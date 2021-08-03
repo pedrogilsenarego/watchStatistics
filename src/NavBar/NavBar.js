@@ -11,11 +11,11 @@ const Navbar = () => {
     return (
         <AppBar color="secondary">
                     <ToolBar>
-                    <IconButton>
-                    <MenuIcon/>
-                </IconButton>
+                        <IconButton>
+                            <MenuIcon/>
+                        </IconButton>
                         <Typography variant="h6">
-                            MUI Theming
+                            Welcome to the Navigation Bar
                         </Typography>
                         <Button>
                             Login
