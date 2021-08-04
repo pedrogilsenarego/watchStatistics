@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import { useState, useEffect } from 'react'
 import axios from "axios"
 
 
@@ -11,14 +11,22 @@ export default function ImagesUpload() {
   
   const [file, setFile] = useState()
   const [description, setDescription] = useState("")
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    (async() => {
+      const result = await axios.get('/posts')
+      setPosts(result.data.posts)
+    })()
+  }, [])
 
   const submit = async event => {
-      event.preventDefault()
-      const data = new FormData()
-      data.append("image", file)
-      data.append("description", description)
-      const result = await axios.post("/posts", data)
-      console.log(result)
+    event.preventDefault()
+    const data = new FormData()
+    data.append('image', file)
+    data.append('description', description)
+    const result = await axios.post('/posts', data)
+    setPosts([result.data, ...posts])
   }
  
 
@@ -43,6 +51,14 @@ export default function ImagesUpload() {
                
                 
             </form>
+            <main>
+        {posts.map(post => (
+          <figure key={post.id}>
+            <img src={post.image_url}></img>
+            <figcaption>{post.description}</figcaption>
+          </figure>
+        ))}
+      </main>
             </div>
             
         

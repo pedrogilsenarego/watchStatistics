@@ -37,3 +37,21 @@
     transform: rotate(360deg);
   }
 }
+form {
+  margin: 100px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+form > * {
+  margin: 10px 0;
+  padding: 0;
+}
+figure {
+  width: 600px;
+  margin: 50px auto;
+}
+
+img {
+  width: 100%;
+}
