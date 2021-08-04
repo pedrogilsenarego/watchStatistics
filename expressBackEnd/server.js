@@ -9,6 +9,8 @@ const app = express()
 
 const database = require("./database")
 
+app.use(express.static('build'))
+
 app.get("/images/:filename", (req, res) => {
     const filename = req.params.filename
   const readStream = fs.createReadStream(path.join(_dirname, "uploads", filename))
@@ -37,6 +39,11 @@ app.post("/posts", upload.single("image"), async (req, res)=>{
         })
     })
 })
+
+// if react router, then add this
+// app.get('*', (req,res) =>{
+//   res.sendFile(path.join(__dirname, 'build/index.html'))
+// })
 
 const port = process.env.PORT || 8080
 app.listen(port, ()=> {
