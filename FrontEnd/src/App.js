@@ -2,14 +2,13 @@ import React from 'react';
 import { Route, Switch } from "react-router-dom";
 import { createTheme } from "@material-ui/core/styles";
 import {ThemeProvider} from "@material-ui/styles"
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import About from "./components/pages/About";
 
-
-import logo from './logo.svg';
-import './App.css';
 import Navbar from "./components/NavBar/NavBar"
 import ImagesUpload from "./components/ImagesUpload"
+import Student from "./components/Student"
 
 
 //The theme is defined here for now
@@ -24,12 +23,16 @@ const theme = createTheme({
       }
   },
   palette: {
-    /*primary: {
-      main: "#0A0908",
+    background: {
+      default: "#FCFAF9",
+    },
+
+    primary: {
+      main: "#FCFAF9",
     },
     secondary: {
-      main: "#F9F6F3",
-    },*/
+      main: "#373332",
+    },
   },
 });
  
@@ -41,17 +44,15 @@ function App() {
      
   return (
     <ThemeProvider theme={theme}>
+    <CssBaseline />
       <div className="App">
-        <header className="App-header">
-          <ImagesUpload/>
+        <header className="App-header">          
           <Navbar/>
-          
-          <img src={logo} className="App-logo" alt="logo" />
           <Switch>
-              <Route path="/about" exact component={About}/>
-              
+              <Route path="/about" exact component={About}/>              
           </Switch>
-          
+          <ImagesUpload/>
+          <Student/>
         </header>
       </div>
     </ThemeProvider>

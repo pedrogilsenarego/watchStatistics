@@ -1,3 +1,6 @@
+//uses srping boot, Mui elements, sends name of student and theyr location to mysql,  and return the data form mysql
+
+
 import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
