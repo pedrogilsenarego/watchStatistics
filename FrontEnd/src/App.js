@@ -1,6 +1,9 @@
 import React from 'react';
+import { Route, Switch } from "react-router-dom";
 import { createTheme } from "@material-ui/core/styles";
 import {ThemeProvider} from "@material-ui/styles"
+
+import About from "./components/pages/About";
 
 
 import logo from './logo.svg';
@@ -11,8 +14,8 @@ import ImagesUpload from "./components/ImagesUpload"
 
 //The theme is defined here for now
 
-import orange from '@material-ui/core/colors/orange';
-import green from '@material-ui/core/colors/green';
+//import orange from '@material-ui/core/colors/orange';
+//import green from '@material-ui/core/colors/green';
 
 const theme = createTheme({
   typography: {
@@ -44,7 +47,10 @@ function App() {
           <Navbar/>
           
           <img src={logo} className="App-logo" alt="logo" />
-        
+          <Switch>
+              <Route path="/about" exact component={About}/>
+              
+          </Switch>
           
         </header>
       </div>
