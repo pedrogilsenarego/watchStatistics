@@ -1,4 +1,6 @@
 import React from 'react';
+import { createTheme } from "@material-ui/core/styles";
+import {ThemeProvider} from "@material-ui/styles"
 
 
 import logo from './logo.svg';
@@ -6,24 +8,47 @@ import './App.css';
 import Navbar from "./components/NavBar/NavBar"
 import ImagesUpload from "./components/ImagesUpload"
 
+
+//The theme is defined here for now
+
+import orange from '@material-ui/core/colors/orange';
+import green from '@material-ui/core/colors/green';
+
+const theme = createTheme({
+  typography: {
+      h2:{
+          fontSize:18,
+      }
+  },
+  palette: {
+    /*primary: {
+      main: "#0A0908",
+    },
+    secondary: {
+      main: "#F9F6F3",
+    },*/
+  },
+});
  
+// not working yet, trying to import the theme from another file
+//let theme2 = createTheme(darkTheme)
+//import  darkTheme  from "./styles/DarkTheme"
 
-
-function App() {
-
-  
+function App() {  
      
   return (
-    <div className="App">
-      <header className="App-header">
-        <ImagesUpload/>
-        <Navbar/>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <header className="App-header">
+          <ImagesUpload/>
+          <Navbar/>
+          
+          <img src={logo} className="App-logo" alt="logo" />
         
-        <img src={logo} className="App-logo" alt="logo" />
-      
-        
-      </header>
-    </div>
+          
+        </header>
+      </div>
+    </ThemeProvider>
   );
 }
 
