@@ -1,14 +1,19 @@
 import React from 'react';
+
+
 import { Route, Switch } from "react-router-dom";
 import { createTheme } from "@material-ui/core/styles";
 import {ThemeProvider} from "@material-ui/styles"
-import CssBaseline from "@material-ui/core/CssBaseline";
 
 import About from "./components/pages/About";
+import Contacts from "./components/pages/Contacts";
+import Home from "./components/pages/Home";
+import Signup from "./components/pages/Signup";
+import {Grid} from "@material-ui/core";
 
 import Navbar from "./components/NavBar/NavBar"
-import ImagesUpload from "./components/ImagesUpload"
-import Student from "./components/Student"
+
+
 
 
 //The theme is defined here for now
@@ -35,6 +40,8 @@ const theme = createTheme({
     },
   },
 });
+
+
  
 // not working yet, trying to import the theme from another file
 //let theme2 = createTheme(darkTheme)
@@ -44,17 +51,21 @@ function App() {
      
   return (
     <ThemeProvider theme={theme}>
-    <CssBaseline />
-      <div className="App">
-        <header className="App-header">          
-          <Navbar/>
+      <Grid>
+        <Grid item xs={12}>
+        <Navbar/>
+        </Grid>
+      </Grid>                                       
           <Switch>
-              <Route path="/about" exact component={About}/>              
+              <Route path="/" exact component={Home}/> 
+              <Route path="/about" exact component={About}/> 
+              <Route path="/contacts" exact component={Contacts}/>  
+              <Route path="/signup" exact component={Signup}/>              
           </Switch>
-          <ImagesUpload/>
-          <Student/>
-        </header>
-      </div>
+          
+          
+        
+      
     </ThemeProvider>
   );
 }
