@@ -8,7 +8,13 @@ import Select from '../Forms/IndividualComponents/Select';
 import DateTimePicker from '../Forms/IndividualComponents/DateTimePicker';
 import Checkbox from '../Forms/IndividualComponents/CheckBox';
 import Button from '../Forms/IndividualComponents/Button';
-import countries from '../../data/countries.json';
+import region from '../../data/region.json';
+import gender from '../../data/gender.json';
+import wristSize from '../../data/wristSize.json';
+
+
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,16 +31,14 @@ const INITIAL_FORM_STATE = {
   userName: '',
   password: '',
   confirmPassword: '',
-  addressLine1: '',
-  addressLine2: '',
-  city: '',
-  state: '',
-  country: '',
-  arrivealDate: '',
-  departureDate: '',
+  birthday: '',
+  gender: '',
+  region: '',
+  wristSize: '',
   message: '',
   termsOfService: false
 };
+
 
 const FORM_VALIDATION = Yup.object().shape({
   firstName: Yup.string()
@@ -51,24 +55,23 @@ const FORM_VALIDATION = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), ""], "Passwords must Match")
     .required("Required"),
-  addressLine1: Yup.string()
+  birthday: Yup.date()
     .required('Required'),
-  addressLine2: Yup.string(),
-  city: Yup.string()
+  gender: Yup.string()
     .required('Required'),
-  state: Yup.string()
+  region: Yup.string()
     .required('Required'),
-  country: Yup.string()
+  wristSize: Yup.string()
     .required('Required'),
-  arrivealDate: Yup.date()
-    .required('Required'),
-  departureDate: Yup.date()
-    .required('Required'),
+  
+  
+  
   message: Yup.string(),
   termsOfService: Yup.boolean()
     .oneOf([true], 'The terms and conditions must be accepted.')
     .required('The terms and conditions must be accepted.'),
 });
+
 
 const Signup = () => {
   const classes = useStyles();
@@ -105,7 +108,6 @@ const Signup = () => {
                       label="First Name"
                     />
                   </Grid>
-
                   <Grid item xs={6}>
                     <Textfield
                       name="lastName"
@@ -119,7 +121,6 @@ const Signup = () => {
                       label="Email"
                     />
                   </Grid>
-
                   <Grid item xs={6}>
                     <Textfield
                       name="userName"
@@ -134,7 +135,6 @@ const Signup = () => {
                       label="Password"
                     />
                   </Grid>
-
                   <Grid item xs={6}>
                     <Textfield
                       type="password"
@@ -143,65 +143,32 @@ const Signup = () => {
                     />
                   </Grid>
 
-                  <Grid item xs={12}>
-                    <Typography>
-                      Additional Information
-                    </Typography>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Textfield
-                      name="addressLine1"
-                      label="Address Line 1"
-                    />
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Textfield
-                      name="addressLine2"
-                      label="Address Line 2"
-                    />
-                  </Grid>
-
                   <Grid item xs={6}>
-                    <Textfield
-                      name="city"
-                      label="City"
-                    />
+                  <DateTimePicker
+                    name="birthday"
+                    label="When were you born?"
+                  />
                   </Grid>
-
                   <Grid item xs={6}>
-                    <Textfield
-                      name="state"
-                      label="State"
-                    />
-                  </Grid>
-
-                  <Grid item xs={12}>
                     <Select
-                      name="country"
-                      label="Country"
-                      options={countries}
+                      name="gender"
+                      label="Are You a man or a woman?"
+                      options={gender}
                     />
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Typography>
-                      Booking information
-                    </Typography>
-                  </Grid>
+                  </Grid>                                                                    
 
                   <Grid item xs={6}>
-                    <DateTimePicker
-                      name="arrivealDate"
-                      label="Arrival Date"
+                    <Select
+                      name="region"
+                      label="What is your region?"
+                      options={region}
                     />
                   </Grid>
-
                   <Grid item xs={6}>
-                    <DateTimePicker
-                      name="departureDate"
-                      label="Departure Date"
+                    <Select
+                      name="wristSize"
+                      label="What is your wrist size?"
+                      options={wristSize}
                     />
                   </Grid>
 
@@ -222,10 +189,11 @@ const Signup = () => {
                     />
                   </Grid>
 
-                  <Grid item xs={12}>
-                    <Button>
+                  <Grid item xs={6}>
+                    <Button >
                       Submit Form
                     </Button>
+                    
                   </Grid>
 
 
