@@ -1,6 +1,5 @@
 import React from 'react'
 
-import LoginGoogle from "../Buttons/LoginGoogle"
 import {makeStyles} from "@material-ui/core/styles";
 
 import {Container} from "@material-ui/core";
@@ -23,7 +22,7 @@ const About = () => {
     return (
         <Container maxWidth="md">
         <div className={classes.formWrapper}>                   
-            <LoginGoogle/>
+            
             
             </div>
         </Container>
