@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import Textfield from './Forms/IndividualComponents/TextField';
-import Button from './Forms/IndividualComponents/Button';
 
 const useStyles = makeStyles((theme) => ({
   formWrapper: {
@@ -25,12 +24,9 @@ const INITIAL_FORM_STATE = {
 
 const FORM_VALIDATION = Yup.object().shape({
   firstName: Yup.string()
-    .required('Required'),
+    .required('Required')
   
 });
-
-
-
 
 export default function ImagesUpload() {
   
@@ -84,13 +80,8 @@ export default function ImagesUpload() {
                       value={firstName}                     
                       onChange={e => setFirstName(e.target.value)}                     
                     />
-                </Grid>
-                <Grid item xs={6}>
-                <input                
-                onChange={e => setFirstName(e.target.value)}
-                type="text"
-                >
-                </input>
+                
+                
               </Grid>
                 <button type="submit">Submit</button>                             
               </Grid>
