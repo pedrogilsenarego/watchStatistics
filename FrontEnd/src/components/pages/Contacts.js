@@ -26,19 +26,9 @@ const Contacts = () => {
         <Container maxWidth="md">
             <div className={classes.formWrapper}>
         <ImagesUpload/>
-            <Paper elevation={3} style={paperStyle}>
-                
-                <form >
-                Hello World
-                
-                
-                </form>
-                
             
-              
-              
             
-            </Paper>
+                        
             </div>
         </Container>
         )}

@@ -18,48 +18,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const INITIAL_FORM_STATE = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  userName: '',
-  password: '',
-  confirmPassword: '',
-  birthday: '',
-  gender: '',
-  region: '',
-  wristSize: '',
-  message: '',
-  termsOfService: false
+  firstName: ''
+  
 };
 
 
 const FORM_VALIDATION = Yup.object().shape({
   firstName: Yup.string()
     .required('Required'),
-  lastName: Yup.string()
-    .required('Required'),
-  email: Yup.string()
-    .email('Invalid email.')
-    .required('Required'),
-  userName: Yup.string()
-    .required('Required'),
-  password: Yup.string()
-    .required('Required'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), ""], "Passwords must Match")
-    .required("Required"),
-  birthday: Yup.date()
-    .required('Required'),
-  gender: Yup.string()
-    .required('Required'),
-  region: Yup.string()
-    .required('Required'),
-  wristSize: Yup.string()
-    .required('Required'),   
-  message: Yup.string(),
-  termsOfService: Yup.boolean()
-    .oneOf([true], 'The terms and conditions must be accepted.')
-    .required('The terms and conditions must be accepted.'),
+  
 });
 
 
