@@ -1,10 +1,9 @@
 import React from 'react'
 
-import ImagesUpload from "../ImagesUpload"
 
-import {Container} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
+import {Container} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,23 +13,19 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
+ 
 
 
-    
-
-
-const Contacts = () => {
+const IndexPage = () => {
 
     const classes = useStyles();
+    
     return (
         <Container maxWidth="md">
-            <div className={classes.formWrapper}>
-        <ImagesUpload/>
+        <div className={classes.formWrapper}>                   
             
-            
-                        
             </div>
         </Container>
         )}
 
-export default Contacts
+export default IndexPage

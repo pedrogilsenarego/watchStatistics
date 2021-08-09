@@ -1,7 +1,6 @@
 import React from 'react'
 
 import LoginGoogle from "../Buttons/LoginGoogle"
-import LogoutGoogle from "../Buttons/LogoutGoogle"
 import {makeStyles} from "@material-ui/core/styles";
 
 import {Container} from "@material-ui/core";
@@ -25,7 +24,7 @@ const About = () => {
         <Container maxWidth="md">
         <div className={classes.formWrapper}>                   
             <LoginGoogle/>
-            <LogoutGoogle/>
+            
             </div>
         </Container>
         )}

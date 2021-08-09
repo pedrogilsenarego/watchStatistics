@@ -18,7 +18,7 @@ function Navbar() {
                                     <Button component={Link} to="/">
                                         Home
                                     </Button>                                                                                                                        
-                                    <Button >
+                                    <Button component={Link} to="/index">
                                         Index
                                     </Button>                                                                                       
                                     <Button component={Link} to="/about">

@@ -1,7 +1,8 @@
 import React from 'react'
-
 import {Container, Grid} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
+import LoginFirebase from '../Buttons/LoginFirebase';
+
 
 const useStyles = makeStyles((theme) => ({
     formWrapper: {
@@ -14,18 +15,20 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Home = () => {
+
     const classes = useStyles();
+    
     return (
+      
         <Grid item xs={12}>
         <Container maxWidth="md">
         <div className={classes.formWrapper}>
         <Grid container spacing={2}>
         <Grid item xs={12}>
             
-                
-                
+        
             
-              
+              <LoginFirebase/>
               
             
             

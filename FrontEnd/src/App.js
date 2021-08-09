@@ -7,6 +7,7 @@ import {ThemeProvider} from "@material-ui/styles"
 
 import About from "./components/pages/About";
 import Contacts from "./components/pages/Contacts";
+import  IndexPage from "./components/pages/Index";
 import Home from "./components/pages/Home";
 import Signup from "./components/pages/Signup";
 import {Grid} from "@material-ui/core";
@@ -60,7 +61,8 @@ function App() {
               <Route path="/" exact component={Home}/> 
               <Route path="/about" exact component={About}/> 
               <Route path="/contacts" exact component={Contacts}/>  
-              <Route path="/signup" exact component={Signup}/>              
+              <Route path="/signup" exact component={Signup}/> 
+              <Route path="/index" exact component={IndexPage}/>              
           </Switch>
           
           
