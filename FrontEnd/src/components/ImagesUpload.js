@@ -55,10 +55,7 @@ const FORM_VALIDATION = Yup.object().shape({
   region: Yup.string()
     .required('Required'),
   wristSize: Yup.string()
-    .required('Required'),
-  
-  
-  
+    .required('Required'),   
   message: Yup.string(),
   termsOfService: Yup.boolean()
     .oneOf([true], 'The terms and conditions must be accepted.')
@@ -128,11 +125,7 @@ export default function ImagesUpload() {
                 >
                 </input>
               </Grid>
-                <button type="submit">Submit</button>
-
-                <Button/>
-
-                
+                <button type="submit">Submit</button>                             
               </Grid>
                 
             </Form>
