@@ -4,7 +4,7 @@ import firebase from './config/firebase-config'
 import {facebookProvider, githubProvider, googleProvider} from "./config/authMethod"
 
 function LoginFirebase() {
-    const [currentUser, setCurrentUser] = useState();
+    const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(()=> {
         firebase.auth().onAuthStateChanged((user) => {
