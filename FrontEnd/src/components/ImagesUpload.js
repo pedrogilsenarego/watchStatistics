@@ -78,7 +78,7 @@ export default function ImagesUpload() {
                       name="firstName"
                       label="First Name"
                       value={firstName}
-                      onChange={e => setFirstName(e.target.value)}
+                      onChange={(e) => setFirstName(e.target.value)}
                     />
 
 
