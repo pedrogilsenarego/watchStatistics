@@ -43,31 +43,27 @@ const theme = createTheme({
 });
 
 
- 
-// not working yet, trying to import the theme from another file
-//let theme2 = createTheme(darkTheme)
-//import  darkTheme  from "./styles/DarkTheme"
 
-function App() {  
-     
+function App() {
+
   return (
     <ThemeProvider theme={theme}>
       <Grid>
         <Grid item xs={12}>
         <Navbar/>
         </Grid>
-      </Grid>                                       
+      </Grid>
           <Switch>
-              <Route path="/" exact component={Home}/> 
-              <Route path="/about" exact component={About}/> 
-              <Route path="/contacts" exact component={Contacts}/>  
-              <Route path="/signup" exact component={Signup}/> 
-              <Route path="/index" exact component={IndexPage}/>              
+              <Route path="/" exact component={Home}/>
+              <Route path="/about" exact component={About}/>
+              <Route path="/contacts" exact component={Contacts}/>
+              <Route path="/signup" exact component={Signup}/>
+              <Route path="/index" exact component={IndexPage}/>
           </Switch>
-          
-          
-        
-      
+
+
+
+
     </ThemeProvider>
   );
 }
