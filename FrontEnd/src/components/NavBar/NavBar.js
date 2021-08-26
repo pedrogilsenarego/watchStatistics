@@ -1,43 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-import ToolBar from '@material-ui/core/ToolBar'
+import ToolBar from "@material-ui/core/ToolBar";
 
-import {Container, Button, AppBar} from "@material-ui/core";
-
+import { Container, Button, AppBar } from "@material-ui/core";
 
 function Navbar() {
-
-
-    return (
-
-            <Container maxWidth="md">
-
-                <AppBar color="secondary" elevation={0} style={{background: "transparent"}}>
-                            <ToolBar>
-                                    <Button component={Link} to="/">
-                                        Home
-                                    </Button>
-                                    <Button component={Link} to="/index">
-                                        Index
-                                    </Button>
-                                    <Button component={Link} to="/about">
-                                        About
-                                    </Button>
-                                    <Button component={Link} to="/contacts">
-                                        Contacts
-                                    </Button>
-                                    <Button component={Link} to="/signup">
-                                        Signup
-                                    </Button>
-
-
-                            </ToolBar>
-
-                        </AppBar>
-                    </Container>
-
-    )
+  const activeStyle = { color: "#8E8D8D" };
+  return (
+    <Container maxWidth="md">
+      <AppBar
+        color="secondary"
+        elevation={0}
+        style={{ background: "transparent" }}
+      >
+        <ToolBar>
+          <Button component={NavLink} to="/">
+            Home
+          </Button>
+          <Button activeStyle={activeStyle} component={NavLink} to="/index">
+            Index
+          </Button>
+          <Button activeStyle={activeStyle} component={NavLink} to="/about">
+            About
+          </Button>
+          <Button activeStyle={activeStyle} component={NavLink} to="/contacts">
+            Contacts
+          </Button>
+          <Button activeStyle={activeStyle} component={NavLink} to="/signup">
+            Signup
+          </Button>
+        </ToolBar>
+      </AppBar>
+    </Container>
+  );
 }
 
-export default Navbar
+export default Navbar;
