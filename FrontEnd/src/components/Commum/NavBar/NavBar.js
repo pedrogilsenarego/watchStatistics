@@ -15,7 +15,7 @@ function Navbar() {
         style={{ background: "transparent" }}
       >
         <ToolBar>
-          <Button component={NavLink} to="/">
+          <Button activeStyle={activeStyle} component={NavLink} to="/" exact>
             Home
           </Button>
           <Button activeStyle={activeStyle} component={NavLink} to="/index">
