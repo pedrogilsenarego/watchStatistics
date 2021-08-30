@@ -5,13 +5,12 @@ import { ThemeProvider } from "@material-ui/styles";
 
 import About from "./components/pages/About";
 import Contacts from "./components/pages/Contacts";
-import Signin from "./components/pages/Signin";
+import IndexPage from "./components/pages/Index";
 import Home from "./components/pages/Home";
 import Signup from "./components/pages/Signup";
 import { Grid } from "@material-ui/core";
 
 import Navbar from "./components/Commum/NavBar/NavBar";
-
 import PageNotFound from "./components/PageNotFound";
 
 //The theme is defined here for now
@@ -42,15 +41,17 @@ const theme = createTheme({
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<Grid item xs={12}>
-				<Navbar />
+			<Grid>
+				<Grid item xs={12}>
+					<Navbar />
+				</Grid>
 			</Grid>
 			<Switch>
 				<Route path="/" exact component={Home} />
 				<Route path="/about" component={About} />
 				<Route path="/contacts" component={Contacts} />
 				<Route path="/signup" component={Signup} />
-				<Route path="/signin" component={Signin} />
+				<Route path="/index" component={IndexPage} />
 				<Route component={PageNotFound} />
 			</Switch>
 		</ThemeProvider>

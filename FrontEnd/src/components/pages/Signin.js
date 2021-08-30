@@ -1,31 +1,24 @@
-import React from "react";
-import { Container, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import LoginFirebase from "../../services/Firebase/LoginFirebase";
+import React, { Component } from "react";
 
-const useStyles = makeStyles((theme) => ({
-	formWrapper: {
-		marginTop: theme.spacing(10),
-		marginBottom: theme.spacing(8)
+import { signInWithGoogle } from "../../services/Firebase/config/utils";
+
+class SignIn extends Component {
+	handleSubmit = async (e) => {
+		e.preventDefault();
+	};
+
+	render() {
+		return (
+			<div className="Signin">
+				<h1> Login</h1>
+				<form onSubmit={this.handleSubmit}>
+					<div>
+						<button onCLick={signInWithGoogle}>Google</button>
+					</div>
+				</form>
+			</div>
+		);
 	}
-}));
+}
 
-const Signin = () => {
-	const classes = useStyles();
-
-	return (
-		<Grid item xs={12}>
-			<Container maxWidth="md">
-				<div className={classes.formWrapper}>
-					<Grid container spacing={2}>
-						<Grid item xs={12}>
-							<LoginFirebase />
-						</Grid>
-					</Grid>
-				</div>
-			</Container>
-		</Grid>
-	);
-};
-
-export default Signin;
+export default SignIn;
