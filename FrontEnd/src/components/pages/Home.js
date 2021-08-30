@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import LoginFirebase from "../../services/Firebase/LoginFirebase";
 
 const useStyles = makeStyles((theme) => ({
 	formWrapper: {

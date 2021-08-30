@@ -11,6 +11,7 @@ import Signup from "./components/pages/Signup";
 import { Grid } from "@material-ui/core";
 
 import Navbar from "./components/Commum/NavBar/NavBar";
+
 import PageNotFound from "./components/PageNotFound";
 
 //The theme is defined here for now
@@ -41,10 +42,8 @@ const theme = createTheme({
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<Grid>
-				<Grid item xs={12}>
-					<Navbar />
-				</Grid>
+			<Grid item xs={12}>
+				<Navbar />
 			</Grid>
 			<Switch>
 				<Route path="/" exact component={Home} />
