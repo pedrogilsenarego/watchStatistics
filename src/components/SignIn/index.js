@@ -10,7 +10,7 @@ class SignIn extends Component {
 	render() {
 		return (
 			<div className="signin">
-				<div classNme="wrap">
+				<div className="wrap">
 					<h2>LogIn</h2>
 					<div className="formWrap">
 						<form onSubmit={this.handleSubmit}>

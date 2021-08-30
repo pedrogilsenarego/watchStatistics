@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "./default.scss";
-import { auth } from "./firebase/utils";
+import { auth, handleUserProfile } from "./firebase/utils";
 
 //pages
 import Homepage from "./pages/Homepage";
@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
+import MainLayout from "./layouts/MainLayout";
 
 const initialState = {
 	currentUser: null
@@ -26,11 +27,30 @@ class App extends Component {
 	authListener = null;
 
 	componentDidMount() {
-		this.authListener = auth.onAuthStateChanged();
+		this.authListener = auth.onAuthStateChanged(async (userAuth) => {
+			if (userAuth) {
+				const userRef = await handleUserProfile(userAuth);
+				userRef.onSnapshot((snapshot) => {
+					this.setState({
+						currentUser: {
+							id: snapshot.id,
+							...snapshot.data()
+						}
+					});
+				});
+			}
+			this.setState({
+				...initialState
+			});
+		});
 	}
-	componentWillUnmount() {}
+	componentWillUnmount() {
+		this.authListener();
+	}
 
 	render() {
+		const { currentUser } = this.state;
+
 		return (
 			<div className="App">
 				<Switch>
@@ -38,7 +58,7 @@ class App extends Component {
 						exact
 						path="/"
 						render={() => (
-							<HomepageLayout>
+							<HomepageLayout currentUser={currentUser}>
 								<Homepage />
 							</HomepageLayout>
 						)}
@@ -47,19 +67,23 @@ class App extends Component {
 						exact
 						path="/registration"
 						render={() => (
-							<HomepageLayout>
+							<MainLayout currentUser={currentUser}>
 								<Registration />
-							</HomepageLayout>
+							</MainLayout>
 						)}
 					/>
 					<Route
 						exact
 						path="/login"
-						render={() => (
-							<HomepageLayout>
-								<Login />
-							</HomepageLayout>
-						)}
+						render={() =>
+							currentUser ? (
+								<Redirect to="/" />
+							) : (
+								<MainLayout currentUser={currentUser}>
+									<Login />
+								</MainLayout>
+							)
+						}
 					/>
 				</Switch>
 			</div>
