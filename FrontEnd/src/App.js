@@ -5,7 +5,7 @@ import { ThemeProvider } from "@material-ui/styles";
 
 import About from "./components/pages/About";
 import Contacts from "./components/pages/Contacts";
-import IndexPage from "./components/pages/Index";
+import Signin from "./components/pages/Signin";
 import Home from "./components/pages/Home";
 import Signup from "./components/pages/Signup";
 import { Grid } from "@material-ui/core";
@@ -51,7 +51,7 @@ function App() {
 				<Route path="/about" component={About} />
 				<Route path="/contacts" component={Contacts} />
 				<Route path="/signup" component={Signup} />
-				<Route path="/index" component={IndexPage} />
+				<Route path="/signin" component={Signin} />
 				<Route component={PageNotFound} />
 			</Switch>
 		</ThemeProvider>

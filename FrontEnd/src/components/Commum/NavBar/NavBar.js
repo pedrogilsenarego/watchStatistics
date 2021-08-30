@@ -32,9 +32,7 @@ function Navbar() {
 					<Button activeStyle={activeStyle} component={NavLink} to="/" exact>
 						Home
 					</Button>
-					<Button activeStyle={activeStyle} component={NavLink} to="/index">
-						Index
-					</Button>
+
 					<Button activeStyle={activeStyle} component={NavLink} to="/about">
 						About
 					</Button>
@@ -43,6 +41,9 @@ function Navbar() {
 					</Button>
 					<Button activeStyle={activeStyle} component={NavLink} to="/signup">
 						Signup
+					</Button>
+					<Button activeStyle={activeStyle} component={NavLink} to="/signin">
+						Signin
 					</Button>
 					<Typography variant="h6" className={classes.title}>
 						{user}

@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const Home = () => {
+const Signin = () => {
 	const classes = useStyles();
 
 	return (
@@ -18,7 +18,9 @@ const Home = () => {
 			<Container maxWidth="md">
 				<div className={classes.formWrapper}>
 					<Grid container spacing={2}>
-						<Grid item xs={12}></Grid>
+						<Grid item xs={12}>
+							<LoginFirebase />
+						</Grid>
 					</Grid>
 				</div>
 			</Container>
@@ -26,4 +28,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default Signin;
