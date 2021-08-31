@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import "./styles.scss";
-import { signInUser } from "../../redux/User/user.actions";
+import {
+	signInUser,
+	signInWithGoogle,
+	resetAllAuthForms
+} from "../../redux/User/user.actions";
 import Button from "../forms/Button";
-import { signInWithGoogle } from "../../firebase/utils";
 import FormInput from "../forms/FormInput";
 import AuthWrapper from "../AuthWrapper";
 
@@ -18,12 +21,17 @@ const SignIn = (props) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	useEffect(() => {
-		if (signInSucess) {
-			resetForm();
-			props.history.push("/");
-		}
-	}, [signInSucess]);
+	useEffect(
+		() => {
+			if (signInSucess) {
+				resetForm();
+				dispatch(resetAllAuthForms());
+				props.history.push("/");
+			}
+		},
+		// eslint-disable-next-line
+		[signInSucess]
+	);
 
 	const resetForm = () => {
 		setEmail("");
@@ -33,6 +41,10 @@ const SignIn = (props) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(signInUser({ email, password }));
+	};
+
+	const handleGoogleSigniIn = () => {
+		dispatch(signInWithGoogle());
 	};
 
 	const configAuthWrapper = {
@@ -60,7 +72,7 @@ const SignIn = (props) => {
 					<Button type="submit">LogIn</Button>
 					<div className="socialSignin">
 						<div className="row">
-							<Button onClick={signInWithGoogle}>SignIn with Google</Button>
+							<Button onClick={handleGoogleSigniIn}>SignIn with Google</Button>
 						</div>
 					</div>
 					<div className="links">

@@ -1,17 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpUser, resetAllAuthForms } from "../../redux/User/user.actions";
 import "./styles.scss";
 import FormInput from "../forms/FormInput";
 import Button from "../forms/Button";
-import { auth, handleUserProfile } from "./../../firebase/utils";
 import AuthWrapper from "../AuthWrapper";
 
+const mapState = ({ user }) => ({
+	signUpSucess: user.signUpSucess,
+	signUpError: user.signUpError
+});
+
 const Signup = (props) => {
+	const dispatch = useDispatch();
+	const { signUpSucess, signUpError } = useSelector(mapState);
 	const [displayName, setDisplayName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
+
+	useEffect(
+		() => {
+			if (signUpSucess) {
+				reset();
+				dispatch(resetAllAuthForms());
+				props.history.push("/");
+			}
+		},
+		// eslint-disable-next-line
+		[signUpSucess]
+	);
+
+	useEffect(() => {
+		if (Array.isArray(signUpError) && signUpError.length > 0) {
+			setErrors(signUpError);
+		}
+	}, [signUpError]);
 
 	const reset = () => {
 		setDisplayName("");
@@ -21,26 +47,16 @@ const Signup = (props) => {
 		setErrors([]);
 	};
 
-	const handleFormSubmit = async (event) => {
+	const handleFormSubmit = (event) => {
 		event.preventDefault();
-
-		if (password !== confirmPassword) {
-			const err = ["Passwords don't match"];
-			setErrors(err);
-			return;
-		}
-		try {
-			const { user } = await auth.createUserWithEmailAndPassword(
+		dispatch(
+			signUpUser({
+				displayName,
 				email,
-				password
-			);
-			await handleUserProfile(user, { displayName });
-			reset();
-			props.history.push('/');
-
-		} catch (err) {
-			console.log(err);
-		}
+				password,
+				confirmPassword
+			})
+		);
 	};
 
 	const configAuthWrapper = {
