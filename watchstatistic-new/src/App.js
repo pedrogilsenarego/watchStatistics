@@ -6,6 +6,7 @@ import { auth, handleUserProfile } from "./firebase/utils";
 //pages
 import Homepage from "./pages/Homepage";
 import Registration from "./pages/Registration";
+import Recovery from "./pages/Recovery";
 import Login from "./pages/Login";
 
 // layouts
@@ -88,6 +89,14 @@ class App extends Component {
 								</MainLayout>
 							)
 						}
+					/>
+					<Route
+						path="/recovery"
+						render={() => (
+							<MainLayout>
+								<Recovery />
+							</MainLayout>
+						)}
 					/>
 				</Switch>
 			</div>
