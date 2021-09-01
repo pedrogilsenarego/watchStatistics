@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { signUpUser, resetAllAuthForms } from "../../redux/User/user.actions";
+import { useHistory, Link } from "react-router-dom";
+import { signUpUserStart } from "./../../redux/User/user.actions";
 import "./styles.scss";
-import FormInput from "../forms/FormInput";
-import Button from "../forms/Button";
-import AuthWrapper from "../AuthWrapper";
+
+import AuthWrapper from "./../AuthWrapper";
+import FormInput from "./../forms/FormInput";
+import Button from "./../forms/Button";
 
 const mapState = ({ user }) => ({
-	signUpSucess: user.signUpSucess,
-	signUpError: user.signUpError
+	currentUser: user.currentUser,
+	userErr: user.userErr
 });
 
 const Signup = (props) => {
 	const dispatch = useDispatch();
-	const { signUpSucess, signUpError } = useSelector(mapState);
+	const history = useHistory();
+	const { currentUser, userErr } = useSelector(mapState);
 	const [displayName, setDisplayName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -23,21 +25,20 @@ const Signup = (props) => {
 
 	useEffect(
 		() => {
-			if (signUpSucess) {
+			if (currentUser) {
 				reset();
-				dispatch(resetAllAuthForms());
-				props.history.push("/");
+				history.push("/");
 			}
 		},
 		// eslint-disable-next-line
-		[signUpSucess]
+		[currentUser]
 	);
 
 	useEffect(() => {
-		if (Array.isArray(signUpError) && signUpError.length > 0) {
-			setErrors(signUpError);
+		if (Array.isArray(userErr) && userErr.length > 0) {
+			setErrors(userErr);
 		}
-	}, [signUpError]);
+	}, [userErr]);
 
 	const reset = () => {
 		setDisplayName("");
@@ -50,7 +51,7 @@ const Signup = (props) => {
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
 		dispatch(
-			signUpUser({
+			signUpUserStart({
 				displayName,
 				email,
 				password,
@@ -62,6 +63,7 @@ const Signup = (props) => {
 	const configAuthWrapper = {
 		headline: "Registration"
 	};
+
 	return (
 		<AuthWrapper {...configAuthWrapper}>
 			<div className="formWrap">
@@ -72,6 +74,7 @@ const Signup = (props) => {
 						})}
 					</ul>
 				)}
+
 				<form onSubmit={handleFormSubmit}>
 					<FormInput
 						type="text"
@@ -80,6 +83,7 @@ const Signup = (props) => {
 						placeholder="Full name"
 						handleChange={(e) => setDisplayName(e.target.value)}
 					/>
+
 					<FormInput
 						type="email"
 						name="email"
@@ -87,6 +91,7 @@ const Signup = (props) => {
 						placeholder="Email"
 						handleChange={(e) => setEmail(e.target.value)}
 					/>
+
 					<FormInput
 						type="password"
 						name="password"
@@ -94,6 +99,7 @@ const Signup = (props) => {
 						placeholder="Password"
 						handleChange={(e) => setPassword(e.target.value)}
 					/>
+
 					<FormInput
 						type="password"
 						name="confirmPassword"
@@ -101,11 +107,18 @@ const Signup = (props) => {
 						placeholder="Confirm Password"
 						handleChange={(e) => setConfirmPassword(e.target.value)}
 					/>
+
 					<Button type="submit">Register</Button>
 				</form>
+
+				<div className="links">
+					<Link to="/login">LogIn</Link>
+					{` | `}
+					<Link to="/recovery">Reset Password</Link>
+				</div>
 			</div>
 		</AuthWrapper>
 	);
 };
 
-export default withRouter(Signup);
+export default Signup;
