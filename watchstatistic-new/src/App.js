@@ -22,6 +22,8 @@ import Admin from "./pages/Admin";
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
 import MainLayout from "./layouts/MainLayout";
+import AdminLayout from "./layouts/AdminLayout";
+import DashBoardLayout from "./layouts/DashboardLayout";
 
 const App = (props) => {
 	const dispatch = useDispatch();
@@ -73,9 +75,9 @@ const App = (props) => {
 					path="/dashboard"
 					render={() => (
 						<WithAuth>
-							<MainLayout>
+							<DashBoardLayout>
 								<Dashboard />
-							</MainLayout>
+							</DashBoardLayout>
 						</WithAuth>
 					)}
 				/>
@@ -83,9 +85,9 @@ const App = (props) => {
 					path="/admin"
 					render={() => (
 						<WithAdminAuth>
-							<MainLayout>
+							<AdminLayout>
 								<Admin />
-							</MainLayout>
+							</AdminLayout>
 						</WithAdminAuth>
 					)}
 				/>

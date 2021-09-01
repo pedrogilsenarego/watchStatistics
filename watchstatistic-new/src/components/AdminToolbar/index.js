@@ -14,6 +14,7 @@ export const AdminToolbar = (props) => {
 	const isAdmin = checkUserIsAdmin(currentUser);
 
 	if (!isAdmin) return null;
+
 	return (
 		<div className="adminToolbar">
 			<ul>
