@@ -4,8 +4,12 @@ import { Switch, Route } from "react-router-dom";
 import "./default.scss";
 import { checkUserSession } from "./redux/User/user.actions";
 
+// components
+import AdminToolbar from "./components/AdminToolbar";
+
 //hoc
 import WithAuth from "./hoc/withAuth";
+import WithAdminAuth from "./hoc/withAdminAuth";
 
 //pages
 import Homepage from "./pages/Homepage";
@@ -13,6 +17,7 @@ import Registration from "./pages/Registration";
 import Recovery from "./pages/Recovery";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Admin from "./pages/Admin";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
@@ -27,6 +32,7 @@ const App = (props) => {
 
 	return (
 		<div className="App">
+			<AdminToolbar />
 			<Switch>
 				<Route
 					exact
@@ -71,6 +77,16 @@ const App = (props) => {
 								<Dashboard />
 							</MainLayout>
 						</WithAuth>
+					)}
+				/>
+				<Route
+					path="/admin"
+					render={() => (
+						<WithAdminAuth>
+							<MainLayout>
+								<Admin />
+							</MainLayout>
+						</WithAdminAuth>
 					)}
 				/>
 			</Switch>
