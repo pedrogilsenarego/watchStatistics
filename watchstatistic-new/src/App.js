@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
@@ -69,6 +70,14 @@ const App = (props) => {
 					render={() => (
 						<MainLayout>
 							<ProductDetails />
+						</MainLayout>
+					)}
+				/>
+				<Route
+					path="/cart"
+					render={() => (
+						<MainLayout>
+							<Cart />
 						</MainLayout>
 					)}
 				/>
