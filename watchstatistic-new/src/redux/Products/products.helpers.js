@@ -15,11 +15,12 @@ export const handleAddProduct = (product) => {
 	});
 };
 
-export const handleFetchProducts = () => {
+export const handleFetchProducts = ({ filterType }) => {
 	return new Promise((resolve, reject) => {
-		firestore
-			.collection("products")
-			.orderBy("createdDate")
+		let ref = firestore.collection("products").orderBy("createdDate"); //if descending on firebase, it is needed to pass the "descending" argument here after "created date"
+		if (filterType) ref = ref.where("productCategory", "==", filterType);
+
+		ref
 			.get()
 			.then((snapshot) => {
 				const productsArray = snapshot.docs.map((doc) => {

@@ -56,6 +56,14 @@ const App = (props) => {
 					)}
 				/>
 				<Route
+					path="/search/:filterType"
+					render={() => (
+						<MainLayout>
+							<Search />
+						</MainLayout>
+					)}
+				/>
+				<Route
 					exact
 					path="/registration"
 					render={() => (
