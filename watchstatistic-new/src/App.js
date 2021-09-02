@@ -13,6 +13,7 @@ import WithAdminAuth from "./hoc/withAdminAuth";
 
 //pages
 import Homepage from "./pages/Homepage";
+import Search from "./pages/Search";
 import Registration from "./pages/Registration";
 import Recovery from "./pages/Recovery";
 import Login from "./pages/Login";
@@ -43,6 +44,15 @@ const App = (props) => {
 						<HomepageLayout>
 							<Homepage />
 						</HomepageLayout>
+					)}
+				/>
+				<Route
+					exact
+					path="/search"
+					render={() => (
+						<MainLayout>
+							<Search />
+						</MainLayout>
 					)}
 				/>
 				<Route
