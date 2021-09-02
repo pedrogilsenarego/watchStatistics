@@ -19,6 +19,7 @@ import Recovery from "./pages/Recovery";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
+import ProductDetails from "./pages/ProductDetails";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
@@ -60,6 +61,14 @@ const App = (props) => {
 					render={() => (
 						<MainLayout>
 							<Search />
+						</MainLayout>
+					)}
+				/>
+				<Route
+					path="/product/:productID"
+					render={() => (
+						<MainLayout>
+							<ProductDetails />
 						</MainLayout>
 					)}
 				/>
