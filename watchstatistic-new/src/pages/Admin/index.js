@@ -9,6 +9,7 @@ import Modal from "./../../components/Modal";
 import FormInput from "./../../components/forms/FormInput";
 import FormSelect from "./../../components/forms/FormSelect";
 import Button from "./../../components/forms/Button";
+import LoadMore from "./../../components/LoadMore";
 import "./styles.scss";
 
 const mapState = ({ productsData }) => ({
@@ -23,6 +24,8 @@ const Admin = (props) => {
 	const [productName, setProductName] = useState("");
 	const [productThumbnail, setProductThumbnail] = useState("");
 	const [productPrice, setProductPrice] = useState(0);
+
+	const { data, queryDoc, isLastPage } = products;
 
 	useEffect(
 		() => {
@@ -59,6 +62,19 @@ const Admin = (props) => {
 			})
 		);
 		resetForm();
+	};
+
+	const handleLoadMore = () => {
+		dispatch(
+			fetchProductsStart({
+				startAfterDoc: queryDoc,
+				persistProducts: data
+			})
+		);
+	};
+
+	const configLoadMore = {
+		onLoadMoreEvt: handleLoadMore
 	};
 
 	return (
@@ -137,33 +153,49 @@ const Admin = (props) => {
 									cellSpacing="0"
 								>
 									<tbody>
-										{products.map((product, index) => {
-											const {
-												productName,
-												productThumbnail,
-												productPrice,
-												documentID
-											} = product;
+										{Array.isArray(data) &&
+											data.length > 0 &&
+											data.map((product, index) => {
+												const {
+													productName,
+													productThumbnail,
+													productPrice,
+													documentID
+												} = product;
 
-											return (
-												<tr>
-													<td>
-														<img src={productThumbnail} alt="" />
-													</td>
-													<td>{productName}</td>
-													<td>${productPrice}</td>
-													<td>
-														<Button
-															onClick={() =>
-																dispatch(deleteProductStart(documentID))
-															}
-														>
-															Delete
-														</Button>
-													</td>
-												</tr>
-											);
-										})}
+												return (
+													<tr>
+														<td>
+															<img src={productThumbnail} alt="" />
+														</td>
+														<td>{productName}</td>
+														<td>${productPrice}</td>
+														<td>
+															<Button
+																onClick={() =>
+																	dispatch(deleteProductStart(documentID))
+																}
+															>
+																Delete
+															</Button>
+														</td>
+													</tr>
+												);
+											})}
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<table border="0" cellPadding="10" cellSpacing="0">
+									<tbody>
+										<tr>
+											<td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
+										</tr>
 									</tbody>
 								</table>
 							</td>
