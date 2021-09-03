@@ -9,5 +9,8 @@ export const checkUserIsAdmin = (currentUser) => {
 };
 
 export const apiInstance = axios.create({
-	baseURL: "http://localhost:5001/fir-auth0-9b4cb/us-central1/api"
+	//liveURL
+	baseURL: "https://us-central1-fir-auth0-9b4cb.cloudfunctions.net/api"
+	//local Hosting
+	//baseURL: "http://localhost:5001/fir-auth0-9b4cb/us-central1/api"
 });

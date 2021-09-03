@@ -13,9 +13,13 @@ const Dashboard = (props) => {
 	const dispatch = useDispatch();
 	const { currentUser, orderHistory } = useSelector(mapState);
 
-	useEffect(() => {
-		dispatch(getUserOrderHistory(currentUser.id));
-	}, []);
+	useEffect(
+		() => {
+			dispatch(getUserOrderHistory(currentUser.id));
+		},
+		// eslint-disable-next-line
+		[]
+	);
 
 	return (
 		<div>
