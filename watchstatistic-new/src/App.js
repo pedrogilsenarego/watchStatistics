@@ -22,6 +22,7 @@ import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
+import Order from "./pages/Order";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
@@ -124,6 +125,16 @@ const App = (props) => {
 						<WithAuth>
 							<DashBoardLayout>
 								<Dashboard />
+							</DashBoardLayout>
+						</WithAuth>
+					)}
+				/>
+				<Route
+					path="/order/:orderID"
+					render={() => (
+						<WithAuth>
+							<DashBoardLayout>
+								<Order />
 							</DashBoardLayout>
 						</WithAuth>
 					)}
