@@ -23,6 +23,7 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Order from "./pages/Order";
+import ChangeLog from "./pages/ChangeLog";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
@@ -147,6 +148,15 @@ const App = (props) => {
 								<Admin />
 							</AdminLayout>
 						</WithAdminAuth>
+					)}
+				/>
+				<Route
+					exact
+					path="/changelog"
+					render={() => (
+						<MainLayout>
+							<ChangeLog />
+						</MainLayout>
 					)}
 				/>
 			</Switch>
