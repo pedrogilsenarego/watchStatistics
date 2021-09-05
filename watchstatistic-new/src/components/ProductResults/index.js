@@ -50,12 +50,24 @@ const ProductResults = ({}) => {
 				value: ""
 			},
 			{
-				name: "Mens",
-				value: "mens"
+				value: "divers",
+				name: "Divers"
 			},
 			{
-				name: "Womens",
-				value: "womens"
+				value: "field",
+				name: "Field"
+			},
+			{
+				value: "pilot",
+				name: "Pilot"
+			},
+			{
+				value: "dress",
+				name: "Dress"
+			},
+			{
+				value: "racing",
+				name: "Racing"
 			}
 		],
 		handleChange: handleFilter

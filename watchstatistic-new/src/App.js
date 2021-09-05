@@ -24,6 +24,7 @@ import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Order from "./pages/Order";
 import ChangeLog from "./pages/ChangeLog";
+import Resources from "./pages/Resources";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
@@ -100,6 +101,15 @@ const App = (props) => {
 					render={() => (
 						<MainLayout>
 							<Registration />
+						</MainLayout>
+					)}
+				/>
+				<Route
+					exact
+					path="/resources"
+					render={() => (
+						<MainLayout>
+							<Resources />
 						</MainLayout>
 					)}
 				/>

@@ -5,8 +5,10 @@ const ChangeLogHistory = (props) => {
 		<div className="wrap">
 			<div>
 				<h2>1.1 - released 2021- </h2>
-				<p>- Dependencies - Added Chart.js</p>
-				<p>- Dependencies - Added MUI</p>
+				<p>- Chart.js Dependencies - Added</p>
+				<p>- MUI Dependencies - Added</p>
+				<p>- Resources Page - Added</p>
+				<p>- Filters for Search for types of Watch - Added - Search Page</p>
 			</div>
 			<div>
 				<h2>1.01 - released 2021-09-04 </h2>
