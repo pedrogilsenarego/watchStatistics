@@ -22,7 +22,14 @@ const ProductCard = ({}) => {
 	const { productID } = useParams();
 	const { product } = useSelector(mapState);
 
-	const { productThumbnail, productName, productPrice, productDesc } = product;
+	const {
+		productThumbnail,
+		productName,
+		averageVotations,
+		productDesc,
+		votationsOwn,
+		votationsNonOwn
+	} = product;
 
 	useEffect(
 		() => {
@@ -57,30 +64,30 @@ const ProductCard = ({}) => {
 			],
 			datasets: [
 				{
-					data: [8, 10, 9, 6, 9, 4, 10],
+					data: votationsOwn,
 					label: "Own",
 					borderColor: "#314e7d",
-					backgroundColor: "#314e7d",
-					fill: false
+					backgroundColor: "#314e7d66",
+					fill: true
 				},
 				{
-					data: [5, 8, 9, 5, 7, 3, 9],
+					data: votationsNonOwn,
 					label: "Not Own",
-					borderColor: "#989ea6",
-					fill: false,
-					backgroundColor: "#989ea6"
+					borderColor: "#E5F517",
+					fill: true,
+					backgroundColor: "#E5F51766"
 				}
 			]
 		},
 
 		options: {
-			title: {
-				display: true,
-				text: "Seiko SKX-007"
+			scales: {
+				r: {
+					suggestedMin: 0,
+					suggestedMax: 10
+				}
 			},
-			scale: {
-				ticks: { beginAtZero: true }
-			},
+
 			animations: {
 				tension: {
 					duration: 700,
@@ -112,7 +119,7 @@ const ProductCard = ({}) => {
 							<h1>{productName}</h1>
 						</li>
 						<li>
-							<span>${productPrice}</span>
+							<span>{averageVotations}</span>
 						</li>
 						<li>
 							<div className="addToCart">

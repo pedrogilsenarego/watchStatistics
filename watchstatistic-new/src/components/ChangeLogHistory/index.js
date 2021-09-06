@@ -4,7 +4,11 @@ const ChangeLogHistory = (props) => {
 	return (
 		<div className="wrap">
 			<div>
-				<h2>1.1 - released 2021- </h2>
+				<h2>1.1 - released 2021-09-06- </h2>
+				<p>
+					- ProductDetail Votations Charts, values hardcoded into the Firestore
+					- Added
+				</p>
 				<p>- Chart.js Dependencies - Added</p>
 				<p>- MUI Dependencies - Added</p>
 				<p>- Resources Page - Added</p>
