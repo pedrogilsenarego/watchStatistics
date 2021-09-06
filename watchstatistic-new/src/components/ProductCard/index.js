@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../forms/Button";
@@ -10,6 +10,7 @@ import {
 import "./styles.scss";
 import { Grid } from "@material-ui/core";
 import RadarChart from "./../RadarChart";
+import ProductVote from "../ProductVote";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
@@ -20,6 +21,7 @@ const mapState = (state) => ({
 const ProductCard = ({}) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const [voteMenu, setVoteMenu] = useState(false);
 	const { productID } = useParams();
 	const { product, currentUser } = useSelector(mapState);
 
@@ -50,7 +52,12 @@ const ProductCard = ({}) => {
 		history.push("/cart");
 	};
 
-	const configAddToCartBtn = {
+	const handleVoteBtn = (e) => {
+		//e.preventDefault();
+		setVoteMenu(!voteMenu);
+	};
+
+	const configBtn = {
 		type: "button"
 	};
 	const configRadarChart = {
@@ -121,22 +128,26 @@ const ProductCard = ({}) => {
 							<h1>{productName}</h1>
 						</li>
 						<li>
-							<span>{averageVotations}</span>
+							<span>Average Votation: {averageVotations}</span>
 						</li>
 						<li>
-							<span>{numberVotes}</span>
+							<span>Number of People Voted: {numberVotes}</span>
 						</li>
 						<li>
 							<div className="addToCart">
-								<Button
-									{...configAddToCartBtn}
-									onClick={() => handleAddToCart(product)}
-								>
+								<Button {...configBtn} onClick={() => handleAddToCart(product)}>
 									Add to Cart
 								</Button>
 							</div>
 						</li>
-						<li>{currentUser && <Button>Vote Here</Button>}</li>
+						<li>
+							{currentUser && (
+								<div>
+									<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
+									<li>{voteMenu && <ProductVote />}</li>
+								</div>
+							)}
+						</li>
 						<li>
 							{!currentUser && (
 								<Button onClick={() => history.push("/login")}>
@@ -144,6 +155,7 @@ const ProductCard = ({}) => {
 								</Button>
 							)}
 						</li>
+
 						<li>
 							<span
 								className="desc"

@@ -27,7 +27,7 @@ const Signup = (props) => {
 		() => {
 			if (currentUser) {
 				reset();
-				history.push("/");
+				history.goBack();
 			}
 		},
 		// eslint-disable-next-line
