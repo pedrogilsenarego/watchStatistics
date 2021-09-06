@@ -5,18 +5,32 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import Button from "../forms/Button";
+import { useDispatch } from "react-redux";
+import { addProductStart } from "../../redux/Products/products.actions";
 
 // eslint-disable-next-line
 const ProductVote = ({}) => {
+	const dispatch = useDispatch();
 	const [value, setValue] = useState("Own");
 	const handleChange = (event) => {
 		setValue(event.target.value);
 	};
 
+	const handleApplyVote = (e) => {
+		e.preventDefault();
+
+		dispatch(
+			addProductStart({
+				numberVotes: 5
+			})
+		);
+	};
+
 	return (
 		<div>
 			<FormControl component="fieldset">
-				<FormLabel component="legend">Gender</FormLabel>
+				<FormLabel component="legend"></FormLabel>
 				<RadioGroup
 					aria-label="gender"
 					name="gender1"
@@ -31,7 +45,7 @@ const ProductVote = ({}) => {
 				Quality
 			</Typography>
 			<Slider
-				defaultValue={50}
+				defaultValue={0}
 				aria-labelledby="discrete-slider"
 				valueLabelDisplay="auto"
 				step={1}
@@ -43,7 +57,7 @@ const ProductVote = ({}) => {
 				Price
 			</Typography>
 			<Slider
-				defaultValue={50}
+				defaultValue={0}
 				aria-labelledby="discrete-slider"
 				valueLabelDisplay="auto"
 				step={1}
@@ -55,7 +69,7 @@ const ProductVote = ({}) => {
 				Brand
 			</Typography>
 			<Slider
-				defaultValue={50}
+				defaultValue={0}
 				aria-labelledby="discrete-slider"
 				valueLabelDisplay="auto"
 				step={1}
@@ -67,7 +81,7 @@ const ProductVote = ({}) => {
 				Refinement
 			</Typography>
 			<Slider
-				defaultValue={50}
+				defaultValue={0}
 				aria-labelledby="discrete-slider"
 				valueLabelDisplay="auto"
 				step={1}
@@ -79,7 +93,7 @@ const ProductVote = ({}) => {
 				History
 			</Typography>
 			<Slider
-				defaultValue={50}
+				defaultValue={0}
 				aria-labelledby="discrete-slider"
 				valueLabelDisplay="auto"
 				step={1}
@@ -91,7 +105,7 @@ const ProductVote = ({}) => {
 				Engineering
 			</Typography>
 			<Slider
-				defaultValue={50}
+				defaultValue={0}
 				aria-labelledby="discrete-slider"
 				valueLabelDisplay="auto"
 				step={1}
@@ -103,7 +117,7 @@ const ProductVote = ({}) => {
 				X-Factor
 			</Typography>
 			<Slider
-				defaultValue={50}
+				defaultValue={0}
 				aria-labelledby="discrete-slider"
 				valueLabelDisplay="auto"
 				step={1}
@@ -111,6 +125,7 @@ const ProductVote = ({}) => {
 				min={0}
 				max={10}
 			/>
+			<Button onClick={handleApplyVote}>Apply Vote</Button>
 		</div>
 	);
 };
