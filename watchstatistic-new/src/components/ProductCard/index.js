@@ -8,6 +8,8 @@ import {
 	setProduct
 } from "../../redux/Products/products.actions";
 import "./styles.scss";
+import { Grid } from "@material-ui/core";
+import RadarChart from "./../RadarChart";
 
 const mapState = (state) => ({
 	product: state.productsData.product
@@ -20,7 +22,14 @@ const ProductCard = ({}) => {
 	const { productID } = useParams();
 	const { product } = useSelector(mapState);
 
-	const { productThumbnail, productName, productPrice, productDesc } = product;
+	const {
+		productThumbnail,
+		productName,
+		averageVotations,
+		productDesc,
+		votationsOwn,
+		votationsNonOwn
+	} = product;
 
 	useEffect(
 		() => {
@@ -42,39 +51,96 @@ const ProductCard = ({}) => {
 	const configAddToCartBtn = {
 		type: "button"
 	};
+	const configRadarChart = {
+		data: {
+			labels: [
+				"Quality",
+				"Price",
+				"Brand",
+				"Refinement",
+				"History",
+				"Engineering",
+				"X factor"
+			],
+			datasets: [
+				{
+					data: votationsOwn,
+					label: "Own",
+					borderColor: "#314e7d",
+					backgroundColor: "#314e7d66",
+					fill: true
+				},
+				{
+					data: votationsNonOwn,
+					label: "Not Own",
+					borderColor: "#E5F517",
+					fill: true,
+					backgroundColor: "#E5F51766"
+				}
+			]
+		},
+
+		options: {
+			scales: {
+				r: {
+					suggestedMin: 0,
+					suggestedMax: 10
+				}
+			},
+
+			animations: {
+				tension: {
+					duration: 700,
+					easing: "linear",
+					from: 0.05,
+					to: 0,
+					loop: true
+				}
+			}
+		}
+	};
 
 	return (
-		<div className="productCard">
-			<div className="hero">
-				<img src={productThumbnail} alt="" />
-			</div>
-			<div className="productDetails">
-				<ul>
-					<li>
-						<h1>{productName}</h1>
-					</li>
-					<li>
-						<span>${productPrice}</span>
-					</li>
-					<li>
-						<div className="addToCart">
-							<Button
-								{...configAddToCartBtn}
-								onClick={() => handleAddToCart(product)}
-							>
-								Add to Cart
-							</Button>
+		<Grid container>
+			<div className="productCard">
+				<Grid container>
+					<Grid>
+						<div className="hero">
+							<img src={productThumbnail} alt="" />
 						</div>
-					</li>
-					<li>
-						<span
-							className="desc"
-							dangerouslySetInnerHTML={{ __html: productDesc }}
-						/>
-					</li>
-				</ul>
+					</Grid>
+					<Grid>
+						<RadarChart {...configRadarChart} />
+					</Grid>
+				</Grid>
+				<div className="productDetails">
+					<ul>
+						<li>
+							<h1>{productName}</h1>
+						</li>
+						<li>
+							<span>{averageVotations}</span>
+						</li>
+						<li>
+							<div className="addToCart">
+								<Button
+									{...configAddToCartBtn}
+									onClick={() => handleAddToCart(product)}
+								>
+									Add to Cart
+								</Button>
+							</div>
+						</li>
+						<li>
+							<span
+								className="desc"
+								dangerouslySetInnerHTML={{ __html: productDesc }}
+							/>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
+		</Grid>
 	);
 };
 export default ProductCard;
