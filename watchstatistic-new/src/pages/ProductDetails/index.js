@@ -9,9 +9,7 @@ const ProductDetails = ({}) => {
 			<Grid container xs={12} sm={9}>
 				<ProductCard />
 			</Grid>
-			<Grid container xs={12} sm={3}>
-				<ProductCard />
-			</Grid>
+			<Grid container xs={12} sm={3}></Grid>
 		</Grid>
 	);
 };

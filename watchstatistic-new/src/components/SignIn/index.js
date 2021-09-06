@@ -25,7 +25,7 @@ const SignIn = (props) => {
 		() => {
 			if (currentUser) {
 				resetForm();
-				history.push("/");
+				history.goBack();
 			}
 		},
 		// eslint-disable-next-line

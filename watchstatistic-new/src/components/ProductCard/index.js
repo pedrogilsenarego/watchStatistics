@@ -12,6 +12,7 @@ import { Grid } from "@material-ui/core";
 import RadarChart from "./../RadarChart";
 
 const mapState = (state) => ({
+	currentUser: state.user.currentUser,
 	product: state.productsData.product
 });
 
@@ -20,7 +21,7 @@ const ProductCard = ({}) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { productID } = useParams();
-	const { product } = useSelector(mapState);
+	const { product, currentUser } = useSelector(mapState);
 
 	const {
 		productThumbnail,
@@ -28,7 +29,8 @@ const ProductCard = ({}) => {
 		averageVotations,
 		productDesc,
 		votationsOwn,
-		votationsNonOwn
+		votationsNonOwn,
+		numberVotes
 	} = product;
 
 	useEffect(
@@ -122,6 +124,9 @@ const ProductCard = ({}) => {
 							<span>{averageVotations}</span>
 						</li>
 						<li>
+							<span>{numberVotes}</span>
+						</li>
+						<li>
 							<div className="addToCart">
 								<Button
 									{...configAddToCartBtn}
@@ -130,6 +135,14 @@ const ProductCard = ({}) => {
 									Add to Cart
 								</Button>
 							</div>
+						</li>
+						<li>{currentUser && <Button>Vote Here</Button>}</li>
+						<li>
+							{!currentUser && (
+								<Button onClick={() => history.push("/login")}>
+									Login Here To vote
+								</Button>
+							)}
 						</li>
 						<li>
 							<span
