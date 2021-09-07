@@ -11,21 +11,22 @@ import { useParams } from "react-router";
 import { updateProductVoteStart } from "../../redux/Products/products.actions";
 
 // eslint-disable-next-line
-const ProductVote = ({}) => {
+const ProductVote = (product) => {
 	const dispatch = useDispatch();
 	const [value, setValue] = useState("Own");
+	const [quality, setQuality] = useState();
 	const { productID } = useParams();
+	const { numberVotes } = product;
 
-	const handleChange = (event) => {
-		setValue(event.target.value);
-	};
+	const votationsArray = [3, 3, 3, 3, 3, 3, 3];
 
 	const handleApplyVote = (e) => {
 		e.preventDefault();
 
 		const configVote = {
-			numberVotes: 10,
-			productID: productID
+			numberVotes: numberVotes + 1,
+			productID: productID,
+			votationsNonOwn: votationsArray
 		};
 
 		dispatch(updateProductVoteStart(configVote));
@@ -39,97 +40,105 @@ const ProductVote = ({}) => {
 					aria-label="gender"
 					name="gender1"
 					value={value}
-					onChange={handleChange}
+					onChange={(event) => {
+						setValue(event.target.value);
+					}}
 				>
 					<FormControlLabel value="female" control={<Radio />} label="Own" />
 					<FormControlLabel value="male" control={<Radio />} label="Not Own" />
 				</RadioGroup>
+
+				<Typography id="discrete-slider" gutterBottom>
+					Quality
+				</Typography>
+				<Slider
+					defaultValue={0}
+					aria-labelledby="discrete-slider"
+					valueLabelDisplay="auto"
+					step={1}
+					marks
+					min={0}
+					max={10}
+					name="quality"
+					value={quality}
+					onChange={(e) => {
+						setQuality(e.target.value);
+					}}
+				/>
+				<Typography id="discrete-slider" gutterBottom>
+					Price
+				</Typography>
+				<Slider
+					defaultValue={0}
+					aria-labelledby="discrete-slider"
+					valueLabelDisplay="auto"
+					step={1}
+					marks
+					min={0}
+					max={10}
+				/>
+				<Typography id="discrete-slider" gutterBottom>
+					Brand
+				</Typography>
+				<Slider
+					defaultValue={0}
+					aria-labelledby="discrete-slider"
+					valueLabelDisplay="auto"
+					step={1}
+					marks
+					min={0}
+					max={10}
+				/>
+				<Typography id="discrete-slider" gutterBottom>
+					Refinement
+				</Typography>
+				<Slider
+					defaultValue={0}
+					aria-labelledby="discrete-slider"
+					valueLabelDisplay="auto"
+					step={1}
+					marks
+					min={0}
+					max={10}
+				/>
+				<Typography id="discrete-slider" gutterBottom>
+					History
+				</Typography>
+				<Slider
+					defaultValue={0}
+					aria-labelledby="discrete-slider"
+					valueLabelDisplay="auto"
+					step={1}
+					marks
+					min={0}
+					max={10}
+				/>
+				<Typography id="discrete-slider" gutterBottom>
+					Engineering
+				</Typography>
+				<Slider
+					defaultValue={0}
+					aria-labelledby="discrete-slider"
+					valueLabelDisplay="auto"
+					step={1}
+					marks
+					min={0}
+					max={10}
+				/>
+				<Typography id="discrete-slider" gutterBottom>
+					X-Factor
+				</Typography>
+				<Slider
+					defaultValue={0}
+					aria-labelledby="discrete-slider"
+					valueLabelDisplay="auto"
+					step={1}
+					marks
+					min={0}
+					max={10}
+				/>
+				<Button onClick={handleApplyVote}>Apply Vote</Button>
 			</FormControl>
-			<Typography id="discrete-slider" gutterBottom>
-				Quality
-			</Typography>
-			<Slider
-				defaultValue={0}
-				aria-labelledby="discrete-slider"
-				valueLabelDisplay="auto"
-				step={1}
-				marks
-				min={0}
-				max={10}
-			/>
-			<Typography id="discrete-slider" gutterBottom>
-				Price
-			</Typography>
-			<Slider
-				defaultValue={0}
-				aria-labelledby="discrete-slider"
-				valueLabelDisplay="auto"
-				step={1}
-				marks
-				min={0}
-				max={10}
-			/>
-			<Typography id="discrete-slider" gutterBottom>
-				Brand
-			</Typography>
-			<Slider
-				defaultValue={0}
-				aria-labelledby="discrete-slider"
-				valueLabelDisplay="auto"
-				step={1}
-				marks
-				min={0}
-				max={10}
-			/>
-			<Typography id="discrete-slider" gutterBottom>
-				Refinement
-			</Typography>
-			<Slider
-				defaultValue={0}
-				aria-labelledby="discrete-slider"
-				valueLabelDisplay="auto"
-				step={1}
-				marks
-				min={0}
-				max={10}
-			/>
-			<Typography id="discrete-slider" gutterBottom>
-				History
-			</Typography>
-			<Slider
-				defaultValue={0}
-				aria-labelledby="discrete-slider"
-				valueLabelDisplay="auto"
-				step={1}
-				marks
-				min={0}
-				max={10}
-			/>
-			<Typography id="discrete-slider" gutterBottom>
-				Engineering
-			</Typography>
-			<Slider
-				defaultValue={0}
-				aria-labelledby="discrete-slider"
-				valueLabelDisplay="auto"
-				step={1}
-				marks
-				min={0}
-				max={10}
-			/>
-			<Typography id="discrete-slider" gutterBottom>
-				X-Factor
-			</Typography>
-			<Slider
-				defaultValue={0}
-				aria-labelledby="discrete-slider"
-				valueLabelDisplay="auto"
-				step={1}
-				marks
-				min={0}
-				max={10}
-			/>
-			<Button onClick={handleApplyVote}>Apply Vote</Button>
 		</div>
 	);
 };

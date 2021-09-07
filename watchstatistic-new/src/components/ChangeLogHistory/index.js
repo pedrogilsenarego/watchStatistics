@@ -8,7 +8,8 @@ const ChangeLogHistory = (props) => {
 				<p>- Option to Vote if Current User is Logged - Added</p>
 				<p>
 					- The Apply Vote know instead of create a new product updates the
-					existent one - Added
+					existent one. Also increments the number of total votes for the watch
+					- Added
 				</p>
 			</div>
 			<div>

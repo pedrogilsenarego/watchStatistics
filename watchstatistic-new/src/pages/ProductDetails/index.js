@@ -6,10 +6,10 @@ import { Grid } from "@material-ui/core";
 const ProductDetails = ({}) => {
 	return (
 		<Grid container>
-			<Grid container xs={12} sm={9}>
+			<Grid item xs={12} sm={9}>
 				<ProductCard />
 			</Grid>
-			<Grid container xs={12} sm={3}></Grid>
+			<Grid item xs={12} sm={3}></Grid>
 		</Grid>
 	);
 };

@@ -144,7 +144,7 @@ const ProductCard = ({}) => {
 							{currentUser && (
 								<div>
 									<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
-									<li>{voteMenu && <ProductVote />}</li>
+									<li>{voteMenu && <ProductVote {...product} />}</li>
 								</div>
 							)}
 						</li>

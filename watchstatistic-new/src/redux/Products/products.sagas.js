@@ -74,10 +74,8 @@ export function* onFetchProductStart() {
 
 export function* updateVote({ payload }) {
 	try {
-		const timestamp = new Date();
 		yield handleUpdateVote({
-			...payload,
-			createdDate: timestamp
+			...payload
 		});
 		yield put(fetchProductsStart());
 	} catch (err) {
