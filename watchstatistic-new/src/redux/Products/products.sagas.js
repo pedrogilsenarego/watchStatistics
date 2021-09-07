@@ -9,7 +9,8 @@ import {
 	handleAddProduct,
 	handleFetchProducts,
 	handleFetchProduct,
-	handleDeleteProduct
+	handleDeleteProduct,
+	handleUpdateVote
 } from "./products.helpers";
 import productsTypes from "./products.types";
 
@@ -69,12 +70,32 @@ export function* fetchProduct({ payload }) {
 export function* onFetchProductStart() {
 	yield takeLatest(productsTypes.FETCH_PRODUCT_START, fetchProduct);
 }
+//new implmentation
+
+export function* updateVote({ payload }) {
+	try {
+		const timestamp = new Date();
+		yield handleUpdateVote({
+			...payload,
+			createdDate: timestamp
+		});
+		yield put(fetchProductsStart());
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* onUpdateProductVoteStart() {
+	yield takeLatest(productsTypes.UPDATE_PRODUCT_VOTE_START, updateVote);
+}
 
 export default function* productsSagas() {
 	yield all([
 		call(onAddProductStart),
 		call(onFetchProductsStart),
 		call(onDeleteProductStart),
-		call(onFetchProductStart)
+		call(onFetchProductStart),
+		//new Implmentation
+		call(onUpdateProductVoteStart)
 	]);
 }

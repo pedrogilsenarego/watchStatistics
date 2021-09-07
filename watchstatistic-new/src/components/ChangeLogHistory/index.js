@@ -4,8 +4,12 @@ const ChangeLogHistory = (props) => {
 	return (
 		<div className="wrap">
 			<div>
-				<h2>1.1.1 - released 2021-09-06 </h2>
+				<h2>1.1.1 - released 2021-09 </h2>
 				<p>- Option to Vote if Current User is Logged - Added</p>
+				<p>
+					- The Apply Vote know instead of create a new product updates the
+					existent one - Added
+				</p>
 			</div>
 			<div>
 				<h2>1.1 - released 2021-09-06 </h2>

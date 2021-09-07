@@ -29,3 +29,9 @@ export const setProduct = (product) => ({
 	type: productsTypes.SET_PRODUCT,
 	payload: product
 });
+
+//New Implementation
+export const updateProductVoteStart = (productData) => ({
+	type: productsTypes.UPDATE_PRODUCT_VOTE_START,
+	payload: productData
+});

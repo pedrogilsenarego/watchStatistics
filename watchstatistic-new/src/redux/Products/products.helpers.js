@@ -90,3 +90,21 @@ export const handleFetchProduct = (productID) => {
 			});
 	});
 };
+
+//new Implementation
+
+export const handleUpdateVote = (product) => {
+	const { productID, numberVotes } = product;
+	return new Promise((resolve, reject) => {
+		firestore
+			.collection("products")
+			.doc(productID)
+			.update(product)
+			.then(() => {
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};

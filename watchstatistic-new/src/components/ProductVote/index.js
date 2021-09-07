@@ -7,12 +7,15 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import Button from "../forms/Button";
 import { useDispatch } from "react-redux";
-import { addProductStart } from "../../redux/Products/products.actions";
+import { useParams } from "react-router";
+import { updateProductVoteStart } from "../../redux/Products/products.actions";
 
 // eslint-disable-next-line
 const ProductVote = ({}) => {
 	const dispatch = useDispatch();
 	const [value, setValue] = useState("Own");
+	const { productID } = useParams();
+
 	const handleChange = (event) => {
 		setValue(event.target.value);
 	};
@@ -20,11 +23,12 @@ const ProductVote = ({}) => {
 	const handleApplyVote = (e) => {
 		e.preventDefault();
 
-		dispatch(
-			addProductStart({
-				numberVotes: 5
-			})
-		);
+		const configVote = {
+			numberVotes: 10,
+			productID: productID
+		};
+
+		dispatch(updateProductVoteStart(configVote));
 	};
 
 	return (
