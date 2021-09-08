@@ -2,19 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "./../../redux/User/user.actions";
-import { selectCartItemsCount } from "./../../redux/Cart/cart.selectors";
 import "./styles.scss";
 
 const mapState = (state) => ({
-	currentUser: state.user.currentUser,
-	totalNumCartItems: selectCartItemsCount(state)
+	currentUser: state.user.currentUser
 });
 
 const Header = (props) => {
 	const location = useLocation();
 	const [activeMenu, setActiveMenu] = useState(false);
 	const dispatch = useDispatch();
-	const { currentUser, totalNumCartItems } = useSelector(mapState);
+	const { currentUser } = useSelector(mapState);
 
 	const signOut = () => {
 		dispatch(signOutUserStart());
@@ -40,13 +38,6 @@ const Header = (props) => {
 
 				<div className="callToActions">
 					<ul>
-						<li>
-							<Link to="/cart">
-								Your Cart ({totalNumCartItems})
-								<i class="fas fa-shopping-basket"></i>
-							</Link>
-						</li>
-
 						{currentUser && [
 							<li key={1}>
 								<Link to="/dashboard">

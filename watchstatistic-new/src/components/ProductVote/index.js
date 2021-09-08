@@ -112,12 +112,6 @@ const ProductVote = (product) => {
 
 	return (
 		<div>
-			<h1>
-				{(
-					(quality + votationsOwn[0] * numberVotesOwn) /
-					(numberVotesOwn + 1)
-				).toFixed(2)}
-			</h1>
 			<FormControl component="fieldset">
 				<FormLabel component="legend"></FormLabel>
 				<RadioGroup

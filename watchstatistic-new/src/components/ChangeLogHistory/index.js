@@ -4,6 +4,13 @@ const ChangeLogHistory = () => {
 	return (
 		<div className="wrap">
 			<div>
+				<h2>1.1.2 - released 2021-09- </h2>
+				<p>
+					- The users when are registered now receive an email confirmation and
+					are passed the role non-verified as default
+				</p>
+			</div>
+			<div>
 				<h2>1.1.1 - released 2021-09-08 </h2>
 				<p>- Option to Vote if Current User is Logged - Added</p>
 				<p>
@@ -19,7 +26,7 @@ const ChangeLogHistory = () => {
 					votes instead of replacing the values
 				</p>
 				<p>
-					Submitting a vote now correctly updates the redux-store ans renders
+					Submitting a vote now correctly updates the redux-store and renders
 					the votes
 				</p>
 			</div>

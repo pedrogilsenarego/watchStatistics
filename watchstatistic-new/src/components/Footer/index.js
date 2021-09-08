@@ -1,5 +1,4 @@
 import React from "react";
-import "./styles.scss";
 import { Box, Container, Grid, Link } from "@material-ui/core";
 
 const Footer = (props) => {
@@ -8,14 +7,14 @@ const Footer = (props) => {
 			<Box
 				px={{ xs: 3, sm: 10 }}
 				py={{ xs: 5, sm: 10 }}
-				bgcolor="text.secondary"
-				color="white"
+				bgcolor={"#403a50"}
+				color={"#dcdae0"}
 				textAlign="center"
 			>
 				<Container maxWidth="lg">
 					<Grid container spacing={5}>
 						<Grid item xs={12} sm={4}>
-							<Box borderBottom={1}>V1.1.1</Box>
+							<Box fontWeight={600}>V1.1.1</Box>
 							<Box>
 								<Link href="/changelog" color="inherit">
 									ChangeLog
@@ -28,7 +27,7 @@ const Footer = (props) => {
 							</Box>
 						</Grid>
 						<Grid item xs={12} sm={4}>
-							<Box borderBottom={1}>About</Box>
+							<Box fontWeight={600}>About</Box>
 							<Box>
 								<Link color="inherit">Who we are</Link>
 							</Box>
@@ -37,7 +36,7 @@ const Footer = (props) => {
 							</Box>
 						</Grid>
 						<Grid item xs={12} sm={4}>
-							<Box borderBottom={1}>Contacts</Box>
+							<Box fontWeight={600}>Contacts</Box>
 							<Box>
 								<Link color="inherit">Tell us Something</Link>
 							</Box>
