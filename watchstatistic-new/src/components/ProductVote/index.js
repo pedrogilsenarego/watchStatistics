@@ -13,12 +13,26 @@ import { updateProductVoteStart } from "../../redux/Products/products.actions";
 // eslint-disable-next-line
 const ProductVote = (product) => {
 	const dispatch = useDispatch();
-	const [value, setValue] = useState("Own");
-	const [quality, setQuality] = useState();
+	const [ownership, setOwnership] = useState("Own");
+	const [quality, setQuality] = useState("");
+	const [price, setPrice] = useState("");
+	const [brand, setBrand] = useState("");
+	const [refinement, setRefinement] = useState("");
+	const [history, setHistory] = useState("");
+	const [engineering, setEngineering] = useState("");
+	const [xFactor, setXFactor] = useState("");
 	const { productID } = useParams();
 	const { numberVotes } = product;
 
-	const votationsArray = [3, 3, 3, 3, 3, 3, 3];
+	const votationsArray = [
+		quality,
+		price,
+		brand,
+		refinement,
+		history,
+		engineering,
+		xFactor
+	];
 
 	const handleApplyVote = (e) => {
 		e.preventDefault();
@@ -39,13 +53,17 @@ const ProductVote = (product) => {
 				<RadioGroup
 					aria-label="gender"
 					name="gender1"
-					value={value}
+					value={ownership}
 					onChange={(event) => {
-						setValue(event.target.value);
+						setOwnership(event.target.value);
 					}}
 				>
-					<FormControlLabel value="female" control={<Radio />} label="Own" />
-					<FormControlLabel value="male" control={<Radio />} label="Not Own" />
+					<FormControlLabel value="Own" control={<Radio />} label="Own" />
+					<FormControlLabel
+						value="Not Own"
+						control={<Radio />}
+						label="Not Own"
+					/>
 				</RadioGroup>
 
 				<Typography id="discrete-slider" gutterBottom>
@@ -60,9 +78,8 @@ const ProductVote = (product) => {
 					min={0}
 					max={10}
 					name="quality"
-					value={quality}
-					onChange={(e) => {
-						setQuality(e.target.value);
+					onChange={(event, newValue) => {
+						setQuality(newValue);
 					}}
 				/>
 				<Typography id="discrete-slider" gutterBottom>
@@ -76,6 +93,9 @@ const ProductVote = (product) => {
 					marks
 					min={0}
 					max={10}
+					onChange={(event, newValue) => {
+						setPrice(newValue);
+					}}
 				/>
 				<Typography id="discrete-slider" gutterBottom>
 					Brand
@@ -88,6 +108,9 @@ const ProductVote = (product) => {
 					marks
 					min={0}
 					max={10}
+					onChange={(event, newValue) => {
+						setBrand(newValue);
+					}}
 				/>
 				<Typography id="discrete-slider" gutterBottom>
 					Refinement
@@ -100,6 +123,9 @@ const ProductVote = (product) => {
 					marks
 					min={0}
 					max={10}
+					onChange={(event, newValue) => {
+						setRefinement(newValue);
+					}}
 				/>
 				<Typography id="discrete-slider" gutterBottom>
 					History
@@ -112,6 +138,9 @@ const ProductVote = (product) => {
 					marks
 					min={0}
 					max={10}
+					onChange={(event, newValue) => {
+						setHistory(newValue);
+					}}
 				/>
 				<Typography id="discrete-slider" gutterBottom>
 					Engineering
@@ -124,6 +153,9 @@ const ProductVote = (product) => {
 					marks
 					min={0}
 					max={10}
+					onChange={(event, newValue) => {
+						setEngineering(newValue);
+					}}
 				/>
 				<Typography id="discrete-slider" gutterBottom>
 					X-Factor
@@ -136,6 +168,9 @@ const ProductVote = (product) => {
 					marks
 					min={0}
 					max={10}
+					onChange={(event, newValue) => {
+						setXFactor(newValue);
+					}}
 				/>
 				<Button onClick={handleApplyVote}>Apply Vote</Button>
 			</FormControl>
