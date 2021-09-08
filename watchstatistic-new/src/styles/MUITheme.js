@@ -1,13 +1,12 @@
 import { createTheme } from "@material-ui/core/styles";
-import green from "@material-ui/core/colors/green";
 
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: green[500]
+			main: "#48415a"
 		},
 		secondary: {
-			main: green[500]
+			main: "#48415a"
 		}
 		/* background: {
 			default: "#3ec9f3"

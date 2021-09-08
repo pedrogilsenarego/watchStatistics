@@ -61,7 +61,7 @@ const ProductVote = (product) => {
 		).toFixed(2),
 		(
 			(price + votationsNonOwn[1] * numberVotesNotOwn) /
-			(numberVotesOwn + 1)
+			(numberVotesNotOwn + 1)
 		).toFixed(2),
 		(
 			(brand + votationsNonOwn[2] * numberVotesNotOwn) /
