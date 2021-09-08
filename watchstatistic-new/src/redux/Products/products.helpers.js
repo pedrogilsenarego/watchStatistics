@@ -94,12 +94,12 @@ export const handleFetchProduct = (productID) => {
 //new Implementation
 
 export const handleUpdateVote = (product) => {
-	const { productID, numberVotes, votationsNonOwn } = product;
+	const { productID, numberVotes, votationsNonOwn, votationsOwn } = product;
 	return new Promise((resolve, reject) => {
 		firestore
 			.collection("products")
 			.doc(productID)
-			.update({ numberVotes, votationsNonOwn })
+			.update({ numberVotes, votationsNonOwn, votationsOwn })
 			.then(() => {
 				resolve();
 			})

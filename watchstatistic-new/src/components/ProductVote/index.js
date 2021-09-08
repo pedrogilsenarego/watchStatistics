@@ -22,9 +22,9 @@ const ProductVote = (product) => {
 	const [engineering, setEngineering] = useState("");
 	const [xFactor, setXFactor] = useState("");
 	const { productID } = useParams();
-	const { numberVotes } = product;
+	const { numberVotes, votationsOwn, votationsNonOwn } = product;
 
-	const votationsArray = [
+	const newVotationsArray = [
 		quality,
 		price,
 		brand,
@@ -37,17 +37,29 @@ const ProductVote = (product) => {
 	const handleApplyVote = (e) => {
 		e.preventDefault();
 
-		const configVote = {
-			numberVotes: numberVotes + 1,
-			productID: productID,
-			votationsNonOwn: votationsArray
-		};
-
-		dispatch(updateProductVoteStart(configVote));
+		if (ownership === "Own") {
+			const configVote = {
+				numberVotes: numberVotes + 1,
+				productID: productID,
+				votationsNonOwn: votationsNonOwn,
+				votationsOwn: newVotationsArray
+			};
+			dispatch(updateProductVoteStart(configVote));
+		}
+		if (ownership === "Not Own") {
+			const configVote = {
+				numberVotes: numberVotes + 1,
+				productID: productID,
+				votationsNonOwn: newVotationsArray,
+				votationsOwn: votationsOwn
+			};
+			dispatch(updateProductVoteStart(configVote));
+		}
 	};
 
 	return (
 		<div>
+			<h1>{ownership}</h1>
 			<FormControl component="fieldset">
 				<FormLabel component="legend"></FormLabel>
 				<RadioGroup
