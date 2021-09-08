@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChangeLogHistory = (props) => {
+const ChangeLogHistory = () => {
 	return (
 		<div className="wrap">
 			<div>
@@ -10,6 +10,13 @@ const ChangeLogHistory = (props) => {
 					- The Apply Vote know instead of create a new product updates the
 					existent one. Also increments the number of total votes for the watch
 					- Added
+				</p>
+				<p>
+					- It is now possible to choose to vote between Own and Not Own watches
+				</p>
+				<p>
+					- the voting system now sucessfully updates the values from the AVG
+					votes instead of replacing the values
 				</p>
 			</div>
 			<div>

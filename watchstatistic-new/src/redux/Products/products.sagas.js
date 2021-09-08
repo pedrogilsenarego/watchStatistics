@@ -3,7 +3,8 @@ import { takeLatest, put, all, call } from "redux-saga/effects";
 import {
 	setProducts,
 	setProduct,
-	fetchProductsStart
+	fetchProductsStart,
+	fetchProductStart
 } from "./products.actions";
 import {
 	handleAddProduct,
@@ -77,7 +78,7 @@ export function* updateVote({ payload }) {
 		yield handleUpdateVote({
 			...payload
 		});
-		yield put(fetchProductsStart());
+		yield put(fetchProductStart(payload.productID));
 	} catch (err) {
 		// console.log(err);
 	}

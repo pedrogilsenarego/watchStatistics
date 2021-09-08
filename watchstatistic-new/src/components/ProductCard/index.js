@@ -32,7 +32,8 @@ const ProductCard = ({}) => {
 		productDesc,
 		votationsOwn,
 		votationsNonOwn,
-		numberVotes
+		numberVotesOwn,
+		numberVotesNotOwn
 	} = product;
 
 	useEffect(
@@ -131,7 +132,10 @@ const ProductCard = ({}) => {
 							<span>Average Votation: {averageVotations}</span>
 						</li>
 						<li>
-							<span>Number of People Voted: {numberVotes}</span>
+							<span>Votes From Owners: {numberVotesOwn}</span>
+						</li>
+						<li>
+							<span>Votes From Non Owners: {numberVotesNotOwn}</span>
 						</li>
 						<li>
 							<div className="addToCart">

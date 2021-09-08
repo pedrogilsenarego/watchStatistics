@@ -22,16 +22,67 @@ const ProductVote = (product) => {
 	const [engineering, setEngineering] = useState("");
 	const [xFactor, setXFactor] = useState("");
 	const { productID } = useParams();
-	const { numberVotes, votationsOwn, votationsNonOwn } = product;
+	const { numberVotesOwn, numberVotesNotOwn, votationsOwn, votationsNonOwn } =
+		product;
 
-	const newVotationsArray = [
-		quality,
-		price,
-		brand,
-		refinement,
-		history,
-		engineering,
-		xFactor
+	const newVotationsOwnArray = [
+		(
+			(quality + votationsOwn[0] * numberVotesOwn) /
+			(numberVotesOwn + 1)
+		).toFixed(2),
+		((price + votationsOwn[1] * numberVotesOwn) / (numberVotesOwn + 1)).toFixed(
+			2
+		),
+		((brand + votationsOwn[2] * numberVotesOwn) / (numberVotesOwn + 1)).toFixed(
+			2
+		),
+		(
+			(refinement + votationsOwn[3] * numberVotesOwn) /
+			(numberVotesOwn + 1)
+		).toFixed(2),
+		(
+			(history + votationsOwn[4] * numberVotesOwn) /
+			(numberVotesOwn + 1)
+		).toFixed(2),
+		(
+			(engineering + votationsOwn[5] * numberVotesOwn) /
+			(numberVotesOwn + 1)
+		).toFixed(2),
+		(
+			(xFactor + votationsOwn[6] * numberVotesOwn) /
+			(numberVotesOwn + 1)
+		).toFixed(2)
+	];
+
+	const newVotationsNotOwnArray = [
+		(
+			(quality + votationsNonOwn[0] * numberVotesNotOwn) /
+			(numberVotesNotOwn + 1)
+		).toFixed(2),
+		(
+			(price + votationsNonOwn[1] * numberVotesNotOwn) /
+			(numberVotesOwn + 1)
+		).toFixed(2),
+		(
+			(brand + votationsNonOwn[2] * numberVotesNotOwn) /
+			(numberVotesNotOwn + 1)
+		).toFixed(2),
+		(
+			(refinement + votationsNonOwn[3] * numberVotesNotOwn) /
+			(numberVotesNotOwn + 1)
+		).toFixed(2),
+		(
+			(history + votationsNonOwn[4] * numberVotesNotOwn) /
+			(numberVotesNotOwn + 1)
+		).toFixed(2),
+		(
+			(engineering + votationsNonOwn[5] * numberVotesNotOwn) /
+			(numberVotesNotOwn + 1)
+		).toFixed(2),
+		(
+			(xFactor + votationsNonOwn[6] * numberVotesNotOwn) /
+			(numberVotesNotOwn + 1)
+		).toFixed(2)
 	];
 
 	const handleApplyVote = (e) => {
@@ -39,18 +90,20 @@ const ProductVote = (product) => {
 
 		if (ownership === "Own") {
 			const configVote = {
-				numberVotes: numberVotes + 1,
+				numberVotesOwn: numberVotesOwn + 1,
+				numberVotesNotOwn: numberVotesNotOwn,
 				productID: productID,
 				votationsNonOwn: votationsNonOwn,
-				votationsOwn: newVotationsArray
+				votationsOwn: newVotationsOwnArray
 			};
 			dispatch(updateProductVoteStart(configVote));
 		}
 		if (ownership === "Not Own") {
 			const configVote = {
-				numberVotes: numberVotes + 1,
+				numberVotesOwn: numberVotesOwn,
+				numberVotesNotOwn: numberVotesNotOwn + 1,
 				productID: productID,
-				votationsNonOwn: newVotationsArray,
+				votationsNonOwn: newVotationsNotOwnArray,
 				votationsOwn: votationsOwn
 			};
 			dispatch(updateProductVoteStart(configVote));
@@ -59,7 +112,12 @@ const ProductVote = (product) => {
 
 	return (
 		<div>
-			<h1>{ownership}</h1>
+			<h1>
+				{(
+					(quality + votationsOwn[0] * numberVotesOwn) /
+					(numberVotesOwn + 1)
+				).toFixed(2)}
+			</h1>
 			<FormControl component="fieldset">
 				<FormLabel component="legend"></FormLabel>
 				<RadioGroup
