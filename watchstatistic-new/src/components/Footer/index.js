@@ -15,7 +15,7 @@ const Footer = (props) => {
 				<Container maxWidth="lg">
 					<Grid container spacing={5}>
 						<Grid item xs={12} sm={4}>
-							<Box borderBottom={1}>V1.1</Box>
+							<Box borderBottom={1}>V1.1.1</Box>
 							<Box>
 								<Link href="/changelog" color="inherit">
 									ChangeLog

@@ -4,7 +4,7 @@ const ChangeLogHistory = () => {
 	return (
 		<div className="wrap">
 			<div>
-				<h2>1.1.1 - released 2021-09 </h2>
+				<h2>1.1.1 - released 2021-09-08 </h2>
 				<p>- Option to Vote if Current User is Logged - Added</p>
 				<p>
 					- The Apply Vote know instead of create a new product updates the
@@ -17,6 +17,10 @@ const ChangeLogHistory = () => {
 				<p>
 					- the voting system now sucessfully updates the values from the AVG
 					votes instead of replacing the values
+				</p>
+				<p>
+					Submitting a vote now correctly updates the redux-store ans renders
+					the votes
 				</p>
 			</div>
 			<div>
