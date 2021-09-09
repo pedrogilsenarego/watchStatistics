@@ -5,10 +5,10 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import Button from "../forms/Button";
+import Button from "../../forms/Button";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { updateProductVoteStart } from "../../redux/Products/products.actions";
+import { updateProductVoteStart } from "../../../redux/Products/products.actions";
 
 // eslint-disable-next-line
 const ProductVote = (product) => {

@@ -1,15 +1,39 @@
-import React from "react";
-import ProductCard from "../../components/ProductCard";
-import { Grid } from "@material-ui/core";
+import React, { useEffect } from "react";
+import ProductCard from "./../../components/ProductDetails/ProductCard";
+import ProductSidePanel from "../../components/ProductDetails/ProductSidePanel";
+import { Grid, Box } from "@material-ui/core";
+import {
+	fetchProductStart,
+	setProduct
+} from "../../redux/Products/products.actions";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
 
 // eslint-disable-next-line
 const ProductDetails = ({}) => {
+	const dispatch = useDispatch();
+	const { productID } = useParams();
+
+	useEffect(
+		() => {
+			dispatch(fetchProductStart(productID));
+			return () => {
+				dispatch(setProduct({}));
+			};
+		},
+		// eslint-disable-next-line
+		[]
+	);
 	return (
 		<Grid container>
-			<Grid item xs={12} sm={9}>
+			<Grid item xs={12} sm={8}>
 				<ProductCard />
 			</Grid>
-			<Grid item xs={12} sm={3}></Grid>
+			<Grid item xs={12} sm={4}>
+				<Box border="solid">
+					<ProductSidePanel />
+				</Box>
+			</Grid>
 		</Grid>
 	);
 };

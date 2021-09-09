@@ -62,7 +62,14 @@ const Admin = (props) => {
 				productName,
 				productThumbnail,
 				productPrice,
-				productDesc
+				productDesc,
+				avgTotal: 0,
+				numberVotesNotOwn: 0,
+				numberVotesOwn: 0,
+				avgVotationsOwn: 0,
+				avgVotationsNotOwn: 0,
+				votationsNonOwn: [0, 0, 0, 0, 0, 0, 0],
+				votationsOwn: [0, 0, 0, 0, 0, 0, 0]
 			})
 		);
 		resetForm();

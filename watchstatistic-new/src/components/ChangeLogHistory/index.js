@@ -4,7 +4,7 @@ const ChangeLogHistory = () => {
 	return (
 		<div className="wrap">
 			<div>
-				<h2>1.1.2 - released 2021-09- </h2>
+				<h2>1.1.2 - released 2021-09-09 </h2>
 				<p>
 					- The users when are registered now receive an email confirmation and
 					are passed the role non-verified as default
@@ -13,6 +13,7 @@ const ChangeLogHistory = () => {
 					The votation system now calculates the Avg score for each own or not
 					own category as also the totalAvg
 				</p>
+				<p>When a product is created now initialize the vote fields as 0</p>
 			</div>
 			<div>
 				<h2>1.1.1 - released 2021-09-08 </h2>

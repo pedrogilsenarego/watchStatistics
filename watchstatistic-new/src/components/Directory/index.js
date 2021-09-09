@@ -26,7 +26,7 @@ const Directory = (props) => {
 							</p>
 						</div>
 					</Grid>
-					<Grid xs={12} sm={3}>
+					<Grid item xs={12} sm={3}>
 						Teste
 					</Grid>
 				</Grid>
