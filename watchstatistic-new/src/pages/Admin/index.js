@@ -24,7 +24,6 @@ const Admin = (props) => {
 	const [productCategory, setProductCategory] = useState("divers");
 	const [productName, setProductName] = useState("");
 	const [productThumbnail, setProductThumbnail] = useState("");
-	const [productPrice, setProductPrice] = useState(0);
 	const [productDesc, setProductDesc] = useState("");
 
 	const { data, queryDoc, isLastPage } = products;
@@ -49,7 +48,6 @@ const Admin = (props) => {
 		setProductCategory("divers");
 		setProductName("");
 		setProductThumbnail("");
-		setProductPrice(0);
 		setProductDesc("");
 	};
 
@@ -61,7 +59,6 @@ const Admin = (props) => {
 				productCategory,
 				productName,
 				productThumbnail,
-				productPrice,
 				productDesc,
 				avgTotal: 0,
 				numberVotesNotOwn: 0,
@@ -143,16 +140,6 @@ const Admin = (props) => {
 							value={productThumbnail}
 							handleChange={(e) => setProductThumbnail(e.target.value)}
 						/>
-
-						<FormInput
-							label="Price"
-							type="number"
-							min="0.00"
-							max="10000.00"
-							step="0.01"
-							value={productPrice}
-							handleChange={(e) => setProductPrice(e.target.value)}
-						/>
 						<CKEditor
 							onChange={(evt) => setProductDesc(evt.editor.getData())}
 						/>
@@ -183,12 +170,8 @@ const Admin = (props) => {
 										{Array.isArray(data) &&
 											data.length > 0 &&
 											data.map((product, index) => {
-												const {
-													productName,
-													productThumbnail,
-													productPrice,
-													documentID
-												} = product;
+												const { productName, productThumbnail, documentID } =
+													product;
 
 												return (
 													<tr>
@@ -196,7 +179,6 @@ const Admin = (props) => {
 															<img src={productThumbnail} alt="" />
 														</td>
 														<td>{productName}</td>
-														<td>${productPrice}</td>
 														<td>
 															<Button
 																onClick={() =>

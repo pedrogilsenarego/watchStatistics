@@ -144,7 +144,6 @@ const ProductVote = (product) => {
 
 	return (
 		<div>
-			<h1>{newAvgVotationsOwn}</h1>
 			<FormControl component="fieldset">
 				<FormLabel component="legend"></FormLabel>
 				<RadioGroup

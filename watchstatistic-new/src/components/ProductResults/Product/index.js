@@ -1,62 +1,62 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
-import Button from "../../forms/Button";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../../redux/Cart/cart.actions";
+import { NavLink } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+	Card,
+	CardActionArea,
+	CardContent,
+	Button,
+	Typography,
+	CardMedia,
+	CardActions
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		maxwidth: 345
+	},
+	media: {
+		height: 145
+	}
+}));
 
 const Product = (product) => {
-	const dispatch = useDispatch();
-	const history = useHistory();
-	const { documentID, productThumbnail, productName, productPrice } = product;
-	if (
-		!documentID ||
-		!productThumbnail ||
-		!productName ||
-		typeof productPrice === "undefined"
-	)
-		return null;
-
-	const configAddToCartBtn = {
-		type: "button"
-	};
-
-	const handleAddToCart = (product) => {
-		if (!product) return;
-		dispatch(addProduct(product));
-		history.push("/cart");
-	};
+	const { documentID, productThumbnail, productName } = product;
+	if (!documentID || !productThumbnail || !productName) return null;
+	// eslint-disable-next-line
+	const classes = useStyles();
 
 	return (
-		<div className="product">
-			<div className="thumb">
-				<Link to={`/product/${documentID}`}>
-					<img src={productThumbnail} alt={productName} />
-				</Link>
-			</div>
-
-			<div className="details">
-				<ul>
-					<li>
-						<span className="name">
-							<Link to={`/product/${documentID}`}>{productName}</Link>
-						</span>
-					</li>
-					<li>
-						<span className="price">${productPrice}</span>
-					</li>
-					<li>
-						<div className="addToCart">
-							<Button
-								{...configAddToCartBtn}
-								onClick={() => handleAddToCart(product)}
-							>
-								Add to Cart
-							</Button>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
+		<Card className={classes.root} alt={productName}>
+			<CardActionArea>
+				<CardMedia
+					className={classes.media}
+					image={productThumbnail}
+					title="hello"
+				/>
+				<CardContent>
+					<Typography gutterBottom variant="h5" component="h2">
+						{productName}
+					</Typography>
+					<Typography variant="body2" color="textSecondary">
+						Hello2
+					</Typography>
+				</CardContent>
+			</CardActionArea>
+			<CardActions>
+				<Button size="small" color="secondary">
+					Share
+				</Button>
+				<Button
+					component={NavLink}
+					to={`/product/${documentID}`}
+					size="small"
+					color="secondary"
+				>
+					Vote Here
+				</Button>
+			</CardActions>
+		</Card>
 	);
 };
 
