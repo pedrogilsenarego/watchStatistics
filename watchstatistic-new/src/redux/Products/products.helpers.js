@@ -99,7 +99,10 @@ export const handleUpdateVote = (product) => {
 		numberVotesOwn,
 		numberVotesNotOwn,
 		votationsNonOwn,
-		votationsOwn
+		votationsOwn,
+		avgVotationsOwn,
+		avgVotationsNotOwn,
+		avgTotal
 	} = product;
 	return new Promise((resolve, reject) => {
 		firestore
@@ -109,7 +112,10 @@ export const handleUpdateVote = (product) => {
 				numberVotesOwn,
 				numberVotesNotOwn,
 				votationsNonOwn,
-				votationsOwn
+				votationsOwn,
+				avgVotationsOwn,
+				avgVotationsNotOwn,
+				avgTotal
 			})
 			.then(() => {
 				resolve();

@@ -22,8 +22,14 @@ const ProductVote = (product) => {
 	const [engineering, setEngineering] = useState("");
 	const [xFactor, setXFactor] = useState("");
 	const { productID } = useParams();
-	const { numberVotesOwn, numberVotesNotOwn, votationsOwn, votationsNonOwn } =
-		product;
+	const {
+		numberVotesOwn,
+		numberVotesNotOwn,
+		votationsOwn,
+		votationsNonOwn,
+		avgVotationsOwn,
+		avgVotationsNotOwn
+	} = product;
 
 	const newVotationsOwnArray = [
 		(
@@ -89,29 +95,56 @@ const ProductVote = (product) => {
 		e.preventDefault();
 
 		if (ownership === "Own") {
+			const newAvgTotal = (
+				(+newAvgVotationsOwn + +avgVotationsNotOwn) /
+				2
+			).toFixed(2);
 			const configVote = {
 				numberVotesOwn: numberVotesOwn + 1,
 				numberVotesNotOwn: numberVotesNotOwn,
 				productID: productID,
 				votationsNonOwn: votationsNonOwn,
-				votationsOwn: newVotationsOwnArray
+				votationsOwn: newVotationsOwnArray,
+				avgVotationsOwn: newAvgVotationsOwn,
+				avgVotationsNotOwn: avgVotationsNotOwn,
+				avgTotal: newAvgTotal
 			};
 			dispatch(updateProductVoteStart(configVote));
 		}
 		if (ownership === "Not Own") {
+			const newAvgTotal = (
+				(+avgVotationsOwn + +newAvgVotationsNotOwn) /
+				2
+			).toFixed(2);
 			const configVote = {
 				numberVotesOwn: numberVotesOwn,
 				numberVotesNotOwn: numberVotesNotOwn + 1,
 				productID: productID,
 				votationsNonOwn: newVotationsNotOwnArray,
-				votationsOwn: votationsOwn
+				votationsOwn: votationsOwn,
+				avgVotationsOwn: avgVotationsOwn,
+				avgVotationsNotOwn: newAvgVotationsNotOwn,
+				avgTotal: newAvgTotal
 			};
 			dispatch(updateProductVoteStart(configVote));
 		}
 	};
 
+	const newAvgVotationsOwn = (
+		newVotationsOwnArray.reduce(function (prev, curr) {
+			return (Number(prev) || 0) + (Number(curr) || 0);
+		}) / 7
+	).toFixed(2);
+
+	const newAvgVotationsNotOwn = (
+		newVotationsNotOwnArray.reduce(function (prev, curr) {
+			return (Number(prev) || 0) + (Number(curr) || 0);
+		}) / 7
+	).toFixed(2);
+
 	return (
 		<div>
+			<h1>{newAvgVotationsOwn}</h1>
 			<FormControl component="fieldset">
 				<FormLabel component="legend"></FormLabel>
 				<RadioGroup

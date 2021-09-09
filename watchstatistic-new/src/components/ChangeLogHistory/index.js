@@ -9,6 +9,10 @@ const ChangeLogHistory = () => {
 					- The users when are registered now receive an email confirmation and
 					are passed the role non-verified as default
 				</p>
+				<p>
+					The votation system now calculates the Avg score for each own or not
+					own category as also the totalAvg
+				</p>
 			</div>
 			<div>
 				<h2>1.1.1 - released 2021-09-08 </h2>

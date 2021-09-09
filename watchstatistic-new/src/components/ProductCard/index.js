@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../forms/Button";
-import { addProduct } from "./../../redux/Cart/cart.actions";
 import {
 	fetchProductStart,
 	setProduct
@@ -28,12 +27,14 @@ const ProductCard = ({}) => {
 	const {
 		productThumbnail,
 		productName,
-		averageVotations,
+		avgVotationsOwn,
+		avgVotationsNotOwn,
 		productDesc,
 		votationsOwn,
 		votationsNonOwn,
 		numberVotesOwn,
-		numberVotesNotOwn
+		numberVotesNotOwn,
+		avgTotal
 	} = product;
 
 	useEffect(
@@ -47,20 +48,11 @@ const ProductCard = ({}) => {
 		[]
 	);
 
-	const handleAddToCart = (product) => {
-		if (!product) return;
-		dispatch(addProduct(product));
-		history.push("/cart");
-	};
-
 	const handleVoteBtn = (e) => {
 		//e.preventDefault();
 		setVoteMenu(!voteMenu);
 	};
 
-	const configBtn = {
-		type: "button"
-	};
 	const configRadarChart = {
 		data: {
 			labels: [
@@ -129,20 +121,19 @@ const ProductCard = ({}) => {
 							<h1>{productName}</h1>
 						</li>
 						<li>
-							<span>Average Votation: {averageVotations}</span>
+							<span>Total Score: {avgTotal}</span>
 						</li>
 						<li>
 							<span>Votes From Owners: {numberVotesOwn}</span>
 						</li>
 						<li>
+							<span>Score Owners: {avgVotationsOwn}</span>
+						</li>
+						<li>
 							<span>Votes From Non Owners: {numberVotesNotOwn}</span>
 						</li>
 						<li>
-							<div className="addToCart">
-								<Button {...configBtn} onClick={() => handleAddToCart(product)}>
-									Add to Cart
-								</Button>
-							</div>
+							<span>Score Non Owners: {avgVotationsNotOwn}</span>
 						</li>
 						<li>
 							{currentUser && (
