@@ -11,6 +11,7 @@ const ChangeLogHistory = () => {
 					When there is a vote a vote data is added to the DB with the vote
 					characteristics
 				</p>
+				<p>each user can only vote once now</p>
 			</div>
 		</div>
 	);

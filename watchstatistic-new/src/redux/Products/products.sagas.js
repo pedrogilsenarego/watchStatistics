@@ -15,6 +15,7 @@ import {
 	handleUserVote
 } from "./products.helpers";
 import productsTypes from "./products.types";
+import { checkUserSession } from "../User/user.actions";
 
 export function* addProduct({ payload }) {
 	try {
@@ -83,6 +84,7 @@ export function* updateVote({ payload }) {
 			...payload
 		});
 		yield put(fetchProductStart(payload.productID));
+		yield put(checkUserSession());
 	} catch (err) {
 		// console.log(err);
 	}
