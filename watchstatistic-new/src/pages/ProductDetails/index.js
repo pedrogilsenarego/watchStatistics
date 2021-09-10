@@ -30,7 +30,7 @@ const ProductDetails = ({}) => {
 				<ProductCard />
 			</Grid>
 			<Grid item xs={12} sm={3}>
-				<Box bgcolor="primary.main">
+				<Box bgcolor="primary.main" alignContent="center">
 					<ProductSidePanel />
 				</Box>
 			</Grid>

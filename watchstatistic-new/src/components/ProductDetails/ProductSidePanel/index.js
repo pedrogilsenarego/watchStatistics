@@ -87,46 +87,38 @@ const ProductSidePanel = ({}) => {
 	};
 
 	return (
-		<div>
-			<Grid container>
-				<Grid>
-					<RadarChart {...configRadarChart} />
-				</Grid>
+		<Grid>
+			<RadarChart {...configRadarChart} />
 
-				<Box
-					bgcolor={"primary.dark"}
-					textAlign="center"
-					color={"text.secondary"}
-				>
-					<Container>
-						<Grid container>
-							<Grid item xs={12}>
-								<Box fontWeight={600}>Total Score: {avgTotal}</Box>
-								<Box>Votes From Owners: {numberVotesOwn}</Box>
-								<Box>Score Owners: {avgVotationsOwn}</Box>
-								<Box>Votes From Non Owners: {numberVotesNotOwn}</Box>
-								<Box>Score Non Owners: {avgVotationsNotOwn}</Box>
-							</Grid>
+			<Box bgcolor={"primary.dark"} textAlign="center" color={"text.secondary"}>
+				<Container>
+					<Grid container>
+						<Grid item xs={12}>
+							<Box fontWeight={600}>Total Score: {avgTotal}</Box>
+							<Box>Votes From Owners: {numberVotesOwn}</Box>
+							<Box>Score Owners: {avgVotationsOwn}</Box>
+							<Box>Votes From Non Owners: {numberVotesNotOwn}</Box>
+							<Box>Score Non Owners: {avgVotationsNotOwn}</Box>
 						</Grid>
-					</Container>
-				</Box>
-				<Box>
-					{currentUser && (
-						<div>
-							<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
-							<Box>{voteMenu && <ProductVote />}</Box>
-						</div>
-					)}
-				</Box>
-				<Box>
-					{!currentUser && (
-						<Button onClick={() => history.push("/login")}>
-							Login Here To vote
-						</Button>
-					)}
-				</Box>
-			</Grid>
-		</div>
+					</Grid>
+				</Container>
+			</Box>
+			<Box>
+				{currentUser && (
+					<div>
+						<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
+						<Box>{voteMenu && <ProductVote />}</Box>
+					</div>
+				)}
+			</Box>
+			<Box>
+				{!currentUser && (
+					<Button onClick={() => history.push("/login")}>
+						Login Here To vote
+					</Button>
+				)}
+			</Box>
+		</Grid>
 	);
 };
 
