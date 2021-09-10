@@ -6,13 +6,20 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import Button from "../../forms/Button";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { updateProductVoteStart } from "../../../redux/Products/products.actions";
-import { saveOrderHistory } from "../../../redux/Orders/orders.actions";
+//import { saveOrderHistory } from "../../../redux/Orders/orders.actions";
+
+const mapState = (state) => ({
+	currentUser: state.user.currentUser,
+	product: state.productsData.product
+});
 
 // eslint-disable-next-line
-const ProductVote = (product) => {
+const ProductVote = () => {
+	const { product, currentUser } = useSelector(mapState);
 	const dispatch = useDispatch();
 	const [ownership, setOwnership] = useState("Own");
 	const [quality, setQuality] = useState("");
@@ -23,15 +30,20 @@ const ProductVote = (product) => {
 	const [engineering, setEngineering] = useState("");
 	const [xFactor, setXFactor] = useState("");
 	const { productID } = useParams();
+
+	const { id, userVotes } = currentUser;
+
 	const {
 		numberVotesOwn,
 		numberVotesNotOwn,
 		votationsOwn,
 		votationsNonOwn,
 		avgVotationsOwn,
-		avgVotationsNotOwn,
-		productName
+		avgVotationsNotOwn
+		//productName
 	} = product;
+
+	//const userAlreadyVoted = userVotes.includes(productID);
 
 	const newVotationsOwnArray = [
 		(
@@ -93,7 +105,7 @@ const ProductVote = (product) => {
 		).toFixed(2)
 	];
 
-	const vote = [
+	/* const vote = [
 		quality,
 		price,
 		brand,
@@ -101,16 +113,18 @@ const ProductVote = (product) => {
 		history,
 		engineering,
 		xFactor
-	];
+	]; */
+
+	const newVoteArray = [...userVotes, productID];
 
 	const handleApplyVote = (e) => {
 		e.preventDefault();
-		const configOrder = {
+		/* const configOrder = {
 			productID: productID,
 			voteData: vote,
 			ownership: ownership,
 			productName: productName
-		};
+		}; */
 
 		if (ownership === "Own") {
 			const newAvgTotal = (
@@ -125,7 +139,9 @@ const ProductVote = (product) => {
 				votationsOwn: newVotationsOwnArray,
 				avgVotationsOwn: newAvgVotationsOwn,
 				avgVotationsNotOwn: avgVotationsNotOwn,
-				avgTotal: newAvgTotal
+				avgTotal: newAvgTotal,
+				userID: id,
+				userVotes: newVoteArray
 			};
 			dispatch(updateProductVoteStart(configVote));
 		}
@@ -142,11 +158,13 @@ const ProductVote = (product) => {
 				votationsOwn: votationsOwn,
 				avgVotationsOwn: avgVotationsOwn,
 				avgVotationsNotOwn: newAvgVotationsNotOwn,
-				avgTotal: newAvgTotal
+				avgTotal: newAvgTotal,
+				userID: id,
+				userVotes: newVoteArray
 			};
 			dispatch(updateProductVoteStart(configVote));
 		}
-		dispatch(saveOrderHistory(configOrder));
+		//dispatch(saveOrderHistory(configOrder));
 	};
 
 	const newAvgVotationsOwn = (
@@ -287,7 +305,16 @@ const ProductVote = (product) => {
 						setXFactor(newValue);
 					}}
 				/>
-				<Button onClick={handleApplyVote}>Apply Vote</Button>
+				{!userVotes.includes(productID) && (
+					<div>
+						<Button onClick={handleApplyVote}>Apply Vote</Button>
+					</div>
+				)}
+				{userVotes.includes(productID) && (
+					<div>
+						<h1>you cant vote again</h1>
+					</div>
+				)}
 			</FormControl>
 		</div>
 	);

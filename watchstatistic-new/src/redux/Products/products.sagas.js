@@ -11,7 +11,8 @@ import {
 	handleFetchProducts,
 	handleFetchProduct,
 	handleDeleteProduct,
-	handleUpdateVote
+	handleUpdateVote,
+	handleUserVote
 } from "./products.helpers";
 import productsTypes from "./products.types";
 
@@ -76,6 +77,9 @@ export function* onFetchProductStart() {
 export function* updateVote({ payload }) {
 	try {
 		yield handleUpdateVote({
+			...payload
+		});
+		yield handleUserVote({
 			...payload
 		});
 		yield put(fetchProductStart(payload.productID));

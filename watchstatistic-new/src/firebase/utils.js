@@ -29,6 +29,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
 				email,
 				createdDate: timestamp,
 				userRoles,
+				userVotes: ["1"],
 				...additionalData
 			});
 		} catch (err) {

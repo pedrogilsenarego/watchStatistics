@@ -106,11 +106,12 @@ const ProductSidePanel = ({}) => {
 							<li>
 								<span>Score Non Owners: {avgVotationsNotOwn}</span>
 							</li>
+
 							<li>
 								{currentUser && (
 									<div>
 										<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
-										<li>{voteMenu && <ProductVote {...product} />}</li>
+										<li>{voteMenu && <ProductVote />}</li>
 									</div>
 								)}
 							</li>

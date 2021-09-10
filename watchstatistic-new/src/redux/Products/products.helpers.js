@@ -91,8 +91,6 @@ export const handleFetchProduct = (productID) => {
 	});
 };
 
-//new Implementation
-
 export const handleUpdateVote = (product) => {
 	const {
 		productID,
@@ -116,6 +114,26 @@ export const handleUpdateVote = (product) => {
 				avgVotationsOwn,
 				avgVotationsNotOwn,
 				avgTotal
+			})
+			.then(() => {
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
+
+//new Implementation
+
+export const handleUserVote = (product) => {
+	const { userID, userVotes } = product;
+	return new Promise((resolve, reject) => {
+		firestore
+			.collection("users")
+			.doc(userID)
+			.update({
+				userVotes: userVotes
 			})
 			.then(() => {
 				resolve();
