@@ -6,7 +6,6 @@ import {
 	handleGetOrder
 } from "./orders.helpers";
 import { auth } from "./../../firebase/utils";
-import { clearCart } from "./../Cart/cart.actions";
 import { setUserOrderHistory, setOrderDetails } from "./orders.actions";
 
 export function* getUserOrderHistory({ payload }) {
@@ -33,7 +32,6 @@ export function* saveOrder({ payload }) {
 			orderUserID: auth.currentUser.uid,
 			orderCreatedDate: timestamps
 		});
-		yield put(clearCart());
 	} catch (err) {
 		// console.log(err);
 	}

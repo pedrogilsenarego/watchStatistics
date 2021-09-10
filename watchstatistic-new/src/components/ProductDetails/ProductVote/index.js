@@ -9,6 +9,7 @@ import Button from "../../forms/Button";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { updateProductVoteStart } from "../../../redux/Products/products.actions";
+import { saveOrderHistory } from "../../../redux/Orders/orders.actions";
 
 // eslint-disable-next-line
 const ProductVote = (product) => {
@@ -28,7 +29,8 @@ const ProductVote = (product) => {
 		votationsOwn,
 		votationsNonOwn,
 		avgVotationsOwn,
-		avgVotationsNotOwn
+		avgVotationsNotOwn,
+		productName
 	} = product;
 
 	const newVotationsOwnArray = [
@@ -91,8 +93,24 @@ const ProductVote = (product) => {
 		).toFixed(2)
 	];
 
+	const vote = [
+		quality,
+		price,
+		brand,
+		refinement,
+		history,
+		engineering,
+		xFactor
+	];
+
 	const handleApplyVote = (e) => {
 		e.preventDefault();
+		const configOrder = {
+			productID: productID,
+			voteData: vote,
+			ownership: ownership,
+			productName: productName
+		};
 
 		if (ownership === "Own") {
 			const newAvgTotal = (
@@ -128,6 +146,7 @@ const ProductVote = (product) => {
 			};
 			dispatch(updateProductVoteStart(configVote));
 		}
+		dispatch(saveOrderHistory(configOrder));
 	};
 
 	const newAvgVotationsOwn = (
