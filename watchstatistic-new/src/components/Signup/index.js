@@ -107,6 +107,7 @@ const Signup = (props) => {
 						placeholder="Confirm Password"
 						handleChange={(e) => setConfirmPassword(e.target.value)}
 					/>
+					<h6>Under dev, if pass doesn't work try bigger and more complex</h6>
 
 					<Button type="submit">Register</Button>
 				</form>
