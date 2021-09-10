@@ -108,6 +108,10 @@ const Signup = (props) => {
 						handleChange={(e) => setConfirmPassword(e.target.value)}
 					/>
 					<h6>Under dev, if pass doesn't work try bigger and more complex</h6>
+					<h6>
+						new emails still need manual validation please enter in contact with
+						me
+					</h6>
 
 					<Button type="submit">Register</Button>
 				</form>

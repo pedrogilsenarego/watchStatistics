@@ -7,8 +7,8 @@ const Footer = (props) => {
 			<Box
 				px={{ xs: 3, sm: 10 }}
 				py={{ xs: 5, sm: 10 }}
-				bgcolor={"#403a50"}
-				color={"#dcdae0"}
+				bgcolor={"primary.main"}
+				color={"text.secondary"}
 				textAlign="center"
 			>
 				<Container maxWidth="lg">

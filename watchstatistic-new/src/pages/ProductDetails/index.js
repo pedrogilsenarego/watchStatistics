@@ -26,11 +26,11 @@ const ProductDetails = ({}) => {
 	);
 	return (
 		<Grid container>
-			<Grid item xs={12} sm={8}>
+			<Grid item xs={12} sm={9}>
 				<ProductCard />
 			</Grid>
-			<Grid item xs={12} sm={4}>
-				<Box border="solid">
+			<Grid item xs={12} sm={3}>
+				<Box bgcolor="primary.main">
 					<ProductSidePanel />
 				</Box>
 			</Grid>

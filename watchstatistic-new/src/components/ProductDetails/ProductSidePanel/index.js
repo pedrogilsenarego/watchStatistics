@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Box } from "@material-ui/core";
+import { Grid, Box, Container } from "@material-ui/core";
 import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -60,8 +60,12 @@ const ProductSidePanel = ({}) => {
 		options: {
 			scales: {
 				r: {
+					angleLines: {},
 					suggestedMin: 0,
-					suggestedMax: 10
+					suggestedMax: 10,
+					ticks: {
+						color: "#ffffff"
+					}
 				}
 			},
 
@@ -83,47 +87,43 @@ const ProductSidePanel = ({}) => {
 	};
 
 	return (
-		<div className="productCard">
+		<div>
 			<Grid container>
-				<Box>
-					<Grid>
-						<RadarChart {...configRadarChart} />
-					</Grid>
-					<div className="productDetails">
-						<ul>
-							<li>
-								<span>Total Score: {avgTotal}</span>
-							</li>
-							<li>
-								<span>Votes From Owners: {numberVotesOwn}</span>
-							</li>
-							<li>
-								<span>Score Owners: {avgVotationsOwn}</span>
-							</li>
-							<li>
-								<span>Votes From Non Owners: {numberVotesNotOwn}</span>
-							</li>
-							<li>
-								<span>Score Non Owners: {avgVotationsNotOwn}</span>
-							</li>
+				<Grid>
+					<RadarChart {...configRadarChart} />
+				</Grid>
 
-							<li>
-								{currentUser && (
-									<div>
-										<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
-										<li>{voteMenu && <ProductVote />}</li>
-									</div>
-								)}
-							</li>
-							<li>
-								{!currentUser && (
-									<Button onClick={() => history.push("/login")}>
-										Login Here To vote
-									</Button>
-								)}
-							</li>
-						</ul>
-					</div>
+				<Box
+					bgcolor={"primary.dark"}
+					textAlign="center"
+					color={"text.secondary"}
+				>
+					<Container>
+						<Grid container>
+							<Grid item xs={12}>
+								<Box fontWeight={600}>Total Score: {avgTotal}</Box>
+								<Box>Votes From Owners: {numberVotesOwn}</Box>
+								<Box>Score Owners: {avgVotationsOwn}</Box>
+								<Box>Votes From Non Owners: {numberVotesNotOwn}</Box>
+								<Box>Score Non Owners: {avgVotationsNotOwn}</Box>
+							</Grid>
+						</Grid>
+					</Container>
+				</Box>
+				<Box>
+					{currentUser && (
+						<div>
+							<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
+							<Box>{voteMenu && <ProductVote />}</Box>
+						</div>
+					)}
+				</Box>
+				<Box>
+					{!currentUser && (
+						<Button onClick={() => history.push("/login")}>
+							Login Here To vote
+						</Button>
+					)}
 				</Box>
 			</Grid>
 		</div>
