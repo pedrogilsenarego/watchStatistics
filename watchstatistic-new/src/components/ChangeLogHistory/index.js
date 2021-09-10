@@ -4,7 +4,7 @@ const ChangeLogHistory = () => {
 	return (
 		<div className="wrap">
 			<div>
-				<h2>1.1.3 - released 2021-09- </h2>
+				<h2>1.1.3 - released 2021-09-10 </h2>
 
 				<p>Redesign from Search Page</p>
 				<p>
