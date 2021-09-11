@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Button from "../../forms/Button";
 import ProductVote from "../ProductVote";
-import "./styles.scss";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
@@ -30,41 +29,62 @@ const ProductSidePanel = ({}) => {
 
 	const configRadarChart = {
 		data: {
-			labels: [
-				"Quality",
-				"Price",
-				"Brand",
-				"Refinement",
-				"History",
-				"Engineering",
-				"X factor"
-			],
+			//"Quality", "Price", "Brand", "Refinement", "History", "Engineering", "X-Factor"
+			labels: ["S", "M", "L", "K", "R", "Q", "O"],
 			datasets: [
-				{
-					data: votationsOwn,
-					label: "Own",
-					borderColor: "#314e7d",
-					backgroundColor: "#314e7d66",
-					fill: true
-				},
 				{
 					data: votationsNonOwn,
 					label: "Not Own",
 					borderColor: "#E5F517",
 					fill: true,
 					backgroundColor: "#E5F51766"
+				},
+				{
+					data: votationsOwn,
+					label: "Own",
+
+					borderColor: "#42e6f5",
+					backgroundColor: "#42e6f566",
+					fill: true
 				}
 			]
 		},
 
 		options: {
+			plugins: {
+				legend: {
+					position: "bottom",
+
+					labels: {
+						color: "#dcdae0",
+						boxWidth: 20,
+						padding: 20,
+						font: {
+							size: 12
+						}
+					}
+				}
+			},
 			scales: {
 				r: {
-					angleLines: {},
+					grid: {
+						color: "#dcdae066"
+					},
+					pointLabels: {
+						color: "#dcdae0",
+
+						font: {
+							family: "MyFont",
+							size: 15
+						}
+					},
+					angleLines: { color: "#dcdae066" },
 					suggestedMin: 0,
 					suggestedMax: 10,
 					ticks: {
-						color: "#ffffff"
+						stepSize: 2,
+						color: "#ffffff",
+						backdropColor: "#dcdae005"
 					}
 				}
 			},
@@ -82,7 +102,6 @@ const ProductSidePanel = ({}) => {
 	};
 
 	const handleVoteBtn = (e) => {
-		//e.preventDefault();
 		setVoteMenu(!voteMenu);
 	};
 

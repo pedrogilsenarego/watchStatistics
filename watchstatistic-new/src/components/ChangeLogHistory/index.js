@@ -4,14 +4,9 @@ const ChangeLogHistory = () => {
 	return (
 		<div className="wrap">
 			<div>
-				<h2>1.1.3 - released 2021-09-10 </h2>
-
-				<p>Redesign from Search Page</p>
-				<p>
-					When there is a vote a vote data is added to the DB with the vote
-					characteristics
-				</p>
-				<p>each user can only vote once now</p>
+				<h2>1.1.4 - released 2021-09- </h2>
+				<p>Product Card now shows score and number of votes</p>
+				<p>Radar Chart has icons now instad of typo</p>
 			</div>
 		</div>
 	);

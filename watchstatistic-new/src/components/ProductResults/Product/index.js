@@ -21,8 +21,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Product = (product) => {
-	const { documentID, productThumbnail, productName } = product;
-	if (!documentID || !productThumbnail || !productName) return null;
+	const {
+		documentID,
+		productThumbnail,
+		productName,
+		avgTotal,
+		numberVotesOwn,
+		numberVotesNotOwn
+	} = product;
+	if (
+		!documentID ||
+		!productThumbnail ||
+		!productName ||
+		!avgTotal ||
+		!numberVotesNotOwn ||
+		!numberVotesOwn
+	)
+		return null;
 	// eslint-disable-next-line
 	const classes = useStyles();
 
@@ -38,9 +53,8 @@ const Product = (product) => {
 					<Typography gutterBottom variant="h5" component="h2">
 						{productName}
 					</Typography>
-					<Typography variant="body2" color="textSecondary">
-						Hello2
-					</Typography>
+					<Typography>Score: {avgTotal}</Typography>
+					<Typography>Votes: {numberVotesNotOwn + numberVotesOwn}</Typography>
 				</CardContent>
 			</CardActionArea>
 			<CardActions>
