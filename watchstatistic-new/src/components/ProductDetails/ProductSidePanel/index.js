@@ -27,6 +27,17 @@ const ProductSidePanel = ({}) => {
 		avgTotal
 	} = product;
 
+	if (
+		!avgVotationsOwn ||
+		!avgVotationsNotOwn ||
+		!votationsOwn ||
+		!votationsNonOwn ||
+		!numberVotesNotOwn ||
+		!numberVotesOwn ||
+		!avgTotal
+	)
+		return null;
+
 	const configRadarChart = {
 		data: {
 			//"Quality", "Price", "Brand", "Refinement", "History", "Engineering", "X-Factor"

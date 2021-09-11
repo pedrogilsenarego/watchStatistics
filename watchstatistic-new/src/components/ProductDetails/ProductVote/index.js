@@ -43,6 +43,18 @@ const ProductVote = () => {
 		//productName
 	} = product;
 
+	if (
+		!avgVotationsOwn ||
+		!avgVotationsNotOwn ||
+		!votationsOwn ||
+		!votationsNonOwn ||
+		!numberVotesNotOwn ||
+		!numberVotesOwn ||
+		!userVotes ||
+		!id
+	)
+		return null;
+
 	//const userAlreadyVoted = userVotes.includes(productID);
 
 	const newVotationsOwnArray = [
