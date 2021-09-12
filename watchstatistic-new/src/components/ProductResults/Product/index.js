@@ -25,19 +25,12 @@ const Product = (product) => {
 		documentID,
 		productThumbnail,
 		productName,
+		productBrand,
 		avgTotal,
 		numberVotesOwn,
 		numberVotesNotOwn
 	} = product;
-	if (
-		!documentID ||
-		!productThumbnail ||
-		!productName ||
-		!avgTotal ||
-		!numberVotesNotOwn ||
-		!numberVotesOwn
-	)
-		return null;
+	if (!documentID || !productThumbnail || !productName) return null;
 	// eslint-disable-next-line
 	const classes = useStyles();
 
@@ -51,7 +44,7 @@ const Product = (product) => {
 				/>
 				<CardContent>
 					<Typography gutterBottom variant="h5" component="h2">
-						{productName}
+						{productBrand} - {productName}
 					</Typography>
 					<Typography>Score: {avgTotal}</Typography>
 					<Typography>Votes: {numberVotesNotOwn + numberVotesOwn}</Typography>

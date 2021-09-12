@@ -12,6 +12,8 @@ import Button from "./../../components/forms/Button";
 import LoadMore from "./../../components/LoadMore";
 import { CKEditor } from "ckeditor4-react";
 import "./styles.scss";
+import watchTypes from "./../../assets/data/watchTypes.json";
+import watchBrands from "./../../assets/data/watchBrands.json";
 
 const mapState = ({ productsData }) => ({
 	products: productsData.products
@@ -22,6 +24,7 @@ const Admin = (props) => {
 	const dispatch = useDispatch();
 	const [hideModal, setHideModal] = useState(true);
 	const [productCategory, setProductCategory] = useState("divers");
+	const [productBrand, setProductBrand] = useState("Rolex");
 	const [productName, setProductName] = useState("");
 	const [productThumbnail, setProductThumbnail] = useState("");
 	const [productDesc, setProductDesc] = useState("");
@@ -46,6 +49,7 @@ const Admin = (props) => {
 	const resetForm = () => {
 		setHideModal(true);
 		setProductCategory("divers");
+		setProductBrand("Rolex");
 		setProductName("");
 		setProductThumbnail("");
 		setProductDesc("");
@@ -57,6 +61,7 @@ const Admin = (props) => {
 		dispatch(
 			addProductStart({
 				productCategory,
+				productBrand,
 				productName,
 				productThumbnail,
 				productDesc,
@@ -102,29 +107,13 @@ const Admin = (props) => {
 
 						<FormSelect
 							label="Category"
-							options={[
-								{
-									value: "divers",
-									name: "Divers"
-								},
-								{
-									value: "field",
-									name: "Field"
-								},
-								{
-									value: "pilot",
-									name: "Pilot"
-								},
-								{
-									value: "dress",
-									name: "Dress"
-								},
-								{
-									value: "racing",
-									name: "Racing"
-								}
-							]}
+							options={watchTypes.optionsAddNew}
 							handleChange={(e) => setProductCategory(e.target.value)}
+						/>
+						<FormSelect
+							label="Brand"
+							options={watchBrands.optionsAddNew}
+							handleChange={(e) => setProductBrand(e.target.value)}
 						/>
 
 						<FormInput

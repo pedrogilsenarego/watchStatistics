@@ -1,9 +1,24 @@
 import React from "react";
-
+import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 
 import "./styles.scss";
-import { Grid } from "@material-ui/core";
+import {
+	Typography,
+	Card,
+	CardActionArea,
+	CardMedia,
+	CardContent
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		maxwidth: 345
+	},
+	media: {
+		height: 500
+	}
+}));
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
@@ -14,29 +29,28 @@ const mapState = (state) => ({
 const ProductCard = ({}) => {
 	const { product } = useSelector(mapState);
 
-	const { productThumbnail, productName, productDesc } = product;
-
+	const { productThumbnail, productName, productDesc, productBrand } = product;
+	const classes = useStyles();
 	return (
-		<div className="productCard">
-			<Grid container>
-				<div className="hero">
-					<img src={productThumbnail} alt="" />
-				</div>
-			</Grid>
-			<div className="productDetails">
-				<ul>
-					<li>
-						<h1>{productName}</h1>
-					</li>
-					<li>
-						<span
-							className="desc"
-							dangerouslySetInnerHTML={{ __html: productDesc }}
-						/>
-					</li>
-				</ul>
-			</div>
-		</div>
+		<Card className={classes.root} alt={productName}>
+			<CardActionArea>
+				<CardMedia
+					className={classes.media}
+					image={productThumbnail}
+					title="hello"
+				/>
+				<CardContent>
+					<Typography gutterBottom variant="h5" component="h2">
+						{productBrand} - {productName}
+					</Typography>
+				</CardContent>
+			</CardActionArea>
+
+			<span
+				className="desc"
+				dangerouslySetInnerHTML={{ __html: productDesc }}
+			/>
+		</Card>
 	);
 };
 export default ProductCard;

@@ -1,0 +1,50 @@
+{
+	"options": [
+		{
+			"name": "Show all",
+			"value": ""
+		},
+		{
+			"value": "divers",
+			"name": "Divers"
+		},
+		{
+			"value": "field",
+			"name": "Field"
+		},
+		{
+			"value": "pilot",
+			"name": "Pilot"
+		},
+		{
+			"value": "dress",
+			"name": "Dress"
+		},
+		{
+			"value": "racing",
+			"name": "Racing"
+		}
+	],
+	"optionsAddNew": [
+		{
+			"value": "divers",
+			"name": "Divers"
+		},
+		{
+			"value": "field",
+			"name": "Field"
+		},
+		{
+			"value": "pilot",
+			"name": "Pilot"
+		},
+		{
+			"value": "dress",
+			"name": "Dress"
+		},
+		{
+			"value": "racing",
+			"name": "Racing"
+		}
+	]
+}

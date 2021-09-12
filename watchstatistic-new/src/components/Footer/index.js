@@ -16,9 +16,7 @@ const Footer = (props) => {
 						<Grid item xs={12} sm={4}>
 							<Box fontWeight={600}>V1.1.3</Box>
 							<Box>
-								<Link href="/changelog" color="inherit">
-									ChangeLog
-								</Link>
+								<Link href="/changelog">ChangeLog</Link>
 							</Box>
 							<Box>
 								<Link href="/resources" color="inherit">

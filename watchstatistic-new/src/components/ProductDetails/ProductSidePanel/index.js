@@ -27,17 +27,6 @@ const ProductSidePanel = ({}) => {
 		avgTotal
 	} = product;
 
-	if (
-		!avgVotationsOwn ||
-		!avgVotationsNotOwn ||
-		!votationsOwn ||
-		!votationsNonOwn ||
-		!numberVotesNotOwn ||
-		!numberVotesOwn ||
-		!avgTotal
-	)
-		return null;
-
 	const configRadarChart = {
 		data: {
 			//"Quality", "Price", "Brand", "Refinement", "History", "Engineering", "X-Factor"
@@ -63,6 +52,43 @@ const ProductSidePanel = ({}) => {
 
 		options: {
 			plugins: {
+				tooltip: {
+					displayColors: false,
+					titleAlign: "center",
+					bodyAlign: "center",
+					titleColor: "#ffffff",
+					bodyColor: "#ffffffDB",
+					callbacks: {
+						title: function (item, everything) {
+							if (item[0].label === "Q") {
+								return "Engineering";
+							}
+							if (item[0].label === "S") {
+								return "Quality";
+							}
+							if (item[0].label === "M") {
+								return "Price";
+							}
+							if (item[0].label === "L") {
+								return "Brand";
+							}
+							if (item[0].label === "K") {
+								return "Refinement";
+							}
+							if (item[0].label === "R") {
+								return "History";
+							}
+							if (item[0].label === "O") {
+								return "X-Factor";
+							}
+							return;
+						},
+						label: function (item, everything) {
+							console.log(item);
+							return item.raw;
+						}
+					}
+				},
 				legend: {
 					position: "bottom",
 

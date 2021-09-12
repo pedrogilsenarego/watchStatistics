@@ -6,6 +6,7 @@ import Product from "./Product";
 import FormSelect from "../forms/FormSelect";
 import LoadMore from "../LoadMore";
 import { Box, Grid } from "@material-ui/core";
+import watchTypes from "./../../assets/data/watchTypes.json";
 
 const mapState = ({ productsData }) => ({
 	products: productsData.products
@@ -44,32 +45,7 @@ const ProductResults = ({}) => {
 
 	const configFilters = {
 		defaultValue: filterType,
-		options: [
-			{
-				name: "Show all",
-				value: ""
-			},
-			{
-				value: "divers",
-				name: "Divers"
-			},
-			{
-				value: "field",
-				name: "Field"
-			},
-			{
-				value: "pilot",
-				name: "Pilot"
-			},
-			{
-				value: "dress",
-				name: "Dress"
-			},
-			{
-				value: "racing",
-				name: "Racing"
-			}
-		],
+		options: watchTypes.options,
 		handleChange: handleFilter
 	};
 
