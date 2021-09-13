@@ -1,21 +1,31 @@
 import React, { useState } from "react";
-import { Grid, Box, Container } from "@material-ui/core";
+import { Grid, Box, Container, Typography } from "@material-ui/core";
 import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Button from "../../forms/Button";
 import ProductVote from "../ProductVote";
+import { makeStyles } from "@material-ui/core/styles";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
 	product: state.productsData.product
 });
 
+const useStyles = makeStyles((theme) => ({
+	legend: {
+		fontSize: 20,
+		fontFamily: "MyFont"
+	}
+}));
+
 // eslint-disable-next-line
 const ProductSidePanel = ({}) => {
 	const { product, currentUser } = useSelector(mapState);
 	const [voteMenu, setVoteMenu] = useState(false);
 	const history = useHistory();
+
+	const classes = useStyles();
 
 	const {
 		avgVotationsOwn,
@@ -155,6 +165,13 @@ const ProductSidePanel = ({}) => {
 							<Box>Score Owners: {avgVotationsOwn}</Box>
 							<Box>Votes From Non Owners: {numberVotesNotOwn}</Box>
 							<Box>Score Non Owners: {avgVotationsNotOwn}</Box>
+							<Typography className={classes.legend}>Q engineering</Typography>
+							<Typography className={classes.legend}>S quality</Typography>
+							<Typography className={classes.legend}>M price</Typography>
+							<Typography className={classes.legend}>L brand</Typography>
+							<Typography className={classes.legend}>K refinement</Typography>
+							<Typography className={classes.legend}>R history</Typography>
+							<Typography className={classes.legend}>O x-factor</Typography>
 						</Grid>
 					</Grid>
 				</Container>
