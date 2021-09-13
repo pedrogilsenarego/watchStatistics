@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-	text: { fontSize: 40, color: "#FFFFFF" }
+	text: { fontSize: 25, color: "#FFFFFF" }
 }));
 
 const mapState = (state) => ({
@@ -20,7 +20,7 @@ const SubHeader = (props) => {
 
 	return (
 		<subheader>
-			<Box px={{ xs: 10 }} py={{ xs: 6 }} bgcolor="primary.light">
+			<Box px={{ xs: 10 }} py={{ xs: 3 }} bgcolor="primary.light">
 				<Grid container>
 					<Grid item xs={12} md={6}>
 						<Typography className={classes.text}>
@@ -43,7 +43,7 @@ const SubHeader = (props) => {
 			</Box>
 			<Box
 				px={{ xs: 10 }}
-				py={{ xs: 5 }}
+				py={{ xs: 3 }}
 				bgcolor={"primary.main"}
 				color={"#dcdae0"}
 				textAlign="center"

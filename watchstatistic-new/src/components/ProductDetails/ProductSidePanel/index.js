@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Box, Container, Typography } from "@material-ui/core";
+import { Grid, Box, Typography } from "@material-ui/core";
 import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -157,34 +157,31 @@ const ProductSidePanel = ({}) => {
 			<RadarChart {...configRadarChart} />
 
 			<Box bgcolor={"primary.dark"} textAlign="center" color={"text.secondary"}>
-				<Container>
-					<Grid container>
-						<Grid item xs={12}>
-							<Box fontWeight={600}>Total Score: {avgTotal}</Box>
-							<Box>Votes From Owners: {numberVotesOwn}</Box>
-							<Box>Score Owners: {avgVotationsOwn}</Box>
-							<Box>Votes From Non Owners: {numberVotesNotOwn}</Box>
-							<Box>Score Non Owners: {avgVotationsNotOwn}</Box>
-							<Typography className={classes.legend}>Q engineering</Typography>
-							<Typography className={classes.legend}>S quality</Typography>
-							<Typography className={classes.legend}>M price</Typography>
-							<Typography className={classes.legend}>L brand</Typography>
-							<Typography className={classes.legend}>K refinement</Typography>
-							<Typography className={classes.legend}>R history</Typography>
-							<Typography className={classes.legend}>O x-factor</Typography>
-						</Grid>
+				<Grid container>
+					<Grid item xs={12}>
+						<Box fontWeight={600}>Total Score: {avgTotal}</Box>
+						<Box>Votes From Owners: {numberVotesOwn}</Box>
+						<Box>Score Owners: {avgVotationsOwn}</Box>
+						<Box>Votes From Non Owners: {numberVotesNotOwn}</Box>
+						<Box>Score Non Owners: {avgVotationsNotOwn}</Box>
+						<Typography className={classes.legend}>Q engineering</Typography>
+						<Typography className={classes.legend}>S quality</Typography>
+						<Typography className={classes.legend}>M price</Typography>
+						<Typography className={classes.legend}>L brand</Typography>
+						<Typography className={classes.legend}>K refinement</Typography>
+						<Typography className={classes.legend}>R history</Typography>
+						<Typography className={classes.legend}>O x-factor</Typography>
 					</Grid>
-				</Container>
+				</Grid>
 			</Box>
 			<Box>
 				{currentUser && (
 					<div>
 						<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
-						<Box>{voteMenu && <ProductVote />}</Box>
+						<Box bgcolor={"primary.light"}>{voteMenu && <ProductVote />}</Box>
 					</div>
 				)}
-			</Box>
-			<Box>
+
 				{!currentUser && (
 					<Button onClick={() => history.push("/login")}>
 						Login Here To vote

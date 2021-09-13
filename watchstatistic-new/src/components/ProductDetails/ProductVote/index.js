@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Slider, Typography } from "@material-ui/core";
+import { Slider, Typography, Box } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -10,7 +10,12 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { updateProductVoteStart } from "../../../redux/Products/products.actions";
+import { makeStyles } from "@material-ui/core/styles";
 //import { saveOrderHistory } from "../../../redux/Orders/orders.actions";
+
+const useStyles = makeStyles((theme) => ({
+	container: {}
+}));
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
@@ -19,6 +24,8 @@ const mapState = (state) => ({
 
 // eslint-disable-next-line
 const ProductVote = () => {
+	const classes = useStyles();
+
 	const { product, currentUser } = useSelector(mapState);
 	const dispatch = useDispatch();
 	const [ownership, setOwnership] = useState("Own");
@@ -180,11 +187,17 @@ const ProductVote = () => {
 	).toFixed(2);
 
 	return (
-		<div>
+		<Box
+			item
+			padding={"10px"}
+			className={classes.container}
+			bgcolor={"text.secondary"}
+		>
 			<FormControl component="fieldset">
 				{!userVotes.includes(productID) && (
 					<div>
 						<FormLabel component="legend"></FormLabel>
+
 						<RadioGroup
 							aria-label="gender"
 							name="gender1"
@@ -200,6 +213,7 @@ const ProductVote = () => {
 								label="Not Own"
 							/>
 						</RadioGroup>
+
 						<Typography id="discrete-slider" gutterBottom>
 							Quality
 						</Typography>
@@ -315,7 +329,7 @@ const ProductVote = () => {
 					</div>
 				)}
 			</FormControl>
-		</div>
+		</Box>
 	);
 };
 export default ProductVote;

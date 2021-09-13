@@ -14,7 +14,7 @@ const Footer = (props) => {
 				<Container maxWidth="lg">
 					<Grid container spacing={5}>
 						<Grid item xs={12} sm={4}>
-							<Box fontWeight={600}>V1.1.3</Box>
+							<Box fontWeight={600}>V1.1.4</Box>
 							<Box>
 								<Link href="/changelog">ChangeLog</Link>
 							</Box>
