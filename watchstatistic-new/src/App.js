@@ -56,17 +56,21 @@ const App = (props) => {
 					exact
 					path="/search"
 					render={() => (
-						<MainLayout>
-							<Search />
-						</MainLayout>
+						<WithAuth>
+							<MainLayout>
+								<Search />
+							</MainLayout>
+						</WithAuth>
 					)}
 				/>
 				<Route
 					path="/search/:filterType"
 					render={() => (
-						<MainLayout>
-							<Search />
-						</MainLayout>
+						<WithAuth>
+							<MainLayout>
+								<Search />
+							</MainLayout>
+						</WithAuth>
 					)}
 				/>
 				<Route

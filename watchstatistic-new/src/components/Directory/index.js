@@ -9,14 +9,10 @@ const Directory = (props) => {
 				<div className="wrap">
 					<h1>Welcome to Watchstatistics</h1>
 					<p>
-						This is a new project to let you experience what is the opinion from
-						watch entusiasts about their watches and about other person watches.
+						At the moment it is only possible to search and vote for watches
+						when loged In and The email was verified
 					</p>
-					<p>
-						This also a personal project where I am applying while I learn
-						webApp tehcnologies, you can check here more about the project and
-						chronological status.{" "}
-					</p>
+
 					<p>
 						Thank you and have Fun wearing your watches and discussing with
 						other entusiasts about them.

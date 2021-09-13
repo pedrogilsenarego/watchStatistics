@@ -30,9 +30,6 @@ const Header = (props) => {
 						<li>
 							<Link to="/">Home</Link>
 						</li>
-						<li>
-							<Link to="/search">Search</Link>
-						</li>
 					</ul>
 				</nav>
 
@@ -40,12 +37,17 @@ const Header = (props) => {
 					<ul>
 						{currentUser && [
 							<li key={1}>
+								<Link to="/search">
+									Search<i class="fas fa-search"></i>
+								</Link>
+							</li>,
+							<li key={2}>
 								<Link to="/dashboard">
 									My Account
 									<i class="fas fa-user-circle"></i>
 								</Link>
 							</li>,
-							<li key={2}>
+							<li key={3}>
 								<span onClick={() => signOut()}>
 									LogOut
 									<i class="fas fa-sign-out-alt"></i>

@@ -13,6 +13,7 @@ const mapState = (state) => ({
 
 const SubHeader = (props) => {
 	const { currentUser } = useSelector(mapState);
+
 	const classes = useStyles();
 
 	const { displayName, userVotes } = currentUser;
@@ -21,25 +22,27 @@ const SubHeader = (props) => {
 	return (
 		<subheader>
 			<Box px={{ xs: 10 }} py={{ xs: 3 }} bgcolor="primary.light">
-				<Grid container>
-					<Grid item xs={12} md={6}>
-						<Typography className={classes.text}>
-							Hello, {displayName}
-						</Typography>
-					</Grid>
-					<Grid item xs={12} md={6} align={"right"}>
-						{(userNumberVotes > 1 || userNumberVotes === 0) && (
+				{currentUser && (
+					<Grid container>
+						<Grid item xs={12} md={6}>
 							<Typography className={classes.text}>
-								You have voted on {userNumberVotes} watches
+								Hello, {displayName}
 							</Typography>
-						)}
-						{userNumberVotes === 1 && (
-							<Typography className={classes.text}>
-								You have voted on {userNumberVotes} watch
-							</Typography>
-						)}
+						</Grid>
+						<Grid item xs={12} md={6} align={"right"}>
+							{(userNumberVotes > 1 || userNumberVotes === 0) && (
+								<Typography className={classes.text}>
+									You have voted on {userNumberVotes} watches
+								</Typography>
+							)}
+							{userNumberVotes === 1 && (
+								<Typography className={classes.text}>
+									You have voted on {userNumberVotes} watch
+								</Typography>
+							)}
+						</Grid>
 					</Grid>
-				</Grid>
+				)}
 			</Box>
 			<Box
 				px={{ xs: 10 }}
