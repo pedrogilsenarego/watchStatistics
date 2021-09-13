@@ -1,8 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
-
-import "./styles.scss";
 import {
 	Typography,
 	Card,
@@ -43,13 +41,9 @@ const ProductCard = ({}) => {
 					<Typography gutterBottom variant="h5" component="h2">
 						{productBrand} - {productName}
 					</Typography>
+					<Typography dangerouslySetInnerHTML={{ __html: productDesc }} />
 				</CardContent>
 			</CardActionArea>
-
-			<span
-				className="desc"
-				dangerouslySetInnerHTML={{ __html: productDesc }}
-			/>
 		</Card>
 	);
 };
