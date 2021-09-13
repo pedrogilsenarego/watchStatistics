@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-	text: { fontSize: 25, color: "#FFFFFF" }
+	text: { fontSize: 25, color: "#FFFFFF" },
+	warningText: { fontSize: 15, color: "#ff9800" }
 }));
 
 const mapState = (state) => ({
@@ -16,12 +17,13 @@ const SubHeader = (props) => {
 
 	const classes = useStyles();
 
-	const { displayName, userVotes } = currentUser;
+	const { displayName, userVotes, userRoles } = currentUser;
 	const userNumberVotes = userVotes.length - 1;
 
 	return (
 		<subheader>
 			<Box px={{ xs: 10 }} py={{ xs: 3 }} bgcolor="primary.light">
+				<div></div>
 				{currentUser && (
 					<Grid container>
 						<Grid item xs={12} md={6}>
@@ -38,6 +40,12 @@ const SubHeader = (props) => {
 							{userNumberVotes === 1 && (
 								<Typography className={classes.text}>
 									You have voted on {userNumberVotes} watch
+								</Typography>
+							)}
+							{!userRoles.includes("verified") && (
+								<Typography className={classes.warningText}>
+									VERIFY first your account before you can search and vote for
+									watches
 								</Typography>
 							)}
 						</Grid>
