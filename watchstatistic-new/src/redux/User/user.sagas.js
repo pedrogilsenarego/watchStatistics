@@ -2,6 +2,7 @@ import { takeLatest, call, all, put } from "redux-saga/effects";
 import {
 	auth,
 	handleUserProfile,
+	handleUserProfileSocialLogin,
 	getCurrentUser,
 	GoogleProvider
 } from "./../../firebase/utils";
@@ -17,6 +18,24 @@ import { handleResetPasswordAPI } from "./user.helpers";
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
 	try {
 		const userRef = yield call(handleUserProfile, {
+			userAuth: user,
+			additionalData
+		});
+		const snapshot = yield userRef.get();
+		yield put(
+			signInSuccess({
+				id: snapshot.id,
+				...snapshot.data()
+			})
+		);
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* getSnapshotFromUserAuthSocialLogin(user, additionalData = {}) {
+	try {
+		const userRef = yield call(handleUserProfileSocialLogin, {
 			userAuth: user,
 			additionalData
 		});
@@ -111,7 +130,7 @@ export function* onResetPasswordStart() {
 export function* googleSignIn() {
 	try {
 		const { user } = yield auth.signInWithPopup(GoogleProvider);
-		yield getSnapshotFromUserAuth(user);
+		yield getSnapshotFromUserAuthSocialLogin(user);
 	} catch (err) {
 		// console.log(err);
 	}

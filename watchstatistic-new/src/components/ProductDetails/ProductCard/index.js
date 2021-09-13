@@ -6,7 +6,8 @@ import {
 	Card,
 	CardActionArea,
 	CardMedia,
-	CardContent
+	CardActions,
+	Button
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +28,7 @@ const mapState = (state) => ({
 const ProductCard = ({}) => {
 	const { product } = useSelector(mapState);
 
-	const { productThumbnail, productName, productDesc, productBrand } = product;
+	const { productThumbnail, productName, productBrand } = product;
 	const classes = useStyles();
 	return (
 		<Card className={classes.root} alt={productName}>
@@ -37,14 +38,24 @@ const ProductCard = ({}) => {
 					image={productThumbnail}
 					title="hello"
 				/>
-				<CardContent>
+				<CardActions>
 					<Typography gutterBottom variant="h5" component="h2">
 						{productBrand} - {productName}
 					</Typography>
-					<Typography dangerouslySetInnerHTML={{ __html: productDesc }} />
-				</CardContent>
+					<Button size="small" color="secondary">
+						More
+					</Button>
+					<Button size="small" color="secondary">
+						Charts
+					</Button>
+					<Button size="small" color="secondary">
+						Description
+					</Button>
+				</CardActions>
 			</CardActionArea>
 		</Card>
 	);
 };
 export default ProductCard;
+
+//<Typography dangerouslySetInnerHTML={{ __html: productDesc }} />
