@@ -3,7 +3,8 @@ import productTypes from "./products.types";
 
 const INITIAL_STATE = {
 	products: [],
-	product: {}
+	product: {},
+	sidePanel: "graph"
 };
 
 const productsReducer = (state = INITIAL_STATE, action) => {
@@ -18,6 +19,7 @@ const productsReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				product: action.payload
 			};
+
 		default:
 			return state;
 	}

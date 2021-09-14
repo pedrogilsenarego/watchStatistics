@@ -30,7 +30,6 @@ export const setProduct = (product) => ({
 	payload: product
 });
 
-//New Implementation
 export const updateProductVoteStart = (productData) => ({
 	type: productsTypes.UPDATE_PRODUCT_VOTE_START,
 	payload: productData

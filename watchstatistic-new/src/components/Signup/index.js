@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { signUpUserStart } from "./../../redux/User/user.actions";
@@ -19,8 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const mapState = ({ user }) => ({
-	currentUser: user.currentUser,
-	userErr: user.userErr
+	currentUser: user.currentUser
 });
 
 const INITIAL_FORM_STATE = {
@@ -57,8 +56,7 @@ const Signup = (props) => {
 
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { currentUser, userErr } = useSelector(mapState);
-	const [errors, setErrors] = useState([]);
+	const { currentUser } = useSelector(mapState);
 
 	useEffect(
 		() => {
@@ -69,12 +67,6 @@ const Signup = (props) => {
 		// eslint-disable-next-line
 		[currentUser]
 	);
-
-	useEffect(() => {
-		if (Array.isArray(userErr) && userErr.length > 0) {
-			setErrors(userErr);
-		}
-	}, [userErr]);
 
 	const handleFormSubmit = (event) => {
 		const { displayName, email, password, confirmPassword } = event;
@@ -95,65 +87,56 @@ const Signup = (props) => {
 
 	return (
 		<AuthWrapper {...configAuthWrapper}>
-			<div className="formWrap">
-				{errors.length > 0 && (
-					<ul>
-						{errors.map((err, index) => {
-							return <li key={index}>{err}</li>;
-						})}
-					</ul>
-				)}
-				<div className={classes.formWrapper}>
-					<Formik
-						initialValues={{
-							...INITIAL_FORM_STATE
-						}}
-						validationSchema={FORM_VALIDATION}
-						onSubmit={(values) => {
-							handleFormSubmit(values);
-						}}
-					>
-						<Form>
-							<Grid container spacing={2}>
-								<Grid item xs={12}>
-									<Typography>Register Here</Typography>
-								</Grid>
-								<Grid item xs={12}>
-									<TextField name="displayName" label="full name"></TextField>
-								</Grid>
-								<Grid item xs={12}>
-									<TextField name="email" label="email"></TextField>
-								</Grid>
-								<Grid item xs={12}>
-									<TextField type="password" name="password" label="Password" />
-								</Grid>
-								<Grid item xs={12}>
-									<TextField
-										type="password"
-										name="confirmPassword"
-										label="ConfirmPassword"
-									/>
-								</Grid>
-								<Grid item xs={12}>
-									<CheckBox
-										name="termsOfService"
-										legend="Terms of Service"
-										label="I, agree"
-									/>
-								</Grid>
-								<Grid item xs={12}>
-									<ButtonMUI>Submit</ButtonMUI>
-								</Grid>
+			<div className={classes.formWrapper}>
+				<Formik
+					initialValues={{
+						...INITIAL_FORM_STATE
+					}}
+					validationSchema={FORM_VALIDATION}
+					onSubmit={(values) => {
+						handleFormSubmit(values);
+					}}
+				>
+					<Form>
+						<Grid container spacing={2}>
+							<Grid item xs={12}>
+								<Typography>Register Here</Typography>
 							</Grid>
-						</Form>
-					</Formik>
-				</div>
+							<Grid item xs={12}>
+								<TextField name="displayName" label="full name"></TextField>
+							</Grid>
+							<Grid item xs={12}>
+								<TextField name="email" label="email"></TextField>
+							</Grid>
+							<Grid item xs={12}>
+								<TextField type="password" name="password" label="Password" />
+							</Grid>
+							<Grid item xs={12}>
+								<TextField
+									type="password"
+									name="confirmPassword"
+									label="ConfirmPassword"
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<CheckBox
+									name="termsOfService"
+									legend="Terms of Service"
+									label="I, agree"
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<ButtonMUI>Submit</ButtonMUI>
+							</Grid>
+						</Grid>
+					</Form>
+				</Formik>
+			</div>
 
-				<div className="links">
-					<Link to="/login">LogIn</Link>
-					{` | `}
-					<Link to="/recovery">Reset Password</Link>
-				</div>
+			<div className="links">
+				<Link to="/login">LogIn</Link>
+				{` | `}
+				<Link to="/recovery">Reset Password</Link>
 			</div>
 		</AuthWrapper>
 	);

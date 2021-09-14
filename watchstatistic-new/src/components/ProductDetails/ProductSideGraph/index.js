@@ -153,41 +153,46 @@ const ProductSidePanel = ({}) => {
 	};
 
 	return (
-		<Grid>
-			<RadarChart {...configRadarChart} />
+		<Grid container>
+			<Grid item xs={12} md={6}>
+				<RadarChart {...configRadarChart} />
+			</Grid>
+			<Grid item xs={12} md={6}>
+				<Box
+					bgcolor={"primary.dark"}
+					textAlign="center"
+					color={"text.secondary"}
+				>
+					<Box fontWeight={600}>Total Score: {avgTotal}</Box>
+					<Box>Votes From Owners: {numberVotesOwn}</Box>
+					<Box>Score Owners: {avgVotationsOwn}</Box>
+					<Box>Votes From Non Owners: {numberVotesNotOwn}</Box>
+					<Box>Score Non Owners: {avgVotationsNotOwn}</Box>
+					<Typography className={classes.legend}>Q engineering</Typography>
+					<Typography className={classes.legend}>S quality</Typography>
+					<Typography className={classes.legend}>M price</Typography>
+					<Typography className={classes.legend}>L brand</Typography>
+					<Typography className={classes.legend}>K refinement</Typography>
+					<Typography className={classes.legend}>R history</Typography>
+					<Typography className={classes.legend}>O x-factor</Typography>
+				</Box>
+			</Grid>
+			<Grid xs={12}>
+				<Box>
+					{currentUser && (
+						<div>
+							<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
+							<Box bgcolor={"primary.light"}>{voteMenu && <ProductVote />}</Box>
+						</div>
+					)}
 
-			<Box bgcolor={"primary.dark"} textAlign="center" color={"text.secondary"}>
-				<Grid container>
-					<Grid item xs={12}>
-						<Box fontWeight={600}>Total Score: {avgTotal}</Box>
-						<Box>Votes From Owners: {numberVotesOwn}</Box>
-						<Box>Score Owners: {avgVotationsOwn}</Box>
-						<Box>Votes From Non Owners: {numberVotesNotOwn}</Box>
-						<Box>Score Non Owners: {avgVotationsNotOwn}</Box>
-						<Typography className={classes.legend}>Q engineering</Typography>
-						<Typography className={classes.legend}>S quality</Typography>
-						<Typography className={classes.legend}>M price</Typography>
-						<Typography className={classes.legend}>L brand</Typography>
-						<Typography className={classes.legend}>K refinement</Typography>
-						<Typography className={classes.legend}>R history</Typography>
-						<Typography className={classes.legend}>O x-factor</Typography>
-					</Grid>
-				</Grid>
-			</Box>
-			<Box>
-				{currentUser && (
-					<div>
-						<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
-						<Box bgcolor={"primary.light"}>{voteMenu && <ProductVote />}</Box>
-					</div>
-				)}
-
-				{!currentUser && (
-					<Button onClick={() => history.push("/login")}>
-						Login Here To vote
-					</Button>
-				)}
-			</Box>
+					{!currentUser && (
+						<Button onClick={() => history.push("/login")}>
+							Login Here To vote
+						</Button>
+					)}
+				</Box>
+			</Grid>
 		</Grid>
 	);
 };
