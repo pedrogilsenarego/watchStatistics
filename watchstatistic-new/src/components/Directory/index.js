@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 	mainText: {
 		color: "#FFFFFF",
 		fontWeight: 600,
-		padding: "30px",
+		padding: "100px",
 		textShadow: "2px 4px 4px rgba(48,43,60)",
 		"&:hover": {
 			color: "#FFA500"

@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 		background: "linear-gradient(180deg,#282432, #282432C7, #28243200)",
 		height: "100px",
 		"&:hover": {
-			background: "linear-gradient(180deg,#282432, #282432D1)"
+			background: "linear-gradient(180deg,#282432, #28243280)"
 		}
 	},
 	textBtn: {
@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
 		"&:active": {
 			color: "#FFFFFF"
 		}
-	}
+	},
+	messages: { textAlign: "right", paddingTop: "10px" }
 }));
 
 const mapState = (state) => ({
@@ -53,16 +54,17 @@ const Header = (props) => {
 		<div>
 			<AppBar position="fixed" elevation={0} className={classes.appbar}>
 				<Toolbar>
-					<Button
-						className={classes.textBtn}
-						activeStyle={activeStyle}
-						component={NavLink}
-						to="/"
-						exact
-					>
-						Home
-					</Button>
-					<div>
+					<Grid xs={12} md={6}>
+						<Button
+							className={classes.textBtn}
+							activeStyle={activeStyle}
+							component={NavLink}
+							to="/"
+							exact
+						>
+							Home
+						</Button>
+
 						{currentUser && [
 							<Button
 								className={classes.textBtn}
@@ -113,34 +115,41 @@ const Header = (props) => {
 								Login
 							</Button>
 						]}
-					</div>
-					{currentUser && (
-						<Grid container>
-							<Grid item xs={12} md={6}>
-								<Typography className={classes.text}>
-									Hello, {displayName}
-								</Typography>
-							</Grid>
-							<Grid item xs={12} md={6} align={"right"}>
-								{(userVotes.length - 1 > 1 || userVotes.length - 1 === 0) && (
+					</Grid>
+					<Grid
+						container
+						xs={12}
+						md={6}
+						className={classes.messages}
+						justify="flex-end"
+					>
+						{currentUser && (
+							<div>
+								<Grid item xs={12}>
 									<Typography className={classes.text}>
-										You have voted on {userVotes.length - 1} watches
+										Hello, {displayName}
 									</Typography>
-								)}
-								{userVotes.length - 1 === 1 && (
-									<Typography className={classes.text}>
-										You have voted on {userVotes.length - 1} watch
-									</Typography>
-								)}
-								{!userRoles.includes("verified") && (
-									<Typography className={classes.warningText}>
-										VERIFY first your account before you can search and vote for
-										watches
-									</Typography>
-								)}
-							</Grid>
-						</Grid>
-					)}
+								</Grid>
+								<Grid item xs={12}>
+									{(userVotes.length - 1 > 1 || userVotes.length - 1 === 0) && (
+										<Typography className={classes.text}>
+											You have voted on {userVotes.length - 1} watches
+										</Typography>
+									)}
+									{userVotes.length - 1 === 1 && (
+										<Typography className={classes.text}>
+											You have voted on {userVotes.length - 1} watch
+										</Typography>
+									)}
+									{!userRoles.includes("verified") && (
+										<Typography style={{ color: "#FFA500" }}>
+											VERIFY account to start voting for watches
+										</Typography>
+									)}
+								</Grid>
+							</div>
+						)}
+					</Grid>
 				</Toolbar>
 			</AppBar>
 		</div>
