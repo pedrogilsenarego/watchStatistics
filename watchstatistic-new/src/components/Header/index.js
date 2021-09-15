@@ -5,13 +5,15 @@ import { signOutUserStart } from "./../../redux/User/user.actions";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
 	appbar: {
 		flexGrow: 1,
 		elevation: 0,
-		background: "linear-gradient(180deg,#282432, #2824320A)",
+		background: "linear-gradient(180deg,#282432, #282432C7, #28243200)",
 		height: "100px",
 		"&:hover": {
 			background: "linear-gradient(180deg,#282432, #282432D1)"
@@ -40,6 +42,8 @@ const Header = (props) => {
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
+
+	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 1;
 
 	const signOut = () => {
 		dispatch(signOutUserStart());
@@ -110,6 +114,33 @@ const Header = (props) => {
 							</Button>
 						]}
 					</div>
+					{currentUser && (
+						<Grid container>
+							<Grid item xs={12} md={6}>
+								<Typography className={classes.text}>
+									Hello, {displayName}
+								</Typography>
+							</Grid>
+							<Grid item xs={12} md={6} align={"right"}>
+								{(userVotes.length - 1 > 1 || userVotes.length - 1 === 0) && (
+									<Typography className={classes.text}>
+										You have voted on {userVotes.length - 1} watches
+									</Typography>
+								)}
+								{userVotes.length - 1 === 1 && (
+									<Typography className={classes.text}>
+										You have voted on {userVotes.length - 1} watch
+									</Typography>
+								)}
+								{!userRoles.includes("verified") && (
+									<Typography className={classes.warningText}>
+										VERIFY first your account before you can search and vote for
+										watches
+									</Typography>
+								)}
+							</Grid>
+						</Grid>
+					)}
 				</Toolbar>
 			</AppBar>
 		</div>

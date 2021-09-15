@@ -1,20 +1,22 @@
 import React from "react";
+import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	box: {
 		backgroundSize: "cover",
-		height: "100vh",
+		height: "800px",
 		backgroundRepeat: "no-repeat",
 
 		backgroundImage: `url(${"https://hips.hearstapps.com/amv-prod-gp.s3.amazonaws.com/gearpatrol/wp-content/uploads/2018/12/Scuba-Diving-With-Seiko-SKX007-gear-patrol-lead-full.jpg?crop=0.6701030927835051xw:1xh;center,top&resize=980:*"})`
 	},
 	mainText: {
 		color: "#FFFFFF",
-		fontSize: "40px",
+		fontWeight: 600,
 		padding: "30px",
+		textShadow: "2px 4px 4px rgba(48,43,60)",
 		"&:hover": {
 			color: "#FFA500"
 		}
@@ -30,14 +32,14 @@ const Directory = (props) => {
 			direction="column"
 			justify="space-evenly"
 		>
-			<div className={classes.mainText}>
-				<p>
+			<Link Link href="/product/ulgJqMRMtjojFERkj2vR" underline="none">
+				<Typography className={classes.mainText} variant="h3" boxShadow={3}>
 					Vote Now <br />
 					for One of the Most Iconic Wacthes
 					<br />
 					Seiko SKX007
-				</p>
-			</div>
+				</Typography>
+			</Link>
 		</Grid>
 	);
 };
