@@ -12,7 +12,10 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 		elevation: 0,
 		background: "linear-gradient(180deg,#282432, #2824320A)",
-		height: "60px"
+		height: "60px",
+		"&:hover": {
+			background: "linear-gradient(180deg,#282432, #2824329C)"
+		}
 	},
 	textBtn: {
 		color: "#8E8D8D",
