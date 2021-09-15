@@ -50,7 +50,6 @@ const Product = (product) => {
 					image={productThumbnail}
 					key={1}
 					style={{
-						filter: "brightness(40%)",
 						position: "relative",
 
 						cursor: "pointer"
@@ -58,43 +57,51 @@ const Product = (product) => {
 					onMouseLeave={() => setOnMouse(true)}
 					onClick={() => history.push(`/product/${documentID}`)}
 				>
-					<Typography
+					{" "}
+					<Box
+						height={"100%"}
+						bgcolor="#040406D1"
 						style={{
-							cursor: "pointer",
-							paddingTop: "60px"
-						}}
-						key={2}
-						className={classes.text}
-						onMouseEnter={() => setOnMouse(false)}
-						onClick={() => history.push(`/product/${documentID}`)}
-					>
-						{productBrand} - {productName}
-					</Typography>
+							position: "relative",
 
-					<Typography
-						style={{
-							cursor: "pointer",
-							paddingTop: "-100px"
-						}}
-						key={3}
-						className={classes.text}
-						onMouseEnter={() => setOnMouse(false)}
-						onClick={() => history.push(`/product/${documentID}`)}
-					>
-						Score: {avgTotal}
-					</Typography>
-
-					<Typography
-						style={{
 							cursor: "pointer"
 						}}
-						key={4}
-						className={classes.text}
-						onMouseEnter={() => setOnMouse(false)}
-						onClick={() => history.push(`/product/${documentID}`)}
 					>
-						Votes: {numberVotesNotOwn + numberVotesOwn}
-					</Typography>
+						<Typography
+							style={{
+								cursor: "pointer",
+								paddingTop: "60px"
+							}}
+							key={2}
+							className={classes.text}
+							onMouseEnter={() => setOnMouse(false)}
+							onClick={() => history.push(`/product/${documentID}`)}
+						>
+							{productBrand} - {productName}
+						</Typography>
+						<Typography
+							style={{
+								cursor: "pointer"
+							}}
+							key={3}
+							className={classes.text}
+							onMouseEnter={() => setOnMouse(false)}
+							onClick={() => history.push(`/product/${documentID}`)}
+						>
+							Score: {avgTotal}
+						</Typography>
+						<Typography
+							style={{
+								cursor: "pointer"
+							}}
+							key={4}
+							className={classes.text}
+							onMouseEnter={() => setOnMouse(false)}
+							onClick={() => history.push(`/product/${documentID}`)}
+						>
+							Votes: {numberVotesNotOwn + numberVotesOwn}
+						</Typography>
+					</Box>
 				</CardMedia>
 			)}
 		</Box>

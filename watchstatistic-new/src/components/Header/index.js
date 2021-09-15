@@ -13,10 +13,10 @@ const useStyles = makeStyles((theme) => ({
 	appbar: {
 		flexGrow: 1,
 		elevation: 0,
-		background: "linear-gradient(180deg,#282432, #282432C7, #28243200)",
+		background: "linear-gradient(180deg,#040406, #04040600)",
 		height: "100px",
 		"&:hover": {
-			background: "linear-gradient(180deg,#282432, #28243280)"
+			background: "linear-gradient(180deg,#040406, #04040680)"
 		}
 	},
 	textBtn: {
@@ -136,7 +136,7 @@ const Header = (props) => {
 								)}
 								{!userRoles.includes("verified") && (
 									<Typography style={{ color: "#FFA500" }}>
-										VERIFY account to start voting for watches
+										VERIFY account to start voting
 									</Typography>
 								)}
 							</Grid>

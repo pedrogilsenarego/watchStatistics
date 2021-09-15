@@ -93,11 +93,7 @@ const ProductDetails = ({}) => {
 								Description
 							</Button>
 						</CardActions>
-						<CardMedia
-							className={classes.media}
-							image={productThumbnail}
-							title="hello"
-						/>
+						<CardMedia className={classes.media} image={productThumbnail} />
 					</CardActionArea>
 				</Card>
 			</Grid>
