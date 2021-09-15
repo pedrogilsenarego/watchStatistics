@@ -12,16 +12,17 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 		elevation: 0,
 		background: "linear-gradient(180deg,#282432, #2824320A)",
-		height: "60px",
+		height: "100px",
 		"&:hover": {
-			background: "linear-gradient(180deg,#282432, #2824329C)"
+			background: "linear-gradient(180deg,#282432, #282432D1)"
 		}
 	},
 	textBtn: {
-		color: "#8E8D8D",
+		paddingTop: "20px",
+		color: "#FFFFFF",
 		fontSize: "13px",
 		"&:hover": {
-			color: "#FFFFFF"
+			color: "#FFA500"
 		},
 		"&:active": {
 			color: "#FFFFFF"
@@ -35,7 +36,8 @@ const mapState = (state) => ({
 
 const Header = (props) => {
 	const classes = useStyles();
-	const activeStyle = { color: "#FFFFFF" };
+	const activeStyle = { color: "#FFA500" };
+
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 

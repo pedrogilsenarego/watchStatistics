@@ -65,6 +65,7 @@ const ProductResults = ({}) => {
 
 	return (
 		<div>
+			<Box height={"80px"} bgcolor="white"></Box>
 			<h1>Browse for you Favorite Timepieces</h1>
 			<FormSelect {...configFilters} />
 			<Box p="5" margin="20px">
