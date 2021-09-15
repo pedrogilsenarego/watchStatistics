@@ -1,16 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "./../../redux/User/user.actions";
-import "./styles.scss";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+	appbar: {
+		flexGrow: 1,
+		elevation: 0,
+		background: "linear-gradient(180deg,#282432, #2824320A)",
+		height: "60px"
+	},
+	textBtn: {
+		color: "#8E8D8D",
+		fontSize: "13px",
+		"&:hover": {
+			color: "#FFFFFF"
+		},
+		"&:active": {
+			color: "#FFFFFF"
+		}
+	}
+}));
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
 
 const Header = (props) => {
-	const location = useLocation();
-	const [activeMenu, setActiveMenu] = useState(false);
+	const classes = useStyles();
+	const activeStyle = { color: "#FFFFFF" };
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 
@@ -18,64 +40,74 @@ const Header = (props) => {
 		dispatch(signOutUserStart());
 	};
 
-	useEffect(() => {
-		setActiveMenu(false);
-	}, [location]);
-
 	return (
-		<header className="header">
-			<div className="wrap">
-				<nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
-					<ul>
-						<li>
-							<Link to="/">Home</Link>
-						</li>
-					</ul>
-				</nav>
-
-				<div className="callToActions">
-					<ul>
+		<div>
+			<AppBar position="fixed" elevation={0} className={classes.appbar}>
+				<Toolbar>
+					<Button
+						className={classes.textBtn}
+						activeStyle={activeStyle}
+						component={NavLink}
+						to="/"
+						exact
+					>
+						Home
+					</Button>
+					<div>
 						{currentUser && [
-							<li key={1}>
-								<Link to="/search">
-									Search<i class="fas fa-search"></i>
-								</Link>
-							</li>,
-							<li key={2}>
-								<Link to="/dashboard">
-									My Account
-									<i class="fas fa-user-circle"></i>
-								</Link>
-							</li>,
-							<li key={3}>
-								<span onClick={() => signOut()}>
-									LogOut
-									<i class="fas fa-sign-out-alt"></i>
-								</span>
-							</li>
+							<Button
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								component={NavLink}
+								to="/search"
+								key={1}
+							>
+								Search
+							</Button>,
+							<Button
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								component={NavLink}
+								to="/dashboard"
+								key={2}
+							>
+								My Account
+							</Button>,
+							<Button
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								exact
+								key={3}
+								onClick={() => signOut()}
+							>
+								LogOut
+							</Button>
 						]}
 
 						{!currentUser && [
-							<li key={1} className="hideOnMobile">
-								<Link to="/registration">Register</Link>
-							</li>,
-							<li key={2}>
-								<Link to="/login">
-									Login
-									<i class="fas fa-user-circle"></i>
-								</Link>
-							</li>
+							<Button
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								component={NavLink}
+								to="/registration"
+								key={1}
+							>
+								Signup
+							</Button>,
+							<Button
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								component={NavLink}
+								to="/login"
+								key={2}
+							>
+								Login
+							</Button>
 						]}
-
-						<li className="mobileMenu">
-							<span onClick={() => setActiveMenu(!activeMenu)}>
-								<i className="fas fa-bars"></i>
-							</span>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</header>
+					</div>
+				</Toolbar>
+			</AppBar>
+		</div>
 	);
 };
 

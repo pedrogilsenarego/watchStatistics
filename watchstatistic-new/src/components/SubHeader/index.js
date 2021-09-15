@@ -22,8 +22,8 @@ const SubHeader = (props) => {
 
 	return (
 		<subheader>
+			<Box height={"40px"} bgcolor="primary.light"></Box>
 			<Box px={{ xs: 10 }} py={{ xs: 3 }} bgcolor="primary.light">
-				<div></div>
 				{currentUser && (
 					<Grid container>
 						<Grid item xs={12} md={6}>
