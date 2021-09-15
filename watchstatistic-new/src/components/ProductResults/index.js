@@ -65,11 +65,11 @@ const ProductResults = ({}) => {
 
 	return (
 		<div>
-			<Box height={"80px"} bgcolor="white"></Box>
-			<h1>Browse for you Favorite Timepieces</h1>
-			<FormSelect {...configFilters} />
-			<Box p="5" margin="20px">
-				<Grid container spacing={2}>
+			<Box height={"80px"} bgcolor="black"></Box>
+			<Box bgcolor="black" padding={"10px"}>
+				<FormSelect {...configFilters} />
+
+				<Grid container spacing={1}>
 					{data.map((product, pos) => {
 						const { productThumbnail, productName } = product;
 						if (!productThumbnail || !productName) return null;
@@ -84,8 +84,9 @@ const ProductResults = ({}) => {
 						);
 					})}
 				</Grid>
+
+				{!isLastPage && <LoadMore {...configLoadMore} />}
 			</Box>
-			{!isLastPage && <LoadMore {...configLoadMore} />}
 		</div>
 	);
 };

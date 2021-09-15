@@ -1,26 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-	Card,
-	CardActionArea,
-	CardContent,
-	Button,
-	Typography,
-	CardMedia,
-	CardActions
-} from "@material-ui/core";
+import { Button, Typography, CardMedia, Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		maxwidth: 345
 	},
 	media: {
-		height: 145
+		height: 200
 	}
 }));
 
 const Product = (product) => {
+	const [onMouse, setOnMouse] = useState(true);
 	const {
 		documentID,
 		productThumbnail,
@@ -35,36 +28,41 @@ const Product = (product) => {
 	const classes = useStyles();
 
 	return (
-		<Card className={classes.root} alt={productName}>
-			<CardActionArea>
+		<Box className={classes.root} alt={productName}>
+			{onMouse && (
 				<CardMedia
 					className={classes.media}
 					image={productThumbnail}
 					title="hello"
+					onMouseEnter={() => setOnMouse(false)}
 				/>
-				<CardContent>
-					<Typography gutterBottom variant="h5" component="h2">
-						{productBrand} - {productName}
-					</Typography>
-					<Typography>Score: {avgTotal}</Typography>
-					<Typography>Votes: {numberVotesNotOwn + numberVotesOwn}</Typography>
-				</CardContent>
-			</CardActionArea>
-			<CardActions>
-				<Button size="small" color="secondary">
-					Share
-				</Button>
-				<Button
-					component={NavLink}
-					to={`/product/${documentID}`}
-					size="small"
-					color="secondary"
-				>
-					Vote Here
-				</Button>
-			</CardActions>
-		</Card>
+			)}
+			{!onMouse && (
+				<CardMedia
+					className={classes.media}
+					image={productThumbnail}
+					title="hello"
+					style={{ filter: "brightness(40%)" }}
+					onMouseLeave={() => setOnMouse(true)}
+				/>
+			)}
+		</Box>
 	);
 };
 
 export default Product;
+
+/* <Typography gutterBottom variant="h5" component="h2">
+						{productBrand} - {productName}
+					</Typography>
+					<Typography>Score: {avgTotal}</Typography>
+					<Typography>Votes: {numberVotesNotOwn + numberVotesOwn}</Typography> */
+
+/* <Button
+						component={NavLink}
+						to={`/product/${documentID}`}
+						size="small"
+						color="secondary"
+					>
+						Vote Here
+					</Button>; */

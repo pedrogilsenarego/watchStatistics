@@ -116,40 +116,39 @@ const Header = (props) => {
 							</Button>
 						]}
 					</Grid>
-					<Grid
-						container
-						xs={12}
-						md={6}
-						className={classes.messages}
-						justify="flex-end"
-					>
-						{currentUser && (
-							<div>
-								<Grid item xs={12}>
+
+					{currentUser && (
+						<Grid
+							container
+							xs={12}
+							md={6}
+							className={classes.messages}
+							justify="flex-end"
+						>
+							<Grid item xs={12}>
+								<Typography className={classes.text}>
+									Hello, {displayName}
+								</Typography>
+							</Grid>
+							<Grid item xs={12}>
+								{(userVotes.length - 1 > 1 || userVotes.length - 1 === 0) && (
 									<Typography className={classes.text}>
-										Hello, {displayName}
+										You have voted on {userVotes.length - 1} watches
 									</Typography>
-								</Grid>
-								<Grid item xs={12}>
-									{(userVotes.length - 1 > 1 || userVotes.length - 1 === 0) && (
-										<Typography className={classes.text}>
-											You have voted on {userVotes.length - 1} watches
-										</Typography>
-									)}
-									{userVotes.length - 1 === 1 && (
-										<Typography className={classes.text}>
-											You have voted on {userVotes.length - 1} watch
-										</Typography>
-									)}
-									{!userRoles.includes("verified") && (
-										<Typography style={{ color: "#FFA500" }}>
-											VERIFY account to start voting for watches
-										</Typography>
-									)}
-								</Grid>
-							</div>
-						)}
-					</Grid>
+								)}
+								{userVotes.length - 1 === 1 && (
+									<Typography className={classes.text}>
+										You have voted on {userVotes.length - 1} watch
+									</Typography>
+								)}
+								{!userRoles.includes("verified") && (
+									<Typography style={{ color: "#FFA500" }}>
+										VERIFY account to start voting for watches
+									</Typography>
+								)}
+							</Grid>
+						</Grid>
+					)}
 				</Toolbar>
 			</AppBar>
 		</div>
