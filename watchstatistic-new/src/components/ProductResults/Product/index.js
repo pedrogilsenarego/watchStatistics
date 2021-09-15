@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, CardMedia, Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		maxwidth: 345
-	},
 	media: {
 		height: 200
+	},
+	text: {
+		color: "#FFFFFF",
+		fontSize: "20px",
+		textAlign: "center"
 	}
 }));
 
 const Product = (product) => {
 	const [onMouse, setOnMouse] = useState(true);
+	const history = useHistory();
+
 	const {
 		documentID,
 		productThumbnail,
@@ -24,6 +28,7 @@ const Product = (product) => {
 		numberVotesNotOwn
 	} = product;
 	if (!documentID || !productThumbnail || !productName) return null;
+
 	// eslint-disable-next-line
 	const classes = useStyles();
 
@@ -37,15 +42,52 @@ const Product = (product) => {
 					onMouseEnter={() => setOnMouse(false)}
 				/>
 			)}
-			{!onMouse && (
+			{!onMouse && [
 				<CardMedia
 					className={classes.media}
 					image={productThumbnail}
-					title="hello"
-					style={{ filter: "brightness(40%)" }}
+					style={{
+						filter: "brightness(40%)",
+						position: "relative",
+						cursor: "pointer"
+					}}
 					onMouseLeave={() => setOnMouse(true)}
-				/>
-			)}
+					onClick={() => history.push(`/product/${documentID}`)}
+				/>,
+				<Typography
+					style={{
+						transform: "translateY(-140px)",
+						cursor: "pointer"
+					}}
+					className={classes.text}
+					onMouseEnter={() => setOnMouse(false)}
+					onClick={() => history.push(`/product/${documentID}`)}
+				>
+					{productBrand} - {productName}
+				</Typography>,
+				<Typography
+					style={{
+						transform: "translateY(-140px)",
+						cursor: "pointer"
+					}}
+					className={classes.text}
+					onMouseEnter={() => setOnMouse(false)}
+					onClick={() => history.push(`/product/${documentID}`)}
+				>
+					Score: {avgTotal}
+				</Typography>,
+				<Typography
+					style={{
+						transform: "translateY(-140px)",
+						cursor: "pointer"
+					}}
+					className={classes.text}
+					onMouseEnter={() => setOnMouse(false)}
+					onClick={() => history.push(`/product/${documentID}`)}
+				>
+					Votes: {numberVotesNotOwn + numberVotesOwn}
+				</Typography>
+			]}
 		</Box>
 	);
 };

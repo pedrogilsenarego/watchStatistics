@@ -1,8 +1,8 @@
 {
 	"optionsAddNew": [
-		{ "name": "Cartier", "value": "cartier" },
-		{ "name": "GrandSeiko", "value": "grandseiko" },
-		{ "name": "Rolex", "value": "rolex" },
-		{ "name": "Seiko", "value": "seiko" }
+		{ "name": "Cartier", "value": "Cartier" },
+		{ "name": "GrandSeiko", "value": "Grandseiko" },
+		{ "name": "Rolex", "value": "Rolex" },
+		{ "name": "Seiko", "value": "Seiko" }
 	]
 }
