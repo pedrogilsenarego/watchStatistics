@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Typography, CardMedia, Box } from "@material-ui/core";
+import { Typography, CardMedia, Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+	root: {},
 	media: {
 		height: 200
 	},
@@ -38,56 +39,64 @@ const Product = (product) => {
 				<CardMedia
 					className={classes.media}
 					image={productThumbnail}
+					key={1}
 					title="hello"
 					onMouseEnter={() => setOnMouse(false)}
 				/>
 			)}
-			{!onMouse && [
+			{!onMouse && (
 				<CardMedia
 					className={classes.media}
 					image={productThumbnail}
+					key={1}
 					style={{
 						filter: "brightness(40%)",
 						position: "relative",
+
 						cursor: "pointer"
 					}}
 					onMouseLeave={() => setOnMouse(true)}
 					onClick={() => history.push(`/product/${documentID}`)}
-				/>,
-				<Typography
-					style={{
-						transform: "translateY(-140px)",
-						cursor: "pointer"
-					}}
-					className={classes.text}
-					onMouseEnter={() => setOnMouse(false)}
-					onClick={() => history.push(`/product/${documentID}`)}
 				>
-					{productBrand} - {productName}
-				</Typography>,
-				<Typography
-					style={{
-						transform: "translateY(-140px)",
-						cursor: "pointer"
-					}}
-					className={classes.text}
-					onMouseEnter={() => setOnMouse(false)}
-					onClick={() => history.push(`/product/${documentID}`)}
-				>
-					Score: {avgTotal}
-				</Typography>,
-				<Typography
-					style={{
-						transform: "translateY(-140px)",
-						cursor: "pointer"
-					}}
-					className={classes.text}
-					onMouseEnter={() => setOnMouse(false)}
-					onClick={() => history.push(`/product/${documentID}`)}
-				>
-					Votes: {numberVotesNotOwn + numberVotesOwn}
-				</Typography>
-			]}
+					<Typography
+						style={{
+							cursor: "pointer",
+							paddingTop: "60px"
+						}}
+						key={2}
+						className={classes.text}
+						onMouseEnter={() => setOnMouse(false)}
+						onClick={() => history.push(`/product/${documentID}`)}
+					>
+						{productBrand} - {productName}
+					</Typography>
+
+					<Typography
+						style={{
+							cursor: "pointer",
+							paddingTop: "-100px"
+						}}
+						key={3}
+						className={classes.text}
+						onMouseEnter={() => setOnMouse(false)}
+						onClick={() => history.push(`/product/${documentID}`)}
+					>
+						Score: {avgTotal}
+					</Typography>
+
+					<Typography
+						style={{
+							cursor: "pointer"
+						}}
+						key={4}
+						className={classes.text}
+						onMouseEnter={() => setOnMouse(false)}
+						onClick={() => history.push(`/product/${documentID}`)}
+					>
+						Votes: {numberVotesNotOwn + numberVotesOwn}
+					</Typography>
+				</CardMedia>
+			)}
 		</Box>
 	);
 };

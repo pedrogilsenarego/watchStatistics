@@ -177,7 +177,7 @@ const ProductSidePanel = ({}) => {
 					<Typography className={classes.legend}>O x-factor</Typography>
 				</Box>
 			</Grid>
-			<Grid xs={12}>
+			<Grid item xs={12}>
 				<Box>
 					{currentUser && (
 						<div>

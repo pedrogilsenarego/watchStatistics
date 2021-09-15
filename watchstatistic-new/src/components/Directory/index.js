@@ -30,10 +30,10 @@ const Directory = (props) => {
 			container
 			className={classes.box}
 			direction="column"
-			justify="space-evenly"
+			justifyContent="space-evenly"
 		>
 			<Link Link href="/product/ulgJqMRMtjojFERkj2vR" underline="none">
-				<Typography className={classes.mainText} variant="h3" boxShadow={3}>
+				<Typography className={classes.mainText} variant="h3" boxshadow={3}>
 					Vote Now <br />
 					for One of the Most Iconic Wacthes
 					<br />

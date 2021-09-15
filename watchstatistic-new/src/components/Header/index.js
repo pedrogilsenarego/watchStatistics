@@ -54,7 +54,7 @@ const Header = (props) => {
 		<div>
 			<AppBar position="fixed" elevation={0} className={classes.appbar}>
 				<Toolbar>
-					<Grid xs={12} md={6}>
+					<Grid item xs={12} sm={6}>
 						<Button
 							className={classes.textBtn}
 							activeStyle={activeStyle}
@@ -87,7 +87,6 @@ const Header = (props) => {
 							<Button
 								className={classes.textBtn}
 								activeStyle={activeStyle}
-								exact
 								key={3}
 								onClick={() => signOut()}
 							>
@@ -118,13 +117,7 @@ const Header = (props) => {
 					</Grid>
 
 					{currentUser && (
-						<Grid
-							container
-							xs={12}
-							md={6}
-							className={classes.messages}
-							justify="flex-end"
-						>
+						<Grid item xs={12} sm={6} className={classes.messages}>
 							<Grid item xs={12}>
 								<Typography className={classes.text}>
 									Hello, {displayName}
