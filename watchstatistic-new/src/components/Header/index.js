@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "./../../redux/User/user.actions";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 import Menu from "@material-ui/core/Menu";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { MenuList } from "@material-ui/core";
+import { MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	appbar: {
-		flexGrow: 1,
 		elevation: 0,
 		background: "linear-gradient(180deg,#040406, #04040600)",
 		height: "100px",
@@ -32,7 +29,15 @@ const useStyles = makeStyles((theme) => ({
 			color: "#FFFFFF"
 		}
 	},
-	messages: { textAlign: "right", paddingTop: "10px" }
+	messages: { textAlign: "right", paddingTop: "10px" },
+	menu: {
+		marginTop: "60px",
+		"& .MuiPaper-root": {
+			backgroundColor: "#04040680",
+			color: "#ffffff"
+		},
+		disableRipple: true
+	}
 }));
 
 const mapState = (state) => ({
@@ -41,20 +46,39 @@ const mapState = (state) => ({
 
 const Header = (props) => {
 	const classes = useStyles();
+	const history = useHistory();
 	const activeStyle = { color: "#FFA500" };
 	const [messageStatus, setMessageStatus] = useState(0);
 	const [anchorMessages, setAnchorMessages] = useState(null);
+	const [anchorSupport, setAnchorSupport] = useState(null);
+	const [anchorMyAccount, setAnchorMyAccount] = useState(null);
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 1;
 
-	const handleMenuOpen = (e) => {
+	const handleMenuMessagesOpen = (e) => {
 		setAnchorMessages(e.currentTarget);
 	};
 
-	const handleCloseMenu = () => {
+	const handleCloseMessagesMenu = () => {
 		setAnchorMessages(null);
+	};
+
+	const handleMenuMyAccountOpen = (e) => {
+		setAnchorMyAccount(e.currentTarget);
+	};
+
+	const handleCloseMyAccountMenu = () => {
+		setAnchorMyAccount(null);
+	};
+
+	const handleMenuSupportOpen = (e) => {
+		setAnchorSupport(e.currentTarget);
+	};
+
+	const handleCloseSupportMenu = () => {
+		setAnchorSupport(null);
 	};
 
 	useEffect(
@@ -75,114 +99,129 @@ const Header = (props) => {
 		<div>
 			<AppBar position="fixed" elevation={0} className={classes.appbar}>
 				<Toolbar>
-					<Grid item xs={12} sm={6}>
+					<Button
+						className={classes.textBtn}
+						activeStyle={activeStyle}
+						component={NavLink}
+						to="/"
+						exact
+					>
+						Home
+					</Button>
+					<Button
+						aria-controls="support"
+						disableRipple
+						className={classes.textBtn}
+						activeStyle={activeStyle}
+						onClick={handleMenuSupportOpen}
+					>
+						Support
+					</Button>
+
+					{currentUser && [
 						<Button
 							className={classes.textBtn}
 							activeStyle={activeStyle}
 							component={NavLink}
-							to="/"
-							exact
+							to="/search"
 						>
-							Home
+							Browse
+						</Button>,
+
+						<Button
+							aria-controls="messages"
+							className={classes.textBtn}
+							activeStyle={activeStyle}
+							disableRipple
+							onClick={handleMenuMessagesOpen}
+						>
+							Messages ({messageStatus})
+						</Button>,
+						<Button
+							className={classes.textBtn}
+							activeStyle={activeStyle}
+							aria-controls="myAccount"
+							disableRipple
+							onClick={handleMenuMyAccountOpen}
+						>
+							{displayName}
 						</Button>
+					]}
 
-						{currentUser && [
-							<Button
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								component={NavLink}
-								to="/search"
-								key={1}
-							>
-								Search
-							</Button>,
-							<Button
-								aria-controls="messages"
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								key={2}
-								onClick={handleMenuOpen}
-							>
-								Messages ({messageStatus})
-							</Button>,
-							<Button
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								component={NavLink}
-								to="/dashboard"
-								key={3}
-							>
-								My Account
-							</Button>,
-							<Button
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								key={4}
-								onClick={() => signOut()}
-							>
-								LogOut
-							</Button>
-						]}
-
-						{!currentUser && [
-							<Button
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								component={NavLink}
-								to="/registration"
-								key={1}
-							>
-								Signup
-							</Button>,
-							<Button
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								component={NavLink}
-								to="/login"
-								key={2}
-							>
-								Login
-							</Button>
-						]}
-					</Grid>
-
-					{currentUser && (
-						<Grid item xs={12} sm={6} className={classes.messages}>
-							<Grid item xs={12}>
-								<Typography className={classes.text}>
-									Hello, {displayName}
-								</Typography>
-							</Grid>
-							<Grid item xs={12}>
-								{(userVotes.length - 1 > 1 || userVotes.length - 1 === 0) && (
-									<Typography className={classes.text}>
-										You have voted on {userVotes.length - 1} watches
-									</Typography>
-								)}
-								{userVotes.length - 1 === 1 && (
-									<Typography className={classes.text}>
-										You have voted on {userVotes.length - 1} watch
-									</Typography>
-								)}
-								{!userRoles.includes("verified") && (
-									<Typography style={{ color: "#FFA500" }}>
-										VERIFY account to start voting
-									</Typography>
-								)}
-							</Grid>
-						</Grid>
-					)}
+					{!currentUser && [
+						<Button
+							className={classes.textBtn}
+							activeStyle={activeStyle}
+							component={NavLink}
+							to="/registration"
+						>
+							Signup
+						</Button>,
+						<Button
+							className={classes.textBtn}
+							activeStyle={activeStyle}
+							component={NavLink}
+							to="/login"
+						>
+							Login
+						</Button>
+					]}
 				</Toolbar>
 			</AppBar>
 			<Menu
+				className={classes.menu}
+				style={{}}
 				id="messages"
-				onClose={handleCloseMenu}
+				onClose={handleCloseMessagesMenu}
 				anchorEl={anchorMessages}
 				open={Boolean(anchorMessages)}
 			>
-				<MenuList onClick={handleCloseMenu}>
-					VERIFY account to start voting
-				</MenuList>
+				{messageStatus === 1 && (
+					<MenuItem
+						style={{ color: "#FFA500" }}
+						onClick={handleCloseMessagesMenu}
+					>
+						VERIFY account to start voting
+					</MenuItem>
+				)}
+			</Menu>
+			<Menu
+				className={classes.menu}
+				id="support"
+				onClose={handleCloseSupportMenu}
+				anchorEl={anchorSupport}
+				open={Boolean(anchorSupport)}
+			>
+				<MenuItem onClick={handleCloseSupportMenu}>Contact Us</MenuItem>
+				<MenuItem onClick={handleCloseSupportMenu}>Privacy Policy</MenuItem>
+				<MenuItem onClick={handleCloseSupportMenu}>FAQ</MenuItem>
+				<MenuItem onClick={handleCloseSupportMenu}>
+					Terms and Conditions
+				</MenuItem>
+			</Menu>
+			<Menu
+				className={classes.menu}
+				id="MyAccount"
+				onClose={handleCloseMyAccountMenu}
+				anchorEl={anchorMyAccount}
+				open={Boolean(anchorMyAccount)}
+			>
+				<MenuItem
+					onClick={() => {
+						history.push("/dashboard");
+					}}
+				>
+					DashBoard
+				</MenuItem>
+				{currentUser && <MenuItem>Votes: {userVotes.length - 1}</MenuItem>}
+				<MenuItem
+					onClick={() => {
+						signOut();
+						handleCloseMyAccountMenu();
+					}}
+				>
+					Logout
+				</MenuItem>
 			</Menu>
 		</div>
 	);

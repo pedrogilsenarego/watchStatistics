@@ -13,8 +13,8 @@ const Footer = (props) => {
 			>
 				<Container maxWidth="lg">
 					<Grid container spacing={5}>
-						<Grid item xs={12} sm={4}>
-							<Box fontWeight={600}>V1.1.4</Box>
+						<Grid item xs={12} sm={6}>
+							<Box fontWeight={600}>V1.1.5</Box>
 							<Box>
 								<Link href="/changelog" color="inherit">
 									ChangeLog
@@ -26,22 +26,13 @@ const Footer = (props) => {
 								</Link>
 							</Box>
 						</Grid>
-						<Grid item xs={12} sm={4}>
+						<Grid item xs={12} sm={6}>
 							<Box fontWeight={600}>About</Box>
 							<Box>
 								<Link color="inherit">Who we are</Link>
 							</Box>
 							<Box>
 								<Link color="inherit">Other Projects</Link>
-							</Box>
-						</Grid>
-						<Grid item xs={12} sm={4}>
-							<Box fontWeight={600}>Contacts</Box>
-							<Box>
-								<Link color="inherit">Tell us Something</Link>
-							</Box>
-							<Box>
-								<Link color="inherit">Where we are</Link>
 							</Box>
 						</Grid>
 					</Grid>
