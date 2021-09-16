@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: "60px",
 		"& .MuiPaper-root": {
 			backgroundColor: "#04040680",
-			color: "#ffffff"
+			color: "#ffffff",
+			disableScrollLock: true
 		},
 		disableRipple: true
 	}
@@ -169,6 +170,7 @@ const Header = (props) => {
 				</Toolbar>
 			</AppBar>
 			<Menu
+				disableScrollLock
 				className={classes.menu}
 				style={{}}
 				id="messages"
@@ -186,6 +188,7 @@ const Header = (props) => {
 				)}
 			</Menu>
 			<Menu
+				disableScrollLock
 				className={classes.menu}
 				id="support"
 				onClose={handleCloseSupportMenu}
@@ -200,6 +203,7 @@ const Header = (props) => {
 				</MenuItem>
 			</Menu>
 			<Menu
+				disableScrollLock
 				className={classes.menu}
 				id="MyAccount"
 				onClose={handleCloseMyAccountMenu}
