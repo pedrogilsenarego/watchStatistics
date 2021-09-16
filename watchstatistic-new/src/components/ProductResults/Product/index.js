@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 		height: 200,
 		"&:hover": {
 			transform: "scale(1.2)",
-			transition: "all 3s ease 0s"
+			transition: "all 3s ease-in-out 50ms"
 		}
 	},
 	imageWrapper: {
@@ -53,6 +53,7 @@ const Product = (product) => {
 					className={classes.media}
 					image={productThumbnail}
 					key={1}
+					onClick={() => setOnMouse(false)}
 					onMouseEnter={() => setOnMouse(false)}
 				/>
 			)}

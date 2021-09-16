@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "./../../redux/User/user.actions";
@@ -6,8 +6,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import Menu from "@material-ui/core/Menu";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { MenuList } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	appbar: {
@@ -40,11 +42,30 @@ const mapState = (state) => ({
 const Header = (props) => {
 	const classes = useStyles();
 	const activeStyle = { color: "#FFA500" };
+	const [messageStatus, setMessageStatus] = useState(0);
+	const [anchorMessages, setAnchorMessages] = useState(null);
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
-
 	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 1;
+
+	const handleMenuOpen = (e) => {
+		setAnchorMessages(e.currentTarget);
+	};
+
+	const handleCloseMenu = () => {
+		setAnchorMessages(null);
+	};
+
+	useEffect(
+		() => {
+			if (currentUser && userRoles.includes("non-verified")) {
+				setMessageStatus(1);
+			}
+		},
+		// eslint-disable-next-line
+		[]
+	);
 
 	const signOut = () => {
 		dispatch(signOutUserStart());
@@ -76,18 +97,27 @@ const Header = (props) => {
 								Search
 							</Button>,
 							<Button
+								aria-controls="messages"
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								key={2}
+								onClick={handleMenuOpen}
+							>
+								Messages ({messageStatus})
+							</Button>,
+							<Button
 								className={classes.textBtn}
 								activeStyle={activeStyle}
 								component={NavLink}
 								to="/dashboard"
-								key={2}
+								key={3}
 							>
 								My Account
 							</Button>,
 							<Button
 								className={classes.textBtn}
 								activeStyle={activeStyle}
-								key={3}
+								key={4}
 								onClick={() => signOut()}
 							>
 								LogOut
@@ -144,6 +174,16 @@ const Header = (props) => {
 					)}
 				</Toolbar>
 			</AppBar>
+			<Menu
+				id="messages"
+				onClose={handleCloseMenu}
+				anchorEl={anchorMessages}
+				open={Boolean(anchorMessages)}
+			>
+				<MenuList onClick={handleCloseMenu}>
+					VERIFY account to start voting
+				</MenuList>
+			</Menu>
 		</div>
 	);
 };
