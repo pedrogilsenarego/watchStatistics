@@ -5,7 +5,6 @@ import { signOutUserStart } from "./../redux/User/user.actions";
 
 import Header from "./../components/Header";
 import VerticalNav from "./../components/VerticalNav";
-import Footer from "./../components/Footer";
 
 const AdminLayout = (props) => {
 	const dispatch = useDispatch();
@@ -34,7 +33,6 @@ const AdminLayout = (props) => {
 				</div>
 				<div className="content">{props.children}</div>
 			</div>
-			<Footer />
 		</div>
 	);
 };

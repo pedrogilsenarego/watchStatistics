@@ -21,7 +21,7 @@ import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
-import Payment from "./pages/Payment";
+
 import Order from "./pages/Order";
 import ChangeLog from "./pages/ChangeLog";
 import Resources from "./pages/Resources";
@@ -89,16 +89,7 @@ const App = (props) => {
 						</MainLayout>
 					)}
 				/>
-				<Route
-					path="/payment"
-					render={() => (
-						<WithAuth>
-							<MainLayout>
-								<Payment />
-							</MainLayout>
-						</WithAuth>
-					)}
-				/>
+
 				<Route
 					exact
 					path="/registration"

@@ -1,47 +1,134 @@
-import React from "react";
-import Link from "@material-ui/core/Link";
-import { makeStyles } from "@material-ui/core/styles";
+import "../../default.scss";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import {
+	Canvas,
+	extend,
+	useFrame,
+	useLoader,
+	useThree
+} from "react-three-fiber";
+import circleImg from "../../assets/circle.png";
+import { Suspense, useCallback, useMemo, useRef } from "react";
+extend({ OrbitControls });
 
-import { Grid, Typography } from "@material-ui/core";
+function CameraControls() {
+	const {
+		camera,
+		gl: { domElement }
+	} = useThree();
 
-const useStyles = makeStyles((theme) => ({
-	box: {
-		backgroundSize: "cover",
-		height: "800px",
-		backgroundRepeat: "no-repeat",
+	const controlsRef = useRef();
+	useFrame(() => controlsRef.current.update());
 
-		backgroundImage: `url(${"https://hips.hearstapps.com/amv-prod-gp.s3.amazonaws.com/gearpatrol/wp-content/uploads/2018/12/Scuba-Diving-With-Seiko-SKX007-gear-patrol-lead-full.jpg?crop=0.6701030927835051xw:1xh;center,top&resize=980:*"})`
-	},
-	mainText: {
-		color: "#FFFFFF",
-		fontWeight: 600,
-		padding: "100px",
-		textShadow: "2px 4px 4px rgba(48,43,60)",
-		"&:hover": {
-			color: "#FFA500"
-		}
-	}
-}));
-
-const Directory = (props) => {
-	const classes = useStyles();
 	return (
-		<Grid
-			container
-			className={classes.box}
-			direction="column"
-			justifyContent="space-evenly"
-		>
-			<Link Link href="/product/ulgJqMRMtjojFERkj2vR" underline="none">
-				<Typography className={classes.mainText} variant="h3" boxshadow={3}>
-					Vote Now <br />
-					for One of the Most Iconic Wacthes
-					<br />
-					Seiko SKX007
-				</Typography>
-			</Link>
-		</Grid>
+		<orbitControls
+			ref={controlsRef}
+			args={[camera, domElement]}
+			autoRotate
+			autoRotateSpeed={-0.2}
+		/>
 	);
-};
+}
+
+function Points() {
+	const imgTex = useLoader(THREE.TextureLoader, circleImg);
+	const bufferRef = useRef();
+
+	let t = 0;
+	let f = 0.002;
+	let a = 3;
+	const graph = useCallback(
+		(x, z) => {
+			return Math.sin(f * (x ** 2 + z ** 2 + t)) * a;
+		},
+		[t, f, a]
+	);
+
+	const count = 100;
+	const sep = 3;
+	let positions = useMemo(() => {
+		let positions = [];
+
+		for (let xi = 0; xi < count; xi++) {
+			for (let zi = 0; zi < count; zi++) {
+				let x = sep * (xi - count / 2);
+				let z = sep * (zi - count / 2);
+				let y = graph(x, z);
+				positions.push(x, y, z);
+			}
+		}
+
+		return new Float32Array(positions);
+	}, [count, sep, graph]);
+
+	useFrame(() => {
+		t += 15;
+
+		const positions = bufferRef.current.array;
+
+		let i = 0;
+		for (let xi = 0; xi < count; xi++) {
+			for (let zi = 0; zi < count; zi++) {
+				let x = sep * (xi - count / 2);
+				let z = sep * (zi - count / 2);
+
+				positions[i + 1] = graph(x, z);
+				i += 3;
+			}
+		}
+
+		bufferRef.current.needsUpdate = true;
+	});
+
+	return (
+		<points>
+			<bufferGeometry attach="geometry">
+				<bufferAttribute
+					ref={bufferRef}
+					attachObject={["attributes", "position"]}
+					array={positions}
+					count={positions.length / 3}
+					itemSize={3}
+				/>
+			</bufferGeometry>
+
+			<pointsMaterial
+				attach="material"
+				map={imgTex}
+				color="#F7F3F3"
+				size={0.5}
+				sizeAttenuation
+				transparent={false}
+				alphaTest={0.5}
+				opacity={1.0}
+			/>
+		</points>
+	);
+}
+
+function AnimationCanvas() {
+	return (
+		<Canvas
+			colorManagement={false}
+			camera={{ position: [100, 10, 0], fov: 75 }}
+		>
+			<Suspense fallback={null}>
+				<Points />
+			</Suspense>
+			<CameraControls />
+		</Canvas>
+	);
+}
+
+function Directory() {
+	return (
+		<div className="anim">
+			<Suspense fallback={<div>Loading...</div>}>
+				<AnimationCanvas />
+			</Suspense>
+		</div>
+	);
+}
 
 export default Directory;
