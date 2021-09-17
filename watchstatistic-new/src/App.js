@@ -23,7 +23,6 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 
 import Order from "./pages/Order";
-import ChangeLog from "./pages/ChangeLog";
 import Resources from "./pages/Resources";
 
 // layouts
@@ -153,15 +152,6 @@ const App = (props) => {
 								<Admin />
 							</AdminLayout>
 						</WithAdminAuth>
-					)}
-				/>
-				<Route
-					exact
-					path="/changelog"
-					render={() => (
-						<MainLayout>
-							<ChangeLog />
-						</MainLayout>
 					)}
 				/>
 			</Switch>
