@@ -55,6 +55,7 @@ const Header = (props) => {
 	const [anchorMessages, setAnchorMessages] = useState(null);
 	const [anchorSupport, setAnchorSupport] = useState(null);
 	const [anchorMyAccount, setAnchorMyAccount] = useState(null);
+	const [anchorUser, setAnchorUser] = useState(null);
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
@@ -67,7 +68,13 @@ const Header = (props) => {
 	const handleCloseMessagesMenu = () => {
 		setAnchorMessages(null);
 	};
+	const handleMenuUserOpen = (e) => {
+		setAnchorUser(e.currentTarget);
+	};
 
+	const handleCloseUserMenu = () => {
+		setAnchorUser(null);
+	};
 	const handleMenuMyAccountOpen = (e) => {
 		setAnchorMyAccount(e.currentTarget);
 	};
@@ -152,6 +159,15 @@ const Header = (props) => {
 								disableRipple
 								onClick={handleMenuMyAccountOpen}
 							>
+								My Account
+							</Button>,
+							<Button
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								aria-controls="user"
+								disableRipple
+								onClick={handleMenuUserOpen}
+							>
 								{displayName}
 							</Button>
 						]}
@@ -226,7 +242,7 @@ const Header = (props) => {
 				>
 					DashBoard
 				</MenuItem>
-				{currentUser && <MenuItem>Votes: {userVotes.length - 1}</MenuItem>}
+
 				<MenuItem
 					onClick={() => {
 						signOut();
@@ -235,6 +251,18 @@ const Header = (props) => {
 				>
 					Logout
 				</MenuItem>
+			</Menu>
+			<Menu
+				disableScrollLock
+				className={classes.menu}
+				id="User"
+				onClose={handleCloseUserMenu}
+				anchorEl={anchorUser}
+				open={Boolean(anchorUser)}
+			>
+				{currentUser && (
+					<MenuItem>Watches voted: {userVotes.length - 1}</MenuItem>
+				)}
 			</Menu>
 		</div>
 	);
