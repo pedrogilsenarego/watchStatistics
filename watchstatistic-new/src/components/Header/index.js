@@ -6,6 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuItem } from "@material-ui/core";
 
@@ -14,10 +15,12 @@ const useStyles = makeStyles((theme) => ({
 		elevation: 0,
 		background: "linear-gradient(180deg,#040406, #04040600)",
 		height: "100px",
+
 		"&:hover": {
 			background: "linear-gradient(180deg,#040406, #04040680)"
 		}
 	},
+	grid: {},
 	textBtn: {
 		paddingTop: "20px",
 		color: "#FFFFFF",
@@ -29,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 			color: "#FFFFFF"
 		}
 	},
-	messages: { textAlign: "right", paddingTop: "10px" },
+
 	menu: {
 		marginTop: "60px",
 		"& .MuiPaper-root": {
@@ -100,26 +103,17 @@ const Header = (props) => {
 		<div>
 			<AppBar position="fixed" elevation={0} className={classes.appbar}>
 				<Toolbar>
-					<Button
-						className={classes.textBtn}
-						activeStyle={activeStyle}
-						component={NavLink}
-						to="/"
-						exact
-					>
-						Home
-					</Button>
-					<Button
-						aria-controls="support"
-						disableRipple
-						className={classes.textBtn}
-						activeStyle={activeStyle}
-						onClick={handleMenuSupportOpen}
-					>
-						Support
-					</Button>
+					<Grid item xs={12} md={6} className={classes.grid} align="left">
+						<Button
+							className={classes.textBtn}
+							activeStyle={activeStyle}
+							component={NavLink}
+							to="/"
+							exact
+						>
+							Home
+						</Button>
 
-					{currentUser && [
 						<Button
 							className={classes.textBtn}
 							activeStyle={activeStyle}
@@ -127,46 +121,58 @@ const Header = (props) => {
 							to="/search"
 						>
 							Browse
-						</Button>,
+						</Button>
 
 						<Button
-							aria-controls="messages"
-							className={classes.textBtn}
-							activeStyle={activeStyle}
+							aria-controls="support"
 							disableRipple
-							onClick={handleMenuMessagesOpen}
-						>
-							Messages ({messageStatus})
-						</Button>,
-						<Button
 							className={classes.textBtn}
 							activeStyle={activeStyle}
-							aria-controls="myAccount"
-							disableRipple
-							onClick={handleMenuMyAccountOpen}
+							onClick={handleMenuSupportOpen}
 						>
-							{displayName}
+							Support
 						</Button>
-					]}
-
-					{!currentUser && [
-						<Button
-							className={classes.textBtn}
-							activeStyle={activeStyle}
-							component={NavLink}
-							to="/registration"
-						>
-							Signup
-						</Button>,
-						<Button
-							className={classes.textBtn}
-							activeStyle={activeStyle}
-							component={NavLink}
-							to="/login"
-						>
-							Login
-						</Button>
-					]}
+					</Grid>
+					<Grid item xs={12} md={6} align="right">
+						{currentUser && [
+							<Button
+								aria-controls="messages"
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								disableRipple
+								onClick={handleMenuMessagesOpen}
+							>
+								Messages ({messageStatus})
+							</Button>,
+							<Button
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								aria-controls="myAccount"
+								disableRipple
+								onClick={handleMenuMyAccountOpen}
+							>
+								{displayName}
+							</Button>
+						]}
+						{!currentUser && [
+							<Button
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								component={NavLink}
+								to="/registration"
+							>
+								Signup
+							</Button>,
+							<Button
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								component={NavLink}
+								to="/login"
+							>
+								Login
+							</Button>
+						]}
+					</Grid>
 				</Toolbar>
 			</AppBar>
 			<Menu
