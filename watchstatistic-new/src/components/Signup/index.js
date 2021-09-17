@@ -5,18 +5,10 @@ import { signUpUserStart } from "./../../redux/User/user.actions";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { Grid, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+
 import TextField from "../forms/InputMUI";
 import CheckBox from "../forms/checkBoxMUI";
 import ButtonMUI from "../forms/ButtonMUI";
-import AuthWrapper from "./../AuthWrapper";
-
-const useStyles = makeStyles((theme) => ({
-	formWrapper: {
-		marginTop: theme.spacing(5),
-		marginBottom: theme.spacing(8)
-	}
-}));
 
 const mapState = ({ user }) => ({
 	currentUser: user.currentUser
@@ -52,8 +44,6 @@ const FORM_VALIDATION = Yup.object().shape({
 });
 
 const Signup = (props) => {
-	const classes = useStyles();
-
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { currentUser } = useSelector(mapState);
@@ -81,13 +71,9 @@ const Signup = (props) => {
 		return false;
 	};
 
-	const configAuthWrapper = {
-		headline: "Registration"
-	};
-
 	return (
-		<AuthWrapper {...configAuthWrapper}>
-			<div className={classes.formWrapper}>
+		<div>
+			<div>
 				<Formik
 					initialValues={{
 						...INITIAL_FORM_STATE
@@ -134,11 +120,9 @@ const Signup = (props) => {
 			</div>
 
 			<div className="links">
-				<Link to="/login">LogIn</Link>
-				{` | `}
 				<Link to="/recovery">Reset Password</Link>
 			</div>
-		</AuthWrapper>
+		</div>
 	);
 };
 

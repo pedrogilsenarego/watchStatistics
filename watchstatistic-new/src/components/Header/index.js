@@ -10,6 +10,8 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuItem } from "@material-ui/core";
 
+import Signup from "../Signup";
+
 const useStyles = makeStyles((theme) => ({
 	appbar: {
 		elevation: 0,
@@ -56,10 +58,28 @@ const Header = (props) => {
 	const [anchorSupport, setAnchorSupport] = useState(null);
 	const [anchorMyAccount, setAnchorMyAccount] = useState(null);
 	const [anchorUser, setAnchorUser] = useState(null);
+	const [anchorLogin, setAnchorLogin] = useState(null);
+	const [anchorSignup, setAnchorSignup] = useState(null);
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 1;
+
+	const handleMenuLoginOpen = (e) => {
+		setAnchorLogin(e.currentTarget);
+	};
+
+	const handleCloseLoginMenu = () => {
+		setAnchorLogin(null);
+	};
+
+	const handleMenuSignupOpen = (e) => {
+		setAnchorSignup(e.currentTarget);
+	};
+
+	const handleCloseSignupMenu = () => {
+		setAnchorSignup(null);
+	};
 
 	const handleMenuMessagesOpen = (e) => {
 		setAnchorMessages(e.currentTarget);
@@ -173,11 +193,11 @@ const Header = (props) => {
 						]}
 						{!currentUser && [
 							<Button
+								aria-controls="signup"
+								disableRipple
 								className={classes.textBtn}
 								activeStyle={activeStyle}
-								component={NavLink}
-								disableRipple
-								to="/registration"
+								onClick={handleMenuSignupOpen}
 							>
 								Signup
 							</Button>,
@@ -189,6 +209,15 @@ const Header = (props) => {
 								to="/login"
 							>
 								Login
+							</Button>,
+							<Button
+								aria-controls="login"
+								disableRipple
+								className={classes.textBtn}
+								activeStyle={activeStyle}
+								onClick={handleMenuLoginOpen}
+							>
+								LoginTeste
 							</Button>
 						]}
 					</Grid>
@@ -263,6 +292,29 @@ const Header = (props) => {
 				{currentUser && (
 					<MenuItem>Watches voted: {userVotes.length - 1}</MenuItem>
 				)}
+			</Menu>
+			<Menu
+				disableScrollLock
+				className={classes.menu}
+				id="login"
+				onClose={handleCloseLoginMenu}
+				anchorEl={anchorLogin}
+				open={Boolean(anchorLogin)}
+			>
+				<MenuItem>Teste</MenuItem>
+			</Menu>
+			<Menu
+				disableRipple
+				disableScrollLock
+				className={classes.menu}
+				id="signup"
+				onClose={handleCloseSignupMenu}
+				anchorEl={anchorSignup}
+				open={Boolean(anchorSignup)}
+			>
+				<MenuItem disableRipple>
+					<Signup />
+				</MenuItem>
 			</Menu>
 		</div>
 	);
