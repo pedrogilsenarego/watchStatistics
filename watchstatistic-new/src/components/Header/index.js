@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 	appbar: {
 		elevation: 0,
 		background: "linear-gradient(180deg,#040406, #04040600)",
-		height: "100px",
+		height: "80px",
 
 		"&:hover": {
 			background: "linear-gradient(180deg,#040406, #04040680)"
@@ -39,8 +39,7 @@ const useStyles = makeStyles((theme) => ({
 			backgroundColor: "#04040680",
 			color: "#ffffff",
 			disableScrollLock: true
-		},
-		disableRipple: true
+		}
 	}
 }));
 
@@ -108,6 +107,7 @@ const Header = (props) => {
 							className={classes.textBtn}
 							activeStyle={activeStyle}
 							component={NavLink}
+							disableRipple
 							to="/"
 							exact
 						>
@@ -118,6 +118,7 @@ const Header = (props) => {
 							className={classes.textBtn}
 							activeStyle={activeStyle}
 							component={NavLink}
+							disableRipple
 							to="/search"
 						>
 							Browse
@@ -159,6 +160,7 @@ const Header = (props) => {
 								className={classes.textBtn}
 								activeStyle={activeStyle}
 								component={NavLink}
+								disableRipple
 								to="/registration"
 							>
 								Signup
@@ -167,6 +169,7 @@ const Header = (props) => {
 								className={classes.textBtn}
 								activeStyle={activeStyle}
 								component={NavLink}
+								disableRipple
 								to="/login"
 							>
 								Login
