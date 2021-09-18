@@ -74,23 +74,12 @@ const Header = (props) => {
 		setAnchorLogin(null);
 	};
 
-	const handleMenuSignupOpen = (e) => {
-		setAnchorSignup(e.currentTarget);
-	};
-
 	const handleCloseSignupMenu = () => {
 		setAnchorSignup(null);
 	};
 
-	const handleMenuMessagesOpen = (e) => {
-		setAnchorMessages(e.currentTarget);
-	};
-
 	const handleCloseMessagesMenu = () => {
 		setAnchorMessages(null);
-	};
-	const handleMenuUserOpen = (e) => {
-		setAnchorUser(e.currentTarget);
 	};
 
 	const handleCloseUserMenu = () => {
@@ -150,9 +139,7 @@ const Header = (props) => {
 						<Button
 							className={classes.textBtn}
 							activeStyle={activeStyle}
-							component={NavLink}
 							disableRipple
-							to="/"
 						>
 							WatchBoxes
 						</Button>
@@ -176,7 +163,9 @@ const Header = (props) => {
 								className={classes.textBtn}
 								activeStyle={activeStyle}
 								disableRipple
-								onClick={handleMenuMessagesOpen}
+								onClick={(e) => {
+									setAnchorMessages(e.currentTarget);
+								}}
 							>
 								Messages ({messageStatus})
 							</Button>,
@@ -194,7 +183,9 @@ const Header = (props) => {
 								activeStyle={activeStyle}
 								aria-controls="user"
 								disableRipple
-								onClick={handleMenuUserOpen}
+								onClick={(e) => {
+									setAnchorUser(e.currentTarget);
+								}}
 							>
 								{displayName}
 							</Button>
@@ -205,7 +196,9 @@ const Header = (props) => {
 								disableRipple
 								className={classes.textBtn}
 								activeStyle={activeStyle}
-								onClick={handleMenuSignupOpen}
+								onClick={(e) => {
+									setAnchorSignup(e.currentTarget);
+								}}
 							>
 								Signup
 							</Button>,
