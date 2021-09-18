@@ -22,7 +22,7 @@ const FORM_VALIDATION = Yup.object().shape({
 	password: Yup.string().required("Required")
 });
 
-const SignIn = (props) => {
+const SignIn = ({ handleCloseLoginMenu }) => {
 	const dispatch = useDispatch();
 
 	const handleFormSubmit = (event) => {
@@ -33,11 +33,13 @@ const SignIn = (props) => {
 				password
 			})
 		);
+		handleCloseLoginMenu();
 		return false;
 	};
 
 	const handleGoogleSigniIn = () => {
 		dispatch(googleSignInStart());
+		handleCloseLoginMenu();
 	};
 
 	return (

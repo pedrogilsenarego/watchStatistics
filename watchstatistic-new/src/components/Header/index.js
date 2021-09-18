@@ -75,6 +75,10 @@ const Header = (props) => {
 		setAnchorLogin(null);
 	};
 
+	const configMenuLogin = {
+		handleCloseLoginMenu
+	};
+
 	const handleCloseSignupMenu = () => {
 		setAnchorSignup(null);
 	};
@@ -294,7 +298,7 @@ const Header = (props) => {
 				open={Boolean(anchorLogin)}
 			>
 				<MenuItem disableRipple>
-					<SignIn {...handleCloseLoginMenu} />
+					<SignIn {...configMenuLogin} />
 				</MenuItem>
 			</Menu>
 			<Menu
