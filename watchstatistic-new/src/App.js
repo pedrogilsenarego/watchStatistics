@@ -23,7 +23,6 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 
 import Order from "./pages/Order";
-import Resources from "./pages/Resources";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
@@ -98,15 +97,7 @@ const App = (props) => {
 						</MainLayout>
 					)}
 				/>
-				<Route
-					exact
-					path="/resources"
-					render={() => (
-						<MainLayout>
-							<Resources />
-						</MainLayout>
-					)}
-				/>
+
 				<Route
 					exact
 					path="/login"

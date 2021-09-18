@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
 		"& .MuiPaper-root": {
 			backgroundColor: "#04040680",
 			color: "#ffffff",
-			disableScrollLock: true
+			disableScrollLock: true,
+			maxWidth: "350px"
 		}
 	}
 }));
@@ -103,10 +104,6 @@ const Header = (props) => {
 		setAnchorMyAccount(null);
 	};
 
-	const handleMenuSupportOpen = (e) => {
-		setAnchorSupport(e.currentTarget);
-	};
-
 	const handleCloseSupportMenu = () => {
 		setAnchorSupport(null);
 	};
@@ -148,7 +145,16 @@ const Header = (props) => {
 							disableRipple
 							to="/search"
 						>
-							Browse
+							WatchStatistics
+						</Button>
+						<Button
+							className={classes.textBtn}
+							activeStyle={activeStyle}
+							component={NavLink}
+							disableRipple
+							to="/"
+						>
+							WatchBoxes
 						</Button>
 
 						<Button
@@ -156,7 +162,9 @@ const Header = (props) => {
 							disableRipple
 							className={classes.textBtn}
 							activeStyle={activeStyle}
-							onClick={handleMenuSupportOpen}
+							onClick={(e) => {
+								setAnchorSupport(e.currentTarget);
+							}}
 						>
 							Support
 						</Button>
