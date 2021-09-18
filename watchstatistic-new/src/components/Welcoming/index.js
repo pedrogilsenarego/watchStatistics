@@ -24,7 +24,10 @@ const Welcoming = ({ hideModal, toggleModal, children }) => {
 					<Typist.Delay ms={2500} />
 					<p>
 						&lt;body&gt; My name is Pedro Sena Rego. <br />
+						<Typist.Delay ms={500} />
 						These are my projects &lt;/body&gt;{" "}
+						<Typist.Backspace count={20} delay={200} />
+						your projects &lt;/body&gt;
 					</p>
 				</Typist>
 			</div>
