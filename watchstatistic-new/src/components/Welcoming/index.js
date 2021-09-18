@@ -7,13 +7,14 @@ const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
 
-const Welcoming = (props) => {
+const Welcoming = ({ hideModal, toggleModal, children }) => {
 	const { currentUser } = useSelector(mapState);
+	if (hideModal) return null;
 
 	const { displayName } = currentUser ? currentUser : { displayName: "friend" };
 
 	return (
-		<div className="container">
+		<div className="container" onClick={() => toggleModal()}>
 			<div className="content">
 				<Typist cursor={{ show: false }}>
 					<Typist.Delay ms={500} />
