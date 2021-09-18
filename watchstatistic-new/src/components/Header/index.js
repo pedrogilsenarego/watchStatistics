@@ -106,7 +106,7 @@ const Header = (props) => {
 			}
 		},
 		// eslint-disable-next-line
-		[]
+		[currentUser]
 	);
 
 	const signOut = () => {
@@ -233,7 +233,7 @@ const Header = (props) => {
 						style={{ color: "#FFA500" }}
 						onClick={handleCloseMessagesMenu}
 					>
-						VERIFY account to start voting
+						VERIFY account to use WatchStatistics
 					</MenuItem>
 				)}
 			</Menu>
