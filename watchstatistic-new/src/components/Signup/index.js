@@ -4,7 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 import { signUpUserStart } from "./../../redux/User/user.actions";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 import TextField from "../forms/InputMUI";
 import CheckBox from "../forms/checkBoxMUI";
@@ -72,7 +72,7 @@ const Signup = (props) => {
 	};
 
 	return (
-		<div>
+		<Grid item xs={12}>
 			<div>
 				<Formik
 					initialValues={{
@@ -84,10 +84,7 @@ const Signup = (props) => {
 					}}
 				>
 					<Form>
-						<Grid container spacing={2}>
-							<Grid item xs={12}>
-								<Typography>Register Here</Typography>
-							</Grid>
+						<Grid container>
 							<Grid item xs={12}>
 								<TextField name="displayName" label="full name"></TextField>
 							</Grid>
@@ -122,7 +119,7 @@ const Signup = (props) => {
 			<div className="links">
 				<Link to="/recovery">Reset Password</Link>
 			</div>
-		</div>
+		</Grid>
 	);
 };
 

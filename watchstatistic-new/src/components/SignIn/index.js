@@ -1,85 +1,84 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import "./styles.scss";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
 	emailSignInStart,
 	googleSignInStart
 } from "../../redux/User/user.actions";
-import Button from "../forms/Button";
-import FormInput from "../forms/FormInput";
-import AuthWrapper from "../AuthWrapper";
 
-const mapState = ({ user }) => ({
-	currentUser: user.currentUser
+import * as Yup from "yup";
+import { Grid, Button } from "@material-ui/core";
+import { Form, Formik } from "formik";
+import TextField from "../forms/InputMUI";
+import ButtonMUI from "../forms/ButtonMUI";
+
+const INITIAL_FORM_STATE = {
+	email: "",
+	password: ""
+};
+
+const FORM_VALIDATION = Yup.object().shape({
+	email: Yup.string().required("Required"),
+	password: Yup.string().required("Required")
 });
 
 const SignIn = (props) => {
-	const history = useHistory();
-	const { currentUser } = useSelector(mapState);
 	const dispatch = useDispatch();
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
 
-	useEffect(
-		() => {
-			if (currentUser) {
-				resetForm();
-				history.goBack();
-			}
-		},
-		// eslint-disable-next-line
-		[currentUser]
-	);
-
-	const resetForm = () => {
-		setEmail("");
-		setPassword("");
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		dispatch(emailSignInStart({ email, password }));
+	const handleFormSubmit = (event) => {
+		const { email, password } = event;
+		dispatch(
+			emailSignInStart({
+				email,
+				password
+			})
+		);
+		return false;
 	};
 
 	const handleGoogleSigniIn = () => {
 		dispatch(googleSignInStart());
 	};
 
-	const configAuthWrapper = {
-		headline: "Login"
-	};
-
 	return (
-		<AuthWrapper {...configAuthWrapper}>
-			<div className="formWrap">
-				<form onSubmit={handleSubmit}>
-					<FormInput
-						type="email"
-						name="email"
-						value={email}
-						placeholder="email"
-						handleChange={(e) => setEmail(e.target.value)}
-					/>
-					<FormInput
-						type="password"
-						name="password"
-						value={password}
-						placeholder="Password"
-						handleChange={(e) => setPassword(e.target.value)}
-					/>
-					<Button type="submit">LogIn</Button>
-					<div className="socialSignin">
-						<div className="row">
-							<Button onClick={handleGoogleSigniIn}>SignIn with Google</Button>
-						</div>
-					</div>
-					<div className="links">
-						<Link to="/recovery">Reset Password</Link>
-					</div>
-				</form>
+		<div>
+			<Grid item xs={12}>
+				<Formik
+					initialValues={{
+						...INITIAL_FORM_STATE
+					}}
+					validationSchema={FORM_VALIDATION}
+					onSubmit={(values) => {
+						handleFormSubmit(values);
+					}}
+				>
+					<Form>
+						<Grid container>
+							<Grid item xs={12}>
+								<TextField name="email" label="email"></TextField>
+							</Grid>
+							<Grid item xs={12}>
+								<TextField
+									type="password"
+									name="password"
+									label="password"
+								></TextField>
+							</Grid>
+							<Grid item xs={12}>
+								<ButtonMUI>Login</ButtonMUI>
+							</Grid>
+						</Grid>
+					</Form>
+				</Formik>
+			</Grid>
+			<Grid item xs={12}>
+				<Button onClick={handleGoogleSigniIn}>SignIn with Google</Button>
+			</Grid>
+
+			<div className="links">
+				<Link to="/recovery">Reset Password</Link>
 			</div>
-		</AuthWrapper>
+		</div>
 	);
 };
 

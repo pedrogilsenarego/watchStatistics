@@ -16,7 +16,6 @@ import Homepage from "./pages/Homepage";
 import Search from "./pages/Search";
 import Registration from "./pages/Registration";
 import Recovery from "./pages/Recovery";
-import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
@@ -98,15 +97,6 @@ const App = (props) => {
 					)}
 				/>
 
-				<Route
-					exact
-					path="/login"
-					render={() => (
-						<MainLayout>
-							<Login />
-						</MainLayout>
-					)}
-				/>
 				<Route
 					path="/recovery"
 					render={() => (

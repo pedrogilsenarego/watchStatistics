@@ -11,12 +11,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import { MenuItem } from "@material-ui/core";
 
 import Signup from "../Signup";
+import SignIn from "../SignIn";
 
 const useStyles = makeStyles((theme) => ({
 	appbar: {
 		elevation: 0,
 		background: "linear-gradient(180deg,#040406, #04040600)",
 		height: "80px",
+		paddingTop: "5px",
 
 		"&:hover": {
 			background: "linear-gradient(180deg,#040406, #04040680)"
@@ -24,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 	grid: {},
 	textBtn: {
-		paddingTop: "20px",
 		color: "#FFFFFF",
 		fontSize: "13px",
 		"&:hover": {
@@ -84,9 +85,6 @@ const Header = (props) => {
 
 	const handleCloseUserMenu = () => {
 		setAnchorUser(null);
-	};
-	const handleMenuMyAccountOpen = (e) => {
-		setAnchorMyAccount(e.currentTarget);
 	};
 
 	const handleCloseMyAccountMenu = () => {
@@ -153,7 +151,7 @@ const Header = (props) => {
 								setAnchorSupport(e.currentTarget);
 							}}
 						>
-							Support
+							About
 						</Button>
 					</Grid>
 					<Grid item xs={12} md={6} align="right">
@@ -174,7 +172,9 @@ const Header = (props) => {
 								activeStyle={activeStyle}
 								aria-controls="myAccount"
 								disableRipple
-								onClick={handleMenuMyAccountOpen}
+								onClick={(e) => {
+									setAnchorMyAccount(e.currentTarget);
+								}}
 							>
 								My Account
 							</Button>,
@@ -203,22 +203,13 @@ const Header = (props) => {
 								Signup
 							</Button>,
 							<Button
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								component={NavLink}
-								disableRipple
-								to="/login"
-							>
-								Login
-							</Button>,
-							<Button
 								aria-controls="login"
 								disableRipple
 								className={classes.textBtn}
 								activeStyle={activeStyle}
 								onClick={handleMenuLoginOpen}
 							>
-								LoginTeste
+								Login
 							</Button>
 						]}
 					</Grid>
@@ -302,7 +293,9 @@ const Header = (props) => {
 				anchorEl={anchorLogin}
 				open={Boolean(anchorLogin)}
 			>
-				<MenuItem>Teste</MenuItem>
+				<MenuItem disableRipple>
+					<SignIn {...handleCloseLoginMenu} />
+				</MenuItem>
 			</Menu>
 			<Menu
 				disableRipple
