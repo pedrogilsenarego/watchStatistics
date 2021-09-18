@@ -63,6 +63,8 @@ const Header = (props) => {
 	const [anchorLogin, setAnchorLogin] = useState(null);
 	const [anchorSignup, setAnchorSignup] = useState(null);
 
+	const [watchstatistics, setWatchstatistics] = useState(true);
+
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 1;
@@ -109,8 +111,19 @@ const Header = (props) => {
 		[currentUser]
 	);
 
+	useEffect(
+		() => {
+			if (currentUser && userRoles.includes("verified")) {
+				setWatchstatistics(false);
+			}
+		},
+		// eslint-disable-next-line
+		[currentUser]
+	);
+
 	const signOut = () => {
 		dispatch(signOutUserStart());
+		setWatchstatistics(true);
 	};
 
 	return (
@@ -130,6 +143,7 @@ const Header = (props) => {
 						</Button>
 
 						<Button
+							disabled={watchstatistics}
 							className={classes.textBtn}
 							activeStyle={activeStyle}
 							component={NavLink}
