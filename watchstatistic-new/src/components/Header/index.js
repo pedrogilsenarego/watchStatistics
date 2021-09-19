@@ -2,13 +2,26 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "./../../redux/User/user.actions";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import { Grid } from "@material-ui/core";
+import {
+	Grid,
+	MenuItem,
+	Toolbar,
+	AppBar,
+	Button,
+	Menu,
+	useMediaQuery,
+	useTheme
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { MenuItem } from "@material-ui/core";
+
+import { ImMenu } from "react-icons/im";
+import { BsGraphUp } from "react-icons/bs";
+import {
+	AiOutlineCodeSandbox,
+	AiOutlineInfoCircle,
+	AiOutlineMessage
+} from "react-icons/ai";
+import { VscHome, VscAccount } from "react-icons/vsc";
 
 import Signup from "../Signup";
 import SignIn from "../SignIn";
@@ -62,12 +75,17 @@ const Header = (props) => {
 	const [anchorUser, setAnchorUser] = useState(null);
 	const [anchorLogin, setAnchorLogin] = useState(null);
 	const [anchorSignup, setAnchorSignup] = useState(null);
+	const [anchorMediaMenu, setAnchorMediaMenu] = useState(null);
 
 	const [watchstatistics, setWatchstatistics] = useState(true);
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 2;
+
+	const handleCloseMediaMenu = () => {
+		setAnchorMediaMenu(null);
+	};
 
 	const handleMenuLoginOpen = (e) => {
 		setAnchorLogin(e.currentTarget);
@@ -126,111 +144,139 @@ const Header = (props) => {
 		setWatchstatistics(true);
 	};
 
+	const theme = useTheme();
+
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
 	return (
 		<div>
 			<AppBar position="fixed" elevation={0} className={classes.appbar}>
 				<Toolbar>
-					<Grid item xs={12} md={6} className={classes.grid} align="left">
-						<Button
-							className={classes.textBtn}
-							activeStyle={activeStyle}
-							component={NavLink}
-							disableRipple
-							to="/"
-							exact
-						>
-							Home
-						</Button>
-
-						<Button
-							disabled={watchstatistics}
-							className={classes.textBtn}
-							activeStyle={activeStyle}
-							component={NavLink}
-							disableRipple
-							to="/search"
-						>
-							WatchStatistics
-						</Button>
-						<Button
-							className={classes.textBtn}
-							activeStyle={activeStyle}
-							disableRipple
-						>
-							WatchBoxes
-						</Button>
-
-						<Button
-							aria-controls="support"
-							disableRipple
-							className={classes.textBtn}
-							activeStyle={activeStyle}
-							onClick={(e) => {
-								setAnchorSupport(e.currentTarget);
-							}}
-						>
-							About
-						</Button>
-					</Grid>
-					<Grid item xs={12} md={6} align="right">
-						{currentUser && [
+					{isMatch ? (
+						<>
 							<Button
-								aria-controls="messages"
+								aria-controls="mediaMenu"
+								disableRipple
 								className={classes.textBtn}
 								activeStyle={activeStyle}
-								disableRipple
 								onClick={(e) => {
-									setAnchorMessages(e.currentTarget);
+									setAnchorMediaMenu(e.currentTarget);
 								}}
 							>
-								Messages ({messageStatus})
-							</Button>,
-							<Button
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								aria-controls="myAccount"
-								disableRipple
-								onClick={(e) => {
-									setAnchorMyAccount(e.currentTarget);
-								}}
-							>
-								My Account
-							</Button>,
-							<Button
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								aria-controls="user"
-								disableRipple
-								onClick={(e) => {
-									setAnchorUser(e.currentTarget);
-								}}
-							>
-								{displayName}
+								<ImMenu fontSize="1.5em" />
 							</Button>
-						]}
-						{!currentUser && [
-							<Button
-								aria-controls="signup"
-								disableRipple
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								onClick={(e) => {
-									setAnchorSignup(e.currentTarget);
-								}}
-							>
-								Signup
-							</Button>,
-							<Button
-								aria-controls="login"
-								disableRipple
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								onClick={handleMenuLoginOpen}
-							>
-								Login
-							</Button>
-						]}
-					</Grid>
+						</>
+					) : (
+						<>
+							<Grid item xs={12} md={6} className={classes.grid} align="left">
+								<Button
+									className={classes.textBtn}
+									activeStyle={activeStyle}
+									component={NavLink}
+									disableRipple
+									to="/"
+									exact
+								>
+									<VscHome fontSize="1.5em" />
+									&nbsp;Home
+								</Button>
+
+								<Button
+									disabled={watchstatistics}
+									className={classes.textBtn}
+									activeStyle={activeStyle}
+									component={NavLink}
+									disableRipple
+									to="/search"
+								>
+									{" "}
+									<BsGraphUp />
+									&nbsp;WatchStatistics
+								</Button>
+								<Button
+									className={classes.textBtn}
+									activeStyle={activeStyle}
+									disableRipple
+								>
+									<AiOutlineCodeSandbox fontSize="1.5em" /> &nbsp;WatchBoxes
+								</Button>
+
+								<Button
+									aria-controls="support"
+									disableRipple
+									className={classes.textBtn}
+									activeStyle={activeStyle}
+									onClick={(e) => {
+										setAnchorSupport(e.currentTarget);
+									}}
+								>
+									<AiOutlineInfoCircle fontSize="1.5em" />
+									&nbsp; About
+								</Button>
+							</Grid>
+							<Grid item xs={12} md={6} align="right">
+								{currentUser && [
+									<Button
+										aria-controls="messages"
+										className={classes.textBtn}
+										activeStyle={activeStyle}
+										disableRipple
+										onClick={(e) => {
+											setAnchorMessages(e.currentTarget);
+										}}
+									>
+										<AiOutlineMessage fontSize="1.5em" />
+										&nbsp;Messages ({messageStatus})
+									</Button>,
+									<Button
+										className={classes.textBtn}
+										activeStyle={activeStyle}
+										aria-controls="myAccount"
+										disableRipple
+										onClick={(e) => {
+											setAnchorMyAccount(e.currentTarget);
+										}}
+									>
+										<VscAccount fontSize="1.5em" />
+										&nbsp;My Account
+									</Button>,
+									<Button
+										className={classes.textBtn}
+										activeStyle={activeStyle}
+										aria-controls="user"
+										disableRipple
+										onClick={(e) => {
+											setAnchorUser(e.currentTarget);
+										}}
+									>
+										{displayName}
+									</Button>
+								]}
+								{!currentUser && [
+									<Button
+										aria-controls="signup"
+										disableRipple
+										className={classes.textBtn}
+										activeStyle={activeStyle}
+										onClick={(e) => {
+											setAnchorSignup(e.currentTarget);
+										}}
+									>
+										Signup
+									</Button>,
+									<Button
+										aria-controls="login"
+										disableRipple
+										className={classes.textBtn}
+										activeStyle={activeStyle}
+										onClick={handleMenuLoginOpen}
+									>
+										Login
+									</Button>
+								]}
+							</Grid>{" "}
+						</>
+					)}
 				</Toolbar>
 			</AppBar>
 			<Menu
@@ -289,6 +335,56 @@ const Header = (props) => {
 					}}
 				>
 					Logout
+				</MenuItem>
+			</Menu>
+			<Menu
+				disableScrollLock
+				className={classes.menu}
+				id="mediaMenu"
+				onClose={handleCloseMediaMenu}
+				anchorEl={anchorMediaMenu}
+				open={Boolean(anchorMediaMenu)}
+			>
+				<MenuItem
+					className={classes.textBtn}
+					activeStyle={activeStyle}
+					component={NavLink}
+					disableRipple
+					to="/"
+					exact
+				>
+					<VscHome fontSize="1.5em" />
+					&nbsp;Home
+				</MenuItem>
+				<MenuItem
+					disabled={watchstatistics}
+					className={classes.textBtn}
+					activeStyle={activeStyle}
+					component={NavLink}
+					disableRipple
+					to="/search"
+				>
+					<BsGraphUp />
+					&nbsp;WatchStatistics
+				</MenuItem>
+				<MenuItem
+					className={classes.textBtn}
+					activeStyle={activeStyle}
+					disableRipple
+				>
+					<AiOutlineCodeSandbox fontSize="1.5em" /> &nbsp;WatchBoxes
+				</MenuItem>
+				<MenuItem
+					aria-controls="support"
+					disableRipple
+					className={classes.textBtn}
+					activeStyle={activeStyle}
+					onClick={(e) => {
+						setAnchorSupport(e.currentTarget);
+					}}
+				>
+					<AiOutlineInfoCircle fontSize="1.5em" />
+					&nbsp; About
 				</MenuItem>
 			</Menu>
 			<Menu

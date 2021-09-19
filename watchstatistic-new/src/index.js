@@ -10,16 +10,15 @@ import theme from "./styles/MUITheme";
 import App from "./App";
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<BrowserRouter>
-				<PersistGate persistor={persistor}>
-					<ThemeProvider theme={theme}>
-						<App />
-					</ThemeProvider>
-				</PersistGate>
-			</BrowserRouter>
-		</Provider>
-	</React.StrictMode>,
+	<Provider store={store}>
+		<BrowserRouter>
+			<PersistGate persistor={persistor}>
+				<ThemeProvider theme={theme}>
+					<App />
+				</ThemeProvider>
+			</PersistGate>
+		</BrowserRouter>
+	</Provider>,
+
 	document.getElementById("root")
 );
