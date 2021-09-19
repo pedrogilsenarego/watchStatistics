@@ -154,17 +154,69 @@ const Header = (props) => {
 				<Toolbar>
 					{isMatch ? (
 						<>
-							<Button
-								aria-controls="mediaMenu"
-								disableRipple
-								className={classes.textBtn}
-								activeStyle={activeStyle}
-								onClick={(e) => {
-									setAnchorMediaMenu(e.currentTarget);
-								}}
-							>
-								<ImMenu fontSize="1.5em" />
-							</Button>
+							<Grid item xs={12} md={6} className={classes.grid} align="left">
+								<Button
+									aria-controls="mediaMenu"
+									disableRipple
+									className={classes.textBtn}
+									activeStyle={activeStyle}
+									onClick={(e) => {
+										setAnchorMediaMenu(e.currentTarget);
+									}}
+								>
+									<ImMenu fontSize="1.5em" />
+								</Button>
+							</Grid>
+							<Grid item xs={12} md={6} align="right">
+								{currentUser && [
+									<Button
+										aria-controls="messages"
+										className={classes.textBtn}
+										activeStyle={activeStyle}
+										disableRipple
+										onClick={(e) => {
+											setAnchorMessages(e.currentTarget);
+										}}
+									>
+										<AiOutlineMessage fontSize="1.5em" />
+										&nbsp;({messageStatus})
+									</Button>,
+									<Button
+										className={classes.textBtn}
+										activeStyle={activeStyle}
+										aria-controls="myAccount"
+										disableRipple
+										onClick={(e) => {
+											setAnchorMyAccount(e.currentTarget);
+										}}
+									>
+										<VscAccount fontSize="1.5em" />
+										&nbsp;
+									</Button>
+								]}
+								{!currentUser && [
+									<Button
+										aria-controls="signup"
+										disableRipple
+										className={classes.textBtn}
+										activeStyle={activeStyle}
+										onClick={(e) => {
+											setAnchorSignup(e.currentTarget);
+										}}
+									>
+										Signup
+									</Button>,
+									<Button
+										aria-controls="login"
+										disableRipple
+										className={classes.textBtn}
+										activeStyle={activeStyle}
+										onClick={handleMenuLoginOpen}
+									>
+										Login
+									</Button>
+								]}
+							</Grid>
 						</>
 					) : (
 						<>
