@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { ImMenu } from "react-icons/im";
+import { CgMenuGridO } from "react-icons/cg";
 import { BsGraphUp } from "react-icons/bs";
 import {
 	AiOutlineCodeSandbox,
@@ -25,6 +25,8 @@ import { VscHome, VscAccount } from "react-icons/vsc";
 
 import Signup from "../Signup";
 import SignIn from "../SignIn";
+
+import MediaRightIconsNoUser from "./mediaRightIconsNoUser";
 
 const useStyles = makeStyles((theme) => ({
 	appbar: {
@@ -83,12 +85,20 @@ const Header = (props) => {
 	const { currentUser } = useSelector(mapState);
 	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 2;
 
-	const handleCloseMediaMenu = () => {
-		setAnchorMediaMenu(null);
+	//mediaRightIconsNoUser
+	const handleSignupOpen = (e) => {
+		setAnchorSignup(e.currentTarget);
+	};
+	const handleLoginOpen = (e) => {
+		setAnchorLogin(e.currentTarget);
+	};
+	const configMediaRightIconsNoUser = {
+		handleSignupOpen,
+		handleLoginOpen
 	};
 
-	const handleMenuLoginOpen = (e) => {
-		setAnchorLogin(e.currentTarget);
+	const handleCloseMediaMenu = () => {
+		setAnchorMediaMenu(null);
 	};
 
 	const handleCloseLoginMenu = () => {
@@ -164,7 +174,7 @@ const Header = (props) => {
 										setAnchorMediaMenu(e.currentTarget);
 									}}
 								>
-									<ImMenu fontSize="1.5em" />
+									<CgMenuGridO fontSize="2.5em" />
 								</Button>
 							</Grid>
 							<Grid item xs={12} md={6} align="right">
@@ -194,28 +204,9 @@ const Header = (props) => {
 										&nbsp;
 									</Button>
 								]}
-								{!currentUser && [
-									<Button
-										aria-controls="signup"
-										disableRipple
-										className={classes.textBtn}
-										activeStyle={activeStyle}
-										onClick={(e) => {
-											setAnchorSignup(e.currentTarget);
-										}}
-									>
-										Signup
-									</Button>,
-									<Button
-										aria-controls="login"
-										disableRipple
-										className={classes.textBtn}
-										activeStyle={activeStyle}
-										onClick={handleMenuLoginOpen}
-									>
-										Login
-									</Button>
-								]}
+								{!currentUser && (
+									<MediaRightIconsNoUser {...configMediaRightIconsNoUser} />
+								)}
 							</Grid>
 						</>
 					) : (
@@ -321,7 +312,9 @@ const Header = (props) => {
 										disableRipple
 										className={classes.textBtn}
 										activeStyle={activeStyle}
-										onClick={handleMenuLoginOpen}
+										onClick={(e) => {
+											setAnchorLogin(e.currentTarget);
+										}}
 									>
 										Login
 									</Button>
