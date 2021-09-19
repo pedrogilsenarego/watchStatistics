@@ -5,7 +5,7 @@ import { fetchProductsStart } from "../../redux/Products/products.actions";
 import Product from "./Product";
 import FormSelect from "../forms/FormSelect";
 import LoadMore from "../LoadMore";
-import { Box, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes.json";
 
 const mapState = ({ productsData }) => ({
@@ -64,29 +64,26 @@ const ProductResults = ({}) => {
 	};
 
 	return (
-		<div>
-			<Box height={"80px"} bgcolor="black"></Box>
-			<Box bgcolor="black" padding={"10px"}>
-				<FormSelect {...configFilters} />
+		<div style={{ paddingTop: "80px" }}>
+			<FormSelect {...configFilters} />
 
-				<Grid container spacing={1}>
-					{data.map((product, pos) => {
-						const { productThumbnail, productName } = product;
-						if (!productThumbnail || !productName) return null;
+			<Grid container spacing={1}>
+				{data.map((product, pos) => {
+					const { productThumbnail, productName } = product;
+					if (!productThumbnail || !productName) return null;
 
-						const configProduct = {
-							...product
-						};
-						return (
-							<Grid item xs="12" sm="6" md="3">
-								<Product {...configProduct} />
-							</Grid>
-						);
-					})}
-				</Grid>
+					const configProduct = {
+						...product
+					};
+					return (
+						<Grid item xs="12" sm="6" md="3">
+							<Product {...configProduct} />
+						</Grid>
+					);
+				})}
+			</Grid>
 
-				{!isLastPage && <LoadMore {...configLoadMore} />}
-			</Box>
+			{!isLastPage && <LoadMore {...configLoadMore} />}
 		</div>
 	);
 };

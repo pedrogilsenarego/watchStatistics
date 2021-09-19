@@ -17,14 +17,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	imageWrapper: {
 		overflow: "hidden",
-		height: 200,
-		display: "inline - block"
+		height: 200
 	},
 
 	text: {
 		color: "#FFFFFF",
-		fontSize: "20px",
-		textAlign: "center"
+		fontSize: "20px"
 	}
 }));
 
@@ -65,7 +63,6 @@ const Product = (product) => {
 						key={1}
 						style={{
 							position: "relative",
-
 							cursor: "pointer"
 						}}
 						onMouseLeave={() => setOnMouse(true)}
@@ -77,7 +74,6 @@ const Product = (product) => {
 							bgcolor="#040406B3"
 							style={{
 								position: "relative",
-
 								cursor: "pointer"
 							}}
 						>
