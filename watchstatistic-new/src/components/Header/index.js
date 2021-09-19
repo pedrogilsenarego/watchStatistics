@@ -67,7 +67,7 @@ const Header = (props) => {
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
-	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 1;
+	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 2;
 
 	const handleMenuLoginOpen = (e) => {
 		setAnchorLogin(e.currentTarget);

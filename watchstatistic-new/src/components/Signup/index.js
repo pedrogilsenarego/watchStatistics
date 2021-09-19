@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { signUpUserStart } from "./../../redux/User/user.actions";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 
 import TextField from "../forms/InputMUI";
 import CheckBox from "../forms/checkBoxMUI";
@@ -101,14 +101,14 @@ const Signup = (props) => {
 									label="ConfirmPassword"
 								/>
 							</Grid>
-							<Grid item xs={12}>
+							<Grid item xs={12} style={{ paddingTop: "30px" }}>
 								<CheckBox
 									name="termsOfService"
 									legend="Terms of Service"
 									label="I, agree"
 								/>
 							</Grid>
-							<Grid item xs={12}>
+							<Grid item xs={12} style={{ paddingTop: "20px" }}>
 								<ButtonMUI>Submit</ButtonMUI>
 							</Grid>
 						</Grid>
@@ -117,7 +117,7 @@ const Signup = (props) => {
 			</div>
 
 			<div className="links">
-				<Link to="/recovery">Reset Password</Link>
+				<Button href="/recovery">Reset Password</Button>
 			</div>
 		</Grid>
 	);

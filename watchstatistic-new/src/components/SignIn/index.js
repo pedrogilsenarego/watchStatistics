@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import {
 	emailSignInStart,
 	googleSignInStart
@@ -11,6 +10,7 @@ import { Grid, Button } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import TextField from "../forms/InputMUI";
 import ButtonMUI from "../forms/ButtonMUI";
+import { FcGoogle } from "react-icons/fc";
 
 const INITIAL_FORM_STATE = {
 	email: "",
@@ -66,19 +66,26 @@ const SignIn = ({ handleCloseLoginMenu }) => {
 									label="password"
 								></TextField>
 							</Grid>
-							<Grid item xs={12}>
+							<Grid item xs={12} style={{ paddingTop: "20px" }}>
 								<ButtonMUI>Login</ButtonMUI>
 							</Grid>
 						</Grid>
 					</Form>
 				</Formik>
 			</Grid>
-			<Grid item xs={12}>
-				<Button onClick={handleGoogleSigniIn}>SignIn with Google</Button>
+			<Grid item xs={12} style={{ paddingTop: "10px" }}>
+				<Button
+					onClick={handleGoogleSigniIn}
+					variant={"contained"}
+					fullWidth={true}
+					style={{ backgroundColor: "#4285F4", color: "#FFFFFF" }}
+				>
+					<FcGoogle size={"2em"} /> &nbsp;&nbsp;SignIn with Google
+				</Button>
 			</Grid>
 
-			<div className="links">
-				<Link to="/recovery">Reset Password</Link>
+			<div className="links" style={{ paddingTop: "10px" }}>
+				<Button href="/recovery">Reset Password</Button>
 			</div>
 		</div>
 	);
