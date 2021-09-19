@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { AiOutlineMessage } from "react-icons/ai";
+import { VscAccount } from "react-icons/vsc";
 
 const useStyles = makeStyles((theme) => ({
 	textBtn: {
@@ -15,30 +17,36 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const MediaRightIconsNoUser = ({ handleSignupOpen, handleLoginOpen }) => {
+const RightIconsUser = ({
+	handleMessagesOpen,
+	handleMyAccountOpen,
+	messageStatus
+}) => {
 	const classes = useStyles();
 	const activeStyle = { color: "#FFA500" };
 
 	return [
 		<Button
-			aria-controls="signup"
-			disableRipple
+			aria-controls="messages"
 			className={classes.textBtn}
 			activeStyle={activeStyle}
-			onClick={(e) => handleSignupOpen(e)}
+			disableRipple
+			onClick={(e) => handleMessagesOpen(e)}
 		>
-			Signup
+			<AiOutlineMessage fontSize="1.5em" />
+			&nbsp;({messageStatus})
 		</Button>,
 		<Button
-			aria-controls="login"
-			disableRipple
 			className={classes.textBtn}
 			activeStyle={activeStyle}
-			onClick={(e) => handleLoginOpen(e)}
+			aria-controls="myAccount"
+			disableRipple
+			onClick={(e) => handleMyAccountOpen(e)}
 		>
-			Login
+			<VscAccount fontSize="1.5em" />
+			&nbsp;
 		</Button>
 	];
 };
 
-export default MediaRightIconsNoUser;
+export default RightIconsUser;

@@ -26,7 +26,8 @@ import { VscHome, VscAccount } from "react-icons/vsc";
 import Signup from "../Signup";
 import SignIn from "../SignIn";
 
-import MediaRightIconsNoUser from "./mediaRightIconsNoUser";
+import RightIconsNoUser from "./RightIconsNoUser";
+import RightIconsUser from "./RightIconsUser";
 
 const useStyles = makeStyles((theme) => ({
 	appbar: {
@@ -85,17 +86,32 @@ const Header = (props) => {
 	const { currentUser } = useSelector(mapState);
 	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 2;
 
-	//mediaRightIconsNoUser
+	//RightIconsNoUser
 	const handleSignupOpen = (e) => {
 		setAnchorSignup(e.currentTarget);
 	};
 	const handleLoginOpen = (e) => {
 		setAnchorLogin(e.currentTarget);
 	};
-	const configMediaRightIconsNoUser = {
+	const configRightIconsNoUser = {
 		handleSignupOpen,
 		handleLoginOpen
 	};
+
+	//RightIconsUser
+	const handleMessagesOpen = (e) => {
+		setAnchorMessages(e.currentTarget);
+	};
+	const handleMyAccountOpen = (e) => {
+		setAnchorMyAccount(e.currentTarget);
+	};
+	const configRightIconsUser = {
+		handleMessagesOpen,
+		handleMyAccountOpen,
+		messageStatus
+	};
+
+	//next
 
 	const handleCloseMediaMenu = () => {
 		setAnchorMediaMenu(null);
@@ -178,34 +194,9 @@ const Header = (props) => {
 								</Button>
 							</Grid>
 							<Grid item xs={12} md={6} align="right">
-								{currentUser && [
-									<Button
-										aria-controls="messages"
-										className={classes.textBtn}
-										activeStyle={activeStyle}
-										disableRipple
-										onClick={(e) => {
-											setAnchorMessages(e.currentTarget);
-										}}
-									>
-										<AiOutlineMessage fontSize="1.5em" />
-										&nbsp;({messageStatus})
-									</Button>,
-									<Button
-										className={classes.textBtn}
-										activeStyle={activeStyle}
-										aria-controls="myAccount"
-										disableRipple
-										onClick={(e) => {
-											setAnchorMyAccount(e.currentTarget);
-										}}
-									>
-										<VscAccount fontSize="1.5em" />
-										&nbsp;
-									</Button>
-								]}
+								{currentUser && <RightIconsUser {...configRightIconsUser} />}
 								{!currentUser && (
-									<MediaRightIconsNoUser {...configMediaRightIconsNoUser} />
+									<RightIconsNoUser {...configRightIconsNoUser} />
 								)}
 							</Grid>
 						</>
@@ -295,30 +286,9 @@ const Header = (props) => {
 										{displayName}
 									</Button>
 								]}
-								{!currentUser && [
-									<Button
-										aria-controls="signup"
-										disableRipple
-										className={classes.textBtn}
-										activeStyle={activeStyle}
-										onClick={(e) => {
-											setAnchorSignup(e.currentTarget);
-										}}
-									>
-										Signup
-									</Button>,
-									<Button
-										aria-controls="login"
-										disableRipple
-										className={classes.textBtn}
-										activeStyle={activeStyle}
-										onClick={(e) => {
-											setAnchorLogin(e.currentTarget);
-										}}
-									>
-										Login
-									</Button>
-								]}
+								{!currentUser && (
+									<RightIconsNoUser {...configRightIconsNoUser} />
+								)}
 							</Grid>{" "}
 						</>
 					)}
