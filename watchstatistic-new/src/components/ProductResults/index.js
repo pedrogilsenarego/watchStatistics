@@ -64,7 +64,7 @@ const ProductResults = ({}) => {
 	};
 
 	return (
-		<div style={{ paddingTop: "80px" }}>
+		<div style={{ paddingTop: "50px" }}>
 			<FormSelect {...configFilters} />
 
 			<Grid container spacing={1}>

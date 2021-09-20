@@ -28,6 +28,7 @@ import SignIn from "../SignIn";
 
 import RightIconsNoUser from "./RightIconsNoUser";
 import RightIconsUser from "./RightIconsUser";
+import LeftIcons from "./LeftIcons";
 
 const useStyles = makeStyles((theme) => ({
 	appbar: {
@@ -111,8 +112,16 @@ const Header = (props) => {
 		messageStatus
 	};
 
-	//next
+	//leftIconst
+	const handleSupportOpen = (e) => {
+		setAnchorSupport(e.currentTarget);
+	};
+	const configLeftIcons = {
+		watchstatistics,
+		handleSupportOpen
+	};
 
+	//next
 	const handleCloseMediaMenu = () => {
 		setAnchorMediaMenu(null);
 	};
@@ -203,50 +212,7 @@ const Header = (props) => {
 					) : (
 						<>
 							<Grid item xs={12} md={6} className={classes.grid} align="left">
-								<Button
-									className={classes.textBtn}
-									activeStyle={activeStyle}
-									component={NavLink}
-									disableRipple
-									to="/"
-									exact
-								>
-									<VscHome fontSize="1.5em" />
-									&nbsp;Home
-								</Button>
-
-								<Button
-									disabled={watchstatistics}
-									className={classes.textBtn}
-									activeStyle={activeStyle}
-									component={NavLink}
-									disableRipple
-									to="/search"
-								>
-									{" "}
-									<BsGraphUp />
-									&nbsp;WatchStatistics
-								</Button>
-								<Button
-									className={classes.textBtn}
-									activeStyle={activeStyle}
-									disableRipple
-								>
-									<AiOutlineCodeSandbox fontSize="1.5em" /> &nbsp;WatchBoxes
-								</Button>
-
-								<Button
-									aria-controls="support"
-									disableRipple
-									className={classes.textBtn}
-									activeStyle={activeStyle}
-									onClick={(e) => {
-										setAnchorSupport(e.currentTarget);
-									}}
-								>
-									<AiOutlineInfoCircle fontSize="1.5em" />
-									&nbsp; About
-								</Button>
+								<LeftIcons {...configLeftIcons} />
 							</Grid>
 							<Grid item xs={12} md={6} align="right">
 								{currentUser && [

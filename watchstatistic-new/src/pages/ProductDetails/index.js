@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 		maxwidth: 345
 	},
 	media: {
-		height: 500
+		height: "75vh"
 	}
 }));
 
@@ -57,54 +57,74 @@ const ProductDetails = ({}) => {
 		[]
 	);
 	return (
-		<Grid container>
-			<Grid item xs={12} sm={7}>
-				<Card className={classes.root} alt={productName}>
-					<CardActionArea>
-						<CardActions>
-							<Typography gutterBottom variant="h5" component="h2">
-								{productBrand} - {productName}
-							</Typography>
-							<Button
-								size="small"
-								color="secondary"
-								onClick={(e) => {
-									setSidePanel("additionalData");
-								}}
-							>
-								About
-							</Button>
-							<Button
-								size="small"
-								color="secondary"
-								onClick={(e) => {
-									setSidePanel("graph");
-								}}
-							>
-								Charts
-							</Button>
-							<Button
-								size="small"
-								color="secondary"
-								onClick={(e) => {
-									setSidePanel("description");
-								}}
-							>
-								Description
-							</Button>
-						</CardActions>
-						<CardMedia className={classes.media} image={productThumbnail} />
-					</CardActionArea>
-				</Card>
+		<div>
+			<Grid
+				container
+				spacing={1}
+				style={{
+					paddingTop: "57px",
+					paddingLeft: "10px",
+					paddingRight: "10px",
+					paddingBottom: "10px"
+				}}
+			>
+				<Grid item xs={12} sm={7}>
+					<Card className={classes.root} alt={productName}>
+						<CardActionArea>
+							<CardActions style={{ backgroundColor: "#36454f" }}>
+								<Grid align="left" xs={6}>
+									<Typography
+										gutterBottom
+										variant="h5"
+										component="h2"
+										style={{ fontFamily: "'Comfortaa', cursive" }}
+									>
+										{productBrand} - {productName}
+									</Typography>
+								</Grid>
+								<Grid align="right" xs={6}>
+									<Button
+										size="small"
+										color="secondary"
+										onClick={(e) => {
+											setSidePanel("additionalData");
+										}}
+									>
+										About
+									</Button>
+									<Button
+										size="small"
+										color="secondary"
+										onClick={(e) => {
+											setSidePanel("graph");
+										}}
+									>
+										Charts
+									</Button>
+									<Button
+										size="small"
+										color="secondary"
+										onClick={(e) => {
+											setSidePanel("description");
+										}}
+									>
+										Description
+									</Button>
+								</Grid>
+							</CardActions>
+							<CardMedia className={classes.media} image={productThumbnail} />
+						</CardActionArea>
+					</Card>
+				</Grid>
+				<Grid item xs={12} sm={5}>
+					<Box bgcolor="primary.main" alignContent="center">
+						{sidePanel === "graph" && <SideGraphPanel />}
+						{sidePanel === "description" && <SideDescription />}
+						{sidePanel === "additionalData" && <SideAdditionalData />}
+					</Box>
+				</Grid>
 			</Grid>
-			<Grid item xs={12} sm={5}>
-				<Box bgcolor="primary.main" alignContent="center">
-					{sidePanel === "graph" && <SideGraphPanel />}
-					{sidePanel === "description" && <SideDescription />}
-					{sidePanel === "additionalData" && <SideAdditionalData />}
-				</Box>
-			</Grid>
-		</Grid>
+		</div>
 	);
 };
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, CardMedia, Box } from "@material-ui/core";
+import { Typography, CardMedia, Box, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
@@ -22,7 +22,9 @@ const useStyles = makeStyles((theme) => ({
 
 	text: {
 		color: "#FFFFFF",
-		fontSize: "20px"
+		fontSize: "20px",
+		textAlign: "center",
+		fontFamily: "'Comfortaa', cursive"
 	}
 }));
 
@@ -77,40 +79,43 @@ const Product = (product) => {
 								cursor: "pointer"
 							}}
 						>
-							<Typography
-								style={{
-									cursor: "pointer",
-									paddingTop: "60px"
-								}}
-								key={2}
-								className={classes.text}
-								onMouseEnter={() => setOnMouse(false)}
-								onClick={() => history.push(`/product/${documentID}`)}
-							>
-								{productBrand} - {productName}
-							</Typography>
-							<Typography
-								style={{
-									cursor: "pointer"
-								}}
-								key={3}
-								className={classes.text}
-								onMouseEnter={() => setOnMouse(false)}
-								onClick={() => history.push(`/product/${documentID}`)}
-							>
-								Score: {avgTotal}
-							</Typography>
-							<Typography
-								style={{
-									cursor: "pointer"
-								}}
-								key={4}
-								className={classes.text}
-								onMouseEnter={() => setOnMouse(false)}
-								onClick={() => history.push(`/product/${documentID}`)}
-							>
-								Votes: {numberVotesNotOwn + numberVotesOwn}
-							</Typography>
+							{" "}
+							<Grid container>
+								<Typography
+									style={{
+										cursor: "pointer",
+										paddingTop: "60px"
+									}}
+									key={2}
+									className={classes.text}
+									onMouseEnter={() => setOnMouse(false)}
+									onClick={() => history.push(`/product/${documentID}`)}
+								>
+									<strong>{productBrand}:</strong> {productName}
+								</Typography>
+								<Typography
+									style={{
+										cursor: "pointer"
+									}}
+									key={3}
+									className={classes.text}
+									onMouseEnter={() => setOnMouse(false)}
+									onClick={() => history.push(`/product/${documentID}`)}
+								>
+									<strong>Score:</strong> {avgTotal}
+								</Typography>
+								<Typography
+									style={{
+										cursor: "pointer"
+									}}
+									key={4}
+									className={classes.text}
+									onMouseEnter={() => setOnMouse(false)}
+									onClick={() => history.push(`/product/${documentID}`)}
+								>
+									<strong>Votes:</strong> {numberVotesNotOwn + numberVotesOwn}
+								</Typography>
+							</Grid>
 						</Box>
 					</CardMedia>
 				</div>
