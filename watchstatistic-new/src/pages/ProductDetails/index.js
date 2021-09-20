@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import SideGraphPanel from "../../components/ProductDetails/ProductSideGraph";
 import SideDescription from "../../components/ProductDetails/ProductSideDescription";
-import SideAdditionalData from "../../components/ProductDetails/ProductSideAdditionalData";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import {
 	Grid,
-	Box,
 	Typography,
 	Card,
 	CardActionArea,
 	CardMedia,
 	CardActions,
-	Button
+	Button,
+	CardContent
 } from "@material-ui/core";
 
 import {
@@ -23,9 +22,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		maxwidth: 345
-	},
+	root: {},
 	media: {
 		height: "75vh"
 	}
@@ -62,10 +59,11 @@ const ProductDetails = ({}) => {
 				container
 				spacing={1}
 				style={{
-					paddingTop: "57px",
+					paddingTop: "84px",
 					paddingLeft: "10px",
 					paddingRight: "10px",
-					paddingBottom: "10px"
+
+					height: "100vh"
 				}}
 			>
 				<Grid item xs={12} sm={7}>
@@ -85,16 +83,7 @@ const ProductDetails = ({}) => {
 								<Grid align="right" xs={6}>
 									<Button
 										size="small"
-										color="secondary"
-										onClick={(e) => {
-											setSidePanel("additionalData");
-										}}
-									>
-										About
-									</Button>
-									<Button
-										size="small"
-										color="secondary"
+										color="white"
 										onClick={(e) => {
 											setSidePanel("graph");
 										}}
@@ -103,7 +92,7 @@ const ProductDetails = ({}) => {
 									</Button>
 									<Button
 										size="small"
-										color="secondary"
+										color="white"
 										onClick={(e) => {
 											setSidePanel("description");
 										}}
@@ -117,11 +106,12 @@ const ProductDetails = ({}) => {
 					</Card>
 				</Grid>
 				<Grid item xs={12} sm={5}>
-					<Box bgcolor="primary.main" alignContent="center">
-						{sidePanel === "graph" && <SideGraphPanel />}
-						{sidePanel === "description" && <SideDescription />}
-						{sidePanel === "additionalData" && <SideAdditionalData />}
-					</Box>
+					<Card style={{ height: "84.4vh", backgroundColor: "#36454f" }}>
+						<CardContent style={{ padding: "5px" }}>
+							{sidePanel === "graph" && <SideGraphPanel />}
+							{sidePanel === "description" && <SideDescription />}
+						</CardContent>
+					</Card>
 				</Grid>
 			</Grid>
 		</div>

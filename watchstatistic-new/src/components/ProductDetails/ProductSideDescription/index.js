@@ -1,38 +1,44 @@
 import React from "react";
-import { Grid, Box, Typography } from "@material-ui/core";
+import { Typography, Box } from "@material-ui/core";
 
 import { useSelector } from "react-redux";
-
-import { makeStyles } from "@material-ui/core/styles";
 
 const mapState = (state) => ({
 	product: state.productsData.product
 });
 
-const useStyles = makeStyles((theme) => ({
-	legend: {
-		fontSize: 20
-	}
-}));
-
 // eslint-disable-next-line
 const ProductSideDescription = ({}) => {
 	const { product } = useSelector(mapState);
 
-	const { productDesc } = product;
-
-	const classes = useStyles();
+	const { productDesc, additionalData } = product;
 
 	return (
-		<Grid>
-			<Box bgcolor={"primary.dark"} textAlign="center" color={"text.secondary"}>
-				<Typography
-					className={classes.legend}
-					dangerouslySetInnerHTML={{ __html: productDesc }}
-				/>
+		<div>
+			<Box
+				bgcolor={"primary.dark"}
+				color={"text.secondary"}
+				borderRadius="10px"
+			>
+				<Typography align="justify" style={{ width: "100%", padding: "10px" }}>
+					{productDesc}
+				</Typography>
 			</Box>
-		</Grid>
+			<Box
+				bgcolor={"primary.dark"}
+				color={"text.secondary"}
+				borderRadius="10px"
+				style={{ marginTop: "5px" }}
+			>
+				<Typography align="justify" style={{ width: "100%", padding: "10px" }}>
+					{additionalData}
+				</Typography>
+			</Box>
+		</div>
 	);
 };
 
 export default ProductSideDescription;
+
+//className={classes.legend}
+//			dangerouslySetInnerHTML={{ __html: productDesc }}
