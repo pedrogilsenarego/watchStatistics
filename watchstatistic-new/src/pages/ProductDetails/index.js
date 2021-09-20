@@ -25,6 +25,16 @@ const useStyles = makeStyles((theme) => ({
 	root: {},
 	media: {
 		height: "75vh"
+	},
+	textBtn: {
+		color: "#FFFFFF",
+		fontSize: "13px",
+		"&:hover": {
+			color: "#FFA500"
+		},
+		"&:active": {
+			color: "#FFFFFF"
+		}
 	}
 }));
 
@@ -67,8 +77,8 @@ const ProductDetails = ({}) => {
 				}}
 			>
 				<Grid item xs={12} sm={7}>
-					<Card className={classes.root} alt={productName}>
-						<CardActionArea>
+					<Card className={classes.root} alt={productName} disableRipple>
+						<CardActionArea disableRipple>
 							<CardActions style={{ backgroundColor: "#36454f" }}>
 								<Grid align="left" xs={6}>
 									<Typography
@@ -82,6 +92,8 @@ const ProductDetails = ({}) => {
 								</Grid>
 								<Grid align="right" xs={6}>
 									<Button
+										className={classes.textBtn}
+										disableRipple
 										size="small"
 										color="white"
 										onClick={(e) => {
@@ -91,6 +103,8 @@ const ProductDetails = ({}) => {
 										Charts
 									</Button>
 									<Button
+										className={classes.textBtn}
+										disableRipple
 										size="small"
 										color="white"
 										onClick={(e) => {
