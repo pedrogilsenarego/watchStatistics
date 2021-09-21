@@ -76,7 +76,7 @@ const ProductDetails = ({}) => {
 					height: "100vh"
 				}}
 			>
-				<Grid item xs={12} sm={7}>
+				<Grid item xs={12} sm={8}>
 					<Card className={classes.root} alt={productName} disableRipple>
 						<CardActionArea disableRipple>
 							<CardActions style={{ backgroundColor: "#36454f" }}>
@@ -119,7 +119,7 @@ const ProductDetails = ({}) => {
 						</CardActionArea>
 					</Card>
 				</Grid>
-				<Grid item xs={12} sm={5}>
+				<Grid item xs={12} sm={4}>
 					<Card style={{ height: "84.4vh", backgroundColor: "#36454f" }}>
 						<CardContent style={{ padding: "5px" }}>
 							{sidePanel === "graph" && <SideGraphPanel />}

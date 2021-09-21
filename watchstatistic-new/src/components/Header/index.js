@@ -269,6 +269,8 @@ const Header = (props) => {
 					onClick={() => {
 						signOut();
 						handleCloseMyAccountMenu();
+						setWatchstatistics(false);
+						history.push("/");
 					}}
 				>
 					Logout

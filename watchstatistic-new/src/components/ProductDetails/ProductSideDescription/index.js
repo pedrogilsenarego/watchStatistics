@@ -1,6 +1,20 @@
 import React from "react";
 import { Typography, Box, Button, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+	textBtn: {
+		color: "#FFFFFF",
+		fontSize: "13px",
+		"&:hover": {
+			color: "#FFA500"
+		},
+		"&:active": {
+			color: "#FFFFFF"
+		}
+	}
+}));
 
 const mapState = (state) => ({
 	product: state.productsData.product
@@ -10,6 +24,7 @@ const mapState = (state) => ({
 const ProductSideDescription = ({}) => {
 	const { product } = useSelector(mapState);
 	const { productDesc, additionalData } = product;
+	const classes = useStyles();
 
 	const openInNewTab = (url) => {
 		const newWindow = window.open(url, "_blank", "noopener,noreferrer");
@@ -34,21 +49,21 @@ const ProductSideDescription = ({}) => {
 				style={{ marginTop: "5px" }}
 			>
 				<Grid container>
-					{additionalData.map((additionalData, pos) => {
-						if (!additionalData) return null;
-
-						return (
-							<Grid xs={6}>
-								<Button
-									align="justify"
-									style={{ width: "100%", padding: "10px" }}
-									onClick={() => openInNewTab(`${additionalData.link}`)}
-								>
-									{additionalData.title}
-								</Button>
-							</Grid>
-						);
-					})}
+					{additionalData &&
+						additionalData.map((additionalData, pos) => {
+							return (
+								<Grid xs={6}>
+									<Button
+										className={classes.textBtn}
+										align="justify"
+										style={{ width: "100%", padding: "10px" }}
+										onClick={() => openInNewTab(`${additionalData.link}`)}
+									>
+										{additionalData.title}
+									</Button>
+								</Grid>
+							);
+						})}
 				</Grid>
 			</Box>
 		</div>

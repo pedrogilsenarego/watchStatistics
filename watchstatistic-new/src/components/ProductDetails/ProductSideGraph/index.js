@@ -1,31 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, Box, Typography } from "@material-ui/core";
 import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
-import Button from "../../forms/Button";
-import ProductVote from "../ProductVote";
-import { makeStyles } from "@material-ui/core/styles";
+//import { makeStyles } from "@material-ui/core/styles";
+import ProductSidePanelMenu from "./SideMenu";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
 	product: state.productsData.product
 });
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
 	legend: {
 		fontSize: 20,
 		fontFamily: "MyFont"
 	}
-}));
+})); */
 
 // eslint-disable-next-line
 const ProductSidePanel = ({}) => {
-	const { product, currentUser } = useSelector(mapState);
-	const [voteMenu, setVoteMenu] = useState(false);
-	const history = useHistory();
+	const { product } = useSelector(mapState);
 
-	const classes = useStyles();
+	//const classes = useStyles();
 
 	const {
 		avgVotationsOwn,
@@ -148,53 +144,51 @@ const ProductSidePanel = ({}) => {
 		}
 	};
 
-	const handleVoteBtn = (e) => {
-		setVoteMenu(!voteMenu);
-	};
-
 	return (
 		<Grid container>
-			<Grid item xs={12} md={6}>
-				<RadarChart {...configRadarChart} />
-			</Grid>
-			<Grid item xs={12} md={6}>
+			<Grid item xs={10} md={10}>
 				<Box
 					bgcolor={"primary.dark"}
-					textAlign="center"
 					color={"text.secondary"}
+					borderRadius="10px"
+					style={{
+						marginRight: "5px",
+						padding: "10px",
+						paddingRight: "10px"
+					}}
 				>
-					<Box fontWeight={600}>Total Score: {avgTotal}</Box>
-					<Box>Votes From Owners: {numberVotesOwn}</Box>
-					<Box>Score Owners: {avgVotationsOwn}</Box>
-					<Box>Votes From Non Owners: {numberVotesNotOwn}</Box>
-					<Box>Score Non Owners: {avgVotationsNotOwn}</Box>
-					<Typography className={classes.legend}>Q engineering</Typography>
-					<Typography className={classes.legend}>S quality</Typography>
-					<Typography className={classes.legend}>M price</Typography>
-					<Typography className={classes.legend}>L brand</Typography>
-					<Typography className={classes.legend}>K refinement</Typography>
-					<Typography className={classes.legend}>R history</Typography>
-					<Typography className={classes.legend}>O x-factor</Typography>
+					<RadarChart {...configRadarChart} />
+
+					<Typography align="center" style={{ width: "100%" }} fontWeight={600}>
+						Total Score: {avgTotal}
+					</Typography>
+					<Typography align="center" style={{ width: "100%" }}>
+						Votes From Owners: {numberVotesOwn}
+					</Typography>
+					<Typography align="center" style={{ width: "100%" }}>
+						Score Owners: {avgVotationsOwn}
+					</Typography>
+					<Typography align="center" style={{ width: "100%" }}>
+						Votes From Non Owners: {numberVotesNotOwn}
+					</Typography>
+					<Typography align="center" style={{ width: "100%" }}>
+						Score Non Owners: {avgVotationsNotOwn}
+					</Typography>
 				</Box>
 			</Grid>
-			<Grid item xs={12}>
-				<Box>
-					{currentUser && (
-						<div>
-							<Button onClick={() => handleVoteBtn()}>Vote Here</Button>
-							<Box bgcolor={"primary.light"}>{voteMenu && <ProductVote />}</Box>
-						</div>
-					)}
-
-					{!currentUser && (
-						<Button onClick={() => history.push("/login")}>
-							Login Here To vote
-						</Button>
-					)}
-				</Box>
+			<Grid item xs={2} md={2}>
+				<ProductSidePanelMenu />
 			</Grid>
 		</Grid>
 	);
 };
 
 export default ProductSidePanel;
+
+/* <Typography className={classes.legend}>Q engineering</Typography>
+				<Typography className={classes.legend}>S quality</Typography>
+				<Typography className={classes.legend}>M price</Typography>
+				<Typography className={classes.legend}>L brand</Typography>
+				<Typography className={classes.legend}>K refinement</Typography>
+				<Typography className={classes.legend}>R history</Typography>
+				<Typography className={classes.legend}>O x-factor</Typography> */
