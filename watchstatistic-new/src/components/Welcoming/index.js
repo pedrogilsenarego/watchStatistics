@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import Typist from "react-typist";
 import { useSelector } from "react-redux";
@@ -7,8 +7,12 @@ const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
 
-const Welcoming = ({ hideModal, toggleModal, children }) => {
+const Welcoming = ({ children }) => {
 	const { currentUser } = useSelector(mapState);
+	const [hideModal, setHideModal] = useState(false);
+
+	const toggleModal = () => setHideModal(!hideModal);
+
 	if (hideModal) return null;
 
 	const { displayName, userVotes } = currentUser

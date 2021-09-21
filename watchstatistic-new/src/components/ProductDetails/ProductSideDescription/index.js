@@ -30,9 +30,18 @@ const ProductSideDescription = ({}) => {
 				borderRadius="10px"
 				style={{ marginTop: "5px" }}
 			>
-				<Typography align="justify" style={{ width: "100%", padding: "10px" }}>
-					{additionalData}
-				</Typography>
+				{additionalData.map((additionalData, pos) => {
+					if (!additionalData) return null;
+
+					return (
+						<Typography
+							align="justify"
+							style={{ width: "100%", padding: "10px" }}
+						>
+							{additionalData}
+						</Typography>
+					);
+				})}
 			</Box>
 		</div>
 	);

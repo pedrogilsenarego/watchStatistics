@@ -16,12 +16,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { CgMenuGridO } from "react-icons/cg";
 import { BsGraphUp } from "react-icons/bs";
-import {
-	AiOutlineCodeSandbox,
-	AiOutlineInfoCircle,
-	AiOutlineMessage
-} from "react-icons/ai";
-import { VscHome, VscAccount } from "react-icons/vsc";
+import { AiOutlineCodeSandbox, AiOutlineInfoCircle } from "react-icons/ai";
+import { VscHome } from "react-icons/vsc";
 
 import Signup from "../Signup";
 import SignIn from "../SignIn";
@@ -29,6 +25,7 @@ import SignIn from "../SignIn";
 import RightIconsNoUser from "./RightIconsNoUser";
 import RightIconsUser from "./RightIconsUser";
 import LeftIcons from "./LeftIcons";
+import RightIconsBigUser from "./RightIconsBigUser";
 
 const useStyles = makeStyles((theme) => ({
 	appbar: {
@@ -76,7 +73,6 @@ const Header = (props) => {
 	const [anchorMessages, setAnchorMessages] = useState(null);
 	const [anchorSupport, setAnchorSupport] = useState(null);
 	const [anchorMyAccount, setAnchorMyAccount] = useState(null);
-	const [anchorUser, setAnchorUser] = useState(null);
 	const [anchorLogin, setAnchorLogin] = useState(null);
 	const [anchorSignup, setAnchorSignup] = useState(null);
 	const [anchorMediaMenu, setAnchorMediaMenu] = useState(null);
@@ -85,7 +81,7 @@ const Header = (props) => {
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
-	const { displayName, userVotes, userRoles } = currentUser ? currentUser : 2;
+	const { userVotes, userRoles } = currentUser ? currentUser : 2;
 
 	//RightIconsNoUser
 	const handleSignupOpen = (e) => {
@@ -140,10 +136,6 @@ const Header = (props) => {
 
 	const handleCloseMessagesMenu = () => {
 		setAnchorMessages(null);
-	};
-
-	const handleCloseUserMenu = () => {
-		setAnchorUser(null);
 	};
 
 	const handleCloseMyAccountMenu = () => {
@@ -215,43 +207,7 @@ const Header = (props) => {
 								<LeftIcons {...configLeftIcons} />
 							</Grid>
 							<Grid item xs={12} md={6} align="right">
-								{currentUser && [
-									<Button
-										aria-controls="messages"
-										className={classes.textBtn}
-										activeStyle={activeStyle}
-										disableRipple
-										onClick={(e) => {
-											setAnchorMessages(e.currentTarget);
-										}}
-									>
-										<AiOutlineMessage fontSize="1.5em" />
-										&nbsp;Messages ({messageStatus})
-									</Button>,
-									<Button
-										className={classes.textBtn}
-										activeStyle={activeStyle}
-										aria-controls="myAccount"
-										disableRipple
-										onClick={(e) => {
-											setAnchorMyAccount(e.currentTarget);
-										}}
-									>
-										<VscAccount fontSize="1.5em" />
-										&nbsp;My Account
-									</Button>,
-									<Button
-										className={classes.textBtn}
-										activeStyle={activeStyle}
-										aria-controls="user"
-										disableRipple
-										onClick={(e) => {
-											setAnchorUser(e.currentTarget);
-										}}
-									>
-										{displayName}
-									</Button>
-								]}
+								{currentUser && <RightIconsBigUser {...configRightIconsUser} />}
 								{!currentUser && (
 									<RightIconsNoUser {...configRightIconsNoUser} />
 								)}
@@ -308,7 +264,9 @@ const Header = (props) => {
 				>
 					DashBoard
 				</MenuItem>
-
+				{currentUser && (
+					<MenuItem>Watches voted: {userVotes.length - 1}</MenuItem>
+				)}
 				<MenuItem
 					onClick={() => {
 						signOut();
@@ -368,18 +326,7 @@ const Header = (props) => {
 					&nbsp; About
 				</MenuItem>
 			</Menu>
-			<Menu
-				disableScrollLock
-				className={classes.menu}
-				id="User"
-				onClose={handleCloseUserMenu}
-				anchorEl={anchorUser}
-				open={Boolean(anchorUser)}
-			>
-				{currentUser && (
-					<MenuItem>Watches voted: {userVotes.length - 1}</MenuItem>
-				)}
-			</Menu>
+
 			<Menu
 				disableScrollLock
 				className={classes.menu}
