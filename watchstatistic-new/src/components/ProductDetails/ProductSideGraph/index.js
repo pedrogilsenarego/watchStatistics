@@ -158,22 +158,31 @@ const ProductSidePanel = ({}) => {
 					}}
 				>
 					<RadarChart {...configRadarChart} />
-
-					<Typography align="center" style={{ width: "100%" }} fontWeight={600}>
-						Total Score: {avgTotal}
-					</Typography>
-					<Typography align="center" style={{ width: "100%" }}>
-						Votes From Owners: {numberVotesOwn}
-					</Typography>
-					<Typography align="center" style={{ width: "100%" }}>
-						Score Owners: {avgVotationsOwn}
-					</Typography>
-					<Typography align="center" style={{ width: "100%" }}>
-						Votes From Non Owners: {numberVotesNotOwn}
-					</Typography>
-					<Typography align="center" style={{ width: "100%" }}>
-						Score Non Owners: {avgVotationsNotOwn}
-					</Typography>
+					<Box
+						style={{
+							marginTop: "20px"
+						}}
+					>
+						<Typography
+							align="center"
+							style={{ width: "100%" }}
+							fontWeight={600}
+						>
+							Total Score: {avgTotal}
+						</Typography>
+						<Typography align="center" style={{ width: "100%" }}>
+							Votes From Owners: {numberVotesOwn}
+						</Typography>
+						<Typography align="center" style={{ width: "100%" }}>
+							Score Owners: {avgVotationsOwn}
+						</Typography>
+						<Typography align="center" style={{ width: "100%" }}>
+							Votes From Non Owners: {numberVotesNotOwn}
+						</Typography>
+						<Typography align="center" style={{ width: "100%" }}>
+							Score Non Owners: {avgVotationsNotOwn}
+						</Typography>
+					</Box>
 				</Box>
 			</Grid>
 			<Grid item xs={2} md={2}>

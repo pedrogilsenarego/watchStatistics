@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import SideGraphPanel from "../../components/ProductDetails/ProductSideGraph";
 import SideDescription from "../../components/ProductDetails/ProductSideDescription";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import {
 	Grid,
-	Typography,
 	Card,
 	CardActionArea,
 	CardMedia,
-	CardActions,
-	Button,
 	CardContent
 } from "@material-ui/core";
 
@@ -45,12 +42,11 @@ const mapState = (state) => ({
 
 // eslint-disable-next-line
 const ProductDetails = ({}) => {
-	const [sidePanel, setSidePanel] = useState("graph");
 	const dispatch = useDispatch();
 	const { productID } = useParams();
 	const { product } = useSelector(mapState);
 
-	const { productThumbnail, productName, productBrand } = product;
+	const { productThumbnail, productName } = product;
 	const classes = useStyles();
 
 	useEffect(
@@ -76,54 +72,24 @@ const ProductDetails = ({}) => {
 					height: "100vh"
 				}}
 			>
-				<Grid item xs={12} sm={8}>
+				<Grid item xs={12}>
 					<Card className={classes.root} alt={productName} disableRipple>
 						<CardActionArea disableRipple>
-							<CardActions style={{ backgroundColor: "#36454f" }}>
-								<Grid align="left" xs={6}>
-									<Typography
-										gutterBottom
-										variant="h5"
-										component="h2"
-										style={{ fontFamily: "'Comfortaa', cursive" }}
-									>
-										{productBrand} - {productName}
-									</Typography>
-								</Grid>
-								<Grid align="right" xs={6}>
-									<Button
-										className={classes.textBtn}
-										disableRipple
-										size="small"
-										color="white"
-										onClick={(e) => {
-											setSidePanel("graph");
-										}}
-									>
-										Charts
-									</Button>
-									<Button
-										className={classes.textBtn}
-										disableRipple
-										size="small"
-										color="white"
-										onClick={(e) => {
-											setSidePanel("description");
-										}}
-									>
-										Description
-									</Button>
-								</Grid>
-							</CardActions>
 							<CardMedia className={classes.media} image={productThumbnail} />
 						</CardActionArea>
 					</Card>
 				</Grid>
-				<Grid item xs={12} sm={4}>
-					<Card style={{ height: "84.4vh", backgroundColor: "#36454f" }}>
+				<Grid item xs={12} sm={8}>
+					<Card style={{ backgroundColor: "#36454f" }}>
 						<CardContent style={{ padding: "5px" }}>
-							{sidePanel === "graph" && <SideGraphPanel />}
-							{sidePanel === "description" && <SideDescription />}
+							<SideDescription />
+						</CardContent>
+					</Card>
+				</Grid>
+				<Grid item xs={12} sm={4}>
+					<Card style={{ backgroundColor: "#36454f" }}>
+						<CardContent style={{ padding: "5px" }}>
+							<SideGraphPanel />
 						</CardContent>
 					</Card>
 				</Grid>
