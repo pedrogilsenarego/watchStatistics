@@ -31,10 +31,18 @@ const Welcoming = ({ children }) => {
 						<Typist.Delay ms={2500} />
 						<p>
 							&lt;body&gt; My name is Pedro Sena Rego. <br />
-							<Typist.Delay ms={500} />
+							<Typist.Delay ms={800} />
 							These are my projects &lt;/body&gt;{" "}
 							<Typist.Backspace count={20} delay={200} />
 							your projects &lt;/body&gt;
+						</p>
+						<Typist.Delay ms={1500} />
+						<p>
+							&lt;body&gt; To visit{" "}
+							<span style={{ color: "#FFA500", fontWeight: "bold" }}>
+								WHATCHSTATISTICS
+							</span>{" "}
+							you must be Login&lt;/body&gt;
 						</p>
 					</Typist>
 				)}

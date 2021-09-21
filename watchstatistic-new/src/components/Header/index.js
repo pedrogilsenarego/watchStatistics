@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	menu: {
-		marginTop: "60px",
+		marginTop: "70px",
 		"& .MuiPaper-root": {
 			backgroundColor: "#04040680",
 			color: "#ffffff",
