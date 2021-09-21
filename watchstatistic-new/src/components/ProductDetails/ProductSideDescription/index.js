@@ -1,6 +1,5 @@
 import React from "react";
-import { Typography, Box } from "@material-ui/core";
-
+import { Typography, Box, Button, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const mapState = (state) => ({
@@ -10,8 +9,12 @@ const mapState = (state) => ({
 // eslint-disable-next-line
 const ProductSideDescription = ({}) => {
 	const { product } = useSelector(mapState);
-
 	const { productDesc, additionalData } = product;
+
+	const openInNewTab = (url) => {
+		const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+		if (newWindow) newWindow.opener = null;
+	};
 
 	return (
 		<div>
@@ -30,18 +33,23 @@ const ProductSideDescription = ({}) => {
 				borderRadius="10px"
 				style={{ marginTop: "5px" }}
 			>
-				{additionalData.map((additionalData, pos) => {
-					if (!additionalData) return null;
+				<Grid container>
+					{additionalData.map((additionalData, pos) => {
+						if (!additionalData) return null;
 
-					return (
-						<Typography
-							align="justify"
-							style={{ width: "100%", padding: "10px" }}
-						>
-							{additionalData}
-						</Typography>
-					);
-				})}
+						return (
+							<Grid xs={6}>
+								<Button
+									align="justify"
+									style={{ width: "100%", padding: "10px" }}
+									onClick={() => openInNewTab(`${additionalData.link}`)}
+								>
+									{additionalData.title}
+								</Button>
+							</Grid>
+						);
+					})}
+				</Grid>
 			</Box>
 		</div>
 	);

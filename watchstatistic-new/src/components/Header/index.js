@@ -83,6 +83,11 @@ const Header = (props) => {
 	const { currentUser } = useSelector(mapState);
 	const { userVotes, userRoles } = currentUser ? currentUser : 2;
 
+	const signOut = () => {
+		dispatch(signOutUserStart());
+		setWatchstatistics(true);
+	};
+
 	//RightIconsNoUser
 	const handleSignupOpen = (e) => {
 		setAnchorSignup(e.currentTarget);
@@ -121,7 +126,9 @@ const Header = (props) => {
 	const handleCloseMediaMenu = () => {
 		setAnchorMediaMenu(null);
 	};
-
+	const handleCloseMessagesMenu = () => {
+		setAnchorMessages(null);
+	};
 	const handleCloseLoginMenu = () => {
 		setAnchorLogin(null);
 	};
@@ -132,10 +139,6 @@ const Header = (props) => {
 
 	const handleCloseSignupMenu = () => {
 		setAnchorSignup(null);
-	};
-
-	const handleCloseMessagesMenu = () => {
-		setAnchorMessages(null);
 	};
 
 	const handleCloseMyAccountMenu = () => {
@@ -165,11 +168,6 @@ const Header = (props) => {
 		// eslint-disable-next-line
 		[currentUser]
 	);
-
-	const signOut = () => {
-		dispatch(signOutUserStart());
-		setWatchstatistics(true);
-	};
 
 	const theme = useTheme();
 

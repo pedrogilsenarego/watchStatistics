@@ -48,7 +48,7 @@ const Welcoming = ({ children }) => {
 				)}
 				{currentUser && (
 					<Typist cursor={{ show: false }}>
-						<Typist.Delay ms={2500} />
+						<Typist.Delay ms={3000} />
 						<p>
 							&lt;body&gt; It is great to see you again <br />
 							<Typist.Delay ms={500} />
