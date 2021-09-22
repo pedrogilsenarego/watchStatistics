@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 		height: "94vh"
 	},
 	side: {
-		height: "100vh"
+		height: "94vh"
 	},
 	textBtn: {
 		color: "#FFFFFF",
@@ -82,8 +82,8 @@ const ProductDetails = ({}) => {
 						</CardActionArea>
 					</Card>
 				</Grid>
-				<Grid item xs={12} sm={4}>
-					<Card xlassName={classes.side} style={{ backgroundColor: "#36454f" }}>
+				<Grid item xs={12} md={4}>
+					<Card className={classes.side} style={{ backgroundColor: "#36454f" }}>
 						<CardContent style={{ padding: "5px" }}>
 							<SideGraphPanel />
 						</CardContent>

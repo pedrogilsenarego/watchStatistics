@@ -1,7 +1,12 @@
 {
 	"optionsAddNew": [
+		{
+			"name": "Show all",
+			"value": ""
+		},
 		{ "name": "Cartier", "value": "Cartier" },
 		{ "name": "GrandSeiko", "value": "Grandseiko" },
+		{ "name": "Isotope", "value": "Isotope" },
 		{ "name": "Rolex", "value": "Rolex" },
 		{ "name": "Seiko", "value": "Seiko" }
 	]

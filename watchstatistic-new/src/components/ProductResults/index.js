@@ -7,6 +7,7 @@ import FormSelect from "../forms/FormSelect";
 import LoadMore from "../LoadMore";
 import { Grid } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes.json";
+import watchBrands from "./../../assets/data/watchBrands.json";
 
 const mapState = ({ productsData }) => ({
 	products: productsData.products
@@ -49,6 +50,12 @@ const ProductResults = ({}) => {
 		handleChange: handleFilter
 	};
 
+	const configFilterBrands = {
+		defaultValue: filterType,
+		options: watchBrands.options,
+		handleChange: handleFilter
+	};
+
 	const handleLoadMore = () => {
 		dispatch(
 			fetchProductsStart({
@@ -66,6 +73,7 @@ const ProductResults = ({}) => {
 	return (
 		<div style={{ paddingTop: "50px" }}>
 			<FormSelect {...configFilters} />
+			<FormSelect {...configFilterBrands} />
 
 			<Grid container spacing={1}>
 				{data.map((product, pos) => {

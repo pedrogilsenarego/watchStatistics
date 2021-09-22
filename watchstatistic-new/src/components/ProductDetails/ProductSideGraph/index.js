@@ -27,6 +27,24 @@ const useStyles = makeStyles((theme) => ({
 			disableScrollLock: true,
 			maxWidth: "350px"
 		}
+	},
+	menu2: {
+		"& .MuiPaper-root": {
+			backgroundColor: "#04040680",
+			color: "#ffffff",
+			disableScrollLock: true,
+			maxWidth: "200px"
+		}
+	},
+	textBtn: {
+		color: "#FFFFFF",
+		fontSize: "13px",
+		"&:hover": {
+			color: "#FFA500"
+		},
+		"&:active": {
+			color: "#FFFFFF"
+		}
 	}
 }));
 
@@ -174,21 +192,20 @@ const ProductSidePanel = ({}) => {
 					color={"text.secondary"}
 					borderRadius="10px"
 					style={{
-						marginRight: "5px",
 						padding: "10px",
-						paddingRight: "10px"
+						paddingRight: "5px"
 					}}
 				>
 					<RadarChart {...configRadarChart} />
 					<Box
 						style={{
-							marginTop: "20px"
+							marginTop: "10px"
 						}}
 					>
 						<Typography
+							fontWeight={600}
 							align="center"
 							style={{ width: "100%" }}
-							fontWeight={600}
 						>
 							Total Score: {avgTotal}
 						</Typography>
@@ -206,24 +223,26 @@ const ProductSidePanel = ({}) => {
 						</Typography>
 
 						<Button
+							className={classes.textBtn}
+							style={{ width: "50%" }}
 							aria-controls="vote"
 							onClick={(e) => {
 								setAnchorVote(e.currentTarget);
 							}}
 							disableRipple
-							className={classes.textBtn}
 						>
 							Vote
 						</Button>
 						<Button
+							className={classes.textBtn}
+							style={{ width: "50%" }}
 							aria-controls="legendVote"
 							onClick={(e) => {
 								setAnchorLegendVote(e.currentTarget);
 							}}
 							disableRipple
-							className={classes.textBtn}
 						>
-							Categories Legend
+							Categories
 						</Button>
 					</Box>
 				</Box>
@@ -244,7 +263,7 @@ const ProductSidePanel = ({}) => {
 				<Draggable>
 					<Menu
 						disableScrollLock
-						className={classes.menu}
+						className={classes.menu2}
 						id="legendVote"
 						onClose={handleCloseLegendVote}
 						anchorEl={anchorLegendVote}
