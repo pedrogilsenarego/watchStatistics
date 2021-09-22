@@ -1,27 +1,49 @@
-import React from "react";
-import { Grid, Box, Typography } from "@material-ui/core";
+import React, { useState } from "react";
+import {
+	Grid,
+	Box,
+	Typography,
+	Button,
+	Menu,
+	MenuItem
+} from "@material-ui/core";
 import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
-//import { makeStyles } from "@material-ui/core/styles";
-import ProductSidePanelMenu from "./SideMenu";
+import { makeStyles } from "@material-ui/core/styles";
+import ProductVote from "../ProductVote";
+import Draggable from "react-draggable";
+import CategoriesLegend from "../CategoriesLegend";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
 	product: state.productsData.product
 });
 
-/* const useStyles = makeStyles((theme) => ({
-	legend: {
-		fontSize: 20,
-		fontFamily: "MyFont"
+const useStyles = makeStyles((theme) => ({
+	menu: {
+		"& .MuiPaper-root": {
+			backgroundColor: "#04040680",
+			color: "#ffffff",
+			disableScrollLock: true,
+			maxWidth: "350px"
+		}
 	}
-})); */
+}));
 
 // eslint-disable-next-line
 const ProductSidePanel = ({}) => {
 	const { product } = useSelector(mapState);
+	const [anchorVote, setAnchorVote] = useState(null);
+	const [anchorLegendVote, setAnchorLegendVote] = useState(null);
 
-	//const classes = useStyles();
+	const handleCloseVote = () => {
+		setAnchorVote(null);
+	};
+	const handleCloseLegendVote = () => {
+		setAnchorLegendVote(null);
+	};
+
+	const classes = useStyles();
 
 	const {
 		avgVotationsOwn,
@@ -146,7 +168,7 @@ const ProductSidePanel = ({}) => {
 
 	return (
 		<Grid container>
-			<Grid item xs={10} md={10}>
+			<Grid item xs={12}>
 				<Box
 					bgcolor={"primary.dark"}
 					color={"text.secondary"}
@@ -182,22 +204,57 @@ const ProductSidePanel = ({}) => {
 						<Typography align="center" style={{ width: "100%" }}>
 							Score Non Owners: {avgVotationsNotOwn}
 						</Typography>
+						<Button
+							aria-controls="vote"
+							onClick={(e) => {
+								setAnchorVote(e.currentTarget);
+							}}
+							disableRipple
+							className={classes.textBtn}
+						>
+							Vote
+						</Button>
+						<Button
+							aria-controls="legendVote"
+							onClick={(e) => {
+								setAnchorLegendVote(e.currentTarget);
+							}}
+							disableRipple
+							className={classes.textBtn}
+						>
+							Categories Legend
+						</Button>
 					</Box>
 				</Box>
-			</Grid>
-			<Grid item xs={2} md={2}>
-				<ProductSidePanelMenu />
+				<Draggable>
+					<Menu
+						disableScrollLock
+						className={classes.menu}
+						id="vote"
+						onClose={handleCloseVote}
+						anchorEl={anchorVote}
+						open={Boolean(anchorVote)}
+					>
+						<MenuItem disableRipple>
+							<ProductVote />
+						</MenuItem>
+					</Menu>
+				</Draggable>
+				<Draggable>
+					<Menu
+						disableScrollLock
+						className={classes.menu}
+						id="legendVote"
+						onClose={handleCloseLegendVote}
+						anchorEl={anchorLegendVote}
+						open={Boolean(anchorLegendVote)}
+					>
+						<CategoriesLegend />
+					</Menu>
+				</Draggable>
 			</Grid>
 		</Grid>
 	);
 };
 
 export default ProductSidePanel;
-
-/* <Typography className={classes.legend}>Q engineering</Typography>
-				<Typography className={classes.legend}>S quality</Typography>
-				<Typography className={classes.legend}>M price</Typography>
-				<Typography className={classes.legend}>L brand</Typography>
-				<Typography className={classes.legend}>K refinement</Typography>
-				<Typography className={classes.legend}>R history</Typography>
-				<Typography className={classes.legend}>O x-factor</Typography> */
