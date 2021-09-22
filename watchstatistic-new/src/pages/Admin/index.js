@@ -107,12 +107,12 @@ const Admin = (props) => {
 
 						<FormSelect
 							label="Category"
-							options={watchTypes.optionsAddNew}
+							options={watchTypes.options}
 							handleChange={(e) => setProductCategory(e.target.value)}
 						/>
 						<FormSelect
 							label="Brand"
-							options={watchBrands.optionsAddNew}
+							options={watchBrands.options}
 							handleChange={(e) => setProductBrand(e.target.value)}
 						/>
 

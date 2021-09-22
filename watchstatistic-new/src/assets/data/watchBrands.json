@@ -1,13 +1,13 @@
 {
-	"optionsAddNew": [
+	"options": [
 		{
-			"name": "Show all",
+			"name": "Brands",
 			"value": ""
 		},
-		{ "name": "Cartier", "value": "Cartier" },
-		{ "name": "GrandSeiko", "value": "Grandseiko" },
-		{ "name": "Isotope", "value": "Isotope" },
-		{ "name": "Rolex", "value": "Rolex" },
-		{ "name": "Seiko", "value": "Seiko" }
+		{ "name": "Cartier", "value": "cartier" },
+		{ "name": "GrandSeiko", "value": "grandseiko" },
+		{ "name": "Isotope", "value": "isotope" },
+		{ "name": "Rolex", "value": "rolex" },
+		{ "name": "Seiko", "value": "seiko" }
 	]
 }
