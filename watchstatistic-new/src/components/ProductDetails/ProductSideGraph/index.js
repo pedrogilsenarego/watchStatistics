@@ -204,6 +204,7 @@ const ProductSidePanel = ({}) => {
 						<Typography align="center" style={{ width: "100%" }}>
 							Score Non Owners: {avgVotationsNotOwn}
 						</Typography>
+
 						<Button
 							aria-controls="vote"
 							onClick={(e) => {

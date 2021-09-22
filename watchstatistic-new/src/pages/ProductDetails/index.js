@@ -21,7 +21,10 @@ import { useParams } from "react-router";
 const useStyles = makeStyles((theme) => ({
 	root: {},
 	media: {
-		height: "75vh"
+		height: "94vh"
+	},
+	side: {
+		height: "100vh"
 	},
 	textBtn: {
 		color: "#FFFFFF",
@@ -72,24 +75,24 @@ const ProductDetails = ({}) => {
 					height: "100vh"
 				}}
 			>
-				<Grid item xs={12}>
+				<Grid item xs={12} md={8}>
 					<Card className={classes.root} alt={productName} disableRipple>
 						<CardActionArea disableRipple>
 							<CardMedia className={classes.media} image={productThumbnail} />
 						</CardActionArea>
 					</Card>
 				</Grid>
-				<Grid item xs={12} sm={8}>
-					<Card style={{ backgroundColor: "#36454f" }}>
+				<Grid item xs={12} sm={4}>
+					<Card xlassName={classes.side} style={{ backgroundColor: "#36454f" }}>
 						<CardContent style={{ padding: "5px" }}>
-							<SideDescription />
+							<SideGraphPanel />
 						</CardContent>
 					</Card>
 				</Grid>
-				<Grid item xs={12} sm={4}>
+				<Grid item xs={12} sm={12}>
 					<Card style={{ backgroundColor: "#36454f" }}>
 						<CardContent style={{ padding: "5px" }}>
-							<SideGraphPanel />
+							<SideDescription />
 						</CardContent>
 					</Card>
 				</Grid>
