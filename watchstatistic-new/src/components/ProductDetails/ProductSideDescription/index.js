@@ -38,9 +38,11 @@ const ProductSideDescription = ({}) => {
 				color={"text.secondary"}
 				borderRadius="10px"
 			>
-				<Typography align="justify" style={{ width: "100%", padding: "10px" }}>
-					{productDesc}
-				</Typography>
+				<Typography
+					dangerouslySetInnerHTML={{ __html: productDesc }}
+					align="justify"
+					style={{ width: "100%", padding: "10px" }}
+				/>
 			</Box>
 			<Box
 				bgcolor={"primary.dark"}
