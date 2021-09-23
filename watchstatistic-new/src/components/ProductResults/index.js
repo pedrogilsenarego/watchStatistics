@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { fetchProductsStart } from "../../redux/Products/products.actions";
@@ -17,13 +17,15 @@ const ProductResults = ({}) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { filterType } = useParams();
+	const [filter, setFilter] = useState("productCategory");
+
 	const { products } = useSelector(mapState);
 
 	const { data, queryDoc, isLastPage } = products;
 
 	useEffect(
 		() => {
-			dispatch(fetchProductsStart({ filterType }));
+			dispatch(fetchProductsStart({ filterType, filter }));
 		},
 		// eslint-disable-next-line
 		[filterType]
@@ -31,6 +33,13 @@ const ProductResults = ({}) => {
 
 	const handleFilter = (e) => {
 		const nextFilter = e.target.value;
+		setFilter("productCategory");
+		history.push(`/search/${nextFilter}`);
+	};
+
+	const handleFilterBrand = (e) => {
+		const nextFilter = e.target.value;
+		setFilter("productBrand");
 		history.push(`/search/${nextFilter}`);
 	};
 
@@ -53,7 +62,7 @@ const ProductResults = ({}) => {
 	const configFilterBrands = {
 		defaultValue: filterType,
 		options: watchBrands.options,
-		handleChange: handleFilter
+		handleChange: handleFilterBrand
 	};
 
 	const handleLoadMore = () => {

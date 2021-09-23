@@ -17,19 +17,21 @@ export const handleAddProduct = (product) => {
 
 export const handleFetchProducts = ({
 	filterType,
+	filter,
 	startAfterDoc,
 	persistProducts = []
 }) => {
 	return new Promise((resolve, reject) => {
 		const pageSize = 8;
+		const where = filter;
 
 		let ref = firestore
 			.collection("products")
 			.orderBy("createdDate")
 			.limit(pageSize);
 
-		if (filterType) ref = ref.where("productBrand", "==", filterType);
-		//if (ref < 1) ref = ref.where("productCategory", "==", filterType);
+		if (filterType) ref = ref.where(where, "==", filterType);
+		//if (ref === {}) ref = ref.where("productCategory", "==", filterType);
 		if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 
 		ref
