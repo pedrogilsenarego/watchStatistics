@@ -19,7 +19,11 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const LeftIcons = ({ watchstatistics, handleSupportOpen }) => {
+const LeftIcons = ({
+	watchstatistics,
+	handleSupportOpen,
+	handleWatchstatisticsOpen
+}) => {
 	const classes = useStyles();
 	const activeStyle = { color: "#FFA500" };
 
@@ -39,17 +43,18 @@ const LeftIcons = ({ watchstatistics, handleSupportOpen }) => {
 
 			<Button
 				disabled={watchstatistics}
+				aria-controls="watchstatistics"
 				className={classes.textBtn}
 				activeStyle={activeStyle}
-				component={NavLink}
 				disableRipple
-				to="/search"
+				onClick={(e) => handleWatchstatisticsOpen(e)}
 			>
 				{" "}
 				<BsGraphUp />
 				&nbsp;WatchStatistics
 			</Button>
 			<Button
+				disabled
 				className={classes.textBtn}
 				activeStyle={activeStyle}
 				disableRipple

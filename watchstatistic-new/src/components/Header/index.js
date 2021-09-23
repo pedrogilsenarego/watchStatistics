@@ -76,6 +76,7 @@ const Header = (props) => {
 	const [anchorLogin, setAnchorLogin] = useState(null);
 	const [anchorSignup, setAnchorSignup] = useState(null);
 	const [anchorMediaMenu, setAnchorMediaMenu] = useState(null);
+	const [anchorWatchStatistics, setAnchorWatchstatistics] = useState(null);
 
 	const [watchstatistics, setWatchstatistics] = useState(true);
 
@@ -117,8 +118,12 @@ const Header = (props) => {
 	const handleSupportOpen = (e) => {
 		setAnchorSupport(e.currentTarget);
 	};
+	const handleWatchstatisticsOpen = (e) => {
+		setAnchorWatchstatistics(e.currentTarget);
+	};
 	const configLeftIcons = {
 		watchstatistics,
+		handleWatchstatisticsOpen,
 		handleSupportOpen
 	};
 
@@ -139,6 +144,10 @@ const Header = (props) => {
 
 	const handleCloseSignupMenu = () => {
 		setAnchorSignup(null);
+	};
+
+	const handleCloseWatchstatisticsMenu = () => {
+		setAnchorWatchstatistics(null);
 	};
 
 	const handleCloseMyAccountMenu = () => {
@@ -231,6 +240,31 @@ const Header = (props) => {
 						VERIFY account to use WatchStatistics
 					</MenuItem>
 				)}
+			</Menu>
+			<Menu
+				disableScrollLock
+				className={classes.menu}
+				id="watchstatistics"
+				onClose={handleCloseWatchstatisticsMenu}
+				anchorEl={anchorWatchStatistics}
+				open={Boolean(anchorWatchStatistics)}
+			>
+				<MenuItem
+					onClick={() => {
+						handleCloseWatchstatisticsMenu();
+						history.push("/watchstatistics");
+					}}
+				>
+					Rooster
+				</MenuItem>
+				<MenuItem
+					onClick={() => {
+						handleCloseWatchstatisticsMenu();
+						history.push("/search");
+					}}
+				>
+					Browse
+				</MenuItem>
 			</Menu>
 			<Menu
 				disableScrollLock

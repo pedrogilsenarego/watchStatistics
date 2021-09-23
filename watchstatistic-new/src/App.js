@@ -20,6 +20,7 @@ import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
+import Watchstatistics from "./pages/Watchstatistics";
 
 import Order from "./pages/Order";
 
@@ -47,6 +48,17 @@ const App = (props) => {
 						<HomepageLayout>
 							<Homepage />
 						</HomepageLayout>
+					)}
+				/>
+				<Route
+					exact
+					path="/watchstatistics"
+					render={() => (
+						<WithAuth>
+							<MainLayout>
+								<Watchstatistics />
+							</MainLayout>
+						</WithAuth>
 					)}
 				/>
 				<Route

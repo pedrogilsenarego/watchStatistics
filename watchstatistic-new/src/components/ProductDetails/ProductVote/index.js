@@ -134,10 +134,11 @@ const ProductVote = () => {
 		}; */
 
 		if (ownership === "Own") {
-			const newAvgTotal = (
-				(+newAvgVotationsOwn + +avgVotationsNotOwn) /
-				2
-			).toFixed(2);
+			const newAvgTotal =
+				numberVotesNotOwn > 0
+					? ((+newAvgVotationsOwn + +avgVotationsNotOwn) / 2).toFixed(2)
+					: (+newAvgVotationsOwn / 1).toFixed(2);
+
 			const configVote = {
 				numberVotesOwn: numberVotesOwn + 1,
 				numberVotesNotOwn: numberVotesNotOwn,
@@ -153,10 +154,11 @@ const ProductVote = () => {
 			dispatch(updateProductVoteStart(configVote));
 		}
 		if (ownership === "Not Own") {
-			const newAvgTotal = (
-				(+avgVotationsOwn + +newAvgVotationsNotOwn) /
-				2
-			).toFixed(2);
+			const newAvgTotal =
+				numberVotesNotOwn > 0
+					? ((+newAvgVotationsOwn + +avgVotationsNotOwn) / 2).toFixed(2)
+					: (+newAvgVotationsNotOwn / 1).toFixed(2);
+
 			const configVote = {
 				numberVotesOwn: numberVotesOwn,
 				numberVotesNotOwn: numberVotesNotOwn + 1,
