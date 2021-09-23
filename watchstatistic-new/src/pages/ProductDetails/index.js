@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SideGraphPanel from "../../components/ProductDetails/ProductSideGraph";
 import SideDescription from "../../components/ProductDetails/ProductSideDescription";
 import { makeStyles } from "@material-ui/core/styles";
+import { BsXDiamond } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import {
 	Grid,
 	Card,
 	CardActionArea,
 	CardMedia,
-	CardContent
+	CardContent,
+	IconButton
 } from "@material-ui/core";
 
 import {
@@ -21,7 +23,8 @@ import { useParams } from "react-router";
 const useStyles = makeStyles((theme) => ({
 	root: {},
 	media: {
-		height: "94vh"
+		height: "94vh",
+		textAlign: "right"
 	},
 	side: {
 		height: "94vh"
@@ -48,6 +51,7 @@ const ProductDetails = ({}) => {
 	const dispatch = useDispatch();
 	const { productID } = useParams();
 	const { product } = useSelector(mapState);
+	const [mainImage, setMainImage] = useState({});
 
 	const classes = useStyles();
 
@@ -80,11 +84,20 @@ const ProductDetails = ({}) => {
 			>
 				<Grid item xs={12} md={8}>
 					<Card className={classes.root} alt={productName} disableRipple>
-						<CardActionArea disableRipple>
-							<CardMedia
-								className={classes.media}
-								image={productThumbnail[0]}
-							/>
+						<CardActionArea className={classes.root} disableRipple>
+							<CardMedia className={classes.media} image={productThumbnail[0]}>
+								{productThumbnail &&
+									productThumbnail.map((productThumbnail, pos) => {
+										return (
+											<IconButton
+												className={classes.textBtn}
+												onClick={(e) => {}}
+											>
+												<BsXDiamond fontSize="1.5em" />
+											</IconButton>
+										);
+									})}
+							</CardMedia>
 						</CardActionArea>
 					</Card>
 				</Grid>
