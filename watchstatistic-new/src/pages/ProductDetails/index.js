@@ -51,7 +51,7 @@ const ProductDetails = ({}) => {
 	const dispatch = useDispatch();
 	const { productID } = useParams();
 	const { product } = useSelector(mapState);
-	const [mainImage, setMainImage] = useState({});
+	const [mainImage, setMainImage] = useState(null);
 
 	const classes = useStyles();
 
@@ -67,6 +67,7 @@ const ProductDetails = ({}) => {
 	);
 
 	const { productThumbnail, productName } = product;
+
 	if (!productThumbnail || !productName) return null;
 
 	return (
@@ -85,19 +86,43 @@ const ProductDetails = ({}) => {
 				<Grid item xs={12} md={8}>
 					<Card className={classes.root} alt={productName} disableRipple>
 						<CardActionArea className={classes.root} disableRipple>
-							<CardMedia className={classes.media} image={productThumbnail[0]}>
-								{productThumbnail &&
-									productThumbnail.map((productThumbnail, pos) => {
-										return (
-											<IconButton
-												className={classes.textBtn}
-												onClick={(e) => {}}
-											>
-												<BsXDiamond fontSize="1.5em" />
-											</IconButton>
-										);
-									})}
-							</CardMedia>
+							{!mainImage && (
+								<CardMedia
+									className={classes.media}
+									image={productThumbnail[0]}
+								>
+									{productThumbnail &&
+										productThumbnail.map((productThumbnail, pos) => {
+											return (
+												<IconButton
+													className={classes.textBtn}
+													onClick={(e) => {
+														setMainImage(productThumbnail);
+													}}
+												>
+													<BsXDiamond fontSize="1.5em" />
+												</IconButton>
+											);
+										})}
+								</CardMedia>
+							)}
+							{mainImage && (
+								<CardMedia className={classes.media} image={mainImage}>
+									{productThumbnail &&
+										productThumbnail.map((productThumbnail, pos) => {
+											return (
+												<IconButton
+													className={classes.textBtn}
+													onClick={(e) => {
+														setMainImage(productThumbnail);
+													}}
+												>
+													<BsXDiamond fontSize="1.5em" />
+												</IconButton>
+											);
+										})}
+								</CardMedia>
+							)}
 						</CardActionArea>
 					</Card>
 				</Grid>
