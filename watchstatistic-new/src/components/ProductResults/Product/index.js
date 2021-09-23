@@ -51,7 +51,7 @@ const Product = (product) => {
 			{onMouse && (
 				<CardMedia
 					className={classes.media}
-					image={productThumbnail}
+					image={productThumbnail[0]}
 					key={1}
 					onClick={() => setOnMouse(false)}
 					onMouseEnter={() => setOnMouse(false)}
@@ -61,7 +61,7 @@ const Product = (product) => {
 				<div className={classes.imageWrapper}>
 					<CardMedia
 						className={classes.media2}
-						image={productThumbnail}
+						image={productThumbnail[0]}
 						key={1}
 						style={{
 							position: "relative",

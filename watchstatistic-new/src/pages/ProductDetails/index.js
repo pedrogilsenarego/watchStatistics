@@ -49,7 +49,6 @@ const ProductDetails = ({}) => {
 	const { productID } = useParams();
 	const { product } = useSelector(mapState);
 
-	const { productThumbnail, productName } = product;
 	const classes = useStyles();
 
 	useEffect(
@@ -62,6 +61,10 @@ const ProductDetails = ({}) => {
 		// eslint-disable-next-line
 		[]
 	);
+
+	const { productThumbnail, productName } = product;
+	if (!productThumbnail || !productName) return null;
+
 	return (
 		<div>
 			<Grid
@@ -78,7 +81,10 @@ const ProductDetails = ({}) => {
 				<Grid item xs={12} md={8}>
 					<Card className={classes.root} alt={productName} disableRipple>
 						<CardActionArea disableRipple>
-							<CardMedia className={classes.media} image={productThumbnail} />
+							<CardMedia
+								className={classes.media}
+								image={productThumbnail[0]}
+							/>
 						</CardActionArea>
 					</Card>
 				</Grid>
