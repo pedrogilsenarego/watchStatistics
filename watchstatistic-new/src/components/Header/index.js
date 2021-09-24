@@ -82,7 +82,7 @@ const Header = (props) => {
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
-	const { userVotes, userRoles } = currentUser ? currentUser : 2;
+	const { userRoles } = currentUser ? currentUser : 2;
 
 	const signOut = () => {
 		dispatch(signOutUserStart());
@@ -296,9 +296,6 @@ const Header = (props) => {
 				>
 					DashBoard
 				</MenuItem>
-				{currentUser && (
-					<MenuItem>Watches voted: {userVotes.length - 1}</MenuItem>
-				)}
 				<MenuItem
 					onClick={() => {
 						signOut();

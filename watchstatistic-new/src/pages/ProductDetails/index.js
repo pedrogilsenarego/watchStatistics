@@ -7,10 +7,10 @@ import { useSelector } from "react-redux";
 import {
 	Grid,
 	Card,
-	CardActionArea,
 	CardMedia,
 	CardContent,
-	IconButton
+	IconButton,
+	Box
 } from "@material-ui/core";
 
 import {
@@ -24,7 +24,9 @@ const useStyles = makeStyles((theme) => ({
 	root: {},
 	media: {
 		height: "94vh",
-		textAlign: "right"
+		textAlign: "right",
+		paddingTop: "86vh",
+		paddingRight: "5px"
 	},
 	side: {
 		height: "94vh"
@@ -32,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 	textBtn: {
 		color: "#FFFFFF",
 		fontSize: "13px",
+
 		"&:hover": {
 			color: "#FFA500"
 		},
@@ -84,47 +87,42 @@ const ProductDetails = ({}) => {
 				}}
 			>
 				<Grid item xs={12} md={8}>
-					<Card className={classes.root} alt={productName} disableRipple>
-						<CardActionArea className={classes.root} disableRipple>
-							{!mainImage && (
-								<CardMedia
-									className={classes.media}
-									image={productThumbnail[0]}
-								>
-									{productThumbnail &&
-										productThumbnail.map((productThumbnail, pos) => {
-											return (
-												<IconButton
-													className={classes.textBtn}
-													onClick={(e) => {
-														setMainImage(productThumbnail);
-													}}
-												>
-													<BsXDiamond fontSize="1.5em" />
-												</IconButton>
-											);
-										})}
-								</CardMedia>
-							)}
-							{mainImage && (
-								<CardMedia className={classes.media} image={mainImage}>
-									{productThumbnail &&
-										productThumbnail.map((productThumbnail, pos) => {
-											return (
-												<IconButton
-													className={classes.textBtn}
-													onClick={(e) => {
-														setMainImage(productThumbnail);
-													}}
-												>
-													<BsXDiamond fontSize="1.5em" />
-												</IconButton>
-											);
-										})}
-								</CardMedia>
-							)}
-						</CardActionArea>
-					</Card>
+					<Box className={classes.root} alt={productName}>
+						{!mainImage && (
+							<CardMedia className={classes.media} image={productThumbnail[0]}>
+								{productThumbnail &&
+									productThumbnail.map((productThumbnail, pos) => {
+										return (
+											<IconButton
+												className={classes.textBtn}
+												onClick={(e) => {
+													setMainImage(productThumbnail);
+												}}
+											>
+												<BsXDiamond fontSize="1.5em" />
+											</IconButton>
+										);
+									})}
+							</CardMedia>
+						)}
+						{mainImage && (
+							<CardMedia className={classes.media} image={mainImage}>
+								{productThumbnail &&
+									productThumbnail.map((productThumbnail, pos) => {
+										return (
+											<IconButton
+												className={classes.textBtn}
+												onClick={(e) => {
+													setMainImage(productThumbnail);
+												}}
+											>
+												<BsXDiamond fontSize="1.5em" />
+											</IconButton>
+										);
+									})}
+							</CardMedia>
+						)}
+					</Box>
 				</Grid>
 				<Grid item xs={12} md={4}>
 					<Card className={classes.side} style={{ backgroundColor: "#36454f" }}>
