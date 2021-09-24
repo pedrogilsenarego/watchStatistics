@@ -47,7 +47,11 @@ const WatchstatisticsSubHeader = ({}) => {
 						<Typography className={classes.text} variant="h5">
 							Welcome, {displayName}
 						</Typography>
-						<Typography className={classes.text} style={{ color: "#ffffffB3" }}>
+						<Typography
+							className={classes.text}
+							variant="h6"
+							style={{ color: "#ffffffB3" }}
+						>
 							have you voted today?
 						</Typography>
 					</Grid>

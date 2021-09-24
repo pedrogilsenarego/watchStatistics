@@ -85,9 +85,11 @@ const App = (props) => {
 				<Route
 					path="/product/:productID"
 					render={() => (
-						<MainLayout>
-							<ProductDetails />
-						</MainLayout>
+						<WithAuth>
+							<MainLayout>
+								<ProductDetails />
+							</MainLayout>
+						</WithAuth>
 					)}
 				/>
 				<Route
