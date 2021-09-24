@@ -31,7 +31,6 @@ export const handleFetchProducts = ({
 			.limit(pageSize);
 
 		if (filterType) ref = ref.where(where, "==", filterType);
-		//if (ref === {}) ref = ref.where("productCategory", "==", filterType);
 		if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 
 		ref

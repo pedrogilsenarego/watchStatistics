@@ -56,10 +56,12 @@ const WatchstatisticsSubHeader = ({}) => {
 						</Typography>
 					</Grid>
 					<Grid item xs={12} md={6} className={classes.item}>
-						<Typography className={classes.text}>
-							you have voted on {numberVotes} watches
+						<Typography variant="h6" className={classes.text}>
+							Watches voted: {numberVotes}
 						</Typography>
-						<Typography className={classes.text}>Rank: {rank()}</Typography>
+						<Typography variant="h6" className={classes.text}>
+							Rank: {rank()}
+						</Typography>
 					</Grid>
 				</Grid>
 			</Box>

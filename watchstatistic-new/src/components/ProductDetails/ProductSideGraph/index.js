@@ -188,7 +188,6 @@ const ProductSidePanel = ({}) => {
 		<Grid container>
 			<Grid item xs={12}>
 				<Box
-					bgcolor={"primary.dark"}
 					color={"text.secondary"}
 					borderRadius="10px"
 					style={{

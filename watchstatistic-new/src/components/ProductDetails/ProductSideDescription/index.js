@@ -33,11 +33,7 @@ const ProductSideDescription = ({}) => {
 
 	return (
 		<div>
-			<Box
-				bgcolor={"primary.dark"}
-				color={"text.secondary"}
-				borderRadius="10px"
-			>
+			<Box color={"text.secondary"} borderRadius="10px">
 				<Typography
 					dangerouslySetInnerHTML={{ __html: productDesc }}
 					align="justify"
@@ -45,7 +41,6 @@ const ProductSideDescription = ({}) => {
 				/>
 			</Box>
 			<Box
-				bgcolor={"primary.dark"}
 				color={"text.secondary"}
 				borderRadius="10px"
 				style={{ marginTop: "5px" }}
