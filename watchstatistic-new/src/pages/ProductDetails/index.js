@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { BsXDiamond } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { Parallax } from "react-parallax";
+
 import {
 	Grid,
 	Card,
@@ -29,6 +30,8 @@ const image3 =
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
+
+	filter: {},
 
 	media: {
 		height: "94vh",
@@ -89,75 +92,84 @@ const ProductDetails = ({}) => {
 
 	return (
 		<Box>
-			<Parallax bgImage={bgImage()} strength={300}>
-				<Grid
-					container
-					spacing={1}
+			<Parallax style={{}} bgImage={bgImage()} strength={300}>
+				<Box
+					className={classes.filter}
+					height={"100%"}
+					bgcolor="#581E064D"
 					style={{
-						paddingTop: "70px",
-						paddingLeft: "10px",
-						paddingRight: "10px"
+						position: "relative"
 					}}
 				>
-					<Grid item xs={12} md={8}>
-						<Box alt={productName}>
-							{!mainImage && (
-								<CardMedia
-									className={classes.media}
-									image={productThumbnail[0]}
-								>
-									{productThumbnail &&
-										productThumbnail.map((productThumbnail, pos) => {
-											return (
-												<IconButton
-													className={classes.textBtn}
-													onClick={(e) => {
-														setMainImage(productThumbnail);
-													}}
-												>
-													<BsXDiamond fontSize="1.5em" />
-												</IconButton>
-											);
-										})}
-								</CardMedia>
-							)}
-							{mainImage && (
-								<CardMedia className={classes.media} image={mainImage}>
-									{productThumbnail &&
-										productThumbnail.map((productThumbnail, pos) => {
-											return (
-												<IconButton
-													className={classes.textBtn}
-													onClick={(e) => {
-														setMainImage(productThumbnail);
-													}}
-												>
-													<BsXDiamond fontSize="1.5em" />
-												</IconButton>
-											);
-										})}
-								</CardMedia>
-							)}
-						</Box>
+					<Grid
+						container
+						spacing={1}
+						style={{
+							paddingTop: "70px",
+							paddingLeft: "10px",
+							paddingRight: "10px"
+						}}
+					>
+						<Grid item xs={12} md={8}>
+							<Box alt={productName}>
+								{!mainImage && (
+									<CardMedia
+										className={classes.media}
+										image={productThumbnail[0]}
+									>
+										{productThumbnail &&
+											productThumbnail.map((productThumbnail, pos) => {
+												return (
+													<IconButton
+														className={classes.textBtn}
+														onClick={(e) => {
+															setMainImage(productThumbnail);
+														}}
+													>
+														<BsXDiamond fontSize="1.5em" />
+													</IconButton>
+												);
+											})}
+									</CardMedia>
+								)}
+								{mainImage && (
+									<CardMedia className={classes.media} image={mainImage}>
+										{productThumbnail &&
+											productThumbnail.map((productThumbnail, pos) => {
+												return (
+													<IconButton
+														className={classes.textBtn}
+														onClick={(e) => {
+															setMainImage(productThumbnail);
+														}}
+													>
+														<BsXDiamond fontSize="1.5em" />
+													</IconButton>
+												);
+											})}
+									</CardMedia>
+								)}
+							</Box>
+						</Grid>
+						<Grid item xs={12} md={4}>
+							<Card
+								className={classes.side}
+								style={{ backgroundColor: "#04040680" }}
+							>
+								<CardContent style={{ padding: "5px" }}>
+									<SideGraphPanel />
+								</CardContent>
+							</Card>
+						</Grid>
+						<Grid item xs={12} sm={12}>
+							<Card style={{ backgroundColor: "#04040680" }}>
+								<CardContent style={{ padding: "5px" }}>
+									<SideDescription />
+								</CardContent>
+							</Card>
+						</Grid>
 					</Grid>
-					<Grid item xs={12} md={4}>
-						<Card
-							className={classes.side}
-							style={{ backgroundColor: "#04040680" }}
-						>
-							<CardContent style={{ padding: "5px" }}>
-								<SideGraphPanel />
-							</CardContent>
-						</Card>
-					</Grid>
-					<Grid item xs={12} sm={12}>
-						<Card style={{ backgroundColor: "#04040680" }}>
-							<CardContent style={{ padding: "5px" }}>
-								<SideDescription />
-							</CardContent>
-						</Card>
-					</Grid>
-				</Grid>
+				</Box>
 			</Parallax>
 		</Box>
 	);
