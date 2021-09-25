@@ -28,6 +28,8 @@ const image2 =
 const image3 =
 	"https://www.idesignarch.com/wp-content/uploads/Buckingham-Palace-Throne-Room.jpg";
 
+const image4 = "https://wallpaperaccess.com/full/465780.jpg";
+
 const useStyles = makeStyles((theme) => ({
 	root: {},
 
@@ -86,6 +88,7 @@ const ProductDetails = ({}) => {
 		if (productCategory === "field") return image2;
 		if (productCategory === "divers") return image1;
 		if (productCategory === "dress") return image3;
+		if (productCategory === "pilot") return image4;
 	};
 
 	if (!productThumbnail || !productName) return null;

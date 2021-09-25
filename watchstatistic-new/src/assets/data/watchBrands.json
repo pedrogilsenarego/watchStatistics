@@ -8,6 +8,7 @@
 		{ "name": "GrandSeiko", "value": "grandseiko" },
 		{ "name": "Isotope", "value": "isotope" },
 		{ "name": "Rolex", "value": "rolex" },
-		{ "name": "Seiko", "value": "seiko" }
+		{ "name": "Seiko", "value": "seiko" },
+		{ "name": "Sinn", "value": "sinn" }
 	]
 }

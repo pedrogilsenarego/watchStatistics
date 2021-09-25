@@ -27,7 +27,7 @@ export const handleFetchProducts = ({
 
 		let ref = firestore
 			.collection("products")
-			.orderBy("createdDate")
+			.orderBy("avgTotal", "desc")
 			.limit(pageSize);
 
 		if (filterType) ref = ref.where(where, "==", filterType);
