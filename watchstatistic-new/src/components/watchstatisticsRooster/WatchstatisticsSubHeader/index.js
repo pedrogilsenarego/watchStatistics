@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		height: "25vh",
+		height: "20vh",
 		marginTop: "80px",
 		background: "#196B91",
 		display: "flex",

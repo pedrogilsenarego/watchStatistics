@@ -99,7 +99,6 @@ const ProductDetails = ({}) => {
 				<Box
 					className={classes.filter}
 					height={"100%"}
-					bgcolor="#581E064D"
 					style={{
 						position: "relative"
 					}}

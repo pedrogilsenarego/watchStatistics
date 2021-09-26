@@ -18,11 +18,12 @@ export const handleAddProduct = (product) => {
 export const handleFetchProducts = ({
 	filterType,
 	filter,
+	pageSize,
 	startAfterDoc,
 	persistProducts = []
 }) => {
 	return new Promise((resolve, reject) => {
-		const pageSize = 8;
+		//const pageSize = 8;
 		const where = filter;
 
 		let ref = firestore

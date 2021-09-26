@@ -18,6 +18,7 @@ const ProductResults = ({}) => {
 	const history = useHistory();
 	const { filterType } = useParams();
 	const [filter, setFilter] = useState("productCategory");
+	const pageSize = 8;
 
 	const { products } = useSelector(mapState);
 
@@ -25,7 +26,7 @@ const ProductResults = ({}) => {
 
 	useEffect(
 		() => {
-			dispatch(fetchProductsStart({ filterType, filter }));
+			dispatch(fetchProductsStart({ filterType, filter, pageSize }));
 		},
 		// eslint-disable-next-line
 		[filterType]

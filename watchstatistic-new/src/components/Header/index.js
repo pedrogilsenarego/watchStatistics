@@ -337,6 +337,7 @@ const Header = (props) => {
 					<BsGraphUp />
 					&nbsp;WatchStatistics
 				</MenuItem>
+
 				<MenuItem
 					className={classes.textBtn}
 					activeStyle={activeStyle}
