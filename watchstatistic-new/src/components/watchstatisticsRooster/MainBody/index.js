@@ -12,17 +12,9 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
 import { fetchProductsStart } from "../../../redux/Products/products.actions";
 
-const useStyles = makeStyles((theme) => ({
-	root: {},
-	container: {
-		textAlign: "center"
-	},
-	item: {},
-	text: {}
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 const mapState = ({ productsData }) => ({
 	products: productsData.products
@@ -32,22 +24,18 @@ const mapState = ({ productsData }) => ({
 const MainBody = ({}) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
-	const { filterType } = useParams();
-	const filter = "productCategory";
 	const pageSize = 5;
 
 	const { products } = useSelector(mapState);
 
 	const { data } = products;
 
-	const { productName } = data;
-
 	useEffect(
 		() => {
-			dispatch(fetchProductsStart({ filterType, filter, pageSize }));
+			dispatch(fetchProductsStart({ pageSize }));
 		},
 		// eslint-disable-next-line
-		[filterType]
+		[]
 	);
 
 	if (!Array.isArray(data)) return null;
@@ -63,22 +51,21 @@ const MainBody = ({}) => {
 	return (
 		<div>
 			<Grid container className={classes.container}>
-				<Grid item xs={6}>
+				<Grid item xs={12} md={6}>
 					<Typography variant={"h5"}>Top 5 Watches</Typography>
-					<Typography variant={"h5"}>{productName}</Typography>
 					<TableContainer component={Paper}>
-						<Table sx={{ minWidth: 650 }} aria-label="simple table">
+						<Table aria-label="simple table">
 							<TableHead>
 								<TableRow>
-									<TableCell>Watches</TableCell>
+									<TableCell align="center">Watches</TableCell>
 
-									<TableCell align="right">Score</TableCell>
-									<TableCell align="right">Category</TableCell>
-									<TableCell align="right">Votes</TableCell>
+									<TableCell align="center">Score</TableCell>
+									<TableCell align="center">Category</TableCell>
+									<TableCell align="center">Votes</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{data.map((product, pos) => {
+								{data.map((product) => {
 									const {
 										productName,
 										productBrand,
@@ -93,12 +80,12 @@ const MainBody = ({}) => {
 											key={productName}
 											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 										>
-											<TableCell component="th" scope="row">
+											<TableCell align="center" component="th" scope="row">
 												{productBrand} - {productName}
 											</TableCell>
-											<TableCell align="right">{avgTotal} /10</TableCell>
-											<TableCell align="right">{productCategory}</TableCell>
-											<TableCell align="right">
+											<TableCell align="center">{avgTotal} /10</TableCell>
+											<TableCell align="center">{productCategory}</TableCell>
+											<TableCell align="center">
 												{numberVotesNotOwn + numberVotesOwn}
 											</TableCell>
 										</TableRow>

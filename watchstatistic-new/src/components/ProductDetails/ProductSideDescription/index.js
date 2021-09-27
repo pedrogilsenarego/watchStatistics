@@ -49,7 +49,7 @@ const ProductSideDescription = ({}) => {
 					{additionalData &&
 						additionalData.map((additionalData, pos) => {
 							return (
-								<Grid xs={6}>
+								<Grid xs={6} md={3}>
 									<Button
 										className={classes.textBtn}
 										align="justify"

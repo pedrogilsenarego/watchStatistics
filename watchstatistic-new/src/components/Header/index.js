@@ -327,12 +327,12 @@ const Header = (props) => {
 					&nbsp;Home
 				</MenuItem>
 				<MenuItem
+					aria-controls="watchstatistics"
 					disabled={watchstatistics}
 					className={classes.textBtn}
 					activeStyle={activeStyle}
-					component={NavLink}
 					disableRipple
-					to="/search"
+					onClick={(e) => handleWatchstatisticsOpen(e)}
 				>
 					<BsGraphUp />
 					&nbsp;WatchStatistics
