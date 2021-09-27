@@ -21,12 +21,12 @@ export const handleResetPasswordAPI = (email) => {
 
 //implementations
 export const handleFetchUsers = () => {
-	/* return new Promise((resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		const pageSize = 5;
 
 		let ref = firestore
 			.collection("users")
-			.orderBy("createdDate")
+			.orderBy("numberVotes", "desc")
 			.limit(pageSize);
 
 		ref
@@ -52,5 +52,5 @@ export const handleFetchUsers = () => {
 			.catch((err) => {
 				reject(err);
 			});
-	}); */
+	});
 };

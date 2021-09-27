@@ -21,7 +21,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
 	if (!snapshot.exists) {
 		const { displayName, email } = userAuth;
 		const timestamp = new Date();
-		const userRoles = ["user", "non-verified"];
+		const userRoles = ["user", "verified"];
 
 		try {
 			await userRef.set({
@@ -30,6 +30,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
 				createdDate: timestamp,
 				userRoles,
 				userVotes: ["1"],
+				numberVotes: ["0"],
 				...additionalData
 			});
 		} catch (err) {
@@ -62,6 +63,7 @@ export const handleUserProfileSocialLogin = async ({
 				createdDate: timestamp,
 				userRoles,
 				userVotes: ["1"],
+				numberVotes: ["0"],
 				...additionalData
 			});
 		} catch (err) {

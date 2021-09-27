@@ -38,7 +38,7 @@ const ProductVote = () => {
 	const [xFactor, setXFactor] = useState("");
 	const { productID } = useParams();
 
-	const { id, userVotes } = currentUser;
+	const { id, userVotes, numberVotes } = currentUser;
 
 	const {
 		numberVotesOwn,
@@ -149,6 +149,7 @@ const ProductVote = () => {
 				avgVotationsNotOwn: avgVotationsNotOwn,
 				avgTotal: newAvgTotal,
 				userID: id,
+				numberVotes: numberVotes + 1,
 				userVotes: newVoteArray
 			};
 			dispatch(updateProductVoteStart(configVote));
@@ -169,6 +170,7 @@ const ProductVote = () => {
 				avgVotationsNotOwn: newAvgVotationsNotOwn,
 				avgTotal: newAvgTotal,
 				userID: id,
+				numberVotes: numberVotes + 1,
 				userVotes: newVoteArray
 			};
 			dispatch(updateProductVoteStart(configVote));

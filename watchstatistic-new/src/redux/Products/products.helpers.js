@@ -130,13 +130,14 @@ export const handleUpdateVote = (product) => {
 //new Implementation
 
 export const handleUserVote = (product) => {
-	const { userID, userVotes } = product;
+	const { userID, userVotes, numberVotes } = product;
 	return new Promise((resolve, reject) => {
 		firestore
 			.collection("users")
 			.doc(userID)
 			.update({
-				userVotes: userVotes
+				userVotes: userVotes,
+				numberVotes: numberVotes
 			})
 			.then(() => {
 				resolve();

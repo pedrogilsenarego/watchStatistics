@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router";
+
 import {
 	Table,
 	TableContainer,
@@ -26,12 +26,11 @@ const mapState = (state) => ({
 const MainUsers = ({}) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
-	const history = useHistory();
 	const pageSize = 5;
 
-	const { products } = useSelector(mapState);
+	const { users } = useSelector(mapState);
 
-	const { data } = products;
+	const { data } = users;
 
 	useEffect(
 		() => {
@@ -56,45 +55,29 @@ const MainUsers = ({}) => {
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
 				<Grid item xs={12} md={6}>
 					<Typography variant={"h5"} align="center">
-						Top 5 Watches
+						Top 5 Users
 					</Typography>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
 						<Table aria-label="simple table">
 							<TableHead>
 								<TableRow>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
-										Watches
+										Users
 									</TableCell>
 
 									<TableCell align="center" style={{ fontSize: "15px" }}>
-										Score
-									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
-										Category
-									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
-										Votes
+										Number of Votes
 									</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
 								{data.map((product) => {
-									const {
-										productName,
-										productBrand,
-										avgTotal,
-										productCategory,
-										numberVotesOwn,
-										numberVotesNotOwn,
-										documentID
-									} = product;
-									if (!productName) return null;
+									const { displayName, userVotes } = product;
+
 									return (
 										<TableRow
-											key={productName}
-											style={{ cursor: "pointer" }}
+											key={displayName}
 											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-											onClick={() => history.push(`/product/${documentID}`)}
 										>
 											<TableCell
 												align="center"
@@ -102,16 +85,10 @@ const MainUsers = ({}) => {
 												scope="row"
 												style={{ color: "#ffffffB3" }}
 											>
-												{productBrand} - {productName}
+												{displayName}
 											</TableCell>
 											<TableCell align="center" style={{ color: "#ffffffB3" }}>
-												{avgTotal} /10
-											</TableCell>
-											<TableCell align="center" style={{ color: "#ffffffB3" }}>
-												{productCategory}
-											</TableCell>
-											<TableCell align="center" style={{ color: "#ffffffB3" }}>
-												{numberVotesNotOwn + numberVotesOwn}
+												{userVotes.length - 1}
 											</TableCell>
 										</TableRow>
 									);

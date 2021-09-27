@@ -142,9 +142,9 @@ export function* onGoogleSignInStart() {
 }
 
 //implementations
-export function* fetchUsers({ payload }) {
+export function* fetchUsers() {
 	try {
-		const users = "teste"; //yield handleFetchUsers(payload);
+		const users = yield handleFetchUsers();
 		yield put(setUsers(users));
 	} catch (err) {
 		// console.log(err);
