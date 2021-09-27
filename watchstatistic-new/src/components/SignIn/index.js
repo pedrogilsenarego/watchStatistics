@@ -81,7 +81,7 @@ const SignIn = ({ handleCloseLoginMenu }) => {
 					fullWidth={true}
 					style={{ backgroundColor: "#4285F4", color: "#FFFFFF" }}
 				>
-					<FcGoogle size={"2em"} />
+					<FcGoogle size={"2em"} /> &nbsp;Login With Google
 				</Button>
 			</Grid>
 

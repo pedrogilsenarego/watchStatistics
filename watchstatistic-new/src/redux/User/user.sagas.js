@@ -11,9 +11,10 @@ import {
 	signInSuccess,
 	signOutUserSuccess,
 	resetPasswordSuccess,
-	userError
+	userError,
+	setUsers
 } from "./user.actions";
-import { handleResetPasswordAPI } from "./user.helpers";
+import { handleResetPasswordAPI, handleFetchUsers } from "./user.helpers";
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
 	try {
@@ -140,6 +141,20 @@ export function* onGoogleSignInStart() {
 	yield takeLatest(userTypes.GOOGLE_SIGN_IN_START, googleSignIn);
 }
 
+//implementations
+export function* fetchUsers({ payload }) {
+	try {
+		const users = "teste"; //yield handleFetchUsers(payload);
+		yield put(setUsers(users));
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* onFetchUsersStart() {
+	yield takeLatest(userTypes.FETCH_USERS_START, fetchUsers);
+}
+
 export default function* userSagas() {
 	yield all([
 		call(onEmailSignInStart),
@@ -147,6 +162,7 @@ export default function* userSagas() {
 		call(onSignOutUserStart),
 		call(onSignUpUserStart),
 		call(onResetPasswordStart),
-		call(onGoogleSignInStart)
+		call(onGoogleSignInStart),
+		call(onFetchUsersStart)
 	]);
 }

@@ -13,16 +13,17 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductsStart } from "../../../redux/Products/products.actions";
+import { fetchUsersStart } from "../../../redux/User/user.actions";
 
 const useStyles = makeStyles((theme) => ({}));
 
-const mapState = ({ productsData }) => ({
-	products: productsData.products
+const mapState = (state) => ({
+	users: state.user.users,
+	products: state.productsData.products
 });
 
 // eslint-disable-next-line
-const MainBody = ({}) => {
+const MainUsers = ({}) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -34,7 +35,7 @@ const MainBody = ({}) => {
 
 	useEffect(
 		() => {
-			dispatch(fetchProductsStart({ pageSize }));
+			dispatch(fetchUsersStart({ pageSize }));
 		},
 		// eslint-disable-next-line
 		[]
@@ -124,4 +125,4 @@ const MainBody = ({}) => {
 	);
 };
 
-export default MainBody;
+export default MainUsers;
