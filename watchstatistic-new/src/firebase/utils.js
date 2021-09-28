@@ -30,7 +30,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
 				createdDate: timestamp,
 				userRoles,
 				userVotes: ["1"],
-				numberVotes: ["0"],
+				numberVotes: 0,
 				...additionalData
 			});
 		} catch (err) {
@@ -63,7 +63,7 @@ export const handleUserProfileSocialLogin = async ({
 				createdDate: timestamp,
 				userRoles,
 				userVotes: ["1"],
-				numberVotes: ["0"],
+				numberVotes: 0,
 				...additionalData
 			});
 		} catch (err) {

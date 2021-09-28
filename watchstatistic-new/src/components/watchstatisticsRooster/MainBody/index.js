@@ -34,7 +34,7 @@ const MainBody = ({}) => {
 
 	useEffect(
 		() => {
-			dispatch(fetchProductsStart(pageSize));
+			dispatch(fetchProductsStart({ pageSize }));
 		},
 		// eslint-disable-next-line
 		[]
