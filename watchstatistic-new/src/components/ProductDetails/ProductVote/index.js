@@ -35,7 +35,6 @@ const ProductVote = () => {
 	const [history, setHistory] = useState("");
 	const [engineering, setEngineering] = useState("");
 	const [xFactor, setXFactor] = useState("");
-	const [errors, setErrors] = useState(false);
 	const { productID } = useParams();
 
 	const { id, userVotes, numberVotes } = currentUser;
@@ -117,13 +116,13 @@ const ProductVote = () => {
 	const handleApplyVote = (e) => {
 		e.preventDefault();
 		if (
-			ownership !== "" ||
-			quality !== "" ||
-			price !== "" ||
-			brand !== "" ||
-			refinement !== "" ||
-			history !== "" ||
-			engineering !== "" ||
+			ownership !== "" &&
+			quality !== "" &&
+			price !== "" &&
+			brand !== "" &&
+			refinement !== "" &&
+			history !== "" &&
+			engineering !== "" &&
 			xFactor !== ""
 		) {
 			if (ownership === "Own") {
@@ -169,7 +168,6 @@ const ProductVote = () => {
 				dispatch(updateProductVoteStart(configVote));
 			}
 		}
-		setErrors(true);
 	};
 
 	const newAvgVotationsOwn = (
@@ -314,7 +312,14 @@ const ProductVote = () => {
 							setXFactor(newValue);
 						}}
 					/>
-					{errors && (
+					{(quality === "" ||
+						price === "" ||
+						ownership === "" ||
+						brand === "" ||
+						refinement === "" ||
+						history === "" ||
+						engineering === "" ||
+						xFactor === "") && (
 						<Typography style={{ color: "red" }}>
 							You must choose all fields
 						</Typography>
