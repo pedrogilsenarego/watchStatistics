@@ -8,6 +8,7 @@
 		{ "name": "Citizen", "value": "citizen" },
 		{ "name": "GrandSeiko", "value": "grandseiko" },
 		{ "name": "Isotope", "value": "isotope" },
+		{ "name": "Omega", "value": "omega" },
 		{ "name": "Rolex", "value": "rolex" },
 		{ "name": "Seiko", "value": "seiko" },
 		{ "name": "Sinn", "value": "sinn" }

@@ -4,17 +4,33 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import Button from "../../forms/Button";
+import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { updateProductVoteStart } from "../../../redux/Products/products.actions";
-//import { makeStyles } from "@material-ui/core/styles";
-//import { saveOrderHistory } from "../../../redux/Orders/orders.actions";
+import { makeStyles } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import { createTheme } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
 
-/* const useStyles = makeStyles((theme) => ({
-	container: {}
-})); */
+const muiTheme = createTheme({
+	overrides: {
+		MuiSlider: {
+			thumb: {
+				color: "#36454f"
+			},
+			track: {
+				color: "white"
+			},
+			rail: {
+				color: "white"
+			}
+		}
+	}
+});
+
+const useStyles = makeStyles((theme) => ({}));
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
@@ -23,7 +39,7 @@ const mapState = (state) => ({
 
 // eslint-disable-next-line
 const ProductVote = () => {
-	//const classes = useStyles();
+	const classes = useStyles();
 
 	const { product, currentUser } = useSelector(mapState);
 	const dispatch = useDispatch();
@@ -35,6 +51,7 @@ const ProductVote = () => {
 	const [history, setHistory] = useState("");
 	const [engineering, setEngineering] = useState("");
 	const [xFactor, setXFactor] = useState("");
+	const [errors, setErrors] = useState(false);
 	const { productID } = useParams();
 
 	const { id, userVotes, numberVotes } = currentUser;
@@ -167,7 +184,9 @@ const ProductVote = () => {
 				};
 				dispatch(updateProductVoteStart(configVote));
 			}
+			setErrors(false);
 		}
+		setErrors(true);
 	};
 
 	const newAvgVotationsOwn = (
@@ -185,7 +204,7 @@ const ProductVote = () => {
 	return (
 		<FormControl component="fieldset">
 			{!userVotes.includes(productID) && (
-				<div>
+				<Grid container>
 					<RadioGroup
 						aria-label="gender"
 						name="gender1"
@@ -205,127 +224,130 @@ const ProductVote = () => {
 							label="I do not own the watch"
 						/>
 					</RadioGroup>
-
-					<Typography id="discrete-slider" gutterBottom>
-						Aesthetics
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						name="quality"
-						onChange={(event, newValue) => {
-							setQuality(newValue);
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						Price over Quality
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setPrice(newValue);
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						Brand
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setBrand(newValue);
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						Refinement
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setRefinement(newValue);
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						History
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setHistory(newValue);
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						Engineering
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setEngineering(newValue);
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						X-Factor
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setXFactor(newValue);
-						}}
-					/>
-					{(quality === "" ||
-						price === "" ||
-						ownership === "" ||
-						brand === "" ||
-						refinement === "" ||
-						history === "" ||
-						engineering === "" ||
-						xFactor === "") && (
-						<Typography style={{ color: "red" }}>
-							You must choose all fields
+					<ThemeProvider theme={muiTheme}>
+						<Typography id="discrete-slider" gutterBottom>
+							Aesthetics
 						</Typography>
-					)}
+						<Slider
+							className={classes.slider}
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							name="quality"
+							onChange={(event, newValue) => {
+								setQuality(newValue);
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							Price over Quality
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setPrice(newValue);
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							Brand
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setBrand(newValue);
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							Refinement
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setRefinement(newValue);
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							History
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setHistory(newValue);
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							Engineering
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setEngineering(newValue);
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							X-Factor
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setXFactor(newValue);
+							}}
+						/>
+					</ThemeProvider>
+					{errors &&
+						(quality === "" ||
+							price === "" ||
+							ownership === "" ||
+							brand === "" ||
+							refinement === "" ||
+							history === "" ||
+							engineering === "" ||
+							xFactor === "") && (
+							<Typography style={{ color: "red" }}>
+								You must choose all fields
+							</Typography>
+						)}
 					<Button onClick={handleApplyVote}>Apply Vote</Button>
-				</div>
+				</Grid>
 			)}
 			{userVotes.includes(productID) && (
 				<div>

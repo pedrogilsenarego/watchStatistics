@@ -22,7 +22,7 @@ const mapState = (state) => ({
 const useStyles = makeStyles((theme) => ({
 	menu: {
 		"& .MuiPaper-root": {
-			backgroundColor: "#04040680",
+			backgroundColor: "#04040699",
 			color: "#ffffff",
 			disableScrollLock: true,
 			maxWidth: "350px"
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	menu2: {
 		"& .MuiPaper-root": {
-			backgroundColor: "#04040680",
+			backgroundColor: "#04040699",
 			color: "#ffffff",
 			disableScrollLock: true,
 			maxWidth: "200px"

@@ -29,6 +29,8 @@ const image3 =
 	"https://www.idesignarch.com/wp-content/uploads/Buckingham-Palace-Throne-Room.jpg";
 
 const image4 = "https://wallpaperaccess.com/full/465780.jpg";
+const image5 =
+	"https://assets-prd.formulae.cloud/-/media/images/news/2020/september/formula-e-grid-shot-start.jpg?modified=20200924095253&cx=0.5&cy=0.8&cw=1440&ch=707&hash=A789C5D311486689FF8C7780CA9E3249";
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
@@ -89,6 +91,7 @@ const ProductDetails = ({}) => {
 		if (productCategory === "divers") return image1;
 		if (productCategory === "dress") return image3;
 		if (productCategory === "pilot") return image4;
+		if (productCategory === "racing") return image5;
 	};
 
 	if (!productThumbnail || !productName) return null;

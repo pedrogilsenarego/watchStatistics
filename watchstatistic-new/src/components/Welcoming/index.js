@@ -42,7 +42,7 @@ const Welcoming = ({ children }) => {
 							<span style={{ color: "#FFA500", fontWeight: "bold" }}>
 								WHATCHSTATISTICS
 							</span>{" "}
-							you must be Login&lt;/body&gt;
+							you must be Logged In&lt;/body&gt;
 						</p>
 					</Typist>
 				)}
