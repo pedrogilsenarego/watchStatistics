@@ -4,7 +4,6 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 import Button from "../../forms/Button";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -28,7 +27,7 @@ const ProductVote = () => {
 
 	const { product, currentUser } = useSelector(mapState);
 	const dispatch = useDispatch();
-	const [ownership, setOwnership] = useState("Own");
+	const [ownership, setOwnership] = useState("");
 	const [quality, setQuality] = useState("");
 	const [price, setPrice] = useState("");
 	const [brand, setBrand] = useState("");
@@ -36,6 +35,7 @@ const ProductVote = () => {
 	const [history, setHistory] = useState("");
 	const [engineering, setEngineering] = useState("");
 	const [xFactor, setXFactor] = useState("");
+	const [errors, setErrors] = useState(false);
 	const { productID } = useParams();
 
 	const { id, userVotes, numberVotes } = currentUser;
@@ -112,70 +112,64 @@ const ProductVote = () => {
 		).toFixed(2)
 	];
 
-	/* const vote = [
-		quality,
-		price,
-		brand,
-		refinement,
-		history,
-		engineering,
-		xFactor
-	]; */
-
 	const newVoteArray = [...userVotes, productID];
 
 	const handleApplyVote = (e) => {
 		e.preventDefault();
-		/* const configOrder = {
-			productID: productID,
-			voteData: vote,
-			ownership: ownership,
-			productName: productName
-		}; */
+		if (
+			ownership !== "" ||
+			quality !== "" ||
+			price !== "" ||
+			brand !== "" ||
+			refinement !== "" ||
+			history !== "" ||
+			engineering !== "" ||
+			xFactor !== ""
+		) {
+			if (ownership === "Own") {
+				const newAvgTotal =
+					numberVotesNotOwn > 0
+						? ((+newAvgVotationsOwn + +avgVotationsNotOwn) / 2).toFixed(2)
+						: (+newAvgVotationsOwn / 1).toFixed(2);
 
-		if (ownership === "Own") {
-			const newAvgTotal =
-				numberVotesNotOwn > 0
-					? ((+newAvgVotationsOwn + +avgVotationsNotOwn) / 2).toFixed(2)
-					: (+newAvgVotationsOwn / 1).toFixed(2);
+				const configVote = {
+					numberVotesOwn: numberVotesOwn + 1,
+					numberVotesNotOwn: numberVotesNotOwn,
+					productID: productID,
+					votationsNonOwn: votationsNonOwn,
+					votationsOwn: newVotationsOwnArray,
+					avgVotationsOwn: newAvgVotationsOwn,
+					avgVotationsNotOwn: avgVotationsNotOwn,
+					avgTotal: newAvgTotal,
+					userID: id,
+					numberVotes: numberVotes + 1,
+					userVotes: newVoteArray
+				};
+				dispatch(updateProductVoteStart(configVote));
+			}
+			if (ownership === "Not Own") {
+				const newAvgTotal =
+					numberVotesNotOwn > 0
+						? ((+newAvgVotationsOwn + +avgVotationsNotOwn) / 2).toFixed(2)
+						: (+newAvgVotationsNotOwn / 1).toFixed(2);
 
-			const configVote = {
-				numberVotesOwn: numberVotesOwn + 1,
-				numberVotesNotOwn: numberVotesNotOwn,
-				productID: productID,
-				votationsNonOwn: votationsNonOwn,
-				votationsOwn: newVotationsOwnArray,
-				avgVotationsOwn: newAvgVotationsOwn,
-				avgVotationsNotOwn: avgVotationsNotOwn,
-				avgTotal: newAvgTotal,
-				userID: id,
-				numberVotes: numberVotes + 1,
-				userVotes: newVoteArray
-			};
-			dispatch(updateProductVoteStart(configVote));
+				const configVote = {
+					numberVotesOwn: numberVotesOwn,
+					numberVotesNotOwn: numberVotesNotOwn + 1,
+					productID: productID,
+					votationsNonOwn: newVotationsNotOwnArray,
+					votationsOwn: votationsOwn,
+					avgVotationsOwn: avgVotationsOwn,
+					avgVotationsNotOwn: newAvgVotationsNotOwn,
+					avgTotal: newAvgTotal,
+					userID: id,
+					numberVotes: numberVotes + 1,
+					userVotes: newVoteArray
+				};
+				dispatch(updateProductVoteStart(configVote));
+			}
 		}
-		if (ownership === "Not Own") {
-			const newAvgTotal =
-				numberVotesNotOwn > 0
-					? ((+newAvgVotationsOwn + +avgVotationsNotOwn) / 2).toFixed(2)
-					: (+newAvgVotationsNotOwn / 1).toFixed(2);
-
-			const configVote = {
-				numberVotesOwn: numberVotesOwn,
-				numberVotesNotOwn: numberVotesNotOwn + 1,
-				productID: productID,
-				votationsNonOwn: newVotationsNotOwnArray,
-				votationsOwn: votationsOwn,
-				avgVotationsOwn: avgVotationsOwn,
-				avgVotationsNotOwn: newAvgVotationsNotOwn,
-				avgTotal: newAvgTotal,
-				userID: id,
-				numberVotes: numberVotes + 1,
-				userVotes: newVoteArray
-			};
-			dispatch(updateProductVoteStart(configVote));
-		}
-		//dispatch(saveOrderHistory(configOrder));
+		setErrors(true);
 	};
 
 	const newAvgVotationsOwn = (
@@ -194,8 +188,6 @@ const ProductVote = () => {
 		<FormControl component="fieldset">
 			{!userVotes.includes(productID) && (
 				<div>
-					<FormLabel component="legend"></FormLabel>
-
 					<RadioGroup
 						aria-label="gender"
 						name="gender1"
@@ -322,6 +314,11 @@ const ProductVote = () => {
 							setXFactor(newValue);
 						}}
 					/>
+					{errors && (
+						<Typography style={{ color: "red" }}>
+							You must choose all fields
+						</Typography>
+					)}
 					<Button onClick={handleApplyVote}>Apply Vote</Button>
 				</div>
 			)}
