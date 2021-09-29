@@ -29,13 +29,16 @@ const muiTheme = createTheme({
 		}
 	}
 });
-
 const useStyles = makeStyles((theme) => ({}));
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
 	product: state.productsData.product
 });
+
+const initialChartState = {
+	quality: ""
+};
 
 // eslint-disable-next-line
 const ProductVote = () => {

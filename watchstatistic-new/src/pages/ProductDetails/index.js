@@ -84,9 +84,11 @@ const ProductDetails = ({}) => {
 		[]
 	);
 
-	const { productThumbnail, productName, productCategory } = product;
+	const { productThumbnail, productName, productCategory, productBackground } =
+		product;
 
 	const bgImage = () => {
+		if (productBackground) return productBackground;
 		if (productCategory === "field") return image2;
 		if (productCategory === "divers") return image1;
 		if (productCategory === "dress") return image3;
