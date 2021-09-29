@@ -47,7 +47,7 @@ const initialCategoriesState = {
 };
 
 // eslint-disable-next-line
-const ProductVote = () => {
+const ProductVote = ({ handleTargetVote, setTargetVote }) => {
 	const classes = useStyles();
 
 	const { product, currentUser } = useSelector(mapState);
@@ -144,6 +144,7 @@ const ProductVote = () => {
 			dispatch(updateProductVoteStart(configVote));
 		}
 		setErrors(false);
+		setTargetVote(false);
 	};
 
 	const newAvgVotationsOwn = (
@@ -196,6 +197,7 @@ const ProductVote = () => {
 							name="quality"
 							onChange={(event, newValue) => {
 								setCategories({ ...categories, quality: newValue });
+								handleTargetVote(newValue, "quality");
 							}}
 						/>
 						<Typography id="discrete-slider" gutterBottom>
@@ -212,6 +214,7 @@ const ProductVote = () => {
 							name="price"
 							onChange={(event, newValue) => {
 								setCategories({ ...categories, price: newValue });
+								handleTargetVote(newValue, "price");
 							}}
 						/>
 						<Typography id="discrete-slider" gutterBottom>
@@ -227,6 +230,7 @@ const ProductVote = () => {
 							max={10}
 							onChange={(event, newValue) => {
 								setCategories({ ...categories, brand: newValue });
+								handleTargetVote(newValue, "brand");
 							}}
 						/>
 						<Typography id="discrete-slider" gutterBottom>
@@ -242,6 +246,7 @@ const ProductVote = () => {
 							max={10}
 							onChange={(event, newValue) => {
 								setCategories({ ...categories, refinement: newValue });
+								handleTargetVote(newValue, "refinement");
 							}}
 						/>
 						<Typography id="discrete-slider" gutterBottom>
@@ -257,6 +262,7 @@ const ProductVote = () => {
 							max={10}
 							onChange={(event, newValue) => {
 								setCategories({ ...categories, history: newValue });
+								handleTargetVote(newValue, "history");
 							}}
 						/>
 						<Typography id="discrete-slider" gutterBottom>
@@ -272,6 +278,7 @@ const ProductVote = () => {
 							max={10}
 							onChange={(event, newValue) => {
 								setCategories({ ...categories, engineering: newValue });
+								handleTargetVote(newValue, "engineering");
 							}}
 						/>
 						<Typography id="discrete-slider" gutterBottom>
@@ -287,6 +294,7 @@ const ProductVote = () => {
 							max={10}
 							onChange={(event, newValue) => {
 								setCategories({ ...categories, xFactor: newValue });
+								handleTargetVote(newValue, "xFactor");
 							}}
 						/>
 					</ThemeProvider>
@@ -295,6 +303,7 @@ const ProductVote = () => {
 							You must choose all fields
 						</Typography>
 					)}
+
 					<Button onClick={handleApplyVote}>Apply Vote</Button>
 				</Grid>
 			)}

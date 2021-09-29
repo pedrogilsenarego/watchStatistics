@@ -48,17 +48,41 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
+const initialTargetVoteState = {
+	quality: "",
+	price: "",
+	brand: "",
+	refinement: "",
+	history: "",
+	engineering: "",
+	xFactor: ""
+};
+
 // eslint-disable-next-line
 const ProductSidePanel = ({}) => {
 	const { product } = useSelector(mapState);
 	const [anchorVote, setAnchorVote] = useState(null);
 	const [anchorLegendVote, setAnchorLegendVote] = useState(null);
+	const [targetVoteCategories, setTargetVoteCategories] = useState({
+		...initialTargetVoteState
+	});
+	const [targetVote, setTargetVote] = useState(false);
 
 	const handleCloseVote = () => {
 		setAnchorVote(null);
+		setTargetVote(false);
 	};
 	const handleCloseLegendVote = () => {
 		setAnchorLegendVote(null);
+	};
+
+	const handleTargetVote = (value, name) => {
+		setTargetVoteCategories({ ...targetVoteCategories, [name]: value });
+	};
+
+	const configTargetVote = {
+		handleTargetVote,
+		setTargetVote
 	};
 
 	const classes = useStyles();
@@ -73,18 +97,34 @@ const ProductSidePanel = ({}) => {
 		avgTotal
 	} = product;
 
+	const targetVoteData = [
+		targetVoteCategories.quality,
+		targetVoteCategories.price,
+		targetVoteCategories.brand,
+		targetVoteCategories.refinement,
+		targetVoteCategories.history,
+		targetVoteCategories.engineering,
+		targetVoteCategories.xFactor
+	];
+
+	const dataSetTargetVote = () => {
+		if (targetVote)
+			return {
+				data: targetVoteData,
+				label: "Target Vote",
+
+				borderColor: "#F9350B",
+				backgroundColor: "#F9350B66",
+				fill: true
+			};
+		return { label: "" };
+	};
+
 	const configRadarChart = {
 		data: {
 			//"Quality", "Price", "Brand", "Refinement", "History", "Engineering", "X-Factor"
 			labels: ["S", "M", "L", "K", "R", "Q", "O"],
 			datasets: [
-				{
-					data: votationsNonOwn,
-					label: "Not Own",
-					borderColor: "#E5F517",
-					fill: true,
-					backgroundColor: "#E5F51766"
-				},
 				{
 					data: votationsOwn,
 					label: "Own",
@@ -92,6 +132,14 @@ const ProductSidePanel = ({}) => {
 					borderColor: "#42e6f5",
 					backgroundColor: "#42e6f566",
 					fill: true
+				},
+				dataSetTargetVote(),
+				{
+					data: votationsNonOwn,
+					label: "Not Own",
+					borderColor: "#E5F517",
+					fill: true,
+					backgroundColor: "#E5F51766"
 				}
 			]
 		},
@@ -110,10 +158,10 @@ const ProductSidePanel = ({}) => {
 								return "Engineering";
 							}
 							if (item[0].label === "S") {
-								return "Quality";
+								return "Aesthetics";
 							}
 							if (item[0].label === "M") {
-								return "Price";
+								return "Price over Quality";
 							}
 							if (item[0].label === "L") {
 								return "Brand";
@@ -128,10 +176,6 @@ const ProductSidePanel = ({}) => {
 								return "X-Factor";
 							}
 							return;
-						},
-						label: function (item, everything) {
-							console.log(item);
-							return item.raw;
 						}
 					}
 				},
@@ -227,6 +271,7 @@ const ProductSidePanel = ({}) => {
 							aria-controls="vote"
 							onClick={(e) => {
 								setAnchorVote(e.currentTarget);
+								setTargetVote(true);
 							}}
 							disableRipple
 						>
@@ -255,7 +300,7 @@ const ProductSidePanel = ({}) => {
 						open={Boolean(anchorVote)}
 					>
 						<MenuItem disableRipple>
-							<ProductVote />
+							<ProductVote {...configTargetVote} />
 						</MenuItem>
 					</Menu>
 				</Draggable>
