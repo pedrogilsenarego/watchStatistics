@@ -47,7 +47,13 @@ const initialCategoriesState = {
 };
 
 // eslint-disable-next-line
-const ProductVote = ({ handleTargetVote, setTargetVote }) => {
+const ProductVote = ({
+	handleTargetVote,
+	setTargetVote,
+	handleVisualTargetVote,
+	targetVote,
+	handleUpdate
+}) => {
 	const classes = useStyles();
 
 	const { product, currentUser } = useSelector(mapState);
@@ -305,6 +311,15 @@ const ProductVote = ({ handleTargetVote, setTargetVote }) => {
 					)}
 
 					<Button onClick={handleApplyVote}>Apply Vote</Button>
+
+					<Button
+						onClick={() => {
+							handleVisualTargetVote(true);
+							handleUpdate();
+						}}
+					>
+						Update Prediction
+					</Button>
 				</Grid>
 			)}
 			{userVotes.includes(productID) && (

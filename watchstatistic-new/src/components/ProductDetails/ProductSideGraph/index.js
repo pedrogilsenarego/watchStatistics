@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
 	Grid,
 	Box,
@@ -67,6 +67,7 @@ const ProductSidePanel = ({}) => {
 		...initialTargetVoteState
 	});
 	const [targetVote, setTargetVote] = useState(false);
+	const [update, setUpdate] = useState(true);
 
 	const handleCloseVote = () => {
 		setAnchorVote(null);
@@ -80,9 +81,20 @@ const ProductSidePanel = ({}) => {
 		setTargetVoteCategories({ ...targetVoteCategories, [name]: value });
 	};
 
+	const handleVisualTargetVote = (value) => {
+		setTargetVote(value);
+	};
+
+	const handleUpdate = () => {
+		setUpdate(!update);
+	};
+
 	const configTargetVote = {
 		handleTargetVote,
-		setTargetVote
+		setTargetVote,
+		handleVisualTargetVote,
+		targetVote,
+		handleUpdate
 	};
 
 	const classes = useStyles();
@@ -228,6 +240,12 @@ const ProductSidePanel = ({}) => {
 		}
 	};
 
+	const memoRadarChart = useMemo(
+		() => <RadarChart {...configRadarChart} />,
+		// eslint-disable-next-line
+		[update]
+	);
+
 	return (
 		<Grid container>
 			<Grid item xs={12}>
@@ -239,7 +257,7 @@ const ProductSidePanel = ({}) => {
 						paddingRight: "5px"
 					}}
 				>
-					<RadarChart {...configRadarChart} />
+					{memoRadarChart}
 					<Box
 						style={{
 							marginTop: "10px"
@@ -271,7 +289,6 @@ const ProductSidePanel = ({}) => {
 							aria-controls="vote"
 							onClick={(e) => {
 								setAnchorVote(e.currentTarget);
-								setTargetVote(true);
 							}}
 							disableRipple
 						>
