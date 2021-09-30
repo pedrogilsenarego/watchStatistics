@@ -310,15 +310,18 @@ const ProductVote = ({
 						</Typography>
 					)}
 
-					<Button onClick={handleApplyVote}>Apply Vote</Button>
-
 					<Button
-						onClick={() => {
+						onMouseEnter={() => {
 							handleVisualTargetVote(true);
 							handleUpdate();
 						}}
+						onMouseLeave={() => {
+							handleVisualTargetVote(false);
+							handleUpdate();
+						}}
+						onClick={handleApplyVote}
 					>
-						Update Prediction
+						Apply Vote
 					</Button>
 				</Grid>
 			)}

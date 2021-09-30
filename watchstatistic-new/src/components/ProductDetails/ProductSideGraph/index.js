@@ -72,6 +72,7 @@ const ProductSidePanel = ({}) => {
 	const handleCloseVote = () => {
 		setAnchorVote(null);
 		setTargetVote(false);
+		setTargetVoteCategories({ ...initialTargetVoteState });
 	};
 	const handleCloseLegendVote = () => {
 		setAnchorLegendVote(null);
