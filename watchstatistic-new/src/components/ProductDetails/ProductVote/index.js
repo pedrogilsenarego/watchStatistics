@@ -315,6 +315,10 @@ const ProductVote = ({
 							handleVisualTargetVote(true);
 							handleUpdate();
 						}}
+						onTouchStart={() => {
+							handleVisualTargetVote(true);
+							handleUpdate();
+						}}
 						onMouseLeave={() => {
 							handleVisualTargetVote(false);
 							handleUpdate();

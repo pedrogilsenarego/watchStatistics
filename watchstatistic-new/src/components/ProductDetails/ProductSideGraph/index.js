@@ -5,13 +5,16 @@ import {
 	Typography,
 	Button,
 	Menu,
-	MenuItem
+	MenuItem,
+	ButtonGroup
 } from "@material-ui/core";
 import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
 import Draggable from "react-draggable";
+import { RiDragDropLine } from "react-icons/ri";
+import { RiCloseCircleLine } from "react-icons/ri";
 import CategoriesLegend from "../CategoriesLegend";
 
 const mapState = (state) => ({
@@ -308,30 +311,50 @@ const ProductSidePanel = ({}) => {
 						</Button>
 					</Box>
 				</Box>
-				<Draggable>
+				<Draggable handle="#imHandle">
 					<Menu
 						disableScrollLock
 						className={classes.menu}
 						id="vote"
-						onClose={handleCloseVote}
 						anchorEl={anchorVote}
 						open={Boolean(anchorVote)}
 					>
+						<ButtonGroup
+							style={{ paddingLeft: "5px", marginBottom: "5px" }}
+							aria-label="outlined primary button group"
+						>
+							<Button id="imHandle">
+								<RiDragDropLine fontSize="1.5em" />
+							</Button>
+							<Button onClick={handleCloseVote}>
+								<RiCloseCircleLine fontSize="1.5em" />
+							</Button>
+						</ButtonGroup>
 						<MenuItem disableRipple>
 							<ProductVote {...configTargetVote} />
 						</MenuItem>
 					</Menu>
 				</Draggable>
-				<Draggable>
+				<Draggable handle="#imHandle">
 					<Menu
 						disableScrollLock
 						className={classes.menu2}
 						id="legendVote"
-						onClose={handleCloseLegendVote}
 						anchorEl={anchorLegendVote}
 						open={Boolean(anchorLegendVote)}
 					>
 						<CategoriesLegend />
+						<ButtonGroup
+							style={{ paddingLeft: "25%", marginTop: "5px" }}
+							aria-label="outlined primary button group"
+						>
+							<Button id="imHandle">
+								<RiDragDropLine fontSize="1.5em" />
+							</Button>
+							<Button onClick={handleCloseLegendVote}>
+								<RiCloseCircleLine fontSize="1.5em" />
+							</Button>
+						</ButtonGroup>
 					</Menu>
 				</Draggable>
 			</Grid>
