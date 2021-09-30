@@ -56,7 +56,9 @@ const useStyles = makeStyles((theme) => ({
 			backgroundColor: "#04040680",
 			color: "#ffffff",
 			disableScrollLock: true,
-			maxWidth: "350px"
+			[theme.breakpoints.up(750)]: {
+				maxWidth: "350px"
+			}
 		}
 	}
 }));
@@ -79,6 +81,7 @@ const Header = (props) => {
 	const [anchorWatchStatistics, setAnchorWatchstatistics] = useState(null);
 
 	const [watchstatistics, setWatchstatistics] = useState(true);
+	//media
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
@@ -96,6 +99,7 @@ const Header = (props) => {
 	const handleLoginOpen = (e) => {
 		setAnchorLogin(e.currentTarget);
 	};
+
 	const configRightIconsNoUser = {
 		handleSignupOpen,
 		handleLoginOpen
@@ -134,6 +138,7 @@ const Header = (props) => {
 	const handleCloseMessagesMenu = () => {
 		setAnchorMessages(null);
 	};
+
 	const handleCloseLoginMenu = () => {
 		setAnchorLogin(null);
 	};
