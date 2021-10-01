@@ -1,41 +1,46 @@
 import React from "react";
-import { TextField, MenuItem } from "@material-ui/core";
-import { useField, useFormikContext } from "formik";
+import {
+	FormControl,
+	Select,
+	MenuItem,
+	InputLabel,
+	Box
+} from "@material-ui/core";
 
-const SelectWrapper = ({ name, options, ...otherProps }) => {
-	const { setFieldValue } = useFormikContext();
-	const [field, meta] = useField(name);
-
-	const handleChange = (evt) => {
-		const { value } = evt.target;
-		setFieldValue(name, value);
-	};
-
-	const configSelect = {
-		...field,
-		...otherProps,
-		select: true,
-		variant: "outlined",
-		fullWidth: true,
-		onChange: handleChange
-	};
-
-	if (meta && meta.touched && meta.error) {
-		configSelect.error = true;
-		configSelect.helperText = meta.error;
-	}
+const FormSelect = ({
+	options,
+	defaultValue,
+	handleChange,
+	label,
+	...otherProps
+}) => {
+	if (!Array.isArray(options) || options.length < 1) return null;
 
 	return (
-		<TextField {...configSelect}>
-			{Object.keys(options).map((item, pos) => {
-				return (
-					<MenuItem key={pos} value={item}>
-						{options[item]}
-					</MenuItem>
-				);
-			})}
-		</TextField>
+		<Box sx={{ minWidth: 120 }}>
+			<FormControl fullWidth>
+				<InputLabel id="demo-simple-select-label">{label}</InputLabel>
+
+				<Select
+					labelId="demo-simple-select-label"
+					id="demo-simple-select"
+					value={defaultValue}
+					onChange={handleChange}
+					{...otherProps}
+				>
+					{options.map((option, index) => {
+						const { value, name } = option;
+
+						return (
+							<MenuItem key={index} value={value}>
+								{name}
+							</MenuItem>
+						);
+					})}
+				</Select>
+			</FormControl>
+		</Box>
 	);
 };
 
-export default SelectWrapper;
+export default FormSelect;

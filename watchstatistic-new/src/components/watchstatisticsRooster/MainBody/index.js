@@ -77,7 +77,7 @@ const MainBody = ({}) => {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{data.map((product) => {
+								{data.map((product, i) => {
 									const {
 										productName,
 										productBrand,
@@ -95,6 +95,9 @@ const MainBody = ({}) => {
 											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 											onClick={() => history.push(`/product/${documentID}`)}
 										>
+											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+												{i + 1}
+											</TableCell>
 											<TableCell
 												align="center"
 												component="th"

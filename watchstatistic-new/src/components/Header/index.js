@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 			backgroundColor: "#04040680",
 			color: "#ffffff",
 			disableScrollLock: true,
+
 			[theme.breakpoints.up(750)]: {
 				maxWidth: "350px"
 			}

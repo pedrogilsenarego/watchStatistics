@@ -35,8 +35,9 @@ const WatchstatisticsSubHeader = ({}) => {
 	const rank = () => {
 		if (numberVotes < 5) return "noob";
 		if (numberVotes < 10) return "begginer";
-		if (numberVotes < 20) return "young";
-		if (numberVotes < 50) return "intermediate";
+		if (numberVotes < 20) return "watch enthusiast";
+		if (numberVotes < 50) return "watch connoisseour";
+		if (numberVotes < 150) return "watch geek legend";
 	};
 
 	return (

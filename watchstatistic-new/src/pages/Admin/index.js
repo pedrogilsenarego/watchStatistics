@@ -7,7 +7,7 @@ import {
 } from "../../redux/Products/products.actions";
 import Modal from "./../../components/Modal";
 import FormInput from "./../../components/forms/FormInput";
-import FormSelect from "./../../components/forms/FormSelect";
+import SelectMUI from "./../../components/forms/SelectMUI";
 import Button from "./../../components/forms/Button";
 import LoadMore from "./../../components/LoadMore";
 import { CKEditor } from "ckeditor4-react";
@@ -105,12 +105,12 @@ const Admin = (props) => {
 					<form onSubmit={handleSubmit}>
 						<h2>Add new product</h2>
 
-						<FormSelect
+						<SelectMUI
 							label="Category"
 							options={watchTypes.options}
 							handleChange={(e) => setProductCategory(e.target.value)}
 						/>
-						<FormSelect
+						<SelectMUI
 							label="Brand"
 							options={watchBrands.options}
 							handleChange={(e) => setProductBrand(e.target.value)}
