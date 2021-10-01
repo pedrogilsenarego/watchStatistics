@@ -102,10 +102,10 @@ const ProductResults = ({}) => {
 		<div style={{ paddingTop: "62px" }}>
 			<Box container className={classes.filters}>
 				<Grid container spacing={2}>
-					<Grid item xs={6} md={3}>
+					<Grid item xs={12} md={3}>
 						<FormSelect className={classes.select} {...configFilters} />
 					</Grid>
-					<Grid item xs={6} md={3}>
+					<Grid item xs={12} md={3}>
 						<FormSelect className={classes.select} {...configFilterBrands} />
 					</Grid>
 				</Grid>
