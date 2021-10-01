@@ -99,7 +99,7 @@ const ProductResults = ({}) => {
 	};
 
 	return (
-		<div style={{ paddingTop: "60px" }}>
+		<div style={{ paddingTop: "62px" }}>
 			<Box container className={classes.filters}>
 				<Grid container spacing={2}>
 					<Grid item xs={6} md={3}>
