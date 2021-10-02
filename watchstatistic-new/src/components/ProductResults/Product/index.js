@@ -6,10 +6,10 @@ import { Typography, CardMedia, Box, Grid } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
 	root: {},
 	media: {
-		height: "35vh"
+		height: "45vh"
 	},
 	media2: {
-		height: "35vh",
+		height: "45vh",
 		"&:hover": {
 			transform: "scale(1.2)",
 			transition: "all 3s ease-in-out 50ms"
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	imageWrapper: {
 		overflow: "hidden",
-		height: "35vh"
+		height: "45vh"
 	},
 
 	text: {

@@ -81,7 +81,7 @@ const ProductResults = ({}) => {
 				container
 				direction="row"
 				spacing={2}
-				style={{ display: "flex", paddingTop: "30px" }}
+				style={{ display: "flex", paddingTop: "160px" }}
 			>
 				<Grid
 					container
