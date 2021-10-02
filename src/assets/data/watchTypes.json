@@ -1,0 +1,28 @@
+{
+	"options": [
+		{
+			"name": "Categories",
+			"value": ""
+		},
+		{
+			"value": "divers",
+			"name": "Divers"
+		},
+		{
+			"value": "field",
+			"name": "Field"
+		},
+		{
+			"value": "pilot",
+			"name": "Pilot"
+		},
+		{
+			"value": "dress",
+			"name": "Dress"
+		},
+		{
+			"value": "racing",
+			"name": "Racing"
+		}
+	]
+}

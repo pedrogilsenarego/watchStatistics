@@ -1,13 +1,17 @@
 import React from "react";
+import Welcoming from "../../components/Welcoming";
+
 import Directory from "./../../components/Directory";
-import "./styles.scss";
 
 const Homepage = (props) => {
 	return (
-		<section className="homepage">
+		<section>
+			<Welcoming />
 			<Directory />
 		</section>
 	);
 };
 
 export default Homepage;
+
+//

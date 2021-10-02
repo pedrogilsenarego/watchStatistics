@@ -1,94 +1,157 @@
-import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Switch, Route } from "react-router-dom";
 import "./default.scss";
-import { auth, handleUserProfile } from "./firebase/utils";
+import { checkUserSession } from "./redux/User/user.actions";
+
+// components
+import AdminToolbar from "./components/AdminToolbar";
+
+//hoc
+import WithAuth from "./hoc/withAuth";
+import WithAdminAuth from "./hoc/withAdminAuth";
 
 //pages
 import Homepage from "./pages/Homepage";
+import Search from "./pages/Search";
 import Registration from "./pages/Registration";
-import Login from "./pages/Login";
+import Recovery from "./pages/Recovery";
+import Dashboard from "./pages/Dashboard";
+import Admin from "./pages/Admin";
+import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
+import Watchstatistics from "./pages/Watchstatistics";
+
+import Order from "./pages/Order";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
 import MainLayout from "./layouts/MainLayout";
+import AdminLayout from "./layouts/AdminLayout";
+import DashBoardLayout from "./layouts/DashboardLayout";
 
-const initialState = {
-	currentUser: null
-};
+const App = (props) => {
+	const dispatch = useDispatch();
 
-class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			...initialState
-		};
-	}
+	useEffect(() => {
+		dispatch(checkUserSession());
+	});
 
-	authListener = null;
-
-	componentDidMount() {
-		this.authListener = auth.onAuthStateChanged(async (userAuth) => {
-			if (userAuth) {
-				const userRef = await handleUserProfile(userAuth);
-				userRef.onSnapshot((snapshot) => {
-					this.setState({
-						currentUser: {
-							id: snapshot.id,
-							...snapshot.data()
-						}
-					});
-				});
-			}
-			this.setState({
-				...initialState
-			});
-		});
-	}
-	componentWillUnmount() {
-		this.authListener();
-	}
-
-	render() {
-		const { currentUser } = this.state;
-
-		return (
-			<div className="App">
-				<Switch>
-					<Route
-						exact
-						path="/"
-						render={() => (
-							<HomepageLayout currentUser={currentUser}>
-								<Homepage />
-							</HomepageLayout>
-						)}
-					/>
-					<Route
-						exact
-						path="/registration"
-						render={() => (
-							<MainLayout currentUser={currentUser}>
-								<Registration />
+	return (
+		<div className="App">
+			<AdminToolbar />
+			<Switch>
+				<Route
+					exact
+					path="/"
+					render={() => (
+						<HomepageLayout>
+							<Homepage />
+						</HomepageLayout>
+					)}
+				/>
+				<Route
+					exact
+					path="/watchstatistics"
+					render={() => (
+						<WithAuth>
+							<MainLayout>
+								<Watchstatistics />
 							</MainLayout>
-						)}
-					/>
-					<Route
-						exact
-						path="/login"
-						render={() =>
-							currentUser ? (
-								<Redirect to="/" />
-							) : (
-								<MainLayout currentUser={currentUser}>
-									<Login />
-								</MainLayout>
-							)
-						}
-					/>
-				</Switch>
-			</div>
-		);
-	}
-}
+						</WithAuth>
+					)}
+				/>
+				<Route
+					exact
+					path="/search"
+					render={() => (
+						<WithAuth>
+							<MainLayout>
+								<Search />
+							</MainLayout>
+						</WithAuth>
+					)}
+				/>
+				<Route
+					path="/search/:filterType"
+					render={() => (
+						<WithAuth>
+							<MainLayout>
+								<Search />
+							</MainLayout>
+						</WithAuth>
+					)}
+				/>
+				<Route
+					path="/product/:productID"
+					render={() => (
+						<WithAuth>
+							<MainLayout>
+								<ProductDetails />
+							</MainLayout>
+						</WithAuth>
+					)}
+				/>
+				<Route
+					path="/cart"
+					render={() => (
+						<MainLayout>
+							<Cart />
+						</MainLayout>
+					)}
+				/>
+
+				<Route
+					exact
+					path="/registration"
+					render={() => (
+						<MainLayout>
+							<Registration />
+						</MainLayout>
+					)}
+				/>
+
+				<Route
+					path="/recovery"
+					render={() => (
+						<MainLayout>
+							<Recovery />
+						</MainLayout>
+					)}
+				/>
+				<Route
+					path="/dashboard"
+					render={() => (
+						<WithAuth>
+							<DashBoardLayout>
+								<Dashboard />
+							</DashBoardLayout>
+						</WithAuth>
+					)}
+				/>
+				<Route
+					path="/order/:orderID"
+					render={() => (
+						<WithAuth>
+							<DashBoardLayout>
+								<Order />
+							</DashBoardLayout>
+						</WithAuth>
+					)}
+				/>
+				<Route
+					path="/admin"
+					render={() => (
+						<WithAdminAuth>
+							<AdminLayout>
+								<Admin />
+							</AdminLayout>
+						</WithAdminAuth>
+					)}
+				/>
+			</Switch>
+		</div>
+	);
+};
 
 export default App;
