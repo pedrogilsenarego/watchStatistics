@@ -62,6 +62,9 @@ const MainUsers = ({}) => {
 							<TableHead>
 								<TableRow>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
+										#
+									</TableCell>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Users
 									</TableCell>
 

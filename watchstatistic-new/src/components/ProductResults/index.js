@@ -5,10 +5,15 @@ import { fetchProductsStart } from "../../redux/Products/products.actions";
 import Product from "./Product";
 import FormSelect from "../forms/SelectMUI";
 import LoadMore from "../LoadMore";
-import { Box, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes.json";
 import watchBrands from "./../../assets/data/watchBrands.json";
 import { makeStyles } from "@material-ui/core/styles";
+import { RiMenuAddFill } from "react-icons/ri";
+
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
 
 const mapState = ({ productsData }) => ({
 	products: productsData.products
@@ -19,15 +24,26 @@ const ProductResults = ({}) => {
 	const history = useHistory();
 	const { filterType } = useParams();
 	const [filter, setFilter] = useState("productCategory");
+	const [state, setState] = React.useState({
+		left: false
+	});
 	const pageSize = 8;
-
-	const { products } = useSelector(mapState);
-
-	const { data, queryDoc, isLastPage } = products;
 
 	const useStyles = makeStyles((theme) => ({
 		main: {
 			paddingTop: "10px"
+		},
+		drawer: {
+			"& .MuiPaper-root": {
+				backgroundColor: "#ffffff40",
+				color: "#ffffffB3"
+			}
+		},
+		filterButton: {
+			height: "3.5rem",
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "center"
 		},
 		filters: {
 			backgroundColor: "#196B91",
@@ -39,6 +55,55 @@ const ProductResults = ({}) => {
 		}
 	}));
 	const classes = useStyles();
+
+	const { products } = useSelector(mapState);
+
+	const { data, queryDoc, isLastPage } = products;
+
+	const toggleDrawer = (anchor, open) => (event) => {
+		if (
+			event.type === "keydown" &&
+			(event.key === "Tab" || event.key === "Shift")
+		) {
+			return;
+		}
+
+		setState({ ...state, [anchor]: open });
+	};
+
+	const list = (anchor) => (
+		<Box
+			sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+			onClick={toggleDrawer(anchor, false)}
+			onKeyDown={toggleDrawer(anchor, false)}
+		>
+			<Grid
+				container
+				direction="row"
+				spacing={2}
+				style={{ display: "flex", paddingTop: "30px" }}
+			>
+				<Grid
+					container
+					xs={12}
+					spacing={1}
+					md={3}
+					style={{
+						display: "flex",
+						justifyContent: "flex-start",
+						marginLeft: "10px"
+					}}
+				>
+					<Grid item spacing={2}>
+						<FormSelect className={classes.select} {...configFilters} />
+					</Grid>
+					<Grid item>
+						<FormSelect className={classes.select} {...configFilterBrands} />
+					</Grid>
+				</Grid>
+			</Grid>
+		</Box>
+	);
 
 	useEffect(
 		() => {
@@ -99,17 +164,37 @@ const ProductResults = ({}) => {
 	};
 
 	return (
-		<div style={{ paddingTop: "62px" }}>
-			<Box container className={classes.filters}>
-				<Grid container spacing={2}>
-					<Grid item xs={12} md={3}>
-						<FormSelect className={classes.select} {...configFilters} />
-					</Grid>
-					<Grid item xs={12} md={3}>
-						<FormSelect className={classes.select} {...configFilterBrands} />
-					</Grid>
-				</Grid>
-			</Box>
+		<div style={{ paddingTop: "50px" }}>
+			<div>
+				{["left"].map((anchor) => (
+					<div key={anchor}>
+						<Button
+							className={classes.filterButton}
+							style={{
+								marginTop: "13px",
+								marginLeft: "3px",
+								position: "absolute",
+								zIndex: "3",
+								color: "white",
+								backgroundColor: "#ffffff40"
+							}}
+							onClick={toggleDrawer(anchor, true)}
+						>
+							<RiMenuAddFill fontSize="1.5em" />
+						</Button>
+
+						<Drawer
+							BackdropProps={{ invisible: true }}
+							className={classes.drawer}
+							anchor={anchor}
+							open={state[anchor]}
+							onClose={toggleDrawer(anchor, false)}
+						>
+							{list(anchor)}
+						</Drawer>
+					</div>
+				))}
+			</div>
 
 			<Grid container spacing={1} className={classes.main}>
 				{data.map((product, pos) => {

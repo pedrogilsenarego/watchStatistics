@@ -62,6 +62,9 @@ const MainBody = ({}) => {
 							<TableHead>
 								<TableRow>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
+										#
+									</TableCell>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Watches
 									</TableCell>
 

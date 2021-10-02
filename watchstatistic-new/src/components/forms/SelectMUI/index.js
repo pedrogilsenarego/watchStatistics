@@ -7,21 +7,23 @@ import Select from "@mui/material/Select";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-	root: {},
+	root2: {},
 	formSelect: {
 		"& .MuiOutlinedInput-input": { color: "white" },
 		"& . MuiInputLabel-root": {
-			color: "white"
+			color: "#ffffffB3"
 		},
+		"& .MuiInputLabel-root": { color: "#ffffffB3" },
 		"& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-			borderColor: "white"
+			borderColor: "#ffffffB3",
+			borderWidth: "2px"
 		},
 		"&:hover .MuiOutlinedInput-input": {
 			color: "#FFA500"
 		},
-		"&:hover .MuiInputLabel-root": { color: "#FFA500" },
+		"&:hover .MuiInputLabel-root": { color: "#ffffff" },
 		"&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-			borderColor: "#FFA500"
+			borderColor: "#ffffffB3"
 		},
 		"& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
 			color: "#ffffffB3"
@@ -47,10 +49,7 @@ const FormSelect = ({
 	if (!Array.isArray(options) || options.length < 1) return null;
 
 	return (
-		<Box
-			className={classes.root}
-			sx={{ minWidth: 120, paddingTop: "5px", paddingBottom: "5px" }}
-		>
+		<Box className={classes.root2} sx={{ minWidth: 120 }}>
 			<FormControl size="small" className={classes.formSelect} fullWidth>
 				<InputLabel id="demo-simple-select-label">{label}</InputLabel>
 
@@ -61,10 +60,9 @@ const FormSelect = ({
 							"&& .Mui-selected": {
 								color: "#FFA500"
 							},
-							color: "red",
 							"& .MuiPaper-root": {
 								backgroundColor: "#04040680",
-								color: "#ffffff"
+								color: "#ffffffB3"
 							}
 						}
 					}}
