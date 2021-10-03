@@ -23,7 +23,6 @@ export const handleFetchProducts = ({
 	persistProducts = []
 }) => {
 	return new Promise((resolve, reject) => {
-		//const pageSize = 8;
 		const where = filter;
 
 		let ref = firestore
@@ -127,8 +126,6 @@ export const handleUpdateVote = (product) => {
 	});
 };
 
-//new Implementation
-
 export const handleUserVote = (product) => {
 	const { userID, userVotes, numberVotes } = product;
 	return new Promise((resolve, reject) => {
@@ -141,6 +138,53 @@ export const handleUserVote = (product) => {
 			})
 			.then(() => {
 				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
+
+//new implementations
+
+export const handleFetchLatestProducts = ({
+	filterType,
+	filter,
+	pageSize,
+	startAfterDoc,
+	persistProducts = []
+}) => {
+	return new Promise((resolve, reject) => {
+		const where = filter;
+
+		let ref = firestore
+			.collection("products")
+			.orderBy("createdDate", "desc")
+			.limit(pageSize);
+
+		if (filterType) ref = ref.where(where, "==", filterType);
+		if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
+
+		ref
+			.get()
+			.then((snapshot) => {
+				const totalCount = snapshot.size;
+
+				const data = [
+					...persistProducts,
+					...snapshot.docs.map((doc) => {
+						return {
+							...doc.data(),
+							documentID: doc.id
+						};
+					})
+				];
+
+				resolve({
+					data,
+					queryDoc: snapshot.docs[totalCount - 1],
+					isLastPage: totalCount < 1
+				});
 			})
 			.catch((err) => {
 				reject(err);

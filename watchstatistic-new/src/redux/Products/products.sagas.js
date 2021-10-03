@@ -9,6 +9,7 @@ import {
 import {
 	handleAddProduct,
 	handleFetchProducts,
+	handleFetchLatestProducts,
 	handleFetchProduct,
 	handleDeleteProduct,
 	handleUpdateVote,
@@ -94,13 +95,30 @@ export function* onUpdateProductVoteStart() {
 	yield takeLatest(productsTypes.UPDATE_PRODUCT_VOTE_START, updateVote);
 }
 
+export function* fetchLatestProducts({ payload }) {
+	try {
+		const products = yield handleFetchLatestProducts(payload);
+		yield put(setProducts(products));
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* onFetchLatestProductsStart() {
+	yield takeLatest(
+		productsTypes.FETCH_LATEST_PRODUCTS_START,
+		fetchLatestProducts
+	);
+}
+
 export default function* productsSagas() {
 	yield all([
 		call(onAddProductStart),
 		call(onFetchProductsStart),
 		call(onDeleteProductStart),
 		call(onFetchProductStart),
+		call(onUpdateProductVoteStart),
 		//new Implmentation
-		call(onUpdateProductVoteStart)
+		call(onFetchLatestProductsStart)
 	]);
 }

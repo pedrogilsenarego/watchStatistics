@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductsStart } from "../../../redux/Products/products.actions";
+import { fetchLatestProductsStart } from "../../../redux/Products/products.actions";
 import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
 
 const useStyles = makeStyles((theme) => ({}));
@@ -24,7 +24,7 @@ const mapState = (state) => ({
 });
 
 // eslint-disable-next-line
-const MainBody = ({}) => {
+const LatestAdditions = ({}) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -37,7 +37,7 @@ const MainBody = ({}) => {
 
 	useEffect(
 		() => {
-			dispatch(fetchProductsStart({ pageSize }));
+			dispatch(fetchLatestProductsStart({ pageSize }));
 		},
 		// eslint-disable-next-line
 		[]
@@ -58,7 +58,7 @@ const MainBody = ({}) => {
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
 				<Grid item xs={12} md={6}>
 					<Typography variant={"h5"} align="center">
-						Top 5 Watches
+						Latest Additions
 					</Typography>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
 						<Table aria-label="simple table">
@@ -153,4 +153,4 @@ const MainBody = ({}) => {
 	);
 };
 
-export default MainBody;
+export default LatestAdditions;

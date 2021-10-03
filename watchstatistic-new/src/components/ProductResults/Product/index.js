@@ -84,7 +84,7 @@ const Product = (product) => {
 								<Typography
 									style={{
 										cursor: "pointer",
-										paddingTop: "60px"
+										paddingTop: "80px"
 									}}
 									key={2}
 									className={classes.text}

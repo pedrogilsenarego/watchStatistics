@@ -34,3 +34,9 @@ export const updateProductVoteStart = (productData) => ({
 	type: productsTypes.UPDATE_PRODUCT_VOTE_START,
 	payload: productData
 });
+
+//new implementations
+export const fetchLatestProductsStart = (filters = {}) => ({
+	type: productsTypes.FETCH_LATEST_PRODUCTS_START,
+	payload: filters
+});
