@@ -1,17 +1,13 @@
 import React from "react";
 import WatchstatisticsSubHeader from "../../components/watchstatisticsRooster/WatchstatisticsSubHeader";
-import MainBody from "../../components/watchstatisticsRooster/MainBody";
-import MainUsers from "../../components/watchstatisticsRooster/MainUsers";
-import LatestAdditions from "../../components/watchstatisticsRooster/LatestAdditions";
+import TableMain from "../../components/watchstatisticsRooster/TableMain";
 
 // eslint-disable-next-line
 const Watchstatistics = ({}) => {
 	return (
 		<div>
 			<WatchstatisticsSubHeader />
-			<MainBody />
-			<MainUsers />
-			<LatestAdditions />
+			<TableMain />
 		</div>
 	);
 };

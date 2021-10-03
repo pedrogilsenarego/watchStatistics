@@ -24,7 +24,7 @@ const mapState = (state) => ({
 });
 
 // eslint-disable-next-line
-const LatestAdditions = ({}) => {
+const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -37,7 +37,10 @@ const LatestAdditions = ({}) => {
 
 	useEffect(
 		() => {
-			dispatch(fetchLatestProductsStart({ pageSize }));
+			if (!loadedLatest) {
+				dispatch(fetchLatestProductsStart({ pageSize }));
+				handleLoadedLatest();
+			}
 		},
 		// eslint-disable-next-line
 		[]
@@ -55,6 +58,7 @@ const LatestAdditions = ({}) => {
 
 	return (
 		<div>
+			<Typography>{loadedLatest}</Typography>
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
 				<Grid item xs={12} md={6}>
 					<Typography variant={"h5"} align="center">

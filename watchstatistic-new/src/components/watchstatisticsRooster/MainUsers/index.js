@@ -23,7 +23,7 @@ const mapState = (state) => ({
 });
 
 // eslint-disable-next-line
-const MainUsers = ({}) => {
+const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const pageSize = 5;
@@ -34,7 +34,10 @@ const MainUsers = ({}) => {
 
 	useEffect(
 		() => {
-			dispatch(fetchUsersStart({ pageSize }));
+			if (!loadedTopUsers) {
+				dispatch(fetchUsersStart({ pageSize }));
+				handleLoadedTopUsers();
+			}
 		},
 		// eslint-disable-next-line
 		[]

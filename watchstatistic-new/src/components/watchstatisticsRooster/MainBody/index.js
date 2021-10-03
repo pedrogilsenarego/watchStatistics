@@ -24,7 +24,7 @@ const mapState = (state) => ({
 });
 
 // eslint-disable-next-line
-const MainBody = ({}) => {
+const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -37,7 +37,10 @@ const MainBody = ({}) => {
 
 	useEffect(
 		() => {
-			dispatch(fetchProductsStart({ pageSize }));
+			if (!loadedTopWatches) {
+				dispatch(fetchProductsStart({ pageSize }));
+				handleLoadedTopWatches();
+			}
 		},
 		// eslint-disable-next-line
 		[]
