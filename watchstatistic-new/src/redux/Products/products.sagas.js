@@ -2,6 +2,7 @@ import { auth } from "./../../firebase/utils";
 import { takeLatest, put, all, call } from "redux-saga/effects";
 import {
 	setProducts,
+	setLatestProducts,
 	setProduct,
 	fetchProductsStart,
 	fetchProductStart
@@ -97,8 +98,8 @@ export function* onUpdateProductVoteStart() {
 
 export function* fetchLatestProducts({ payload }) {
 	try {
-		const products = yield handleFetchLatestProducts(payload);
-		yield put(setProducts(products));
+		const latestProducts = yield handleFetchLatestProducts(payload);
+		yield put(setLatestProducts(latestProducts));
 	} catch (err) {
 		// console.log(err);
 	}

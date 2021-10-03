@@ -3,6 +3,7 @@ import productTypes from "./products.types";
 
 const INITIAL_STATE = {
 	products: [],
+	latestProducts: [],
 	product: {},
 	sidePanel: "graph"
 };
@@ -13,6 +14,11 @@ const productsReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				products: action.payload
+			};
+		case productTypes.SET_LATEST_PRODUCTS:
+			return {
+				...state,
+				latestProducts: action.payload
 			};
 		case productsTypes.SET_PRODUCT:
 			return {

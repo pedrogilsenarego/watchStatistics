@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({}));
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
-	products: state.productsData.products
+	products: state.productsData.latestProducts
 });
 
 // eslint-disable-next-line
@@ -65,7 +65,7 @@ const LatestAdditions = ({}) => {
 							<TableHead>
 								<TableRow>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
-										#
+										Date
 									</TableCell>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Watches

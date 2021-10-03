@@ -40,3 +40,8 @@ export const fetchLatestProductsStart = (filters = {}) => ({
 	type: productsTypes.FETCH_LATEST_PRODUCTS_START,
 	payload: filters
 });
+
+export const setLatestProducts = (latestProducts) => ({
+	type: productsTypes.SET_LATEST_PRODUCTS,
+	payload: latestProducts
+});
