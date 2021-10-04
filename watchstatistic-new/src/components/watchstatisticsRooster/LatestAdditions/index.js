@@ -95,6 +95,7 @@ const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 										productName,
 										productBrand,
 										avgTotal,
+										createdDate,
 										productCategory,
 										numberVotesOwn,
 										numberVotesNotOwn,
@@ -110,7 +111,9 @@ const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 											onClick={() => history.push(`/product/${documentID}`)}
 										>
 											<TableCell align="center" style={{ color: color }}>
-												{i + 1}
+												{new Date(
+													createdDate.seconds * 1000
+												).toLocaleDateString("en-US")}
 											</TableCell>
 											<TableCell
 												align="center"
