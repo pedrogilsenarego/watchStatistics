@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { addProductStart } from "../../redux/Products/products.actions";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import { useHistory } from "react-router";
 import { Grid, Typography } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes2.json";
 import watchBrands from "./../../assets/data/watchBrands2.json";
@@ -58,6 +59,7 @@ const mapState = (state) => ({
 });
 
 const AddWatchForm = () => {
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 	const { userRoles } = currentUser;
@@ -96,6 +98,7 @@ const AddWatchForm = () => {
 				votationsOwn: [0, 0, 0, 0, 0, 0, 0]
 			})
 		);
+		history.push("/watchstatistics");
 	};
 
 	return (
