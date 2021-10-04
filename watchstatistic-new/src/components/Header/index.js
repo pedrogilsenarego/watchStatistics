@@ -80,6 +80,8 @@ const Header = (props) => {
 	const [anchorSignup, setAnchorSignup] = useState(null);
 	const [anchorMediaMenu, setAnchorMediaMenu] = useState(null);
 	const [anchorWatchStatistics, setAnchorWatchstatistics] = useState(null);
+	const [mediaWatchstatisticsBtns, setMediaWatchstatisticsBtns] =
+		useState(false);
 
 	const [watchstatistics, setWatchstatistics] = useState(true);
 	//media
@@ -135,6 +137,7 @@ const Header = (props) => {
 	//next
 	const handleCloseMediaMenu = () => {
 		setAnchorMediaMenu(null);
+		setMediaWatchstatisticsBtns(false);
 	};
 	const handleCloseMessagesMenu = () => {
 		setAnchorMessages(null);
@@ -333,17 +336,36 @@ const Header = (props) => {
 					&nbsp;Home
 				</MenuItem>
 				<MenuItem
-					aria-controls="watchstatistics"
-					disabled={watchstatistics}
 					className={classes.textBtn}
-					activeStyle={activeStyle}
 					disableRipple
-					onClick={(e) => handleWatchstatisticsOpen(e)}
+					style={
+						mediaWatchstatisticsBtns
+							? { color: "#FFA500" }
+							: { color: "#ffffff" }
+					}
+					onClick={(e) =>
+						setMediaWatchstatisticsBtns(!mediaWatchstatisticsBtns)
+					}
 				>
 					<BsGraphUp />
 					&nbsp;WatchStatistics
 				</MenuItem>
-
+				{mediaWatchstatisticsBtns && [
+					<MenuItem
+						onClick={() => {
+							history.push("/watchstatistics");
+						}}
+					>
+						Rooster
+					</MenuItem>,
+					<MenuItem
+						onClick={() => {
+							history.push("/search");
+						}}
+					>
+						Browse
+					</MenuItem>
+				]}
 				<MenuItem
 					className={classes.textBtn}
 					activeStyle={activeStyle}
