@@ -27,7 +27,7 @@ export function* addProduct({ payload }) {
 			productAdminUserUID: auth.currentUser.uid,
 			createdDate: timestamp
 		});
-		yield put(fetchProductsStart());
+		//yield put(fetchProductsStart());
 	} catch (err) {
 		// console.log(err);
 	}

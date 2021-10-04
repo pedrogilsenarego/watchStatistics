@@ -274,6 +274,13 @@ const Header = (props) => {
 				>
 					Browse
 				</MenuItem>
+				<MenuItem
+					onClick={() => {
+						history.push("/watchstatistics/addwatch");
+					}}
+				>
+					Submit New Watch
+				</MenuItem>
 			</Menu>
 			<Menu
 				disableScrollLock
@@ -364,6 +371,13 @@ const Header = (props) => {
 						}}
 					>
 						Browse
+					</MenuItem>,
+					<MenuItem
+						onClick={() => {
+							history.push("/watchstatistics/addwatch");
+						}}
+					>
+						Submit New Watch
 					</MenuItem>
 				]}
 				<MenuItem

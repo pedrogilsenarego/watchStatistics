@@ -11,10 +11,12 @@
 		{ "name": "Hublot", "value": "hublot" },
 		{ "name": "Isotope", "value": "isotope" },
 		{ "name": "Jeger-LeCoultre", "value": "Jeger-LeCoultre" },
+		{ "name": "Lorier", "value": "Lorier" },
 		{ "name": "Omega", "value": "omega" },
 		{ "name": "Panerai", "value": "Panerai" },
 		{ "name": "Rolex", "value": "rolex" },
 		{ "name": "Seiko", "value": "seiko" },
-		{ "name": "Sinn", "value": "sinn" }
+		{ "name": "Sinn", "value": "sinn" },
+		{ "name": "Timex", "value": "Timex" }
 	]
 }

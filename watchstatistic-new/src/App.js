@@ -21,6 +21,7 @@ import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Watchstatistics from "./pages/Watchstatistics";
+import AddWatch from "./pages/Watchstatistics/AddWatch";
 
 import Order from "./pages/Order";
 
@@ -59,6 +60,17 @@ const App = (props) => {
 								<Watchstatistics />
 							</MainLayout>
 						</WithAuth>
+					)}
+				/>
+				<Route
+					exact
+					path="/watchstatistics/addwatch"
+					render={() => (
+						<WithAdminAuth>
+							<MainLayout>
+								<AddWatch />
+							</MainLayout>
+						</WithAdminAuth>
 					)}
 				/>
 				<Route
