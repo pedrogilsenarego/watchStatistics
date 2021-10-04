@@ -1,9 +1,12 @@
 import { firestore } from "./../../firebase/utils";
 
 export const handleAddProduct = (product) => {
+	const admin = product.admin;
+	const where = admin ? "products" : "orders";
+	delete product.admin;
 	return new Promise((resolve, reject) => {
 		firestore
-			.collection("products")
+			.collection(where)
 			.doc()
 			.set(product)
 			.then(() => {

@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { addProductStart } from "../../redux/Products/products.actions";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -29,13 +30,15 @@ const FORM_VALIDATION = Yup.object().shape({
 	productName: Yup.string().required("Required"),
 	productThumbnail: Yup.string()
 		.matches(
-			/((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+			// eslint-disable-next-line
+			/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
 			"Enter a valid URL!"
 		)
 		.required("Please enter Image URL adress"),
 	productBackground: Yup.string()
 		.matches(
-			/((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+			// eslint-disable-next-line
+			/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
 			"Enter a valid URL!"
 		)
 		.required("Please enter Image URL adress"),
@@ -43,14 +46,22 @@ const FORM_VALIDATION = Yup.object().shape({
 	additionalDataTitle: Yup.string().required("Required"),
 	additionalDataLink: Yup.string()
 		.matches(
-			/((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+			// eslint-disable-next-line
+			/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
 			"Enter a valid URL!"
 		)
 		.required("Please enter Image URL adress")
 });
 
+const mapState = (state) => ({
+	currentUser: state.user.currentUser
+});
+
 const AddWatchForm = () => {
 	const dispatch = useDispatch();
+	const { currentUser } = useSelector(mapState);
+	const { userRoles } = currentUser;
+	const admin = userRoles.includes("admin") ? true : false;
 
 	const handleFormSubmit = (e) => {
 		const {
@@ -66,6 +77,7 @@ const AddWatchForm = () => {
 
 		dispatch(
 			addProductStart({
+				admin: admin,
 				productCategory,
 				productBrand,
 				productName,
@@ -89,6 +101,7 @@ const AddWatchForm = () => {
 	return (
 		<Grid item xs={12}>
 			<div>
+				{userRoles.includes("admin") && <Typography>{userRoles}</Typography>}
 				<Formik
 					initialValues={{
 						...INITIAL_FORM_STATE

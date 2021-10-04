@@ -66,11 +66,11 @@ const App = (props) => {
 					exact
 					path="/watchstatistics/addwatch"
 					render={() => (
-						<WithAdminAuth>
+						<WithAuth>
 							<MainLayout>
 								<AddWatch />
 							</MainLayout>
-						</WithAdminAuth>
+						</WithAuth>
 					)}
 				/>
 				<Route
