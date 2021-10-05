@@ -35,7 +35,6 @@ export const updateProductVoteStart = (productData) => ({
 	payload: productData
 });
 
-//new implementations
 export const fetchLatestProductsStart = (filters = {}) => ({
 	type: productsTypes.FETCH_LATEST_PRODUCTS_START,
 	payload: filters
@@ -44,4 +43,15 @@ export const fetchLatestProductsStart = (filters = {}) => ({
 export const setLatestProducts = (latestProducts) => ({
 	type: productsTypes.SET_LATEST_PRODUCTS,
 	payload: latestProducts
+});
+
+//new implementations
+export const fetchValidationProductsStart = (filters = {}) => ({
+	type: productsTypes.FETCH_VALIDATION_PRODUCTS_START,
+	payload: filters
+});
+
+export const setValidationProducts = (validationProducts) => ({
+	type: productsTypes.SET_VALIDATION_PRODUCTS,
+	payload: validationProducts
 });

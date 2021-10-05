@@ -3,6 +3,7 @@ import { takeLatest, put, all, call } from "redux-saga/effects";
 import {
 	setProducts,
 	setLatestProducts,
+	setValidationProducts,
 	setProduct,
 	fetchProductsStart,
 	fetchProductStart
@@ -11,6 +12,7 @@ import {
 	handleAddProduct,
 	handleFetchProducts,
 	handleFetchLatestProducts,
+	handleFetchValidationProducts,
 	handleFetchProduct,
 	handleDeleteProduct,
 	handleUpdateVote,
@@ -75,7 +77,6 @@ export function* fetchProduct({ payload }) {
 export function* onFetchProductStart() {
 	yield takeLatest(productsTypes.FETCH_PRODUCT_START, fetchProduct);
 }
-//new implmentation
 
 export function* updateVote({ payload }) {
 	try {
@@ -111,6 +112,22 @@ export function* onFetchLatestProductsStart() {
 		fetchLatestProducts
 	);
 }
+//new implementations
+export function* fetchValidationProducts({ payload }) {
+	try {
+		const validationProducts = yield handleFetchValidationProducts(payload);
+		yield put(setValidationProducts(validationProducts));
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* onFetchValidationProductsStart() {
+	yield takeLatest(
+		productsTypes.FETCH_VALIDATION_PRODUCTS_START,
+		fetchValidationProducts
+	);
+}
 
 export default function* productsSagas() {
 	yield all([
@@ -119,7 +136,8 @@ export default function* productsSagas() {
 		call(onDeleteProductStart),
 		call(onFetchProductStart),
 		call(onUpdateProductVoteStart),
+		call(onFetchLatestProductsStart),
 		//new Implmentation
-		call(onFetchLatestProductsStart)
+		call(onFetchValidationProductsStart)
 	]);
 }

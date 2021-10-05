@@ -1,206 +1,150 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router";
 import {
-	addProductStart,
-	fetchProductsStart,
-	deleteProductStart
-} from "../../redux/Products/products.actions";
-import Modal from "./../../components/Modal";
-import FormInput from "./../../components/forms/FormInput";
-import SelectMUI from "./../../components/forms/SelectMUI";
-import Button from "./../../components/forms/Button";
-import LoadMore from "./../../components/LoadMore";
-import { CKEditor } from "ckeditor4-react";
-import "./styles.scss";
-import watchTypes from "./../../assets/data/watchTypes.json";
-import watchBrands from "./../../assets/data/watchBrands.json";
+	Table,
+	TableContainer,
+	TableHead,
+	TableRow,
+	TableCell,
+	TableBody,
+	Grid,
+	Paper
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchValidationProductsStart } from "../../redux/Products/products.actions";
+import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
 
-const mapState = ({ productsData }) => ({
-	products: productsData.products
+const useStyles = makeStyles((theme) => ({}));
+
+const mapState = (state) => ({
+	currentUser: state.user.currentUser,
+	products: state.productsData.validationProducts
 });
 
-const Admin = (props) => {
-	const { products } = useSelector(mapState);
+// eslint-disable-next-line
+const Admin = ({}) => {
+	const classes = useStyles();
 	const dispatch = useDispatch();
-	const [hideModal, setHideModal] = useState(true);
-	const [productCategory, setProductCategory] = useState("divers");
-	const [productBrand, setProductBrand] = useState("Rolex");
-	const [productName, setProductName] = useState("");
-	const [productThumbnail, setProductThumbnail] = useState("");
-	const [productDesc, setProductDesc] = useState("");
+	const history = useHistory();
+	const pageSize = 5;
 
-	const { data, queryDoc, isLastPage } = products;
+	const { products, currentUser } = useSelector(mapState);
+
+	const { data } = products;
+	const { userVotes } = currentUser;
 
 	useEffect(
 		() => {
-			dispatch(fetchProductsStart());
+			dispatch(fetchValidationProductsStart({ pageSize }));
 		},
 		// eslint-disable-next-line
 		[]
 	);
 
-	const toggleModal = () => setHideModal(!hideModal);
+	if (!Array.isArray(data)) return null;
 
-	const configModal = {
-		hideModal,
-		toggleModal
-	};
-
-	const resetForm = () => {
-		setHideModal(true);
-		setProductCategory("divers");
-		setProductBrand("Rolex");
-		setProductName("");
-		setProductThumbnail("");
-		setProductDesc("");
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
-		dispatch(
-			addProductStart({
-				productCategory,
-				productBrand,
-				productName,
-				productThumbnail,
-				productDesc,
-				avgTotal: 0,
-				numberVotesNotOwn: 0,
-				numberVotesOwn: 0,
-				avgVotationsOwn: 0,
-				avgVotationsNotOwn: 0,
-				votationsNonOwn: [0, 0, 0, 0, 0, 0, 0],
-				votationsOwn: [0, 0, 0, 0, 0, 0, 0]
-			})
+	if (data.length < 1) {
+		return (
+			<div>
+				<p>No search Results</p>
+			</div>
 		);
-		resetForm();
-	};
-
-	const handleLoadMore = () => {
-		dispatch(
-			fetchProductsStart({
-				startAfterDoc: queryDoc,
-				persistProducts: data
-			})
-		);
-	};
-
-	const configLoadMore = {
-		onLoadMoreEvt: handleLoadMore
-	};
+	}
 
 	return (
-		<div className="admin">
-			<div className="callToActions">
-				<ul>
-					<li>
-						<Button onClick={() => toggleModal()}>Add new product</Button>
-					</li>
-				</ul>
-			</div>
+		<div>
+			<Grid container className={classes.container} style={{ padding: "20px" }}>
+				<Grid item xs={12} md={6}>
+					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
+						<Table aria-label="simple table">
+							<TableHead>
+								<TableRow>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										#
+									</TableCell>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Watches
+									</TableCell>
 
-			<Modal {...configModal}>
-				<div className="addNewProductForm">
-					<form onSubmit={handleSubmit}>
-						<h2>Add new product</h2>
-
-						<SelectMUI
-							label="Category"
-							options={watchTypes.options}
-							handleChange={(e) => setProductCategory(e.target.value)}
-						/>
-						<SelectMUI
-							label="Brand"
-							options={watchBrands.options}
-							handleChange={(e) => setProductBrand(e.target.value)}
-						/>
-
-						<FormInput
-							label="Name"
-							type="text"
-							value={productName}
-							handleChange={(e) => setProductName(e.target.value)}
-						/>
-
-						<FormInput
-							label="Main image URL"
-							type="url"
-							value={productThumbnail}
-							handleChange={(e) => setProductThumbnail(e.target.value)}
-						/>
-						<CKEditor
-							onChange={(evt) => setProductDesc(evt.editor.getData())}
-						/>
-						<br />
-
-						<Button type="submit">Add product</Button>
-					</form>
-				</div>
-			</Modal>
-
-			<div className="manageProducts">
-				<table border="0" cellPadding="0" cellSpacing="0">
-					<tbody>
-						<tr>
-							<th>
-								<h1>Manage Products</h1>
-							</th>
-						</tr>
-						<tr>
-							<td>
-								<table
-									className="results"
-									border="0"
-									cellPadding="10"
-									cellSpacing="0"
-								>
-									<tbody>
-										{Array.isArray(data) &&
-											data.length > 0 &&
-											data.map((product, index) => {
-												const { productName, productThumbnail, documentID } =
-													product;
-
-												return (
-													<tr>
-														<td>
-															<img src={productThumbnail} alt="" />
-														</td>
-														<td>{productName}</td>
-														<td>
-															<Button
-																onClick={() =>
-																	dispatch(deleteProductStart(documentID))
-																}
-															>
-																Delete
-															</Button>
-														</td>
-													</tr>
-												);
-											})}
-									</tbody>
-								</table>
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
-						<tr>
-							<td>
-								<table border="0" cellPadding="10" cellSpacing="0">
-									<tbody>
-										<tr>
-											<td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
-										</tr>
-									</tbody>
-								</table>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Score
+									</TableCell>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Category
+									</TableCell>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Votes
+									</TableCell>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										<BiCheckboxChecked fontSize="1.5em" />
+									</TableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{data.map((product, i) => {
+									const {
+										productName,
+										productBrand,
+										avgTotal,
+										productCategory,
+										numberVotesOwn,
+										numberVotesNotOwn,
+										documentID
+									} = product;
+									if (!productName) return null;
+									const color = "#ffffffB3";
+									return (
+										<TableRow
+											key={productName}
+											style={{ cursor: "pointer" }}
+											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+											onClick={() => history.push(`/product/${documentID}`)}
+										>
+											<TableCell align="center" style={{ color: color }}>
+												{i + 1}
+											</TableCell>
+											<TableCell
+												align="center"
+												component="th"
+												scope="row"
+												style={{ color: color }}
+											>
+												{productBrand} - {productName}
+											</TableCell>
+											<TableCell align="center" style={{ color: color }}>
+												{avgTotal} /10
+											</TableCell>
+											<TableCell align="center" style={{ color: color }}>
+												{productCategory}
+											</TableCell>
+											<TableCell align="center" style={{ color: color }}>
+												{numberVotesNotOwn + numberVotesOwn}
+											</TableCell>
+											{userVotes.includes(documentID) && (
+												<TableCell
+													align="center"
+													style={{ color: color, fontSize: "15px" }}
+												>
+													<BiCheckboxChecked fontSize="1.5em" />
+												</TableCell>
+											)}
+											{!userVotes.includes(documentID) && (
+												<TableCell
+													align="center"
+													style={{ color: color, fontSize: "15px" }}
+												>
+													<BiCheckbox fontSize="1.5em" />
+												</TableCell>
+											)}
+										</TableRow>
+									);
+								})}
+							</TableBody>
+						</Table>
+					</TableContainer>
+				</Grid>
+			</Grid>
 		</div>
 	);
 };

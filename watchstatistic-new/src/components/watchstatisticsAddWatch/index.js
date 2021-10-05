@@ -104,7 +104,6 @@ const AddWatchForm = () => {
 	return (
 		<Grid item xs={12}>
 			<div>
-				{userRoles.includes("admin") && <Typography>{userRoles}</Typography>}
 				<Formik
 					initialValues={{
 						...INITIAL_FORM_STATE

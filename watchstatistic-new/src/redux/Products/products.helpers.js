@@ -148,8 +148,6 @@ export const handleUserVote = (product) => {
 	});
 };
 
-//new implementations
-
 export const handleFetchLatestProducts = ({
 	filterType,
 	filter,
@@ -163,6 +161,52 @@ export const handleFetchLatestProducts = ({
 		let ref = firestore
 			.collection("products")
 			.orderBy("createdDate", "desc")
+			.limit(pageSize);
+
+		if (filterType) ref = ref.where(where, "==", filterType);
+		if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
+
+		ref
+			.get()
+			.then((snapshot) => {
+				const totalCount = snapshot.size;
+
+				const data = [
+					...persistProducts,
+					...snapshot.docs.map((doc) => {
+						return {
+							...doc.data(),
+							documentID: doc.id
+						};
+					})
+				];
+
+				resolve({
+					data,
+					queryDoc: snapshot.docs[totalCount - 1],
+					isLastPage: totalCount < 1
+				});
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
+
+//new implementations
+export const handleFetchValidationProducts = ({
+	filterType,
+	filter,
+	pageSize,
+	startAfterDoc,
+	persistProducts = []
+}) => {
+	return new Promise((resolve, reject) => {
+		const where = filter;
+
+		let ref = firestore
+			.collection("orders")
+			.orderBy("createdDate")
 			.limit(pageSize);
 
 		if (filterType) ref = ref.where(where, "==", filterType);
