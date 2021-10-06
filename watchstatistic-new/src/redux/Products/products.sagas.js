@@ -5,7 +5,7 @@ import {
 	setLatestProducts,
 	setValidationProducts,
 	setProduct,
-	fetchProductsStart,
+	fetchValidationProductsStart,
 	fetchProductStart
 } from "./products.actions";
 import {
@@ -55,7 +55,7 @@ export function* onFetchProductsStart() {
 export function* deleteProduct({ payload }) {
 	try {
 		yield handleDeleteProduct(payload);
-		yield put(fetchProductsStart());
+		yield put(fetchValidationProductsStart());
 	} catch (err) {
 		// console.log(err);
 	}

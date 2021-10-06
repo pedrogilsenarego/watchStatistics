@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addProductStart } from "../../redux/Products/products.actions";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Box, Button } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes2.json";
 import watchBrands from "./../../assets/data/watchBrands2.json";
 
@@ -19,6 +19,9 @@ const INITIAL_FORM_STATE = {
 	productBrand: "",
 	productName: "",
 	productThumbnail: "",
+	productThumbnail2: null,
+	productThumbnail3: null,
+	productThumbnail4: null,
 	productBackground: "",
 	productDesc: "",
 	additionalDataTitle: "",
@@ -61,6 +64,12 @@ const mapState = (state) => ({
 const AddWatchForm = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
+	const [additionalProductThumbnail2, setAdditionalProductThumbnail2] =
+		useState(false);
+	const [additionalProductThumbnail3, setAdditionalProductThumbnail3] =
+		useState(false);
+	const [additionalProductThumbnail4, setAdditionalProductThumbnail4] =
+		useState(false);
 	const { currentUser } = useSelector(mapState);
 	const { userRoles } = currentUser;
 	const admin = userRoles.includes("admin") ? true : false;
@@ -69,6 +78,9 @@ const AddWatchForm = () => {
 		const {
 			productName,
 			productThumbnail,
+			productThumbnail2,
+			productThumbnail3,
+			productThumbnail4,
 			productBackground,
 			productBrand,
 			productDesc,
@@ -77,6 +89,19 @@ const AddWatchForm = () => {
 			productCategory
 		} = e;
 
+		const thumbnail = additionalProductThumbnail2
+			? [productThumbnail, productThumbnail2]
+			: additionalProductThumbnail3
+			? [productThumbnail, productThumbnail2, productThumbnail3]
+			: additionalProductThumbnail4
+			? [
+					productThumbnail,
+					productThumbnail2,
+					productThumbnail3,
+					productThumbnail4
+			  ]
+			: [productThumbnail];
+
 		dispatch(
 			addProductStart({
 				admin: admin,
@@ -84,7 +109,7 @@ const AddWatchForm = () => {
 				productBrand,
 				productName,
 				productBackground,
-				productThumbnail: [productThumbnail],
+				productThumbnail: thumbnail,
 				productDesc,
 				additionalData: [
 					{ title: additionalDataTitle, link: additionalDataLink }
@@ -102,8 +127,8 @@ const AddWatchForm = () => {
 	};
 
 	return (
-		<Grid item xs={12}>
-			<div>
+		<Grid container justify="center">
+			<Box style={{ width: "60vw" }}>
 				<Formik
 					initialValues={{
 						...INITIAL_FORM_STATE
@@ -114,15 +139,15 @@ const AddWatchForm = () => {
 					}}
 				>
 					<Form>
-						<Grid container>
-							<Grid item xs={12}>
+						<Grid container spacing={2}>
+							<Grid item xs={12} md={6}>
 								<Select
 									name="productCategory"
 									label="Categories"
 									options={watchTypes}
 								/>
 							</Grid>
-							<Grid item xs={12}>
+							<Grid item xs={12} md={6}>
 								<Select
 									name="productBrand"
 									label="Brands"
@@ -133,8 +158,49 @@ const AddWatchForm = () => {
 								<TextField name="productName" label="Model"></TextField>
 							</Grid>
 							<Grid item xs={12}>
-								<TextField name="productThumbnail" label="Images"></TextField>
+								<TextField
+									name="productThumbnail"
+									label="Main Image"
+								></TextField>
+								{!additionalProductThumbnail4 && (
+									<Button
+										onClick={() => {
+											if (!additionalProductThumbnail2)
+												setAdditionalProductThumbnail2(true);
+											if (additionalProductThumbnail2)
+												setAdditionalProductThumbnail3(true);
+											if (additionalProductThumbnail3)
+												setAdditionalProductThumbnail4(true);
+										}}
+									>
+										Additional Image
+									</Button>
+								)}
 							</Grid>
+							{additionalProductThumbnail2 && (
+								<Grid item xs={12}>
+									<TextField
+										name="productThumbnail2"
+										label="Additional Image"
+									></TextField>
+								</Grid>
+							)}
+							{additionalProductThumbnail3 && (
+								<Grid item xs={12}>
+									<TextField
+										name="productThumbnail3"
+										label="Additional Image 2"
+									></TextField>
+								</Grid>
+							)}
+							{additionalProductThumbnail4 && (
+								<Grid item xs={12}>
+									<TextField
+										name="productThumbnail4"
+										label="Additional Image 3"
+									></TextField>
+								</Grid>
+							)}
 							<Grid item xs={12}>
 								<TextField
 									name="productBackground"
@@ -163,7 +229,7 @@ const AddWatchForm = () => {
 						</Grid>
 					</Form>
 				</Formik>
-			</div>
+			</Box>
 		</Grid>
 	);
 };

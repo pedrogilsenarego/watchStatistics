@@ -8,12 +8,17 @@ import {
 	TableCell,
 	TableBody,
 	Grid,
-	Paper
+	Paper,
+	Button,
+	ButtonGroup
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchValidationProductsStart } from "../../redux/Products/products.actions";
-import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
+import {
+	fetchValidationProductsStart,
+	addProductStart,
+	deleteProductStart
+} from "../../redux/Products/products.actions";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -29,10 +34,9 @@ const Admin = ({}) => {
 	const history = useHistory();
 	const pageSize = 5;
 
-	const { products, currentUser } = useSelector(mapState);
+	const { products } = useSelector(mapState);
 
 	const { data } = products;
-	const { userVotes } = currentUser;
 
 	useEffect(
 		() => {
@@ -76,9 +80,6 @@ const Admin = ({}) => {
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Votes
 									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
-										<BiCheckboxChecked fontSize="1.5em" />
-									</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
@@ -88,10 +89,9 @@ const Admin = ({}) => {
 										productBrand,
 										avgTotal,
 										productCategory,
-										numberVotesOwn,
-										numberVotesNotOwn,
 										documentID
 									} = product;
+									product.admin = true;
 									if (!productName) return null;
 									const color = "#ffffffB3";
 									return (
@@ -99,7 +99,6 @@ const Admin = ({}) => {
 											key={productName}
 											style={{ cursor: "pointer" }}
 											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-											onClick={() => history.push(`/product/${documentID}`)}
 										>
 											<TableCell align="center" style={{ color: color }}>
 												{i + 1}
@@ -109,6 +108,7 @@ const Admin = ({}) => {
 												component="th"
 												scope="row"
 												style={{ color: color }}
+												onClick={() => history.push(`/product/${documentID}`)}
 											>
 												{productBrand} - {productName}
 											</TableCell>
@@ -119,24 +119,25 @@ const Admin = ({}) => {
 												{productCategory}
 											</TableCell>
 											<TableCell align="center" style={{ color: color }}>
-												{numberVotesNotOwn + numberVotesOwn}
+												<ButtonGroup>
+													<Button
+														onClick={() => {
+															delete product.documentID;
+															dispatch(addProductStart(product));
+															dispatch(deleteProductStart(documentID));
+														}}
+													>
+														Approve
+													</Button>
+													<Button
+														onClick={() =>
+															dispatch(deleteProductStart(documentID))
+														}
+													>
+														Delete
+													</Button>
+												</ButtonGroup>
 											</TableCell>
-											{userVotes.includes(documentID) && (
-												<TableCell
-													align="center"
-													style={{ color: color, fontSize: "15px" }}
-												>
-													<BiCheckboxChecked fontSize="1.5em" />
-												</TableCell>
-											)}
-											{!userVotes.includes(documentID) && (
-												<TableCell
-													align="center"
-													style={{ color: color, fontSize: "15px" }}
-												>
-													<BiCheckbox fontSize="1.5em" />
-												</TableCell>
-											)}
 										</TableRow>
 									);
 								})}

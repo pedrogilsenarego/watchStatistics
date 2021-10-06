@@ -4,6 +4,7 @@ export const handleAddProduct = (product) => {
 	const admin = product.admin;
 	const where = admin ? "products" : "orders";
 	delete product.admin;
+
 	return new Promise((resolve, reject) => {
 		firestore
 			.collection(where)
@@ -66,7 +67,7 @@ export const handleFetchProducts = ({
 export const handleDeleteProduct = (documentID) => {
 	return new Promise((resolve, reject) => {
 		firestore
-			.collection("products")
+			.collection("orders")
 			.doc(documentID)
 			.delete()
 			.then(() => {
