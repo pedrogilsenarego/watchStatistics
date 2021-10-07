@@ -4,7 +4,7 @@
 			"name": "Brands",
 			"value": ""
 		},
-		{ "name": "Cartier", "value": "cartier" },
+		{ "name": "Cartier", "value": "Cartier" },
 		{ "name": "Cvstos", "value": "cvstos" },
 		{ "name": "Citizen", "value": "citizen" },
 		{ "name": "GrandSeiko", "value": "grandseiko" },
@@ -12,7 +12,7 @@
 		{ "name": "Isotope", "value": "isotope" },
 		{ "name": "Jeger-LeCoultre", "value": "Jeger-LeCoultre" },
 		{ "name": "Lorier", "value": "Lorier" },
-		{ "name": "Omega", "value": "omega" },
+		{ "name": "Omega", "value": "Omega" },
 		{ "name": "Panerai", "value": "Panerai" },
 		{ "name": "Rolex", "value": "rolex" },
 		{ "name": "Seiko", "value": "seiko" },

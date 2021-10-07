@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button, ButtonGroup } from "@material-ui/core";
+import { Button, ButtonGroup, Grid, Box } from "@material-ui/core";
 //import { makeStyles } from "@material-ui/core/styles";
 import MainBody from "../MainBody";
 import LatestAdditions from "../LatestAdditions";
@@ -44,34 +44,36 @@ const TableMain = ({}) => {
 	};
 
 	return (
-		<div>
-			<ButtonGroup>
-				<Button
-					onClick={(e) => {
-						setTable("main");
-					}}
-				>
-					Top Watches
-				</Button>
-				<Button
-					onClick={(e) => {
-						setTable("second");
-					}}
-				>
-					Latest Additions
-				</Button>
-				<Button
-					onClick={(e) => {
-						setTable("third");
-					}}
-				>
-					Top Users
-				</Button>
-			</ButtonGroup>
+		<Box>
+			<Grid container justify="center" style={{ paddingTop: "10px" }}>
+				<ButtonGroup>
+					<Button
+						onClick={(e) => {
+							setTable("main");
+						}}
+					>
+						Top Watches
+					</Button>
+					<Button
+						onClick={(e) => {
+							setTable("second");
+						}}
+					>
+						Latest Additions
+					</Button>
+					<Button
+						onClick={(e) => {
+							setTable("third");
+						}}
+					>
+						Top Users
+					</Button>
+				</ButtonGroup>
+			</Grid>
 			{table === "main" && <MainBody {...configLoadedTopWatches} />}
 			{table === "second" && <LatestAdditions {...configLoadedLatest} />}
 			{table === "third" && <MainUsers {...configLoadedTopUsers} />}
-		</div>
+		</Box>
 	);
 };
 

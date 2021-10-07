@@ -110,7 +110,11 @@ const ProductVote = ({
 		if (ownership === "Own") {
 			const newAvgTotal =
 				numberVotesNotOwn > 0
-					? ((+newAvgVotationsOwn + +avgVotationsNotOwn) / 2).toFixed(2)
+					? (
+							(+newAvgVotationsOwn * (numberVotesOwn + 1) +
+								+avgVotationsNotOwn * numberVotesNotOwn) /
+							(numberVotesNotOwn + numberVotesOwn + 1)
+					  ).toFixed(2)
 					: (+newAvgVotationsOwn / 1).toFixed(2);
 
 			const configVote = {
@@ -131,7 +135,11 @@ const ProductVote = ({
 		if (ownership === "Not Own") {
 			const newAvgTotal =
 				numberVotesOwn > 0
-					? ((+newAvgVotationsNotOwn + +avgVotationsOwn) / 2).toFixed(2)
+					? (
+							(+newAvgVotationsNotOwn * (numberVotesNotOwn + 1) +
+								+avgVotationsOwn * numberVotesOwn) /
+							(numberVotesOwn + numberVotesNotOwn + 1)
+					  ).toFixed(2)
 					: (+newAvgVotationsNotOwn / 1).toFixed(2);
 
 			const configVote = {

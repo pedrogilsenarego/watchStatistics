@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, CardMedia, Box, Grid } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
@@ -21,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	text: {
-		color: "#FFFFFF",
-		fontSize: "20px",
+		color: "#ffffff",
+		fontSize: "13px",
 		textAlign: "center",
 		fontFamily: "'Comfortaa', cursive"
 	}
@@ -75,27 +76,31 @@ const Product = (product) => {
 							height={"100%"}
 							bgcolor="#040406B3"
 							style={{
-								position: "relative",
 								cursor: "pointer"
 							}}
 						>
 							{" "}
-							<Grid container>
+							<Grid container justify="center">
 								<Typography
 									style={{
 										cursor: "pointer",
-										paddingTop: "80px"
+										paddingTop: "90px"
 									}}
 									key={2}
 									className={classes.text}
 									onMouseEnter={() => setOnMouse(false)}
 									onClick={() => history.push(`/product/${documentID}`)}
 								>
-									<strong>{productBrand}:</strong> {productName}
+									<strong>
+										{productBrand} {productName}
+									</strong>
 								</Typography>
+
+								<Divider style={{ width: "80%", background: "white" }} />
 								<Typography
 									style={{
-										cursor: "pointer"
+										cursor: "pointer",
+										paddingTop: "10px"
 									}}
 									key={3}
 									className={classes.text}
