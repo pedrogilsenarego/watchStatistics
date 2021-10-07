@@ -89,17 +89,17 @@ const AddWatchForm = () => {
 			productCategory
 		} = e;
 
-		const thumbnail = additionalProductThumbnail2
-			? [productThumbnail, productThumbnail2]
-			: additionalProductThumbnail3
-			? [productThumbnail, productThumbnail2, productThumbnail3]
-			: additionalProductThumbnail4
+		const thumbnail = additionalProductThumbnail4
 			? [
 					productThumbnail,
 					productThumbnail2,
 					productThumbnail3,
 					productThumbnail4
 			  ]
+			: additionalProductThumbnail3
+			? [productThumbnail, productThumbnail2, productThumbnail3]
+			: additionalProductThumbnail2
+			? [productThumbnail, productThumbnail2]
 			: [productThumbnail];
 
 		dispatch(
