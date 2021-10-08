@@ -140,12 +140,29 @@ const AddWatchForm = () => {
 	const handlePreview = (e) => {
 		const {
 			productThumbnail,
+			productThumbnail2,
+			productThumbnail3,
+			productThumbnail4,
 			productBackground,
 			productDesc,
 			additionalDataTitle,
 			additionalDataLink
 		} = e;
-		setProductThumbnailPreview(productThumbnail);
+
+		const thumbnail = additionalProductThumbnail4
+			? [
+					productThumbnail,
+					productThumbnail2,
+					productThumbnail3,
+					productThumbnail4
+			  ]
+			: additionalProductThumbnail3
+			? [productThumbnail, productThumbnail2, productThumbnail3]
+			: additionalProductThumbnail2
+			? [productThumbnail, productThumbnail2]
+			: [productThumbnail];
+
+		setProductThumbnailPreview(thumbnail);
 		setProductBackgroundPreview(productBackground);
 		setProductDescPreview(productDesc);
 		setProductAdditionalDataPreview([
@@ -154,7 +171,7 @@ const AddWatchForm = () => {
 	};
 
 	const configPreview = {
-		productThumbnail: [productThumbnailPreview],
+		productThumbnail: productThumbnailPreview,
 		productBackground: productBackGroundPreview,
 		productDesc: productDescPreview,
 		additionalData: productAdditionalDataPreview
@@ -268,10 +285,20 @@ const AddWatchForm = () => {
 										></TextField>
 									</Grid>
 									<Grid item xs={12} style={{ paddingTop: "20px" }}>
-										<ButtonMUI>Preview</ButtonMUI>
+										{preview && <ButtonMUI>Refresh Preview</ButtonMUI>}
+										{!preview && <ButtonMUI>Submit</ButtonMUI>}
 									</Grid>
 									<Grid item xs={12} style={{ paddingTop: "20px" }}>
-										<ButtonMUI>Submit</ButtonMUI>
+										{preview && (
+											<Button onClick={() => setPreview(!preview)}>
+												I am ready to Submit
+											</Button>
+										)}
+										{!preview && (
+											<Button onClick={() => setPreview(!preview)}>
+												Take me back
+											</Button>
+										)}
 									</Grid>
 								</Grid>
 							</Form>
@@ -279,7 +306,10 @@ const AddWatchForm = () => {
 					</Box>
 				</Paper>
 			</Grid>
-			{preview && <ProductDetailsPreview {...configPreview} />}
+			<Typography style={{ paddingTop: "10px" }} variant={"h5"}>
+				Preview
+			</Typography>
+			<ProductDetailsPreview {...configPreview} />
 		</div>
 	);
 };
