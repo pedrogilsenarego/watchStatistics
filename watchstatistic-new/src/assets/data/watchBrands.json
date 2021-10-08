@@ -14,11 +14,13 @@
 		{ "name": "Jeger-LeCoultre", "value": "Jeger-LeCoultre" },
 		{ "name": "Lorier", "value": "Lorier" },
 		{ "name": "Omega", "value": "Omega" },
+		{ "name": "Oris", "value": "Oris" },
 		{ "name": "Panerai", "value": "Panerai" },
-		{ "name": "Rolex", "value": "rolex" },
+		{ "name": "Rolex", "value": "Rolex" },
 		{ "name": "Seiko", "value": "seiko" },
 		{ "name": "Sinn", "value": "sinn" },
 		{ "name": "Timex", "value": "Timex" },
+		{ "name": "Tudor", "value": "Tudor" },
 		{ "name": "Universal Geneve", "value": "Universal Geneve" }
 	]
 }

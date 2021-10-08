@@ -19,6 +19,7 @@ import Recovery from "./pages/Recovery";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
+import ProductDetailsPreview from "./pages/ProductDetailsPreview";
 import Cart from "./pages/Cart";
 import Watchstatistics from "./pages/Watchstatistics";
 import AddWatch from "./pages/Watchstatistics/AddWatch";
@@ -100,6 +101,16 @@ const App = (props) => {
 						<WithAuth>
 							<MainLayout>
 								<ProductDetails />
+							</MainLayout>
+						</WithAuth>
+					)}
+				/>
+				<Route
+					path="/product/preview"
+					render={() => (
+						<WithAuth>
+							<MainLayout>
+								<ProductDetailsPreview />
 							</MainLayout>
 						</WithAuth>
 					)}
