@@ -23,6 +23,7 @@ import ProductDetailsPreview from "./pages/ProductDetailsPreview";
 import Cart from "./pages/Cart";
 import Watchstatistics from "./pages/Watchstatistics";
 import AddWatch from "./pages/Watchstatistics/AddWatch";
+import WatchBoxes from "./pages/WatchBoxes";
 
 import Order from "./pages/Order";
 
@@ -120,6 +121,14 @@ const App = (props) => {
 					render={() => (
 						<MainLayout>
 							<Cart />
+						</MainLayout>
+					)}
+				/>
+				<Route
+					path="/watchboxes"
+					render={() => (
+						<MainLayout>
+							<WatchBoxes />
 						</MainLayout>
 					)}
 				/>

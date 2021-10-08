@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@material-ui/core";
+import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 import { AiOutlineCodeSandbox, AiOutlineInfoCircle } from "react-icons/ai";
 import { BsGraphUp } from "react-icons/bs";
@@ -26,6 +27,7 @@ const LeftIcons = ({
 }) => {
 	const classes = useStyles();
 	const activeStyle = { color: "#FFA500" };
+	const history = useHistory();
 
 	return (
 		<div>
@@ -54,7 +56,7 @@ const LeftIcons = ({
 				&nbsp;WatchStatistics
 			</Button>
 			<Button
-				disabled
+				onClick={() => history.push("/watchboxes")}
 				className={classes.textBtn}
 				activeStyle={activeStyle}
 				disableRipple

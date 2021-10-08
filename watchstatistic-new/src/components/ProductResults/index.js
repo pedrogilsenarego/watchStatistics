@@ -154,7 +154,8 @@ const ProductResults = ({}) => {
 			fetchProductsStart({
 				filterType,
 				startAfterDoc: queryDoc,
-				persistProducts: data
+				persistProducts: data,
+				pageSize
 			})
 		);
 	};
