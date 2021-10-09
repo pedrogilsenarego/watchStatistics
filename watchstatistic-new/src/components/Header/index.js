@@ -129,7 +129,6 @@ const Header = (props) => {
 		setAnchorWatchstatistics(e.currentTarget);
 	};
 	const configLeftIcons = {
-		watchstatistics,
 		handleWatchstatisticsOpen,
 		handleSupportOpen
 	};
@@ -275,6 +274,7 @@ const Header = (props) => {
 					Browse
 				</MenuItem>
 				<MenuItem
+					disabled={watchstatistics}
 					onClick={() => {
 						history.push("/watchstatistics/addwatch");
 					}}
@@ -373,6 +373,7 @@ const Header = (props) => {
 						Browse
 					</MenuItem>,
 					<MenuItem
+						disabled={watchstatistics}
 						onClick={() => {
 							history.push("/watchstatistics/addwatch");
 						}}

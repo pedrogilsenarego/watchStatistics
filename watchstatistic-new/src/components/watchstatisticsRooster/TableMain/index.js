@@ -9,7 +9,7 @@ import MainUsers from "../MainUsers";
 //const useStyles = makeStyles((theme) => ({}));
 
 // eslint-disable-next-line
-const TableMain = ({}) => {
+const TableMain = ({ currentUser }) => {
 	//const classes = useStyles();
 	const [table, setTable] = useState("main");
 	const [loadedLatest, setLoadedLatest] = useState(false);

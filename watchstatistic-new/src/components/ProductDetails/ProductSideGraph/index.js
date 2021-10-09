@@ -17,11 +17,6 @@ import { RiDragDropLine } from "react-icons/ri";
 import { RiCloseCircleLine } from "react-icons/ri";
 import CategoriesLegend from "../CategoriesLegend";
 
-const mapState = (state) => ({
-	currentUser: state.user.currentUser,
-	product: state.productsData.product
-});
-
 const useStyles = makeStyles((theme) => ({
 	menu: {
 		"& .MuiPaper-root": {
@@ -63,7 +58,11 @@ const initialTargetVoteState = {
 
 // eslint-disable-next-line
 const ProductSidePanel = ({}) => {
-	const { product } = useSelector(mapState);
+	const mapState = (state) => ({
+		currentUser: state.user.currentUser,
+		product: state.productsData.product
+	});
+	const { product, currentUser } = useSelector(mapState);
 	const [anchorVote, setAnchorVote] = useState(null);
 	const [anchorLegendVote, setAnchorLegendVote] = useState(null);
 	const [targetVoteCategories, setTargetVoteCategories] = useState({
@@ -286,18 +285,29 @@ const ProductSidePanel = ({}) => {
 						<Typography align="center" style={{ width: "100%" }}>
 							Score Non Owners: {avgVotationsNotOwn}
 						</Typography>
-
-						<Button
-							className={classes.textBtn}
-							style={{ width: "50%" }}
-							aria-controls="vote"
-							onClick={(e) => {
-								setAnchorVote(e.currentTarget);
-							}}
-							disableRipple
-						>
-							Vote
-						</Button>
+						{currentUser && (
+							<Button
+								className={classes.textBtn}
+								style={{ width: "50%" }}
+								aria-controls="vote"
+								onClick={(e) => {
+									setAnchorVote(e.currentTarget);
+								}}
+								disableRipple
+							>
+								Vote
+							</Button>
+						)}
+						{!currentUser && (
+							<Button
+								className={classes.textBtn}
+								style={{ width: "50%" }}
+								aria-controls="vote"
+								disableRipple
+							>
+								Login to Vote
+							</Button>
+						)}
 						<Button
 							className={classes.textBtn}
 							style={{ width: "50%" }}

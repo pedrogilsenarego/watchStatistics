@@ -33,7 +33,8 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 	const { products, currentUser } = useSelector(mapState);
 
 	const { data } = products;
-	const { userVotes } = currentUser;
+
+	const { userVotes } = currentUser ? currentUser : "null";
 
 	useEffect(
 		() => {
@@ -83,9 +84,11 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Votes
 									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
-										<BiCheckboxChecked fontSize="1.5em" />
-									</TableCell>
+									{currentUser && (
+										<TableCell align="center" style={{ fontSize: "15px" }}>
+											<BiCheckboxChecked fontSize="1.5em" />
+										</TableCell>
+									)}
 								</TableRow>
 							</TableHead>
 							<TableBody>
@@ -128,7 +131,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 											<TableCell align="center" style={{ color: color }}>
 												{numberVotesNotOwn + numberVotesOwn}
 											</TableCell>
-											{userVotes.includes(documentID) && (
+											{currentUser && userVotes.includes(documentID) && (
 												<TableCell
 													align="center"
 													style={{ color: color, fontSize: "15px" }}
@@ -136,7 +139,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 													<BiCheckboxChecked fontSize="1.5em" />
 												</TableCell>
 											)}
-											{!userVotes.includes(documentID) && (
+											{currentUser && !userVotes.includes(documentID) && (
 												<TableCell
 													align="center"
 													style={{ color: color, fontSize: "15px" }}

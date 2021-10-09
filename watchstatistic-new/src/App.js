@@ -57,11 +57,9 @@ const App = (props) => {
 					exact
 					path="/watchstatistics"
 					render={() => (
-						<WithAuth>
-							<MainLayout>
-								<Watchstatistics />
-							</MainLayout>
-						</WithAuth>
+						<MainLayout>
+							<Watchstatistics />
+						</MainLayout>
 					)}
 				/>
 				<Route
@@ -79,31 +77,25 @@ const App = (props) => {
 					exact
 					path="/search"
 					render={() => (
-						<WithAuth>
-							<MainLayout>
-								<Search />
-							</MainLayout>
-						</WithAuth>
+						<MainLayout>
+							<Search />
+						</MainLayout>
 					)}
 				/>
 				<Route
 					path="/search/:filterType"
 					render={() => (
-						<WithAuth>
-							<MainLayout>
-								<Search />
-							</MainLayout>
-						</WithAuth>
+						<MainLayout>
+							<Search />
+						</MainLayout>
 					)}
 				/>
 				<Route
 					path="/product/:productID"
 					render={() => (
-						<WithAuth>
-							<MainLayout>
-								<ProductDetails />
-							</MainLayout>
-						</WithAuth>
+						<MainLayout>
+							<ProductDetails />
+						</MainLayout>
 					)}
 				/>
 				<Route

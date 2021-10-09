@@ -20,11 +20,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const LeftIcons = ({
-	watchstatistics,
-	handleSupportOpen,
-	handleWatchstatisticsOpen
-}) => {
+const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 	const classes = useStyles();
 	const activeStyle = { color: "#FFA500" };
 	const history = useHistory();
@@ -44,7 +40,6 @@ const LeftIcons = ({
 			</Button>
 
 			<Button
-				disabled={watchstatistics}
 				aria-controls="watchstatistics"
 				className={classes.textBtn}
 				activeStyle={activeStyle}
