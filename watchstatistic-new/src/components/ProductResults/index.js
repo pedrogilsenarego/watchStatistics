@@ -8,6 +8,7 @@ import LoadMore from "../LoadMore";
 import { Grid } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes.json";
 import watchBrands from "./../../assets/data/watchBrands.json";
+import pricesBracket from "./../../assets/data/pricesBracket.json";
 import { makeStyles } from "@material-ui/core/styles";
 import { RiMenuAddFill } from "react-icons/ri";
 
@@ -50,7 +51,7 @@ const ProductResults = ({}) => {
 			color: "#ffffff",
 			padding: "2px"
 		},
-		select: {
+		select2: {
 			backgroundColor: "#134F6B"
 		}
 	}));
@@ -95,10 +96,16 @@ const ProductResults = ({}) => {
 					}}
 				>
 					<Grid item spacing={2}>
-						<FormSelect className={classes.select} {...configFilters} />
+						<FormSelect className={classes.select2} {...configFilters} />
 					</Grid>
 					<Grid item>
-						<FormSelect className={classes.select} {...configFilterBrands} />
+						<FormSelect className={classes.select2} {...configFilterBrands} />
+					</Grid>
+					<Grid item>
+						<FormSelect
+							className={classes.select2}
+							{...configFilterPriceBrackets}
+						/>
 					</Grid>
 				</Grid>
 			</Grid>
@@ -122,6 +129,12 @@ const ProductResults = ({}) => {
 	const handleFilterBrand = (e) => {
 		const nextFilter = e.target.value;
 		setFilter("productBrand");
+		history.push(`/search/${nextFilter}`);
+	};
+
+	const handleFilterPriceBracket = (e) => {
+		const nextFilter = e.target.value;
+		setFilter("productPriceBrackets");
 		history.push(`/search/${nextFilter}`);
 	};
 
@@ -149,6 +162,13 @@ const ProductResults = ({}) => {
 		label: "Brands"
 	};
 
+	const configFilterPriceBrackets = {
+		defaultValue: filterType,
+		options: pricesBracket.options,
+		handleChange: handleFilterPriceBracket,
+		label: "PriceBrackets"
+	};
+
 	const handleLoadMore = () => {
 		dispatch(
 			fetchProductsStart({
@@ -174,7 +194,7 @@ const ProductResults = ({}) => {
 							style={{
 								marginTop: "13px",
 								marginLeft: "3px",
-								position: "absolute",
+								position: "fixed",
 								zIndex: "3",
 								color: "white",
 								backgroundColor: "#ffffff40"

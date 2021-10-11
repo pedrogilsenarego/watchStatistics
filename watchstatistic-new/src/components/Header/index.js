@@ -276,6 +276,7 @@ const Header = (props) => {
 				<MenuItem
 					disabled={watchstatistics}
 					onClick={() => {
+						handleCloseWatchstatisticsMenu();
 						history.push("/watchstatistics/addwatch");
 					}}
 				>

@@ -8,6 +8,7 @@ import { useHistory } from "react-router";
 import { Grid, Typography, Box, Paper, Button } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes2.json";
 import watchBrands from "./../../assets/data/watchBrands2.json";
+import pricesBracket from "./../../assets/data/pricesBracket2.json";
 
 import TextField from "../forms/InputMUI";
 import ButtonMUI from "../forms/ButtonMUI";
@@ -18,6 +19,7 @@ import ProductDetailsPreview from "../../pages/ProductDetailsPreview";
 const INITIAL_FORM_STATE = {
 	productCategory: "",
 	productBrand: "",
+	productPriceBrackets: "",
 	productName: "",
 	productThumbnail: "",
 	productThumbnail2: null,
@@ -34,6 +36,7 @@ const FORM_VALIDATION_NULL = Yup.object().shape({});
 const FORM_VALIDATION = Yup.object().shape({
 	productCategory: Yup.string().required("Required"),
 	productBrand: Yup.string().required("Required"),
+	productPriceBrackets: Yup.string().required("Required"),
 	productName: Yup.string().required("Required"),
 	productThumbnail: Yup.string()
 		.matches(
@@ -94,6 +97,7 @@ const AddWatchForm = () => {
 			productThumbnail4,
 			productBackground,
 			productBrand,
+			productPriceBrackets,
 			productDesc,
 			additionalDataTitle,
 			additionalDataLink,
@@ -118,6 +122,7 @@ const AddWatchForm = () => {
 				admin: admin,
 				productCategory,
 				productBrand,
+				productPriceBrackets,
 				productName,
 				productBackground,
 				productThumbnail: thumbnail,
@@ -208,6 +213,13 @@ const AddWatchForm = () => {
 											name="productBrand"
 											label="Brands"
 											options={watchBrands}
+										/>
+									</Grid>
+									<Grid item xs={12} md={6}>
+										<Select
+											name="productPriceBrackets"
+											label="Price Brackets"
+											options={pricesBracket}
 										/>
 									</Grid>
 									<Grid item xs={12}>
