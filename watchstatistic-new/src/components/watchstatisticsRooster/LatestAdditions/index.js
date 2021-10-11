@@ -16,7 +16,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLatestProductsStart } from "../../../redux/Products/products.actions";
 import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+	tableRow: {
+		"&:hover": {
+			backgroundColor: "#525252 !important"
+		}
+	}
+}));
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
@@ -105,10 +111,14 @@ const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 									} = product;
 									if (!productName) return null;
 									const color = "#ffffffB3";
+									const colorRow = `linear-gradient(90deg, rgba(3, 10, 13, ${
+										avgTotal / 10
+									}) ${avgTotal * 10}%, rgb(25, 107, 145) 100%)`;
 									return (
 										<TableRow
+											className={classes.tableRow}
 											key={productName}
-											style={{ cursor: "pointer" }}
+											style={{ cursor: "pointer", background: colorRow }}
 											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 											onClick={() => history.push(`/product/${documentID}`)}
 										>

@@ -36,8 +36,10 @@ const WatchstatisticsSubHeader = ({}) => {
 		if (numberVotes < 5) return "noob";
 		if (numberVotes < 10) return "begginer";
 		if (numberVotes < 20) return "watch enthusiast";
-		if (numberVotes < 50) return "watch connoisseour";
-		if (numberVotes < 150) return "watch geek legend";
+		if (numberVotes < 50) return "mature watch enthusiast";
+		if (numberVotes < 150) return "watch connoisseour";
+		if (numberVotes < 500) return "watch geek legend";
+		else return "watch god";
 	};
 
 	return (

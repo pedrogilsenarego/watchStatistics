@@ -16,8 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsStart } from "../../../redux/Products/products.actions";
 import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
 
-const useStyles = makeStyles((theme) => ({}));
-
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
 	products: state.productsData.products
@@ -25,7 +23,6 @@ const mapState = (state) => ({
 
 // eslint-disable-next-line
 const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
-	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const pageSize = 5;
@@ -33,6 +30,16 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 	const { products, currentUser } = useSelector(mapState);
 
 	const { data } = products;
+
+	const useStyles = makeStyles((theme) => ({
+		tableRow: {
+			"&:hover": {
+				backgroundColor: "#525252 !important"
+			}
+		}
+	}));
+
+	const classes = useStyles();
 
 	const { userVotes } = currentUser ? currentUser : "null";
 
@@ -91,6 +98,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 									)}
 								</TableRow>
 							</TableHead>
+
 							<TableBody>
 								{data.map((product, i) => {
 									const {
@@ -104,11 +112,21 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 									} = product;
 									if (!productName) return null;
 									const color = "#ffffffB3";
+
+									const colorRow = `linear-gradient(90deg, rgba(3, 10, 13, ${
+										avgTotal / 10
+									}) ${avgTotal * 10}%, rgb(25, 107, 145) 100%)`;
 									return (
 										<TableRow
+											className={classes.tableRow}
 											key={productName}
-											style={{ cursor: "pointer" }}
-											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+											style={{
+												cursor: "pointer",
+												background: colorRow
+											}}
+											sx={{
+												"&:last-child td, &:last-child th": { border: 0 }
+											}}
 											onClick={() => history.push(`/product/${documentID}`)}
 										>
 											<TableCell align="center" style={{ color: color }}>
