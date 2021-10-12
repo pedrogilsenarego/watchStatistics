@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
+import LinearProgress, {
+	linearProgressClasses
+} from "@mui/material/LinearProgress";
+import { styled } from "@mui/material/styles";
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+	height: 3,
+	borderRadius: 5,
+	[`&.${linearProgressClasses.colorPrimary}`]: {
+		backgroundColor: "#ffffffB3"
+	},
+	[`& .${linearProgressClasses.bar}`]: {
+		borderRadius: 5,
+		backgroundColor: "#040406"
+	}
+}));
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -27,8 +43,8 @@ const mapState = (state) => ({
 const WatchstatisticsSubHeader = ({}) => {
 	const { currentUser } = useSelector(mapState);
 	const classes = useStyles();
+	const [progress, setProgress] = useState(0);
 	const { userVotes, displayName } = currentUser;
-	if (!currentUser) return null;
 
 	const numberVotes = userVotes.length - 1;
 
@@ -41,6 +57,21 @@ const WatchstatisticsSubHeader = ({}) => {
 		if (numberVotes < 500) return "watch geek legend";
 		else return "watch god";
 	};
+
+	useEffect(() => {
+		if (rank() === "noob") setProgress((numberVotes / 5) * 100);
+		if (rank() === "begginer") setProgress(((numberVotes - 5) / 5) * 100);
+		if (rank() === "watch enthusiast")
+			setProgress(((numberVotes - 10) / 10) * 100);
+		if (rank() === "mature watch enthusiast")
+			setProgress(((numberVotes - 20) / 30) * 100);
+		if (rank() === "watch connoisseour")
+			setProgress(((numberVotes - 50) / 100) * 100);
+		if (rank() === "watch geek legend")
+			setProgress(((numberVotes - 150) / 350) * 100);
+		if (rank() === "watch god") setProgress(100);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<div>
@@ -65,6 +96,20 @@ const WatchstatisticsSubHeader = ({}) => {
 						<Typography variant="h6" className={classes.text}>
 							Rank: {rank()}
 						</Typography>
+
+						<Box
+							sx={{
+								display: "flex",
+								justifyContent: "center",
+								paddingTop: "10px"
+							}}
+						>
+							<BorderLinearProgress
+								style={{ width: "50%" }}
+								variant="determinate"
+								value={progress}
+							/>
+						</Box>
 					</Grid>
 				</Grid>
 			</Box>
