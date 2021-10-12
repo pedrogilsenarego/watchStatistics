@@ -19,7 +19,7 @@ import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
 const useStyles = makeStyles((theme) => ({
 	tableRow: {
 		"&:hover": {
-			backgroundColor: "#525252 !important"
+			backgroundColor: "#858585 !important"
 		}
 	}
 }));
@@ -67,9 +67,6 @@ const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 			<Typography>{loadedLatest}</Typography>
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
 				<Grid item xs={12} md={6}>
-					<Typography variant={"h5"} align="center">
-						Latest Additions
-					</Typography>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
 						<Table aria-label="simple table">
 							<TableHead>

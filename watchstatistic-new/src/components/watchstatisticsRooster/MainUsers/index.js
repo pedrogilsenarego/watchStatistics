@@ -8,8 +8,7 @@ import {
 	TableCell,
 	TableBody,
 	Grid,
-	Paper,
-	Typography
+	Paper
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -57,9 +56,6 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 		<div>
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
 				<Grid item xs={12} md={6}>
-					<Typography variant={"h5"} align="center">
-						Top 5 Users
-					</Typography>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
 						<Table aria-label="simple table">
 							<TableHead>

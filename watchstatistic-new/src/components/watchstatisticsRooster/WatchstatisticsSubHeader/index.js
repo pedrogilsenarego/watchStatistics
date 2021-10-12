@@ -8,14 +8,14 @@ import LinearProgress, {
 import { styled } from "@mui/material/styles";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-	height: 3,
+	height: 4,
 	borderRadius: 5,
 	[`&.${linearProgressClasses.colorPrimary}`]: {
-		backgroundColor: "#ffffffB3"
+		backgroundColor: "#1877a3"
 	},
 	[`& .${linearProgressClasses.bar}`]: {
 		borderRadius: 5,
-		backgroundColor: "#040406"
+		backgroundColor: "#154A67"
 	}
 }));
 
