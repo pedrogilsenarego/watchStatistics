@@ -50,13 +50,13 @@ const WatchstatisticsSubHeader = ({}) => {
 
 	const rank = () => {
 		if (!experience) return;
-		if (experience < 20) return "noob";
-		if (experience < 100) return "begginer";
-		if (experience < 200) return "watch enthusiast";
-		if (experience < 500) return "mature watch enthusiast";
-		if (experience < 1500) return "watch connoisseour";
-		if (experience < 5000) return "watch geek legend";
-		else return "watch god";
+		if (experience < 20) return "Noob";
+		if (experience < 100) return "Begginer";
+		if (experience < 200) return "Watch Enthusiast";
+		if (experience < 500) return "Mature Watch Enthusiast";
+		if (experience < 1500) return "Watch Connoisseour";
+		if (experience < 5000) return "Watch Geek Legend";
+		else return "Watch God";
 	};
 
 	useEffect(() => {
@@ -95,9 +95,8 @@ const WatchstatisticsSubHeader = ({}) => {
 							Watches voted: {numberVotes}
 						</Typography>
 						<Typography variant="h6" className={classes.text}>
-							User Experience: {experience}
+							Rank: {rank()}
 						</Typography>
-
 						<Box
 							sx={{
 								display: "flex",
@@ -111,9 +110,6 @@ const WatchstatisticsSubHeader = ({}) => {
 								value={progress}
 							/>
 						</Box>
-						<Typography variant="h6" className={classes.text}>
-							Rank: {rank()}
-						</Typography>
 					</Grid>
 				</Grid>
 			</Box>

@@ -59,7 +59,7 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 	return (
 		<div>
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={8}>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
 						<Table aria-label="simple table" size="small">
 							<TableHead className={classes.tableHead}>
@@ -70,7 +70,9 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Users
 									</TableCell>
-
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Rank
+									</TableCell>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Number of Votes
 									</TableCell>
@@ -78,7 +80,18 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 							</TableHead>
 							<TableBody>
 								{data.map((product, i) => {
-									const { displayName, userVotes } = product;
+									const { displayName, userVotes, experience } = product;
+
+									const rank = () => {
+										if (!experience) return;
+										if (experience < 20) return "Noob";
+										if (experience < 100) return "Begginer";
+										if (experience < 200) return "Watch Enthusiast";
+										if (experience < 500) return "Mature Watch Enthusiast";
+										if (experience < 1500) return "Watch Connoisseour";
+										if (experience < 5000) return "Watch Geek Legend";
+										else return "Watch God";
+									};
 
 									return (
 										<TableRow
@@ -95,6 +108,14 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 												style={{ color: "#ffffffB3" }}
 											>
 												{displayName}
+											</TableCell>
+											<TableCell
+												align="center"
+												component="th"
+												scope="row"
+												style={{ color: "#ffffffB3" }}
+											>
+												{rank()}
 											</TableCell>
 											<TableCell align="center" style={{ color: "#ffffffB3" }}>
 												{userVotes.length - 1}

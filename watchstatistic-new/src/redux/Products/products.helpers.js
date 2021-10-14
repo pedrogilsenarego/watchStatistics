@@ -240,3 +240,5 @@ export const handleFetchValidationProducts = ({
 			});
 	});
 };
+
+//new implementation

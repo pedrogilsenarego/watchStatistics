@@ -103,9 +103,7 @@ const ProductSideListPreview = (product) => {
 							</TableCell>
 						</TableRow>
 						<TableRow>
-							<TableCell className={classes.tableCell}>
-								Water Resistance
-							</TableCell>
+							<TableCell className={classes.tableCell}>Water Res.</TableCell>
 							<TableCell className={classes.tableCell} align="right">
 								{waterResistance}
 							</TableCell>

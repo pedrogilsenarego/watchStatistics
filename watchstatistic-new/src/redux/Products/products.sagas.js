@@ -26,7 +26,7 @@ export function* addProduct({ payload }) {
 		const timestamp = new Date();
 		yield handleAddProduct({
 			...payload,
-			productAdminUserUID: auth.currentUser.uid,
+			UserUID: auth.currentUser.uid,
 			createdDate: timestamp
 		});
 		//yield put(fetchProductsStart());
@@ -112,7 +112,7 @@ export function* onFetchLatestProductsStart() {
 		fetchLatestProducts
 	);
 }
-//new implementations
+
 export function* fetchValidationProducts({ payload }) {
 	try {
 		const validationProducts = yield handleFetchValidationProducts(payload);
@@ -129,6 +129,8 @@ export function* onFetchValidationProductsStart() {
 	);
 }
 
+//new implementation
+
 export default function* productsSagas() {
 	yield all([
 		call(onAddProductStart),
@@ -137,7 +139,7 @@ export default function* productsSagas() {
 		call(onFetchProductStart),
 		call(onUpdateProductVoteStart),
 		call(onFetchLatestProductsStart),
-		//new Implmentation
 		call(onFetchValidationProductsStart)
+		//new implementation
 	]);
 }

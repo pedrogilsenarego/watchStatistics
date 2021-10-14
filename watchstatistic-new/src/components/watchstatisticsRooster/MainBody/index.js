@@ -69,7 +69,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 	return (
 		<div>
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={8}>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
 						<Table aria-label="simple table" size="small">
 							<TableHead className={classes.tableHead}>
@@ -78,9 +78,11 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 										#
 									</TableCell>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
-										Watches
+										Watch
 									</TableCell>
-
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Ref.
+									</TableCell>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Score
 									</TableCell>
@@ -107,7 +109,8 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 										productCategory,
 										numberVotesOwn,
 										numberVotesNotOwn,
-										documentID
+										documentID,
+										reference
 									} = product;
 									if (!productName) return null;
 									const color = "#ffffffB3";
@@ -138,6 +141,14 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 												style={{ color: color }}
 											>
 												{productBrand} - {productName}
+											</TableCell>
+											<TableCell
+												align="center"
+												component="th"
+												scope="row"
+												style={{ color: color }}
+											>
+												{reference}
 											</TableCell>
 											<TableCell align="center" style={{ color: color }}>
 												{avgTotal}

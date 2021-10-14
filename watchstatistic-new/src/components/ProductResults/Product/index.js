@@ -39,6 +39,7 @@ const Product = (product) => {
 		productName,
 		productBrand,
 		avgTotal,
+		reference,
 		numberVotesOwn,
 		numberVotesNotOwn
 	} = product;
@@ -101,6 +102,17 @@ const Product = (product) => {
 									style={{
 										cursor: "pointer",
 										paddingTop: "10px"
+									}}
+									key={3}
+									className={classes.text}
+									onMouseEnter={() => setOnMouse(false)}
+									onClick={() => history.push(`/product/${documentID}`)}
+								>
+									<strong>Ref:</strong> {reference}
+								</Typography>
+								<Typography
+									style={{
+										cursor: "pointer"
 									}}
 									key={3}
 									className={classes.text}

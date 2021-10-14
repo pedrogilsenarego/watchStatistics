@@ -45,7 +45,6 @@ export const setLatestProducts = (latestProducts) => ({
 	payload: latestProducts
 });
 
-//new implementations
 export const fetchValidationProductsStart = (filters = {}) => ({
 	type: productsTypes.FETCH_VALIDATION_PRODUCTS_START,
 	payload: filters
@@ -55,3 +54,5 @@ export const setValidationProducts = (validationProducts) => ({
 	type: productsTypes.SET_VALIDATION_PRODUCTS,
 	payload: validationProducts
 });
+
+//new implementations
