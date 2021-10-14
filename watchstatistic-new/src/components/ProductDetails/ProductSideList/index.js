@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 	table: {
 		backgroundColor: "#14587500 !important",
 		background: "#14587500 !important",
-		paddingTop: "5px",
+		paddingTop: "9px",
 		marginBottom: "10px"
 	},
 	tableCell: { fontSize: "18px !important", color: "#ffffffB3 !important" },
@@ -94,7 +94,7 @@ const ProductSideList = ({}) => {
 			caliber,
 			productionYears,
 			waterResistance,
-			caseSize: caseSize + " mm"
+			caseSize: caseSize + "mm"
 		};
 		if (caseMaterial === "") delete values.caseMaterial;
 		if (movement === "") delete values.movement;
@@ -124,10 +124,22 @@ const ProductSideList = ({}) => {
 						container
 					>
 						{!submitDetails && (
-							<Button size="small" onClick={() => setSubmitDetails(true)}>
-								Add details
-							</Button>
+							<Typography variant={"h6"} style={{ paddingLeft: "10px" }}>
+								Details
+							</Typography>
 						)}
+						{!submitDetails &&
+							(!caseSize ||
+								!waterResistance ||
+								!caseMaterial ||
+								!caliber ||
+								!movement ||
+								!productionYears) && (
+								<Button size="small" onClick={() => setSubmitDetails(true)}>
+									Add details
+								</Button>
+							)}
+
 						{submitDetails && [
 							<ButtonMUI size="small">Submit </ButtonMUI>,
 							<Button onClick={() => setSubmitDetails(false)}>GoBack</Button>
@@ -305,10 +317,11 @@ const ProductSideList = ({}) => {
 												options={{
 													"": "Null",
 													None: "None",
-													"30 meters": "30 meters",
-													"50 meters": "50 meters",
-													"100 meters": "100 meters",
-													"200 meters": "200 meters"
+													"30 meters": "30meters",
+													"50 meters": "50meters",
+													"100 meters": "100meters",
+													"200 meters": "200meters",
+													"300 meters": "300meters"
 												}}
 											/>
 										)}
