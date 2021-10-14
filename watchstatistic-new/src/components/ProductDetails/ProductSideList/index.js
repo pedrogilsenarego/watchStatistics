@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Box } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,10 +7,11 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import InputBase from "@mui/material/InputBase";
+import InputBase from "../../forms/InputMUI";
 import { useDispatch } from "react-redux";
 
 import ButtonMUI from "../../forms/ButtonMUI";
+import { Button } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import Select from "../../forms/SelectMUIFormik";
@@ -22,7 +23,11 @@ import { addProductStart } from "../../../redux/Products/products.actions";
 const INITIAL_FORM_STATE = {
 	movement: "",
 	caseMaterial: "",
-	caliber: ""
+	caliber: "",
+	waterResistance: "",
+	caseSize: "",
+	productionYearsStart: "",
+	productionYearsEnd: ""
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -54,6 +59,7 @@ const ProductSideList = ({}) => {
 	const { product } = useSelector(mapState);
 	const dispatch = useDispatch();
 	const { productID } = useParams();
+	const [submitDetails, setSubmitDetails] = useState(false);
 
 	const {
 		productName,
@@ -71,11 +77,33 @@ const ProductSideList = ({}) => {
 	const classes = useStyles();
 
 	const handleSubmit = (e) => {
-		const { movement, caseMaterial } = e;
-		const values = { movement, productID, caseMaterial };
+		const {
+			movement,
+			caseMaterial,
+			caliber,
+			waterResistance,
+			caseSize,
+			productionYearsStart,
+			productionYearsEnd
+		} = e;
+		const productionYears = productionYearsStart + "-" + productionYearsEnd;
+		const values = {
+			movement,
+			productID,
+			caseMaterial,
+			caliber,
+			productionYears,
+			waterResistance,
+			caseSize: caseSize + " mm"
+		};
 		if (caseMaterial === "") delete values.caseMaterial;
 		if (movement === "") delete values.movement;
+		if (caliber === "") delete values.caliber;
+		if (waterResistance === "") delete values.waterResistance;
+		if (caseSize === "") delete values.caseSize;
+		if (productionYears === "-") delete values.productionYears;
 		dispatch(addProductStart(values));
+		setSubmitDetails(false);
 	};
 
 	return (
@@ -91,15 +119,19 @@ const ProductSideList = ({}) => {
 				<Form>
 					<Box
 						color={"text.secondary"}
-						sx={{ display: "flex" }}
+						sx={{ display: "flex", justifyContent: "space-evenly" }}
 						borderRadius="10px"
 						container
 					>
-						<Typography variant={"h6"} style={{ paddingLeft: "10px" }}>
-							Details
-						</Typography>
-
-						<ButtonMUI size="small">Submit </ButtonMUI>
+						{!submitDetails && (
+							<Button size="small" onClick={() => setSubmitDetails(true)}>
+								Add details
+							</Button>
+						)}
+						{submitDetails && [
+							<ButtonMUI size="small">Submit </ButtonMUI>,
+							<Button onClick={() => setSubmitDetails(false)}>GoBack</Button>
+						]}
 					</Box>
 					<TableContainer className={classes.table} component={Paper}>
 						<Table size="small" aria-label="simple table">
@@ -131,7 +163,7 @@ const ProductSideList = ({}) => {
 								<TableRow>
 									<TableCell className={classes.tableCell}>Movement</TableCell>
 									<TableCell className={classes.tableCell} align="right">
-										{!movement && (
+										{!movement && submitDetails && (
 											<Select
 												className={classes.select}
 												size="small"
@@ -152,19 +184,23 @@ const ProductSideList = ({}) => {
 								<TableRow>
 									<TableCell className={classes.tableCell}>Caliber</TableCell>
 									<TableCell className={classes.tableCell} align="right">
-										{!caliber && (
+										{!caliber && submitDetails && (
 											<InputBase
-												className={classes.textField}
+												size="small"
+												style={{
+													width: "100px",
+													border: "1.4px solid #ffffffB3",
+													borderRadius: "4px"
+												}}
+												name="caliber"
 												inputProps={{
 													style: {
-														padding: 2,
+														padding: 4,
 														color: "#ffffffB3",
 														width: "75px"
 													}
 												}}
-												size="small"
-												id="outlined-helperText"
-											/>
+											></InputBase>
 										)}
 										{caliber}
 									</TableCell>
@@ -174,12 +210,65 @@ const ProductSideList = ({}) => {
 										Production
 									</TableCell>
 									<TableCell className={classes.tableCell} align="right">
+										{!productionYears &&
+											submitDetails && [
+												<InputBase
+													size="small"
+													style={{
+														width: "60px",
+														border: "1.4px solid #ffffffB3",
+														borderRadius: "4px"
+													}}
+													name="productionYearsStart"
+													inputProps={{
+														style: {
+															padding: 4,
+															color: "#ffffffB3",
+															width: "75px"
+														}
+													}}
+												></InputBase>,
+												<InputBase
+													size="small"
+													style={{
+														width: "60px",
+														border: "1.4px solid #ffffffB3",
+														borderRadius: "4px"
+													}}
+													name="productionYearsEnd"
+													inputProps={{
+														style: {
+															padding: 4,
+															color: "#ffffffB3",
+															width: "75px"
+														}
+													}}
+												></InputBase>
+											]}
 										{productionYears}
 									</TableCell>
 								</TableRow>
 								<TableRow>
 									<TableCell className={classes.tableCell}>Case Size</TableCell>
 									<TableCell className={classes.tableCell} align="right">
+										{!caseSize && submitDetails && (
+											<InputBase
+												size="small"
+												style={{
+													width: "100px",
+													border: "1.4px solid #ffffffB3",
+													borderRadius: "4px"
+												}}
+												name="caseSize"
+												inputProps={{
+													style: {
+														padding: 4,
+														color: "#ffffffB3",
+														width: "75px"
+													}
+												}}
+											></InputBase>
+										)}
 										{caseSize}
 									</TableCell>
 								</TableRow>
@@ -188,7 +277,7 @@ const ProductSideList = ({}) => {
 										Case Material
 									</TableCell>
 									<TableCell className={classes.tableCell} align="right">
-										{!caseMaterial && (
+										{!caseMaterial && submitDetails && (
 											<Select
 												name="caseMaterial"
 												className={classes.select}
@@ -208,6 +297,21 @@ const ProductSideList = ({}) => {
 										Water Res.
 									</TableCell>
 									<TableCell className={classes.tableCell} align="right">
+										{!waterResistance && submitDetails && (
+											<Select
+												className={classes.select}
+												size="small"
+												name="waterResistance"
+												options={{
+													"": "Null",
+													None: "None",
+													"30 meters": "30 meters",
+													"50 meters": "50 meters",
+													"100 meters": "100 meters",
+													"200 meters": "200 meters"
+												}}
+											/>
+										)}
 										{waterResistance}
 									</TableCell>
 								</TableRow>
