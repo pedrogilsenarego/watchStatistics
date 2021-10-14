@@ -44,32 +44,33 @@ const WatchstatisticsSubHeader = ({}) => {
 	const { currentUser } = useSelector(mapState);
 	const classes = useStyles();
 	const [progress, setProgress] = useState(0);
-	const { userVotes, displayName } = currentUser;
+	const { userVotes, displayName, experience } = currentUser;
 
 	const numberVotes = userVotes.length - 1;
 
 	const rank = () => {
-		if (numberVotes < 5) return "noob";
-		if (numberVotes < 10) return "begginer";
-		if (numberVotes < 20) return "watch enthusiast";
-		if (numberVotes < 50) return "mature watch enthusiast";
-		if (numberVotes < 150) return "watch connoisseour";
-		if (numberVotes < 500) return "watch geek legend";
+		if (!experience) return;
+		if (experience < 20) return "noob";
+		if (experience < 100) return "begginer";
+		if (experience < 200) return "watch enthusiast";
+		if (experience < 500) return "mature watch enthusiast";
+		if (experience < 1500) return "watch connoisseour";
+		if (experience < 5000) return "watch geek legend";
 		else return "watch god";
 	};
 
 	useEffect(() => {
-		if (rank() === "noob") setProgress((numberVotes / 5) * 100);
-		if (rank() === "begginer") setProgress(((numberVotes - 5) / 5) * 100);
+		if (rank() === "noob") setProgress((experience / 20) * 100);
+		if (rank() === "begginer") setProgress(((experience - 20) / 80) * 100);
 		if (rank() === "watch enthusiast")
-			setProgress(((numberVotes - 10) / 10) * 100);
+			setProgress(((experience - 100) / 100) * 100);
 		if (rank() === "mature watch enthusiast")
-			setProgress(((numberVotes - 20) / 30) * 100);
+			setProgress(((experience - 200) / 300) * 100);
 		if (rank() === "watch connoisseour")
-			setProgress(((numberVotes - 50) / 100) * 100);
+			setProgress(((experience - 500) / 1000) * 100);
 		if (rank() === "watch geek legend")
-			setProgress(((numberVotes - 150) / 350) * 100);
-		if (rank() === "watch god") setProgress(100);
+			setProgress(((experience - 1500) / 3500) * 100);
+		if (rank() === "watch god") setProgress(1000);
 		// eslint-disable-next-line
 	}, []);
 
@@ -94,7 +95,7 @@ const WatchstatisticsSubHeader = ({}) => {
 							Watches voted: {numberVotes}
 						</Typography>
 						<Typography variant="h6" className={classes.text}>
-							Rank: {rank()}
+							User Experience: {experience}
 						</Typography>
 
 						<Box
@@ -110,6 +111,9 @@ const WatchstatisticsSubHeader = ({}) => {
 								value={progress}
 							/>
 						</Box>
+						<Typography variant="h6" className={classes.text}>
+							Rank: {rank()}
+						</Typography>
 					</Grid>
 				</Grid>
 			</Box>

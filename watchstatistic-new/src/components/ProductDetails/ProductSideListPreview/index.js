@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, Box } from "@material-ui/core";
-import { useSelector } from "react-redux";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 import Table from "@mui/material/Table";
@@ -21,25 +21,20 @@ const useStyles = makeStyles((theme) => ({
 	tableCell: { fontSize: "18px !important", color: "#ffffffB3 !important" }
 }));
 
-const mapState = (state) => ({
-	product: state.productsData.product
-});
-
 // eslint-disable-next-line
-const ProductSideList = ({}) => {
-	const { product } = useSelector(mapState);
+const ProductSideListPreview = (product) => {
 	const {
-		productName,
 		productBrand,
 		productCategory,
+		productName,
 		reference,
 		movement,
-		caseMaterial,
-		caseSize,
 		caliber,
-		productPriceBrackets,
+		productionYears,
 		waterResistance,
-		productionYears
+		caseSize,
+		caseMaterial,
+		productPriceBrackets
 	} = product;
 	const classes = useStyles();
 
@@ -128,4 +123,4 @@ const ProductSideList = ({}) => {
 	);
 };
 
-export default ProductSideList;
+export default ProductSideListPreview;

@@ -37,7 +37,7 @@ const ProductSideDescription = ({}) => {
 			<Box
 				color={"text.secondary"}
 				borderRadius="10px"
-				sx={{ minHeight: "57.6vh" }}
+				sx={{ minHeight: "70.4vh" }}
 			>
 				<Typography variant={"h6"} style={{ paddingLeft: "10px" }}>
 					Description
@@ -45,10 +45,11 @@ const ProductSideDescription = ({}) => {
 				<Box
 					overflow="hidden"
 					sx={{
-						minHeight: "48vh",
+						minHeight: "60vh",
 
 						height: "100%",
-						position: "relative"
+						position: "relative",
+						paddingTop: "10px"
 					}}
 				>
 					<Typography
@@ -59,7 +60,7 @@ const ProductSideDescription = ({}) => {
 							paddingLeft: "10px",
 							paddingRight: "10px",
 							paddingBottom: "10px",
-							maxHeight: "48vh",
+							maxHeight: "60vh",
 							position: "absolute",
 							overflow: "scroll"
 						}}
@@ -78,7 +79,7 @@ const ProductSideDescription = ({}) => {
 					{additionalData &&
 						additionalData.map((additionalData, pos) => {
 							return (
-								<Grid xs={6} md={6}>
+								<Grid xs={6} md={3}>
 									<Button
 										className={classes.textBtn}
 										align="justify"

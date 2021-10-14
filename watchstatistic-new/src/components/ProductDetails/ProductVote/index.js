@@ -63,7 +63,7 @@ const ProductVote = ({
 	const [errors, setErrors] = useState(false);
 	const { productID } = useParams();
 
-	const { id, userVotes, numberVotes } = currentUser;
+	const { id, userVotes, numberVotes, experience } = currentUser;
 
 	const {
 		numberVotesOwn,
@@ -128,6 +128,7 @@ const ProductVote = ({
 				avgTotal: newAvgTotal,
 				userID: id,
 				numberVotes: numberVotes + 1,
+				experience: experience + 1,
 				userVotes: newVoteArray
 			};
 			dispatch(updateProductVoteStart(configVote));
@@ -153,6 +154,7 @@ const ProductVote = ({
 				avgTotal: newAvgTotal,
 				userID: id,
 				numberVotes: numberVotes + 1,
+				experience: experience + 1,
 				userVotes: newVoteArray
 			};
 			dispatch(updateProductVoteStart(configVote));

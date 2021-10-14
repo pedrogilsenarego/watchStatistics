@@ -103,7 +103,7 @@ export function* signUpUser({
 
 	try {
 		const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-		yield auth.currentUser.sendEmailVerification();
+		//yield auth.currentUser.sendEmailVerification();
 		const additionalData = { displayName };
 		yield getSnapshotFromUserAuth(user, additionalData);
 	} catch (err) {

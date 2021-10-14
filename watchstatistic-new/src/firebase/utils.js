@@ -40,6 +40,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
 				userRoles,
 				userVotes: ["1"],
 				numberVotes: 0,
+				experience: 0,
 				...additionalData
 			});
 		} catch (err) {

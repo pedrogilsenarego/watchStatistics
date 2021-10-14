@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 // eslint-disable-next-line
 const ProductSideDescriptionPreview = (product) => {
 	const { productDesc, additionalData } = product;
-	//const additionalData = { title: "ola", link: "wqwnoidn" };
+
 	const classes = useStyles();
 
 	const openInNewTab = (url) => {
@@ -29,20 +29,38 @@ const ProductSideDescriptionPreview = (product) => {
 
 	return (
 		<div>
-			<Box color={"text.secondary"} borderRadius="10px">
+			<Box
+				color={"text.secondary"}
+				borderRadius="10px"
+				sx={{ minHeight: "70.4vh" }}
+			>
 				<Typography variant={"h6"} style={{ paddingLeft: "10px" }}>
 					Description
 				</Typography>
-				<Typography
-					dangerouslySetInnerHTML={{ __html: productDesc }}
-					align="justify"
-					style={{
-						width: "100%",
-						paddingLeft: "10px",
-						paddingRight: "10px",
-						paddingBottom: "10px"
+				<Box
+					overflow="hidden"
+					sx={{
+						minHeight: "60vh",
+
+						height: "100%",
+						position: "relative",
+						paddingTop: "10px"
 					}}
-				/>
+				>
+					<Typography
+						dangerouslySetInnerHTML={{ __html: productDesc }}
+						align="justify"
+						style={{
+							width: "100%",
+							paddingLeft: "10px",
+							paddingRight: "10px",
+							paddingBottom: "10px",
+							maxHeight: "60vh",
+							position: "absolute",
+							overflow: "scroll"
+						}}
+					/>
+				</Box>
 			</Box>
 			<Box sx={{ paddingLeft: "10px", paddingRight: "10px" }}>
 				<Divider style={{ background: "white" }} />
@@ -56,7 +74,7 @@ const ProductSideDescriptionPreview = (product) => {
 					{additionalData &&
 						additionalData.map((additionalData, pos) => {
 							return (
-								<Grid xs={6} md={6}>
+								<Grid xs={6} md={3}>
 									<Button
 										className={classes.textBtn}
 										align="justify"

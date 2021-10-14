@@ -35,7 +35,7 @@ const INITIAL_FORM_STATE = {
 	movement: "",
 	caseMaterial: "",
 	waterResistance: "",
-	ref: ""
+	reference: ""
 };
 
 const FORM_VALIDATION_NULL = Yup.object().shape({});
@@ -48,7 +48,7 @@ const FORM_VALIDATION = Yup.object().shape({
 	movement: Yup.string().required("Required"),
 	productPriceBrackets: Yup.string().required("Required"),
 	productName: Yup.string().required("Required"),
-	ref: Yup.string().required("Required"),
+	reference: Yup.string().required("Required"),
 	caseSize: Yup.string().required("Must enter a size"),
 	productThumbnail: Yup.string()
 		.matches(
@@ -132,7 +132,7 @@ const AddWatchForm = () => {
 			yearProductionStart,
 			yearProductionEnd,
 			movement,
-			ref
+			reference
 		} = e;
 
 		const productionYears = yearProductionStart + "-" + yearProductionEnd;
@@ -163,7 +163,7 @@ const AddWatchForm = () => {
 				productThumbnail: thumbnail,
 				productDesc,
 				caseMaterial,
-				ref,
+				reference,
 				movement,
 				productionYears,
 				additionalData: [
@@ -190,17 +190,8 @@ const AddWatchForm = () => {
 			productBackground,
 			productDesc,
 			additionalDataTitle,
-			additionalDataLink,
-			yearProductionStart,
-			waterResistance,
-			caseSize,
-			movement,
-			ref,
-			caseMaterial,
-			yearProductionEnd
+			additionalDataLink
 		} = e;
-
-		const productionYears = yearProductionStart + "-" + yearProductionEnd;
 
 		const thumbnail = additionalProductThumbnail4
 			? [
@@ -322,7 +313,7 @@ const AddWatchForm = () => {
 										<TextField name="productName" label="Model"></TextField>
 									</Grid>
 									<Grid item xs={6}>
-										<TextField name="ref" label="Reference"></TextField>
+										<TextField name="reference" label="Reference"></TextField>
 									</Grid>
 									<Grid item xs={12}>
 										<TextField

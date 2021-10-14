@@ -14,6 +14,7 @@ import {
 	IconButton,
 	Box
 } from "@material-ui/core";
+import ProductSideListPreview from "../../components/ProductDetails/ProductSideListPreview";
 
 const image1 =
 	"https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2018/09/17/5595aa2e-863a-4243-ad43-87437f688e78/scuba-diving";
@@ -69,6 +70,8 @@ const ProductDetails = (configPreview) => {
 		productDesc: productDesc,
 		additionalData: additionalData
 	};
+
+	const configSideList = {};
 
 	const classes = useStyles();
 
@@ -164,7 +167,7 @@ const ProductDetails = (configPreview) => {
 								style={{ backgroundColor: "#04040699", marginBottom: "10px" }}
 							>
 								<CardContent style={{ padding: "5px" }}>
-									<SideDescriptionPreview {...configSideDesc} />
+									<ProductSideListPreview {...configSideList} />
 								</CardContent>
 							</Card>
 						</Grid>
