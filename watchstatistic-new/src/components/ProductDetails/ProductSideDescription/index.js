@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Box, Button, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	textBtn: {
@@ -33,12 +34,40 @@ const ProductSideDescription = ({}) => {
 
 	return (
 		<div>
-			<Box color={"text.secondary"} borderRadius="10px">
-				<Typography
-					dangerouslySetInnerHTML={{ __html: productDesc }}
-					align="justify"
-					style={{ width: "100%", padding: "10px" }}
-				/>
+			<Box
+				color={"text.secondary"}
+				borderRadius="10px"
+				sx={{ minHeight: "57.6vh" }}
+			>
+				<Typography variant={"h6"} style={{ paddingLeft: "10px" }}>
+					Description
+				</Typography>
+				<Box
+					overflow="hidden"
+					sx={{
+						minHeight: "48vh",
+
+						height: "100%",
+						position: "relative"
+					}}
+				>
+					<Typography
+						dangerouslySetInnerHTML={{ __html: productDesc }}
+						align="justify"
+						style={{
+							width: "100%",
+							paddingLeft: "10px",
+							paddingRight: "10px",
+							paddingBottom: "10px",
+							maxHeight: "48vh",
+							position: "absolute",
+							overflow: "scroll"
+						}}
+					/>
+				</Box>
+			</Box>
+			<Box sx={{ paddingLeft: "10px", paddingRight: "10px" }}>
+				<Divider style={{ background: "white" }} />
 			</Box>
 			<Box
 				color={"text.secondary"}
@@ -49,7 +78,7 @@ const ProductSideDescription = ({}) => {
 					{additionalData &&
 						additionalData.map((additionalData, pos) => {
 							return (
-								<Grid xs={6} md={3}>
+								<Grid xs={6} md={6}>
 									<Button
 										className={classes.textBtn}
 										align="justify"

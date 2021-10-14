@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
 		"&:hover": {
 			backgroundColor: "#858585 !important"
 		}
+	},
+	tableHead: {
+		backgroundColor: "#145875 !important"
 	}
 }));
 
@@ -68,8 +71,8 @@ const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
 				<Grid item xs={12} md={6}>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
-						<Table aria-label="simple table">
-							<TableHead>
+						<Table aria-label="simple table" size="small">
+							<TableHead className={classes.tableHead}>
 								<TableRow>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Date
@@ -133,7 +136,7 @@ const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 												{productBrand} - {productName}
 											</TableCell>
 											<TableCell align="center" style={{ color: color }}>
-												{avgTotal} /10
+												{avgTotal}
 											</TableCell>
 											<TableCell align="center" style={{ color: color }}>
 												{productCategory}

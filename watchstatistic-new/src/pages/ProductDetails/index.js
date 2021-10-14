@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SideGraphPanel from "../../components/ProductDetails/ProductSideGraph";
 import SideDescription from "../../components/ProductDetails/ProductSideDescription";
+import ProductSideList from "../../components/ProductDetails/ProductSideList";
 import { makeStyles } from "@material-ui/core/styles";
 import { BsXDiamond } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -168,10 +169,20 @@ const ProductDetails = ({}) => {
 								</CardContent>
 							</Card>
 						</Grid>
-						<Grid item xs={12} sm={12}>
+
+						<Grid item xs={12} sm={8}>
 							<Card style={{ backgroundColor: "#04040699" }}>
 								<CardContent style={{ padding: "5px" }}>
 									<SideDescription />
+								</CardContent>
+							</Card>
+						</Grid>
+						<Grid item xs={12} sm={4}>
+							<Card
+								style={{ backgroundColor: "#04040699", marginBottom: "10px" }}
+							>
+								<CardContent style={{ padding: "5px" }}>
+									<ProductSideList />
 								</CardContent>
 							</Card>
 						</Grid>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Box, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	textBtn: {
@@ -29,11 +30,22 @@ const ProductSideDescriptionPreview = (product) => {
 	return (
 		<div>
 			<Box color={"text.secondary"} borderRadius="10px">
+				<Typography variant={"h6"} style={{ paddingLeft: "10px" }}>
+					Description
+				</Typography>
 				<Typography
 					dangerouslySetInnerHTML={{ __html: productDesc }}
 					align="justify"
-					style={{ width: "100%", padding: "10px" }}
+					style={{
+						width: "100%",
+						paddingLeft: "10px",
+						paddingRight: "10px",
+						paddingBottom: "10px"
+					}}
 				/>
+			</Box>
+			<Box sx={{ paddingLeft: "10px", paddingRight: "10px" }}>
+				<Divider style={{ background: "white" }} />
 			</Box>
 			<Box
 				color={"text.secondary"}
@@ -44,7 +56,7 @@ const ProductSideDescriptionPreview = (product) => {
 					{additionalData &&
 						additionalData.map((additionalData, pos) => {
 							return (
-								<Grid xs={6} md={3}>
+								<Grid xs={6} md={6}>
 									<Button
 										className={classes.textBtn}
 										align="justify"

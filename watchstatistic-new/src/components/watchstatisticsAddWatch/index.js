@@ -28,7 +28,14 @@ const INITIAL_FORM_STATE = {
 	productBackground: "",
 	productDesc: "",
 	additionalDataTitle: "",
-	additionalDataLink: ""
+	additionalDataLink: "",
+	yearProductionStart: "",
+	yearProductionEnd: "",
+	caseSize: "",
+	movement: "",
+	caseMaterial: "",
+	waterResistance: "",
+	ref: ""
 };
 
 const FORM_VALIDATION_NULL = Yup.object().shape({});
@@ -36,8 +43,13 @@ const FORM_VALIDATION_NULL = Yup.object().shape({});
 const FORM_VALIDATION = Yup.object().shape({
 	productCategory: Yup.string().required("Required"),
 	productBrand: Yup.string().required("Required"),
+	caseMaterial: Yup.string().required("Required"),
+	waterResistance: Yup.string().required("Required"),
+	movement: Yup.string().required("Required"),
 	productPriceBrackets: Yup.string().required("Required"),
 	productName: Yup.string().required("Required"),
+	ref: Yup.string().required("Required"),
+	caseSize: Yup.string().required("Must enter a size"),
 	productThumbnail: Yup.string()
 		.matches(
 			// eslint-disable-next-line
@@ -60,7 +72,19 @@ const FORM_VALIDATION = Yup.object().shape({
 			/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
 			"Enter a valid URL!"
 		)
-		.required("Please enter Image URL adress")
+		.required("Please enter Image URL adress"),
+	yearProductionStart: Yup.string()
+		.matches(/\b\d{4}\b/, {
+			message: "Must be exactly 4 numbers",
+			excludeEmptyString: true
+		})
+		.required("Must enter a year"),
+	yearProductionEnd: Yup.string()
+		.matches(/\b\d{4}\b/, {
+			message: "Must be exactly 4 numbers",
+			excludeEmptyString: true
+		})
+		.required("Must enter a year")
 });
 
 const mapState = (state) => ({
@@ -101,8 +125,17 @@ const AddWatchForm = () => {
 			productDesc,
 			additionalDataTitle,
 			additionalDataLink,
-			productCategory
+			productCategory,
+			caseSize,
+			waterResistance,
+			caseMaterial,
+			yearProductionStart,
+			yearProductionEnd,
+			movement,
+			ref
 		} = e;
+
+		const productionYears = yearProductionStart + "-" + yearProductionEnd;
 
 		const thumbnail = additionalProductThumbnail4
 			? [
@@ -123,10 +156,16 @@ const AddWatchForm = () => {
 				productCategory,
 				productBrand,
 				productPriceBrackets,
+				caseSize: caseSize + "mm",
 				productName,
+				waterResistance,
 				productBackground,
 				productThumbnail: thumbnail,
 				productDesc,
+				caseMaterial,
+				ref,
+				movement,
+				productionYears,
 				additionalData: [
 					{ title: additionalDataTitle, link: additionalDataLink }
 				],
@@ -151,8 +190,17 @@ const AddWatchForm = () => {
 			productBackground,
 			productDesc,
 			additionalDataTitle,
-			additionalDataLink
+			additionalDataLink,
+			yearProductionStart,
+			waterResistance,
+			caseSize,
+			movement,
+			ref,
+			caseMaterial,
+			yearProductionEnd
 		} = e;
+
+		const productionYears = yearProductionStart + "-" + yearProductionEnd;
 
 		const thumbnail = additionalProductThumbnail4
 			? [
@@ -222,8 +270,59 @@ const AddWatchForm = () => {
 											options={pricesBracket}
 										/>
 									</Grid>
-									<Grid item xs={12}>
+									<Grid item xs={12} md={6}>
+										<Select
+											name="movement"
+											label="Type of movement"
+											options={{
+												Automatic: "Automatic",
+												Quartz: "Quartz",
+												MechaQuartz: "MechaQuartz",
+												Manual: "Manual"
+											}}
+										/>
+									</Grid>
+									<Grid item xs={12} md={6}>
+										<Select
+											name="caseMaterial"
+											label="Watch material"
+											options={{
+												Gold: "Gold",
+												"Stainless Steel": "Stainless Steel"
+											}}
+										/>
+									</Grid>
+									<Grid item xs={12} md={6}>
+										<Select
+											name="waterResistance"
+											label="Water Resistance"
+											options={{
+												"30meters": "30 meters",
+												"50meters": "50 meters"
+											}}
+										/>
+									</Grid>
+									<Grid item xs={3}>
+										<TextField
+											name="yearProductionStart"
+											label="Start year"
+										></TextField>
+									</Grid>
+									<Grid item xs={3}>
+										<TextField
+											name="yearProductionEnd"
+											label="Finish year"
+										></TextField>
+									</Grid>
+									<Grid item xs={3}>
+										<TextField name="caseSize" label="Case size"></TextField>
+									</Grid>
+
+									<Grid item xs={6}>
 										<TextField name="productName" label="Model"></TextField>
+									</Grid>
+									<Grid item xs={6}>
+										<TextField name="ref" label="Reference"></TextField>
 									</Grid>
 									<Grid item xs={12}>
 										<TextField

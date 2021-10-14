@@ -14,7 +14,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsersStart } from "../../../redux/User/user.actions";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+	tableHead: {
+		backgroundColor: "#145875 !important"
+	}
+}));
 
 const mapState = (state) => ({
 	users: state.user.users,
@@ -57,8 +61,8 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
 				<Grid item xs={12} md={6}>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
-						<Table aria-label="simple table">
-							<TableHead>
+						<Table aria-label="simple table" size="small">
+							<TableHead className={classes.tableHead}>
 								<TableRow>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										#

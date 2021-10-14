@@ -14,7 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
 import Draggable from "react-draggable";
 import { RiDragDropLine } from "react-icons/ri";
-import { RiCloseCircleLine } from "react-icons/ri";
+
 import CategoriesLegend from "../CategoriesLegend";
 
 const useStyles = makeStyles((theme) => ({
@@ -326,6 +326,7 @@ const ProductSidePanel = ({}) => {
 						disableScrollLock
 						className={classes.menu}
 						id="vote"
+						onClose={handleCloseVote}
 						anchorEl={anchorVote}
 						open={Boolean(anchorVote)}
 					>
@@ -335,9 +336,6 @@ const ProductSidePanel = ({}) => {
 						>
 							<Button id="imHandle">
 								<RiDragDropLine fontSize="1.5em" />
-							</Button>
-							<Button onClick={handleCloseVote}>
-								<RiCloseCircleLine fontSize="1.5em" />
 							</Button>
 						</ButtonGroup>
 						<MenuItem disableRipple>
@@ -350,6 +348,7 @@ const ProductSidePanel = ({}) => {
 						disableScrollLock
 						className={classes.menu2}
 						id="legendVote"
+						onClose={handleCloseLegendVote}
 						anchorEl={anchorLegendVote}
 						open={Boolean(anchorLegendVote)}
 					>
@@ -360,9 +359,6 @@ const ProductSidePanel = ({}) => {
 						>
 							<Button id="imHandle">
 								<RiDragDropLine fontSize="1.5em" />
-							</Button>
-							<Button onClick={handleCloseLegendVote}>
-								<RiCloseCircleLine fontSize="1.5em" />
 							</Button>
 						</ButtonGroup>
 					</Menu>

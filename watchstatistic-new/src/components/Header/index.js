@@ -263,7 +263,7 @@ const Header = (props) => {
 						history.push("/watchstatistics");
 					}}
 				>
-					Rooster
+					Roster
 				</MenuItem>
 				<MenuItem
 					onClick={() => {
@@ -364,7 +364,7 @@ const Header = (props) => {
 							history.push("/watchstatistics");
 						}}
 					>
-						Rooster
+						Roster
 					</MenuItem>,
 					<MenuItem
 						onClick={() => {
@@ -386,10 +386,12 @@ const Header = (props) => {
 					className={classes.textBtn}
 					activeStyle={activeStyle}
 					disableRipple
+					disabled
 				>
 					<AiOutlineCodeSandbox fontSize="1.5em" /> &nbsp;WatchBoxes
 				</MenuItem>
 				<MenuItem
+					disabled
 					aria-controls="support"
 					disableRipple
 					className={classes.textBtn}

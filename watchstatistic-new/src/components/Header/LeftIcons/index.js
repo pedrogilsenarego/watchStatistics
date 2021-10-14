@@ -54,6 +54,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 				onClick={() => history.push("/watchboxes")}
 				className={classes.textBtn}
 				activeStyle={activeStyle}
+				disabled
 				disableRipple
 			>
 				<AiOutlineCodeSandbox fontSize="1.5em" /> &nbsp;WatchBoxes
@@ -62,6 +63,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 			<Button
 				aria-controls="support"
 				disableRipple
+				disabled
 				className={classes.textBtn}
 				activeStyle={activeStyle}
 				onClick={(e) => handleSupportOpen(e)}
