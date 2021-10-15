@@ -1,4 +1,5 @@
 import { firestore } from "./../../firebase/utils";
+import firebase from "firebase/app";
 
 export const handleAddProduct = (product) => {
 	const admin = product.admin;
@@ -272,6 +273,25 @@ export const handleUpdateDetails = (product) => {
 			.collection("products")
 			.doc(productID)
 			.update(data)
+			.then(() => {
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
+
+export const handleUserUpdateDetails = (product) => {
+	const { UserUID } = product;
+	const incrementExp = 1;
+	return new Promise((resolve, reject) => {
+		firestore
+			.collection("users")
+			.doc(UserUID)
+			.update({
+				experience: firebase.firestore.FieldValue.increment(incrementExp)
+			})
 			.then(() => {
 				resolve();
 			})

@@ -17,7 +17,8 @@ import {
 	handleDeleteProduct,
 	handleUpdateVote,
 	handleUpdateDetails,
-	handleUserVote
+	handleUserVote,
+	handleUserUpdateDetails
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession } from "../User/user.actions";
@@ -29,6 +30,9 @@ export function* addProduct({ payload }) {
 			...payload,
 			UserUID: auth.currentUser.uid,
 			createdDate: timestamp
+		});
+		yield handleUserUpdateDetails({
+			...payload
 		});
 		//yield put(fetchProductsStart());
 	} catch (err) {
@@ -137,11 +141,9 @@ export function* updateDetails({ payload }) {
 		yield handleUpdateDetails({
 			...payload
 		});
-		/* yield handleUserVote({
+		yield handleUserUpdateDetails({
 			...payload
 		});
-
-		yield put(checkUserSession()); */
 	} catch (err) {
 		// console.log(err);
 	}

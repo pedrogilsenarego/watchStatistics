@@ -38,7 +38,6 @@ const Admin = ({}) => {
 	const { products } = useSelector(mapState);
 
 	const { data } = products;
-	const { productDesc } = data;
 
 	useEffect(
 		() => {
@@ -79,7 +78,8 @@ const Admin = ({}) => {
 							</TableHead>
 							<TableBody>
 								{data.map((product, i) => {
-									const { productName, productBrand, documentID } = product;
+									const { productName, productBrand, documentID, productDesc } =
+										product;
 									product.admin = true;
 									if (!productName) return null;
 									const color = "#ffffffB3";

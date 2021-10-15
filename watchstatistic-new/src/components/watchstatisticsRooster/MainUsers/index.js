@@ -74,6 +74,9 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 										Rank
 									</TableCell>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Experience
+									</TableCell>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Number of Votes
 									</TableCell>
 								</TableRow>
@@ -116,6 +119,9 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 												style={{ color: "#ffffffB3" }}
 											>
 												{rank()}
+											</TableCell>
+											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+												{experience}
 											</TableCell>
 											<TableCell align="center" style={{ color: "#ffffffB3" }}>
 												{userVotes.length - 1}

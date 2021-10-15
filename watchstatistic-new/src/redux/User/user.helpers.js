@@ -26,7 +26,7 @@ export const handleFetchUsers = () => {
 
 		let ref = firestore
 			.collection("users")
-			.orderBy("numberVotes", "desc")
+			.orderBy("experience", "desc")
 			.limit(pageSize);
 
 		ref
