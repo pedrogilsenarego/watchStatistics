@@ -37,7 +37,7 @@ const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const pageSize = 5;
+	const pageSize = 10;
 
 	const { products, currentUser } = useSelector(mapState);
 

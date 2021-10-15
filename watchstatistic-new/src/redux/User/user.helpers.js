@@ -22,7 +22,7 @@ export const handleResetPasswordAPI = (email) => {
 //implementations
 export const handleFetchUsers = () => {
 	return new Promise((resolve, reject) => {
-		const pageSize = 5;
+		const pageSize = 10;
 
 		let ref = firestore
 			.collection("users")

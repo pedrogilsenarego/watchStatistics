@@ -29,11 +29,11 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
 	borderRadius: 5,
 	[`&.${linearProgressClasses.colorPrimary}`]: {
-		backgroundColor: "#ffffff"
+		backgroundColor: "#ffffffB3"
 	},
 	[`& .${linearProgressClasses.bar}`]: {
 		borderRadius: 5,
-		backgroundColor: "red"
+		backgroundColor: "#154A67"
 	}
 }));
 
@@ -46,7 +46,7 @@ const mapState = (state) => ({
 const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
-	const pageSize = 5;
+	const pageSize = 10;
 
 	const { users } = useSelector(mapState);
 
@@ -132,6 +132,10 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 
 									return (
 										<TableRow
+											style={{
+												cursor: "pointer",
+												background: "black"
+											}}
 											key={displayName}
 											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 										>

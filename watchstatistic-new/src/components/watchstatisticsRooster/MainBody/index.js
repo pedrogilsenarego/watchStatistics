@@ -24,7 +24,7 @@ const mapState = (state) => ({
 const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const pageSize = 5;
+	const pageSize = 10;
 
 	const { products, currentUser } = useSelector(mapState);
 
