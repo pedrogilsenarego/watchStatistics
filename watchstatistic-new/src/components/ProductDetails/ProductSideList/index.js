@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import ButtonMUI from "../../forms/ButtonMUI";
 import { Button } from "@material-ui/core";
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
 import Select from "../../forms/SelectMUIFormik";
 
 import TableRow from "@mui/material/TableRow";
@@ -91,6 +90,8 @@ const ProductSideList = ({}) => {
 			movement,
 			productID,
 			caseMaterial,
+			productName,
+			productBrand,
 			caliber,
 			productionYears,
 			waterResistance,
@@ -107,7 +108,7 @@ const ProductSideList = ({}) => {
 	};
 
 	return (
-		<div>
+		<Box sx={{ minHeight: "76vh" }}>
 			<Formik
 				initialValues={{
 					...INITIAL_FORM_STATE
@@ -339,7 +340,7 @@ const ProductSideList = ({}) => {
 					</TableContainer>
 				</Form>
 			</Formik>
-		</div>
+		</Box>
 	);
 };
 

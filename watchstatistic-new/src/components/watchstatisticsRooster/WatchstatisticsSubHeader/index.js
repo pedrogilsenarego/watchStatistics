@@ -60,17 +60,17 @@ const WatchstatisticsSubHeader = ({}) => {
 	};
 
 	useEffect(() => {
-		if (rank() === "noob") setProgress((experience / 20) * 100);
-		if (rank() === "begginer") setProgress(((experience - 20) / 80) * 100);
-		if (rank() === "watch enthusiast")
+		if (rank() === "Noob") setProgress((experience / 20) * 100);
+		if (rank() === "Begginer") setProgress(((experience - 20) / 80) * 100);
+		if (rank() === "Watch enthusiast")
 			setProgress(((experience - 100) / 100) * 100);
-		if (rank() === "mature watch enthusiast")
+		if (rank() === "Mature watch enthusiast")
 			setProgress(((experience - 200) / 300) * 100);
-		if (rank() === "watch connoisseour")
+		if (rank() === "Watch connoisseour")
 			setProgress(((experience - 500) / 1000) * 100);
-		if (rank() === "watch geek legend")
+		if (rank() === "Watch geek legend")
 			setProgress(((experience - 1500) / 3500) * 100);
-		if (rank() === "watch god") setProgress(1000);
+		if (rank() === "Watch god") setProgress(100);
 		// eslint-disable-next-line
 	}, []);
 

@@ -16,6 +16,7 @@ import {
 	handleFetchProduct,
 	handleDeleteProduct,
 	handleUpdateVote,
+	handleUpdateDetails,
 	handleUserVote
 } from "./products.helpers";
 import productsTypes from "./products.types";
@@ -131,6 +132,25 @@ export function* onFetchValidationProductsStart() {
 
 //new implementation
 
+export function* updateDetails({ payload }) {
+	try {
+		yield handleUpdateDetails({
+			...payload
+		});
+		/* yield handleUserVote({
+			...payload
+		});
+
+		yield put(checkUserSession()); */
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* onUpdateProductDetailsStart() {
+	yield takeLatest(productsTypes.UPDATE_PRODUCT_DETAILS_START, updateDetails);
+}
+
 export default function* productsSagas() {
 	yield all([
 		call(onAddProductStart),
@@ -138,6 +158,7 @@ export default function* productsSagas() {
 		call(onDeleteProductStart),
 		call(onFetchProductStart),
 		call(onUpdateProductVoteStart),
+		call(onUpdateProductDetailsStart),
 		call(onFetchLatestProductsStart),
 		call(onFetchValidationProductsStart)
 		//new implementation

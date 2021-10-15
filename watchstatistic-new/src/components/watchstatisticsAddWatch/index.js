@@ -73,18 +73,15 @@ const FORM_VALIDATION = Yup.object().shape({
 			"Enter a valid URL!"
 		)
 		.required("Please enter Image URL adress"),
-	yearProductionStart: Yup.string()
-		.matches(/\b\d{4}\b/, {
-			message: "Must be exactly 4 numbers",
-			excludeEmptyString: true
-		})
-		.required("Must enter a year"),
-	yearProductionEnd: Yup.string()
-		.matches(/\b\d{4}\b/, {
-			message: "Must be exactly 4 numbers",
-			excludeEmptyString: true
-		})
-		.required("Must enter a year")
+	yearProductionStart: Yup.string().matches(/\b\d{4}\b/, {
+		message: "Must be exactly 4 numbers",
+		excludeEmptyString: true
+	}),
+
+	yearProductionEnd: Yup.string().matches(/\b\d{4}\b/, {
+		message: "Must be exactly 4 numbers",
+		excludeEmptyString: true
+	})
 });
 
 const mapState = (state) => ({
@@ -149,35 +146,35 @@ const AddWatchForm = () => {
 			: additionalProductThumbnail2
 			? [productThumbnail, productThumbnail2]
 			: [productThumbnail];
+		const values = {
+			admin: admin,
+			productCategory,
+			productBrand,
+			productPriceBrackets,
+			caseSize: caseSize + "mm",
+			productName,
+			waterResistance,
+			productBackground,
+			productThumbnail: thumbnail,
+			productDesc,
+			caseMaterial,
+			reference,
+			movement,
+			productionYears,
+			additionalData: [
+				{ title: additionalDataTitle, link: additionalDataLink }
+			],
+			avgTotal: 0,
+			numberVotesNotOwn: 0,
+			numberVotesOwn: 0,
+			avgVotationsOwn: 0,
+			avgVotationsNotOwn: 0,
+			votationsNonOwn: [0, 0, 0, 0, 0, 0, 0],
+			votationsOwn: [0, 0, 0, 0, 0, 0, 0]
+		};
+		if (productionYears === "-") delete values.productionYears;
 
-		dispatch(
-			addProductStart({
-				admin: admin,
-				productCategory,
-				productBrand,
-				productPriceBrackets,
-				caseSize: caseSize + "mm",
-				productName,
-				waterResistance,
-				productBackground,
-				productThumbnail: thumbnail,
-				productDesc,
-				caseMaterial,
-				reference,
-				movement,
-				productionYears,
-				additionalData: [
-					{ title: additionalDataTitle, link: additionalDataLink }
-				],
-				avgTotal: 0,
-				numberVotesNotOwn: 0,
-				numberVotesOwn: 0,
-				avgVotationsOwn: 0,
-				avgVotationsNotOwn: 0,
-				votationsNonOwn: [0, 0, 0, 0, 0, 0, 0],
-				votationsOwn: [0, 0, 0, 0, 0, 0, 0]
-			})
-		);
+		dispatch(addProductStart(values));
 		history.push("/watchstatistics");
 	};
 

@@ -56,3 +56,7 @@ export const setValidationProducts = (validationProducts) => ({
 });
 
 //new implementations
+export const updateProductDetailsStart = (productDetails) => ({
+	type: productsTypes.UPDATE_PRODUCT_DETAILS_START,
+	payload: productDetails
+});

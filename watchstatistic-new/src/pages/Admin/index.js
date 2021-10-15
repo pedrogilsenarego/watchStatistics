@@ -17,7 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	fetchValidationProductsStart,
 	addProductStart,
-	deleteProductStart
+	deleteProductStart,
+	updateProductDetailsStart
 } from "../../redux/Products/products.actions";
 
 const useStyles = makeStyles((theme) => ({}));
@@ -37,6 +38,7 @@ const Admin = ({}) => {
 	const { products } = useSelector(mapState);
 
 	const { data } = products;
+	const { productDesc } = data;
 
 	useEffect(
 		() => {
@@ -59,7 +61,7 @@ const Admin = ({}) => {
 	return (
 		<div>
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12}>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
 						<Table aria-label="simple table">
 							<TableHead>
@@ -70,27 +72,14 @@ const Admin = ({}) => {
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Watches
 									</TableCell>
-
 									<TableCell align="center" style={{ fontSize: "15px" }}>
-										Score
-									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
-										Category
-									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
-										Votes
+										Options
 									</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
 								{data.map((product, i) => {
-									const {
-										productName,
-										productBrand,
-										avgTotal,
-										productCategory,
-										documentID
-									} = product;
+									const { productName, productBrand, documentID } = product;
 									product.admin = true;
 									if (!productName) return null;
 									const color = "#ffffffB3";
@@ -112,23 +101,30 @@ const Admin = ({}) => {
 											>
 												{productBrand} - {productName}
 											</TableCell>
-											<TableCell align="center" style={{ color: color }}>
-												{avgTotal} /10
-											</TableCell>
-											<TableCell align="center" style={{ color: color }}>
-												{productCategory}
-											</TableCell>
+
 											<TableCell align="center" style={{ color: color }}>
 												<ButtonGroup>
-													<Button
-														onClick={() => {
-															delete product.documentID;
-															dispatch(addProductStart(product));
-															dispatch(deleteProductStart(documentID));
-														}}
-													>
-														Approve
-													</Button>
+													{productDesc && (
+														<Button
+															onClick={() => {
+																delete product.documentID;
+																dispatch(addProductStart(product));
+																dispatch(deleteProductStart(documentID));
+															}}
+														>
+															Approve New Watch
+														</Button>
+													)}
+													{!productDesc && (
+														<Button
+															onClick={() => {
+																dispatch(updateProductDetailsStart(product));
+																dispatch(deleteProductStart(documentID));
+															}}
+														>
+															Approve Update Watch
+														</Button>
+													)}
 													<Button
 														onClick={() =>
 															dispatch(deleteProductStart(documentID))

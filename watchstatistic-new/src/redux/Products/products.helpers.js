@@ -242,3 +242,41 @@ export const handleFetchValidationProducts = ({
 };
 
 //new implementation
+export const handleUpdateDetails = (product) => {
+	const {
+		productID,
+		caliber,
+		movement,
+		caseSize,
+		productionYears,
+		caseMaterial,
+		waterResistance
+	} = product;
+	const data = {
+		caliber,
+		movement,
+		productionYears,
+		caseSize,
+		caseMaterial,
+		waterResistance
+	};
+	if (!movement) delete data.movement;
+	if (!caliber) delete data.caliber;
+	if (!productionYears) delete data.productionYears;
+	if (!caseSize) delete data.caseSize;
+	if (!caseMaterial) delete data.caseMaterial;
+	if (!waterResistance) delete data.waterResistance;
+
+	return new Promise((resolve, reject) => {
+		firestore
+			.collection("products")
+			.doc(productID)
+			.update(data)
+			.then(() => {
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
