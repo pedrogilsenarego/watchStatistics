@@ -59,6 +59,7 @@ const ProductSideList = ({}) => {
 	const dispatch = useDispatch();
 	const { productID } = useParams();
 	const [submitDetails, setSubmitDetails] = useState(false);
+	const [submitedDetails, setSubmitedDetails] = useState(false);
 
 	const {
 		productName,
@@ -105,6 +106,7 @@ const ProductSideList = ({}) => {
 		if (productionYears === "-") delete values.productionYears;
 		dispatch(addProductStart(values));
 		setSubmitDetails(false);
+		setSubmitedDetails(true);
 	};
 
 	return (
@@ -126,7 +128,7 @@ const ProductSideList = ({}) => {
 					>
 						{!submitDetails && (
 							<Typography variant={"h6"} style={{ paddingLeft: "10px" }}>
-								Details
+								{submitedDetails ? "Details submited for approval" : "Details"}
 							</Typography>
 						)}
 						{!submitDetails &&
@@ -135,7 +137,8 @@ const ProductSideList = ({}) => {
 								!caseMaterial ||
 								!caliber ||
 								!movement ||
-								!productionYears) && (
+								!productionYears) &&
+							!submitedDetails && (
 								<Button size="small" onClick={() => setSubmitDetails(true)}>
 									Add details
 								</Button>

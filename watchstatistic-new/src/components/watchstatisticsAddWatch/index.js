@@ -43,13 +43,13 @@ const FORM_VALIDATION_NULL = Yup.object().shape({});
 const FORM_VALIDATION = Yup.object().shape({
 	productCategory: Yup.string().required("Required"),
 	productBrand: Yup.string().required("Required"),
-	caseMaterial: Yup.string().required("Required"),
-	waterResistance: Yup.string().required("Required"),
-	movement: Yup.string().required("Required"),
+	caseMaterial: Yup.string(),
+	waterResistance: Yup.string(),
+	movement: Yup.string(),
 	productPriceBrackets: Yup.string().required("Required"),
 	productName: Yup.string().required("Required"),
 	reference: Yup.string().required("Required"),
-	caseSize: Yup.string().required("Must enter a size"),
+	caseSize: Yup.string(),
 	productThumbnail: Yup.string()
 		.matches(
 			// eslint-disable-next-line
