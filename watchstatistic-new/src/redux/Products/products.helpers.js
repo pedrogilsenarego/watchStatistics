@@ -283,8 +283,41 @@ export const handleUpdateDetails = (product) => {
 };
 
 export const handleUserUpdateDetails = (product) => {
-	const { UserUID } = product;
-	const incrementExp = 1;
+	const {
+		UserUID,
+		movement,
+		caliber,
+		productionYears,
+		caseSize,
+		caseMaterial,
+		waterResistance,
+		productDesc
+	} = product;
+	var incrementExp = 0;
+	if (!productDesc) {
+		if (waterResistance) {
+			incrementExp = incrementExp + 0.5;
+		}
+		if (movement) {
+			incrementExp = incrementExp + 0.5;
+		}
+		if (caliber) {
+			incrementExp = incrementExp + 0.5;
+		}
+		if (productionYears) {
+			incrementExp = incrementExp + 0.5;
+		}
+		if (caseSize) {
+			incrementExp = incrementExp + 0.5;
+		}
+		if (caseMaterial) {
+			incrementExp = incrementExp + 0.5;
+		}
+	}
+	if (productDesc) {
+		incrementExp = incrementExp + 4;
+	}
+
 	return new Promise((resolve, reject) => {
 		firestore
 			.collection("users")

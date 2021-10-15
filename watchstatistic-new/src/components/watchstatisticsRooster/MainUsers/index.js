@@ -8,15 +8,32 @@ import {
 	TableCell,
 	TableBody,
 	Grid,
-	Paper
+	Paper,
+	Box
 } from "@material-ui/core";
+import LinearProgress, {
+	linearProgressClasses
+} from "@mui/material/LinearProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsersStart } from "../../../redux/User/user.actions";
+import { styled } from "@mui/material/styles";
 
 const useStyles = makeStyles((theme) => ({
 	tableHead: {
 		backgroundColor: "#145875 !important"
+	}
+}));
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+	height: 4,
+	borderRadius: 5,
+	[`&.${linearProgressClasses.colorPrimary}`]: {
+		backgroundColor: "#ffffff"
+	},
+	[`& .${linearProgressClasses.bar}`]: {
+		borderRadius: 5,
+		backgroundColor: "red"
 	}
 }));
 
@@ -74,7 +91,7 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 										Rank
 									</TableCell>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
-										Experience
+										Progress
 									</TableCell>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Number of Votes
@@ -94,6 +111,23 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 										if (experience < 1500) return "Watch Connoisseour";
 										if (experience < 5000) return "Watch Geek Legend";
 										else return "Watch God";
+									};
+									const progress = () => {
+										if (experience < 20) return (experience / 20) * 100;
+										if (experience < 100) return ((experience - 20) / 80) * 100;
+
+										if (experience < 200)
+											return ((experience - 100) / 100) * 100;
+
+										if (experience < 500)
+											return ((experience - 200) / 300) * 100;
+
+										if (experience < 1500)
+											return ((experience - 500) / 1000) * 100;
+
+										if (experience < 5000)
+											return ((experience - 1500) / 3500) * 100;
+										else return 100;
 									};
 
 									return (
@@ -121,7 +155,19 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 												{rank()}
 											</TableCell>
 											<TableCell align="center" style={{ color: "#ffffffB3" }}>
-												{experience}
+												<Box
+													sx={{
+														display: "flex",
+														justifyContent: "center",
+														paddingTop: "10px"
+													}}
+												>
+													<BorderLinearProgress
+														style={{ width: "75%" }}
+														variant="determinate"
+														value={progress()}
+													/>
+												</Box>
 											</TableCell>
 											<TableCell align="center" style={{ color: "#ffffffB3" }}>
 												{userVotes.length - 1}
