@@ -44,7 +44,7 @@ const WatchstatisticsSubHeader = ({}) => {
 	const { currentUser } = useSelector(mapState);
 	const classes = useStyles();
 	const [progress, setProgress] = useState(0);
-	const { userVotes, displayName, experience } = currentUser;
+	const { userVotes, displayName, experience, watchesSubmited } = currentUser;
 
 	const numberVotes = userVotes.length - 1;
 
@@ -92,7 +92,10 @@ const WatchstatisticsSubHeader = ({}) => {
 					</Grid>
 					<Grid item xs={12} md={6} className={classes.item}>
 						<Typography variant="h6" className={classes.text}>
-							Watches voted: {numberVotes}
+							Watches Voted: {numberVotes}
+						</Typography>
+						<Typography variant="h6" className={classes.text}>
+							Watches Submited: {watchesSubmited}
 						</Typography>
 						<Typography variant="h6" className={classes.text}>
 							Rank: {rank()}
@@ -101,7 +104,7 @@ const WatchstatisticsSubHeader = ({}) => {
 							sx={{
 								display: "flex",
 								justifyContent: "center",
-								paddingTop: "10px"
+								paddingTop: "5px"
 							}}
 						>
 							<BorderLinearProgress
