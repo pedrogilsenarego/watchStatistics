@@ -26,9 +26,10 @@ import { checkUserSession } from "../User/user.actions";
 export function* addProduct({ payload }) {
 	try {
 		const timestamp = new Date();
+
 		yield handleAddProduct({
 			...payload,
-			UserUID: auth.currentUser.uid,
+			UserUID: payload.UserUID ? payload.UserUID : auth.currentUser.uid,
 			createdDate: timestamp
 		});
 		yield handleUserUpdateDetails({

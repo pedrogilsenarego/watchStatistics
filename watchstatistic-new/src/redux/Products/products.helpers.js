@@ -294,6 +294,7 @@ export const handleUserUpdateDetails = (product) => {
 		productDesc
 	} = product;
 	var incrementExp = 0;
+	var incrementWatches = 0;
 	if (!productDesc) {
 		if (waterResistance) {
 			incrementExp = incrementExp + 0.5;
@@ -316,6 +317,7 @@ export const handleUserUpdateDetails = (product) => {
 	}
 	if (productDesc) {
 		incrementExp = incrementExp + 4;
+		incrementWatches = incrementWatches + 1;
 	}
 
 	return new Promise((resolve, reject) => {
@@ -323,7 +325,9 @@ export const handleUserUpdateDetails = (product) => {
 			.collection("users")
 			.doc(UserUID)
 			.update({
-				experience: firebase.firestore.FieldValue.increment(incrementExp)
+				experience: firebase.firestore.FieldValue.increment(incrementExp),
+				watchesSubmited:
+					firebase.firestore.FieldValue.increment(incrementWatches)
 			})
 			.then(() => {
 				resolve();

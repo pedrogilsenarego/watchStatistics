@@ -96,11 +96,19 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Number of Votes
 									</TableCell>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Watches Submited
+									</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
 								{data.map((product, i) => {
-									const { displayName, userVotes, experience } = product;
+									const {
+										displayName,
+										userVotes,
+										experience,
+										watchesSubmited
+									} = product;
 
 									const rank = () => {
 										if (!experience) return;
@@ -175,6 +183,9 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 											</TableCell>
 											<TableCell align="center" style={{ color: "#ffffffB3" }}>
 												{userVotes.length - 1}
+											</TableCell>
+											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+												{watchesSubmited}
 											</TableCell>
 										</TableRow>
 									);

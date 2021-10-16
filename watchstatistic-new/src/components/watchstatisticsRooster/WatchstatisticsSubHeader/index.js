@@ -22,7 +22,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: "20vh",
-		marginTop: "80px",
+		marginTop: "70px",
 		background: "#196B91",
 		display: "flex",
 		flexDirection: "column",
