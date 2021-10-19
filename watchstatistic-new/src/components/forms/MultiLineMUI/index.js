@@ -10,7 +10,7 @@ const MultilineFieldWrapper = ({ name, ...otherProps }) => {
 		...otherProps,
 		fullWidth: true,
 
-		variant: "standard"
+		variant: "outlined"
 	};
 
 	if (mata && mata.touched && mata.error) {

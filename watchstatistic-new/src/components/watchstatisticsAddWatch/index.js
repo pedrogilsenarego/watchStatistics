@@ -9,6 +9,7 @@ import { Grid, Typography, Box, Paper, Button } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes2.json";
 import watchBrands from "./../../assets/data/watchBrands2.json";
 import pricesBracket from "./../../assets/data/pricesBracket2.json";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 import TextField from "../forms/InputMUI";
 import ButtonMUI from "../forms/ButtonMUI";
@@ -151,7 +152,7 @@ const AddWatchForm = () => {
 			productCategory,
 			productBrand,
 			productPriceBrackets,
-			caseSize: caseSize + "mm",
+			caseSize: caseSize,
 			productName,
 			waterResistance,
 			productBackground,
@@ -221,7 +222,7 @@ const AddWatchForm = () => {
 	return (
 		<div>
 			<Grid container justify="center">
-				<Paper style={{ width: "60vw" }}>
+				<Paper style={{ width: "90vw", background: "#196B91" }}>
 					<Box style={{ margin: "10px" }}>
 						<Formik
 							initialValues={{
@@ -236,25 +237,26 @@ const AddWatchForm = () => {
 							}}
 						>
 							<Form>
-								<Grid container spacing={2}>
+								<Typography variant="h6">Details from the Watch</Typography>
+								<Grid container spacing={2} style={{ paddingTop: "20px" }}>
 									<Grid item xs={12} md={6}>
 										<Select
 											name="productCategory"
-											label="Categories"
+											label="Categories*"
 											options={watchTypes}
 										/>
 									</Grid>
 									<Grid item xs={12} md={6}>
 										<Select
 											name="productBrand"
-											label="Brands"
+											label="Brands*"
 											options={watchBrands}
 										/>
 									</Grid>
 									<Grid item xs={12} md={6}>
 										<Select
 											name="productPriceBrackets"
-											label="Price Brackets"
+											label="Price Brackets*"
 											options={pricesBracket}
 										/>
 									</Grid>
@@ -276,7 +278,8 @@ const AddWatchForm = () => {
 											label="Watch material"
 											options={{
 												Gold: "Gold",
-												"Stainless Steel": "Stainless Steel"
+												"Stainless Steel": "Stainless Steel",
+												Titanium: "Titanium"
 											}}
 										/>
 									</Grid>
@@ -307,16 +310,46 @@ const AddWatchForm = () => {
 									</Grid>
 
 									<Grid item xs={6}>
-										<TextField name="productName" label="Model"></TextField>
+										<TextField name="productName" label="Model*"></TextField>
 									</Grid>
 									<Grid item xs={6}>
-										<TextField name="reference" label="Reference"></TextField>
+										<TextField name="reference" label="Reference*"></TextField>
 									</Grid>
-									<Grid item xs={12}>
+									<Typography
+										variant="h6"
+										style={{ paddingLeft: "8px", paddingTop: "40px" }}
+									>
+										Images
+									</Typography>
+									<Grid item xs={12} style={{ paddingTop: "20px" }}>
 										<TextField
 											name="productThumbnail"
-											label="Main Image"
+											label="Main Image*"
 										></TextField>
+										{additionalProductThumbnail2 && (
+											<Grid item xs={12} style={{ paddingTop: "10px" }}>
+												<TextField
+													name="productThumbnail2"
+													label="Additional Image"
+												></TextField>
+											</Grid>
+										)}
+										{additionalProductThumbnail3 && (
+											<Grid item xs={12} style={{ paddingTop: "10px" }}>
+												<TextField
+													name="productThumbnail3"
+													label="Additional Image 2"
+												></TextField>
+											</Grid>
+										)}
+										{additionalProductThumbnail4 && (
+											<Grid item xs={12} style={{ paddingTop: "10px" }}>
+												<TextField
+													name="productThumbnail4"
+													label="Additional Image 3"
+												></TextField>
+											</Grid>
+										)}
 										{!additionalProductThumbnail4 && (
 											<Button
 												onClick={() => {
@@ -332,41 +365,35 @@ const AddWatchForm = () => {
 											</Button>
 										)}
 									</Grid>
-									{additionalProductThumbnail2 && (
-										<Grid item xs={12}>
-											<TextField
-												name="productThumbnail2"
-												label="Additional Image"
-											></TextField>
-										</Grid>
-									)}
-									{additionalProductThumbnail3 && (
-										<Grid item xs={12}>
-											<TextField
-												name="productThumbnail3"
-												label="Additional Image 2"
-											></TextField>
-										</Grid>
-									)}
-									{additionalProductThumbnail4 && (
-										<Grid item xs={12}>
-											<TextField
-												name="productThumbnail4"
-												label="Additional Image 3"
-											></TextField>
-										</Grid>
-									)}
+
 									<Grid item xs={12}>
 										<TextField
 											name="productBackground"
-											label="Background Image"
+											label="Background Image*"
 										></TextField>
 									</Grid>
-									<Grid item xs={12}>
+									<Typography
+										variant="h6"
+										style={{ paddingLeft: "8px", paddingTop: "40px" }}
+									>
+										Description from the Watch
+									</Typography>
+									<Grid
+										item
+										xs={12}
+										style={{
+											paddingTop: "20px",
+											display: "flex"
+										}}
+									>
 										<Multiline
+											style={{ width: "80%" }}
 											name="productDesc"
-											label="Description from Watch"
+											label="Description from Watch*"
 										></Multiline>
+										<Button size="small">
+											<AiOutlineQuestionCircle fontSize="1.5em" />
+										</Button>
 									</Grid>
 									<Grid item xs={12}>
 										<Typography>References</Typography>
@@ -374,16 +401,16 @@ const AddWatchForm = () => {
 									<Grid item xs={12}>
 										<TextField
 											name="additionalDataTitle"
-											label="Title"
+											label="Title*"
 										></TextField>
 									</Grid>
 									<Grid item xs={12}>
 										<TextField
 											name="additionalDataLink"
-											label="Link"
+											label="Link*"
 										></TextField>
 									</Grid>
-									<Grid item xs={12} style={{ paddingTop: "20px" }}>
+									<Grid item xs={12} style={{ paddingTop: "60px" }}>
 										{preview && <ButtonMUI>Refresh Preview</ButtonMUI>}
 										{!preview && <ButtonMUI>Submit</ButtonMUI>}
 									</Grid>
@@ -405,8 +432,11 @@ const AddWatchForm = () => {
 					</Box>
 				</Paper>
 			</Grid>
-			<Typography style={{ paddingTop: "10px" }} variant={"h5"}>
-				Preview
+			<Typography
+				style={{ paddingTop: "40px", paddingLeft: "60px" }}
+				variant={"h5"}
+			>
+				Preview your watch
 			</Typography>
 			<ProductDetailsPreview {...configPreview} />
 		</div>

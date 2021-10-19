@@ -6,6 +6,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { BsXDiamond } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { Parallax } from "react-parallax";
+import FacebookShare from "../../components/forms/socialShare/Facebook";
+import WhatsappShareButton from "../../components/forms/socialShare/Whatsapp";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 import {
 	Grid,
@@ -85,8 +88,28 @@ const ProductDetails = ({}) => {
 		[]
 	);
 
-	const { productThumbnail, productName, productCategory, productBackground } =
-		product;
+	const {
+		productThumbnail,
+		productName,
+		productCategory,
+		productBackground,
+		productBrand,
+		reference,
+		avgTotal
+	} = product;
+
+	const configShareButtons = {
+		quote:
+			"Vote here on your personal opinion on the " +
+			productBrand +
+			" " +
+			productName +
+			" " +
+			reference +
+			" with a score of " +
+			avgTotal,
+		url: "https://fir-auth0-9b4cb.web.app/product/" + productID
+	};
 
 	const bgImage = () => {
 		if (productBackground) return productBackground;
@@ -120,6 +143,20 @@ const ProductDetails = ({}) => {
 					>
 						<Grid item xs={12} md={8}>
 							<Box alt={productName}>
+								<ButtonGroup
+									style={{
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "space-between",
+										marginTop: "60vh",
+										marginLeft: "-15px",
+										position: "fixed",
+										zIndex: "3"
+									}}
+								>
+									<FacebookShare {...configShareButtons} />
+									<WhatsappShareButton {...configShareButtons} />
+								</ButtonGroup>
 								{!mainImage && (
 									<CardMedia
 										className={classes.media}
