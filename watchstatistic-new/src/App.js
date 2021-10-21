@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import "./default.scss";
 import { checkUserSession } from "./redux/User/user.actions";
-import HelmetMetaData from "./hoc/helmet";
 
 // components
 import AdminToolbar from "./components/AdminToolbar";
@@ -44,7 +43,7 @@ const App = (props) => {
 	return (
 		<div className="App">
 			<AdminToolbar />
-			<HelmetMetaData></HelmetMetaData>
+
 			<Switch>
 				<Route
 					exact

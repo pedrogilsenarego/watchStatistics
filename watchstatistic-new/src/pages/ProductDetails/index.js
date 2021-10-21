@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { Parallax } from "react-parallax";
 import FacebookShare from "../../components/forms/socialShare/Facebook";
 import WhatsappShareButton from "../../components/forms/socialShare/Whatsapp";
+
 import ButtonGroup from "@mui/material/ButtonGroup";
 
 import {
@@ -126,6 +127,7 @@ const ProductDetails = ({}) => {
 		<Box>
 			<Parallax style={{}} bgImage={bgImage()} strength={300}>
 				<Box
+					sx={{ borderRadius: "10px" }}
 					className={classes.filter}
 					height={"100%"}
 					style={{
@@ -148,7 +150,7 @@ const ProductDetails = ({}) => {
 										display: "flex",
 										flexDirection: "column",
 										justifyContent: "space-between",
-										marginTop: "60vh",
+										marginTop: "68vh",
 										marginLeft: "-15px",
 										position: "fixed",
 										zIndex: "3"
@@ -159,6 +161,7 @@ const ProductDetails = ({}) => {
 								</ButtonGroup>
 								{!mainImage && (
 									<CardMedia
+										style={{ borderRadius: "4px" }}
 										className={classes.media}
 										image={productThumbnail[0]}
 									>

@@ -8,7 +8,7 @@ const FacebookShare = ({ ...otherProps }) => {
 	return (
 		<Container>
 			<FacebookShareButton url={url} quote={quote} hashtag="#VoteForWatches">
-				<FacebookIcon size="2em" logoFillColor="white" round={true} />
+				<FacebookIcon size="7vh" logoFillColor="white" round={true} />
 			</FacebookShareButton>
 		</Container>
 	);
