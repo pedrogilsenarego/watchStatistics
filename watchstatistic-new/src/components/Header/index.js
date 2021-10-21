@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { CgMenuGridO } from "react-icons/cg";
 import { BsGraphUp } from "react-icons/bs";
-import { AiOutlineCodeSandbox, AiOutlineInfoCircle } from "react-icons/ai";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import { VscHome } from "react-icons/vsc";
 
 import Signup from "../Signup";
@@ -382,14 +382,7 @@ const Header = (props) => {
 						Submit New Watch
 					</MenuItem>
 				]}
-				<MenuItem
-					className={classes.textBtn}
-					activeStyle={activeStyle}
-					disableRipple
-					disabled
-				>
-					<AiOutlineCodeSandbox fontSize="1.5em" /> &nbsp;WatchBoxes
-				</MenuItem>
+
 				<MenuItem
 					disabled
 					aria-controls="support"
