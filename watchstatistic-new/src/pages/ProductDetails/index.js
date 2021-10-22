@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
 		height: "94vh",
 		textAlign: "right",
 		paddingTop: "86vh",
-		paddingRight: "5px"
+		paddingRight: "5px",
+		borderRadius: "4px"
 	},
 	side: {
 		height: "94vh"
