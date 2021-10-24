@@ -21,6 +21,7 @@ import Cart from "./pages/Cart";
 import Watchstatistics from "./pages/Watchstatistics";
 import AddWatch from "./pages/Watchstatistics/AddWatch";
 import WatchBoxes from "./pages/WatchBoxes";
+import CompareWatches from "./pages/CompareWatches";
 
 import Order from "./pages/Order";
 
@@ -55,6 +56,15 @@ const App = (props) => {
 					render={() => (
 						<MainLayout>
 							<Watchstatistics />
+						</MainLayout>
+					)}
+				/>
+				<Route
+					exact
+					path="/watchstatistics/comparewatches"
+					render={() => (
+						<MainLayout>
+							<CompareWatches />
 						</MainLayout>
 					)}
 				/>

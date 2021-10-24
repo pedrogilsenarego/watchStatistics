@@ -5,7 +5,7 @@ import { fetchProductsStart } from "../../redux/Products/products.actions";
 import Product from "./Product";
 import FormSelect from "../forms/SelectMUI";
 import LoadMore from "../LoadMore";
-import { Grid } from "@material-ui/core";
+import { Grid, useMediaQuery, useTheme } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes.json";
 import watchBrands from "./../../assets/data/watchBrands.json";
 import pricesBracket from "./../../assets/data/pricesBracket.json";
@@ -112,7 +112,14 @@ const ProductResults = ({}) => {
 
 	const list = (anchor) => (
 		<Box
-			sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 400 }}
+			sx={{
+				width:
+					anchor === "top" || anchor === "bottom"
+						? "auto"
+						: isMatch
+						? "100vw"
+						: 400
+			}}
 			/* onClick={toggleDrawer(anchor, false)}
 			onKeyDown={toggleDrawer(anchor, false)} */
 		>
@@ -176,6 +183,9 @@ const ProductResults = ({}) => {
 						<Button onClick={() => setStartedSearch(false)}>
 							Reset Search
 						</Button>
+						{isMatch && (
+							<Button onClick={toggleDrawer(anchor, false)}>Close</Button>
+						)}
 					</Grid>
 				</Grid>
 			</Grid>
@@ -189,6 +199,9 @@ const ProductResults = ({}) => {
 		// eslint-disable-next-line
 		[filterType]
 	);
+
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
 	const handleFilter = (e) => {
 		if (!startedSearch) {
@@ -274,7 +287,7 @@ const ProductResults = ({}) => {
 								<Button
 									className={classes.filterButton}
 									style={{
-										marginTop: "13px",
+										marginTop: "80vh",
 										marginLeft: "3px",
 										position: "fixed",
 										zIndex: "3",
@@ -304,7 +317,7 @@ const ProductResults = ({}) => {
 	}
 
 	return (
-		<div style={{ paddingTop: "50px" }}>
+		<div>
 			<div>
 				{["left"].map((anchor) => (
 					<div key={anchor}>
@@ -312,7 +325,7 @@ const ProductResults = ({}) => {
 							<Button
 								className={classes.filterButton}
 								style={{
-									marginTop: "13px",
+									marginTop: "80vh",
 									marginLeft: "3px",
 									position: "fixed",
 									zIndex: "3",
