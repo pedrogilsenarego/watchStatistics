@@ -1,10 +1,11 @@
 import React from "react";
+import CompareWatchesComp from "../../components/CompareWatches";
 
 // eslint-disable-next-line
 const CompareWatches = ({}) => {
 	return (
 		<div>
-			<p>Hello</p>
+			<CompareWatchesComp />
 		</div>
 	);
 };

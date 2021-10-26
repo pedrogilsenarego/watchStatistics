@@ -289,7 +289,8 @@ const AddWatchForm = () => {
 											label="Water Resistance"
 											options={{
 												"30meters": "30 meters",
-												"50meters": "50 meters"
+												"50meters": "50 meters",
+												"100meters": "100 meters"
 											}}
 										/>
 									</Grid>

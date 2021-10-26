@@ -8,6 +8,9 @@ import { useSelector } from "react-redux";
 import { Parallax } from "react-parallax";
 import FacebookShare from "../../components/forms/socialShare/Facebook";
 import WhatsappShareButton from "../../components/forms/socialShare/Whatsapp";
+import { GoMirror } from "react-icons/go";
+import { useHistory, useParams } from "react-router";
+import { addProduct } from "./../../redux/Cart/cart.actions";
 
 import ButtonGroup from "@mui/material/ButtonGroup";
 
@@ -19,12 +22,12 @@ import {
 	IconButton,
 	Box
 } from "@material-ui/core";
+import { Button } from "@mui/material";
 import {
 	fetchProductStart,
 	setProduct
 } from "../../redux/Products/products.actions";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router";
 
 const image1 =
 	"https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2018/09/17/5595aa2e-863a-4243-ad43-87437f688e78/scuba-diving";
@@ -74,6 +77,7 @@ const mapState = (state) => ({
 const ProductDetails = ({}) => {
 	const dispatch = useDispatch();
 	const { productID } = useParams();
+	const history = useHistory();
 	const { product } = useSelector(mapState);
 	const [mainImage, setMainImage] = useState(null);
 
@@ -124,6 +128,11 @@ const ProductDetails = ({}) => {
 
 	if (!productThumbnail || !productName) return null;
 
+	const handleAddToCart = (product) => {
+		dispatch(addProduct(product));
+		history.push("/watchstatistics/comparewatches");
+	};
+
 	return (
 		<Box>
 			<Parallax style={{}} bgImage={bgImage()} strength={300}>
@@ -151,12 +160,30 @@ const ProductDetails = ({}) => {
 										display: "flex",
 										flexDirection: "column",
 										justifyContent: "space-between",
-										marginTop: "68vh",
+										marginTop: "60vh",
 										marginLeft: "-15px",
 										position: "fixed",
 										zIndex: "3"
 									}}
 								>
+									<Button
+										onClick={() => {
+											handleAddToCart(product);
+										}}
+										size="small"
+										sx={{
+											marginLeft: "25px",
+											width: "6.5vh",
+											height: "6.5vh",
+											borderRadius: 25,
+											backgroundColor: "red",
+											marginBottom: "3px",
+											alignItems: "center",
+											justifyContent: "center"
+										}}
+									>
+										<GoMirror size="4vh" color="white" />
+									</Button>
 									<FacebookShare {...configShareButtons} />
 									<WhatsappShareButton {...configShareButtons} />
 								</ButtonGroup>
