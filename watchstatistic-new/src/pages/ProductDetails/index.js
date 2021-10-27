@@ -70,7 +70,8 @@ const useStyles = makeStyles((theme) => ({
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
-	product: state.productsData.product
+	product: state.productsData.product,
+	cartItems: state.cartData.cartItems
 });
 
 // eslint-disable-next-line
@@ -78,8 +79,9 @@ const ProductDetails = ({}) => {
 	const dispatch = useDispatch();
 	const { productID } = useParams();
 	const history = useHistory();
-	const { product } = useSelector(mapState);
+	const { product, cartItems } = useSelector(mapState);
 	const [mainImage, setMainImage] = useState(null);
+	const [compareWatches, setCompareWatches] = useState(false);
 
 	const classes = useStyles();
 
@@ -89,6 +91,14 @@ const ProductDetails = ({}) => {
 			return () => {
 				dispatch(setProduct({}));
 			};
+		},
+		// eslint-disable-next-line
+		[]
+	);
+
+	useEffect(
+		() => {
+			if (cartItems.length > 3) setCompareWatches(true);
 		},
 		// eslint-disable-next-line
 		[]
@@ -128,9 +138,12 @@ const ProductDetails = ({}) => {
 
 	if (!productThumbnail || !productName) return null;
 
-	const handleAddToCart = (product) => {
-		dispatch(addProduct(product));
-		history.push("/watchstatistics/comparewatches");
+	const handleAddToCart = (product, cartItems) => {
+		if (!product) return;
+		if (cartItems.length < 4) {
+			dispatch(addProduct(product));
+			history.push("/watchstatistics/comparewatches");
+		} else history.push("/watchstatistics/comparewatches");
 	};
 
 	return (
@@ -168,7 +181,7 @@ const ProductDetails = ({}) => {
 								>
 									<Button
 										onClick={() => {
-											handleAddToCart(product);
+											handleAddToCart(product, cartItems);
 										}}
 										size="small"
 										sx={{
@@ -182,7 +195,9 @@ const ProductDetails = ({}) => {
 											justifyContent: "center"
 										}}
 									>
-										<GoMirror size="4vh" color="white" />
+										{" "}
+										{compareWatches && <h1>X</h1>}
+										{!compareWatches && <GoMirror size="4vh" color="white" />}
 									</Button>
 									<FacebookShare {...configShareButtons} />
 									<WhatsappShareButton {...configShareButtons} />
