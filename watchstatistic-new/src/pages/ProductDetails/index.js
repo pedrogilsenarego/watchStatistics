@@ -186,13 +186,20 @@ const ProductDetails = ({}) => {
 										size="small"
 										sx={{
 											marginLeft: "25px",
-											width: "6.5vh",
-											height: "6.5vh",
+											width: "7vh",
+											height: "7vh",
 											borderRadius: 25,
-											backgroundColor: "red",
+											border: "none",
+											outline: "none",
+											backgroundColor: "#960617",
 											marginBottom: "3px",
 											alignItems: "center",
-											justifyContent: "center"
+											justifyContent: "center",
+											"&:hover": {
+												backgroundColor: "#960617",
+												border: "none",
+												outline: "none"
+											}
 										}}
 									>
 										{" "}
