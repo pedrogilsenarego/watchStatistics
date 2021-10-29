@@ -21,6 +21,7 @@
 		{ "name": "IWC", "value": "IWC" },
 		{ "name": "Jeger-LeCoultre", "value": "Jeger-LeCoultre" },
 		{ "name": "Junghans", "value": "Junghans" },
+		{ "name": "Longines", "value": "Longines" },
 		{ "name": "Lorier", "value": "Lorier" },
 		{ "name": "Nixon", "value": "Nixon" },
 		{ "name": "Omega", "value": "Omega" },
@@ -36,6 +37,7 @@
 		{ "name": "Sinn", "value": "sinn" },
 		{ "name": "Timex", "value": "Timex" },
 		{ "name": "Tudor", "value": "Tudor" },
+		{ "name": "Urwerk", "value": "Urwerk" },
 		{ "name": "Universal Geneve", "value": "Universal Geneve" },
 		{ "name": "Zenith", "value": "Zenith" }
 	]

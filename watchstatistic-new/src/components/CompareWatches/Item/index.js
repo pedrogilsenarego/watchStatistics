@@ -1,54 +1,66 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import CardMedia from "@mui/material/CardMedia";
+import Box from "@mui/material/Box";
+import { makeStyles } from "@material-ui/core/styles";
+import { TableCell, TableRow } from "@material-ui/core";
+import { useHistory } from "react-router";
+import { VscGraph } from "react-icons/vsc";
+import { ImCross } from "react-icons/im";
 
-import { removeCartItem, addProduct } from "../../../redux/Cart/cart.actions";
+import { removeCartItem } from "../../../redux/Cart/cart.actions";
+
+const useStyles = makeStyles((theme) => ({
+	root: {},
+	media: {
+		height: "50px",
+		width: "80px",
+		borderRadius: "3px"
+	}
+}));
 
 const Item = (product) => {
 	const dispatch = useDispatch();
-	const { productName, productThumbnail, documentID } = product;
+	const history = useHistory();
+	const { productName, productThumbnail, reference, productBrand, documentID } =
+		product;
+	const classes = useStyles();
 
-	const handleRemoveCartItem = (documentID) => {
+	const handleRemoveCartItem = (reference) => {
 		dispatch(
 			removeCartItem({
-				documentID
+				reference
 			})
 		);
 	};
 
-	const handleAddProduct = (product) => {
-		dispatch(addProduct(product));
-	};
-
 	return (
-		<table className="cartItem" border="0" cellSpacing="0" cellPadding="10">
-			<tbody>
-				<tr>
-					<td>
-						<img
-							style={{ height: "10vh" }}
-							src={productThumbnail}
-							alt={productName}
-						/>
-					</td>
-					<td>{productName}</td>
-					<td>
-						<span
-							className="cartBtn"
-							onClick={() => handleAddProduct(product)}
-						>{` >`}</span>
-					</td>
+		<TableRow style={{ cursor: "pointer" }} key={productName}>
+			<TableCell
+				align="center"
+				onClick={() => history.push(`/product/${documentID}`)}
+			>
+				<Box className={classes.root} alt={productName}>
+					<CardMedia className={classes.media} image={productThumbnail[0]} />
+				</Box>
+			</TableCell>
+			<TableCell
+				align="center"
+				onClick={() => history.push(`/product/${documentID}`)}
+			>
+				{productBrand} - {productName} - {reference}
+			</TableCell>
+			<TableCell align="center">
+				<VscGraph color={product.color} style={{}} fontSize="1.5em" />{" "}
+			</TableCell>
 
-					<td align="center">
-						<span
-							className="cartBtn"
-							onClick={() => handleRemoveCartItem(documentID)}
-						>
-							X
-						</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+			<TableCell align="center">
+				<ImCross
+					fontSize="1em"
+					onClick={() => handleRemoveCartItem(reference)}
+				/>{" "}
+			</TableCell>
+		</TableRow>
 	);
 };
 

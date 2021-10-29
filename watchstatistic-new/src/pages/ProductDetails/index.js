@@ -11,6 +11,7 @@ import WhatsappShareButton from "../../components/forms/socialShare/Whatsapp";
 import { GoMirror } from "react-icons/go";
 import { useHistory, useParams } from "react-router";
 import { addProduct } from "./../../redux/Cart/cart.actions";
+import { Helmet } from "react-helmet";
 
 import ButtonGroup from "@mui/material/ButtonGroup";
 
@@ -88,17 +89,14 @@ const ProductDetails = ({}) => {
 	useEffect(
 		() => {
 			dispatch(fetchProductStart(productID));
+			if (
+				cartItems.length > 3 ||
+				cartItems.some((e) => e.reference === reference)
+			)
+				setCompareWatches(true);
 			return () => {
 				dispatch(setProduct({}));
 			};
-		},
-		// eslint-disable-next-line
-		[]
-	);
-
-	useEffect(
-		() => {
-			if (cartItems.length > 3) setCompareWatches(true);
 		},
 		// eslint-disable-next-line
 		[]
@@ -143,143 +141,150 @@ const ProductDetails = ({}) => {
 		if (cartItems.length < 4) {
 			dispatch(addProduct(product));
 			history.push("/watchstatistics/comparewatches");
-		} else history.push("/watchstatistics/comparewatches");
+		} else {
+			history.push("/watchstatistics/comparewatches");
+		}
 	};
 
 	return (
-		<Box>
-			<Parallax style={{}} bgImage={bgImage()} strength={300}>
-				<Box
-					sx={{ borderRadius: "10px" }}
-					className={classes.filter}
-					height={"100%"}
-					style={{
-						position: "relative"
-					}}
-				>
-					<Grid
-						container
-						spacing={1}
+		<div>
+			<Helmet>
+				<meta property="og:image" content={productThumbnail} />
+			</Helmet>
+			<Box>
+				<Parallax style={{}} bgImage={bgImage()} strength={300}>
+					<Box
+						sx={{ borderRadius: "10px" }}
+						className={classes.filter}
+						height={"100%"}
 						style={{
-							paddingTop: "70px",
-							paddingLeft: "10px",
-							paddingRight: "10px"
+							position: "relative"
 						}}
 					>
-						<Grid item xs={12} md={8}>
-							<Box alt={productName}>
-								<ButtonGroup
-									style={{
-										display: "flex",
-										flexDirection: "column",
-										justifyContent: "space-between",
-										marginTop: "60vh",
-										marginLeft: "-15px",
-										position: "fixed",
-										zIndex: "3"
-									}}
-								>
-									<Button
-										onClick={() => {
-											handleAddToCart(product, cartItems);
+						<Grid
+							container
+							spacing={1}
+							style={{
+								paddingTop: "70px",
+								paddingLeft: "10px",
+								paddingRight: "10px"
+							}}
+						>
+							<Grid item xs={12} md={8}>
+								<Box alt={productName}>
+									<ButtonGroup
+										style={{
+											display: "flex",
+											flexDirection: "column",
+											justifyContent: "space-between",
+											marginTop: "60vh",
+											marginLeft: "-15px",
+											position: "fixed",
+											zIndex: "3"
 										}}
-										size="small"
-										sx={{
-											marginLeft: "25px",
-											width: "7vh",
-											height: "7vh",
-											borderRadius: 25,
-											border: "none",
-											outline: "none",
-											backgroundColor: "#960617",
-											marginBottom: "3px",
-											alignItems: "center",
-											justifyContent: "center",
-											"&:hover": {
-												backgroundColor: "#960617",
+									>
+										<Button
+											onClick={() => {
+												handleAddToCart(product, cartItems);
+											}}
+											size="small"
+											sx={{
+												marginLeft: "25px",
+												width: "7vh",
+												height: "7vh",
+												borderRadius: 25,
 												border: "none",
-												outline: "none"
-											}
-										}}
-									>
-										{" "}
-										{compareWatches && <h1>X</h1>}
-										{!compareWatches && <GoMirror size="4vh" color="white" />}
-									</Button>
-									<FacebookShare {...configShareButtons} />
-									<WhatsappShareButton {...configShareButtons} />
-								</ButtonGroup>
-								{!mainImage && (
-									<CardMedia
-										style={{ borderRadius: "4px" }}
-										className={classes.media}
-										image={productThumbnail[0]}
-									>
-										{productThumbnail &&
-											productThumbnail.map((productThumbnail, pos) => {
-												return (
-													<IconButton
-														className={classes.textBtn}
-														onClick={(e) => {
-															setMainImage(productThumbnail);
-														}}
-													>
-														<BsXDiamond fontSize="1.5em" />
-													</IconButton>
-												);
-											})}
-									</CardMedia>
-								)}
-								{mainImage && (
-									<CardMedia className={classes.media} image={mainImage}>
-										{productThumbnail &&
-											productThumbnail.map((productThumbnail, pos) => {
-												return (
-													<IconButton
-														className={classes.textBtn}
-														onClick={(e) => {
-															setMainImage(productThumbnail);
-														}}
-													>
-														<BsXDiamond fontSize="1.5em" />
-													</IconButton>
-												);
-											})}
-									</CardMedia>
-								)}
-							</Box>
-						</Grid>
-						<Grid item xs={12} md={4}>
-							<Card
-								className={classes.side}
-								style={{ backgroundColor: "#04040699" }}
-							>
-								<CardContent style={{ padding: "5px" }}>
-									<SideGraphPanel />
-								</CardContent>
-							</Card>
-						</Grid>
+												outline: "none",
+												backgroundColor: "#960617",
+												marginBottom: "3px",
+												alignItems: "center",
+												justifyContent: "center",
+												"&:hover": {
+													backgroundColor: "#960617",
+													border: "none",
+													outline: "none"
+												}
+											}}
+										>
+											{" "}
+											{compareWatches && <h2 style={{ color: "white" }}>X</h2>}
+											{!compareWatches && <GoMirror size="4vh" color="white" />}
+										</Button>
+										<FacebookShare {...configShareButtons} />
+										<WhatsappShareButton {...configShareButtons} />
+									</ButtonGroup>
+									{!mainImage && (
+										<CardMedia
+											style={{ borderRadius: "4px" }}
+											className={classes.media}
+											image={productThumbnail[0]}
+										>
+											{productThumbnail &&
+												productThumbnail.map((productThumbnail, pos) => {
+													return (
+														<IconButton
+															className={classes.textBtn}
+															onClick={(e) => {
+																setMainImage(productThumbnail);
+															}}
+														>
+															<BsXDiamond fontSize="1.5em" />
+														</IconButton>
+													);
+												})}
+										</CardMedia>
+									)}
+									{mainImage && (
+										<CardMedia className={classes.media} image={mainImage}>
+											{productThumbnail &&
+												productThumbnail.map((productThumbnail, pos) => {
+													return (
+														<IconButton
+															className={classes.textBtn}
+															onClick={(e) => {
+																setMainImage(productThumbnail);
+															}}
+														>
+															<BsXDiamond fontSize="1.5em" />
+														</IconButton>
+													);
+												})}
+										</CardMedia>
+									)}
+								</Box>
+							</Grid>
+							<Grid item xs={12} md={4}>
+								<Card
+									className={classes.side}
+									style={{ backgroundColor: "#04040699" }}
+								>
+									<CardContent style={{ padding: "5px" }}>
+										<SideGraphPanel />
+									</CardContent>
+								</Card>
+							</Grid>
 
-						<Grid item xs={12} sm={8}>
-							<Card style={{ backgroundColor: "#04040699" }}>
-								<CardContent style={{ padding: "5px" }}>
-									<SideDescription />
-								</CardContent>
-							</Card>
+							<Grid item xs={12} sm={8}>
+								<Card style={{ backgroundColor: "#04040699" }}>
+									<CardContent style={{ padding: "5px" }}>
+										<SideDescription />
+									</CardContent>
+								</Card>
+							</Grid>
+							<Grid item xs={12} sm={4}>
+								<Card
+									style={{ backgroundColor: "#04040699", marginBottom: "10px" }}
+								>
+									<CardContent style={{ padding: "5px" }}>
+										<ProductSideList />
+									</CardContent>
+								</Card>
+							</Grid>
 						</Grid>
-						<Grid item xs={12} sm={4}>
-							<Card
-								style={{ backgroundColor: "#04040699", marginBottom: "10px" }}
-							>
-								<CardContent style={{ padding: "5px" }}>
-									<ProductSideList />
-								</CardContent>
-							</Card>
-						</Grid>
-					</Grid>
-				</Box>
-			</Parallax>
-		</Box>
+					</Box>
+				</Parallax>
+			</Box>
+		</div>
 	);
 };
 
