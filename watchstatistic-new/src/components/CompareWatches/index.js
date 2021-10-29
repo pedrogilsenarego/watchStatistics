@@ -234,7 +234,7 @@ const CompareWatches = () => {
 				</Paper>
 			</Grid>
 			<Grid item xs={6}>
-				<Paper style={{ background: "#196B91" }}>
+				<Paper style={{ background: "#196B91", padding: "30px" }}>
 					<RadarChart {...configRadarChart} />
 				</Paper>
 			</Grid>
