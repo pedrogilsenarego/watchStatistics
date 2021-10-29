@@ -1,5 +1,6 @@
 import React from "react";
 import RadarChart from "../RadarChart";
+import { useHistory } from "react-router";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -24,6 +25,7 @@ const mapState = (state) => ({
 const errMsg = "You have no watches added";
 
 const CompareWatches = () => {
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const { cartItems } = useSelector(mapState);
 
@@ -37,19 +39,33 @@ const CompareWatches = () => {
 			labels: ["S", "M", "L", "K", "R", "Q", "O"],
 			datasets: [
 				{
-					data: [2, 5, 6, 7, 8, 9, 8],
-					label: "Own",
+					data: cartItems[0] && cartItems[0].votationsNonOwn,
+					label: cartItems[0] && cartItems[0].productName,
 
 					borderColor: "#42e6f5",
 					backgroundColor: "#42e6f566",
 					fill: true
 				},
 				{
-					data: [2, 5, 6, 7, 8, 9, 8],
-					label: "Not Own",
+					data: cartItems[1] && cartItems[1].votationsNonOwn,
+					label: cartItems[1] && cartItems[1].productName,
 					borderColor: "#E5F517",
 					fill: true,
 					backgroundColor: "#E5F51766"
+				},
+				{
+					data: cartItems[2] && cartItems[2].votationsNonOwn,
+					label: cartItems[2] && cartItems[2].productName,
+					borderColor: "#D221EA",
+					fill: true,
+					backgroundColor: "#D221EA66"
+				},
+				{
+					data: cartItems[3] && cartItems[3].votationsNonOwn,
+					label: cartItems[3] && cartItems[3].productName,
+					borderColor: "#DC0D0D",
+					fill: true,
+					backgroundColor: "#DC0D0D66"
 				}
 			]
 		},
@@ -138,13 +154,19 @@ const CompareWatches = () => {
 		}
 	};
 
+	let n = 3;
+	while (n > 0) {
+		if (!cartItems[n]) configRadarChart.data.datasets.pop();
+		n--;
+	}
+
 	return (
 		<Grid
 			container
 			spacing={2}
 			justify="center"
 			style={{
-				paddingTop: "150px",
+				paddingTop: "160px",
 				paddingLeft: "100px",
 				paddingRight: "100px"
 			}}
@@ -174,12 +196,12 @@ const CompareWatches = () => {
 									{cartItems.map((item, pos) => {
 										const color =
 											item === cartItems[0]
-												? "#214EEA"
+												? "#42e6f5"
 												: item === cartItems[1]
-												? "red"
+												? "#E5F517"
 												: item === cartItems[2]
 												? "#D221EA"
-												: "yellow";
+												: "#DC0D0D";
 										const configItem = { ...item, color: color };
 										return <Item {...configItem} />;
 									})}
@@ -189,13 +211,26 @@ const CompareWatches = () => {
 					) : (
 						<p>{errMsg}</p>
 					)}
-					<Button
-						onClick={() => {
-							handleClearCart();
-						}}
-					>
-						Clear Watches
-					</Button>
+					<Grid container>
+						<Grid item xs={6}>
+							<Button
+								onClick={() => {
+									history.push("/search");
+								}}
+							>
+								Search for Watches
+							</Button>
+						</Grid>
+						<Grid item xs={6}>
+							<Button
+								onClick={() => {
+									handleClearCart();
+								}}
+							>
+								Clear Watches
+							</Button>
+						</Grid>
+					</Grid>
 				</Paper>
 			</Grid>
 			<Grid item xs={6}>
