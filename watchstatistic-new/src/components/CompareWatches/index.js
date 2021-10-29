@@ -11,8 +11,11 @@ import {
 	TableCell,
 	TableBody,
 	Grid,
+	useMediaQuery,
+	useTheme,
 	Paper,
-	Button
+	Button,
+	Typography
 } from "@material-ui/core";
 
 import { clearCart } from "../../redux/Cart/cart.actions";
@@ -28,10 +31,29 @@ const CompareWatches = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { cartItems } = useSelector(mapState);
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
 	const handleClearCart = () => {
 		dispatch(clearCart());
 	};
+	function mergeVotations(index) {
+		var i = 0;
+		const newArray = [];
+		const { votationsOwn, numberVotesOwn, votationsNonOwn, numberVotesNotOwn } =
+			cartItems[index];
+		while (i < 7) {
+			newArray.push(
+				(
+					(Number(votationsNonOwn[i]) * numberVotesNotOwn +
+						Number(votationsOwn[i]) * numberVotesOwn) /
+					(numberVotesNotOwn + numberVotesOwn)
+				).toFixed(2)
+			);
+			i++;
+		}
+		return newArray;
+	}
 
 	const configRadarChart = {
 		data: {
@@ -39,7 +61,7 @@ const CompareWatches = () => {
 			labels: ["S", "M", "L", "K", "R", "Q", "O"],
 			datasets: [
 				{
-					data: cartItems[0] && cartItems[0].votationsNonOwn,
+					data: cartItems[0] && mergeVotations(0),
 					label: cartItems[0] && cartItems[0].productName,
 
 					borderColor: "#42e6f5",
@@ -47,21 +69,21 @@ const CompareWatches = () => {
 					fill: true
 				},
 				{
-					data: cartItems[1] && cartItems[1].votationsNonOwn,
+					data: cartItems[1] && mergeVotations(1),
 					label: cartItems[1] && cartItems[1].productName,
 					borderColor: "#E5F517",
 					fill: true,
 					backgroundColor: "#E5F51766"
 				},
 				{
-					data: cartItems[2] && cartItems[2].votationsNonOwn,
+					data: cartItems[2] && mergeVotations(2),
 					label: cartItems[2] && cartItems[2].productName,
 					borderColor: "#D221EA",
 					fill: true,
 					backgroundColor: "#D221EA66"
 				},
 				{
-					data: cartItems[3] && cartItems[3].votationsNonOwn,
+					data: cartItems[3] && mergeVotations(3),
 					label: cartItems[3] && cartItems[3].productName,
 					borderColor: "#DC0D0D",
 					fill: true,
@@ -167,11 +189,11 @@ const CompareWatches = () => {
 			justify="center"
 			style={{
 				paddingTop: "160px",
-				paddingLeft: "100px",
-				paddingRight: "100px"
+				paddingLeft: isMatch ? "5px" : "100px",
+				paddingRight: isMatch ? "5px" : "100px"
 			}}
 		>
-			<Grid item xs={6}>
+			<Grid item xs={12} md={6}>
 				<Paper style={{ background: "#196B91" }}>
 					{cartItems && cartItems.length > 0 ? (
 						<TableContainer>
@@ -233,9 +255,12 @@ const CompareWatches = () => {
 					</Grid>
 				</Paper>
 			</Grid>
-			<Grid item xs={6}>
+			<Grid item xs={12} md={6}>
 				<Paper style={{ background: "#196B91", padding: "30px" }}>
 					<RadarChart {...configRadarChart} />
+					<Typography>
+						Weighted average from the votes of owners VS non-owners
+					</Typography>
 				</Paper>
 			</Grid>
 		</Grid>
