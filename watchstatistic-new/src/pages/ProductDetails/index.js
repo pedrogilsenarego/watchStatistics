@@ -114,7 +114,7 @@ const ProductDetails = ({}) => {
 
 	const configShareButtons = {
 		quote:
-			"Vote here on your personal opinion on the " +
+			"Vote here on your personal opinion for the " +
 			productBrand +
 			" " +
 			productName +
@@ -136,9 +136,10 @@ const ProductDetails = ({}) => {
 
 	if (!productThumbnail || !productName) return null;
 
-	const handleAddToCart = (product, cartItems) => {
+	const handleAddToCart = (product, cartItems, productID) => {
 		if (!product) return;
 		if (cartItems.length < 4) {
+			product.productID = productID;
 			dispatch(addProduct(product));
 			history.push("/watchstatistics/comparewatches");
 		} else {
@@ -185,7 +186,7 @@ const ProductDetails = ({}) => {
 									>
 										<Button
 											onClick={() => {
-												handleAddToCart(product, cartItems);
+												handleAddToCart(product, cartItems, productID);
 											}}
 											size="small"
 											sx={{

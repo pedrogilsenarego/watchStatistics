@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const Item = (product) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { productName, productThumbnail, reference, productBrand, documentID } =
+	const { productName, productThumbnail, reference, productBrand, productID } =
 		product;
 	const classes = useStyles();
 
@@ -38,7 +38,7 @@ const Item = (product) => {
 		<TableRow style={{ cursor: "pointer" }} key={productName}>
 			<TableCell
 				align="center"
-				onClick={() => history.push(`/product/${documentID}`)}
+				onClick={() => history.push(`/product/${productID}`)}
 			>
 				<Box className={classes.root} alt={productName}>
 					<CardMedia className={classes.media} image={productThumbnail[0]} />
@@ -46,7 +46,7 @@ const Item = (product) => {
 			</TableCell>
 			<TableCell
 				align="center"
-				onClick={() => history.push(`/product/${documentID}`)}
+				onClick={() => history.push(`/product/${productID}`)}
 			>
 				{productBrand} - {productName} - {reference}
 			</TableCell>
