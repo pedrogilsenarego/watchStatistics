@@ -9,7 +9,6 @@ import WithAuth from "./hoc/withAuth";
 import WithAdminAuth from "./hoc/withAdminAuth";
 
 //pages
-import Homepage from "./pages/Homepage";
 import Search from "./pages/Search";
 import Registration from "./pages/Registration";
 import Recovery from "./pages/Recovery";
@@ -46,17 +45,8 @@ const App = (props) => {
 					path="/"
 					render={() => (
 						<HomepageLayout>
-							<Homepage />
-						</HomepageLayout>
-					)}
-				/>
-				<Route
-					exact
-					path="/watchstatistics"
-					render={() => (
-						<MainLayout>
 							<Watchstatistics />
-						</MainLayout>
+						</HomepageLayout>
 					)}
 				/>
 				<Route
