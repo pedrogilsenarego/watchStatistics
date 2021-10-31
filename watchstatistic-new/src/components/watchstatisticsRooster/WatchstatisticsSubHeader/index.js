@@ -74,6 +74,16 @@ const WatchstatisticsSubHeader = ({}) => {
 		// eslint-disable-next-line
 	}, []);
 
+	const colorRank = () => {
+		if (rank() === "Noob") return "#ffffff66";
+		if (rank() === "Begginer") return "white";
+		if (rank() === "Watch Enthusiast") return "green";
+		if (rank() === "Mature Watch Enthusiast") return "blue";
+		if (rank() === "Watch Connoisseour") return "purple";
+		if (rank() === "Watch Geek Legend") return "orange";
+		if (rank() === "Watch God") return "red";
+	};
+
 	return (
 		<div>
 			<Box className={classes.root}>
@@ -97,7 +107,11 @@ const WatchstatisticsSubHeader = ({}) => {
 						<Typography variant="h6" className={classes.text}>
 							Watches Submited: {watchesSubmited}
 						</Typography>
-						<Typography variant="h6" className={classes.text}>
+						<Typography
+							variant="h6"
+							className={classes.text}
+							style={{ color: colorRank() }}
+						>
 							Rank: {rank()}
 						</Typography>
 						<Box
