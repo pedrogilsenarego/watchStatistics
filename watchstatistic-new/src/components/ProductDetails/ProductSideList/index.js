@@ -301,7 +301,8 @@ const ProductSideList = ({}) => {
 												options={{
 													"": "Null",
 													Gold: "Gold",
-													"Stainless Steel": "Stainless Steel"
+													"Stainless Steel": "Stainless Steel",
+													"White Gold": "White Gold"
 												}}
 											/>
 										)}

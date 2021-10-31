@@ -176,7 +176,7 @@ const AddWatchForm = () => {
 		if (productionYears === "-") delete values.productionYears;
 
 		dispatch(addProductStart(values));
-		history.push("/watchstatistics");
+		history.push("/");
 	};
 
 	const handlePreview = (e) => {

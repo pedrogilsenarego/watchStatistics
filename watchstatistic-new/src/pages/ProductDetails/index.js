@@ -166,7 +166,7 @@ const ProductDetails = ({}) => {
 							container
 							spacing={1}
 							style={{
-								paddingTop: "70px",
+								paddingTop: "90px",
 								paddingLeft: "10px",
 								paddingRight: "10px"
 							}}

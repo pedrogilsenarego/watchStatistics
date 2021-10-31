@@ -148,14 +148,15 @@ const ProductSidePanel = ({}) => {
 					backgroundColor: "#42e6f566",
 					fill: true
 				},
-				dataSetTargetVote(),
+
 				{
 					data: votationsNonOwn,
 					label: "Not Own",
 					borderColor: "#E5F517",
 					fill: true,
 					backgroundColor: "#E5F51766"
-				}
+				},
+				dataSetTargetVote()
 			]
 		},
 
@@ -242,6 +243,8 @@ const ProductSidePanel = ({}) => {
 			}
 		}
 	};
+
+	if (!targetVote) configRadarChart.data.datasets.pop();
 
 	const memoRadarChart = useMemo(
 		() => <RadarChart {...configRadarChart} />,

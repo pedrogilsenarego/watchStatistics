@@ -138,6 +138,16 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 										else return 100;
 									};
 
+									const colorRank = () => {
+										if (rank() === "Noob") return "#ffffff66";
+										if (rank() === "Begginer") return "white";
+										if (rank() === "Watch Enthusiast") return "green";
+										if (rank() === "Mature Watch Enthusiast") return "blue";
+										if (rank() === "Watch Connoisseour") return "purple";
+										if (rank() === "Watch Geek Legend") return "orange";
+										if (rank() === "Watch God") return "red";
+									};
+
 									return (
 										<TableRow
 											style={{
@@ -162,7 +172,7 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 												align="center"
 												component="th"
 												scope="row"
-												style={{ color: "#ffffffB3" }}
+												style={{ color: colorRank() }}
 											>
 												{rank()}
 											</TableCell>
