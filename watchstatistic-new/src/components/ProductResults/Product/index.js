@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, CardMedia, Box, Grid } from "@material-ui/core";
+import { Typography, CardMedia, Box } from "@material-ui/core";
 import { Divider } from "@material-ui/core";
+import Grid from "@mui/material/Grid";
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
@@ -81,7 +82,13 @@ const Product = (product) => {
 							}}
 						>
 							{" "}
-							<Grid container justify="center">
+							<Grid
+								container
+								spacing={0}
+								direction="column"
+								alignItems="center"
+								justifyContent="center"
+							>
 								<Typography
 									style={{
 										cursor: "pointer",

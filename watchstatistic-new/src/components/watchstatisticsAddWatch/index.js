@@ -279,7 +279,8 @@ const AddWatchForm = () => {
 											options={{
 												Gold: "Gold",
 												"Stainless Steel": "Stainless Steel",
-												Titanium: "Titanium"
+												Titanium: "Titanium",
+												"White Gold": "White Gold"
 											}}
 										/>
 									</Grid>
