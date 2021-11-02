@@ -11,10 +11,11 @@
 		{ "name": "Cartier", "value": "Cartier" },
 		{ "name": "Certina", "value": "Certina" },
 		{ "name": "Christopher Ward", "value": "Christopher Ward" },
-		{ "name": "Cvstos", "value": "cvstos" },
-		{ "name": "Citizen", "value": "citizen" },
+		{ "name": "Cvstos", "value": "Cvstos" },
+		{ "name": "Citizen", "value": "Citizen" },
+		{ "name": "Doxa", "value": "Doxa" },
 		{ "name": "Girrard-Perregaux", "value": "Girrard-Perregaux" },
-		{ "name": "GrandSeiko", "value": "grandseiko" },
+		{ "name": "GrandSeiko", "value": "Grandseiko" },
 		{ "name": "Hamilton", "value": "Hamilton" },
 		{ "name": "Hublot", "value": "hublot" },
 		{ "name": "Isotope", "value": "isotope" },
@@ -41,6 +42,7 @@
 		{ "name": "Tudor", "value": "Tudor" },
 		{ "name": "Urwerk", "value": "Urwerk" },
 		{ "name": "Universal Geneve", "value": "Universal Geneve" },
-		{ "name": "Zenith", "value": "Zenith" }
+		{ "name": "Zenith", "value": "Zenith" },
+		{ "name": "Zodiac", "value": "Zodiac" }
 	]
 }

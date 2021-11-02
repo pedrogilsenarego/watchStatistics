@@ -13,17 +13,18 @@ import { useHistory, useParams } from "react-router";
 import { addProduct } from "./../../redux/Cart/cart.actions";
 import { Helmet } from "react-helmet";
 
-import ButtonGroup from "@mui/material/ButtonGroup";
-
 import {
 	Grid,
 	Card,
 	CardMedia,
 	CardContent,
 	IconButton,
-	Box
+	Box,
+	Typography,
+	useMediaQuery,
+	useTheme
 } from "@material-ui/core";
-import { Button } from "@mui/material";
+
 import {
 	fetchProductStart,
 	setProduct
@@ -83,6 +84,8 @@ const ProductDetails = ({}) => {
 	const { product, cartItems } = useSelector(mapState);
 	const [mainImage, setMainImage] = useState(null);
 	const [compareWatches, setCompareWatches] = useState(false);
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("xs"));
 
 	const classes = useStyles();
 
@@ -173,7 +176,8 @@ const ProductDetails = ({}) => {
 						>
 							<Grid item xs={12} md={8}>
 								<Box alt={productName}>
-									<ButtonGroup
+									<Grid
+										item
 										style={{
 											display: "flex",
 											flexDirection: "column",
@@ -184,36 +188,47 @@ const ProductDetails = ({}) => {
 											zIndex: "3"
 										}}
 									>
-										<Button
+										<Box
 											onClick={() => {
 												handleAddToCart(product, cartItems, productID);
 											}}
 											size="small"
 											sx={{
-												marginLeft: "25px",
+												marginLeft: isMatch ? "15px" : "25px",
 												width: "7vh",
 												height: "7vh",
 												borderRadius: 25,
-												border: "none",
-												outline: "none",
+												cursor: "pointer",
 												backgroundColor: "#960617",
-												marginBottom: "3px",
-												alignItems: "center",
-												justifyContent: "center",
-												"&:hover": {
-													backgroundColor: "#960617",
-													border: "none",
-													outline: "none"
-												}
+												marginBottom: "3px"
 											}}
 										>
-											{" "}
-											{compareWatches && <h2 style={{ color: "white" }}>X</h2>}
-											{!compareWatches && <GoMirror size="4vh" color="white" />}
-										</Button>
+											<Grid
+												container
+												direction="column"
+												alignItems="center"
+												justifyContent="center"
+												spacing={0}
+												style={{ paddingTop: "1.2vh" }}
+											>
+												{" "}
+												{compareWatches && (
+													<Typography
+														style={{
+															color: "white"
+														}}
+													>
+														X
+													</Typography>
+												)}
+												{!compareWatches && (
+													<GoMirror size="4vh" color="white" />
+												)}
+											</Grid>
+										</Box>
 										<FacebookShare {...configShareButtons} />
 										<WhatsappShareButton {...configShareButtons} />
-									</ButtonGroup>
+									</Grid>
 									{!mainImage && (
 										<CardMedia
 											style={{ borderRadius: "4px" }}
