@@ -42,34 +42,6 @@ const image4 = "https://wallpaperaccess.com/full/465780.jpg";
 const image5 =
 	"https://assets-prd.formulae.cloud/-/media/images/news/2020/september/formula-e-grid-shot-start.jpg?modified=20200924095253&cx=0.5&cy=0.8&cw=1440&ch=707&hash=A789C5D311486689FF8C7780CA9E3249";
 
-const useStyles = makeStyles((theme) => ({
-	root: {},
-
-	filter: {},
-
-	media: {
-		height: "94vh",
-		textAlign: "right",
-		paddingTop: "86vh",
-		paddingRight: "5px",
-		borderRadius: "4px"
-	},
-	side: {
-		height: "94vh"
-	},
-	textBtn: {
-		color: "#FFFFFF",
-		fontSize: "13px",
-
-		"&:hover": {
-			color: "#FFA500"
-		},
-		"&:active": {
-			color: "#FFFFFF"
-		}
-	}
-}));
-
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
 	product: state.productsData.product,
@@ -86,6 +58,34 @@ const ProductDetails = ({}) => {
 	const [compareWatches, setCompareWatches] = useState(false);
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("xs"));
+
+	const useStyles = makeStyles((theme) => ({
+		root: {},
+
+		filter: {},
+
+		media: {
+			height: "94vh",
+			textAlign: "right",
+			paddingTop: "86vh",
+			paddingRight: "5px",
+			borderRadius: "4px"
+		},
+		side: {
+			height: isMatch ? null : "94vh"
+		},
+		textBtn: {
+			color: "#FFFFFF",
+			fontSize: "13px",
+
+			"&:hover": {
+				color: "#FFA500"
+			},
+			"&:active": {
+				color: "#FFFFFF"
+			}
+		}
+	}));
 
 	const classes = useStyles();
 

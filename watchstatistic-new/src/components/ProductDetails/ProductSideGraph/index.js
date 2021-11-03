@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
 import Draggable from "react-draggable";
 import { RiDragDropLine } from "react-icons/ri";
+import { useParams } from "react-router";
 
 import CategoriesLegend from "../CategoriesLegend";
 
@@ -70,6 +71,7 @@ const ProductSidePanel = ({}) => {
 	});
 	const [targetVote, setTargetVote] = useState(false);
 	const [update, setUpdate] = useState(true);
+	const { productID } = useParams();
 
 	const handleCloseVote = () => {
 		setAnchorVote(null);
@@ -97,6 +99,7 @@ const ProductSidePanel = ({}) => {
 		setTargetVote,
 		handleVisualTargetVote,
 		targetVote,
+		handleCloseVote,
 		handleUpdate
 	};
 
@@ -272,56 +275,62 @@ const ProductSidePanel = ({}) => {
 						<Typography
 							fontWeight={600}
 							align="center"
-							style={{ width: "100%" }}
+							style={{ width: "100%", color: "#ffffff" }}
 						>
-							Total Score: {avgTotal}
+							Score: {avgTotal}
+						</Typography>
+
+						<Typography align="center" style={{ width: "100%" }}>
+							Own: {avgVotationsOwn} Votes: {numberVotesOwn}
 						</Typography>
 						<Typography align="center" style={{ width: "100%" }}>
-							Votes From Owners: {numberVotesOwn}
+							Not Own: {avgVotationsNotOwn} Votes: {numberVotesNotOwn}
 						</Typography>
-						<Typography align="center" style={{ width: "100%" }}>
-							Score Owners: {avgVotationsOwn}
-						</Typography>
-						<Typography align="center" style={{ width: "100%" }}>
-							Votes From Non Owners: {numberVotesNotOwn}
-						</Typography>
-						<Typography align="center" style={{ width: "100%" }}>
-							Score Non Owners: {avgVotationsNotOwn}
-						</Typography>
-						{currentUser && (
+						<Grid item style={{}}>
+							{currentUser && !currentUser.userVotes.includes(productID) && (
+								<Button
+									className={classes.textBtn}
+									style={{ width: "50%" }}
+									aria-controls="vote"
+									onClick={(e) => {
+										setAnchorVote(e.currentTarget);
+									}}
+									disableRipple
+								>
+									Vote
+								</Button>
+							)}
+							{currentUser && currentUser.userVotes.includes(productID) && (
+								<Button
+									className={classes.textBtn}
+									style={{ width: "50%" }}
+									disableRipple
+								>
+									Already Voted
+								</Button>
+							)}
+							{!currentUser && (
+								<Button
+									className={classes.textBtn}
+									style={{ width: "50%" }}
+									aria-controls="vote"
+									disableRipple
+								>
+									Login to Vote
+								</Button>
+							)}
 							<Button
 								className={classes.textBtn}
 								style={{ width: "50%" }}
-								aria-controls="vote"
+								aria-controls="legendVote"
 								onClick={(e) => {
-									setAnchorVote(e.currentTarget);
+									setAnchorLegendVote(e.currentTarget);
 								}}
 								disableRipple
 							>
-								Vote
+								Categories
 							</Button>
-						)}
-						{!currentUser && (
-							<Button
-								className={classes.textBtn}
-								style={{ width: "50%" }}
-								aria-controls="vote"
-								disableRipple
-							>
-								Login to Vote
-							</Button>
-						)}
-						<Button
-							className={classes.textBtn}
-							style={{ width: "50%" }}
-							aria-controls="legendVote"
-							onClick={(e) => {
-								setAnchorLegendVote(e.currentTarget);
-							}}
-							disableRipple
-						>
-							Categories
-						</Button>
+						</Grid>
 					</Box>
 				</Box>
 				<Draggable handle="#imHandle">

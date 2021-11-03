@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
@@ -7,6 +7,7 @@ import { TableCell, TableRow } from "@material-ui/core";
 import { useHistory } from "react-router";
 import { VscGraph } from "react-icons/vsc";
 import { ImCross } from "react-icons/im";
+import { BiHide } from "react-icons/bi";
 
 import { removeCartItem } from "../../../redux/Cart/cart.actions";
 
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 const Item = (product) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const [view, setView] = useState(false);
 	const { productName, productThumbnail, reference, productBrand, productID } =
 		product;
 	const classes = useStyles();
@@ -53,7 +55,17 @@ const Item = (product) => {
 			<TableCell align="center">
 				<VscGraph color={product.color} style={{}} fontSize="1.5em" />{" "}
 			</TableCell>
-
+			<TableCell align="center">
+				<BiHide
+					color={!view ? "#ffffff66" : "#ffffff"}
+					style={{}}
+					fontSize="1.5em"
+					onClick={() => {
+						product.handleToggleView(product.pos);
+						setView(!view);
+					}}
+				/>{" "}
+			</TableCell>
 			<TableCell align="center">
 				<ImCross
 					fontSize="1em"

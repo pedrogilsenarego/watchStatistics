@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import RadarChart from "../RadarChart";
 import { useHistory } from "react-router";
 
@@ -33,6 +33,10 @@ const CompareWatches = () => {
 	const { cartItems } = useSelector(mapState);
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+	const [hide0, setHide0] = useState(false);
+	const [hide1, setHide1] = useState(false);
+	const [hide2, setHide2] = useState(false);
+	const [hide3, setHide3] = useState(false);
 
 	const handleClearCart = () => {
 		dispatch(clearCart());
@@ -64,30 +68,30 @@ const CompareWatches = () => {
 					data: cartItems[0] && mergeVotations(0),
 					label: cartItems[0] && cartItems[0].productName,
 
-					borderColor: "#42e6f5",
-					backgroundColor: "#42e6f566",
+					borderColor: hide0 ? "#42e6f51A" : "#42e6f5",
+					backgroundColor: hide0 ? "#42e6f51A" : "#42e6f566",
 					fill: true
 				},
 				{
 					data: cartItems[1] && mergeVotations(1),
 					label: cartItems[1] && cartItems[1].productName,
-					borderColor: "#E5F517",
+					borderColor: hide1 ? "#E5F5171A" : "#E5F517",
 					fill: true,
-					backgroundColor: "#E5F51766"
+					backgroundColor: hide1 ? "#E5F5171A" : "#E5F51766"
 				},
 				{
 					data: cartItems[2] && mergeVotations(2),
 					label: cartItems[2] && cartItems[2].productName,
-					borderColor: "#D221EA",
+					borderColor: hide2 ? "#ffffff1A" : "#ffffff",
 					fill: true,
-					backgroundColor: "#D221EA66"
+					backgroundColor: hide2 ? "#ffffff1A" : "#ffffff66"
 				},
 				{
 					data: cartItems[3] && mergeVotations(3),
 					label: cartItems[3] && cartItems[3].productName,
-					borderColor: "#DC0D0D",
+					borderColor: hide3 ? "#DC0D0D1A" : "#DC0D0D",
 					fill: true,
-					backgroundColor: "#DC0D0D66"
+					backgroundColor: hide3 ? "#DC0D0D1A" : "#DC0D0D66"
 				}
 			]
 		},
@@ -182,6 +186,13 @@ const CompareWatches = () => {
 		n--;
 	}
 
+	const handleToggleView = (pos) => {
+		if (pos === 0) setHide0(!hide0);
+		if (pos === 1) setHide1(!hide1);
+		if (pos === 2) setHide2(!hide2);
+		if (pos === 3) setHide3(!hide3);
+	};
+
 	return (
 		<Grid
 			container
@@ -210,6 +221,9 @@ const CompareWatches = () => {
 											Label
 										</TableCell>
 										<TableCell align="center" style={{ fontSize: "15px" }}>
+											Hide
+										</TableCell>
+										<TableCell align="center" style={{ fontSize: "15px" }}>
 											Remove
 										</TableCell>
 									</TableRow>
@@ -222,9 +236,14 @@ const CompareWatches = () => {
 												: item === cartItems[1]
 												? "#E5F517"
 												: item === cartItems[2]
-												? "#D221EA"
+												? "#ffffff"
 												: "#DC0D0D";
-										const configItem = { ...item, color: color };
+										const configItem = {
+											...item,
+											color: color,
+											handleToggleView,
+											pos: pos
+										};
 										return <Item {...configItem} />;
 									})}
 								</TableBody>
