@@ -189,7 +189,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 					</TableContainer>
 				</Grid>
 				<Grid item xs={12} md={4}>
-					<Paper style={{ height: "100%" }}>
+					<Paper style={{ height: "100%", backgroundColor: "black" }}>
 						<CardMedia
 							style={{ height: isMatch ? "80vh" : "100%", borderRadius: "4px" }}
 							image={data[0].productThumbnail[0]}
