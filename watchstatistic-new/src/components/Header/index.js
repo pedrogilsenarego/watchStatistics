@@ -291,10 +291,21 @@ const Header = (props) => {
 				anchorEl={anchorSupport}
 				open={Boolean(anchorSupport)}
 			>
-				<MenuItem onClick={handleCloseSupportMenu}>Contact Us</MenuItem>
-				<MenuItem onClick={handleCloseSupportMenu}>Privacy Policy</MenuItem>
-				<MenuItem onClick={handleCloseSupportMenu}>FAQ</MenuItem>
-				<MenuItem onClick={handleCloseSupportMenu}>
+				<MenuItem disabled onClick={handleCloseSupportMenu}>
+					Contact Us
+				</MenuItem>
+				<MenuItem disabled onClick={handleCloseSupportMenu}>
+					Privacy Policy
+				</MenuItem>
+				<MenuItem
+					onClick={() => {
+						handleCloseSupportMenu();
+						history.push("/about/FAQ");
+					}}
+				>
+					FAQ
+				</MenuItem>
+				<MenuItem disabled onClick={handleCloseSupportMenu}>
 					Terms and Conditions
 				</MenuItem>
 			</Menu>
@@ -385,7 +396,6 @@ const Header = (props) => {
 				]}
 
 				<MenuItem
-					disabled
 					aria-controls="support"
 					disableRipple
 					className={classes.textBtn}

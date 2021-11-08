@@ -8,7 +8,8 @@ import {
 	TableCell,
 	TableBody,
 	Grid,
-	Paper
+	Paper,
+	CardMedia
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,7 +69,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 
 	return (
 		<div>
-			<Grid container className={classes.container} style={{ padding: "20px" }}>
+			<Grid container spacing={1} style={{ padding: "20px" }}>
 				<Grid item xs={12} md={8}>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
 						<Table aria-label="simple table" size="small">
@@ -181,6 +182,11 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 							</TableBody>
 						</Table>
 					</TableContainer>
+				</Grid>
+				<Grid item xs={12} md={4}>
+					<Paper style={{ height: "200px", marginTop: "10px" }}>
+						<CardMedia image={data[0].productThumbnail[0]}></CardMedia>
+					</Paper>
 				</Grid>
 			</Grid>
 		</div>

@@ -53,7 +53,6 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 			<Button
 				aria-controls="support"
 				disableRipple
-				disabled
 				className={classes.textBtn}
 				activeStyle={activeStyle}
 				onClick={(e) => handleSupportOpen(e)}

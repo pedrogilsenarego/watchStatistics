@@ -105,6 +105,7 @@ const AddWatchForm = () => {
 	const [productDescPreview, setProductDescPreview] = useState("");
 	const [productAdditionalDataPreview, setProductAdditionalDataPreview] =
 		useState("");
+	const [helperDescription, setHelperDescription] = useState(false);
 
 	const { currentUser } = useSelector(mapState);
 	const { userRoles } = currentUser;
@@ -394,9 +395,28 @@ const AddWatchForm = () => {
 											label="Description from Watch*"
 										></Multiline>
 										<Button size="small">
-											<AiOutlineQuestionCircle fontSize="1.5em" />
+											<AiOutlineQuestionCircle
+												onClick={() => setHelperDescription(!helperDescription)}
+												fontSize="1.5em"
+											/>
 										</Button>
 									</Grid>
+									{helperDescription && (
+										<Grid item xs={12}>
+											<Typography
+												style={{ paddingLeft: "15px", fontSize: "12px" }}
+											>
+												To set up the description text use the following
+												procedure: <br />
+												1. When using the text from a source put the text
+												between "" and the name of the Source after
+												<br />
+												2. To make any part of text bold wrap in the tag
+												&lt;b&gt;&lt;/b&gt;, to use a line break use the tag
+												&lt;br&gt;
+											</Typography>
+										</Grid>
+									)}
 									<Grid item xs={12}>
 										<Typography>References</Typography>
 									</Grid>

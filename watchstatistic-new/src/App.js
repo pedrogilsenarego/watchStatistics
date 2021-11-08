@@ -16,7 +16,7 @@ import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
 import ProductDetailsPreview from "./pages/ProductDetailsPreview";
-import Cart from "./pages/Cart";
+import FAQ from "./pages/FAQ";
 import Watchstatistics from "./pages/Watchstatistics";
 import AddWatch from "./pages/Watchstatistics/AddWatch";
 import WatchBoxes from "./pages/WatchBoxes";
@@ -105,10 +105,10 @@ const App = (props) => {
 					)}
 				/>
 				<Route
-					path="/cart"
+					path="/about/FAQ"
 					render={() => (
 						<MainLayout>
-							<Cart />
+							<FAQ />
 						</MainLayout>
 					)}
 				/>
