@@ -8,7 +8,10 @@ import {
 	TableCell,
 	TableBody,
 	Grid,
+	Typography,
 	Paper,
+	useMediaQuery,
+	useTheme,
 	CardMedia
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,6 +28,8 @@ const mapState = (state) => ({
 const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 	const pageSize = 10;
 
 	const { products, currentUser } = useSelector(mapState);
@@ -71,7 +76,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 		<div>
 			<Grid container spacing={1} style={{ padding: "20px" }}>
 				<Grid item xs={12} md={8}>
-					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
+					<TableContainer component={Paper}>
 						<Table aria-label="simple table" size="small">
 							<TableHead className={classes.tableHead}>
 								<TableRow>
@@ -184,8 +189,17 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 					</TableContainer>
 				</Grid>
 				<Grid item xs={12} md={4}>
-					<Paper style={{ height: "200px", marginTop: "10px" }}>
-						<CardMedia image={data[0].productThumbnail[0]}></CardMedia>
+					<Paper style={{ height: "100%" }}>
+						<CardMedia
+							style={{ height: isMatch ? "80vh" : "100%", borderRadius: "4px" }}
+							image={data[0].productThumbnail[0]}
+						>
+							<Grid container alignItems="center" justifyContent="center">
+								<Typography style={{ color: "#ffffff66" }}>
+									Check here the top voted watch
+								</Typography>
+							</Grid>
+						</CardMedia>
 					</Paper>
 				</Grid>
 			</Grid>
@@ -194,3 +208,5 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 };
 
 export default MainBody;
+
+/* ; */

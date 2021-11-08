@@ -9,6 +9,9 @@ import {
 	TableBody,
 	Grid,
 	Paper,
+	useTheme,
+	useMediaQuery,
+	CardMedia,
 	Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -38,6 +41,8 @@ const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const pageSize = 10;
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
 	const { products, currentUser } = useSelector(mapState);
 
@@ -68,9 +73,9 @@ const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 	return (
 		<div>
 			<Typography>{loadedLatest}</Typography>
-			<Grid container className={classes.container} style={{ padding: "20px" }}>
+			<Grid container spacing={1} style={{ padding: "20px" }}>
 				<Grid item xs={12} md={8}>
-					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
+					<TableContainer component={Paper}>
 						<Table aria-label="simple table" size="small">
 							<TableHead className={classes.tableHead}>
 								<TableRow>
@@ -177,6 +182,20 @@ const LatestAdditions = ({ handleLoadedLatest, loadedLatest }) => {
 							</TableBody>
 						</Table>
 					</TableContainer>
+				</Grid>
+				<Grid item xs={12} md={4}>
+					<Paper style={{ height: "100%" }}>
+						<CardMedia
+							style={{ height: isMatch ? "80vh" : "100%", borderRadius: "4px" }}
+							image={data[0].productThumbnail[0]}
+						>
+							<Grid container alignItems="center" justifyContent="center">
+								<Typography style={{ color: "#ffffff66" }}>
+									Check here the latest addition
+								</Typography>
+							</Grid>
+						</CardMedia>
+					</Paper>
 				</Grid>
 			</Grid>
 		</div>
