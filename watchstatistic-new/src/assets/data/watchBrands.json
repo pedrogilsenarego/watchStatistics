@@ -9,6 +9,7 @@
 		{ "name": "Bell & Ross", "value": "Bell & Ross" },
 		{ "name": "Blancpain", "value": "Blancpain" },
 		{ "name": "Borel", "value": "Borel" },
+		{ "name": "Breitling", "value": "Breitling" },
 		{ "name": "Bvlgari", "value": "Bvlgari" },
 		{ "name": "Bulova", "value": "Bulova" },
 		{ "name": "Cartier", "value": "Cartier" },
@@ -21,6 +22,7 @@
 		{ "name": "F.P.Journe", "value": "F.P.Journe" },
 		{ "name": "Girrard-Perregaux", "value": "Girrard-Perregaux" },
 		{ "name": "GrandSeiko", "value": "Grandseiko" },
+		{ "name": "H.Moser & Cie", "value": "H.Moser & Cie" },
 		{ "name": "Hamilton", "value": "Hamilton" },
 		{ "name": "Hublot", "value": "hublot" },
 		{ "name": "Isotope", "value": "isotope" },
@@ -30,6 +32,7 @@
 		{ "name": "Laurent Ferrier", "value": "Laurent Ferrier" },
 		{ "name": "Longines", "value": "Longines" },
 		{ "name": "Lorier", "value": "Lorier" },
+		{ "name": "Ming", "value": "Ming" },
 		{ "name": "Nixon", "value": "Nixon" },
 		{ "name": "Omega", "value": "Omega" },
 		{ "name": "Orient", "value": "Orient" },
@@ -49,6 +52,7 @@
 		{ "name": "Urwerk", "value": "Urwerk" },
 		{ "name": "Universal Geneve", "value": "Universal Geneve" },
 		{ "name": "Vacheron Constatin", "value": "Vacheron Constatin" },
+		{ "name": "Yema", "value": "Yema" },
 		{ "name": "Zenith", "value": "Zenith" },
 		{ "name": "Zodiac", "value": "Zodiac" }
 	]

@@ -195,7 +195,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 							image={data[0].productThumbnail[0]}
 						>
 							<Grid container alignItems="center" justifyContent="center">
-								<Typography style={{ color: "#ffffff66" }}>
+								<Typography style={{ color: "#ffffff66", paddingTop: "10px" }}>
 									Check here the top voted watch
 								</Typography>
 							</Grid>

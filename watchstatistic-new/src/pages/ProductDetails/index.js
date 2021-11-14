@@ -53,7 +53,7 @@ const ProductDetails = ({}) => {
 	const dispatch = useDispatch();
 	const { productID } = useParams();
 	const history = useHistory();
-	const { product, cartItems } = useSelector(mapState);
+	const { product, currentUser, cartItems } = useSelector(mapState);
 	const [mainImage, setMainImage] = useState(null);
 	const [compareWatches, setCompareWatches] = useState(false);
 	const theme = useTheme();
@@ -129,12 +129,14 @@ const ProductDetails = ({}) => {
 	};
 
 	const bgImage = () => {
-		if (productBackground) return productBackground;
-		if (productCategory === "field") return image2;
-		if (productCategory === "divers") return image1;
-		if (productCategory === "dress") return image3;
-		if (productCategory === "pilot") return image4;
-		if (productCategory === "racing") return image5;
+		if (!currentUser.backgroundImageOff) {
+			if (productBackground) return productBackground;
+			if (productCategory === "Field") return image2;
+			if (productCategory === "Divers") return image1;
+			if (productCategory === "Dress") return image3;
+			if (productCategory === "Pilot") return image4;
+			if (productCategory === "Racing") return image5;
+		} else return;
 	};
 
 	if (!productThumbnail || !productName) return null;

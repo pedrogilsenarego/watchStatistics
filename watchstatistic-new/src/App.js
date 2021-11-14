@@ -143,9 +143,9 @@ const App = (props) => {
 					path="/dashboard"
 					render={() => (
 						<WithAuth>
-							<DashBoardLayout>
+							<MainLayout>
 								<Dashboard />
-							</DashBoardLayout>
+							</MainLayout>
 						</WithAuth>
 					)}
 				/>
