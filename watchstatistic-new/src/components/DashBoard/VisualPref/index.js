@@ -14,6 +14,7 @@ const VisualPref = (props) => {
 	const { currentUser } = useSelector(mapState);
 
 	const configData = {
+		...currentUser,
 		userID: currentUser.id,
 		backgroundImageOff: currentUser.backgroundImageOff ? false : true
 	};

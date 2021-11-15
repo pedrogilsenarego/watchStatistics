@@ -38,6 +38,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				users: action.payload
 			};
+		case userTypes.SET_PREFERENCES:
+			return {
+				...state,
+				currentUser: action.payload
+			};
 		default:
 			return state;
 	}
