@@ -50,7 +50,6 @@ export const googleSignInStart = () => ({
 	type: userTypes.GOOGLE_SIGN_IN_START
 });
 
-//implementations
 export const fetchUsersStart = () => ({
 	type: userTypes.FETCH_USERS_START
 });
@@ -58,4 +57,10 @@ export const fetchUsersStart = () => ({
 export const setUsers = (usersData) => ({
 	type: userTypes.SET_USERS,
 	payload: usersData
+});
+
+//implementations
+export const updateUserPreferences = (preferencesData) => ({
+	type: userTypes.SET_PREFERENCES,
+	payload: preferencesData
 });
