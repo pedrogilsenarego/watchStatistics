@@ -37,34 +37,41 @@ const Dashboard = (props) => {
 			style={{
 				marginTop: "120px",
 				paddingTop: "20px",
-				backgroundColor: "#196B91"
+				backgroundColor: "#196B91",
+				borderRadius: "4px"
 			}}
 		>
-			<Grid container>
+			<Grid container spacing={1}>
 				<Grid item md={2}>
-					<Grid item xs={12}>
-						<Button
-							onClick={() => {
-								handleResetState();
-								setVisualPref(true);
-							}}
-						>
-							Visual Preferences
-						</Button>
-					</Grid>
-					<Grid item xs={12}>
-						<Button
-							onClick={() => {
-								handleResetState();
-								setVoteHistory(true);
-							}}
-						>
-							Vote History
-						</Button>
-					</Grid>
+					<Container
+						style={{ backgroundColor: "#154A67", borderRadius: "4px" }}
+					>
+						<Grid item xs={12}>
+							<Button
+								style={{ color: visualPref ? "orange" : "white" }}
+								onClick={() => {
+									handleResetState();
+									setVisualPref(true);
+								}}
+							>
+								Visual Preferences
+							</Button>
+						</Grid>
+						<Grid item xs={12}>
+							<Button
+								style={{ color: voteHistory ? "orange" : "white" }}
+								onClick={() => {
+									handleResetState();
+									setVoteHistory(true);
+								}}
+							>
+								Vote History
+							</Button>
+						</Grid>
+					</Container>
 				</Grid>
 				<Grid item md={10}>
-					<Box style={{ backgroundColor: "blue" }}>
+					<Box style={{ backgroundColor: "#154A67", borderRadius: "4px" }}>
 						{visualPref && <VisualPref />}
 						{voteHistory && <OrderHistory orders={orderHistory} />}
 					</Box>

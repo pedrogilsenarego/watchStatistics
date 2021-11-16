@@ -108,7 +108,7 @@ const AddWatchForm = () => {
 	const [helperDescription, setHelperDescription] = useState(false);
 
 	const { currentUser } = useSelector(mapState);
-	const { userRoles } = currentUser;
+	const { userRoles, displayName } = currentUser;
 	const admin = userRoles.includes("admin") ? true : false;
 
 	const handleFormSubmit = (e) => {
@@ -172,7 +172,8 @@ const AddWatchForm = () => {
 			avgVotationsOwn: 0,
 			avgVotationsNotOwn: 0,
 			votationsNonOwn: [0, 0, 0, 0, 0, 0, 0],
-			votationsOwn: [0, 0, 0, 0, 0, 0, 0]
+			votationsOwn: [0, 0, 0, 0, 0, 0, 0],
+			userID: displayName
 		};
 		if (productionYears === "-") delete values.productionYears;
 

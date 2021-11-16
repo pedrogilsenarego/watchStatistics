@@ -72,7 +72,8 @@ const ProductSideList = ({}) => {
 		caliber,
 		productPriceBrackets,
 		waterResistance,
-		productionYears
+		productionYears,
+		userID
 	} = product;
 	const classes = useStyles();
 
@@ -344,6 +345,11 @@ const ProductSideList = ({}) => {
 					</TableContainer>
 				</Form>
 			</Formik>
+			{userID && (
+				<Typography style={{ paddingLeft: "10px", color: "#ffffff66" }}>
+					Submited by {userID}
+				</Typography>
+			)}
 		</Box>
 	);
 };
