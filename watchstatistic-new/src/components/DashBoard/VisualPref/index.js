@@ -2,7 +2,9 @@ import { Typography } from "@material-ui/core";
 import React from "react";
 import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
+
+import Switch from "@mui/material/Switch";
+
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserPreferences } from "../../../redux/User/user.actions";
 
@@ -17,36 +19,45 @@ const VisualPref = (props) => {
 	const configData = {
 		...currentUser,
 		userID: currentUser.id,
-		backgroundImageOff: currentUser.backgroundImageOff ? false : true
+		backgroundImageOff: currentUser.backgroundImageOff ? false : true,
+		flag: "backgroundImage"
 	};
 	const handleSetImageBackGround = () => {
 		dispatch(updateUserPreferences(configData));
 	};
 
+	const label = { inputProps: { "aria-label": "Switch demo" } };
+
 	return (
 		<Container>
-			<Typography>Global Preferences</Typography>
-			<Divider style={{ width: "80%", background: "white" }} />
-			<Typography style={{ paddingTop: "200px" }}>Watch Details</Typography>
-			<Divider style={{ width: "80%", background: "white" }} />
-			<Container style={{ paddingTop: "20px", marginBottom: "20px" }}>
+			<Typography style={{ paddingTop: "20px" }}>Watch Details</Typography>
+			<Typography style={{ color: "#ffffffBF" }}>
+				You can change if the background image is shown when visualizing a watch
+			</Typography>
+			<Divider style={{ width: "100%", background: "#ffffff66" }} />
+			<Container
+				style={{
+					marginTop: "20px",
+					paddingTop: "20px",
+					paddingBottom: "20px",
+					display: "flex",
+					alignItems: "center",
+					backgroundColor: "#ffffff66"
+				}}
+			>
+				<Switch
+					onClick={() => {
+						handleSetImageBackGround();
+					}}
+					checked={!currentUser.backgroundImageOff}
+					{...label}
+					color="primary"
+				/>
 				{!currentUser.backgroundImageOff && (
-					<Button
-						onClick={() => {
-							handleSetImageBackGround();
-						}}
-					>
-						Set Background Image Off
-					</Button>
+					<Typography>Background Image is currently On</Typography>
 				)}
 				{currentUser.backgroundImageOff && (
-					<Button
-						onClick={() => {
-							handleSetImageBackGround();
-						}}
-					>
-						Set Background Image On
-					</Button>
+					<Typography>Background Image is currently Off</Typography>
 				)}
 			</Container>
 		</Container>

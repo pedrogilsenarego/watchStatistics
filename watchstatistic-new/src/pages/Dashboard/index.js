@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserOrderHistory } from "./../../redux/Orders/orders.actions";
 import OrderHistory from "./../../components/OrderHistory";
 import VisualPref from "./../../components/DashBoard/VisualPref";
+import UserPref from "./../../components/DashBoard/UserPref";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 
 const mapState = ({ user, ordersData }) => ({
 	currentUser: user.currentUser,
@@ -16,7 +16,8 @@ const mapState = ({ user, ordersData }) => ({
 const Dashboard = (props) => {
 	const dispatch = useDispatch();
 	const { currentUser, orderHistory } = useSelector(mapState);
-	const [visualPref, setVisualPref] = useState(true);
+	const [userPref, setUserPref] = useState(true);
+	const [visualPref, setVisualPref] = useState(false);
 	const [voteHistory, setVoteHistory] = useState(false);
 
 	useEffect(
@@ -28,56 +29,56 @@ const Dashboard = (props) => {
 	);
 
 	const handleResetState = () => {
+		setUserPref(false);
 		setVoteHistory(false);
 		setVisualPref(false);
 	};
 
 	return (
-		<Container
-			style={{
-				marginTop: "120px",
-				paddingTop: "20px",
-				backgroundColor: "#196B91",
-				borderRadius: "4px"
-			}}
+		<Grid
+			container
+			spacing={2}
+			style={{ marginTop: "100px" }}
+			justifyContent="center"
 		>
-			<Grid container spacing={1}>
-				<Grid item md={2}>
-					<Container
-						style={{ backgroundColor: "#154A67", borderRadius: "4px" }}
+			<Grid item xs={12}>
+				<Container style={{ backgroundColor: "#154A6799" }}>
+					<Button
+						style={{ color: userPref ? "orange" : "white" }}
+						onClick={() => {
+							handleResetState();
+							setUserPref(true);
+						}}
 					>
-						<Grid item xs={12}>
-							<Button
-								style={{ color: visualPref ? "orange" : "white" }}
-								onClick={() => {
-									handleResetState();
-									setVisualPref(true);
-								}}
-							>
-								Visual Preferences
-							</Button>
-						</Grid>
-						<Grid item xs={12}>
-							<Button
-								style={{ color: voteHistory ? "orange" : "white" }}
-								onClick={() => {
-									handleResetState();
-									setVoteHistory(true);
-								}}
-							>
-								Vote History
-							</Button>
-						</Grid>
-					</Container>
-				</Grid>
-				<Grid item md={10}>
-					<Box style={{ backgroundColor: "#154A67", borderRadius: "4px" }}>
-						{visualPref && <VisualPref />}
-						{voteHistory && <OrderHistory orders={orderHistory} />}
-					</Box>
-				</Grid>
+						User Preferences
+					</Button>
+					<Button
+						style={{ color: visualPref ? "orange" : "white" }}
+						onClick={() => {
+							handleResetState();
+							setVisualPref(true);
+						}}
+					>
+						Visual Preferences
+					</Button>
+
+					<Button
+						style={{ color: voteHistory ? "orange" : "white" }}
+						onClick={() => {
+							handleResetState();
+							setVoteHistory(true);
+						}}
+					>
+						Vote History
+					</Button>
+				</Container>
 			</Grid>
-		</Container>
+			<Grid item xs={12} md={6}>
+				{userPref && <UserPref />}
+				{visualPref && <VisualPref />}
+				{voteHistory && <OrderHistory orders={orderHistory} />}
+			</Grid>
+		</Grid>
 	);
 };
 
