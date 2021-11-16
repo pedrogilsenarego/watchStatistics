@@ -128,7 +128,10 @@ const ProductSideList = ({}) => {
 						container
 					>
 						{!submitDetails && (
-							<Typography variant={"h6"} style={{ paddingLeft: "10px" }}>
+							<Typography
+								variant={"h6"}
+								style={{ paddingLeft: "10px", color: "#ffffffBF" }}
+							>
 								{submitedDetails ? "Details submited for approval" : "Details"}
 							</Typography>
 						)}

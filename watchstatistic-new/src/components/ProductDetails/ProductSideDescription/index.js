@@ -39,7 +39,10 @@ const ProductSideDescription = ({}) => {
 				borderRadius="10px"
 				sx={{ minHeight: "70.4vh" }}
 			>
-				<Typography variant={"h6"} style={{ paddingLeft: "10px" }}>
+				<Typography
+					variant={"h6"}
+					style={{ paddingLeft: "10px", color: "#ffffff" }}
+				>
 					Description
 				</Typography>
 				<Box
@@ -62,7 +65,8 @@ const ProductSideDescription = ({}) => {
 							paddingBottom: "10px",
 							maxHeight: "60vh",
 							position: "absolute",
-							overflow: "scroll"
+							overflow: "scroll",
+							color: "#ffffffBF"
 						}}
 					/>
 				</Box>

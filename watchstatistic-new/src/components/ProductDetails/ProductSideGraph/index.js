@@ -280,10 +280,16 @@ const ProductSidePanel = ({}) => {
 							Score: {avgTotal}
 						</Typography>
 
-						<Typography align="center" style={{ width: "100%" }}>
+						<Typography
+							align="center"
+							style={{ width: "100%", color: "#ffffffBF" }}
+						>
 							Own: {avgVotationsOwn} Votes: {numberVotesOwn}
 						</Typography>
-						<Typography align="center" style={{ width: "100%" }}>
+						<Typography
+							align="center"
+							style={{ width: "100%", color: "#ffffffBF" }}
+						>
 							Not Own: {avgVotationsNotOwn} Votes: {numberVotesNotOwn}
 						</Typography>
 						<Grid item style={{}}>

@@ -43,9 +43,17 @@ const App = (props) => {
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 
-	useEffect(() => {
+	/* useEffect(() => {
 		dispatch(checkUserSession());
-	});
+	}); */
+
+	useEffect(
+		() => {
+			dispatch(checkUserSession());
+		},
+		// eslint-disable-next-line
+		[]
+	);
 
 	return (
 		<ThemeProvider
