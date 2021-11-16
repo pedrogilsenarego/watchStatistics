@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserOrderHistory } from "./../../redux/Orders/orders.actions";
+import React, { useState } from "react";
+
 import OrderHistory from "./../../components/OrderHistory";
 import VisualPref from "./../../components/DashBoard/VisualPref";
 import UserPref from "./../../components/DashBoard/UserPref";
@@ -8,25 +7,10 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
-const mapState = ({ user, ordersData }) => ({
-	currentUser: user.currentUser,
-	orderHistory: ordersData.orderHistory.data
-});
-
 const Dashboard = (props) => {
-	const dispatch = useDispatch();
-	const { currentUser, orderHistory } = useSelector(mapState);
 	const [userPref, setUserPref] = useState(true);
 	const [visualPref, setVisualPref] = useState(false);
 	const [voteHistory, setVoteHistory] = useState(false);
-
-	useEffect(
-		() => {
-			dispatch(getUserOrderHistory(currentUser.id));
-		},
-		// eslint-disable-next-line
-		[]
-	);
 
 	const handleResetState = () => {
 		setUserPref(false);
@@ -76,7 +60,7 @@ const Dashboard = (props) => {
 			<Grid item xs={12} md={6}>
 				{userPref && <UserPref />}
 				{visualPref && <VisualPref />}
-				{voteHistory && <OrderHistory orders={orderHistory} />}
+				{voteHistory && <OrderHistory />}
 			</Grid>
 		</Grid>
 	);
