@@ -180,141 +180,145 @@ const ProductVote = ({
 	return (
 		<FormControl component="fieldset">
 			<Grid container>
-				<RadioGroup
-					aria-label="gender"
-					value={ownership}
-					onChange={(event) => {
-						setOwnership(event.target.value);
-					}}
-				>
-					<FormControlLabel
-						value="Own"
-						control={<Radio />}
-						label="I own the watch"
-					/>
-					<FormControlLabel
-						value="Not Own"
-						control={<Radio />}
-						label="I do not own the watch"
-					/>
-				</RadioGroup>
-				<ThemeProvider theme={muiTheme}>
-					<Typography id="discrete-slider" gutterBottom>
-						Aesthetics
-					</Typography>
-					<Slider
-						className={classes.slider}
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						name="quality"
-						onChange={(event, newValue) => {
-							setCategories({ ...categories, quality: newValue });
-							handleTargetVote(newValue, "quality");
+				<Grid item xs={12}>
+					<RadioGroup
+						aria-label="gender"
+						value={ownership}
+						onChange={(event) => {
+							setOwnership(event.target.value);
 						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						Price over Quality
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						name="price"
-						onChange={(event, newValue) => {
-							setCategories({ ...categories, price: newValue });
-							handleTargetVote(newValue, "price");
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						Brand
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setCategories({ ...categories, brand: newValue });
-							handleTargetVote(newValue, "brand");
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						Refinement
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setCategories({ ...categories, refinement: newValue });
-							handleTargetVote(newValue, "refinement");
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						History
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setCategories({ ...categories, history: newValue });
-							handleTargetVote(newValue, "history");
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						Engineering
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setCategories({ ...categories, engineering: newValue });
-							handleTargetVote(newValue, "engineering");
-						}}
-					/>
-					<Typography id="discrete-slider" gutterBottom>
-						X-Factor
-					</Typography>
-					<Slider
-						defaultValue={0}
-						aria-labelledby="discrete-slider"
-						valueLabelDisplay="auto"
-						step={1}
-						marks
-						min={0}
-						max={10}
-						onChange={(event, newValue) => {
-							setCategories({ ...categories, xFactor: newValue });
-							handleTargetVote(newValue, "xFactor");
-						}}
-					/>
-				</ThemeProvider>
+					>
+						<FormControlLabel
+							value="Own"
+							control={<Radio />}
+							label="I own the watch"
+						/>
+						<FormControlLabel
+							value="Not Own"
+							control={<Radio />}
+							label="I do not own the watch"
+						/>
+					</RadioGroup>
+				</Grid>
+				<Grid item xs={12}>
+					<ThemeProvider theme={muiTheme}>
+						<Typography id="discrete-slider" gutterBottom>
+							Aesthetics
+						</Typography>
+						<Slider
+							className={classes.slider}
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							name="quality"
+							onChange={(event, newValue) => {
+								setCategories({ ...categories, quality: newValue });
+								handleTargetVote(newValue, "quality");
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							Price over Quality
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							name="price"
+							onChange={(event, newValue) => {
+								setCategories({ ...categories, price: newValue });
+								handleTargetVote(newValue, "price");
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							Brand
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setCategories({ ...categories, brand: newValue });
+								handleTargetVote(newValue, "brand");
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							Refinement
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setCategories({ ...categories, refinement: newValue });
+								handleTargetVote(newValue, "refinement");
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							History
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setCategories({ ...categories, history: newValue });
+								handleTargetVote(newValue, "history");
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							Engineering
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setCategories({ ...categories, engineering: newValue });
+								handleTargetVote(newValue, "engineering");
+							}}
+						/>
+						<Typography id="discrete-slider" gutterBottom>
+							X-Factor
+						</Typography>
+						<Slider
+							defaultValue={0}
+							aria-labelledby="discrete-slider"
+							valueLabelDisplay="auto"
+							step={1}
+							marks
+							min={0}
+							max={10}
+							onChange={(event, newValue) => {
+								setCategories({ ...categories, xFactor: newValue });
+								handleTargetVote(newValue, "xFactor");
+							}}
+						/>
+					</ThemeProvider>
+				</Grid>
 				{errors && Object.values(categories).includes("") && (
 					<Typography style={{ color: "red" }}>
 						You must choose all fields

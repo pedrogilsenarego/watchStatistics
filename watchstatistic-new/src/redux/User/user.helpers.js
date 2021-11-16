@@ -56,12 +56,13 @@ export const handleFetchUsers = () => {
 
 //implementations
 export const handleUpdateUserPreferences = (product) => {
-	const { userID, backgroundImageOff, displayName, flag } = product;
+	const { userID, backgroundImageOff, displayName, theme, flag } = product;
 
 	return new Promise((resolve, reject) => {
 		let ref = firestore.collection("users").doc(userID);
 
 		if (flag === "username") ref = ref.update({ displayName: displayName });
+		if (flag === "theme") ref = ref.update({ theme: theme });
 		if (flag === "backgroundImage")
 			ref = ref.update({ backgroundImageOff: backgroundImageOff });
 

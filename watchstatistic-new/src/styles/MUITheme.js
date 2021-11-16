@@ -1,20 +1,47 @@
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material/styles";
 
-const theme = createTheme({
+const darkTheme = createTheme({
 	palette: {
+		background: {
+			default: "#000000"
+		},
 		primary: {
 			main: "#36454f",
 			light: "#736d83",
 			dark: "#1e252b"
 		},
 		secondary: {
-			main: "#FFA500"
+			main: "#ffffff66"
 		},
 		text: {
-			secondary: "#dcdae0"
+			primary: "#ffffff",
+			faded: "#ffffffBF",
+			faded2: "#ffffff66"
 		},
 		type: "dark"
 	}
 });
 
-export default theme;
+const lightTheme = createTheme({
+	palette: {
+		background: {
+			default: "#ffffff"
+		},
+		primary: {
+			main: "#36454f",
+			light: "#B3B1B1",
+			dark: "#1e252b"
+		},
+		secondary: {
+			main: "#FFA500"
+		},
+		text: {
+			primary: "#000000",
+			faded: "#000000BF",
+			faded2: "#00000066"
+		},
+		type: "light"
+	}
+});
+
+export { darkTheme, lightTheme };

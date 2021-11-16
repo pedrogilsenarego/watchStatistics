@@ -7,6 +7,7 @@ import Switch from "@mui/material/Switch";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserPreferences } from "../../../redux/User/user.actions";
+import { useTheme } from "@material-ui/core";
 
 const mapState = ({ user }) => ({
 	currentUser: user.currentUser
@@ -15,6 +16,7 @@ const mapState = ({ user }) => ({
 const VisualPref = (props) => {
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
+	const theme = useTheme();
 
 	const configData = {
 		...currentUser,
@@ -26,15 +28,27 @@ const VisualPref = (props) => {
 		dispatch(updateUserPreferences(configData));
 	};
 
+	const configDataTheme = {
+		...currentUser,
+		userID: currentUser.id,
+		theme: currentUser.theme ? false : true,
+		flag: "theme"
+	};
+	const handleSetTheme = () => {
+		dispatch(updateUserPreferences(configDataTheme));
+	};
+
 	const label = { inputProps: { "aria-label": "Switch demo" } };
 
 	return (
 		<Container>
-			<Typography style={{ paddingTop: "20px" }}>Watch Details</Typography>
-			<Typography style={{ color: "#ffffffBF" }}>
-				You can change if the background image is shown when visualizing a watch
+			<Typography style={{ paddingTop: "20px" }}>Global Theme</Typography>
+			<Typography style={{ color: theme.palette.text.faded }}>
+				Set here if you prefer a light or dark theme here
 			</Typography>
-			<Divider style={{ width: "100%", background: "#ffffff66" }} />
+			<Divider
+				style={{ width: "100%", background: theme.palette.text.faded2 }}
+			/>
 			<Container
 				style={{
 					marginTop: "20px",
@@ -42,7 +56,35 @@ const VisualPref = (props) => {
 					paddingBottom: "20px",
 					display: "flex",
 					alignItems: "center",
-					backgroundColor: "#ffffff66"
+					backgroundColor: theme.palette.text.faded2
+				}}
+			>
+				<Switch
+					onClick={() => {
+						handleSetTheme();
+					}}
+					checked={!currentUser.theme}
+					{...label}
+					color="primary"
+				/>
+				{!currentUser.theme && <Typography>Dark Theme is on</Typography>}
+				{currentUser.theme && <Typography>Ligh Theme is on</Typography>}
+			</Container>
+			<Typography style={{ paddingTop: "20px" }}>Watch Details</Typography>
+			<Typography style={{ color: theme.palette.text.faded }}>
+				You can change if the background image is shown when visualizing a watch
+			</Typography>
+			<Divider
+				style={{ width: "100%", background: theme.palette.text.faded2 }}
+			/>
+			<Container
+				style={{
+					marginTop: "20px",
+					paddingTop: "20px",
+					paddingBottom: "20px",
+					display: "flex",
+					alignItems: "center",
+					backgroundColor: theme.palette.text.faded2
 				}}
 			>
 				<Switch

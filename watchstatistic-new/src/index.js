@@ -4,8 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/createStore";
-import { ThemeProvider } from "@material-ui/styles";
-import theme from "./styles/MUITheme";
 
 import App from "./App";
 import { hydrate, render } from "react-dom";
@@ -16,9 +14,7 @@ if (rootElement.hasChildNodes()) {
 		<Provider store={store}>
 			<BrowserRouter>
 				<PersistGate persistor={persistor}>
-					<ThemeProvider theme={theme}>
-						<App />
-					</ThemeProvider>
+					<App />
 				</PersistGate>
 			</BrowserRouter>
 		</Provider>,
@@ -29,9 +25,7 @@ if (rootElement.hasChildNodes()) {
 		<Provider store={store}>
 			<BrowserRouter>
 				<PersistGate persistor={persistor}>
-					<ThemeProvider theme={theme}>
-						<App />
-					</ThemeProvider>
+					<App />
 				</PersistGate>
 			</BrowserRouter>
 		</Provider>,

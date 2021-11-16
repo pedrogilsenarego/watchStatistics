@@ -10,6 +10,7 @@ import * as Yup from "yup";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserPreferences } from "../../../redux/User/user.actions";
+import { useTheme } from "@material-ui/core";
 
 const mapState = ({ user }) => ({
 	currentUser: user.currentUser
@@ -18,6 +19,7 @@ const mapState = ({ user }) => ({
 const UserPref = (props) => {
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
+	const theme = useTheme();
 
 	const handleChangeUserName = (values) => {
 		const { username } = values;
@@ -33,11 +35,13 @@ const UserPref = (props) => {
 	return (
 		<Container>
 			<Typography style={{ paddingTop: "20px" }}>Username</Typography>
-			<Typography style={{ color: "#ffffffBF" }}>
+			<Typography style={{ color: theme.palette.text.faded }}>
 				Your current username is {currentUser.displayName}, You can change for a
 				different name, however the watches submited will keep the old name.
 			</Typography>
-			<Divider style={{ width: "100%", background: "#ffffff66" }} />
+			<Divider
+				style={{ width: "100%", background: theme.palette.text.faded2 }}
+			/>
 			<Container
 				style={{
 					marginTop: "20px",
@@ -45,7 +49,7 @@ const UserPref = (props) => {
 					paddingBottom: "20px",
 					display: "flex",
 					alignItems: "center",
-					backgroundColor: "#ffffff66"
+					backgroundColor: theme.palette.text.faded2
 				}}
 			>
 				<Formik

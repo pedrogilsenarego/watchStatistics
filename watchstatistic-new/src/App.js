@@ -30,147 +30,164 @@ import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import DashBoardLayout from "./layouts/DashboardLayout";
 
+import { ThemeProvider } from "@material-ui/styles";
+import { darkTheme, lightTheme } from "./styles/MUITheme";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { useSelector } from "react-redux";
+
+const mapState = (state) => ({
+	currentUser: state.user.currentUser
+});
+
 const App = (props) => {
 	const dispatch = useDispatch();
+	const { currentUser } = useSelector(mapState);
 
 	useEffect(() => {
 		dispatch(checkUserSession());
 	});
 
 	return (
-		<div className="App">
-			<Switch>
-				<Route
-					exact
-					path="/"
-					render={() => (
-						<HomepageLayout>
-							<Watchstatistics />
-						</HomepageLayout>
-					)}
-				/>
-				<Route
-					exact
-					path="/watchstatistics/comparewatches"
-					render={() => (
-						<MainLayout>
-							<CompareWatches />
-						</MainLayout>
-					)}
-				/>
-				<Route
-					exact
-					path="/watchstatistics/addwatch"
-					render={() => (
-						<WithAuth>
+		<ThemeProvider
+			theme={
+				currentUser ? (!currentUser.theme ? darkTheme : lightTheme) : darkTheme
+			}
+		>
+			<CssBaseline />
+			<div className="App">
+				<Switch>
+					<Route
+						exact
+						path="/"
+						render={() => (
+							<HomepageLayout>
+								<Watchstatistics />
+							</HomepageLayout>
+						)}
+					/>
+					<Route
+						exact
+						path="/watchstatistics/comparewatches"
+						render={() => (
 							<MainLayout>
-								<AddWatch />
+								<CompareWatches />
 							</MainLayout>
-						</WithAuth>
-					)}
-				/>
-				<Route
-					exact
-					path="/search"
-					render={() => (
-						<MainLayout>
-							<Search />
-						</MainLayout>
-					)}
-				/>
-				<Route
-					path="/search/:filterType"
-					render={() => (
-						<MainLayout>
-							<Search />
-						</MainLayout>
-					)}
-				/>
-				<Route
-					path="/product/:productID"
-					render={() => (
-						<MainLayout>
-							<ProductDetails />
-						</MainLayout>
-					)}
-				/>
-				<Route
-					path="/product/preview"
-					render={() => (
-						<WithAuth>
+						)}
+					/>
+					<Route
+						exact
+						path="/watchstatistics/addwatch"
+						render={() => (
+							<WithAuth>
+								<MainLayout>
+									<AddWatch />
+								</MainLayout>
+							</WithAuth>
+						)}
+					/>
+					<Route
+						exact
+						path="/search"
+						render={() => (
 							<MainLayout>
-								<ProductDetailsPreview />
+								<Search />
 							</MainLayout>
-						</WithAuth>
-					)}
-				/>
-				<Route
-					path="/about/FAQ"
-					render={() => (
-						<MainLayout>
-							<FAQ />
-						</MainLayout>
-					)}
-				/>
-				<Route
-					path="/watchboxes"
-					render={() => (
-						<MainLayout>
-							<WatchBoxes />
-						</MainLayout>
-					)}
-				/>
+						)}
+					/>
+					<Route
+						path="/search/:filterType"
+						render={() => (
+							<MainLayout>
+								<Search />
+							</MainLayout>
+						)}
+					/>
+					<Route
+						path="/product/:productID"
+						render={() => (
+							<MainLayout>
+								<ProductDetails />
+							</MainLayout>
+						)}
+					/>
+					<Route
+						path="/product/preview"
+						render={() => (
+							<WithAuth>
+								<MainLayout>
+									<ProductDetailsPreview />
+								</MainLayout>
+							</WithAuth>
+						)}
+					/>
+					<Route
+						path="/about/FAQ"
+						render={() => (
+							<MainLayout>
+								<FAQ />
+							</MainLayout>
+						)}
+					/>
+					<Route
+						path="/watchboxes"
+						render={() => (
+							<MainLayout>
+								<WatchBoxes />
+							</MainLayout>
+						)}
+					/>
 
-				<Route
-					exact
-					path="/registration"
-					render={() => (
-						<MainLayout>
-							<Registration />
-						</MainLayout>
-					)}
-				/>
-
-				<Route
-					path="/recovery"
-					render={() => (
-						<MainLayout>
-							<Recovery />
-						</MainLayout>
-					)}
-				/>
-				<Route
-					path="/dashboard"
-					render={() => (
-						<WithAuth>
+					<Route
+						exact
+						path="/registration"
+						render={() => (
 							<MainLayout>
-								<Dashboard />
+								<Registration />
 							</MainLayout>
-						</WithAuth>
-					)}
-				/>
-				<Route
-					path="/order/:orderID"
-					render={() => (
-						<WithAuth>
-							<DashBoardLayout>
-								<Order />
-							</DashBoardLayout>
-						</WithAuth>
-					)}
-				/>
-				<Route
-					path="/admin"
-					render={() => (
-						<WithAdminAuth>
-							<AdminLayout>
-								<Admin />
-							</AdminLayout>
-						</WithAdminAuth>
-					)}
-				/>
-			</Switch>
-		</div>
+						)}
+					/>
+
+					<Route
+						path="/recovery"
+						render={() => (
+							<MainLayout>
+								<Recovery />
+							</MainLayout>
+						)}
+					/>
+					<Route
+						path="/dashboard"
+						render={() => (
+							<WithAuth>
+								<MainLayout>
+									<Dashboard />
+								</MainLayout>
+							</WithAuth>
+						)}
+					/>
+					<Route
+						path="/order/:orderID"
+						render={() => (
+							<WithAuth>
+								<DashBoardLayout>
+									<Order />
+								</DashBoardLayout>
+							</WithAuth>
+						)}
+					/>
+					<Route
+						path="/admin"
+						render={() => (
+							<WithAdminAuth>
+								<AdminLayout>
+									<Admin />
+								</AdminLayout>
+							</WithAdminAuth>
+						)}
+					/>
+				</Switch>
+			</div>
+		</ThemeProvider>
 	);
 };
 
