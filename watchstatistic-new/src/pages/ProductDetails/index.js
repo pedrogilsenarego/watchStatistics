@@ -129,13 +129,10 @@ const ProductDetails = ({}) => {
 	};
 
 	const bgImage = () => {
+		if (!currentUser) return productBackground;
+
 		if (!currentUser.backgroundImageOff) {
 			if (productBackground) return productBackground;
-			if (productCategory === "Field") return image2;
-			if (productCategory === "Divers") return image1;
-			if (productCategory === "Dress") return image3;
-			if (productCategory === "Pilot") return image4;
-			if (productCategory === "Racing") return image5;
 		} else return;
 	};
 
