@@ -47,7 +47,7 @@ const VisualPref = (props) => {
 				Set here if you prefer a light or dark theme here
 			</Typography>
 			<Divider
-				style={{ width: "100%", background: theme.palette.text.faded2 }}
+				style={{ width: "100%", background: theme.palette.text.faded3 }}
 			/>
 			<Container
 				style={{
@@ -75,7 +75,7 @@ const VisualPref = (props) => {
 				You can change if the background image is shown when visualizing a watch
 			</Typography>
 			<Divider
-				style={{ width: "100%", background: theme.palette.text.faded2 }}
+				style={{ width: "100%", background: theme.palette.text.faded3 }}
 			/>
 			<Container
 				style={{

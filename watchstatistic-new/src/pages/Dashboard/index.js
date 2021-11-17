@@ -57,7 +57,7 @@ const Dashboard = (props) => {
 					</Button>
 				</Container>
 			</Grid>
-			<Grid item xs={12} md={6}>
+			<Grid item xs={12} md={5}>
 				{userPref && <UserPref />}
 				{visualPref && <VisualPref />}
 				{voteHistory && <OrderHistory />}

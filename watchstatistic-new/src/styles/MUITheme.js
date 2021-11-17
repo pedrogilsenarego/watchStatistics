@@ -6,17 +6,19 @@ const darkTheme = createTheme({
 			default: "#000000"
 		},
 		primary: {
+			contrastText: "#FFFFFF",
 			main: "#36454f",
 			light: "#736d83",
 			dark: "#1e252b"
 		},
 		secondary: {
-			main: "#ffffff66"
+			main: "#000000"
 		},
 		text: {
 			primary: "#ffffff",
 			faded: "#ffffffBF",
-			faded2: "#ffffff66"
+			faded2: "#ffffff66",
+			faded3: "#ffffff33"
 		},
 		type: "dark"
 	}

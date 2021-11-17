@@ -10,6 +10,7 @@ const ButtonWrapper = ({ children, ...otherProps }) => {
 	};
 
 	const configButton = {
+		...otherProps,
 		size: "small",
 		variant: "contained",
 		color: "primary",
