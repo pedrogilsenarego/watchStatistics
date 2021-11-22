@@ -132,7 +132,7 @@ export const handleUpdateVote = (product) => {
 };
 
 export const handleUserVote = (product) => {
-	const { userID, userVotes, numberVotes, experience } = product;
+	const { userID, userVotes, numberVotes, experience, points } = product;
 	return new Promise((resolve, reject) => {
 		firestore
 			.collection("users")
@@ -140,7 +140,8 @@ export const handleUserVote = (product) => {
 			.update({
 				userVotes: userVotes,
 				numberVotes: numberVotes,
-				experience: experience
+				experience: experience,
+				points: points
 			})
 			.then(() => {
 				resolve();
@@ -326,6 +327,7 @@ export const handleUserUpdateDetails = (product) => {
 			.doc(UserUID)
 			.update({
 				experience: firebase.firestore.FieldValue.increment(incrementExp),
+				points: firebase.firestore.FieldValue.increment(incrementExp),
 				watchesSubmited:
 					firebase.firestore.FieldValue.increment(incrementWatches)
 			})

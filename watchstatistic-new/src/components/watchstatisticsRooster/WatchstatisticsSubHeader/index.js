@@ -44,7 +44,8 @@ const WatchstatisticsSubHeader = ({}) => {
 	const { currentUser } = useSelector(mapState);
 	const classes = useStyles();
 	const [progress, setProgress] = useState(0);
-	const { userVotes, displayName, experience, watchesSubmited } = currentUser;
+	const { userVotes, displayName, experience, watchesSubmited, points } =
+		currentUser;
 
 	const numberVotes = userVotes.length - 1;
 
@@ -112,7 +113,7 @@ const WatchstatisticsSubHeader = ({}) => {
 							className={classes.text}
 							style={{ color: colorRank() }}
 						>
-							Rank: {rank()}
+							Rank: {rank()} / Points: {points}
 						</Typography>
 						<Box
 							sx={{
