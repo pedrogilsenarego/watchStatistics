@@ -46,20 +46,17 @@ const VisualPref = (props) => {
 			<Typography style={{ color: theme.palette.text.faded }}>
 				Set here if you prefer a light or dark theme here
 			</Typography>
-			<Divider
-				style={{ width: "100%", background: theme.palette.text.faded3 }}
-			/>
+
 			<Container
 				style={{
 					marginTop: "20px",
-					paddingTop: "20px",
-					paddingBottom: "20px",
+					paddingLeft: "0px",
 					display: "flex",
-					alignItems: "center",
-					backgroundColor: theme.palette.text.faded2
+					alignItems: "center"
 				}}
 			>
 				<Switch
+					size="small"
 					onClick={() => {
 						handleSetTheme();
 					}}
@@ -67,27 +64,39 @@ const VisualPref = (props) => {
 					{...label}
 					color="primary"
 				/>
-				{!currentUser.theme && <Typography>Dark Theme is on</Typography>}
-				{currentUser.theme && <Typography>Ligh Theme is on</Typography>}
+				{!currentUser.theme && (
+					<Typography style={{ marginLeft: "10px" }}>
+						Dark Theme is on
+					</Typography>
+				)}
+				{currentUser.theme && (
+					<Typography style={{ marginLeft: "10px" }}>
+						Ligh Theme is on
+					</Typography>
+				)}
 			</Container>
-			<Typography style={{ paddingTop: "20px" }}>Watch Details</Typography>
+			<Divider
+				style={{
+					width: "100%",
+					marginTop: "15px",
+					background: theme.palette.text.faded3
+				}}
+			/>
+			<Typography style={{ paddingTop: "60px" }}>Watch Details</Typography>
 			<Typography style={{ color: theme.palette.text.faded }}>
 				You can change if the background image is shown when visualizing a watch
 			</Typography>
-			<Divider
-				style={{ width: "100%", background: theme.palette.text.faded3 }}
-			/>
+
 			<Container
 				style={{
 					marginTop: "20px",
-					paddingTop: "20px",
-					paddingBottom: "20px",
+					paddingLeft: "0px",
 					display: "flex",
-					alignItems: "center",
-					backgroundColor: theme.palette.text.faded2
+					alignItems: "center"
 				}}
 			>
 				<Switch
+					size="small"
 					onClick={() => {
 						handleSetImageBackGround();
 					}}
@@ -96,12 +105,23 @@ const VisualPref = (props) => {
 					color="primary"
 				/>
 				{!currentUser.backgroundImageOff && (
-					<Typography>Background Image is currently On</Typography>
+					<Typography style={{ marginLeft: "10px" }}>
+						Background Image is currently On
+					</Typography>
 				)}
 				{currentUser.backgroundImageOff && (
-					<Typography>Background Image is currently Off</Typography>
+					<Typography style={{ marginLeft: "10px" }}>
+						Background Image is currently Off
+					</Typography>
 				)}
 			</Container>
+			<Divider
+				style={{
+					width: "100%",
+					marginTop: "15px",
+					background: theme.palette.text.faded3
+				}}
+			/>
 		</Container>
 	);
 };

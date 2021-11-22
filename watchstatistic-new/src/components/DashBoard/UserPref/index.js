@@ -99,7 +99,7 @@ const UserPref = (props) => {
 				<Form>
 					<Container
 						style={{
-							backgroundColor: "white",
+							backgroundColor: theme.palette.textField.background,
 							height: "40px",
 							padding: "0px",
 							marginTop: "10px",

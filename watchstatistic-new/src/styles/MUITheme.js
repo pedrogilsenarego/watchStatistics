@@ -20,6 +20,9 @@ const darkTheme = createTheme({
 			faded2: "#ffffff66",
 			faded3: "#ffffff33"
 		},
+		textField: {
+			background: "#ffffff"
+		},
 		type: "dark"
 	}
 });
@@ -41,6 +44,9 @@ const lightTheme = createTheme({
 			primary: "#000000",
 			faded: "#000000BF",
 			faded2: "#00000066"
+		},
+		textField: {
+			background: "#B3B1B1"
 		},
 		type: "light"
 	}

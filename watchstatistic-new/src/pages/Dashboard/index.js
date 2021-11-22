@@ -47,7 +47,8 @@ const Dashboard = (props) => {
 					</Button>
 
 					<Button
-						style={{ color: voteHistory ? "orange" : "white" }}
+						style={{ color: "#ffffff66" }}
+						disabled
 						onClick={() => {
 							handleResetState();
 							setVoteHistory(true);
