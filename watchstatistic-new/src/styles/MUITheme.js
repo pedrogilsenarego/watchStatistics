@@ -23,6 +23,9 @@ const darkTheme = createTheme({
 		textField: {
 			background: "#ffffff"
 		},
+		switch: {
+			primary: "#154A6799"
+		},
 		type: "dark"
 	}
 });
@@ -47,6 +50,9 @@ const lightTheme = createTheme({
 		},
 		textField: {
 			background: "#B3B1B1"
+		},
+		switch: {
+			primary: "#154A6799"
 		},
 		type: "light"
 	}

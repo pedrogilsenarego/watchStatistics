@@ -4,6 +4,7 @@ import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
 
 import Switch from "@mui/material/Switch";
+import { alpha, styled } from "@mui/material/styles";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserPreferences } from "../../../redux/User/user.actions";
@@ -17,6 +18,18 @@ const VisualPref = (props) => {
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 	const theme = useTheme();
+
+	const CustomSwitch = styled(Switch)(({ theme }) => ({
+		"& .MuiSwitch-switchBase.Mui-checked": {
+			color: "#154A6799",
+			"&:hover": {
+				backgroundColor: alpha("#154A6799", theme.palette.action.hoverOpacity)
+			}
+		},
+		"& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+			backgroundColor: "#154A6799"
+		}
+	}));
 
 	const configData = {
 		...currentUser,
@@ -55,7 +68,7 @@ const VisualPref = (props) => {
 					alignItems: "center"
 				}}
 			>
-				<Switch
+				<CustomSwitch
 					size="small"
 					onClick={() => {
 						handleSetTheme();
@@ -95,7 +108,7 @@ const VisualPref = (props) => {
 					alignItems: "center"
 				}}
 			>
-				<Switch
+				<CustomSwitch
 					size="small"
 					onClick={() => {
 						handleSetImageBackGround();
