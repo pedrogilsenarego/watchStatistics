@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Box, Grid, Typography } from "@material-ui/core";
+import {
+	Box,
+	Grid,
+	Typography,
+	Button,
+	useMediaQuery,
+	useTheme
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import LinearProgress, {
 	linearProgressClasses
 } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
+import { GiTrophyCup } from "react-icons/gi";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
@@ -19,33 +27,44 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	}
 }));
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		height: "20vh",
-		marginTop: "80px",
-		background: "#196B91",
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center"
-	},
-	container: {
-		textAlign: "center"
-	},
-	item: {},
-	text: {}
-}));
-
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
 
 // eslint-disable-next-line
 const WatchstatisticsSubHeader = ({}) => {
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 	const { currentUser } = useSelector(mapState);
-	const classes = useStyles();
+
 	const [progress, setProgress] = useState(0);
 	const { userVotes, displayName, experience, watchesSubmited, points } =
 		currentUser;
+
+	const useStyles = makeStyles((theme) => ({
+		root: {
+			height: isMatch ? "30vh" : "20vh",
+			marginTop: "80px",
+			background: "#196B91",
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "center"
+		},
+		container: {
+			textAlign: "center",
+			display: "flex",
+
+			justifyContent: "center"
+		},
+		item: {
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "center"
+		},
+		text: {}
+	}));
+
+	const classes = useStyles();
 
 	const numberVotes = userVotes.length - 1;
 
@@ -101,33 +120,66 @@ const WatchstatisticsSubHeader = ({}) => {
 							have you voted today?
 						</Typography>
 					</Grid>
-					<Grid item xs={12} md={6} className={classes.item}>
-						<Typography variant="h6" className={classes.text}>
-							Watches Voted: {numberVotes}
-						</Typography>
-						<Typography variant="h6" className={classes.text}>
-							Watches Submited: {watchesSubmited}
-						</Typography>
-						<Typography
-							variant="h6"
-							className={classes.text}
-							style={{ color: colorRank() }}
-						>
-							Rank: {rank()} / Points: {points}
-						</Typography>
-						<Box
-							sx={{
-								display: "flex",
-								justifyContent: "center",
-								paddingTop: "5px"
-							}}
-						>
-							<BorderLinearProgress
-								style={{ width: "50%" }}
-								variant="determinate"
-								value={progress}
-							/>
-						</Box>
+					<Grid
+						item
+						xs={12}
+						md={6}
+						className={classes.item}
+						style={{ marginTop: isMatch ? "20px" : "0px" }}
+					>
+						<Grid container>
+							<Grid item xs={4} className={classes.item}>
+								<Button
+									style={{
+										marginLeft: isMatch ? "30px" : "60px",
+										marginRight: isMatch ? "30px" : "60px"
+									}}
+								>
+									<Grid
+										container
+										style={{
+											display: "flex",
+											flexDirection: "column",
+											justifyContent: "center"
+										}}
+									>
+										<GiTrophyCup
+											size="3em"
+											style={{ marginLeft: isMatch ? "33%" : "24%" }}
+										/>
+										<Typography style={{ fontSize: "14px" }}>Badges</Typography>
+									</Grid>
+								</Button>
+							</Grid>
+							<Grid item xs={8}>
+								<Typography variant="h6" className={classes.text}>
+									Watches Voted: {numberVotes}
+								</Typography>
+								<Typography variant="h6" className={classes.text}>
+									Watches Submited: {watchesSubmited}
+								</Typography>
+								<Typography
+									variant="h6"
+									className={classes.text}
+									style={{ color: colorRank() }}
+								>
+									Rank: {rank()} / Points: {points}
+								</Typography>
+								<Box
+									sx={{
+										display: "flex",
+										justifyContent: "center",
+										paddingTop: "5px"
+									}}
+								>
+									<BorderLinearProgress
+										style={{ width: "50%" }}
+										variant="determinate"
+										value={progress}
+									/>
+								</Box>
+							</Grid>
+						</Grid>
 					</Grid>
 				</Grid>
 			</Box>

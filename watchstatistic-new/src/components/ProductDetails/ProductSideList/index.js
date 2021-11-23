@@ -306,6 +306,7 @@ const ProductSideList = ({}) => {
 													"": "Null",
 													Gold: "Gold",
 													"Stainless Steel": "Stainless Steel",
+													Titanium: "Titanium",
 													"White Gold": "White Gold"
 												}}
 											/>

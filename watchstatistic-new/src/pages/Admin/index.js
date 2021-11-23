@@ -12,7 +12,7 @@ import {
 	Button,
 	ButtonGroup
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
 	fetchValidationProductsStart,
@@ -21,8 +21,6 @@ import {
 	updateProductDetailsStart
 } from "../../redux/Products/products.actions";
 
-const useStyles = makeStyles((theme) => ({}));
-
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
 	products: state.productsData.validationProducts
@@ -30,7 +28,6 @@ const mapState = (state) => ({
 
 // eslint-disable-next-line
 const Admin = ({}) => {
-	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const pageSize = 5;
@@ -59,9 +56,12 @@ const Admin = ({}) => {
 
 	return (
 		<div>
-			<Grid container className={classes.container} style={{ padding: "20px" }}>
+			<Grid container style={{ padding: "20px" }}>
 				<Grid item xs={12}>
-					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
+					<TableContainer
+						component={Paper}
+						style={{ marginTop: "10px", backgroundColor: "#000000" }}
+					>
 						<Table aria-label="simple table">
 							<TableHead>
 								<TableRow>
@@ -82,7 +82,7 @@ const Admin = ({}) => {
 										product;
 									product.admin = true;
 									if (!productName) return null;
-									const color = "#ffffffB3";
+									const color = "#ffffff";
 									return (
 										<TableRow
 											key={productName}
