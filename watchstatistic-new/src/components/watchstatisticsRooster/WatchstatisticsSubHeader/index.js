@@ -127,31 +127,35 @@ const WatchstatisticsSubHeader = ({}) => {
 						className={classes.item}
 						style={{ marginTop: isMatch ? "20px" : "0px" }}
 					>
-						<Grid container>
-							<Grid item xs={4} className={classes.item}>
-								<Button
-									style={{
-										marginLeft: isMatch ? "30px" : "60px",
-										marginRight: isMatch ? "30px" : "60px"
-									}}
-								>
+						<Grid
+							container
+							spacing={0}
+							justify="center"
+							style={{ paddingRight: "40px" }}
+						>
+							<Grid item xs={3} className={classes.item}>
+								<Button>
 									<Grid
 										container
 										style={{
+											paddingTop: "5px",
 											display: "flex",
 											flexDirection: "column",
-											justifyContent: "center"
+											justify: "center"
 										}}
 									>
-										<GiTrophyCup
-											size="3em"
-											style={{ marginLeft: isMatch ? "33%" : "24%" }}
-										/>
-										<Typography style={{ fontSize: "14px" }}>Badges</Typography>
+										<Grid item>
+											<GiTrophyCup size="3em" />
+										</Grid>
+										<Grid>
+											<Typography style={{ fontSize: "14px" }}>
+												Badges
+											</Typography>
+										</Grid>
 									</Grid>
 								</Button>
 							</Grid>
-							<Grid item xs={8}>
+							<Grid item xs={5}>
 								<Typography variant="h6" className={classes.text}>
 									Watches Voted: {numberVotes}
 								</Typography>
