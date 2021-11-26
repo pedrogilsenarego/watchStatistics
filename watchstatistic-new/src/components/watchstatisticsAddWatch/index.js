@@ -293,7 +293,9 @@ const AddWatchForm = () => {
 											options={{
 												"30meters": "30 meters",
 												"50meters": "50 meters",
-												"100meters": "100 meters"
+												"100meters": "100 meters",
+												"200meters": "200 meters",
+												"300meters": "300 meters"
 											}}
 										/>
 									</Grid>

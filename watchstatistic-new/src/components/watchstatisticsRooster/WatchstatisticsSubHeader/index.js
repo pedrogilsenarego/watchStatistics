@@ -134,7 +134,12 @@ const WatchstatisticsSubHeader = ({}) => {
 							style={{ paddingRight: "40px" }}
 						>
 							<Grid item xs={3} className={classes.item}>
-								<Button>
+								<Button
+									style={{
+										marginLeft: "30px",
+										marginRight: "30px"
+									}}
+								>
 									<Grid
 										container
 										style={{
@@ -145,7 +150,7 @@ const WatchstatisticsSubHeader = ({}) => {
 										}}
 									>
 										<Grid item>
-											<GiTrophyCup size="3em" />
+											<GiTrophyCup size="2.5em" />
 										</Grid>
 										<Grid>
 											<Typography style={{ fontSize: "14px" }}>

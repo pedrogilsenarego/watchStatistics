@@ -56,32 +56,34 @@ const TableMain = ({ currentUser }) => {
 		<Box>
 			<Box className={classes.subHeaderBox2}>
 				<Grid container style={{ paddingLeft: "20px" }}>
-					<ButtonGroup>
-						<Button
-							style={{ color: table === "main" ? "white" : "#ffffffB3" }}
-							onClick={(e) => {
-								setTable("main");
-							}}
-						>
-							Top Watches
-						</Button>
-						<Button
-							style={{ color: table === "second" ? "white" : "#ffffffB3" }}
-							onClick={(e) => {
-								setTable("second");
-							}}
-						>
-							Latest Additions
-						</Button>
-						<Button
-							style={{ color: table === "third" ? "white" : "#ffffffB3" }}
-							onClick={(e) => {
-								setTable("third");
-							}}
-						>
-							Top Users
-						</Button>
-					</ButtonGroup>
+					<Grid item xs={12}>
+						<ButtonGroup>
+							<Button
+								style={{ color: table === "main" ? "white" : "#ffffffB3" }}
+								onClick={(e) => {
+									setTable("main");
+								}}
+							>
+								Top Watches
+							</Button>
+							<Button
+								style={{ color: table === "second" ? "white" : "#ffffffB3" }}
+								onClick={(e) => {
+									setTable("second");
+								}}
+							>
+								Latest Additions
+							</Button>
+							<Button
+								style={{ color: table === "third" ? "white" : "#ffffffB3" }}
+								onClick={(e) => {
+									setTable("third");
+								}}
+							>
+								Top Users
+							</Button>
+						</ButtonGroup>
+					</Grid>
 				</Grid>
 			</Box>
 			{table === "main" && <MainBody {...configLoadedTopWatches} />}
