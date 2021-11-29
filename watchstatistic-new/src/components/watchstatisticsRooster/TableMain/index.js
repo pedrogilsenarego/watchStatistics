@@ -53,10 +53,10 @@ const TableMain = ({ currentUser }) => {
 	};
 
 	return (
-		<Box>
+		<div>
 			<Box className={classes.subHeaderBox2}>
 				<Grid container style={{ paddingLeft: "20px" }}>
-					<Grid item xs={12}>
+					<Grid item container xs={12}>
 						<ButtonGroup>
 							<Button
 								style={{ color: table === "main" ? "white" : "#ffffffB3" }}
@@ -89,7 +89,7 @@ const TableMain = ({ currentUser }) => {
 			{table === "main" && <MainBody {...configLoadedTopWatches} />}
 			{table === "second" && <LatestAdditions {...configLoadedLatest} />}
 			{table === "third" && <MainUsers {...configLoadedTopUsers} />}
-		</Box>
+		</div>
 	);
 };
 

@@ -21,6 +21,7 @@ import Watchstatistics from "./pages/Watchstatistics";
 import AddWatch from "./pages/Watchstatistics/AddWatch";
 import WatchBoxes from "./pages/WatchBoxes";
 import CompareWatches from "./pages/CompareWatches";
+import WatchLaboratory from "./pages/WatchLaboratory";
 
 import Order from "./pages/Order";
 
@@ -80,6 +81,17 @@ const App = (props) => {
 							<MainLayout>
 								<CompareWatches />
 							</MainLayout>
+						)}
+					/>
+					<Route
+						exact
+						path="/watchstatistics/watchlaboratory"
+						render={() => (
+							<WithAuth>
+								<MainLayout>
+									<WatchLaboratory />
+								</MainLayout>
+							</WithAuth>
 						)}
 					/>
 					<Route

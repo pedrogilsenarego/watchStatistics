@@ -45,7 +45,7 @@ const WatchstatisticsSubHeader = ({}) => {
 		root: {
 			height: isMatch ? "30vh" : "20vh",
 			marginTop: "80px",
-			background: "#196B91",
+			background: theme.palette.home.primary,
 			display: "flex",
 			flexDirection: "column",
 			justifyContent: "center"

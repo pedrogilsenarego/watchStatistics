@@ -269,6 +269,15 @@ const Header = (props) => {
 					disabled={watchstatistics}
 					onClick={() => {
 						handleCloseWatchstatisticsMenu();
+						history.push("/watchstatistics/watchlaboratory");
+					}}
+				>
+					Watch Laboratory
+				</MenuItem>
+				<MenuItem
+					disabled={watchstatistics}
+					onClick={() => {
+						handleCloseWatchstatisticsMenu();
 						history.push("/watchstatistics/addwatch");
 					}}
 				>
@@ -376,6 +385,14 @@ const Header = (props) => {
 						}}
 					>
 						Browse
+					</MenuItem>,
+					<MenuItem
+						disabled={watchstatistics}
+						onClick={() => {
+							history.push("/watchstatistics/watchlaboratory");
+						}}
+					>
+						Watch Laboratory
 					</MenuItem>,
 					<MenuItem
 						disabled={watchstatistics}
