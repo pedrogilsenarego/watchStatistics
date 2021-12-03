@@ -1,10 +1,11 @@
 import React from "react";
+import WatchLab from "../../components/WatchLab";
 
 // eslint-disable-next-line
 const WatchLaboratory = ({}) => {
 	return (
 		<div style={{ paddingTop: "100px" }}>
-			<p>Hello</p>
+			<WatchLab />
 		</div>
 	);
 };

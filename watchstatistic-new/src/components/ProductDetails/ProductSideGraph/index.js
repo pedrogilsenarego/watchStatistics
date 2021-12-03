@@ -145,7 +145,7 @@ const ProductSidePanel = ({}) => {
 			datasets: [
 				{
 					data: votationsOwn,
-					label: "Own",
+					label: "Own/Experimented",
 
 					borderColor: "#42e6f5",
 					backgroundColor: "#42e6f566",
@@ -154,7 +154,7 @@ const ProductSidePanel = ({}) => {
 
 				{
 					data: votationsNonOwn,
-					label: "Not Own",
+					label: "Only seen Digitaly",
 					borderColor: "#E5F517",
 					fill: true,
 					backgroundColor: "#E5F51766"
@@ -284,13 +284,13 @@ const ProductSidePanel = ({}) => {
 							align="center"
 							style={{ width: "100%", color: "#ffffffBF" }}
 						>
-							Own: {avgVotationsOwn} Votes: {numberVotesOwn}
+							Own/Experimented: {avgVotationsOwn} Votes: {numberVotesOwn}
 						</Typography>
 						<Typography
 							align="center"
 							style={{ width: "100%", color: "#ffffffBF" }}
 						>
-							Not Own: {avgVotationsNotOwn} Votes: {numberVotesNotOwn}
+							Only Seen Digital: {avgVotationsNotOwn} Votes: {numberVotesNotOwn}
 						</Typography>
 						<Grid item style={{}}>
 							{currentUser && !currentUser.userVotes.includes(productID) && (

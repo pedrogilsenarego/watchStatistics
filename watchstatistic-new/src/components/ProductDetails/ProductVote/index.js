@@ -193,12 +193,12 @@ const ProductVote = ({
 						<FormControlLabel
 							value="Own"
 							control={<Radio style={{ color: "#ffffff66" }} />}
-							label="I own the watch"
+							label="I own/experimented the watch"
 						/>
 						<FormControlLabel
 							value="Not Own"
 							control={<Radio style={{ color: "#ffffff66" }} />}
-							label="I do not own the watch"
+							label="I do not own/experimented the watch"
 						/>
 					</RadioGroup>
 				</Grid>
