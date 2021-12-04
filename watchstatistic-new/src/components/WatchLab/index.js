@@ -17,7 +17,11 @@ const WatchLab = () => {
 		<div>
 			<Grid container justify="center">
 				<Paper style={{ width: "90vw", background: "#196B91" }}>
-					<Box style={{ margin: "10px" }}></Box>
+					<Grid container>
+						<Grid item>
+							<Typography>List </Typography>
+						</Grid>
+					</Grid>
 				</Paper>
 			</Grid>
 		</div>

@@ -43,7 +43,7 @@ const WatchstatisticsSubHeader = ({}) => {
 
 	const useStyles = makeStyles((theme) => ({
 		root: {
-			height: isMatch ? "30vh" : "20vh",
+			height: isMatch ? "35vh" : "20vh",
 			marginTop: "80px",
 			background: theme.palette.home.primary,
 			display: "flex",
@@ -107,7 +107,11 @@ const WatchstatisticsSubHeader = ({}) => {
 	return (
 		<div>
 			<Box className={classes.root}>
-				<Grid container className={classes.container}>
+				<Grid
+					container
+					className={classes.container}
+					style={{ marginTop: isMatch ? "15px" : "0px" }}
+				>
 					<Grid item xs={12} md={6} className={classes.item}>
 						<Typography className={classes.text} variant="h5">
 							Welcome, {displayName}
@@ -133,7 +137,7 @@ const WatchstatisticsSubHeader = ({}) => {
 							justify="center"
 							style={{ paddingRight: "40px" }}
 						>
-							<Grid item xs={3} className={classes.item}>
+							<Grid item xs={6} md={3} className={classes.item}>
 								<Button
 									style={{
 										marginLeft: "30px",
@@ -160,7 +164,7 @@ const WatchstatisticsSubHeader = ({}) => {
 									</Grid>
 								</Button>
 							</Grid>
-							<Grid item xs={5}>
+							<Grid item xs={6} md={5}>
 								<Typography variant="h6" className={classes.text}>
 									Watches Voted: {numberVotes}
 								</Typography>
