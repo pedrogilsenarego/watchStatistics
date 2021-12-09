@@ -1,5 +1,6 @@
 import { auth } from "./../../firebase/utils";
 import { firestore } from "./../../firebase/utils";
+import firebase from "firebase/app";
 
 export const handleResetPasswordAPI = (email) => {
 	const config = {
@@ -83,7 +84,10 @@ export const handleUpdateBoxStatus = (product) => {
 	return new Promise((resolve, reject) => {
 		let ref = firestore.collection("users").doc(userID);
 
-		ref.update({ whiteBox: 1 });
+		ref.update({
+			whiteBox: firebase.firestore.FieldValue.increment(1),
+			points: firebase.firestore.FieldValue.increment(-10)
+		});
 
 		ref
 			.then(() => {

@@ -30,6 +30,17 @@ const WatchLab = () => {
 		dispatch(updateBoxStatus(configData));
 	};
 
+	const whiteBoxes = () => {
+		if (!currentUser.whiteBox) return 0;
+		else return currentUser.whiteBox;
+	};
+
+	const whiteboxDisabled = () => {
+		if (currentUser.points <= 10) {
+			return true;
+		} else return false;
+	};
+
 	return (
 		<div>
 			<Grid container justify="center">
@@ -66,8 +77,13 @@ const WatchLab = () => {
 										}}
 									>
 										<Typography>WhiteBox: 10 points</Typography>
+										<Typography>Owned: {whiteBoxes()}</Typography>
 										<ButtonGroup style={{ marginTop: "10px" }}>
-											<Button size="small" onClick={() => handleGetWhiteBox()}>
+											<Button
+												disabled={whiteboxDisabled()}
+												size="small"
+												onClick={() => handleGetWhiteBox()}
+											>
 												Get
 											</Button>
 											<Button size="small">
