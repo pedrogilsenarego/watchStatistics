@@ -17,7 +17,8 @@ import {
 import {
 	handleResetPasswordAPI,
 	handleFetchUsers,
-	handleUpdateUserPreferences
+	handleUpdateUserPreferences,
+	handleUpdateBoxStatus
 } from "./user.helpers";
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
@@ -157,8 +158,6 @@ export function* fetchUsers() {
 export function* onFetchUsersStart() {
 	yield takeLatest(userTypes.FETCH_USERS_START, fetchUsers);
 }
-
-//implementations
 export function* updateUserPreference({ payload }) {
 	try {
 		yield handleUpdateUserPreferences({
@@ -173,6 +172,21 @@ export function* onUpdateUserPreferencesStart() {
 	yield takeLatest(userTypes.SET_PREFERENCES, updateUserPreference);
 }
 
+//implementations
+
+export function* updateBoxState({ payload }) {
+	try {
+		yield handleUpdateBoxStatus({
+			...payload
+		});
+	} catch (err) {
+		// console.log(err);
+	}
+}
+export function* onUpdateBoxStatus() {
+	yield takeLatest(userTypes.UPDATE_BOX_STATE, updateBoxState);
+}
+
 export default function* userSagas() {
 	yield all([
 		call(onEmailSignInStart),
@@ -182,6 +196,7 @@ export default function* userSagas() {
 		call(onResetPasswordStart),
 		call(onGoogleSignInStart),
 		call(onFetchUsersStart),
-		call(onUpdateUserPreferencesStart)
+		call(onUpdateUserPreferencesStart),
+		call(onUpdateBoxStatus)
 	]);
 }

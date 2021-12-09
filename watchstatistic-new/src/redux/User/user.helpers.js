@@ -54,7 +54,6 @@ export const handleFetchUsers = () => {
 	});
 };
 
-//implementations
 export const handleUpdateUserPreferences = (product) => {
 	const { userID, backgroundImageOff, displayName, theme, flag } = product;
 
@@ -65,6 +64,26 @@ export const handleUpdateUserPreferences = (product) => {
 		if (flag === "theme") ref = ref.update({ theme: theme });
 		if (flag === "backgroundImage")
 			ref = ref.update({ backgroundImageOff: backgroundImageOff });
+
+		ref
+			.then(() => {
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
+
+//implementations
+
+export const handleUpdateBoxStatus = (product) => {
+	const { userID } = product;
+
+	return new Promise((resolve, reject) => {
+		let ref = firestore.collection("users").doc(userID);
+
+		ref.update({ whiteBox: 1 });
 
 		ref
 			.then(() => {

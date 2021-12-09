@@ -2,17 +2,33 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-import { useHistory } from "react-router";
-import { Grid, Typography, Box, Paper, Button } from "@material-ui/core";
+import {
+	Grid,
+	Typography,
+	Box,
+	Paper,
+	Button,
+	ButtonGroup
+} from "@material-ui/core";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { updateBoxStatus } from "../../redux/User/user.actions";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
 
 const WatchLab = () => {
-	const history = useHistory();
 	const dispatch = useDispatch();
+	const [helperDescription, setHelperDescription] = useState(false);
 	const { currentUser } = useSelector(mapState);
+
+	const handleGetWhiteBox = () => {
+		const configData = {
+			...currentUser,
+			userID: currentUser.id
+		};
+		dispatch(updateBoxStatus(configData));
+	};
 
 	return (
 		<div>
@@ -38,17 +54,86 @@ const WatchLab = () => {
 								}}
 							>
 								<Grid container>
-									<Grid item xs={3} style={{ textAlign: "center" }}>
-										<Typography>Hello</Typography>
+									<Grid
+										item
+										xs={3}
+										style={{
+											textAlign: "center",
+											border: "solid 1px",
+											borderRadius: "4px",
+											borderColor: "#ffffff66",
+											padding: "10px"
+										}}
+									>
+										<Typography>WhiteBox: 10 points</Typography>
+										<ButtonGroup style={{ marginTop: "10px" }}>
+											<Button size="small" onClick={() => handleGetWhiteBox()}>
+												Get
+											</Button>
+											<Button size="small">
+												<AiOutlineQuestionCircle
+													onClick={() =>
+														setHelperDescription(!helperDescription)
+													}
+													fontSize="1.5em"
+												/>
+											</Button>
+										</ButtonGroup>
 									</Grid>
-									<Grid item xs={3} style={{ textAlign: "center" }}>
-										<Typography>Hello</Typography>
+
+									<Grid
+										item
+										xs={3}
+										style={{
+											textAlign: "center",
+											border: "solid 1px",
+											borderRadius: "4px",
+											borderColor: "#ffffff66"
+										}}
+									>
+										<Typography>BlueBox</Typography>
+										<Button size="small">
+											<AiOutlineQuestionCircle
+												onClick={() => setHelperDescription(!helperDescription)}
+												fontSize="1.5em"
+											/>
+										</Button>
 									</Grid>
-									<Grid item xs={3} style={{ textAlign: "center" }}>
-										<Typography>Hello</Typography>
+									<Grid
+										item
+										xs={3}
+										style={{
+											textAlign: "center",
+											border: "solid 1px",
+											borderRadius: "4px",
+											borderColor: "#ffffff66"
+										}}
+									>
+										<Typography>PurpleBox</Typography>
+										<Button size="small">
+											<AiOutlineQuestionCircle
+												onClick={() => setHelperDescription(!helperDescription)}
+												fontSize="1.5em"
+											/>
+										</Button>
 									</Grid>
-									<Grid item xs={3} style={{ textAlign: "center" }}>
-										<Typography>Hello</Typography>
+									<Grid
+										item
+										xs={3}
+										style={{
+											textAlign: "center",
+											border: "solid 1px",
+											borderRadius: "4px",
+											borderColor: "#ffffff66"
+										}}
+									>
+										<Typography>OrangeBox</Typography>
+										<Button size="small">
+											<AiOutlineQuestionCircle
+												onClick={() => setHelperDescription(!helperDescription)}
+												fontSize="1.5em"
+											/>
+										</Button>
 									</Grid>
 								</Grid>
 							</Box>

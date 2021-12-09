@@ -59,8 +59,13 @@ export const setUsers = (usersData) => ({
 	payload: usersData
 });
 
-//implementations
 export const updateUserPreferences = (preferencesData) => ({
 	type: userTypes.SET_PREFERENCES,
 	payload: preferencesData
+});
+
+//new implementation
+export const updateBoxStatus = (boxStatus) => ({
+	type: userTypes.UPDATE_BOX_STATE,
+	payload: boxStatus
 });
