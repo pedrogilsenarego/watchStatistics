@@ -32,13 +32,18 @@ const userReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				...INITIAL_STATE
 			};
-		//implementations
 		case userTypes.SET_USERS:
 			return {
 				...state,
 				users: action.payload
 			};
 		case userTypes.SET_PREFERENCES:
+			return {
+				...state,
+				currentUser: action.payload
+			};
+		//implementations
+		case userTypes.UPDATE_BOX_STATE:
 			return {
 				...state,
 				currentUser: action.payload

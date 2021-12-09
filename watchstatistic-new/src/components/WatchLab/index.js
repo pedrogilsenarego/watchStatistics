@@ -22,17 +22,19 @@ const WatchLab = () => {
 	const [helperDescription, setHelperDescription] = useState(false);
 	const { currentUser } = useSelector(mapState);
 
-	const handleGetWhiteBox = () => {
-		const configData = {
-			...currentUser,
-			userID: currentUser.id
-		};
-		dispatch(updateBoxStatus(configData));
-	};
-
 	const whiteBoxes = () => {
 		if (!currentUser.whiteBox) return 0;
 		else return currentUser.whiteBox;
+	};
+
+	const handleGetWhiteBox = () => {
+		const configData = {
+			...currentUser,
+			points: currentUser.points - 10,
+			whiteBox: whiteBoxes() + 1,
+			userID: currentUser.id
+		};
+		dispatch(updateBoxStatus(configData));
 	};
 
 	const whiteboxDisabled = () => {
