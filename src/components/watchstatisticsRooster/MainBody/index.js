@@ -8,33 +8,55 @@ import {
 	TableCell,
 	TableBody,
 	Grid,
+	Typography,
 	Paper,
-	Typography
+	useMediaQuery,
+	useTheme,
+	CardMedia
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsStart } from "../../../redux/Products/products.actions";
+import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
 
-const useStyles = makeStyles((theme) => ({}));
-
-const mapState = ({ productsData }) => ({
-	products: productsData.products
+const mapState = (state) => ({
+	currentUser: state.user.currentUser,
+	products: state.productsData.products
 });
 
 // eslint-disable-next-line
-const MainBody = ({}) => {
-	const classes = useStyles();
+const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const pageSize = 5;
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+	const pageSize = 10;
 
-	const { products } = useSelector(mapState);
+	const { products, currentUser } = useSelector(mapState);
 
 	const { data } = products;
 
+	const useStyles = makeStyles((theme) => ({
+		tableRow: {
+			"&:hover": {
+				backgroundColor: "#858585 !important"
+			}
+		},
+		tableHead: {
+			backgroundColor: "#145875 !important"
+		}
+	}));
+
+	const classes = useStyles();
+
+	const { userVotes } = currentUser ? currentUser : "null";
+
 	useEffect(
 		() => {
-			dispatch(fetchProductsStart({ pageSize }));
+			if (!loadedTopWatches) {
+				dispatch(fetchProductsStart({ pageSize }));
+				handleLoadedTopWatches();
+			}
 		},
 		// eslint-disable-next-line
 		[]
@@ -52,22 +74,21 @@ const MainBody = ({}) => {
 
 	return (
 		<div>
-			<Grid container className={classes.container} style={{ padding: "20px" }}>
-				<Grid item xs={12} md={6}>
-					<Typography variant={"h5"} align="center">
-						Top 5 Watches
-					</Typography>
-					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
-						<Table aria-label="simple table">
-							<TableHead>
+			<Grid container spacing={1} style={{ padding: "20px" }}>
+				<Grid item xs={12} md={8}>
+					<TableContainer component={Paper}>
+						<Table aria-label="simple table" size="small">
+							<TableHead className={classes.tableHead}>
 								<TableRow>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										#
 									</TableCell>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
-										Watches
+										Watch
 									</TableCell>
-
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Ref.
+									</TableCell>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Score
 									</TableCell>
@@ -77,8 +98,14 @@ const MainBody = ({}) => {
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Votes
 									</TableCell>
+									{currentUser && (
+										<TableCell align="center" style={{ fontSize: "15px" }}>
+											<BiCheckboxChecked fontSize="1.5em" />
+										</TableCell>
+									)}
 								</TableRow>
 							</TableHead>
+
 							<TableBody>
 								{data.map((product, i) => {
 									const {
@@ -88,36 +115,72 @@ const MainBody = ({}) => {
 										productCategory,
 										numberVotesOwn,
 										numberVotesNotOwn,
-										documentID
+										documentID,
+										reference
 									} = product;
 									if (!productName) return null;
+									const color = "#ffffffB3";
+
+									const colorRow = `linear-gradient(90deg, rgba(3, 10, 13, ${
+										avgTotal / 10
+									}) ${avgTotal * 10}%, rgb(25, 107, 145) 100%)`;
 									return (
 										<TableRow
+											className={classes.tableRow}
 											key={productName}
-											style={{ cursor: "pointer" }}
-											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+											style={{
+												cursor: "pointer",
+												background: colorRow
+											}}
+											sx={{
+												"&:last-child td, &:last-child th": { border: 0 }
+											}}
 											onClick={() => history.push(`/product/${documentID}`)}
 										>
-											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+											<TableCell align="center" style={{ color: color }}>
 												{i + 1}
 											</TableCell>
 											<TableCell
 												align="center"
 												component="th"
 												scope="row"
-												style={{ color: "#ffffffB3" }}
+												style={{ color: color }}
 											>
 												{productBrand} - {productName}
 											</TableCell>
-											<TableCell align="center" style={{ color: "#ffffffB3" }}>
-												{avgTotal} /10
+											<TableCell
+												align="center"
+												component="th"
+												scope="row"
+												style={{ color: color }}
+											>
+												{reference}
 											</TableCell>
-											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+											<TableCell align="center" style={{ color: color }}>
+												{avgTotal}
+											</TableCell>
+											<TableCell align="center" style={{ color: color }}>
 												{productCategory}
 											</TableCell>
-											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+											<TableCell align="center" style={{ color: color }}>
 												{numberVotesNotOwn + numberVotesOwn}
 											</TableCell>
+											{currentUser && userVotes.includes(documentID) && (
+												<TableCell
+													align="center"
+													style={{ color: color, fontSize: "15px" }}
+												>
+													<BiCheckboxChecked fontSize="1.5em" />
+												</TableCell>
+											)}
+											{currentUser && !userVotes.includes(documentID) && (
+												<TableCell
+													align="center"
+													style={{ color: color, fontSize: "15px" }}
+												>
+													<BiCheckbox fontSize="1.5em" />
+												</TableCell>
+											)}
 										</TableRow>
 									);
 								})}
@@ -125,9 +188,25 @@ const MainBody = ({}) => {
 						</Table>
 					</TableContainer>
 				</Grid>
+				<Grid item xs={12} md={4}>
+					<Paper style={{ height: "100%", backgroundColor: "black" }}>
+						<CardMedia
+							style={{ height: isMatch ? "80vh" : "100%", borderRadius: "4px" }}
+							image={data[0].productThumbnail[0]}
+						>
+							<Grid container alignItems="center" justifyContent="center">
+								<Typography style={{ color: "#ffffff66", paddingTop: "10px" }}>
+									Check here the top voted watch
+								</Typography>
+							</Grid>
+						</CardMedia>
+					</Paper>
+				</Grid>
 			</Grid>
 		</div>
 	);
 };
 
 export default MainBody;
+
+/* ; */

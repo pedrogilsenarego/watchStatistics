@@ -52,6 +52,7 @@ const ProductVote = ({
 	setTargetVote,
 	handleVisualTargetVote,
 	targetVote,
+	handleCloseVote,
 	handleUpdate
 }) => {
 	const classes = useStyles();
@@ -63,7 +64,7 @@ const ProductVote = ({
 	const [errors, setErrors] = useState(false);
 	const { productID } = useParams();
 
-	const { id, userVotes, numberVotes } = currentUser;
+	const { id, userVotes, numberVotes, experience, points } = currentUser;
 
 	const {
 		numberVotesOwn,
@@ -110,7 +111,11 @@ const ProductVote = ({
 		if (ownership === "Own") {
 			const newAvgTotal =
 				numberVotesNotOwn > 0
-					? ((+newAvgVotationsOwn + +avgVotationsNotOwn) / 2).toFixed(2)
+					? (
+							(+newAvgVotationsOwn * (numberVotesOwn + 1) +
+								+avgVotationsNotOwn * numberVotesNotOwn) /
+							(numberVotesNotOwn + numberVotesOwn + 1)
+					  ).toFixed(2)
 					: (+newAvgVotationsOwn / 1).toFixed(2);
 
 			const configVote = {
@@ -124,6 +129,8 @@ const ProductVote = ({
 				avgTotal: newAvgTotal,
 				userID: id,
 				numberVotes: numberVotes + 1,
+				experience: experience + 1,
+				points: points + 1,
 				userVotes: newVoteArray
 			};
 			dispatch(updateProductVoteStart(configVote));
@@ -131,7 +138,11 @@ const ProductVote = ({
 		if (ownership === "Not Own") {
 			const newAvgTotal =
 				numberVotesOwn > 0
-					? ((+newAvgVotationsNotOwn + +avgVotationsOwn) / 2).toFixed(2)
+					? (
+							(+newAvgVotationsNotOwn * (numberVotesNotOwn + 1) +
+								+avgVotationsOwn * numberVotesOwn) /
+							(numberVotesOwn + numberVotesNotOwn + 1)
+					  ).toFixed(2)
 					: (+newAvgVotationsNotOwn / 1).toFixed(2);
 
 			const configVote = {
@@ -145,12 +156,15 @@ const ProductVote = ({
 				avgTotal: newAvgTotal,
 				userID: id,
 				numberVotes: numberVotes + 1,
+				experience: experience + 1,
+				points: points + 1,
 				userVotes: newVoteArray
 			};
 			dispatch(updateProductVoteStart(configVote));
 		}
 		setErrors(false);
 		setTargetVote(false);
+		handleCloseVote();
 	};
 
 	const newAvgVotationsOwn = (
@@ -167,8 +181,8 @@ const ProductVote = ({
 
 	return (
 		<FormControl component="fieldset">
-			{!userVotes.includes(productID) && (
-				<Grid container>
+			<Grid container>
+				<Grid item xs={12}>
 					<RadioGroup
 						aria-label="gender"
 						value={ownership}
@@ -178,15 +192,17 @@ const ProductVote = ({
 					>
 						<FormControlLabel
 							value="Own"
-							control={<Radio />}
-							label="I own the watch"
+							control={<Radio style={{ color: "#ffffff66" }} />}
+							label="I own/experimented the watch"
 						/>
 						<FormControlLabel
 							value="Not Own"
-							control={<Radio />}
-							label="I do not own the watch"
+							control={<Radio style={{ color: "#ffffff66" }} />}
+							label="I do not own/experimented the watch"
 						/>
 					</RadioGroup>
+				</Grid>
+				<Grid item xs={12}>
 					<ThemeProvider theme={muiTheme}>
 						<Typography id="discrete-slider" gutterBottom>
 							Aesthetics
@@ -304,36 +320,23 @@ const ProductVote = ({
 							}}
 						/>
 					</ThemeProvider>
-					{errors && Object.values(categories).includes("") && (
-						<Typography style={{ color: "red" }}>
-							You must choose all fields
-						</Typography>
-					)}
-
-					<Button
-						onMouseEnter={() => {
-							handleVisualTargetVote(true);
-							handleUpdate();
-						}}
-						onTouchStart={() => {
-							handleVisualTargetVote(true);
-							handleUpdate();
-						}}
-						onMouseLeave={() => {
-							handleVisualTargetVote(false);
-							handleUpdate();
-						}}
-						onClick={handleApplyVote}
-					>
-						Apply Vote
-					</Button>
 				</Grid>
-			)}
-			{userVotes.includes(productID) && (
-				<div>
-					<h1>you cant vote again</h1>
-				</div>
-			)}
+				{errors && Object.values(categories).includes("") && (
+					<Typography style={{ color: "red" }}>
+						You must choose all fields
+					</Typography>
+				)}
+
+				<Button onClick={handleApplyVote}>Apply Vote</Button>
+				<Button
+					onClick={() => {
+						handleVisualTargetVote(true);
+						handleUpdate();
+					}}
+				>
+					Preview Vote
+				</Button>
+			</Grid>
 		</FormControl>
 	);
 };

@@ -19,14 +19,13 @@ export const handleResetPasswordAPI = (email) => {
 	});
 };
 
-//implementations
 export const handleFetchUsers = () => {
 	return new Promise((resolve, reject) => {
-		const pageSize = 5;
+		const pageSize = 10;
 
 		let ref = firestore
 			.collection("users")
-			.orderBy("numberVotes", "desc")
+			.orderBy("experience", "desc")
 			.limit(pageSize);
 
 		ref
@@ -48,6 +47,28 @@ export const handleFetchUsers = () => {
 					queryDoc: snapshot.docs[totalCount - 1],
 					isLastPage: totalCount < 1
 				});
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
+
+//implementations
+export const handleUpdateUserPreferences = (product) => {
+	const { userID, backgroundImageOff, displayName, theme, flag } = product;
+
+	return new Promise((resolve, reject) => {
+		let ref = firestore.collection("users").doc(userID);
+
+		if (flag === "username") ref = ref.update({ displayName: displayName });
+		if (flag === "theme") ref = ref.update({ theme: theme });
+		if (flag === "backgroundImage")
+			ref = ref.update({ backgroundImageOff: backgroundImageOff });
+
+		ref
+			.then(() => {
+				resolve();
 			})
 			.catch((err) => {
 				reject(err);

@@ -1,19 +1,17 @@
 export const existingCartItem = ({ prevCartItems, nextCartItem }) => {
 	return prevCartItems.find(
-		(cartItem) => cartItem.documentID === nextCartItem.documentID
+		(cartItem) => cartItem.reference === nextCartItem.reference
 	);
 };
 
 export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
-	const quantityIncrement = 1;
 	const cartItemExists = existingCartItem({ prevCartItems, nextCartItem });
 
 	if (cartItemExists) {
 		return prevCartItems.map((cartItem) =>
-			cartItem.documentID === nextCartItem.documentID
+			cartItem.reference === nextCartItem.reference
 				? {
-						...cartItem,
-						quantity: cartItem.quantity + quantityIncrement
+						...cartItem
 				  }
 				: cartItem
 		);
@@ -22,15 +20,14 @@ export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
 	return [
 		...prevCartItems,
 		{
-			...nextCartItem,
-			quantity: quantityIncrement
+			...nextCartItem
 		}
 	];
 };
 
 export const handleRemoveCartItem = ({ prevCartItems, cartItemToRemove }) => {
 	return prevCartItems.filter(
-		(item) => item.documentID !== cartItemToRemove.documentID
+		(item) => item.reference !== cartItemToRemove.reference
 	);
 };
 

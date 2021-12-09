@@ -38,7 +38,7 @@ const Welcoming = ({ children }) => {
 						</p>
 						<Typist.Delay ms={1500} />
 						<p>
-							&lt;body&gt; To visit{" "}
+							&lt;body&gt; To use all features from{" "}
 							<span style={{ color: "#FFA500", fontWeight: "bold" }}>
 								WHATCHSTATISTICS
 							</span>{" "}

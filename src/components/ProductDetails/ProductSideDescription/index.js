@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Box, Button, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	textBtn: {
@@ -33,12 +34,45 @@ const ProductSideDescription = ({}) => {
 
 	return (
 		<div>
-			<Box color={"text.secondary"} borderRadius="10px">
+			<Box
+				color={"text.secondary"}
+				borderRadius="10px"
+				sx={{ minHeight: "70.4vh" }}
+			>
 				<Typography
-					dangerouslySetInnerHTML={{ __html: productDesc }}
-					align="justify"
-					style={{ width: "100%", padding: "10px" }}
-				/>
+					variant={"h6"}
+					style={{ paddingLeft: "10px", color: "#ffffff" }}
+				>
+					Description
+				</Typography>
+				<Box
+					overflow="hidden"
+					sx={{
+						minHeight: "60vh",
+
+						height: "100%",
+						position: "relative",
+						paddingTop: "10px"
+					}}
+				>
+					<Typography
+						dangerouslySetInnerHTML={{ __html: productDesc }}
+						align="justify"
+						style={{
+							width: "100%",
+							paddingLeft: "10px",
+							paddingRight: "10px",
+							paddingBottom: "10px",
+							maxHeight: "60vh",
+							position: "absolute",
+							overflow: "scroll",
+							color: "#ffffffBF"
+						}}
+					/>
+				</Box>
+			</Box>
+			<Box sx={{ paddingLeft: "10px", paddingRight: "10px" }}>
+				<Divider style={{ background: "white" }} />
 			</Box>
 			<Box
 				color={"text.secondary"}

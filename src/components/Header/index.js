@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { CgMenuGridO } from "react-icons/cg";
 import { BsGraphUp } from "react-icons/bs";
-import { AiOutlineCodeSandbox, AiOutlineInfoCircle } from "react-icons/ai";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import { VscHome } from "react-icons/vsc";
 
 import Signup from "../Signup";
@@ -80,6 +80,8 @@ const Header = (props) => {
 	const [anchorSignup, setAnchorSignup] = useState(null);
 	const [anchorMediaMenu, setAnchorMediaMenu] = useState(null);
 	const [anchorWatchStatistics, setAnchorWatchstatistics] = useState(null);
+	const [mediaWatchstatisticsBtns, setMediaWatchstatisticsBtns] =
+		useState(false);
 
 	const [watchstatistics, setWatchstatistics] = useState(true);
 	//media
@@ -127,7 +129,6 @@ const Header = (props) => {
 		setAnchorWatchstatistics(e.currentTarget);
 	};
 	const configLeftIcons = {
-		watchstatistics,
 		handleWatchstatisticsOpen,
 		handleSupportOpen
 	};
@@ -135,6 +136,7 @@ const Header = (props) => {
 	//next
 	const handleCloseMediaMenu = () => {
 		setAnchorMediaMenu(null);
+		setMediaWatchstatisticsBtns(false);
 	};
 	const handleCloseMessagesMenu = () => {
 		setAnchorMessages(null);
@@ -258,18 +260,36 @@ const Header = (props) => {
 				<MenuItem
 					onClick={() => {
 						handleCloseWatchstatisticsMenu();
-						history.push("/watchstatistics");
-					}}
-				>
-					Rooster
-				</MenuItem>
-				<MenuItem
-					onClick={() => {
-						handleCloseWatchstatisticsMenu();
 						history.push("/search");
 					}}
 				>
 					Browse
+				</MenuItem>
+				<MenuItem
+					disabled={watchstatistics}
+					onClick={() => {
+						handleCloseWatchstatisticsMenu();
+						history.push("/watchstatistics/watchlaboratory");
+					}}
+				>
+					Watch Laboratory
+				</MenuItem>
+				<MenuItem
+					disabled={watchstatistics}
+					onClick={() => {
+						handleCloseWatchstatisticsMenu();
+						history.push("/watchstatistics/addwatch");
+					}}
+				>
+					Submit New Watch
+				</MenuItem>
+				<MenuItem
+					onClick={() => {
+						handleCloseWatchstatisticsMenu();
+						history.push("/watchstatistics/comparewatches");
+					}}
+				>
+					Compare Watches
 				</MenuItem>
 			</Menu>
 			<Menu
@@ -280,10 +300,21 @@ const Header = (props) => {
 				anchorEl={anchorSupport}
 				open={Boolean(anchorSupport)}
 			>
-				<MenuItem onClick={handleCloseSupportMenu}>Contact Us</MenuItem>
-				<MenuItem onClick={handleCloseSupportMenu}>Privacy Policy</MenuItem>
-				<MenuItem onClick={handleCloseSupportMenu}>FAQ</MenuItem>
-				<MenuItem onClick={handleCloseSupportMenu}>
+				<MenuItem disabled onClick={handleCloseSupportMenu}>
+					Contact Us
+				</MenuItem>
+				<MenuItem disabled onClick={handleCloseSupportMenu}>
+					Privacy Policy
+				</MenuItem>
+				<MenuItem
+					onClick={() => {
+						handleCloseSupportMenu();
+						history.push("/about/FAQ");
+					}}
+				>
+					FAQ
+				</MenuItem>
+				<MenuItem disabled onClick={handleCloseSupportMenu}>
 					Terms and Conditions
 				</MenuItem>
 			</Menu>
@@ -333,24 +364,54 @@ const Header = (props) => {
 					&nbsp;Home
 				</MenuItem>
 				<MenuItem
-					aria-controls="watchstatistics"
-					disabled={watchstatistics}
 					className={classes.textBtn}
-					activeStyle={activeStyle}
 					disableRipple
-					onClick={(e) => handleWatchstatisticsOpen(e)}
+					style={
+						mediaWatchstatisticsBtns
+							? { color: "#FFA500" }
+							: { color: "#ffffff" }
+					}
+					onClick={(e) =>
+						setMediaWatchstatisticsBtns(!mediaWatchstatisticsBtns)
+					}
 				>
 					<BsGraphUp />
 					&nbsp;WatchStatistics
 				</MenuItem>
+				{mediaWatchstatisticsBtns && [
+					<MenuItem
+						onClick={() => {
+							history.push("/search");
+						}}
+					>
+						Browse
+					</MenuItem>,
+					<MenuItem
+						disabled={watchstatistics}
+						onClick={() => {
+							history.push("/watchstatistics/watchlaboratory");
+						}}
+					>
+						Watch Laboratory
+					</MenuItem>,
+					<MenuItem
+						disabled={watchstatistics}
+						onClick={() => {
+							history.push("/watchstatistics/addwatch");
+						}}
+					>
+						Submit New Watch
+					</MenuItem>,
+					<MenuItem
+						onClick={() => {
+							handleCloseWatchstatisticsMenu();
+							history.push("/watchstatistics/comparewatches");
+						}}
+					>
+						Compare Watches
+					</MenuItem>
+				]}
 
-				<MenuItem
-					className={classes.textBtn}
-					activeStyle={activeStyle}
-					disableRipple
-				>
-					<AiOutlineCodeSandbox fontSize="1.5em" /> &nbsp;WatchBoxes
-				</MenuItem>
 				<MenuItem
 					aria-controls="support"
 					disableRipple

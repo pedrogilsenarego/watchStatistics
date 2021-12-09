@@ -1,24 +1,34 @@
 import React from "react";
-import ReactDOM from "react-dom";
+
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/createStore";
-import { ThemeProvider } from "@material-ui/styles";
-import theme from "./styles/MUITheme";
 
 import App from "./App";
+import { hydrate, render } from "react-dom";
 
-ReactDOM.render(
-	<Provider store={store}>
-		<BrowserRouter>
-			<PersistGate persistor={persistor}>
-				<ThemeProvider theme={theme}>
+const rootElement = document.getElementById("root");
+if (rootElement.hasChildNodes()) {
+	hydrate(
+		<Provider store={store}>
+			<BrowserRouter>
+				<PersistGate persistor={persistor}>
 					<App />
-				</ThemeProvider>
-			</PersistGate>
-		</BrowserRouter>
-	</Provider>,
-
-	document.getElementById("root")
-);
+				</PersistGate>
+			</BrowserRouter>
+		</Provider>,
+		rootElement
+	);
+} else {
+	render(
+		<Provider store={store}>
+			<BrowserRouter>
+				<PersistGate persistor={persistor}>
+					<App />
+				</PersistGate>
+			</BrowserRouter>
+		</Provider>,
+		rootElement
+	);
+}

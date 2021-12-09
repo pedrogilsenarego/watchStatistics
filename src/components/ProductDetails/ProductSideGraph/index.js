@@ -14,13 +14,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
 import Draggable from "react-draggable";
 import { RiDragDropLine } from "react-icons/ri";
-import { RiCloseCircleLine } from "react-icons/ri";
-import CategoriesLegend from "../CategoriesLegend";
+import { useParams } from "react-router";
 
-const mapState = (state) => ({
-	currentUser: state.user.currentUser,
-	product: state.productsData.product
-});
+import CategoriesLegend from "../CategoriesLegend";
 
 const useStyles = makeStyles((theme) => ({
 	menu: {
@@ -63,7 +59,11 @@ const initialTargetVoteState = {
 
 // eslint-disable-next-line
 const ProductSidePanel = ({}) => {
-	const { product } = useSelector(mapState);
+	const mapState = (state) => ({
+		currentUser: state.user.currentUser,
+		product: state.productsData.product
+	});
+	const { product, currentUser } = useSelector(mapState);
 	const [anchorVote, setAnchorVote] = useState(null);
 	const [anchorLegendVote, setAnchorLegendVote] = useState(null);
 	const [targetVoteCategories, setTargetVoteCategories] = useState({
@@ -71,6 +71,7 @@ const ProductSidePanel = ({}) => {
 	});
 	const [targetVote, setTargetVote] = useState(false);
 	const [update, setUpdate] = useState(true);
+	const { productID } = useParams();
 
 	const handleCloseVote = () => {
 		setAnchorVote(null);
@@ -98,6 +99,7 @@ const ProductSidePanel = ({}) => {
 		setTargetVote,
 		handleVisualTargetVote,
 		targetVote,
+		handleCloseVote,
 		handleUpdate
 	};
 
@@ -143,20 +145,21 @@ const ProductSidePanel = ({}) => {
 			datasets: [
 				{
 					data: votationsOwn,
-					label: "Own",
+					label: "Own/Experimented",
 
 					borderColor: "#42e6f5",
 					backgroundColor: "#42e6f566",
 					fill: true
 				},
-				dataSetTargetVote(),
+
 				{
 					data: votationsNonOwn,
-					label: "Not Own",
+					label: "Only seen Digitaly",
 					borderColor: "#E5F517",
 					fill: true,
 					backgroundColor: "#E5F51766"
-				}
+				},
+				dataSetTargetVote()
 			]
 		},
 
@@ -244,6 +247,8 @@ const ProductSidePanel = ({}) => {
 		}
 	};
 
+	if (!targetVote) configRadarChart.data.datasets.pop();
+
 	const memoRadarChart = useMemo(
 		() => <RadarChart {...configRadarChart} />,
 		// eslint-disable-next-line
@@ -270,45 +275,68 @@ const ProductSidePanel = ({}) => {
 						<Typography
 							fontWeight={600}
 							align="center"
-							style={{ width: "100%" }}
+							style={{ width: "100%", color: "#ffffff" }}
 						>
-							Total Score: {avgTotal}
-						</Typography>
-						<Typography align="center" style={{ width: "100%" }}>
-							Votes From Owners: {numberVotesOwn}
-						</Typography>
-						<Typography align="center" style={{ width: "100%" }}>
-							Score Owners: {avgVotationsOwn}
-						</Typography>
-						<Typography align="center" style={{ width: "100%" }}>
-							Votes From Non Owners: {numberVotesNotOwn}
-						</Typography>
-						<Typography align="center" style={{ width: "100%" }}>
-							Score Non Owners: {avgVotationsNotOwn}
+							Score: {avgTotal}
 						</Typography>
 
-						<Button
-							className={classes.textBtn}
-							style={{ width: "50%" }}
-							aria-controls="vote"
-							onClick={(e) => {
-								setAnchorVote(e.currentTarget);
-							}}
-							disableRipple
+						<Typography
+							align="center"
+							style={{ width: "100%", color: "#ffffffBF" }}
 						>
-							Vote
-						</Button>
-						<Button
-							className={classes.textBtn}
-							style={{ width: "50%" }}
-							aria-controls="legendVote"
-							onClick={(e) => {
-								setAnchorLegendVote(e.currentTarget);
-							}}
-							disableRipple
+							Own/Experimented: {avgVotationsOwn} Votes: {numberVotesOwn}
+						</Typography>
+						<Typography
+							align="center"
+							style={{ width: "100%", color: "#ffffffBF" }}
 						>
-							Categories
-						</Button>
+							Only Seen Digital: {avgVotationsNotOwn} Votes: {numberVotesNotOwn}
+						</Typography>
+						<Grid item style={{}}>
+							{currentUser && !currentUser.userVotes.includes(productID) && (
+								<Button
+									className={classes.textBtn}
+									style={{ width: "50%" }}
+									aria-controls="vote"
+									onClick={(e) => {
+										setAnchorVote(e.currentTarget);
+									}}
+									disableRipple
+								>
+									Vote
+								</Button>
+							)}
+							{currentUser && currentUser.userVotes.includes(productID) && (
+								<Button
+									className={classes.textBtn}
+									style={{ width: "50%" }}
+									disableRipple
+								>
+									Already Voted
+								</Button>
+							)}
+							{!currentUser && (
+								<Button
+									className={classes.textBtn}
+									style={{ width: "50%" }}
+									aria-controls="vote"
+									disableRipple
+								>
+									Login to Vote
+								</Button>
+							)}
+							<Button
+								className={classes.textBtn}
+								style={{ width: "50%" }}
+								aria-controls="legendVote"
+								onClick={(e) => {
+									setAnchorLegendVote(e.currentTarget);
+								}}
+								disableRipple
+							>
+								Categories
+							</Button>
+						</Grid>
 					</Box>
 				</Box>
 				<Draggable handle="#imHandle">
@@ -316,6 +344,7 @@ const ProductSidePanel = ({}) => {
 						disableScrollLock
 						className={classes.menu}
 						id="vote"
+						onClose={handleCloseVote}
 						anchorEl={anchorVote}
 						open={Boolean(anchorVote)}
 					>
@@ -325,9 +354,6 @@ const ProductSidePanel = ({}) => {
 						>
 							<Button id="imHandle">
 								<RiDragDropLine fontSize="1.5em" />
-							</Button>
-							<Button onClick={handleCloseVote}>
-								<RiCloseCircleLine fontSize="1.5em" />
 							</Button>
 						</ButtonGroup>
 						<MenuItem disableRipple>
@@ -340,6 +366,7 @@ const ProductSidePanel = ({}) => {
 						disableScrollLock
 						className={classes.menu2}
 						id="legendVote"
+						onClose={handleCloseLegendVote}
 						anchorEl={anchorLegendVote}
 						open={Boolean(anchorLegendVote)}
 					>
@@ -350,9 +377,6 @@ const ProductSidePanel = ({}) => {
 						>
 							<Button id="imHandle">
 								<RiDragDropLine fontSize="1.5em" />
-							</Button>
-							<Button onClick={handleCloseLegendVote}>
-								<RiCloseCircleLine fontSize="1.5em" />
 							</Button>
 						</ButtonGroup>
 					</Menu>

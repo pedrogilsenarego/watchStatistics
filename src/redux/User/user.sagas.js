@@ -14,7 +14,11 @@ import {
 	userError,
 	setUsers
 } from "./user.actions";
-import { handleResetPasswordAPI, handleFetchUsers } from "./user.helpers";
+import {
+	handleResetPasswordAPI,
+	handleFetchUsers,
+	handleUpdateUserPreferences
+} from "./user.helpers";
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
 	try {
@@ -103,7 +107,7 @@ export function* signUpUser({
 
 	try {
 		const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-		yield auth.currentUser.sendEmailVerification();
+		//yield auth.currentUser.sendEmailVerification();
 		const additionalData = { displayName };
 		yield getSnapshotFromUserAuth(user, additionalData);
 	} catch (err) {
@@ -141,7 +145,6 @@ export function* onGoogleSignInStart() {
 	yield takeLatest(userTypes.GOOGLE_SIGN_IN_START, googleSignIn);
 }
 
-//implementations
 export function* fetchUsers() {
 	try {
 		const users = yield handleFetchUsers();
@@ -155,6 +158,21 @@ export function* onFetchUsersStart() {
 	yield takeLatest(userTypes.FETCH_USERS_START, fetchUsers);
 }
 
+//implementations
+export function* updateUserPreference({ payload }) {
+	try {
+		yield handleUpdateUserPreferences({
+			...payload
+		});
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* onUpdateUserPreferencesStart() {
+	yield takeLatest(userTypes.SET_PREFERENCES, updateUserPreference);
+}
+
 export default function* userSagas() {
 	yield all([
 		call(onEmailSignInStart),
@@ -163,6 +181,7 @@ export default function* userSagas() {
 		call(onSignUpUserStart),
 		call(onResetPasswordStart),
 		call(onGoogleSignInStart),
-		call(onFetchUsersStart)
+		call(onFetchUsersStart),
+		call(onUpdateUserPreferencesStart)
 	]);
 }

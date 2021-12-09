@@ -34,3 +34,29 @@ export const updateProductVoteStart = (productData) => ({
 	type: productsTypes.UPDATE_PRODUCT_VOTE_START,
 	payload: productData
 });
+
+export const fetchLatestProductsStart = (filters = {}) => ({
+	type: productsTypes.FETCH_LATEST_PRODUCTS_START,
+	payload: filters
+});
+
+export const setLatestProducts = (latestProducts) => ({
+	type: productsTypes.SET_LATEST_PRODUCTS,
+	payload: latestProducts
+});
+
+export const fetchValidationProductsStart = (filters = {}) => ({
+	type: productsTypes.FETCH_VALIDATION_PRODUCTS_START,
+	payload: filters
+});
+
+export const setValidationProducts = (validationProducts) => ({
+	type: productsTypes.SET_VALIDATION_PRODUCTS,
+	payload: validationProducts
+});
+
+//new implementations
+export const updateProductDetailsStart = (productDetails) => ({
+	type: productsTypes.UPDATE_PRODUCT_DETAILS_START,
+	payload: productDetails
+});

@@ -9,13 +9,33 @@ import {
 	TableBody,
 	Grid,
 	Paper,
-	Typography
+	Box
 } from "@material-ui/core";
+import LinearProgress, {
+	linearProgressClasses
+} from "@mui/material/LinearProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsersStart } from "../../../redux/User/user.actions";
+import { styled } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+	tableHead: {
+		backgroundColor: "#145875 !important"
+	}
+}));
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+	height: 4,
+	borderRadius: 5,
+	[`&.${linearProgressClasses.colorPrimary}`]: {
+		backgroundColor: "#ffffffB3"
+	},
+	[`& .${linearProgressClasses.bar}`]: {
+		borderRadius: 5,
+		backgroundColor: "#154A67"
+	}
+}));
 
 const mapState = (state) => ({
 	users: state.user.users,
@@ -23,10 +43,10 @@ const mapState = (state) => ({
 });
 
 // eslint-disable-next-line
-const MainUsers = ({}) => {
+const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
-	const pageSize = 5;
+	const pageSize = 10;
 
 	const { users } = useSelector(mapState);
 
@@ -34,7 +54,10 @@ const MainUsers = ({}) => {
 
 	useEffect(
 		() => {
-			dispatch(fetchUsersStart({ pageSize }));
+			if (!loadedTopUsers) {
+				dispatch(fetchUsersStart({ pageSize }));
+				handleLoadedTopUsers();
+			}
 		},
 		// eslint-disable-next-line
 		[]
@@ -53,13 +76,10 @@ const MainUsers = ({}) => {
 	return (
 		<div>
 			<Grid container className={classes.container} style={{ padding: "20px" }}>
-				<Grid item xs={12} md={6}>
-					<Typography variant={"h5"} align="center">
-						Top 5 Users
-					</Typography>
+				<Grid item xs={12} md={8}>
 					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
-						<Table aria-label="simple table">
-							<TableHead>
+						<Table aria-label="simple table" size="small">
+							<TableHead className={classes.tableHead}>
 								<TableRow>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										#
@@ -67,18 +87,73 @@ const MainUsers = ({}) => {
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Users
 									</TableCell>
-
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Rank
+									</TableCell>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Progress
+									</TableCell>
 									<TableCell align="center" style={{ fontSize: "15px" }}>
 										Number of Votes
+									</TableCell>
+									<TableCell align="center" style={{ fontSize: "15px" }}>
+										Watches Submited
 									</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
 								{data.map((product, i) => {
-									const { displayName, userVotes } = product;
+									const {
+										displayName,
+										userVotes,
+										experience,
+										watchesSubmited
+									} = product;
+
+									const rank = () => {
+										if (!experience) return;
+										if (experience < 20) return "Noob";
+										if (experience < 100) return "Begginer";
+										if (experience < 200) return "Watch Enthusiast";
+										if (experience < 500) return "Mature Watch Enthusiast";
+										if (experience < 1500) return "Watch Connoisseour";
+										if (experience < 5000) return "Watch Geek Legend";
+										else return "Watch God";
+									};
+									const progress = () => {
+										if (experience < 20) return (experience / 20) * 100;
+										if (experience < 100) return ((experience - 20) / 80) * 100;
+
+										if (experience < 200)
+											return ((experience - 100) / 100) * 100;
+
+										if (experience < 500)
+											return ((experience - 200) / 300) * 100;
+
+										if (experience < 1500)
+											return ((experience - 500) / 1000) * 100;
+
+										if (experience < 5000)
+											return ((experience - 1500) / 3500) * 100;
+										else return 100;
+									};
+
+									const colorRank = () => {
+										if (rank() === "Noob") return "#ffffff66";
+										if (rank() === "Begginer") return "white";
+										if (rank() === "Watch Enthusiast") return "green";
+										if (rank() === "Mature Watch Enthusiast") return "blue";
+										if (rank() === "Watch Connoisseour") return "purple";
+										if (rank() === "Watch Geek Legend") return "orange";
+										if (rank() === "Watch God") return "red";
+									};
 
 									return (
 										<TableRow
+											style={{
+												cursor: "pointer",
+												background: "black"
+											}}
 											key={displayName}
 											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 										>
@@ -93,8 +168,34 @@ const MainUsers = ({}) => {
 											>
 												{displayName}
 											</TableCell>
+											<TableCell
+												align="center"
+												component="th"
+												scope="row"
+												style={{ color: colorRank() }}
+											>
+												{rank()}
+											</TableCell>
+											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+												<Box
+													sx={{
+														display: "flex",
+														justifyContent: "center",
+														paddingTop: "10px"
+													}}
+												>
+													<BorderLinearProgress
+														style={{ width: "75%" }}
+														variant="determinate"
+														value={progress()}
+													/>
+												</Box>
+											</TableCell>
 											<TableCell align="center" style={{ color: "#ffffffB3" }}>
 												{userVotes.length - 1}
+											</TableCell>
+											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+												{watchesSubmited}
 											</TableCell>
 										</TableRow>
 									);
