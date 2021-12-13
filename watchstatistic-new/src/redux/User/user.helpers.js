@@ -84,10 +84,16 @@ export const handleUpdateBoxStatus = (product) => {
 	return new Promise((resolve, reject) => {
 		let ref = firestore.collection("users").doc(userID);
 
-		ref.update({
-			whiteBox: firebase.firestore.FieldValue.increment(1),
-			points: firebase.firestore.FieldValue.increment(-10)
-		});
+		if (product.flag === "getWhitebox")
+			ref.update({
+				whiteBox: firebase.firestore.FieldValue.increment(1),
+				points: firebase.firestore.FieldValue.increment(-10)
+			});
+
+		if (product.flag === "openWhitebox")
+			ref.update({
+				whiteBox: firebase.firestore.FieldValue.increment(-1)
+			});
 
 		ref
 			.then(() => {
