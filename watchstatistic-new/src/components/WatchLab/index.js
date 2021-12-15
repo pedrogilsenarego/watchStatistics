@@ -39,11 +39,17 @@ const WatchLab = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const [helperDescription, setHelperDescription] = useState(false);
+	const [helperDescriptionBlue, setHelperDescriptionBlue] = useState(false);
 	const { currentUser } = useSelector(mapState);
 
 	const whiteBoxes = () => {
 		if (!currentUser.whiteBox) return 0;
 		else return currentUser.whiteBox;
+	};
+
+	const BlueBoxes = () => {
+		if (!currentUser.blueBox) return 0;
+		else return currentUser.blueBox;
 	};
 
 	const handleGetWhiteBox = () => {
@@ -57,8 +63,25 @@ const WatchLab = () => {
 		dispatch(updateBoxStatus(configData));
 	};
 
+	const handleGetBlueBox = () => {
+		const configData = {
+			...currentUser,
+			flag: "getBluebox",
+			blueFragments: currentUser.blueFragments - 10,
+			blueBox: BlueBoxes() + 1,
+			userID: currentUser.id
+		};
+		dispatch(updateBoxStatus(configData));
+	};
+
 	const whiteboxDisabled = () => {
-		if (currentUser.points <= 10) {
+		if (!currentUser.points || currentUser.points <= 10) {
+			return true;
+		} else return false;
+	};
+
+	const blueboxDisabled = () => {
+		if (!currentUser.blueFragments || currentUser.blueFragments <= 10) {
 			return true;
 		} else return false;
 	};
@@ -72,14 +95,34 @@ const WatchLab = () => {
 		};
 		dispatch(updateBoxStatus(configData));
 	};
+
+	const handleOpenBlueBox = () => {
+		const configData = {
+			...currentUser,
+			flag: "openBluebox",
+			blueBox: BlueBoxes() - 1,
+			userID: currentUser.id
+		};
+		dispatch(updateBoxStatus(configData));
+	};
 	const whiteboxDisabled2 = () => {
-		if (currentUser.whiteBoxes < 1) {
+		if (!currentUser.whiteBox || currentUser.whiteBox < 1) {
+			return true;
+		} else return false;
+	};
+
+	const blueboxDisabled2 = () => {
+		if (!currentUser.blueBox || currentUser.blueBox < 1) {
 			return true;
 		} else return false;
 	};
 
 	const handleCloseWhiteBoxesMenu = () => {
 		setHelperDescription(false);
+	};
+
+	const handleCloseBlueBoxesMenu = () => {
+		setHelperDescriptionBlue(false);
 	};
 
 	return (
@@ -93,6 +136,9 @@ const WatchLab = () => {
 							</Typography>
 							<Typography style={{ marginTop: "20px" }}>
 								Current Points: {currentUser.points}{" "}
+							</Typography>
+							<Typography style={{ marginTop: "5px" }}>
+								Blue Fragments: {currentUser.blueFragments}{" "}
 							</Typography>
 						</Grid>
 						<Grid item xs={12} style={{ marginTop: "30px" }}>
@@ -154,9 +200,11 @@ const WatchLab = () => {
 											anchorEl={helperDescription}
 											open={Boolean(helperDescription)}
 										>
-											<MenuItem>Browse</MenuItem>
-											<MenuItem>Watch Laboratory</MenuItem>
-											<MenuItem>Submit New Watch</MenuItem>
+											<MenuItem>2xGrey or White Parts </MenuItem>
+											<MenuItem>20% Chance of a Light Green Part</MenuItem>
+											<MenuItem>1% Chance of a Dark Green Part</MenuItem>
+											<MenuItem>1-3 Fragments of Blue Box</MenuItem>
+											<MenuItem>2% Chance of Fragment of Purple Box</MenuItem>
 										</Menu>
 									</Grid>
 
@@ -169,16 +217,51 @@ const WatchLab = () => {
 											textAlign: "center",
 											border: "solid 1px",
 											borderRadius: "4px",
-											borderColor: "#ffffff66"
+											borderColor: "#ffffff66",
+											padding: "10px"
 										}}
 									>
-										<Typography>BlueBox</Typography>
-										<Button size="small">
-											<AiOutlineQuestionCircle
-												onClick={() => setHelperDescription(!helperDescription)}
-												fontSize="1.5em"
-											/>
-										</Button>
+										<Typography>BlueBox: 10 Fragments</Typography>
+										<Typography>Owned: {BlueBoxes()}</Typography>
+										<ButtonGroup style={{ marginTop: "10px" }}>
+											<Button
+												disabled={blueboxDisabled()}
+												size="small"
+												onClick={() => handleGetBlueBox()}
+											>
+												Get
+											</Button>
+											<Button
+												disabled={blueboxDisabled2()}
+												size="small"
+												onClick={() => handleOpenBlueBox()}
+											>
+												Open
+											</Button>
+											<Button
+												aria-controls="blueBoxes"
+												size="small"
+												onClick={() =>
+													setHelperDescriptionBlue(!helperDescriptionBlue)
+												}
+											>
+												<AiOutlineQuestionCircle fontSize="1.5em" />
+											</Button>
+										</ButtonGroup>
+										<Menu
+											disableScrollLock
+											className={classes.menu}
+											id="blueBoxes"
+											onClose={handleCloseBlueBoxesMenu}
+											anchorEl={helperDescriptionBlue}
+											open={Boolean(helperDescriptionBlue)}
+										>
+											<MenuItem>3xWhite or Light Green Parts </MenuItem>
+											<MenuItem>20% Chance of a Dark Green Part</MenuItem>
+											<MenuItem>1% Chance of a Light Blue Part</MenuItem>
+											<MenuItem>1-3 Fragments of Purple Box</MenuItem>
+											<MenuItem>2% Chance of Fragment of Orange Box</MenuItem>
+										</Menu>
 									</Grid>
 									<Grid
 										item
