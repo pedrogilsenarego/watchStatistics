@@ -8,17 +8,36 @@ import {
 	Box,
 	Paper,
 	Button,
-	ButtonGroup
+	ButtonGroup,
+	Menu,
+	MenuItem
 } from "@material-ui/core";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { updateBoxStatus } from "../../redux/User/user.actions";
+import { makeStyles } from "@material-ui/core/styles";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
 
+const useStyles = makeStyles((theme) => ({
+	menu: {
+		marginTop: "70px",
+		"& .MuiPaper-root": {
+			backgroundColor: "#04040680",
+			color: "#ffffff",
+			disableScrollLock: true,
+
+			[theme.breakpoints.up(750)]: {
+				maxWidth: "350px"
+			}
+		}
+	}
+}));
+
 const WatchLab = () => {
 	const dispatch = useDispatch();
+	const classes = useStyles();
 	const [helperDescription, setHelperDescription] = useState(false);
 	const { currentUser } = useSelector(mapState);
 
@@ -57,6 +76,10 @@ const WatchLab = () => {
 		if (currentUser.whiteBoxes < 1) {
 			return true;
 		} else return false;
+	};
+
+	const handleCloseWhiteBoxesMenu = () => {
+		setHelperDescription(false);
 	};
 
 	return (
@@ -113,15 +136,28 @@ const WatchLab = () => {
 											>
 												Open
 											</Button>
-											<Button size="small">
-												<AiOutlineQuestionCircle
-													onClick={() =>
-														setHelperDescription(!helperDescription)
-													}
-													fontSize="1.5em"
-												/>
+											<Button
+												size="small"
+												aria-controls="whiteBoxes"
+												onClick={(e) => {
+													setHelperDescription(e.currentTarget);
+												}}
+											>
+												<AiOutlineQuestionCircle fontSize="1.5em" />
 											</Button>
 										</ButtonGroup>
+										<Menu
+											disableScrollLock
+											className={classes.menu}
+											id="whiteBoxes"
+											onClose={handleCloseWhiteBoxesMenu}
+											anchorEl={helperDescription}
+											open={Boolean(helperDescription)}
+										>
+											<MenuItem>Browse</MenuItem>
+											<MenuItem>Watch Laboratory</MenuItem>
+											<MenuItem>Submit New Watch</MenuItem>
+										</Menu>
 									</Grid>
 
 									<Grid
