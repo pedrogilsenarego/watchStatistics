@@ -39,6 +39,7 @@ const WatchLab = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
+	const [popUpInf, setPopUpInfo] = useState(null);
 	const [helperDescription, setHelperDescription] = useState(false);
 	const [helperDescriptionBlue, setHelperDescriptionBlue] = useState(false);
 	const { currentUser } = useSelector(mapState);
@@ -47,6 +48,11 @@ const WatchLab = () => {
 		min = Math.ceil(min);
 		max = Math.floor(max);
 		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	function percentageLoot(percentage) {
+		if (getRandomInt(1, 100) <= percentage) return 1;
+		else return 0;
 	}
 
 	const whiteBoxes = () => {
@@ -62,6 +68,11 @@ const WatchLab = () => {
 	const blueBoxFragments = () => {
 		if (!currentUser.blueBoxFragments) return 0;
 		else return currentUser.blueBoxFragments;
+	};
+
+	const purpleBoxFragments = () => {
+		if (!currentUser.purpleBoxFragments) return 0;
+		else return currentUser.purpleBoxFragments;
 	};
 
 	const handleGetWhiteBox = () => {
@@ -104,10 +115,18 @@ const WatchLab = () => {
 			flag: "openWhitebox",
 			whiteBox: whiteBoxes() - 1,
 			blueBoxFragments: blueBoxFragments() + getRandomInt(1, 3),
+			purpleBoxFragments: purpleBoxFragments() + percentageLoot(2),
 			userID: currentUser.id
 		};
 		dispatch(updateBoxStatus(configData));
 		setOpenBoxPopUp(true);
+		setPopUpInfo(
+			"You just received: " +
+				Number(configData.blueBoxFragments - blueBoxFragments()) +
+				" Blue Box Fragments, " +
+				Number(configData.purpleBoxFragments - purpleBoxFragments()) +
+				" Purple Box Fragments"
+		);
 	};
 
 	const handleOpenBlueBox = () => {
@@ -158,6 +177,9 @@ const WatchLab = () => {
 							<Typography style={{ marginTop: "5px" }}>
 								Blue Fragments: {blueBoxFragments()}{" "}
 							</Typography>
+							<Typography style={{ marginTop: "5px" }}>
+								Purple Fragments: {purpleBoxFragments()}{" "}
+							</Typography>
 							{openBoxPopUp && (
 								<Menu
 									disableScrollLock
@@ -167,7 +189,7 @@ const WatchLab = () => {
 									anchorEl={openBoxPopUp}
 									open={Boolean(openBoxPopUp)}
 								>
-									<MenuItem>You just received:</MenuItem>
+									<MenuItem>{popUpInf}</MenuItem>
 								</Menu>
 							)}
 						</Grid>
