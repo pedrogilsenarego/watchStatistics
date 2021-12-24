@@ -38,9 +38,16 @@ const useStyles = makeStyles((theme) => ({
 const WatchLab = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
+	const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
 	const [helperDescription, setHelperDescription] = useState(false);
 	const [helperDescriptionBlue, setHelperDescriptionBlue] = useState(false);
 	const { currentUser } = useSelector(mapState);
+
+	function getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
 
 	const whiteBoxes = () => {
 		if (!currentUser.whiteBox) return 0;
@@ -50,6 +57,11 @@ const WatchLab = () => {
 	const BlueBoxes = () => {
 		if (!currentUser.blueBox) return 0;
 		else return currentUser.blueBox;
+	};
+
+	const blueBoxFragments = () => {
+		if (!currentUser.blueBoxFragments) return 0;
+		else return currentUser.blueBoxFragments;
 	};
 
 	const handleGetWhiteBox = () => {
@@ -91,9 +103,11 @@ const WatchLab = () => {
 			...currentUser,
 			flag: "openWhitebox",
 			whiteBox: whiteBoxes() - 1,
+			blueBoxFragments: blueBoxFragments() + getRandomInt(1, 3),
 			userID: currentUser.id
 		};
 		dispatch(updateBoxStatus(configData));
+		setOpenBoxPopUp(true);
 	};
 
 	const handleOpenBlueBox = () => {
@@ -138,8 +152,13 @@ const WatchLab = () => {
 								Current Points: {currentUser.points}{" "}
 							</Typography>
 							<Typography style={{ marginTop: "5px" }}>
-								Blue Fragments: {currentUser.blueFragments}{" "}
+								Blue Fragments: {blueBoxFragments()}{" "}
 							</Typography>
+							{openBoxPopUp && (
+								<Typography style={{ marginTop: "5px" }}>
+									Teste Popup
+								</Typography>
+							)}
 						</Grid>
 						<Grid item xs={12} style={{ marginTop: "30px" }}>
 							<Box
