@@ -139,6 +139,10 @@ const WatchLab = () => {
 		setHelperDescriptionBlue(false);
 	};
 
+	const handleCloseOpenBoxPopUp = () => {
+		setOpenBoxPopUp(false);
+	};
+
 	return (
 		<div>
 			<Grid container justify="center">
@@ -155,9 +159,16 @@ const WatchLab = () => {
 								Blue Fragments: {blueBoxFragments()}{" "}
 							</Typography>
 							{openBoxPopUp && (
-								<Typography style={{ marginTop: "5px" }}>
-									Teste Popup
-								</Typography>
+								<Menu
+									disableScrollLock
+									className={classes.menu}
+									id="openBoxPopUp"
+									onClose={handleCloseOpenBoxPopUp}
+									anchorEl={openBoxPopUp}
+									open={Boolean(openBoxPopUp)}
+								>
+									<MenuItem>You just received:</MenuItem>
+								</Menu>
 							)}
 						</Grid>
 						<Grid item xs={12} style={{ marginTop: "30px" }}>
