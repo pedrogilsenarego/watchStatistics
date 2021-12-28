@@ -39,7 +39,7 @@ const WatchLab = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
-	const [bagFull, setBagFull] = useState(true);
+	const [bagFull, setBagFull] = useState(false);
 	const [popUpInf, setPopUpInfo] = useState(null);
 	const [helperDescription, setHelperDescription] = useState(false);
 	const [helperDescriptionBlue, setHelperDescriptionBlue] = useState(false);
@@ -47,13 +47,14 @@ const WatchLab = () => {
 
 	useEffect(
 		() => {
-			if (currentUser.watchParts.length > bagSize()) {
+			if (currentUser.watchParts && currentUser.watchParts.length > bagSize()) {
 				setBagFull(true);
 			}
 		},
 		// eslint-disable-next-line
 		[currentUser.watchParts]
 	);
+
 	function getRandomInt(min, max) {
 		min = Math.ceil(min);
 		max = Math.floor(max);
@@ -76,7 +77,7 @@ const WatchLab = () => {
 
 	function getRandomGreyPart() {
 		const a = getRandomWatchPart();
-		return "GR" + a;
+		return "0" + a;
 	}
 
 	const bagSize = () => {
@@ -168,7 +169,7 @@ const WatchLab = () => {
 				" Blue Box Fragments, " +
 				Number(configData.purpleBoxFragments - purpleBoxFragments()) +
 				" Purple Box Fragments, " +
-				a
+				a.substring(1)
 		);
 	};
 
@@ -185,7 +186,7 @@ const WatchLab = () => {
 		if (
 			!currentUser.whiteBox ||
 			currentUser.whiteBox < 1 ||
-			currentUser.watchParts.length > bagSize()
+			(currentUser.watchParts && currentUser.watchParts.length > bagSize())
 		) {
 			return true;
 		} else return false;
@@ -195,7 +196,7 @@ const WatchLab = () => {
 		if (
 			!currentUser.blueBox ||
 			currentUser.blueBox < 1 ||
-			currentUser.watchParts.length > bagSize()
+			(currentUser.watchParts && currentUser.watchParts.length > bagSize())
 		) {
 			return true;
 		} else return false;
@@ -413,9 +414,9 @@ const WatchLab = () => {
 							</Box>
 						</Grid>
 						{bagFull && (
-							<Typography>
+							<Typography style={{ marginTop: "10px", color: "orange" }}>
 								Your bag is full of Watch Parts, you need to use or delete some
-								to open more boxes.
+								parts to open more boxes.
 							</Typography>
 						)}
 						<Grid item xs={12} style={{ marginTop: "30px" }}>
