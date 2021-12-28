@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 			disableScrollLock: true,
 
 			[theme.breakpoints.up(750)]: {
-				maxWidth: "350px"
+				maxWidth: "1000px"
 			}
 		}
 	}
@@ -54,6 +54,36 @@ const WatchLab = () => {
 		if (getRandomInt(1, 100) <= percentage) return 1;
 		else return 0;
 	}
+
+	function getRandomWatchPart() {
+		const a = getRandomInt(1, 5);
+		if (a === 1) return "WatchCase";
+		if (a === 2) return "Movement";
+		if (a === 3) return "Crown";
+		if (a === 4) return "Glass";
+		if (a === 5) return "Bracelet";
+	}
+
+	function getRandomGreyPart() {
+		const a = getRandomWatchPart();
+		return "GR" + a;
+	}
+
+	const bagSize = () => {
+		if (!currentUser.experience) return 0;
+		if (currentUser.experience < 20) return 5;
+		if (currentUser.experience < 100) return 6;
+		if (currentUser.experience < 200) return 7;
+		if (currentUser.experience < 500) return 8;
+		if (currentUser.experience < 1500) return 9;
+		if (currentUser.experience < 5000) return 10;
+		else return 15;
+	};
+
+	const itemsBag = () => {
+		if (!currentUser.watchParts) return "";
+		else return currentUser.watchParts;
+	};
 
 	const whiteBoxes = () => {
 		if (!currentUser.whiteBox) return 0;
@@ -110,12 +140,14 @@ const WatchLab = () => {
 	};
 
 	const handleOpenWhiteBox = () => {
+		const a = getRandomGreyPart();
 		const configData = {
 			...currentUser,
 			flag: "openWhitebox",
 			whiteBox: whiteBoxes() - 1,
 			blueBoxFragments: blueBoxFragments() + getRandomInt(1, 3),
 			purpleBoxFragments: purpleBoxFragments() + percentageLoot(2),
+			watchParts: !currentUser.watchParts ? [a] : [...itemsBag(), a],
 			userID: currentUser.id
 		};
 		dispatch(updateBoxStatus(configData));
@@ -125,7 +157,8 @@ const WatchLab = () => {
 				Number(configData.blueBoxFragments - blueBoxFragments()) +
 				" Blue Box Fragments, " +
 				Number(configData.purpleBoxFragments - purpleBoxFragments()) +
-				" Purple Box Fragments"
+				" Purple Box Fragments, " +
+				a
 		);
 	};
 
@@ -169,7 +202,7 @@ const WatchLab = () => {
 					<Grid container style={{ padding: "20px" }}>
 						<Grid item xs={12}>
 							<Typography variant="h5">
-								Trade your points and build your watch collection
+								User your Goodies to build your watch collection
 							</Typography>
 							<Typography style={{ marginTop: "20px" }}>
 								Current Points: {currentUser.points}{" "}
@@ -179,6 +212,9 @@ const WatchLab = () => {
 							</Typography>
 							<Typography style={{ marginTop: "5px" }}>
 								Purple Fragments: {purpleBoxFragments()}{" "}
+							</Typography>
+							<Typography style={{ marginTop: "5px" }}>
+								Watch Parts: {itemsBag().length}/{bagSize()}{" "}
 							</Typography>
 							{openBoxPopUp && (
 								<Menu
@@ -252,8 +288,8 @@ const WatchLab = () => {
 											anchorEl={helperDescription}
 											open={Boolean(helperDescription)}
 										>
-											<MenuItem>2xGrey or White Parts </MenuItem>
-											<MenuItem>20% Chance of a Light Green Part</MenuItem>
+											<MenuItem>Grey Watch Part </MenuItem>
+											<MenuItem>20% Chance of a White Watch Part</MenuItem>
 											<MenuItem>1% Chance of a Dark Green Part</MenuItem>
 											<MenuItem>1-3 Fragments of Blue Box</MenuItem>
 											<MenuItem>2% Chance of Fragment of Purple Box</MenuItem>
@@ -308,9 +344,9 @@ const WatchLab = () => {
 											anchorEl={helperDescriptionBlue}
 											open={Boolean(helperDescriptionBlue)}
 										>
-											<MenuItem>3xWhite or Light Green Parts </MenuItem>
-											<MenuItem>20% Chance of a Dark Green Part</MenuItem>
-											<MenuItem>1% Chance of a Light Blue Part</MenuItem>
+											<MenuItem>White Watch Part </MenuItem>
+											<MenuItem>20% Chance of a Light Green Part</MenuItem>
+											<MenuItem>1% Chance of a Dark Green Watch Part</MenuItem>
 											<MenuItem>1-3 Fragments of Purple Box</MenuItem>
 											<MenuItem>2% Chance of Fragment of Orange Box</MenuItem>
 										</Menu>

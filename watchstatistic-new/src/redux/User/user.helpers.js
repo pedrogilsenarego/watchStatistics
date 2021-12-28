@@ -79,7 +79,7 @@ export const handleUpdateUserPreferences = (product) => {
 //implementations
 
 export const handleUpdateBoxStatus = (product) => {
-	const { userID, blueBoxFragments, purpleBoxFragments } = product;
+	const { userID, blueBoxFragments, purpleBoxFragments, watchParts } = product;
 
 	return new Promise((resolve, reject) => {
 		let ref = firestore.collection("users").doc(userID);
@@ -94,7 +94,8 @@ export const handleUpdateBoxStatus = (product) => {
 			ref.update({
 				whiteBox: firebase.firestore.FieldValue.increment(-1),
 				blueBoxFragments: blueBoxFragments,
-				purpleBoxFragments: purpleBoxFragments
+				purpleBoxFragments: purpleBoxFragments,
+				watchParts: watchParts
 			});
 
 		ref
