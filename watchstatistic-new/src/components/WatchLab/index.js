@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
@@ -39,11 +39,21 @@ const WatchLab = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
+	const [bagFull, setBagFull] = useState(true);
 	const [popUpInf, setPopUpInfo] = useState(null);
 	const [helperDescription, setHelperDescription] = useState(false);
 	const [helperDescriptionBlue, setHelperDescriptionBlue] = useState(false);
 	const { currentUser } = useSelector(mapState);
 
+	useEffect(
+		() => {
+			if (currentUser.watchParts.length > bagSize()) {
+				setBagFull(true);
+			}
+		},
+		// eslint-disable-next-line
+		[currentUser.watchParts]
+	);
 	function getRandomInt(min, max) {
 		min = Math.ceil(min);
 		max = Math.floor(max);
@@ -172,13 +182,21 @@ const WatchLab = () => {
 		dispatch(updateBoxStatus(configData));
 	};
 	const whiteboxDisabled2 = () => {
-		if (!currentUser.whiteBox || currentUser.whiteBox < 1) {
+		if (
+			!currentUser.whiteBox ||
+			currentUser.whiteBox < 1 ||
+			currentUser.watchParts.length > bagSize()
+		) {
 			return true;
 		} else return false;
 	};
 
 	const blueboxDisabled2 = () => {
-		if (!currentUser.blueBox || currentUser.blueBox < 1) {
+		if (
+			!currentUser.blueBox ||
+			currentUser.blueBox < 1 ||
+			currentUser.watchParts.length > bagSize()
+		) {
 			return true;
 		} else return false;
 	};
@@ -394,6 +412,12 @@ const WatchLab = () => {
 								</Grid>
 							</Box>
 						</Grid>
+						{bagFull && (
+							<Typography>
+								Your bag is full of Watch Parts, you need to use or delete some
+								to open more boxes.
+							</Typography>
+						)}
 						<Grid item xs={12} style={{ marginTop: "30px" }}>
 							<Box
 								style={{
