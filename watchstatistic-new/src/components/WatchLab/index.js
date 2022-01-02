@@ -13,6 +13,7 @@ import {
 	MenuItem
 } from "@material-ui/core";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { TiDelete } from "react-icons/ti";
 import { updateBoxStatus } from "../../redux/User/user.actions";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -214,16 +215,27 @@ const WatchLab = () => {
 		setOpenBoxPopUp(false);
 	};
 
-	const newWatchParts = () => {
-		let arraySize = currentUser.watchParts.length;
-		let i = 0;
-		const newArray = [];
-		while (i <= arraySize) {
-			newArray.push(currentUser.watchParts[i]);
-			i++;
-		}
+	const newWatchParts = (watchParts) => {
+		let newArray = watchParts;
+		newArray = newArray.substring(1);
 		return newArray;
 	};
+
+	const colorWatchParts = (watchParts) => {
+		let newArray = watchParts;
+		let color = newArray[0];
+		if (color === "0") return "#ffffff66";
+		if (color === "1") return "#ffffff";
+		if (color === "2") return "lightGreen";
+		if (color === "3") return "darkGreen";
+		if (color === "4") return "lightBlue";
+		if (color === "5") return "darkBlue";
+		if (color === "6") return "purple";
+		if (color === "7") return "orange";
+		if (color === "8") return "red";
+	};
+
+	const handleDeleteWatchPart = () => {};
 
 	return (
 		<div>
@@ -246,18 +258,26 @@ const WatchLab = () => {
 							<Typography style={{ marginTop: "5px" }}>
 								Watch Parts: {itemsBag().length}/{bagSize()}{" "}
 							</Typography>
-							<Grid container>{newWatchParts()}</Grid>
 							<Grid container>
 								{currentUser.watchParts &&
 									currentUser.watchParts.map((watchParts, pos) => {
 										return (
 											<Grid xs={6} md={3}>
-												<Button
-													align="justify"
-													style={{ width: "100%", padding: "10px" }}
-												>
-													{watchParts}
-												</Button>
+												<ButtonGroup>
+													<Button
+														align="justify"
+														style={{
+															width: "100%",
+															padding: "10px",
+															color: colorWatchParts(watchParts)
+														}}
+													>
+														{newWatchParts(watchParts)}
+													</Button>
+													<Button>
+														<TiDelete fontSize="3.5em" />
+													</Button>
+												</ButtonGroup>
 											</Grid>
 										);
 									})}
@@ -336,7 +356,7 @@ const WatchLab = () => {
 										>
 											<MenuItem>Grey Watch Part </MenuItem>
 											<MenuItem>20% Chance of a White Watch Part</MenuItem>
-											<MenuItem>1% Chance of a Dark Green Part</MenuItem>
+											<MenuItem>1% Chance of a Light Green Part</MenuItem>
 											<MenuItem>1-3 Fragments of Blue Box</MenuItem>
 											<MenuItem>2% Chance of Fragment of Purple Box</MenuItem>
 										</Menu>
