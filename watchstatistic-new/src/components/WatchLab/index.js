@@ -186,7 +186,7 @@ const WatchLab = () => {
 		if (
 			!currentUser.whiteBox ||
 			currentUser.whiteBox < 1 ||
-			(currentUser.watchParts && currentUser.watchParts.length > bagSize())
+			(currentUser.watchParts && currentUser.watchParts.length >= bagSize())
 		) {
 			return true;
 		} else return false;
@@ -196,7 +196,7 @@ const WatchLab = () => {
 		if (
 			!currentUser.blueBox ||
 			currentUser.blueBox < 1 ||
-			(currentUser.watchParts && currentUser.watchParts.length > bagSize())
+			(currentUser.watchParts && currentUser.watchParts.length >= bagSize())
 		) {
 			return true;
 		} else return false;
@@ -212,6 +212,17 @@ const WatchLab = () => {
 
 	const handleCloseOpenBoxPopUp = () => {
 		setOpenBoxPopUp(false);
+	};
+
+	const newWatchParts = () => {
+		let arraySize = currentUser.watchParts.length;
+		let i = 0;
+		const newArray = [];
+		while (i <= arraySize) {
+			newArray.push(currentUser.watchParts[i]);
+			i++;
+		}
+		return newArray;
 	};
 
 	return (
@@ -235,6 +246,22 @@ const WatchLab = () => {
 							<Typography style={{ marginTop: "5px" }}>
 								Watch Parts: {itemsBag().length}/{bagSize()}{" "}
 							</Typography>
+							<Grid container>{newWatchParts()}</Grid>
+							<Grid container>
+								{currentUser.watchParts &&
+									currentUser.watchParts.map((watchParts, pos) => {
+										return (
+											<Grid xs={6} md={3}>
+												<Button
+													align="justify"
+													style={{ width: "100%", padding: "10px" }}
+												>
+													{watchParts}
+												</Button>
+											</Grid>
+										);
+									})}
+							</Grid>
 							{openBoxPopUp && (
 								<Menu
 									disableScrollLock
