@@ -40,6 +40,7 @@ const WatchLab = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
+	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 	const [bagFull, setBagFull] = useState(false);
 	const [popUpInf, setPopUpInfo] = useState(null);
 	const [helperDescription, setHelperDescription] = useState(false);
@@ -69,7 +70,7 @@ const WatchLab = () => {
 
 	function getRandomWatchPart() {
 		const a = getRandomInt(1, 5);
-		if (a === 1) return "WatchCase";
+		if (a === 1) return "Case";
 		if (a === 2) return "Movement";
 		if (a === 3) return "Crown";
 		if (a === 4) return "Glass";
@@ -146,7 +147,7 @@ const WatchLab = () => {
 	};
 
 	const whiteboxDisabled = () => {
-		if (!currentUser.points || currentUser.points <= 10) {
+		if (!currentUser.points || currentUser.points < 10) {
 			return true;
 		} else return false;
 	};
@@ -221,6 +222,10 @@ const WatchLab = () => {
 		setOpenBoxPopUp(false);
 	};
 
+	const handleCloseConfirmDelete = () => {
+		setOpenConfirmDelete(false);
+	};
+
 	const newWatchParts = (watchParts) => {
 		let newArray = watchParts;
 		newArray = newArray.substring(1);
@@ -289,10 +294,32 @@ const WatchLab = () => {
 													>
 														{newWatchParts(watchParts)}
 													</Button>
-													<Button onClick={() => handleDeleteWatchPart(pos)}>
+													<Button
+														id="openConfirmDelete"
+														onClick={() => setOpenConfirmDelete(true)}
+													>
 														<TiDelete fontSize="3.5em" />
 													</Button>
 												</ButtonGroup>
+												<Menu
+													disableScrollLock
+													className={classes.menu}
+													id="openConfirmDelete"
+													onClose={handleCloseConfirmDelete}
+													anchorEl={openConfirmDelete}
+													open={Boolean(openConfirmDelete)}
+												>
+													<MenuItem>
+														<Button
+															onClick={() => {
+																handleDeleteWatchPart(pos);
+																setOpenConfirmDelete(false);
+															}}
+														>
+															This is definitive are you sure?
+														</Button>
+													</MenuItem>
+												</Menu>
 											</Grid>
 										);
 									})}
