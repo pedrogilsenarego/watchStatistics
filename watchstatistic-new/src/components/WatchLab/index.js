@@ -82,6 +82,16 @@ const WatchLab = () => {
 		return "0" + a;
 	}
 
+	/* function getRandomWhitePart() {
+		const a = getRandomWatchPart();
+		return "1" + a;
+	}
+
+	function getRandomLightGreenPart() {
+		const a = getRandomWatchPart();
+		return "2" + a;
+	} */
+
 	const bagSize = () => {
 		if (!currentUser.experience) return 0;
 		if (currentUser.experience < 20) return 5;
