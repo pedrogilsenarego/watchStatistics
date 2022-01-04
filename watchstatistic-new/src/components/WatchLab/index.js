@@ -97,6 +97,12 @@ const WatchLab = () => {
 		else return currentUser.watchParts;
 	};
 
+	const itemsBagDelete = (pos) => {
+		const a = currentUser.watchParts;
+		a.splice(pos, 1);
+		return a;
+	};
+
 	const whiteBoxes = () => {
 		if (!currentUser.whiteBox) return 0;
 		else return currentUser.whiteBox;
@@ -235,7 +241,16 @@ const WatchLab = () => {
 		if (color === "8") return "red";
 	};
 
-	const handleDeleteWatchPart = () => {};
+	const handleDeleteWatchPart = (pos) => {
+		const a = itemsBagDelete(pos);
+		const configData = {
+			...currentUser,
+			flag: "deleteWatchPart",
+			watchParts: a,
+			userID: currentUser.id
+		};
+		dispatch(updateBoxStatus(configData));
+	};
 
 	return (
 		<div>
@@ -274,7 +289,7 @@ const WatchLab = () => {
 													>
 														{newWatchParts(watchParts)}
 													</Button>
-													<Button>
+													<Button onClick={() => handleDeleteWatchPart(pos)}>
 														<TiDelete fontSize="3.5em" />
 													</Button>
 												</ButtonGroup>

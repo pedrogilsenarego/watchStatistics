@@ -97,6 +97,10 @@ export const handleUpdateBoxStatus = (product) => {
 				purpleBoxFragments: purpleBoxFragments,
 				watchParts: watchParts
 			});
+		if (product.flag === "deleteWatchPart")
+			ref.update({
+				watchParts: watchParts
+			});
 
 		ref
 			.then(() => {
