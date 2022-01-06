@@ -245,10 +245,6 @@ const WatchLab = () => {
 		setOpenBoxPopUp(false);
 	};
 
-	const handleCloseConfirmDelete = () => {
-		setOpenConfirmDelete(false);
-	};
-
 	const newWatchParts = (watchParts) => {
 		let newArray = watchParts;
 		newArray = newArray.substring(1);
@@ -278,6 +274,7 @@ const WatchLab = () => {
 			userID: currentUser.id
 		};
 		dispatch(updateBoxStatus(configData));
+		setBagFull(false);
 	};
 
 	return (
@@ -301,6 +298,14 @@ const WatchLab = () => {
 							<Typography style={{ marginTop: "5px" }}>
 								Watch Parts: {itemsBag().length}/{bagSize()}{" "}
 							</Typography>
+							<ButtonGroup>
+								<Button onClick={() => setOpenConfirmDelete(true)}>
+									Delete Parts
+								</Button>
+								<Button onClick={() => setOpenConfirmDelete(false)}>
+									Cancel
+								</Button>
+							</ButtonGroup>
 							<Grid container>
 								{currentUser.watchParts &&
 									currentUser.watchParts.map((watchParts, pos) => {
@@ -317,36 +322,28 @@ const WatchLab = () => {
 													>
 														{newWatchParts(watchParts)}
 													</Button>
-													<Button
-														id="openConfirmDelete"
-														onClick={() => setOpenConfirmDelete(true)}
-													>
-														<TiDelete fontSize="3.5em" />
-													</Button>
-												</ButtonGroup>
-												<Menu
-													disableScrollLock
-													className={classes.menu}
-													id="openConfirmDelete"
-													onClose={handleCloseConfirmDelete}
-													anchorEl={openConfirmDelete}
-													open={Boolean(openConfirmDelete)}
-												>
-													<MenuItem>
+
+													{openConfirmDelete && (
 														<Button
-															onClick={(pos) => {
+															aria-controls={pos}
+															id={pos}
+															onClick={() => {
 																handleDeleteWatchPart(pos);
-																setOpenConfirmDelete(false);
 															}}
 														>
-															This is definitive are you sure?
+															<TiDelete color="red" fontSize="3.5em" />
 														</Button>
-													</MenuItem>
-												</Menu>
+													)}
+												</ButtonGroup>
 											</Grid>
 										);
 									})}
 							</Grid>
+							{openConfirmDelete && (
+								<Typography style={{ color: "orange" }}>
+									Once you delete the part it's gone!
+								</Typography>
+							)}
 							{openBoxPopUp && (
 								<Menu
 									disableScrollLock
@@ -460,8 +457,8 @@ const WatchLab = () => {
 											<Button
 												aria-controls="blueBoxes"
 												size="small"
-												onClick={() =>
-													setHelperDescriptionBlue(!helperDescriptionBlue)
+												onClick={(e) =>
+													setHelperDescriptionBlue(e.currentTarget)
 												}
 											>
 												<AiOutlineQuestionCircle fontSize="1.5em" />
