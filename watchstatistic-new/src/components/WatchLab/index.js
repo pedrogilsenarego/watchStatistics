@@ -170,13 +170,15 @@ const WatchLab = () => {
 
 	const handleOpenWhiteBox = () => {
 		const a = getRandomGreyPart();
+		const b = [...itemsBag(), a];
+		b.push("5teste");
 		const configData = {
 			...currentUser,
 			flag: "openWhitebox",
 			whiteBox: whiteBoxes() - 1,
 			blueBoxFragments: blueBoxFragments() + getRandomInt(1, 3),
 			purpleBoxFragments: purpleBoxFragments() + percentageLoot(2),
-			watchParts: !currentUser.watchParts ? [a] : [...itemsBag(), a],
+			watchParts: !currentUser.watchParts ? [a] : b,
 			userID: currentUser.id
 		};
 		dispatch(updateBoxStatus(configData));
