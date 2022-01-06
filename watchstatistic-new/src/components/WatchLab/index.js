@@ -49,7 +49,10 @@ const WatchLab = () => {
 
 	useEffect(
 		() => {
-			if (currentUser.watchParts && currentUser.watchParts.length > bagSize()) {
+			if (
+				currentUser.watchParts &&
+				currentUser.watchParts.length >= bagSize()
+			) {
 				setBagFull(true);
 			}
 		},
@@ -82,7 +85,7 @@ const WatchLab = () => {
 		return "0" + a;
 	}
 
-	/* function getRandomWhitePart() {
+	function getRandomWhitePart() {
 		const a = getRandomWatchPart();
 		return "1" + a;
 	}
@@ -90,7 +93,7 @@ const WatchLab = () => {
 	function getRandomLightGreenPart() {
 		const a = getRandomWatchPart();
 		return "2" + a;
-	} */
+	}
 
 	const bagSize = () => {
 		if (!currentUser.experience) return 0;
@@ -169,16 +172,24 @@ const WatchLab = () => {
 	};
 
 	const handleOpenWhiteBox = () => {
-		const a = getRandomGreyPart();
-		const b = [...itemsBag(), a];
-		b.push("5teste");
+		const a = [getRandomGreyPart()];
+
+		if (currentUser.watchParts) {
+			a.unshift(...itemsBag());
+		}
+		if (percentageLoot(20) === 1) {
+			a.push(getRandomWhitePart());
+		}
+		if (percentageLoot(1) === 1) {
+			a.push(getRandomLightGreenPart());
+		}
 		const configData = {
 			...currentUser,
 			flag: "openWhitebox",
 			whiteBox: whiteBoxes() - 1,
 			blueBoxFragments: blueBoxFragments() + getRandomInt(1, 3),
-			purpleBoxFragments: purpleBoxFragments() + percentageLoot(2),
-			watchParts: !currentUser.watchParts ? [a] : b,
+			purpleBoxFragments: purpleBoxFragments() + percentageLoot(5),
+			watchParts: a,
 			userID: currentUser.id
 		};
 		dispatch(updateBoxStatus(configData));
@@ -189,7 +200,7 @@ const WatchLab = () => {
 				" Blue Box Fragments, " +
 				Number(configData.purpleBoxFragments - purpleBoxFragments()) +
 				" Purple Box Fragments, " +
-				a.substring(1)
+				a[0].substring(1)
 		);
 	};
 
@@ -412,7 +423,7 @@ const WatchLab = () => {
 											<MenuItem>20% Chance of a White Watch Part</MenuItem>
 											<MenuItem>1% Chance of a Light Green Part</MenuItem>
 											<MenuItem>1-3 Fragments of Blue Box</MenuItem>
-											<MenuItem>2% Chance of Fragment of Purple Box</MenuItem>
+											<MenuItem>5% Chance of Fragment of Purple Box</MenuItem>
 										</Menu>
 									</Grid>
 
