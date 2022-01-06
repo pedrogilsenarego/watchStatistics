@@ -334,7 +334,7 @@ const WatchLab = () => {
 												>
 													<MenuItem>
 														<Button
-															onClick={() => {
+															onClick={(pos) => {
 																handleDeleteWatchPart(pos);
 																setOpenConfirmDelete(false);
 															}}
