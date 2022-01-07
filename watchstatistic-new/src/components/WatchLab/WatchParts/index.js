@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Grid,
 	Typography,
 	Box,
 	Paper,
 	Button,
-	ButtonGroup,
-	Menu,
-	MenuItem
+	ButtonGroup
 } from "@material-ui/core";
 
 const data = [
@@ -16,11 +14,15 @@ const data = [
 ];
 
 const WatchParts = () => {
+	const [list, setList] = useState(data);
+	const handleDragStart = (e, params) => {
+		console.log("drgging", params);
+	};
 	return (
 		<div>
 			<Typography>Test</Typography>
 			<Paper style={{ padding: "10px" }}>
-				{data.map((grp, grpI) => (
+				{list.map((grp, grpI) => (
 					<Box
 						style={{
 							backgroundColor: "grey",
@@ -32,20 +34,31 @@ const WatchParts = () => {
 						}}
 						key={grp.title}
 					>
-						{grp.items.map((item, itemI) => (
-							<Box
-								style={{
-									backgroundColor: "lightGrey",
-									margin: "5px",
-									padding: "5px",
-									borderRadius: "3px"
-								}}
-							>
-								<Typography style={{ color: "black" }} key={item}>
-									{item}
-								</Typography>
-							</Box>
-						))}
+						<Grid container>
+							<Grid xs={12}>
+								<Typography>{grp.title}</Typography>
+							</Grid>
+							<Grid xs={12}>
+								{grp.items.map((item, itemI) => (
+									<Box
+										onDragStart={(e) => {
+											handleDragStart(e, { grpI, itemI });
+										}}
+										draggable={true}
+										key={item}
+										style={{
+											cursor: "pointer",
+											backgroundColor: "lightGrey",
+											margin: "5px",
+											padding: "5px",
+											borderRadius: "3px"
+										}}
+									>
+										<Typography style={{ color: "black" }}>{item}</Typography>
+									</Box>
+								))}
+							</Grid>
+						</Grid>
 					</Box>
 				))}
 			</Paper>
