@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-
+import WatchParts from "./WatchParts";
 import {
 	Grid,
 	Typography,
@@ -174,14 +174,17 @@ const WatchLab = () => {
 	const handleOpenWhiteBox = () => {
 		const a = [getRandomGreyPart()];
 
-		if (currentUser.watchParts) {
-			a.unshift(...itemsBag());
-		}
 		if (percentageLoot(20) === 1) {
 			a.push(getRandomWhitePart());
 		}
 		if (percentageLoot(1) === 1) {
 			a.push(getRandomLightGreenPart());
+		}
+		let b = [...a];
+		var c = b.map((s) => s.slice(1));
+
+		if (currentUser.watchParts) {
+			a.unshift(...itemsBag());
 		}
 		const configData = {
 			...currentUser,
@@ -200,7 +203,7 @@ const WatchLab = () => {
 				" Blue Box Fragments, " +
 				Number(configData.purpleBoxFragments - purpleBoxFragments()) +
 				" Purple Box Fragments, " +
-				a[0].substring(1)
+				c
 		);
 	};
 
@@ -298,64 +301,6 @@ const WatchLab = () => {
 							<Typography style={{ marginTop: "5px" }}>
 								Watch Parts: {itemsBag().length}/{bagSize()}{" "}
 							</Typography>
-							<ButtonGroup>
-								<Button onClick={() => setOpenConfirmDelete(true)}>
-									Delete Parts
-								</Button>
-								<Button onClick={() => setOpenConfirmDelete(false)}>
-									Cancel
-								</Button>
-							</ButtonGroup>
-							<Grid container>
-								{currentUser.watchParts &&
-									currentUser.watchParts.map((watchParts, pos) => {
-										return (
-											<Grid xs={6} md={3}>
-												<ButtonGroup>
-													<Button
-														align="justify"
-														style={{
-															width: "100%",
-															padding: "10px",
-															color: colorWatchParts(watchParts)
-														}}
-													>
-														{newWatchParts(watchParts)}
-													</Button>
-
-													{openConfirmDelete && (
-														<Button
-															aria-controls={pos}
-															id={pos}
-															onClick={() => {
-																handleDeleteWatchPart(pos);
-															}}
-														>
-															<TiDelete color="red" fontSize="3.5em" />
-														</Button>
-													)}
-												</ButtonGroup>
-											</Grid>
-										);
-									})}
-							</Grid>
-							{openConfirmDelete && (
-								<Typography style={{ color: "orange" }}>
-									Once you delete the part it's gone!
-								</Typography>
-							)}
-							{openBoxPopUp && (
-								<Menu
-									disableScrollLock
-									className={classes.menu}
-									id="openBoxPopUp"
-									onClose={handleCloseOpenBoxPopUp}
-									anchorEl={openBoxPopUp}
-									open={Boolean(openBoxPopUp)}
-								>
-									<MenuItem>{popUpInf}</MenuItem>
-								</Menu>
-							)}
 						</Grid>
 						<Grid item xs={12} style={{ marginTop: "30px" }}>
 							<Box
@@ -542,7 +487,7 @@ const WatchLab = () => {
 									<Grid
 										item
 										xs={12}
-										sm={6}
+										sm={12}
 										style={{
 											textAlign: "center",
 											border: "solid 1px",
@@ -550,7 +495,135 @@ const WatchLab = () => {
 											borderColor: "#ffffff66",
 											padding: "10px"
 										}}
-									></Grid>
+									>
+										<Typography>
+											Put here your parts to Build your watch
+										</Typography>
+										<ButtonGroup>
+											<Button onClick={() => setOpenConfirmDelete(true)}>
+												Delete Parts
+											</Button>
+											<Button onClick={() => setOpenConfirmDelete(false)}>
+												Cancel
+											</Button>
+										</ButtonGroup>
+										<Grid container>
+											{currentUser.watchParts &&
+												currentUser.watchParts.map((watchParts, pos) => {
+													return (
+														<Grid xs={6} md={3}>
+															<ButtonGroup>
+																<Button
+																	align="justify"
+																	style={{
+																		width: "100%",
+																		padding: "10px",
+																		color: colorWatchParts(watchParts)
+																	}}
+																>
+																	{newWatchParts(watchParts)}
+																</Button>
+
+																{openConfirmDelete && (
+																	<Button
+																		aria-controls={pos}
+																		id={pos}
+																		onClick={() => {
+																			handleDeleteWatchPart(pos);
+																		}}
+																	>
+																		<TiDelete color="red" fontSize="3.5em" />
+																	</Button>
+																)}
+															</ButtonGroup>
+														</Grid>
+													);
+												})}
+										</Grid>
+										{openConfirmDelete && (
+											<Typography style={{ color: "orange" }}>
+												Once you delete the part it's gone!
+											</Typography>
+										)}
+										{openBoxPopUp && (
+											<Menu
+												disableScrollLock
+												className={classes.menu}
+												id="openBoxPopUp"
+												onClose={handleCloseOpenBoxPopUp}
+												anchorEl={openBoxPopUp}
+												open={Boolean(openBoxPopUp)}
+											>
+												<MenuItem>{popUpInf}</MenuItem>
+											</Menu>
+										)}
+										<Box
+											style={{
+												border: "solid 1px",
+												borderRadius: "4px",
+												borderColor: "#ffffff",
+												background: "lightGrey",
+												padding: "10px"
+											}}
+										>
+											<Box
+												style={{
+													border: "solid 1px",
+													borderRadius: "4px",
+													borderColor: "#ffffff",
+													background: "lightBlue",
+													padding: "10px"
+												}}
+											>
+												Crown
+											</Box>
+											<Box
+												style={{
+													border: "solid 1px",
+													borderRadius: "4px",
+													borderColor: "#ffffff",
+													background: "lightBlue",
+													padding: "10px"
+												}}
+											>
+												Case
+											</Box>
+											<Box
+												style={{
+													border: "solid 1px",
+													borderRadius: "4px",
+													borderColor: "#ffffff",
+													background: "lightBlue",
+													padding: "10px"
+												}}
+											>
+												Glass
+											</Box>
+											<Box
+												style={{
+													border: "solid 1px",
+													borderRadius: "4px",
+													borderColor: "#ffffff",
+													background: "lightBlue",
+													padding: "10px"
+												}}
+											>
+												Movement
+											</Box>
+											<Box
+												style={{
+													border: "solid 1px",
+													borderRadius: "4px",
+													borderColor: "#ffffff",
+													background: "lightBlue",
+													padding: "10px"
+												}}
+											>
+												Bracelet
+											</Box>
+											<WatchParts />
+										</Box>
+									</Grid>
 								</Grid>
 							</Box>
 						</Grid>
