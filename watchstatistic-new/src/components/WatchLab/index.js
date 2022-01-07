@@ -47,6 +47,10 @@ const WatchLab = () => {
 	const [helperDescriptionBlue, setHelperDescriptionBlue] = useState(false);
 	const { currentUser } = useSelector(mapState);
 
+	const configWatchParts = {
+		watchParts: [5, 3, 3]
+	};
+
 	useEffect(
 		() => {
 			if (
@@ -566,62 +570,7 @@ const WatchLab = () => {
 												padding: "10px"
 											}}
 										>
-											<Box
-												style={{
-													border: "solid 1px",
-													borderRadius: "4px",
-													borderColor: "#ffffff",
-													background: "lightBlue",
-													padding: "10px"
-												}}
-											>
-												Crown
-											</Box>
-											<Box
-												style={{
-													border: "solid 1px",
-													borderRadius: "4px",
-													borderColor: "#ffffff",
-													background: "lightBlue",
-													padding: "10px"
-												}}
-											>
-												Case
-											</Box>
-											<Box
-												style={{
-													border: "solid 1px",
-													borderRadius: "4px",
-													borderColor: "#ffffff",
-													background: "lightBlue",
-													padding: "10px"
-												}}
-											>
-												Glass
-											</Box>
-											<Box
-												style={{
-													border: "solid 1px",
-													borderRadius: "4px",
-													borderColor: "#ffffff",
-													background: "lightBlue",
-													padding: "10px"
-												}}
-											>
-												Movement
-											</Box>
-											<Box
-												style={{
-													border: "solid 1px",
-													borderRadius: "4px",
-													borderColor: "#ffffff",
-													background: "lightBlue",
-													padding: "10px"
-												}}
-											>
-												Bracelet
-											</Box>
-											<WatchParts />
+											<WatchParts {...configWatchParts} />
 										</Box>
 									</Grid>
 								</Grid>

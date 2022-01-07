@@ -1,19 +1,27 @@
 import React, { useState, useRef } from "react";
-import { Grid, Typography, Box, Paper } from "@material-ui/core";
 
-const data = [
-	{ title: "Available Parts", items: [1, 2, 3] },
-	{ title: "Fusion Machine", items: [4, 5, 6] }
-];
+import {
+	Grid,
+	Typography,
+	Box,
+	Paper,
+	Button,
+	ButtonGroup
+} from "@material-ui/core";
+const WatchParts = ({ watchParts }) => {
+	const data = [
+		{ title: "Available Parts", items: ["teste", "ola", 3] },
+		{ title: "Fusion Machine", items: [4, 5, 6] }
+	];
 
-const WatchParts = () => {
 	const [list, setList] = useState(data);
 	const [dragging, setDragging] = useState(false);
 	const dragItem = useRef();
 	const dragNode = useRef();
 
+	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+
 	const handleDragStart = (e, params) => {
-		console.log("dragging", params);
 		dragItem.current = params;
 		dragNode.current = e.target;
 		dragNode.current.addEventListener("dragend", handleDragEnd);
@@ -23,7 +31,6 @@ const WatchParts = () => {
 	};
 
 	const handleDragEnd = () => {
-		console.log("draging end..");
 		setDragging(false);
 		dragNode.current.removeEventListener("dragend", handleDragEnd);
 		dragItem.current = null;
@@ -31,10 +38,8 @@ const WatchParts = () => {
 	};
 
 	const handleDragEnter = (e, params) => {
-		console.log("enteringDrag", params);
 		const currentItem = dragItem.current;
 		if (e.target !== dragNode.current) {
-			console.log("traget is not the same");
 			setList((oldList) => {
 				let newList = JSON.parse(JSON.stringify(oldList));
 				newList[params.grpI].items.splice(
@@ -61,8 +66,15 @@ const WatchParts = () => {
 
 	return (
 		<div>
-			<Typography>Test</Typography>
 			<Paper style={{ padding: "3px", backgroundColor: "#3C3939" }}>
+				<Typography>Put here your parts to Build your watch</Typography>
+
+				<ButtonGroup>
+					<Button onClick={() => setOpenConfirmDelete(true)}>
+						Delete Parts
+					</Button>
+					<Button onClick={() => setOpenConfirmDelete(false)}>Cancel</Button>
+				</ButtonGroup>
 				{list.map((grp, grpI) => (
 					<Box
 						style={{
