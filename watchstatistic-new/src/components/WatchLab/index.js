@@ -48,8 +48,8 @@ const WatchLab = () => {
 	const { currentUser } = useSelector(mapState);
 
 	const data = [
-		{ title: "Available Parts", items: [2, 4, 6] },
-		{ title: "Fusion Machine", items: [4, 5, 6] }
+		{ title: "Available Parts", items: currentUser.watchParts },
+		{ title: "Fusion Machine", items: ["5Test", 55, 66] }
 	];
 
 	const configWatchParts = {

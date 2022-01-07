@@ -42,6 +42,7 @@ const WatchParts = ({ data }) => {
 					)[0]
 				);
 				dragItem.current = targetItem;
+				localStorage.setItem("List", JSON.stringify(newList));
 				return newList;
 			});
 		}
@@ -54,7 +55,21 @@ const WatchParts = ({ data }) => {
 		) {
 			return "#3C3939";
 		}
-		return "white";
+		return colorWatchParts(item.item);
+	};
+
+	const colorWatchParts = (watchParts) => {
+		let newArray = watchParts;
+		let color = newArray[0];
+		if (color === "0") return "#ffffff66";
+		if (color === "1") return "#ffffff";
+		if (color === "2") return "lightGreen";
+		if (color === "3") return "darkGreen";
+		if (color === "4") return "lightBlue";
+		if (color === "5") return "darkBlue";
+		if (color === "6") return "purple";
+		if (color === "7") return "orange";
+		if (color === "8") return "red";
 	};
 
 	if (list) {
@@ -96,19 +111,19 @@ const WatchParts = ({ data }) => {
 													: null
 											}
 											draggable={true}
-											key={item}
+											key={item.id}
 											style={{
 												cursor: "pointer",
 												backgroundColor: dragging
-													? getStyles({ grpI, itemI })
-													: "white",
+													? getStyles({ grpI, itemI, item })
+													: colorWatchParts(item),
 												margin: "5px",
 												padding: "5px",
 												borderRadius: "3px"
 											}}
 										>
 											<Typography style={{ color: "#3C3939" }}>
-												{item}
+												{item.toString().slice(1)}
 											</Typography>
 										</Box>
 									))}
