@@ -1,12 +1,5 @@
-import React, { useState } from "react";
-import {
-	Grid,
-	Typography,
-	Box,
-	Paper,
-	Button,
-	ButtonGroup
-} from "@material-ui/core";
+import React, { useState, useRef } from "react";
+import { Grid, Typography, Box, Paper } from "@material-ui/core";
 
 const data = [
 	{ title: "Available Parts", items: [1, 2, 3] },
@@ -15,9 +8,39 @@ const data = [
 
 const WatchParts = () => {
 	const [list, setList] = useState(data);
+	const [dragging, setDragging] = useState(false);
+	const dragItem = useRef();
+	const dragNode = useRef();
+
 	const handleDragStart = (e, params) => {
-		console.log("drgging", params);
+		console.log("dragging", params);
+		dragItem.current = params;
+		dragNode.current = e.target;
+		dragNode.current.addEventListener("dragend", handleDragEnd);
+		setTimeout(() => {
+			setDragging(true);
+		}, 0);
 	};
+
+	const handleDragEnd = () => {
+		console.log("draging end..");
+		setDragging(false);
+		dragNode.current.removeEventListener("dragend", handleDragEnd);
+		dragItem.current = null;
+		dragNode.current = null;
+	};
+
+	const getStyles = (params) => {
+		const currentItem = dragItem.current;
+		if (
+			currentItem.grpI === params.grpI &&
+			currentItem.itemI === params.itemI
+		) {
+			return "#3C3939";
+		}
+		return "lightGrey";
+	};
+
 	return (
 		<div>
 			<Typography>Test</Typography>
@@ -25,7 +48,7 @@ const WatchParts = () => {
 				{list.map((grp, grpI) => (
 					<Box
 						style={{
-							backgroundColor: "grey",
+							backgroundColor: "#3C3939",
 							margin: "10px",
 							padding: "10px",
 							borderRadius: "5px",
@@ -48,13 +71,15 @@ const WatchParts = () => {
 										key={item}
 										style={{
 											cursor: "pointer",
-											backgroundColor: "lightGrey",
+											backgroundColor: dragging
+												? getStyles({ grpI, itemI })
+												: "lightGrey",
 											margin: "5px",
 											padding: "5px",
 											borderRadius: "3px"
 										}}
 									>
-										<Typography style={{ color: "black" }}>{item}</Typography>
+										<Typography style={{ color: "#3C3939" }}>{item}</Typography>
 									</Box>
 								))}
 							</Grid>
