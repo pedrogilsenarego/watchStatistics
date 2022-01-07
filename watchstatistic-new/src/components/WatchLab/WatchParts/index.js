@@ -1,9 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-
-import { Grid, Typography, Box, Paper } from "@material-ui/core";
-const WatchParts = ({ data }) => {
+import { TiDelete } from "react-icons/ti";
+import {
+	Grid,
+	Typography,
+	Box,
+	Paper,
+	Button,
+	ButtonGroup
+} from "@material-ui/core";
+const WatchParts = ({ data, handleDeleteWatchPart }) => {
 	const [list, setList] = useState(data);
 	const [dragging, setDragging] = useState(false);
+	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
 	useEffect(() => {
 		setList(data);
@@ -77,7 +85,12 @@ const WatchParts = ({ data }) => {
 			<div>
 				<Paper style={{ padding: "3px", backgroundColor: "#3C3939" }}>
 					<Typography>Put here your parts to Build your watch</Typography>
-
+					<ButtonGroup>
+						<Button onClick={() => setOpenConfirmDelete(true)}>
+							Delete Parts
+						</Button>
+						<Button onClick={() => setOpenConfirmDelete(false)}>Cancel</Button>
+					</ButtonGroup>
 					{list.map((grp, grpI) => (
 						<Box
 							style={{
@@ -119,12 +132,23 @@ const WatchParts = ({ data }) => {
 													: colorWatchParts(item),
 												margin: "5px",
 												padding: "5px",
-												borderRadius: "3px"
+												borderRadius: "3px",
+												display: "flex",
+												justifyContent: "center"
 											}}
 										>
 											<Typography style={{ color: "#3C3939" }}>
 												{item.toString().slice(1)}
 											</Typography>
+											{openConfirmDelete && (
+												<Button
+													onClick={() => {
+														handleDeleteWatchPart(itemI);
+													}}
+												>
+													<TiDelete color="red" fontSize="1.5em" />
+												</Button>
+											)}
 										</Box>
 									))}
 								</Grid>

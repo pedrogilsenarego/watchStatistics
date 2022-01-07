@@ -49,12 +49,8 @@ const WatchLab = () => {
 
 	const data = [
 		{ title: "Available Parts", items: currentUser.watchParts },
-		{ title: "Fusion Machine", items: ["5Test", 55, 66] }
+		{ title: "Fusion Machine", items: [] }
 	];
-
-	const configWatchParts = {
-		data
-	};
 
 	useEffect(
 		() => {
@@ -287,6 +283,11 @@ const WatchLab = () => {
 		};
 		dispatch(updateBoxStatus(configData));
 		setBagFull(false);
+	};
+
+	const configWatchParts = {
+		data,
+		handleDeleteWatchPart
 	};
 
 	return (
