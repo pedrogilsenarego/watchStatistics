@@ -30,6 +30,24 @@ const WatchParts = () => {
 		dragNode.current = null;
 	};
 
+	const handleDragEnter = (e, params) => {
+		console.log("enteringDrag", params);
+		const currentItem = dragItem.current;
+		if (e.target !== dragNode.current) {
+			console.log("traget is not the same");
+			setList((oldList) => {
+				let newList = JSON.parse(JSON.stringify(oldList));
+				newList[params.grpI].items.splice(
+					params.itemI,
+					0,
+					newList[currentItem.grpI].items.splice(currentItem.itemI, 1)[0]
+				);
+				dragItem.current = params;
+				return newList;
+			});
+		}
+	};
+
 	const getStyles = (params) => {
 		const currentItem = dragItem.current;
 		if (
@@ -56,6 +74,13 @@ const WatchParts = () => {
 							justifyContent: "center"
 						}}
 						key={grp.title}
+						onDragEnter={
+							dragging && !grp.items.length
+								? (e) => {
+										handleDragEnter(e, { grpI, itemI: 0 });
+								  }
+								: null
+						}
 					>
 						<Grid container>
 							<Grid xs={12}>
@@ -67,6 +92,13 @@ const WatchParts = () => {
 										onDragStart={(e) => {
 											handleDragStart(e, { grpI, itemI });
 										}}
+										onDragEnter={
+											dragging
+												? (e) => {
+														handleDragEnter(e, { grpI, itemI });
+												  }
+												: null
+										}
 										draggable={true}
 										key={item}
 										style={{
