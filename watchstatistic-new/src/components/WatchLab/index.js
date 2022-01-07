@@ -47,8 +47,13 @@ const WatchLab = () => {
 	const [helperDescriptionBlue, setHelperDescriptionBlue] = useState(false);
 	const { currentUser } = useSelector(mapState);
 
+	const data = [
+		{ title: "Available Parts", items: [2, 4, 6] },
+		{ title: "Fusion Machine", items: [4, 5, 6] }
+	];
+
 	const configWatchParts = {
-		watchParts: [5, 3, 3]
+		data
 	};
 
 	useEffect(
