@@ -38,17 +38,17 @@ const WatchParts = () => {
 		) {
 			return "#3C3939";
 		}
-		return "lightGrey";
+		return "white";
 	};
 
 	return (
 		<div>
 			<Typography>Test</Typography>
-			<Paper style={{ padding: "10px" }}>
+			<Paper style={{ padding: "3px", backgroundColor: "#3C3939" }}>
 				{list.map((grp, grpI) => (
 					<Box
 						style={{
-							backgroundColor: "#3C3939",
+							backgroundColor: "black",
 							margin: "10px",
 							padding: "10px",
 							borderRadius: "5px",
@@ -73,7 +73,7 @@ const WatchParts = () => {
 											cursor: "pointer",
 											backgroundColor: dragging
 												? getStyles({ grpI, itemI })
-												: "lightGrey",
+												: "white",
 											margin: "5px",
 											padding: "5px",
 											borderRadius: "3px"
