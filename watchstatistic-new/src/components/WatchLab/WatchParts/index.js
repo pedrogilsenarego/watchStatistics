@@ -73,6 +73,14 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 		if (color === "8") return "red";
 	};
 
+	const shredderMeter = (data) => {
+		var a = 0;
+		for (var i = 0; i < data.length; i++) {
+			a = a + 1 + parseInt(data[i][0]);
+		}
+		return a;
+	};
+
 	if (list) {
 		return (
 			<div>
@@ -136,10 +144,12 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 					))}
 					{list[2].items.length > 0 && (
 						<Typography style={{ color: "orange" }}>
-							Deleted Parts are gone!
+							Shredded Parts are gone!
 						</Typography>
 					)}
-					<Typography>{list[2].items}</Typography>
+					<Typography>
+						Part converted: {shredderMeter(list[2].items)}
+					</Typography>
 					{!openConfirmDelete && (
 						<Button
 							onClick={() => {
