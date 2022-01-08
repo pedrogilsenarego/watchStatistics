@@ -19,16 +19,20 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 		},
 		[`& .${linearProgressClasses.bar}`]: {
 			borderRadius: 5,
-			backgroundColor: LinearProgressBarColor()
+			backgroundColor: LinearProgressBarColor(shredderMeter(list[2].items))
 		}
 	}));
 
 	const LinearProgressBarFormat = (value) => {
-		if (value < 5) return value * 5;
+		if (value < 5) return value * 20;
+		if (value < 10) return (value - 4) * 10;
+		if (value < 15) return (value - 9) * 10;
 	};
 
-	const LinearProgressBarColor = () => {
-		return "lightGrey";
+	const LinearProgressBarColor = (value) => {
+		if (value < 5) return "grey";
+		if (value < 10) return "white";
+		if (value < 15) return "lightGreen";
 	};
 
 	useEffect(() => {
