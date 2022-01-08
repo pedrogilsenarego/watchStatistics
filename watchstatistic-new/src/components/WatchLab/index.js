@@ -49,7 +49,8 @@ const WatchLab = () => {
 
 	const data = [
 		{ title: "Available Parts", items: currentUser.watchParts },
-		{ title: "Fusion Machine", items: [] }
+		{ title: "Fusion Machine", items: [] },
+		{ title: "Parts Shreder", items: [] }
 	];
 
 	useEffect(
@@ -119,6 +120,12 @@ const WatchLab = () => {
 	const itemsBagDelete = (pos) => {
 		const a = currentUser.watchParts;
 		a.splice(pos, 1);
+		return a;
+	};
+
+	const itemsBagDeleted = (pos) => {
+		const a = currentUser.watchParts;
+		for (var i = pos.length - 1; i >= 0; i--) a.splice(pos[i], 1);
 		return a;
 	};
 
@@ -285,9 +292,21 @@ const WatchLab = () => {
 		setBagFull(false);
 	};
 
+	const handleDeleteWatchParts = (pos) => {
+		const a = itemsBagDeleted(pos);
+		const configData = {
+			...currentUser,
+			flag: "deleteWatchPart",
+			watchParts: a,
+			userID: currentUser.id
+		};
+		dispatch(updateBoxStatus(configData));
+		setBagFull(false);
+	};
+
 	const configWatchParts = {
 		data,
-		handleDeleteWatchPart
+		handleDeleteWatchParts
 	};
 
 	return (
