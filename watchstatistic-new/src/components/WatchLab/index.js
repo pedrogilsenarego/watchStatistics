@@ -84,19 +84,35 @@ const WatchLab = () => {
 		if (a === 5) return "Bracelet";
 	}
 
-	function getRandomGreyPart() {
+	function getRandomPart(color) {
 		const a = getRandomWatchPart();
-		return "0" + a;
-	}
-
-	function getRandomWhitePart() {
-		const a = getRandomWatchPart();
-		return "1" + a;
-	}
-
-	function getRandomLightGreenPart() {
-		const a = getRandomWatchPart();
-		return "2" + a;
+		if (color === "grey") {
+			return "0" + a;
+		}
+		if (color === "white") {
+			return "1" + a;
+		}
+		if (color === "lightGreen") {
+			return "2" + a;
+		}
+		if (color === "darkGreen") {
+			return "3" + a;
+		}
+		if (color === "lightBlue") {
+			return "4" + a;
+		}
+		if (color === "darkBlue") {
+			return "5" + a;
+		}
+		if (color === "purple") {
+			return "6" + a;
+		}
+		if (color === "orange") {
+			return "7" + a;
+		}
+		if (color === "red") {
+			return "8" + a;
+		}
 	}
 
 	const bagSize = () => {
@@ -178,13 +194,13 @@ const WatchLab = () => {
 	};
 
 	const handleOpenWhiteBox = () => {
-		const a = [getRandomGreyPart()];
+		const a = [getRandomPart("grey")];
 
 		if (percentageLoot(20) === 1) {
-			a.push(getRandomWhitePart());
+			a.push(getRandomPart("white"));
 		}
 		if (percentageLoot(1) === 1) {
-			a.push(getRandomLightGreenPart());
+			a.push(getRandomPart("lightGreen"));
 		}
 		let b = [...a];
 		var c = b.map((s) => s.slice(1));
@@ -254,8 +270,19 @@ const WatchLab = () => {
 		setOpenBoxPopUp(false);
 	};
 
-	const handleDeleteWatchParts = (pos) => {
+	const handleDeleteWatchParts = (pos, color, percentage, color2) => {
 		const a = itemsBagDeleted(pos);
+
+		if (percentageLoot(percentage) === 1) {
+			const b = getRandomPart(color);
+			a.push(b);
+		} else {
+			if (color2 !== "black") {
+				const b = getRandomPart(color2);
+				a.push(b);
+			}
+		}
+
 		const configData = {
 			...currentUser,
 			flag: "deleteWatchPart",

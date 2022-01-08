@@ -227,8 +227,9 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 								setOpenConfirmDelete(false);
 								handleDeleteWatchParts(
 									list[2].items,
-									LinearProgressBarColor(list[2].items),
-									LinearProgressBarFormat(list[2].items)
+									LinearProgressBarColor(shredderMeter(list[2].items)),
+									LinearProgressBarFormat(shredderMeter(list[2].items)),
+									LinearProgressBarColor2(shredderMeter(list[2].items))
 								);
 							}}
 						>
