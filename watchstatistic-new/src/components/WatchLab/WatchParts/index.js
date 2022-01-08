@@ -218,7 +218,7 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 							}}
 						>
 							<TiDelete color="red" fontSize="3.5em" />
-							Delete Parts
+							Shred Parts
 						</Button>
 					)}
 					{openConfirmDelete && (
