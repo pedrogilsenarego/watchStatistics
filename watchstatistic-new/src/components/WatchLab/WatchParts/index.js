@@ -1,10 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TiDelete } from "react-icons/ti";
 import { Grid, Typography, Box, Paper, Button } from "@material-ui/core";
+import LinearProgress, {
+	linearProgressClasses
+} from "@mui/material/LinearProgress";
+import { styled } from "@mui/material/styles";
 const WatchParts = ({ data, handleDeleteWatchParts }) => {
 	const [list, setList] = useState(data);
 	const [dragging, setDragging] = useState(false);
 	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+
+	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+		height: 20,
+		width: 100,
+		borderRadius: 5,
+		[`&.${linearProgressClasses.colorPrimary}`]: {
+			backgroundColor: "black"
+		},
+		[`& .${linearProgressClasses.bar}`]: {
+			borderRadius: 5,
+			backgroundColor: LinearProgressBarColor()
+		}
+	}));
+
+	const LinearProgressBarFormat = (value) => {
+		if (value < 5) return value * 5;
+	};
+
+	const LinearProgressBarColor = () => {
+		return "lightGrey";
+	};
 
 	useEffect(() => {
 		setList(data);
@@ -150,6 +175,18 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 					<Typography>
 						Part converted: {shredderMeter(list[2].items)}
 					</Typography>
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							paddingTop: "5px"
+						}}
+					>
+						<BorderLinearProgress
+							variant="determinate"
+							value={LinearProgressBarFormat(shredderMeter(list[2].items))}
+						/>
+					</Box>
 					{!openConfirmDelete && (
 						<Button
 							onClick={() => {
