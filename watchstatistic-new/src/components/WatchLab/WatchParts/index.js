@@ -22,17 +22,35 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 			backgroundColor: LinearProgressBarColor(shredderMeter(list[2].items))
 		}
 	}));
-
+	const shredderMeter = (data) => {
+		var a = 0;
+		for (var i = 0; i < data.length; i++) {
+			a = a + 1 + parseInt(data[i][0]);
+		}
+		return a;
+	};
 	const LinearProgressBarFormat = (value) => {
-		if (value < 5) return value * 20;
-		if (value < 10) return (value - 4) * 10;
-		if (value < 15) return (value - 9) * 10;
+		if (value < 2) return value * 50;
+		if (value < 4) return (value - 1) * 20;
+		if (value < 7) return (value - 3) * 34;
+		if (value < 10) return (value - 6) * 34;
+		if (value < 14) return (value - 9) * 25;
+		if (value < 18) return (value - 13) * 25;
+		if (value < 22) return (value - 17) * 25;
+		if (value < 27) return (value - 21) * 20;
+		if (value < 33) return (value - 26) * 17;
 	};
 
 	const LinearProgressBarColor = (value) => {
-		if (value < 5) return "grey";
-		if (value < 10) return "white";
-		if (value < 15) return "lightGreen";
+		if (value < 2) return "grey";
+		if (value < 4) return "white";
+		if (value < 7) return "lightGreen";
+		if (value < 10) return "darkGreen";
+		if (value < 14) return "lightBlue";
+		if (value < 18) return "darkBlue";
+		if (value < 22) return "purple";
+		if (value < 27) return "orange";
+		if (value < 33) return "red";
 	};
 
 	useEffect(() => {
@@ -100,14 +118,6 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 		if (color === "6") return "purple";
 		if (color === "7") return "orange";
 		if (color === "8") return "red";
-	};
-
-	const shredderMeter = (data) => {
-		var a = 0;
-		for (var i = 0; i < data.length; i++) {
-			a = a + 1 + parseInt(data[i][0]);
-		}
-		return a;
 	};
 
 	if (list) {
