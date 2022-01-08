@@ -15,7 +15,7 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 		width: 100,
 		borderRadius: 5,
 		[`&.${linearProgressClasses.colorPrimary}`]: {
-			backgroundColor: "black"
+			backgroundColor: LinearProgressBarColor2(shredderMeter(list[2].items))
 		},
 		[`& .${linearProgressClasses.bar}`]: {
 			borderRadius: 5,
@@ -51,6 +51,18 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 		if (value < 22) return "purple";
 		if (value < 27) return "orange";
 		if (value < 33) return "red";
+	};
+
+	const LinearProgressBarColor2 = (value) => {
+		if (value < 2) return "black";
+		if (value < 4) return "grey";
+		if (value < 7) return "white";
+		if (value < 10) return "lightGreen";
+		if (value < 14) return "darkGreen";
+		if (value < 18) return "lightBlue";
+		if (value < 22) return "darkBlue";
+		if (value < 27) return "purple";
+		if (value < 33) return "orange";
 	};
 
 	useEffect(() => {
@@ -186,9 +198,7 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 							Shredded Parts are gone!
 						</Typography>
 					)}
-					<Typography>
-						Part converted: {shredderMeter(list[2].items)}
-					</Typography>
+					<Typography>New part that will be obtained:</Typography>
 					<Box
 						sx={{
 							display: "flex",
@@ -215,7 +225,11 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 						<Button
 							onClick={() => {
 								setOpenConfirmDelete(false);
-								handleDeleteWatchParts(list[2].items);
+								handleDeleteWatchParts(
+									list[2].items,
+									LinearProgressBarColor(list[2].items),
+									LinearProgressBarFormat(list[2].items)
+								);
 							}}
 						>
 							<TiDelete color="red" fontSize="3.5em" />
