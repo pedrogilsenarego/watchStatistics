@@ -13,7 +13,6 @@ import {
 	MenuItem
 } from "@material-ui/core";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { TiDelete } from "react-icons/ti";
 import { updateBoxStatus } from "../../redux/User/user.actions";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -40,7 +39,6 @@ const WatchLab = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
-	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 	const [bagFull, setBagFull] = useState(false);
 	const [popUpInf, setPopUpInfo] = useState(null);
 	const [helperDescription, setHelperDescription] = useState(false);
@@ -117,12 +115,6 @@ const WatchLab = () => {
 		else return currentUser.watchParts;
 	};
 
-	const itemsBagDelete = (pos) => {
-		const a = currentUser.watchParts;
-		a.splice(pos, 1);
-		return a;
-	};
-
 	const itemsBagDeleted = (pos) => {
 		var a = currentUser.watchParts;
 		for (var i = 0; i < pos.length; i++) {
@@ -130,12 +122,6 @@ const WatchLab = () => {
 		}
 		return a;
 	};
-
-	/* const itemsBagDeleted = (pos) => {
-		const a = currentUser.watchParts;
-		for (var i = pos.length - 1; i >= 0; i--) a.splice(pos[i], 1);
-		return a;
-	}; */
 
 	const whiteBoxes = () => {
 		if (!currentUser.whiteBox) return 0;
@@ -266,38 +252,6 @@ const WatchLab = () => {
 
 	const handleCloseOpenBoxPopUp = () => {
 		setOpenBoxPopUp(false);
-	};
-
-	const newWatchParts = (watchParts) => {
-		let newArray = watchParts;
-		newArray = newArray.substring(1);
-		return newArray;
-	};
-
-	const colorWatchParts = (watchParts) => {
-		let newArray = watchParts;
-		let color = newArray[0];
-		if (color === "0") return "#ffffff66";
-		if (color === "1") return "#ffffff";
-		if (color === "2") return "lightGreen";
-		if (color === "3") return "darkGreen";
-		if (color === "4") return "lightBlue";
-		if (color === "5") return "darkBlue";
-		if (color === "6") return "purple";
-		if (color === "7") return "orange";
-		if (color === "8") return "red";
-	};
-
-	const handleDeleteWatchPart = (pos) => {
-		const a = itemsBagDelete(pos);
-		const configData = {
-			...currentUser,
-			flag: "deleteWatchPart",
-			watchParts: a,
-			userID: currentUser.id
-		};
-		dispatch(updateBoxStatus(configData));
-		setBagFull(false);
 	};
 
 	const handleDeleteWatchParts = (pos) => {
@@ -533,55 +487,6 @@ const WatchLab = () => {
 											padding: "10px"
 										}}
 									>
-										<Typography>
-											Put here your parts to Build your watch
-										</Typography>
-										<ButtonGroup>
-											<Button onClick={() => setOpenConfirmDelete(true)}>
-												Delete Parts
-											</Button>
-											<Button onClick={() => setOpenConfirmDelete(false)}>
-												Cancel
-											</Button>
-										</ButtonGroup>
-										<Grid container>
-											{currentUser.watchParts &&
-												currentUser.watchParts.map((watchParts, pos) => {
-													return (
-														<Grid xs={6} md={3}>
-															<ButtonGroup>
-																<Button
-																	align="justify"
-																	style={{
-																		width: "100%",
-																		padding: "10px",
-																		color: colorWatchParts(watchParts)
-																	}}
-																>
-																	{newWatchParts(watchParts)}
-																</Button>
-
-																{openConfirmDelete && (
-																	<Button
-																		aria-controls={pos}
-																		id={pos}
-																		onClick={() => {
-																			handleDeleteWatchPart(pos);
-																		}}
-																	>
-																		<TiDelete color="red" fontSize="3.5em" />
-																	</Button>
-																)}
-															</ButtonGroup>
-														</Grid>
-													);
-												})}
-										</Grid>
-										{openConfirmDelete && (
-											<Typography style={{ color: "orange" }}>
-												Once you delete the part it's gone!
-											</Typography>
-										)}
 										{openBoxPopUp && (
 											<Menu
 												disableScrollLock

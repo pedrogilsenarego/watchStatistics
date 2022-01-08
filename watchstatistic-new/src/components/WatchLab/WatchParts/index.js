@@ -134,18 +134,33 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 							</Grid>
 						</Box>
 					))}
-
-					<Button
-						onClick={() => {
-							setOpenConfirmDelete(true);
-							handleDeleteWatchParts(list[2].items);
-						}}
-					>
-						<TiDelete color="red" fontSize="3.5em" />
-						Delete Parts
-					</Button>
-
+					{list[2].items.length > 0 && (
+						<Typography style={{ color: "orange" }}>
+							Deleted Parts are gone!
+						</Typography>
+					)}
 					<Typography>{list[2].items}</Typography>
+					{!openConfirmDelete && (
+						<Button
+							onClick={() => {
+								setOpenConfirmDelete(true);
+							}}
+						>
+							<TiDelete color="red" fontSize="3.5em" />
+							Delete Parts
+						</Button>
+					)}
+					{openConfirmDelete && (
+						<Button
+							onClick={() => {
+								setOpenConfirmDelete(false);
+								handleDeleteWatchParts(list[2].items);
+							}}
+						>
+							<TiDelete color="red" fontSize="3.5em" />
+							I, Confirm
+						</Button>
+					)}
 				</Paper>
 			</div>
 		);
