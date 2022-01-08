@@ -124,10 +124,18 @@ const WatchLab = () => {
 	};
 
 	const itemsBagDeleted = (pos) => {
+		var a = currentUser.watchParts;
+		for (var i = 0; i < pos.length; i++) {
+			a.splice(a.indexOf(pos[i]), 1);
+		}
+		return a;
+	};
+
+	/* const itemsBagDeleted = (pos) => {
 		const a = currentUser.watchParts;
 		for (var i = pos.length - 1; i >= 0; i--) a.splice(pos[i], 1);
 		return a;
-	};
+	}; */
 
 	const whiteBoxes = () => {
 		if (!currentUser.whiteBox) return 0;

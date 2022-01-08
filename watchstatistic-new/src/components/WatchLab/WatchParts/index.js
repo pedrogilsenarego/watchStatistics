@@ -138,7 +138,7 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 					<Button
 						onClick={() => {
 							setOpenConfirmDelete(true);
-							handleDeleteWatchParts([2]);
+							handleDeleteWatchParts(list[2].items);
 						}}
 					>
 						<TiDelete color="red" fontSize="3.5em" />
