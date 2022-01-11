@@ -22,6 +22,19 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 			backgroundColor: LinearProgressBarColor(shredderMeter(list[2].items))
 		}
 	}));
+
+	const BorderLinearProgress0 = styled(LinearProgress)(({ theme }) => ({
+		height: 20,
+		width: 100,
+		borderRadius: 5,
+		[`&.${linearProgressClasses.colorPrimary}`]: {
+			backgroundColor: LinearProgressBarColor2(shredderMeter(list[1].items))
+		},
+		[`& .${linearProgressClasses.bar}`]: {
+			borderRadius: 5,
+			backgroundColor: LinearProgressBarColor(shredderMeter(list[1].items))
+		}
+	}));
 	const shredderMeter = (data) => {
 		var a = 0;
 		for (var i = 0; i < data.length; i++) {
@@ -193,50 +206,72 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 							</Grid>
 						</Box>
 					))}
-					{list[2].items.length > 0 && (
-						<Typography style={{ color: "orange" }}>
-							Shredded Parts are gone!
-						</Typography>
-					)}
-					<Typography>New part that will be obtained:</Typography>
-					<Box
-						sx={{
-							display: "flex",
-							justifyContent: "center",
-							paddingTop: "5px"
-						}}
-					>
-						<BorderLinearProgress
-							variant="determinate"
-							value={LinearProgressBarFormat(shredderMeter(list[2].items))}
-						/>
-					</Box>
-					{!openConfirmDelete && (
-						<Button
-							onClick={() => {
-								setOpenConfirmDelete(true);
-							}}
-						>
-							<TiDelete color="red" fontSize="3.5em" />
-							Shred Parts
-						</Button>
-					)}
-					{openConfirmDelete && (
-						<Button
-							onClick={() => {
-								setOpenConfirmDelete(false);
-								handleDeleteWatchParts(
-									list[2].items,
-									LinearProgressBarColor(shredderMeter(list[2].items)),
-									LinearProgressBarFormat(shredderMeter(list[2].items)),
-									LinearProgressBarColor2(shredderMeter(list[2].items))
-								);
-							}}
-						>
-							<TiDelete color="red" fontSize="3.5em" />
-							I, Confirm
-						</Button>
-					)}
+					<Grid container style={{ display: "flex" }}>
+						<Grid item xs={12} md={6}>
+							<Typography>New watch to be obtained:</Typography>
+							<Box
+								sx={{
+									display: "flex",
+									justifyContent: "center",
+									paddingTop: "5px"
+								}}
+							>
+								<BorderLinearProgress0
+									variant="determinate"
+									value={LinearProgressBarFormat(shredderMeter(list[1].items))}
+								/>
+							</Box>
+							<Button>
+								You need to have one of each basic parts of a watch (5)
+							</Button>
+						</Grid>
+						<Grid item xs={12} md={6}>
+							{list[2].items.length > 0 && (
+								<Typography style={{ color: "orange" }}>
+									Shredded Parts are gone!
+								</Typography>
+							)}
+							<Typography>New part that will be obtained:</Typography>
+							<Box
+								sx={{
+									display: "flex",
+									justifyContent: "center",
+									paddingTop: "5px"
+								}}
+							>
+								<BorderLinearProgress
+									variant="determinate"
+									value={LinearProgressBarFormat(shredderMeter(list[2].items))}
+								/>
+							</Box>
+							{!openConfirmDelete && (
+								<Button
+									onClick={() => {
+										setOpenConfirmDelete(true);
+									}}
+								>
+									<TiDelete color="red" fontSize="3.5em" />
+									Shred Parts
+								</Button>
+							)}
+							{openConfirmDelete && (
+								<Button
+									onClick={() => {
+										setOpenConfirmDelete(false);
+										handleDeleteWatchParts(
+											list[2].items,
+											LinearProgressBarColor(shredderMeter(list[2].items)),
+											LinearProgressBarFormat(shredderMeter(list[2].items)),
+											LinearProgressBarColor2(shredderMeter(list[2].items))
+										);
+									}}
+								>
+									<TiDelete color="red" fontSize="3.5em" />
+									I, Confirm
+								</Button>
+							)}
+						</Grid>
+					</Grid>
 				</Paper>
 			</div>
 		);
