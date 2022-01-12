@@ -8,6 +8,11 @@ import { styled } from "@mui/material/styles";
 const WatchParts = ({ data, handleDeleteWatchParts }) => {
 	const [list, setList] = useState(data);
 	const [dragging, setDragging] = useState(false);
+	const [fusionGlass, setFusionGlass] = useState(false);
+	const [fusionCrown, setFusionCrown] = useState(false);
+	const [fusionMovement, setFusionMovement] = useState(false);
+	const [fusionBracelet, setFusionBracelet] = useState(false);
+	const [fusionCase, setFusionCase] = useState(false);
 	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
 	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -81,6 +86,24 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 	useEffect(() => {
 		setList(data);
 	}, [setList, data]);
+
+	useEffect(() => {
+		if (list[1].items.join("").includes("Crown")) {
+			setFusionCrown(true);
+		} else setFusionCrown(false);
+		if (list[1].items.join("").includes("Case")) {
+			setFusionCase(true);
+		} else setFusionCase(false);
+		if (list[1].items.join("").includes("Bracelet")) {
+			setFusionBracelet(true);
+		} else setFusionBracelet(false);
+		if (list[1].items.join("").includes("Glass")) {
+			setFusionGlass(true);
+		} else setFusionGlass(false);
+		if (list[1].items.join("").includes("Movement")) {
+			setFusionMovement(true);
+		} else setFusionMovement(false);
+	}, [list]);
 
 	const dragItem = useRef();
 	const dragItemNode = useRef();
@@ -208,7 +231,7 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 					))}
 					<Grid container style={{ display: "flex" }}>
 						<Grid item xs={12} md={6}>
-							<Typography>New watch to be obtained:</Typography>
+							<Typography>FUSION MACHINE: New watch to be obtained:</Typography>
 							<Box
 								sx={{
 									display: "flex",
@@ -221,9 +244,36 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 									value={LinearProgressBarFormat(shredderMeter(list[1].items))}
 								/>
 							</Box>
-							<Button>
+							{list[1].items.length > 5 && (
+								<Typography style={{ color: "orange" }}>
+									You have to many parts on the fusion machine
+								</Typography>
+							)}
+							<Typography>
 								You need to have one of each basic parts of a watch (5)
-							</Button>
+							</Typography>
+
+							<Typography style={{ color: fusionCrown ? "white" : "grey" }}>
+								Crown
+							</Typography>
+							<Typography style={{ color: fusionMovement ? "white" : "grey" }}>
+								Movement
+							</Typography>
+							<Typography style={{ color: fusionCase ? "white" : "grey" }}>
+								Case
+							</Typography>
+							<Typography style={{ color: fusionGlass ? "white" : "grey" }}>
+								Glass
+							</Typography>
+							<Typography style={{ color: fusionBracelet ? "white" : "grey" }}>
+								Bracelet
+							</Typography>
+							{fusionBracelet &&
+								fusionCase &&
+								fusionGlass &&
+								fusionCrown &&
+								fusionMovement &&
+								list[1].items.length === 5 && <Button>Fusion!</Button>}
 						</Grid>
 						<Grid item xs={12} md={6}>
 							{list[2].items.length > 0 && (
@@ -231,7 +281,9 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 									Shredded Parts are gone!
 								</Typography>
 							)}
-							<Typography>New part that will be obtained:</Typography>
+							<Typography>
+								SHREDDING - New part that will be obtained:
+							</Typography>
 							<Box
 								sx={{
 									display: "flex",
