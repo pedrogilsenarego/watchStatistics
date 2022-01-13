@@ -280,6 +280,7 @@ const AddWatchForm = () => {
 											label="Watch material"
 											options={{
 												Gold: "Gold",
+												Plastic: "Plastic",
 												"Stainless Steel": "Stainless Steel",
 												Titanium: "Titanium",
 												"White Gold": "White Gold"

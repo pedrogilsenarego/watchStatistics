@@ -46,7 +46,10 @@ const WatchLab = () => {
 	const { currentUser } = useSelector(mapState);
 
 	const data = [
-		{ title: "Available Parts", items: currentUser.watchParts },
+		{
+			title: "Available Parts",
+			items: currentUser.watchParts ? currentUser.watchParts : []
+		},
 		{ title: "Fusion Machine", items: [] },
 		{ title: "Parts Shreder", items: [] }
 	];
@@ -116,7 +119,6 @@ const WatchLab = () => {
 	}
 
 	const bagSize = () => {
-		if (!currentUser.experience) return 0;
 		if (currentUser.experience < 20) return 7;
 		if (currentUser.experience < 100) return 9;
 		if (currentUser.experience < 200) return 11;
@@ -308,7 +310,7 @@ const WatchLab = () => {
 								User your Goodies to build your watch collection
 							</Typography>
 							<Typography style={{ marginTop: "20px" }}>
-								Current Points: {currentUser.points}{" "}
+								Current Points: {currentUser.points ? currentUser.points : 0}{" "}
 							</Typography>
 							<Typography style={{ marginTop: "5px" }}>
 								Blue Fragments: {blueBoxFragments()}{" "}
