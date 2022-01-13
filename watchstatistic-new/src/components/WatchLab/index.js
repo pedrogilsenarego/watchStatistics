@@ -117,12 +117,12 @@ const WatchLab = () => {
 
 	const bagSize = () => {
 		if (!currentUser.experience) return 0;
-		if (currentUser.experience < 20) return 5;
-		if (currentUser.experience < 100) return 6;
-		if (currentUser.experience < 200) return 7;
-		if (currentUser.experience < 500) return 8;
-		if (currentUser.experience < 1500) return 9;
-		if (currentUser.experience < 5000) return 10;
+		if (currentUser.experience < 20) return 7;
+		if (currentUser.experience < 100) return 9;
+		if (currentUser.experience < 200) return 11;
+		if (currentUser.experience < 500) return 12;
+		if (currentUser.experience < 1500) return 13;
+		if (currentUser.experience < 5000) return 14;
 		else return 15;
 	};
 

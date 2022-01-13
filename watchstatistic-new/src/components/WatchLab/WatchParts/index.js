@@ -13,6 +13,7 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 	const [fusionMovement, setFusionMovement] = useState(false);
 	const [fusionBracelet, setFusionBracelet] = useState(false);
 	const [fusionCase, setFusionCase] = useState(false);
+	const [fusionMatchParts, setFusionMatchParts] = useState(true);
 	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
 	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -103,6 +104,16 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 		if (list[1].items.join("").includes("Movement")) {
 			setFusionMovement(true);
 		} else setFusionMovement(false);
+
+		const a = [];
+		for (var i = 0; i < list[1].items.length; i++) {
+			const b = list[1].items[i].slice(0, 1);
+			a.push(b);
+		}
+		const allEqual = (a) => a.every((val) => val === a[0]);
+		if (!allEqual(a)) {
+			setFusionMatchParts(false);
+		} else setFusionMatchParts(true);
 	}, [list]);
 
 	const dragItem = useRef();
@@ -249,10 +260,11 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 									You have to many parts on the fusion machine
 								</Typography>
 							)}
-							<Typography>
-								You need to have one of each basic parts of a watch (5)
-							</Typography>
-
+							{!fusionMatchParts && (
+								<Typography style={{ color: "orange" }}>
+									You have Parts that are incompatible
+								</Typography>
+							)}
 							<Typography style={{ color: fusionCrown ? "white" : "grey" }}>
 								Crown
 							</Typography>
@@ -273,6 +285,7 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 								fusionGlass &&
 								fusionCrown &&
 								fusionMovement &&
+								fusionMatchParts &&
 								list[1].items.length === 5 && <Button>Fusion!</Button>}
 						</Grid>
 						<Grid item xs={12} md={6}>
