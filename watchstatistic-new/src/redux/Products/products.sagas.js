@@ -5,6 +5,7 @@ import {
 	setLatestProducts,
 	setValidationProducts,
 	setProduct,
+	setRandomProduct,
 	fetchValidationProductsStart,
 	fetchProductStart
 } from "./products.actions";
@@ -156,7 +157,7 @@ export function* onUpdateProductDetailsStart() {
 export function* fetchRandomProduct({ payload }) {
 	try {
 		const product = yield handleFetchRandomProduct(payload);
-		yield put(setProduct(product));
+		yield put(setRandomProduct(product));
 	} catch (err) {
 		// console.log(err);
 	}

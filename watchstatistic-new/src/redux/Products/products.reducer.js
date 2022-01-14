@@ -6,6 +6,7 @@ const INITIAL_STATE = {
 	latestProducts: [],
 	validationProducts: [],
 	product: {},
+	randomProduct: {},
 	sidePanel: "graph"
 };
 
@@ -31,7 +32,11 @@ const productsReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				product: action.payload
 			};
-
+		case productsTypes.SET_RANDOM_PRODUCT:
+			return {
+				...state,
+				randomProduct: action.payload
+			};
 		default:
 			return state;
 	}

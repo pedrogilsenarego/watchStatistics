@@ -6,6 +6,7 @@ import LinearProgress, {
 	linearProgressClasses
 } from "@mui/material/LinearProgress";
 import { updateCollectionStatus } from "../../../redux/User/user.actions";
+import { fetchRandomProduct } from "../../../redux/Products/products.actions";
 import { styled } from "@mui/material/styles";
 
 const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
@@ -178,7 +179,13 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 		};
 		dispatch(updateCollectionStatus(configData));
 	};
-
+	useEffect(
+		() => {
+			dispatch(fetchRandomProduct({}));
+		},
+		// eslint-disable-next-line
+		[]
+	);
 	if (list) {
 		return (
 			<div>

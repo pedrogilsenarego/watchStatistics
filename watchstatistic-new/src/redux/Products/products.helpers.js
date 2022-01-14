@@ -340,38 +340,29 @@ export const handleUserUpdateDetails = (product) => {
 	});
 };
 //new implementations
-export const handleFetchRandomProduct = ({
-	filterType,
-	persistProducts = []
-}) => {
+export const handleFetchRandomProduct = () => {
 	return new Promise((resolve, reject) => {
 		let ref = firestore
 			.collection("products")
 			.orderBy("avgTotal", "desc")
 			.limit(1);
 
-		if (filterType) ref = ref.where("productPriceBrackets", "==", filterType);
+		ref = ref.where("productPriceBrackets", "==", "0-200€");
 		//if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 
 		ref
 			.get()
 			.then((snapshot) => {
-				const totalCount = snapshot.size;
-
 				const data = [
-					...persistProducts,
 					...snapshot.docs.map((doc) => {
 						return {
-							...doc.data(),
 							documentID: doc.id
 						};
 					})
 				];
 
 				resolve({
-					data,
-					queryDoc: snapshot.docs[totalCount - 1],
-					isLastPage: totalCount < 1
+					data
 				});
 			})
 			.catch((err) => {
