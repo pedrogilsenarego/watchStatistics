@@ -29,18 +29,6 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 		}
 	}));
 
-	const BorderLinearProgress0 = styled(LinearProgress)(({ theme }) => ({
-		height: 20,
-		width: 100,
-		borderRadius: 5,
-		[`&.${linearProgressClasses.colorPrimary}`]: {
-			backgroundColor: LinearProgressBarColor2(shredderMeter(list[1].items))
-		},
-		[`& .${linearProgressClasses.bar}`]: {
-			borderRadius: 5,
-			backgroundColor: LinearProgressBarColor(shredderMeter(list[1].items))
-		}
-	}));
 	const shredderMeter = (data) => {
 		var a = 0;
 		for (var i = 0; i < data.length; i++) {
@@ -242,19 +230,10 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 					))}
 					<Grid container style={{ display: "flex" }}>
 						<Grid item xs={12} md={6}>
-							<Typography>FUSION MACHINE: New watch to be obtained:</Typography>
-							<Box
-								sx={{
-									display: "flex",
-									justifyContent: "center",
-									paddingTop: "5px"
-								}}
-							>
-								<BorderLinearProgress0
-									variant="determinate"
-									value={LinearProgressBarFormat(shredderMeter(list[1].items))}
-								/>
-							</Box>
+							<Typography>
+								FUSION MACHINE - New watch to be obtained:
+							</Typography>
+
 							{list[1].items.length > 5 && (
 								<Typography style={{ color: "orange" }}>
 									You have to many parts on the fusion machine
