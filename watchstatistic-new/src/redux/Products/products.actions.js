@@ -54,9 +54,12 @@ export const setValidationProducts = (validationProducts) => ({
 	type: productsTypes.SET_VALIDATION_PRODUCTS,
 	payload: validationProducts
 });
-
-//new implementations
 export const updateProductDetailsStart = (productDetails) => ({
 	type: productsTypes.UPDATE_PRODUCT_DETAILS_START,
 	payload: productDetails
+});
+//new implementations
+export const fetchRandomProduct = (randomDetails) => ({
+	type: productsTypes.FETCH_RANDOM_PRODUCT,
+	payload: randomDetails
 });

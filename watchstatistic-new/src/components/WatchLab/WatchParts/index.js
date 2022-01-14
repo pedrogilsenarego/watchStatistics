@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TiDelete } from "react-icons/ti";
+import { useDispatch } from "react-redux";
 import { Grid, Typography, Box, Paper, Button } from "@material-ui/core";
 import LinearProgress, {
 	linearProgressClasses
 } from "@mui/material/LinearProgress";
+import { updateCollectionStatus } from "../../../redux/User/user.actions";
 import { styled } from "@mui/material/styles";
-const WatchParts = ({ data, handleDeleteWatchParts }) => {
+
+const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
+	const dispatch = useDispatch();
 	const [list, setList] = useState(data);
 	const [dragging, setDragging] = useState(false);
 	const [fusionGlass, setFusionGlass] = useState(false);
@@ -167,6 +171,14 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 		if (color === "8") return "red";
 	};
 
+	const handleFusionNewWatch = () => {
+		const configData = {
+			...currentUser,
+			collection: ["8bP2UuAqqGyatgRoE3za"]
+		};
+		dispatch(updateCollectionStatus(configData));
+	};
+
 	if (list) {
 		return (
 			<div>
@@ -265,7 +277,11 @@ const WatchParts = ({ data, handleDeleteWatchParts }) => {
 								fusionCrown &&
 								fusionMovement &&
 								fusionMatchParts &&
-								list[1].items.length === 5 && <Button>Fusion!</Button>}
+								list[1].items.length === 5 && (
+									<Button onClick={() => handleFusionNewWatch()}>
+										Fusion!
+									</Button>
+								)}
 						</Grid>
 						<Grid item xs={12} md={6}>
 							{list[2].items.length > 0 && (

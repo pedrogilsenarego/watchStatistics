@@ -297,7 +297,8 @@ const WatchLab = () => {
 
 	const configWatchParts = {
 		data,
-		handleDeleteWatchParts
+		handleDeleteWatchParts,
+		currentUser
 	};
 
 	return (
@@ -310,6 +311,10 @@ const WatchLab = () => {
 								User your Goodies to build your watch collection
 							</Typography>
 							<Typography style={{ marginTop: "20px" }}>
+								Collection size:{" "}
+								{currentUser.collection ? currentUser.collection.length : 0}{" "}
+							</Typography>
+							<Typography style={{ marginTop: "5px" }}>
 								Current Points: {currentUser.points ? currentUser.points : 0}{" "}
 							</Typography>
 							<Typography style={{ marginTop: "5px" }}>
