@@ -199,7 +199,9 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 	};
 
 	const handleFusionNewWatch = () => {
-		dispatch(fetchRandomProduct({ fusionPrice }));
+		const randomValue = randomWeightedNumber();
+		console.log(randomValue);
+		dispatch(fetchRandomProduct({ fusionPrice, randomValue }));
 		const configData = {
 			...currentUser,
 			collection: ["8bP2UuAqqGyatgRoE3za"]
@@ -271,7 +273,6 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 					))}
 					<Grid container style={{ display: "flex" }}>
 						<Grid item xs={12} md={6}>
-							<Button>Generate random value: {randomWeightedNumber()}</Button>
 							<Typography>
 								FUSION MACHINE - New watch to be obtained: {fusionPrice}
 							</Typography>
