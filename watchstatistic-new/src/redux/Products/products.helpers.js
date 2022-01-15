@@ -355,6 +355,7 @@ export const handleFetchRandomProduct = ({ fusionPrice, randomValue }) => {
 				const data = [
 					...snapshot.docs.map((doc) => {
 						return {
+							...doc.data(),
 							documentID: doc.id
 						};
 					})

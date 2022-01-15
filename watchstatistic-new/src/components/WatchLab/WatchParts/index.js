@@ -1,12 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Grid, Typography, Box, Paper, Button } from "@material-ui/core";
 import LinearProgress, {
 	linearProgressClasses
 } from "@mui/material/LinearProgress";
 import { fetchRandomProduct } from "../../../redux/Products/products.actions";
+import { updateCollectionStatus } from "../../../redux/User/user.actions";
 import { styled } from "@mui/material/styles";
+
+const mapState = (state) => ({
+	randomProduct: state.productsData.randomProduct.data[0]
+});
 
 const WatchParts = ({
 	data,
@@ -26,6 +32,8 @@ const WatchParts = ({
 	const [fusionPrice, setFusionPrice] = useState("");
 	const [ready, setReady] = useState(false);
 	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+	const [newWatchPopup, setNewWatchPopup] = useState(true);
+	const { randomProduct } = useSelector(mapState);
 
 	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 		height: 20,
@@ -206,12 +214,17 @@ const WatchParts = ({
 		const randomValue = randomWeightedNumber();
 
 		const configData = {
-			...currentUser,
 			randomValue,
-			fusionPrice,
-			userID: currentUser.id
+			fusionPrice
 		};
 		dispatch(fetchRandomProduct(configData));
+		setNewWatchPopup(true);
+		const configData2 = {
+			...currentUser,
+			userID: currentUser.id,
+			collection: randomProduct.documentID
+		};
+		dispatch(updateCollectionStatus(configData2));
 	};
 
 	if (list) {
@@ -381,6 +394,12 @@ const WatchParts = ({
 									<TiDelete color="red" fontSize="3.5em" />
 									I, Confirm
 								</Button>
+							)}
+							{newWatchPopup && randomProduct && (
+								<Typography>
+									{randomProduct.productBrand} . {randomProduct.productName} .{" "}
+									{randomProduct.documentID}
+								</Typography>
 							)}
 						</Grid>
 					</Grid>

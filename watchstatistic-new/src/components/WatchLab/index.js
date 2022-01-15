@@ -62,7 +62,7 @@ const WatchLab = () => {
 				currentUser.watchParts.length >= bagSize()
 			) {
 				setBagFull(true);
-			}
+			} else setBagFull(false);
 		},
 		// eslint-disable-next-line
 		[currentUser.watchParts]
@@ -75,10 +75,10 @@ const WatchLab = () => {
 				currentUser.collection.length >= bagSize()
 			) {
 				setCollectionFull(true);
-			}
+			} else setCollectionFull(false);
 		},
 		// eslint-disable-next-line
-		[currentUser.watchParts]
+		[currentUser.collection]
 	);
 
 	function getRandomInt(min, max) {

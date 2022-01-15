@@ -111,11 +111,12 @@ export const handleUpdateBoxStatus = (product) => {
 };
 //new implementations
 export const handleUpdateCollectionStatus = (product) => {
-	const { newWatch, userID } = product;
+	const { collection, userID } = product;
 	return new Promise((resolve, reject) => {
 		let ref = firestore.collection("users").doc(userID);
 		ref.update({
-			collection: firebase.firestore.FieldValue.arrayUnion(newWatch)
+			collection: collection
+			//collection: firebase.firestore.FieldValue.arrayUnion(newWatch)
 		});
 
 		ref
