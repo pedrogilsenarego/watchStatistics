@@ -23,7 +23,7 @@ import {
 	handleFetchRandomProduct
 } from "./products.helpers";
 import productsTypes from "./products.types";
-import { checkUserSession } from "../User/user.actions";
+import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
 
 export function* addProduct({ payload }) {
 	try {
@@ -161,6 +161,9 @@ export function* fetchRandomProduct({ payload }) {
 			var differentPayload = { ...payload, randomValue: 1 };
 			product = yield handleFetchRandomProduct(differentPayload);
 		}
+
+		const configData = { newWatch: product.data[0].documentID };
+		yield put(updateCollectionStatus(configData));
 		yield put(setRandomProduct(product));
 	} catch (err) {
 		// console.log(err);

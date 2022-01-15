@@ -1,10 +1,8 @@
 import userTypes from "./user.types";
-
 const INITIAL_STATE = {
 	currentUser: null,
 	resetPasswordSuccess: false,
 	userErr: [],
-	//implementations
 	users: []
 };
 
@@ -43,12 +41,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
 				currentUser: action.payload
 			};
 		case userTypes.UPDATE_BOX_STATE:
-			return {
-				...state,
-				currentUser: action.payload
-			};
-		//implementations
-		case userTypes.UPDATE_COLLECTION_STATE:
 			return {
 				...state,
 				currentUser: action.payload

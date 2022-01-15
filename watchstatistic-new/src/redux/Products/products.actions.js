@@ -63,7 +63,7 @@ export const fetchRandomProduct = (randomDetails) => ({
 	type: productsTypes.FETCH_RANDOM_PRODUCT,
 	payload: randomDetails
 });
-
+//retirar
 export const setRandomProduct = (product) => ({
 	type: productsTypes.SET_RANDOM_PRODUCT,
 	payload: product

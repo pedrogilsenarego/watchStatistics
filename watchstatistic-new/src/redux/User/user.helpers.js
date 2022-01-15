@@ -76,8 +76,6 @@ export const handleUpdateUserPreferences = (product) => {
 	});
 };
 
-//implementations
-
 export const handleUpdateBoxStatus = (product) => {
 	const { userID, blueBoxFragments, purpleBoxFragments, watchParts } = product;
 
@@ -101,6 +99,25 @@ export const handleUpdateBoxStatus = (product) => {
 			ref.update({
 				watchParts: watchParts
 			});
+
+		ref
+			.then(() => {
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
+//new implementations
+export const handleUpdateCollectionStatus = (product) => {
+	const { newWatch } = product;
+	console.log(newWatch);
+	return new Promise((resolve, reject) => {
+		let ref = firestore.collection("users").doc("GmvVFotd6lcVTawaExI8wSReEax2");
+		ref.update({
+			collection: firebase.firestore.FieldValue.arrayUnion(newWatch)
+		});
 
 		ref
 			.then(() => {

@@ -5,7 +5,6 @@ import { Grid, Typography, Box, Paper, Button } from "@material-ui/core";
 import LinearProgress, {
 	linearProgressClasses
 } from "@mui/material/LinearProgress";
-import { updateCollectionStatus } from "../../../redux/User/user.actions";
 import { fetchRandomProduct } from "../../../redux/Products/products.actions";
 import { styled } from "@mui/material/styles";
 
@@ -201,12 +200,6 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 	const handleFusionNewWatch = () => {
 		const randomValue = randomWeightedNumber();
 		dispatch(fetchRandomProduct({ fusionPrice, randomValue }));
-		const configData = {
-			...currentUser,
-			collection: ["8bP2UuAqqGyatgRoE3za"]
-		};
-
-		dispatch(updateCollectionStatus(configData));
 	};
 
 	if (list) {

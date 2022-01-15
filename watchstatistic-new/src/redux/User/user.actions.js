@@ -68,7 +68,7 @@ export const updateBoxStatus = (boxStatus) => ({
 	payload: boxStatus
 });
 //new implementation
-export const updateCollectionStatus = (collectionStatus) => ({
+export const updateCollectionStatus = (newWatch) => ({
 	type: userTypes.UPDATE_COLLECTION_STATE,
-	payload: collectionStatus
+	payload: newWatch
 });

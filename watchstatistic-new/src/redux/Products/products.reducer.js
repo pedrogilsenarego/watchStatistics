@@ -32,6 +32,7 @@ const productsReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				product: action.payload
 			};
+		//retirar
 		case productsTypes.SET_RANDOM_PRODUCT:
 			return {
 				...state,
