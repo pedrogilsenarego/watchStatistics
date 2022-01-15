@@ -8,7 +8,12 @@ import LinearProgress, {
 import { fetchRandomProduct } from "../../../redux/Products/products.actions";
 import { styled } from "@mui/material/styles";
 
-const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
+const WatchParts = ({
+	data,
+	handleDeleteWatchParts,
+	collectionFull,
+	currentUser
+}) => {
 	const dispatch = useDispatch();
 	const [list, setList] = useState(data);
 	const [dragging, setDragging] = useState(false);
@@ -199,7 +204,14 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 
 	const handleFusionNewWatch = () => {
 		const randomValue = randomWeightedNumber();
-		dispatch(fetchRandomProduct({ fusionPrice, randomValue }));
+
+		const configData = {
+			...currentUser,
+			randomValue,
+			fusionPrice,
+			userID: currentUser.id
+		};
+		dispatch(fetchRandomProduct(configData));
 	};
 
 	if (list) {
@@ -301,6 +313,7 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 								fusionCrown &&
 								fusionMovement &&
 								fusionMatchParts &&
+								!collectionFull &&
 								list[1].items.length === 5 && (
 									<Button
 										onClick={() => {

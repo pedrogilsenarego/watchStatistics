@@ -45,6 +45,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				currentUser: action.payload
 			};
+		/* case userTypes.UPDATE_COLLECTION_STATE:
+			return {
+				...state,
+				currentUser: {
+					collection: action.payload.newWatch
+				}
+			}; */
 		default:
 			return state;
 	}

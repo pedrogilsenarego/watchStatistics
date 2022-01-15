@@ -39,6 +39,7 @@ const WatchLab = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
+	const [collectionFull, setCollectionFull] = useState(false);
 	const [bagFull, setBagFull] = useState(false);
 	const [popUpInf, setPopUpInfo] = useState(null);
 	const [helperDescription, setHelperDescription] = useState(false);
@@ -61,6 +62,19 @@ const WatchLab = () => {
 				currentUser.watchParts.length >= bagSize()
 			) {
 				setBagFull(true);
+			}
+		},
+		// eslint-disable-next-line
+		[currentUser.watchParts]
+	);
+
+	useEffect(
+		() => {
+			if (
+				currentUser.collection &&
+				currentUser.collection.length >= bagSize()
+			) {
+				setCollectionFull(true);
 			}
 		},
 		// eslint-disable-next-line
@@ -298,7 +312,8 @@ const WatchLab = () => {
 	const configWatchParts = {
 		data,
 		handleDeleteWatchParts,
-		currentUser
+		currentUser,
+		collectionFull
 	};
 
 	return (
@@ -312,7 +327,8 @@ const WatchLab = () => {
 							</Typography>
 							<Typography style={{ marginTop: "20px" }}>
 								Collection size:{" "}
-								{currentUser.collection ? currentUser.collection.length : 0}{" "}
+								{currentUser.collection ? currentUser.collection.length : 0}/
+								{bagSize()}
 							</Typography>
 							<Typography style={{ marginTop: "5px" }}>
 								Current Points: {currentUser.points ? currentUser.points : 0}{" "}
@@ -496,6 +512,12 @@ const WatchLab = () => {
 							<Typography style={{ marginTop: "10px", color: "orange" }}>
 								Your bag is full of Watch Parts, you need to use or delete some
 								parts to open more boxes.
+							</Typography>
+						)}
+						{collectionFull && (
+							<Typography style={{ marginTop: "10px", color: "orange" }}>
+								Your collection is full of Watches, you need to increase the
+								spots or delete some watches to get new watches.
 							</Typography>
 						)}
 						<Grid item xs={12} style={{ marginTop: "30px" }}>
