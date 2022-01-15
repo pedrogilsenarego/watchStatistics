@@ -176,8 +176,8 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 
 	const randomWeightedNumber = () => {
 		const numbers = [
-			0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6,
-			6, 7, 7, 8, 8, 9
+			1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8,
+			8, 9
 		];
 		const rnd = Math.floor(Math.random() * numbers.length);
 		const rnd2 = Math.floor(Math.random() * 10) + 1;
@@ -200,7 +200,6 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 
 	const handleFusionNewWatch = () => {
 		const randomValue = randomWeightedNumber();
-		console.log(randomValue);
 		dispatch(fetchRandomProduct({ fusionPrice, randomValue }));
 		const configData = {
 			...currentUser,
