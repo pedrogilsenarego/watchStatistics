@@ -340,14 +340,12 @@ export const handleUserUpdateDetails = (product) => {
 	});
 };
 //new implementations
-export const handleFetchRandomProduct = () => {
+export const handleFetchRandomProduct = ({ fusionPrice }) => {
 	return new Promise((resolve, reject) => {
-		let ref = firestore
-			.collection("products")
-			.orderBy("avgTotal", "desc")
-			.limit(1);
+		let ref = firestore.collection("products").orderBy("avgTotal").limit(1);
 
-		ref = ref.where("productPriceBrackets", "==", "0-200€");
+		ref = ref.where("productPriceBrackets", "==", fusionPrice);
+		ref = ref.where("avgTotal", ">=", "5");
 		//if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 
 		ref

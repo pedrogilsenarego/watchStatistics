@@ -19,6 +19,8 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 	const [fusionBracelet, setFusionBracelet] = useState(false);
 	const [fusionCase, setFusionCase] = useState(false);
 	const [fusionMatchParts, setFusionMatchParts] = useState(true);
+	const [fusionPrice, setFusionPrice] = useState("");
+	const [ready, setReady] = useState(false);
 	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
 	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -172,20 +174,40 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 		if (color === "8") return "red";
 	};
 
+	const randomWeightedNumber = () => {
+		const numbers = [
+			0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6,
+			6, 7, 7, 8, 8, 9
+		];
+		const rnd = Math.floor(Math.random() * numbers.length);
+		const rnd2 = Math.floor(Math.random() * 10) + 1;
+		return numbers[rnd] + rnd2 / 10;
+	};
+
+	const priceWatchParts = (watchParts) => {
+		let newArray = watchParts;
+		let color = newArray[0];
+		if (color === "0") return "0-200€";
+		if (color === "1") return "200-500€";
+		if (color === "2") return "500-1000€";
+		if (color === "3") return "1000-5000€";
+		if (color === "4") return "5000-10.000€";
+		if (color === "5") return "10.000-30.000€";
+		if (color === "6") return "30.000-50.000€";
+		if (color === "7") return "50.000-100.000€";
+		if (color === "8") return "100.000€+";
+	};
+
 	const handleFusionNewWatch = () => {
+		dispatch(fetchRandomProduct({ fusionPrice }));
 		const configData = {
 			...currentUser,
 			collection: ["8bP2UuAqqGyatgRoE3za"]
 		};
+
 		dispatch(updateCollectionStatus(configData));
 	};
-	useEffect(
-		() => {
-			dispatch(fetchRandomProduct({}));
-		},
-		// eslint-disable-next-line
-		[]
-	);
+
 	if (list) {
 		return (
 			<div>
@@ -249,8 +271,9 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 					))}
 					<Grid container style={{ display: "flex" }}>
 						<Grid item xs={12} md={6}>
+							<Button>Generate random value: {randomWeightedNumber()}</Button>
 							<Typography>
-								FUSION MACHINE - New watch to be obtained:
+								FUSION MACHINE - New watch to be obtained: {fusionPrice}
 							</Typography>
 
 							{list[1].items.length > 5 && (
@@ -278,17 +301,33 @@ const WatchParts = ({ data, handleDeleteWatchParts, currentUser }) => {
 							<Typography style={{ color: fusionBracelet ? "white" : "grey" }}>
 								Bracelet
 							</Typography>
-							{fusionBracelet &&
+							{!ready &&
+								fusionBracelet &&
 								fusionCase &&
 								fusionGlass &&
 								fusionCrown &&
 								fusionMovement &&
 								fusionMatchParts &&
 								list[1].items.length === 5 && (
-									<Button onClick={() => handleFusionNewWatch()}>
-										Fusion!
+									<Button
+										onClick={() => {
+											setFusionPrice(priceWatchParts(list[1].items[0]));
+											setReady(true);
+										}}
+									>
+										Are you ready!
 									</Button>
 								)}
+							{ready && (
+								<Button
+									onClick={() => {
+										setReady(false);
+										handleFusionNewWatch();
+									}}
+								>
+									Fusion!
+								</Button>
+							)}
 						</Grid>
 						<Grid item xs={12} md={6}>
 							{list[2].items.length > 0 && (
