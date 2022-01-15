@@ -156,7 +156,11 @@ export function* onUpdateProductDetailsStart() {
 
 export function* fetchRandomProduct({ payload }) {
 	try {
-		const product = yield handleFetchRandomProduct(payload);
+		var product = yield handleFetchRandomProduct(payload);
+		if (product.data.length === 0) {
+			var differentPayload = { ...payload, randomValue: 1 };
+			product = yield handleFetchRandomProduct(differentPayload);
+		}
 		yield put(setRandomProduct(product));
 	} catch (err) {
 		// console.log(err);
