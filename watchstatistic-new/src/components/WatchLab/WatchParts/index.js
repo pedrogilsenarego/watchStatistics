@@ -32,7 +32,7 @@ const WatchParts = ({
 	const [fusionPrice, setFusionPrice] = useState("");
 	const [ready, setReady] = useState(false);
 	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
-	const [newWatchPopup, setNewWatchPopup] = useState(true);
+	const [newWatchPopup, setNewWatchPopup] = useState(false);
 	const { randomProduct } = useSelector(mapState);
 
 	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -219,6 +219,8 @@ const WatchParts = ({
 		};
 		dispatch(fetchRandomProduct(configData));
 		setNewWatchPopup(true);
+	};
+	const handleAcceptWatch = () => {
 		const newArray = currentUser.collection ? currentUser.collection : [];
 		newArray.push(randomProduct.documentID);
 		const configData2 = {
@@ -227,6 +229,7 @@ const WatchParts = ({
 			collection: newArray
 		};
 		dispatch(updateCollectionStatus(configData2));
+		setNewWatchPopup(false);
 	};
 
 	if (list) {
@@ -397,12 +400,20 @@ const WatchParts = ({
 									I, Confirm
 								</Button>
 							)}
-							{newWatchPopup && randomProduct && (
-								<Typography>
-									{randomProduct.productBrand} . {randomProduct.productName} .{" "}
-									{randomProduct.documentID}
-								</Typography>
-							)}
+							{newWatchPopup &&
+								randomProduct && [
+									<Typography>
+										{randomProduct.productBrand} . {randomProduct.productName} .{" "}
+										{randomProduct.documentID}
+									</Typography>,
+									<Button
+										onClick={() => {
+											handleAcceptWatch();
+										}}
+									>
+										Accept
+									</Button>
+								]}
 						</Grid>
 					</Grid>
 				</Paper>
