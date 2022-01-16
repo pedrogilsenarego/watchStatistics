@@ -85,7 +85,7 @@ export const handleUpdateBoxStatus = (product) => {
 		if (product.flag === "getWhitebox")
 			ref.update({
 				whiteBox: firebase.firestore.FieldValue.increment(1),
-				points: firebase.firestore.FieldValue.increment(-10)
+				points: firebase.firestore.FieldValue.increment(-4)
 			});
 
 		if (product.flag === "openWhitebox")

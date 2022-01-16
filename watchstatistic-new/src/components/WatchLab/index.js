@@ -133,12 +133,12 @@ const WatchLab = () => {
 	}
 
 	const bagSize = () => {
-		if (currentUser.experience < 20) return 7;
-		if (currentUser.experience < 100) return 9;
-		if (currentUser.experience < 200) return 11;
-		if (currentUser.experience < 500) return 12;
-		if (currentUser.experience < 1500) return 13;
-		if (currentUser.experience < 5000) return 14;
+		if (currentUser.experience < 20) return 10;
+		if (currentUser.experience < 100) return 12;
+		if (currentUser.experience < 200) return 14;
+		if (currentUser.experience < 500) return 16;
+		if (currentUser.experience < 1500) return 18;
+		if (currentUser.experience < 5000) return 20;
 		else return 15;
 	};
 
@@ -367,7 +367,7 @@ const WatchLab = () => {
 											padding: "10px"
 										}}
 									>
-										<Typography>WhiteBox: 10 points</Typography>
+										<Typography>WhiteBox: 4 points</Typography>
 										<Typography>Owned: {whiteBoxes()}</Typography>
 										<ButtonGroup style={{ marginTop: "10px" }}>
 											<Button
