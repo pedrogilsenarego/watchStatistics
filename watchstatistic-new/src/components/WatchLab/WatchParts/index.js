@@ -219,10 +219,12 @@ const WatchParts = ({
 		};
 		dispatch(fetchRandomProduct(configData));
 		setNewWatchPopup(true);
+		const newArray = currentUser.collection ? currentUser.collection : [];
+		newArray.push(randomProduct.documentID);
 		const configData2 = {
 			...currentUser,
 			userID: currentUser.id,
-			collection: randomProduct.documentID
+			collection: newArray
 		};
 		dispatch(updateCollectionStatus(configData2));
 	};
