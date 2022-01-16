@@ -214,6 +214,9 @@ const WatchParts = ({
 		const randomValue = randomWeightedNumber();
 
 		const configData = {
+			...currentUser,
+			userID: currentUser.id,
+			collection: currentUser.collection ? currentUser.collection : [],
 			randomValue,
 			fusionPrice
 		};

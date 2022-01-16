@@ -23,7 +23,7 @@ import {
 	handleFetchRandomProduct
 } from "./products.helpers";
 import productsTypes from "./products.types";
-import { checkUserSession } from "../User/user.actions";
+import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
 
 export function* addProduct({ payload }) {
 	try {
@@ -161,7 +161,13 @@ export function* fetchRandomProduct({ payload }) {
 			var differentPayload = { ...payload, randomValue: 1 };
 			product = yield handleFetchRandomProduct(differentPayload);
 		}
-
+		const newCollection = payload.collection;
+		newCollection.push(product.data[0].documentID);
+		const configData = {
+			...payload,
+			collection: newCollection
+		};
+		yield put(updateCollectionStatus(configData));
 		yield put(setRandomProduct(product));
 	} catch (err) {
 		// console.log(err);
