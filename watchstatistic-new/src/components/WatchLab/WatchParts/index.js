@@ -7,7 +7,6 @@ import LinearProgress, {
 	linearProgressClasses
 } from "@mui/material/LinearProgress";
 import { fetchRandomProduct } from "../../../redux/Products/products.actions";
-import { updateCollectionStatus } from "../../../redux/User/user.actions";
 import { styled } from "@mui/material/styles";
 
 const mapState = (state) => ({
@@ -223,17 +222,6 @@ const WatchParts = ({
 		dispatch(fetchRandomProduct(configData));
 		setNewWatchPopup(true);
 	};
-	const handleAcceptWatch = () => {
-		const newArray = currentUser.collection ? currentUser.collection : [];
-		newArray.push(randomProduct.documentID);
-		const configData2 = {
-			...currentUser,
-			userID: currentUser.id,
-			collection: newArray
-		};
-		dispatch(updateCollectionStatus(configData2));
-		setNewWatchPopup(false);
-	};
 
 	if (list) {
 		return (
@@ -411,10 +399,10 @@ const WatchParts = ({
 									</Typography>,
 									<Button
 										onClick={() => {
-											handleAcceptWatch();
+											setNewWatchPopup(false);
 										}}
 									>
-										Accept
+										Nice!
 									</Button>
 								]}
 						</Grid>
