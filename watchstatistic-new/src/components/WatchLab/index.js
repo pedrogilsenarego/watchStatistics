@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import WatchParts from "./WatchParts";
+import NewWatchPopUp from "./NewWatchPopUp";
 import {
 	Grid,
 	Typography,
@@ -198,7 +199,7 @@ const WatchLab = () => {
 	};
 
 	const whiteboxDisabled = () => {
-		if (!currentUser.points || currentUser.points < 10) {
+		if (!currentUser.points || currentUser.points < 4) {
 			return true;
 		} else return false;
 	};
@@ -573,6 +574,7 @@ const WatchLab = () => {
 					</Grid>
 				</Paper>
 			</Grid>
+			<NewWatchPopUp />
 		</div>
 	);
 };
