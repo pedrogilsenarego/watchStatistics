@@ -289,11 +289,11 @@ const WatchLab = () => {
 	const handleDeleteWatchParts = (pos, color, percentage, color2) => {
 		const a = itemsBagDeleted(pos);
 
-		if (percentageLoot(percentage) === 1) {
+		if (percentage && color && percentageLoot(percentage) === 1) {
 			const b = getRandomPart(color);
 			a.push(b);
 		} else {
-			if (color2 !== "black") {
+			if (color2 && color2 !== "black") {
 				const b = getRandomPart(color2);
 				a.push(b);
 			}

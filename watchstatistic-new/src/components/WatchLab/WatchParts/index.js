@@ -338,6 +338,7 @@ const WatchParts = ({
 									onClick={() => {
 										setReady(false);
 										handleFusionNewWatch();
+										handleDeleteWatchParts(list[1].items);
 									}}
 								>
 									Fusion!
