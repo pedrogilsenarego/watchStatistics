@@ -10,7 +10,7 @@ import { fetchRandomProduct } from "../../../redux/Products/products.actions";
 import { styled } from "@mui/material/styles";
 
 const mapState = (state) => ({
-	randomProduct: state.productsData.randomProduct.data[0]
+	randomProduct: state.productsData.randomProduct
 });
 
 const WatchParts = ({
@@ -395,8 +395,9 @@ const WatchParts = ({
 							{newWatchPopup &&
 								randomProduct && [
 									<Typography>
-										{randomProduct.productBrand} . {randomProduct.productName} .{" "}
-										{randomProduct.documentID}
+										{randomProduct.data[0].productBrand} .{" "}
+										{randomProduct.data[0].productName} .{" "}
+										{randomProduct.data[0].documentID}
 									</Typography>,
 									<Button
 										onClick={() => {

@@ -180,7 +180,7 @@ const WatchLab = () => {
 		const configData = {
 			...currentUser,
 			flag: "getWhitebox",
-			points: currentUser.points - 10,
+			points: currentUser.points - 4,
 			whiteBox: whiteBoxes() + 1,
 			userID: currentUser.id
 		};
