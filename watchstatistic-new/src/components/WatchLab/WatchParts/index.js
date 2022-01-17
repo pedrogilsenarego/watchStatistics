@@ -2,13 +2,20 @@ import React, { useState, useEffect, useRef } from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Grid, Typography, Box, Paper, Button } from "@material-ui/core";
+import {
+	Grid,
+	Typography,
+	Box,
+	Paper,
+	Button,
+	CardMedia
+} from "@material-ui/core";
 import LinearProgress, {
 	linearProgressClasses
 } from "@mui/material/LinearProgress";
 import { fetchRandomProduct } from "../../../redux/Products/products.actions";
 import { styled } from "@mui/material/styles";
-
+import Popup from "../../controls/Popup";
 const mapState = (state) => ({
 	randomProduct: state.productsData.randomProduct
 });
@@ -32,6 +39,7 @@ const WatchParts = ({
 	const [ready, setReady] = useState(false);
 	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 	const [newWatchPopup, setNewWatchPopup] = useState(false);
+	const [openPopupNewWatch, setOpenPopupNewWatch] = useState(false);
 	const { randomProduct } = useSelector(mapState);
 
 	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -410,6 +418,28 @@ const WatchParts = ({
 						</Grid>
 					</Grid>
 				</Paper>
+				<Button
+					onClick={() => {
+						setOpenPopupNewWatch(true);
+					}}
+				>
+					Teste Popup
+				</Button>
+				<Popup
+					openPopup={openPopupNewWatch}
+					setOpenPopup={setOpenPopupNewWatch}
+					title={"New Watch!!"}
+				>
+					<Typography style={{ color: "black", fontSize: "12px" }}>
+						<CardMedia
+							style={{ height: "30vh" }}
+							image={randomProduct.data[0].productThumbnail[0]}
+						></CardMedia>
+						Congratulations you added to your collection a:{" "}
+						{randomProduct.data[0].productBrand}{" "}
+						{randomProduct.data[0].productName}
+					</Typography>
+				</Popup>
 			</div>
 		);
 	}

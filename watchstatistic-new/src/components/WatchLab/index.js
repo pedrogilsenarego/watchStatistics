@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import WatchParts from "./WatchParts";
-import NewWatchPopUp from "./NewWatchPopUp";
+
 import {
 	Grid,
 	Typography,
@@ -45,6 +45,7 @@ const WatchLab = () => {
 	const [popUpInf, setPopUpInfo] = useState(null);
 	const [helperDescription, setHelperDescription] = useState(false);
 	const [helperDescriptionBlue, setHelperDescriptionBlue] = useState(false);
+
 	const { currentUser } = useSelector(mapState);
 
 	const data = [
@@ -574,7 +575,6 @@ const WatchLab = () => {
 					</Grid>
 				</Paper>
 			</Grid>
-			<NewWatchPopUp />
 		</div>
 	);
 };
