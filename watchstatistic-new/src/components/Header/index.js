@@ -328,6 +328,13 @@ const Header = (props) => {
 			>
 				<MenuItem
 					onClick={() => {
+						history.push("/mycollection");
+					}}
+				>
+					My Collection
+				</MenuItem>
+				<MenuItem
+					onClick={() => {
 						history.push("/dashboard");
 					}}
 				>

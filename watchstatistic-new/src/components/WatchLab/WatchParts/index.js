@@ -38,7 +38,7 @@ const WatchParts = ({
 	const [fusionPrice, setFusionPrice] = useState("");
 	const [ready, setReady] = useState(false);
 	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
-	const [newWatchPopup, setNewWatchPopup] = useState(false);
+
 	const [openPopupNewWatch, setOpenPopupNewWatch] = useState(false);
 	const { randomProduct } = useSelector(mapState);
 
@@ -228,7 +228,7 @@ const WatchParts = ({
 			fusionPrice
 		};
 		dispatch(fetchRandomProduct(configData));
-		setNewWatchPopup(true);
+		setOpenPopupNewWatch(true);
 	};
 
 	if (list) {
@@ -400,21 +400,6 @@ const WatchParts = ({
 									I, Confirm
 								</Button>
 							)}
-							{newWatchPopup &&
-								randomProduct && [
-									<Typography>
-										{randomProduct.data[0].productBrand} .{" "}
-										{randomProduct.data[0].productName} .{" "}
-										{randomProduct.data[0].documentID}
-									</Typography>,
-									<Button
-										onClick={() => {
-											setNewWatchPopup(false);
-										}}
-									>
-										Nice!
-									</Button>
-								]}
 						</Grid>
 					</Grid>
 				</Paper>
@@ -428,16 +413,19 @@ const WatchParts = ({
 				<Popup
 					openPopup={openPopupNewWatch}
 					setOpenPopup={setOpenPopupNewWatch}
-					title={"New Watch!!"}
+					title={"New Watch Alert!!"}
 				>
-					<Typography style={{ color: "black", fontSize: "12px" }}>
-						<CardMedia
-							style={{ height: "30vh" }}
-							image={randomProduct.data[0].productThumbnail[0]}
-						></CardMedia>
+					<CardMedia
+						style={{ height: "30vh" }}
+						image={randomProduct.data[0].productThumbnail[0]}
+					></CardMedia>
+					<Typography
+						style={{ color: "black", fontSize: "12px", marginTop: "10px" }}
+					>
 						Congratulations you added to your collection a:{" "}
 						{randomProduct.data[0].productBrand}{" "}
-						{randomProduct.data[0].productName}
+						{randomProduct.data[0].productName} Ref:{" "}
+						{randomProduct.data[0].reference}
 					</Typography>
 				</Popup>
 			</div>

@@ -18,7 +18,11 @@ const Popup = (props) => {
 				}}
 			>
 				<DialogTitle>
-					<Typography style={{ color: "black" }}>{title}</Typography>
+					<div style={{ textAlign: "center" }}>
+						<Typography variant="h6" component="div" style={{ color: "black" }}>
+							{title}
+						</Typography>
+					</div>
 				</DialogTitle>
 				<DialogContent dividers>{children}</DialogContent>
 			</Dialog>

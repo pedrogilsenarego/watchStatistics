@@ -13,6 +13,7 @@ import Search from "./pages/Search";
 import Registration from "./pages/Registration";
 import Recovery from "./pages/Recovery";
 import Dashboard from "./pages/Dashboard";
+import MyCollection from "./pages/MyCollection";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
 import ProductDetailsPreview from "./pages/ProductDetailsPreview";
@@ -181,6 +182,16 @@ const App = (props) => {
 							<WithAuth>
 								<MainLayout>
 									<Dashboard />
+								</MainLayout>
+							</WithAuth>
+						)}
+					/>
+					<Route
+						path="/mycollection"
+						render={() => (
+							<WithAuth>
+								<MainLayout>
+									<MyCollection />
 								</MainLayout>
 							</WithAuth>
 						)}
