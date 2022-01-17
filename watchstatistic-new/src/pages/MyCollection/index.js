@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
+import { Typography } from "@material-ui/core";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
@@ -12,11 +14,17 @@ const mapState = (state) => ({
 const MyCollection = (props) => {
 	const { currentUser } = useSelector(mapState);
 	const history = useHistory();
-	const [list, setList] = useState(currentUser.collection);
 
-	useEffect(() => {
-		setList(currentUser.collection);
-	}, [setList, currentUser.collection]);
+	const [teste, setTeste] = useState(currentUser.collection);
+	const list = currentUser.collection;
+	const { collection } = currentUser;
+
+	const handleWatch4Booster = (watchPos) => {
+		const oldArray = collection;
+
+		oldArray.splice(watchPos, 1);
+		setTeste(oldArray);
+	};
 
 	return (
 		<div>
@@ -32,24 +40,35 @@ const MyCollection = (props) => {
 					</Container>
 				</Grid>
 
-				{list.map((collection, pos) => (
+				{list.map((item, pos) => (
 					<Grid
 						container
 						spacing={0}
 						direction="column"
 						alignItems="center"
 						justifyContent="center"
+						key={item}
 					>
-						<Button
-							onClick={() => {
-								history.push(`/product/${currentUser.collection[pos]}`);
-							}}
-						>
-							{currentUser.collection[pos]}
-						</Button>
+						<ButtonGroup>
+							<Button
+								onClick={() => {
+									history.push(`/product/${item[pos]}`);
+								}}
+							>
+								{item}
+							</Button>
+							<Button
+								onClick={() => {
+									handleWatch4Booster(pos);
+								}}
+							>
+								Trade this Watch for Boosters
+							</Button>
+						</ButtonGroup>
 					</Grid>
 				))}
 			</Grid>
+			<Typography style={{ color: "white" }}>{teste}</Typography>
 		</div>
 	);
 };

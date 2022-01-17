@@ -305,7 +305,7 @@ const WatchParts = ({
 							)}
 							{!fusionMatchParts && (
 								<Typography style={{ color: "orange" }}>
-									You have Parts that are incompatible
+									You have Parts that are incompatible (different colors)
 								</Typography>
 							)}
 							<Typography style={{ color: fusionCrown ? "white" : "grey" }}>

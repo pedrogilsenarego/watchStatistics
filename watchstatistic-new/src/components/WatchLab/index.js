@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import WatchParts from "./WatchParts";
-
+import { useHistory } from "react-router";
 import {
 	Grid,
 	Typography,
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 const WatchLab = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
+	const history = useHistory();
 	const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
 	const [collectionFull, setCollectionFull] = useState(false);
 	const [bagFull, setBagFull] = useState(false);
@@ -327,7 +328,12 @@ const WatchLab = () => {
 							<Typography variant="h5">
 								User your Goodies to build your watch collection
 							</Typography>
-							<Typography style={{ marginTop: "20px" }}>
+							<Typography
+								onClick={() => {
+									history.push("/mycollection");
+								}}
+								style={{ marginTop: "20px", cursor: "pointer" }}
+							>
 								Collection size:{" "}
 								{currentUser.collection ? currentUser.collection.length : 0}/
 								{bagSize()}

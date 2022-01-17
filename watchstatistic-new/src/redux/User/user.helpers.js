@@ -116,7 +116,6 @@ export const handleUpdateCollectionStatus = (product) => {
 		let ref = firestore.collection("users").doc(userID);
 		ref.update({
 			collection: collection
-			//collection: firebase.firestore.FieldValue.arrayUnion(newWatch)
 		});
 
 		ref
