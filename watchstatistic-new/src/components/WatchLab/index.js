@@ -179,6 +179,11 @@ const WatchLab = () => {
 		else return currentUser.purpleBoxFragments;
 	};
 
+	const orangeBoxFragments = () => {
+		if (!currentUser.orangeBoxFragments) return 0;
+		else return currentUser.orangeBoxFragments;
+	};
+
 	const handleGetWhiteBox = () => {
 		const configData = {
 			...currentUser,
@@ -194,7 +199,7 @@ const WatchLab = () => {
 		const configData = {
 			...currentUser,
 			flag: "getBluebox",
-			blueFragments: currentUser.blueFragments - 10,
+			blueBoxFragments: currentUser.blueBoxFragments - 10,
 			blueBox: BlueBoxes() + 1,
 			userID: currentUser.id
 		};
@@ -208,7 +213,7 @@ const WatchLab = () => {
 	};
 
 	const blueboxDisabled = () => {
-		if (!currentUser.blueFragments || currentUser.blueFragments <= 10) {
+		if (!currentUser.blueBoxFragments || currentUser.blueBoxFragments < 10) {
 			return true;
 		} else return false;
 	};
@@ -250,14 +255,40 @@ const WatchLab = () => {
 	};
 
 	const handleOpenBlueBox = () => {
+		const a = [getRandomPart("white")];
+		if (percentageLoot(20) === 1) {
+			a.push(getRandomPart("lightGreen"));
+		}
+		if (percentageLoot(1) === 1) {
+			a.push(getRandomPart("darkGreen"));
+		}
+		let b = [...a];
+		var c = b.map((s) => s.slice(1));
+
+		if (currentUser.watchParts) {
+			a.unshift(...itemsBag());
+		}
 		const configData = {
 			...currentUser,
 			flag: "openBluebox",
 			blueBox: BlueBoxes() - 1,
+			purpleBoxFragments: purpleBoxFragments() + getRandomInt(1, 3),
+			orangeBoxFragments: orangeBoxFragments() + percentageLoot(5),
+			watchParts: a,
 			userID: currentUser.id
 		};
 		dispatch(updateBoxStatus(configData));
+		setOpenBoxPopUp(true);
+		setPopUpInfo(
+			"You just received: " +
+				Number(configData.purpleBoxFragments - purpleBoxFragments()) +
+				" Purple Box Fragments, " +
+				Number(configData.orangeBoxFragments - orangeBoxFragments()) +
+				" Orange Box Fragments, " +
+				c
+		);
 	};
+
 	const whiteboxDisabled2 = () => {
 		if (
 			!currentUser.whiteBox ||
@@ -343,6 +374,9 @@ const WatchLab = () => {
 							</Typography>
 							<Typography style={{ marginTop: "5px" }}>
 								Purple Fragments: {purpleBoxFragments()}{" "}
+							</Typography>
+							<Typography style={{ marginTop: "5px" }}>
+								Orange Fragments: {orangeBoxFragments()}{" "}
 							</Typography>
 							<Typography style={{ marginTop: "5px" }}>
 								Watch Parts: {itemsBag().length}/{bagSize()}{" "}
