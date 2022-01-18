@@ -20,7 +20,7 @@ export const clearCart = () => ({
 });
 
 //new implementations
-export const addBooster = (booster) => ({
+export const addBooster = (product) => ({
 	type: cartTypes.ADD_BOOSTER_TO_CART,
-	payload: booster
+	payload: product
 });

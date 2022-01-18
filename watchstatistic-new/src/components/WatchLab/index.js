@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import WatchParts from "./WatchParts";
 import { useHistory } from "react-router";
+import Boosters from "./Boosters";
 import {
 	Grid,
 	Typography,
@@ -45,6 +46,7 @@ const WatchLab = () => {
 	const [collectionFull, setCollectionFull] = useState(false);
 	const [bagFull, setBagFull] = useState(false);
 	const [popUpInf, setPopUpInfo] = useState(null);
+	const [viewBoosters, setViewBoosters] = useState(null);
 	const [helperDescription, setHelperDescription] = useState(false);
 	const [helperDescriptionBlue, setHelperDescriptionBlue] = useState(false);
 
@@ -381,9 +383,15 @@ const WatchLab = () => {
 							<Typography style={{ marginTop: "5px" }}>
 								Watch Parts: {itemsBag().length}/{bagSize()}{" "}
 							</Typography>
-							<Typography style={{ marginTop: "5px" }}>
+							<Typography
+								onClick={() => {
+									setViewBoosters(!viewBoosters);
+								}}
+								style={{ marginTop: "5px", cursor: "pointer" }}
+							>
 								Boosters: {currentUser.boosters ? currentUser.boosters : 0}{" "}
 							</Typography>
+							{viewBoosters && <Boosters />}
 						</Grid>
 						<Grid item xs={12} style={{ marginTop: "30px" }}>
 							<Box

@@ -11,7 +11,7 @@ import WhatsappShareButton from "../../components/forms/socialShare/Whatsapp";
 import { GoMirror } from "react-icons/go";
 import { AiFillFire } from "react-icons/ai";
 import { useHistory, useParams } from "react-router";
-import { addProduct } from "./../../redux/Cart/cart.actions";
+import { addProduct, addBooster } from "./../../redux/Cart/cart.actions";
 import { Helmet } from "react-helmet";
 
 import {
@@ -44,11 +44,10 @@ const ProductDetails = ({}) => {
 	const dispatch = useDispatch();
 	const { productID } = useParams();
 	const history = useHistory();
-	const { product, currentUser, cartItems, cartBoosters } =
-		useSelector(mapState);
+	const { product, currentUser, cartItems } = useSelector(mapState);
 	const [mainImage, setMainImage] = useState(null);
 	const [compareWatches, setCompareWatches] = useState(false);
-	const [booster, setBooster] = useState(false);
+
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("xs"));
 
@@ -141,10 +140,11 @@ const ProductDetails = ({}) => {
 		}
 	};
 
-	const handleAddToBoost = (product, cartBoosters) => {
+	const handleAddToBoost = (product) => {
 		if (!product) return;
-		if (cartBoosters.length < 9) {
-		}
+
+		dispatch(addBooster(product));
+		history.push("/watchstatistics/watchlaboratory");
 	};
 
 	return (
@@ -187,7 +187,7 @@ const ProductDetails = ({}) => {
 									>
 										<Box
 											onClick={() => {
-												handleAddToBoost(product, cartBoosters);
+												handleAddToBoost(product);
 											}}
 											size="small"
 											sx={{
@@ -208,17 +208,7 @@ const ProductDetails = ({}) => {
 												spacing={0}
 												style={{ paddingTop: "1.2vh" }}
 											>
-												{" "}
-												{booster && (
-													<Typography
-														style={{
-															color: "white"
-														}}
-													>
-														X
-													</Typography>
-												)}
-												{!booster && <AiFillFire size="4vh" color="white" />}
+												<AiFillFire size="4vh" color="white" />
 											</Grid>
 										</Box>
 										<Box

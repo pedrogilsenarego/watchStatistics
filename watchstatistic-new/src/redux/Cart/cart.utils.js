@@ -1,7 +1,9 @@
 export const existingCartItem = ({ prevCartItems, nextCartItem }) => {
-	return prevCartItems.find(
-		(cartItem) => cartItem.reference === nextCartItem.reference
-	);
+	if (prevCartItems) {
+		return prevCartItems.find(
+			(cartItem) => cartItem.reference === nextCartItem.reference
+		);
+	}
 };
 
 export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
@@ -16,13 +18,14 @@ export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
 				: cartItem
 		);
 	}
-
-	return [
-		...prevCartItems,
-		{
-			...nextCartItem
-		}
-	];
+	if (prevCartItems) {
+		return [
+			...prevCartItems,
+			{
+				...nextCartItem
+			}
+		];
+	} else return [{ ...nextCartItem }];
 };
 
 export const handleRemoveCartItem = ({ prevCartItems, cartItemToRemove }) => {
@@ -50,4 +53,44 @@ export const handleReduceCartItem = ({ prevCartItems, cartItemToReduce }) => {
 			  }
 			: cartItem
 	);
+};
+
+//new implementation
+
+/* export const existingBoosterItem = ({ prevCartItems, nextCartItem }) => {
+	if (prevCartItems) {
+		return prevCartItems.productPriceBrackets.find(
+			(cartItem) => cartItem.reference === nextCartItem.reference
+		);
+	}
+}; */
+
+export const handleAddToBoosterCart = ({ prevCartItems, nextCartItem }) => {
+	if (nextCartItem.productPriceBrackets === "0-200€") {
+		return { ...prevCartItems, a: nextCartItem };
+	}
+	if (nextCartItem.productPriceBrackets === "200-500€") {
+		return { ...prevCartItems, b: nextCartItem };
+	}
+	if (nextCartItem.productPriceBrackets === "500-1000€") {
+		return { ...prevCartItems, c: nextCartItem };
+	}
+	if (nextCartItem.productPriceBrackets === "1000-5000€") {
+		return { ...prevCartItems, d: nextCartItem };
+	}
+	if (nextCartItem.productPriceBrackets === "5000-10.000€") {
+		return { ...prevCartItems, e: nextCartItem };
+	}
+	if (nextCartItem.productPriceBrackets === "10.000-30.000€") {
+		return { ...prevCartItems, f: nextCartItem };
+	}
+	if (nextCartItem.productPriceBrackets === "30.000-50.000€") {
+		return { ...prevCartItems, g: nextCartItem };
+	}
+	if (nextCartItem.productPriceBrackets === "50.000-100.000€") {
+		return { ...prevCartItems, h: nextCartItem };
+	}
+	if (nextCartItem.productPriceBrackets === "100.000€+") {
+		return { ...prevCartItems, i: nextCartItem };
+	}
 };

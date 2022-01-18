@@ -1,6 +1,7 @@
 import cartTypes from "./cart.types";
 import {
 	handleAddToCart,
+	handleAddToBoosterCart,
 	handleRemoveCartItem,
 	handleReduceCartItem
 } from "./cart.utils";
@@ -40,6 +41,15 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				...INITIAL_STATE
+			};
+		//new implementation
+		case cartTypes.ADD_BOOSTER_TO_CART:
+			return {
+				...state,
+				cartBoosters: handleAddToBoosterCart({
+					prevCartItems: state.cartBoosters,
+					nextCartItem: action.payload
+				})
 			};
 		default:
 			return state;
