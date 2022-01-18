@@ -8,6 +8,7 @@ import {
 	Box,
 	Paper,
 	Button,
+	ButtonGroup,
 	CardMedia
 } from "@material-ui/core";
 import LinearProgress, {
@@ -332,14 +333,19 @@ const WatchParts = ({
 								fusionMatchParts &&
 								!collectionFull &&
 								list[1].items.length === 5 && (
-									<Button
-										onClick={() => {
-											setFusionPrice(priceWatchParts(list[1].items[0]));
-											setReady(true);
-										}}
-									>
-										Are you ready!
-									</Button>
+									<ButtonGroup>
+										<Button
+											onClick={() => {
+												setFusionPrice(priceWatchParts(list[1].items[0]));
+												setReady(true);
+											}}
+										>
+											Are you ready!
+										</Button>
+										<Button disabled={!currentUser.boosters}>
+											Boost Watch
+										</Button>
+									</ButtonGroup>
 								)}
 							{ready && (
 								<Button
