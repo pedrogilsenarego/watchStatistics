@@ -403,13 +403,7 @@ const WatchParts = ({
 						</Grid>
 					</Grid>
 				</Paper>
-				<Button
-					onClick={() => {
-						setOpenPopupNewWatch(true);
-					}}
-				>
-					Teste Popup
-				</Button>
+
 				<Popup
 					openPopup={openPopupNewWatch}
 					setOpenPopup={setOpenPopupNewWatch}

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
-import { Typography } from "@material-ui/core";
+
+import { updateCollectionStatus } from "../../redux/User/user.actions";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
@@ -14,16 +16,22 @@ const mapState = (state) => ({
 const MyCollection = (props) => {
 	const { currentUser } = useSelector(mapState);
 	const history = useHistory();
-
-	const [teste, setTeste] = useState(currentUser.collection);
+	const dispatch = useDispatch();
 	const list = currentUser.collection;
-	const { collection } = currentUser;
+	const { collection, boosters } = currentUser;
 
 	const handleWatch4Booster = (watchPos) => {
 		const oldArray = collection;
-
+		const boostersIncreased = boosters ? boosters + 1 : 1;
 		oldArray.splice(watchPos, 1);
-		setTeste(oldArray);
+		const configData = {
+			...currentUser,
+			flag: "boosters",
+			boosters: boostersIncreased,
+			userID: currentUser.id,
+			collection: oldArray
+		};
+		dispatch(updateCollectionStatus(configData));
 	};
 
 	return (
@@ -68,7 +76,6 @@ const MyCollection = (props) => {
 					</Grid>
 				))}
 			</Grid>
-			<Typography style={{ color: "white" }}>{teste}</Typography>
 		</div>
 	);
 };
