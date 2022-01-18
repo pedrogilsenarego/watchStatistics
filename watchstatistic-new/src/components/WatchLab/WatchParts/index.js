@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import {
 	Grid,
@@ -29,6 +30,7 @@ const WatchParts = ({
 }) => {
 	const dispatch = useDispatch();
 	const [list, setList] = useState(data);
+	const history = useHistory();
 	const [dragging, setDragging] = useState(false);
 	const [fusionGlass, setFusionGlass] = useState(false);
 	const [fusionCrown, setFusionCrown] = useState(false);
@@ -333,30 +335,35 @@ const WatchParts = ({
 								fusionMatchParts &&
 								!collectionFull &&
 								list[1].items.length === 5 && (
-									<ButtonGroup>
-										<Button
-											onClick={() => {
-												setFusionPrice(priceWatchParts(list[1].items[0]));
-												setReady(true);
-											}}
-										>
-											Are you ready!
-										</Button>
-										<Button disabled={!currentUser.boosters}>
-											Boost Watch
-										</Button>
-									</ButtonGroup>
+									<Button
+										onClick={() => {
+											setFusionPrice(priceWatchParts(list[1].items[0]));
+											setReady(true);
+										}}
+									>
+										Are you ready!
+									</Button>
 								)}
 							{ready && (
-								<Button
-									onClick={() => {
-										setReady(false);
-										handleFusionNewWatch();
-										handleDeleteWatchParts(list[1].items);
-									}}
-								>
-									Fusion!
-								</Button>
+								<ButtonGroup>
+									<Button
+										onClick={() => {
+											setReady(false);
+											handleFusionNewWatch();
+											handleDeleteWatchParts(list[1].items);
+										}}
+									>
+										Fusion!
+									</Button>
+									<Button
+										onClick={() => {
+											history.push(`/search/${fusionPrice}`);
+										}}
+										disabled={!currentUser.boosters}
+									>
+										Boost Watch
+									</Button>
+								</ButtonGroup>
 							)}
 						</Grid>
 						<Grid item xs={12} md={6}>

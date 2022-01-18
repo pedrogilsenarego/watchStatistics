@@ -16,6 +16,7 @@ import {
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { updateBoxStatus } from "../../redux/User/user.actions";
 import { makeStyles } from "@material-ui/core/styles";
+import Popup from "../controls/Popup";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
@@ -285,10 +286,6 @@ const WatchLab = () => {
 		setHelperDescriptionBlue(false);
 	};
 
-	const handleCloseOpenBoxPopUp = () => {
-		setOpenBoxPopUp(false);
-	};
-
 	const handleDeleteWatchParts = (pos, color, percentage, color2) => {
 		const a = itemsBagDeleted(pos);
 
@@ -554,18 +551,6 @@ const WatchLab = () => {
 											padding: "10px"
 										}}
 									>
-										{openBoxPopUp && (
-											<Menu
-												disableScrollLock
-												className={classes.menu}
-												id="openBoxPopUp"
-												onClose={handleCloseOpenBoxPopUp}
-												anchorEl={openBoxPopUp}
-												open={Boolean(openBoxPopUp)}
-											>
-												<MenuItem>{popUpInf}</MenuItem>
-											</Menu>
-										)}
 										<Box
 											style={{
 												border: "solid 1px",
@@ -584,6 +569,13 @@ const WatchLab = () => {
 					</Grid>
 				</Paper>
 			</Grid>
+			<Popup
+				title="You just opened a Box!!"
+				openPopup={openBoxPopUp}
+				setOpenPopup={setOpenBoxPopUp}
+			>
+				<Typography style={{ color: "black" }}>{popUpInf}</Typography>
+			</Popup>
 		</div>
 	);
 };
