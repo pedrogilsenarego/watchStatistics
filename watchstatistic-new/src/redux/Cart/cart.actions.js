@@ -18,3 +18,9 @@ export const reduceCartItem = (cartItem) => ({
 export const clearCart = () => ({
 	type: cartTypes.CLEAR_CART
 });
+
+//new implementations
+export const addBooster = (booster) => ({
+	type: cartTypes.ADD_BOOSTER_TO_CART,
+	payload: booster
+});

@@ -19,7 +19,7 @@ import { fetchRandomProduct } from "../../../redux/Products/products.actions";
 import { styled } from "@mui/material/styles";
 import Popup from "../../controls/Popup";
 const mapState = (state) => ({
-	randomProduct: state.productsData.randomProduct
+	randomProduct: state.productsData.randomNewProduct
 });
 
 const WatchParts = ({
@@ -416,25 +416,25 @@ const WatchParts = ({
 						</Grid>
 					</Grid>
 				</Paper>
-
-				<Popup
-					openPopup={openPopupNewWatch}
-					setOpenPopup={setOpenPopupNewWatch}
-					title={"New Watch Alert!!"}
-				>
-					<CardMedia
-						style={{ height: "30vh" }}
-						image={randomProduct.data[0].productThumbnail[0]}
-					></CardMedia>
-					<Typography
-						style={{ color: "black", fontSize: "12px", marginTop: "10px" }}
+				{randomProduct && (
+					<Popup
+						openPopup={openPopupNewWatch}
+						setOpenPopup={setOpenPopupNewWatch}
+						title={"New Watch Alert!!"}
 					>
-						Congratulations you added to your collection a:{" "}
-						{randomProduct.data[0].productBrand}{" "}
-						{randomProduct.data[0].productName} Ref:{" "}
-						{randomProduct.data[0].reference}
-					</Typography>
-				</Popup>
+						<CardMedia
+							style={{ height: "30vh" }}
+							image={randomProduct.productThumbnail[0]}
+						></CardMedia>
+						<Typography
+							style={{ color: "black", fontSize: "12px", marginTop: "10px" }}
+						>
+							Congratulations you added to your collection a:{" "}
+							{randomProduct.productBrand} {randomProduct.productName} Ref:{" "}
+							{randomProduct.reference}
+						</Typography>
+					</Popup>
+				)}
 			</div>
 		);
 	}

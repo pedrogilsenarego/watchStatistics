@@ -9,6 +9,7 @@ import { Parallax } from "react-parallax";
 import FacebookShare from "../../components/forms/socialShare/Facebook";
 import WhatsappShareButton from "../../components/forms/socialShare/Whatsapp";
 import { GoMirror } from "react-icons/go";
+import { AiFillFire } from "react-icons/ai";
 import { useHistory, useParams } from "react-router";
 import { addProduct } from "./../../redux/Cart/cart.actions";
 import { Helmet } from "react-helmet";
@@ -34,7 +35,8 @@ import { useDispatch } from "react-redux";
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
 	product: state.productsData.product,
-	cartItems: state.cartData.cartItems
+	cartItems: state.cartData.cartItems,
+	cartBoosters: state.cartData.cartBoosters
 });
 
 // eslint-disable-next-line
@@ -42,9 +44,11 @@ const ProductDetails = ({}) => {
 	const dispatch = useDispatch();
 	const { productID } = useParams();
 	const history = useHistory();
-	const { product, currentUser, cartItems } = useSelector(mapState);
+	const { product, currentUser, cartItems, cartBoosters } =
+		useSelector(mapState);
 	const [mainImage, setMainImage] = useState(null);
 	const [compareWatches, setCompareWatches] = useState(false);
+	const [booster, setBooster] = useState(false);
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("xs"));
 
@@ -137,6 +141,12 @@ const ProductDetails = ({}) => {
 		}
 	};
 
+	const handleAddToBoost = (product, cartBoosters) => {
+		if (!product) return;
+		if (cartBoosters.length < 9) {
+		}
+	};
+
 	return (
 		<div>
 			<Helmet>
@@ -169,12 +179,48 @@ const ProductDetails = ({}) => {
 											display: "flex",
 											flexDirection: "column",
 											justifyContent: "space-between",
-											marginTop: "60vh",
+											marginTop: "50vh",
 											marginLeft: "-15px",
 											position: "fixed",
 											zIndex: "3"
 										}}
 									>
+										<Box
+											onClick={() => {
+												handleAddToBoost(product, cartBoosters);
+											}}
+											size="small"
+											sx={{
+												marginLeft: isMatch ? "15px" : "25px",
+												width: "7vh",
+												height: "7vh",
+												borderRadius: 25,
+												cursor: "pointer",
+												backgroundColor: "#1D5B7B",
+												marginBottom: "6px"
+											}}
+										>
+											<Grid
+												container
+												direction="column"
+												alignItems="center"
+												justifyContent="center"
+												spacing={0}
+												style={{ paddingTop: "1.2vh" }}
+											>
+												{" "}
+												{booster && (
+													<Typography
+														style={{
+															color: "white"
+														}}
+													>
+														X
+													</Typography>
+												)}
+												{!booster && <AiFillFire size="4vh" color="white" />}
+											</Grid>
+										</Box>
 										<Box
 											onClick={() => {
 												handleAddToCart(product, cartItems, productID);

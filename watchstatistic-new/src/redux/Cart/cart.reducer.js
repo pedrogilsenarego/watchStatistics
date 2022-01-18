@@ -6,7 +6,8 @@ import {
 } from "./cart.utils";
 
 const INITIAL_STATE = {
-	cartItems: []
+	cartItems: [],
+	cartBoosters: []
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
