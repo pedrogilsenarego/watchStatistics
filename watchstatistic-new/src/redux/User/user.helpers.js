@@ -77,7 +77,13 @@ export const handleUpdateUserPreferences = (product) => {
 };
 
 export const handleUpdateBoxStatus = (product) => {
-	const { userID, blueBoxFragments, purpleBoxFragments, watchParts } = product;
+	const {
+		userID,
+		blueBoxFragments,
+		purpleBoxFragments,
+		watchParts,
+		orangeBoxFragments
+	} = product;
 
 	return new Promise((resolve, reject) => {
 		let ref = firestore.collection("users").doc(userID);
@@ -87,12 +93,24 @@ export const handleUpdateBoxStatus = (product) => {
 				whiteBox: firebase.firestore.FieldValue.increment(1),
 				points: firebase.firestore.FieldValue.increment(-4)
 			});
+		if (product.flag === "getBluebox")
+			ref.update({
+				blueBox: firebase.firestore.FieldValue.increment(1),
+				blueBoxFragments: firebase.firestore.FieldValue.increment(-10)
+			});
 
 		if (product.flag === "openWhitebox")
 			ref.update({
 				whiteBox: firebase.firestore.FieldValue.increment(-1),
 				blueBoxFragments: blueBoxFragments,
 				purpleBoxFragments: purpleBoxFragments,
+				watchParts: watchParts
+			});
+		if (product.flag === "openBluebox")
+			ref.update({
+				blueBox: firebase.firestore.FieldValue.increment(-1),
+				purpleBoxFragments: purpleBoxFragments,
+				orangeBoxFragments: orangeBoxFragments,
 				watchParts: watchParts
 			});
 		if (product.flag === "deleteWatchPart")

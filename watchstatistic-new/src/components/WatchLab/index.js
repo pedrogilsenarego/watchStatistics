@@ -20,7 +20,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Popup from "../controls/Popup";
 
 const mapState = (state) => ({
-	currentUser: state.user.currentUser
+	currentUser: state.user.currentUser,
+	cartBoosters: state.cartData.cartBoosters
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +51,7 @@ const WatchLab = () => {
 	const [helperDescription, setHelperDescription] = useState(false);
 	const [helperDescriptionBlue, setHelperDescriptionBlue] = useState(false);
 
-	const { currentUser } = useSelector(mapState);
+	const { currentUser, cartBoosters } = useSelector(mapState);
 
 	const data = [
 		{
@@ -349,6 +350,10 @@ const WatchLab = () => {
 		collectionFull
 	};
 
+	const configBoosters = {
+		cartBoosters
+	};
+
 	return (
 		<div>
 			<Grid container justify="center">
@@ -391,7 +396,7 @@ const WatchLab = () => {
 							>
 								Boosters: {currentUser.boosters ? currentUser.boosters : 0}{" "}
 							</Typography>
-							{viewBoosters && <Boosters />}
+							{viewBoosters && <Boosters {...configBoosters} />}
 						</Grid>
 						<Grid item xs={12} style={{ marginTop: "30px" }}>
 							<Box

@@ -18,6 +18,8 @@ import LinearProgress, {
 import { fetchRandomProduct } from "../../../redux/Products/products.actions";
 import { styled } from "@mui/material/styles";
 import Popup from "../../controls/Popup";
+import BoosterSelection from "./BoosterSelection";
+
 const mapState = (state) => ({
 	randomProduct: state.productsData.randomNewProduct
 });
@@ -326,6 +328,7 @@ const WatchParts = ({
 							<Typography style={{ color: fusionBracelet ? "white" : "grey" }}>
 								Bracelet
 							</Typography>
+
 							{!ready &&
 								fusionBracelet &&
 								fusionCase &&
@@ -344,7 +347,7 @@ const WatchParts = ({
 										Are you ready!
 									</Button>
 								)}
-							{ready && (
+							{ready && [
 								<ButtonGroup>
 									<Button
 										onClick={() => {
@@ -363,8 +366,9 @@ const WatchParts = ({
 									>
 										Boost Watch
 									</Button>
-								</ButtonGroup>
-							)}
+								</ButtonGroup>,
+								<BoosterSelection />
+							]}
 						</Grid>
 						<Grid item xs={12} md={6}>
 							{list[2].items.length > 0 && (
