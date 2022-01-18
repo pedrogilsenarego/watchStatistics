@@ -350,6 +350,9 @@ const WatchLab = () => {
 							<Typography style={{ marginTop: "5px" }}>
 								Watch Parts: {itemsBag().length}/{bagSize()}{" "}
 							</Typography>
+							<Typography style={{ marginTop: "5px" }}>
+								Boosters: {currentUser.boosters ? currentUser.boosters : 0}{" "}
+							</Typography>
 						</Grid>
 						<Grid item xs={12} style={{ marginTop: "30px" }}>
 							<Box

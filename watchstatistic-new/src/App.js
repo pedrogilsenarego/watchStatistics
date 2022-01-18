@@ -45,10 +45,6 @@ const App = (props) => {
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 
-	/* useEffect(() => {
-		dispatch(checkUserSession());
-	}); */
-
 	useEffect(
 		() => {
 			dispatch(checkUserSession());
