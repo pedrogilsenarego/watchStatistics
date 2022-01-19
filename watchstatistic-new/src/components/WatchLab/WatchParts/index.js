@@ -21,7 +21,8 @@ import BoosterSelection from "./BoosterSelection";
 
 const mapState = (state) => ({
 	randomProduct: state.productsData.randomNewProduct,
-	currentUser: state.user.currentUser
+	currentUser: state.user.currentUser,
+	cartBoosters: state.cartData.cartBoosters
 });
 
 const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
@@ -40,7 +41,9 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 	const [boostStatus, setBoostStatus] = useState("false");
 	const [openPopupNewWatch, setOpenPopupNewWatch] = useState(false);
-	const { randomProduct, currentUser } = useSelector(mapState);
+	const { randomProduct, currentUser, cartBoosters } = useSelector(mapState);
+
+	const [numberBoosters, setNumberBoosters] = useState(0);
 
 	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 		height: 20,
@@ -236,9 +239,25 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 				...currentUser,
 				userID: currentUser.id,
 				collection: currentUser.collection ? currentUser.collection : [],
-				boosters: currentUser.boosters ? currentUser.boosters - 1 : 0,
+				boosters: currentUser.boosters
+					? currentUser.boosters - numberBoosters
+					: 0,
 				randomValue,
 				fusionPrice
+			};
+			dispatch(fetchRandomProduct(configData));
+			setOpenPopupNewWatch(true);
+		}
+		if (boostStatus === "true") {
+			const configData = {
+				...currentUser,
+				userID: currentUser.id,
+				collection: currentUser.collection ? currentUser.collection : [],
+				boosters: currentUser.boosters
+					? currentUser.boosters - numberBoosters
+					: 0,
+				productID: "teste",
+				flag: "boost"
 			};
 			dispatch(fetchRandomProduct(configData));
 			setOpenPopupNewWatch(true);
@@ -261,6 +280,8 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 		boostStatusFalse,
 		boostStatusTrue,
 		boostStatusFail,
+		numberBoosters,
+		setNumberBoosters,
 		fusionPrice
 	};
 

@@ -340,33 +340,52 @@ export const handleUserUpdateDetails = (product) => {
 	});
 };
 //new implementations
-export const handleFetchRandomProduct = ({ fusionPrice, randomValue }) => {
-	const rValue = randomValue.toString();
+export const handleFetchRandomProduct = ({
+	fusionPrice,
+	randomValue,
+	productID,
+	flag
+}) => {
 	return new Promise((resolve, reject) => {
-		let ref = firestore.collection("products").orderBy("avgTotal").limit(1);
+		let ref = firestore.collection("products");
 
-		ref = ref.where("productPriceBrackets", "==", fusionPrice);
-		ref = ref.where("avgTotal", ">=", rValue);
-		//if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
-
-		ref
-			.get()
-			.then((snapshot) => {
-				const data = [
-					...snapshot.docs.map((doc) => {
-						return {
-							...doc.data(),
-							documentID: doc.id
-						};
-					})
-				];
-
-				resolve({
-					data
+		if (flag === "boost") {
+			ref = ref.doc("zQ8WRRbJGPN4sqJIkMNj");
+			ref
+				.get()
+				.then((snapshot) => {
+					if (snapshot.exists) {
+						const data = [...snapshot.data()];
+						resolve(data);
+					}
+				})
+				.catch((err) => {
+					reject(err);
 				});
-			})
-			.catch((err) => {
-				reject(err);
-			});
+		} else {
+			const rValue = randomValue.toString();
+			ref = ref.orderBy("avgTotal").limit(1);
+			ref = ref.where("productPriceBrackets", "==", fusionPrice);
+			ref = ref.where("avgTotal", ">=", rValue);
+			ref
+				.get()
+				.then((snapshot) => {
+					const data = [
+						...snapshot.docs.map((doc) => {
+							return {
+								...doc.data(),
+								documentID: doc.id
+							};
+						})
+					];
+
+					resolve({
+						data
+					});
+				})
+				.catch((err) => {
+					reject(err);
+				});
+		}
 	});
 };

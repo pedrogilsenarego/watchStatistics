@@ -17,11 +17,13 @@ const BoosterSelection = ({
 	fusionPrice,
 	boostStatusFalse,
 	boostStatusTrue,
-	boostStatusFail
+	boostStatusFail,
+	numberBoosters,
+	setNumberBoosters
 }) => {
 	const history = useHistory();
 	const { cartBoosters, currentUser } = useSelector(mapState);
-	const [numberBoosters, setNumberBoosters] = useState(0);
+	//const [numberBoosters, setNumberBoosters] = useState(0);
 	const [decreaseDisable, setDecreaseDisable] = useState(true);
 	const [increaseDisable, setIncreaseDisable] = useState(false);
 	const [confirmBoost, setConfirmBoost] = useState(false);
@@ -99,9 +101,10 @@ const BoosterSelection = ({
 					<Grid item xs={6}>
 						<Typography>
 							For this price Bracket you have selected a{" "}
-							{boosterValue().productBrand} {cartBoosters.a.productName} you
-							have {currentUser.boosters ? currentUser.boosters : 0} Boosters,
-							select the number to use.
+							{boosterValue().productBrand} {boosterValue().productName} you
+							have{" "}
+							{currentUser.boosters ? currentUser.boosters - numberBoosters : 0}{" "}
+							Boosters, select the number to use.
 						</Typography>
 					</Grid>
 					<Grid item xs={6}>
@@ -143,7 +146,7 @@ const BoosterSelection = ({
 					{confirmBoost &&
 						boostBeingUsed && [
 							<Typography>
-								You will use {numberBoosters} are you sure?
+								You will use {numberBoosters} boosters are you sure?
 							</Typography>,
 							<Button
 								onClick={() => {
