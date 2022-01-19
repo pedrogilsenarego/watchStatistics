@@ -30,6 +30,24 @@ const BoosterSelection = ({ fusionPrice }) => {
 		if (fusionPrice === "100.000€+") return cartBoosters.i;
 	};
 
+	const boosterPercentage = () => {
+		if (fusionPrice === "0-200€") return 50;
+		if (fusionPrice === "200-500€") return 100 / 3;
+		if (fusionPrice === "500-1000€") return 25;
+		if (fusionPrice === "1000-5000€") return 20;
+		if (fusionPrice === "5000-10.000€") return 10;
+		if (fusionPrice === "10.000-30.000€") return 10;
+		if (fusionPrice === "30.000-50.000€") return 5;
+		if (fusionPrice === "50.000-100.000€") return 5;
+		if (fusionPrice === "100.000€+") return 4;
+	};
+
+	function boostPercentage() {
+		const value = boosterPercentage() * numberBoosters;
+		if (value <= 100) return value;
+		else return 100;
+	}
+
 	const handleIncrementBooster = () => {
 		setNumberBoosters(numberBoosters + 1);
 		setDecreaseDisable(false);
@@ -47,7 +65,7 @@ const BoosterSelection = ({ fusionPrice }) => {
 	}, [numberBoosters]);
 
 	return (
-		<Box>
+		<Box sx={{ display: "flex", alignContent: "center" }}>
 			<Grid container>
 				<Grid item xs={6}>
 					<Typography>
@@ -56,25 +74,6 @@ const BoosterSelection = ({ fusionPrice }) => {
 						{currentUser.boosters ? currentUser.boosters : 0} Boosters, select
 						the number to use.
 					</Typography>
-					<ButtonGroup>
-						<Button
-							disabled={decreaseDisable}
-							onClick={() => {
-								handleDecreaseBooster();
-							}}
-						>
-							-
-						</Button>
-						<Button>{numberBoosters}</Button>
-						<Button
-							disabled={increaseDisable}
-							onClick={() => {
-								handleIncrementBooster();
-							}}
-						>
-							+
-						</Button>
-					</ButtonGroup>
 				</Grid>
 				<Grid item xs={6}>
 					<CardMedia
@@ -82,6 +81,26 @@ const BoosterSelection = ({ fusionPrice }) => {
 						image={cartBoosters.a.productThumbnail[0]}
 					></CardMedia>
 				</Grid>
+				<ButtonGroup>
+					<Button
+						disabled={decreaseDisable}
+						onClick={() => {
+							handleDecreaseBooster();
+						}}
+					>
+						-
+					</Button>
+					<Button>{numberBoosters}</Button>
+					<Button
+						disabled={increaseDisable}
+						onClick={() => {
+							handleIncrementBooster();
+						}}
+					>
+						+
+					</Button>
+				</ButtonGroup>
+				<Typography>Percentage given by boost: {boostPercentage()} </Typography>
 			</Grid>
 		</Box>
 	);

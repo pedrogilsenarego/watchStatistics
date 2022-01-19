@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+
 import { useSelector } from "react-redux";
 import {
 	Grid,
@@ -9,7 +9,6 @@ import {
 	Box,
 	Paper,
 	Button,
-	ButtonGroup,
 	CardMedia
 } from "@material-ui/core";
 import LinearProgress, {
@@ -32,7 +31,7 @@ const WatchParts = ({
 }) => {
 	const dispatch = useDispatch();
 	const [list, setList] = useState(data);
-	const history = useHistory();
+
 	const [dragging, setDragging] = useState(false);
 	const [fusionGlass, setFusionGlass] = useState(false);
 	const [fusionCrown, setFusionCrown] = useState(false);
@@ -352,26 +351,16 @@ const WatchParts = ({
 									</Button>
 								)}
 							{ready && [
-								<ButtonGroup>
-									<Button
-										onClick={() => {
-											setReady(false);
-											handleFusionNewWatch();
-											handleDeleteWatchParts(list[1].items);
-										}}
-									>
-										Fusion!
-									</Button>
-									<Button
-										onClick={() => {
-											history.push(`/search/${fusionPrice}`);
-										}}
-										disabled={!currentUser.boosters}
-									>
-										Boost Watch
-									</Button>
-								</ButtonGroup>,
-								<BoosterSelection {...configBoosterSelection} />
+								<BoosterSelection {...configBoosterSelection} />,
+								<Button
+									onClick={() => {
+										setReady(false);
+										handleFusionNewWatch();
+										handleDeleteWatchParts(list[1].items);
+									}}
+								>
+									Fusion!
+								</Button>
 							]}
 						</Grid>
 						<Grid item xs={12} md={6}>
