@@ -13,12 +13,19 @@ const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
 
-const BoosterSelection = ({ fusionPrice }) => {
+const BoosterSelection = ({
+	fusionPrice,
+	boostStatusFalse,
+	boostStatusTrue,
+	boostStatusFail
+}) => {
 	const history = useHistory();
 	const { cartBoosters, currentUser } = useSelector(mapState);
 	const [numberBoosters, setNumberBoosters] = useState(0);
 	const [decreaseDisable, setDecreaseDisable] = useState(true);
 	const [increaseDisable, setIncreaseDisable] = useState(false);
+	const [confirmBoost, setConfirmBoost] = useState(false);
+	const [boostBeingUsed, setBoostBeingUsed] = useState(false);
 
 	const boosterValue = () => {
 		if (fusionPrice === "0-200€") return cartBoosters.a;
@@ -34,7 +41,7 @@ const BoosterSelection = ({ fusionPrice }) => {
 
 	const boosterPercentage = () => {
 		if (fusionPrice === "0-200€") return 50;
-		if (fusionPrice === "200-500€") return 100 / 3;
+		if (fusionPrice === "200-500€") return 40;
 		if (fusionPrice === "500-1000€") return 25;
 		if (fusionPrice === "1000-5000€") return 20;
 		if (fusionPrice === "5000-10.000€") return 10;
@@ -44,15 +51,30 @@ const BoosterSelection = ({ fusionPrice }) => {
 		if (fusionPrice === "100.000€+") return 1;
 	};
 
+	function getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
 	function boostPercentage() {
 		const value = boosterPercentage() * numberBoosters;
 		if (value <= 100) return value;
 		else return 100;
 	}
 
+	function doBoost() {
+		if (getRandomInt(1, 100) <= boostPercentage()) {
+			boostStatusTrue();
+		} else {
+			boostStatusFail();
+		}
+	}
+
 	const handleIncrementBooster = () => {
 		setNumberBoosters(numberBoosters + 1);
 		setDecreaseDisable(false);
+		setBoostBeingUsed(true);
 		if (numberBoosters === currentUser.boosters) setIncreaseDisable(true);
 	};
 
@@ -62,7 +84,10 @@ const BoosterSelection = ({ fusionPrice }) => {
 	};
 
 	useEffect(() => {
-		if (numberBoosters === 0) setDecreaseDisable(true);
+		if (numberBoosters === 0) {
+			setDecreaseDisable(true);
+			setBoostBeingUsed(false);
+		}
 		if (currentUser.boosters === numberBoosters) setIncreaseDisable(true);
 		// eslint-disable-next-line
 	}, [numberBoosters]);
@@ -104,9 +129,31 @@ const BoosterSelection = ({ fusionPrice }) => {
 							+
 						</Button>
 					</ButtonGroup>
-					<Typography>
-						Percentage given by boost: {boostPercentage()}{" "}
-					</Typography>
+					<Typography>Boost this watch by: {boostPercentage()}%</Typography>
+					{!confirmBoost && boostBeingUsed && (
+						<Button
+							onClick={() => {
+								doBoost();
+								setConfirmBoost(true);
+							}}
+						>
+							I do wanna Boost
+						</Button>
+					)}
+					{confirmBoost &&
+						boostBeingUsed && [
+							<Typography>
+								You will use {numberBoosters} are you sure?
+							</Typography>,
+							<Button
+								onClick={() => {
+									boostStatusFalse();
+									setConfirmBoost(false);
+								}}
+							>
+								Cancel
+							</Button>
+						]}
 				</Grid>
 			</Box>
 		);

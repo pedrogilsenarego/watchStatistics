@@ -20,15 +20,11 @@ import Popup from "../../controls/Popup";
 import BoosterSelection from "./BoosterSelection";
 
 const mapState = (state) => ({
-	randomProduct: state.productsData.randomNewProduct
+	randomProduct: state.productsData.randomNewProduct,
+	currentUser: state.user.currentUser
 });
 
-const WatchParts = ({
-	data,
-	handleDeleteWatchParts,
-	collectionFull,
-	currentUser
-}) => {
+const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 	const dispatch = useDispatch();
 	const [list, setList] = useState(data);
 
@@ -42,9 +38,9 @@ const WatchParts = ({
 	const [fusionPrice, setFusionPrice] = useState("");
 	const [ready, setReady] = useState(false);
 	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
-
+	const [boostStatus, setBoostStatus] = useState("false");
 	const [openPopupNewWatch, setOpenPopupNewWatch] = useState(false);
-	const { randomProduct } = useSelector(mapState);
+	const { randomProduct, currentUser } = useSelector(mapState);
 
 	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 		height: 20,
@@ -222,20 +218,49 @@ const WatchParts = ({
 	};
 
 	const handleFusionNewWatch = () => {
-		const randomValue = randomWeightedNumber();
+		if (boostStatus === "false") {
+			const randomValue = randomWeightedNumber();
+			const configData = {
+				...currentUser,
+				userID: currentUser.id,
+				collection: currentUser.collection ? currentUser.collection : [],
+				randomValue,
+				fusionPrice
+			};
+			dispatch(fetchRandomProduct(configData));
+			setOpenPopupNewWatch(true);
+		}
+		if (boostStatus === "fail") {
+			const randomValue = randomWeightedNumber();
+			const configData = {
+				...currentUser,
+				userID: currentUser.id,
+				collection: currentUser.collection ? currentUser.collection : [],
+				boosters: currentUser.boosters ? currentUser.boosters - 1 : 0,
+				randomValue,
+				fusionPrice
+			};
+			dispatch(fetchRandomProduct(configData));
+			setOpenPopupNewWatch(true);
+		}
+	};
 
-		const configData = {
-			...currentUser,
-			userID: currentUser.id,
-			collection: currentUser.collection ? currentUser.collection : [],
-			randomValue,
-			fusionPrice
-		};
-		dispatch(fetchRandomProduct(configData));
-		setOpenPopupNewWatch(true);
+	const boostStatusFalse = () => {
+		setBoostStatus("false");
+	};
+
+	const boostStatusTrue = () => {
+		setBoostStatus("true");
+	};
+
+	const boostStatusFail = () => {
+		setBoostStatus("fail");
 	};
 
 	const configBoosterSelection = {
+		boostStatusFalse,
+		boostStatusTrue,
+		boostStatusFail,
 		fusionPrice
 	};
 
@@ -303,7 +328,8 @@ const WatchParts = ({
 					<Grid container style={{ display: "flex" }}>
 						<Grid item xs={12} md={6}>
 							<Typography>
-								FUSION MACHINE - New watch to be obtained: {fusionPrice}
+								FUSION MACHINE - New watch to be obtained: {fusionPrice}{" "}
+								{boostStatus}
 							</Typography>
 
 							{list[1].items.length > 5 && (
