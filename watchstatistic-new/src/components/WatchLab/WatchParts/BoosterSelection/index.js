@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import { useHistory } from "react-router-dom";
 
 const mapState = (state) => ({
 	cartBoosters: state.cartData.cartBoosters,
@@ -13,6 +14,7 @@ const mapState = (state) => ({
 });
 
 const BoosterSelection = ({ fusionPrice }) => {
+	const history = useHistory();
 	const { cartBoosters, currentUser } = useSelector(mapState);
 	const [numberBoosters, setNumberBoosters] = useState(0);
 	const [decreaseDisable, setDecreaseDisable] = useState(true);
@@ -36,10 +38,10 @@ const BoosterSelection = ({ fusionPrice }) => {
 		if (fusionPrice === "500-1000€") return 25;
 		if (fusionPrice === "1000-5000€") return 20;
 		if (fusionPrice === "5000-10.000€") return 10;
-		if (fusionPrice === "10.000-30.000€") return 10;
-		if (fusionPrice === "30.000-50.000€") return 5;
-		if (fusionPrice === "50.000-100.000€") return 5;
-		if (fusionPrice === "100.000€+") return 4;
+		if (fusionPrice === "10.000-30.000€") return 5;
+		if (fusionPrice === "30.000-50.000€") return 4;
+		if (fusionPrice === "50.000-100.000€") return 2;
+		if (fusionPrice === "100.000€+") return 1;
 	};
 
 	function boostPercentage() {
@@ -51,6 +53,7 @@ const BoosterSelection = ({ fusionPrice }) => {
 	const handleIncrementBooster = () => {
 		setNumberBoosters(numberBoosters + 1);
 		setDecreaseDisable(false);
+		if (numberBoosters === currentUser.boosters) setIncreaseDisable(true);
 	};
 
 	const handleDecreaseBooster = () => {
@@ -64,46 +67,65 @@ const BoosterSelection = ({ fusionPrice }) => {
 		// eslint-disable-next-line
 	}, [numberBoosters]);
 
-	return (
-		<Box sx={{ display: "flex", alignContent: "center" }}>
-			<Grid container>
-				<Grid item xs={6}>
+	if (boosterValue())
+		return (
+			<Box sx={{ display: "flex", alignContent: "center" }}>
+				<Grid container>
+					<Grid item xs={6}>
+						<Typography>
+							For this price Bracket you have selected a{" "}
+							{boosterValue().productBrand} {cartBoosters.a.productName} you
+							have {currentUser.boosters ? currentUser.boosters : 0} Boosters,
+							select the number to use.
+						</Typography>
+					</Grid>
+					<Grid item xs={6}>
+						<CardMedia
+							style={{ width: "80px", height: "80px" }}
+							image={boosterValue().productThumbnail[0]}
+						></CardMedia>
+					</Grid>
+					<ButtonGroup>
+						<Button
+							disabled={decreaseDisable}
+							onClick={() => {
+								handleDecreaseBooster();
+							}}
+						>
+							-
+						</Button>
+						<Button>{numberBoosters}</Button>
+						<Button
+							disabled={increaseDisable}
+							onClick={() => {
+								handleIncrementBooster();
+							}}
+						>
+							+
+						</Button>
+					</ButtonGroup>
 					<Typography>
-						For this price Bracket you have selected a{" "}
-						{boosterValue().productBrand} {cartBoosters.a.productName} you have{" "}
-						{currentUser.boosters ? currentUser.boosters : 0} Boosters, select
-						the number to use.
+						Percentage given by boost: {boostPercentage()}{" "}
 					</Typography>
 				</Grid>
-				<Grid item xs={6}>
-					<CardMedia
-						style={{ width: "80px", height: "80px" }}
-						image={cartBoosters.a.productThumbnail[0]}
-					></CardMedia>
-				</Grid>
-				<ButtonGroup>
-					<Button
-						disabled={decreaseDisable}
-						onClick={() => {
-							handleDecreaseBooster();
-						}}
-					>
-						-
-					</Button>
-					<Button>{numberBoosters}</Button>
-					<Button
-						disabled={increaseDisable}
-						onClick={() => {
-							handleIncrementBooster();
-						}}
-					>
-						+
-					</Button>
-				</ButtonGroup>
-				<Typography>Percentage given by boost: {boostPercentage()} </Typography>
-			</Grid>
-		</Box>
-	);
+			</Box>
+		);
+	else
+		return (
+			<div>
+				<Typography>
+					You have no assigned any prefered watch for this price brackets click
+					here to choose it if you want
+				</Typography>
+				<Button
+					onClick={() => {
+						history.push(`/search`);
+					}}
+				>
+					Here
+				</Button>
+			</div>
+		);
 };
 
 export default BoosterSelection;
