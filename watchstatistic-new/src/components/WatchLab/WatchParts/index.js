@@ -236,6 +236,10 @@ const WatchParts = ({
 		setOpenPopupNewWatch(true);
 	};
 
+	const configBoosterSelection = {
+		fusionPrice
+	};
+
 	if (list) {
 		return (
 			<div>
@@ -367,7 +371,7 @@ const WatchParts = ({
 										Boost Watch
 									</Button>
 								</ButtonGroup>,
-								<BoosterSelection />
+								<BoosterSelection {...configBoosterSelection} />
 							]}
 						</Grid>
 						<Grid item xs={12} md={6}>
