@@ -361,7 +361,6 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 						<Grid item xs={12} md={6}>
 							<Typography>
 								FUSION MACHINE - New watch to be obtained: {fusionPrice}{" "}
-								{boostStatus}
 							</Typography>
 
 							{list[1].items.length > 5 && (
