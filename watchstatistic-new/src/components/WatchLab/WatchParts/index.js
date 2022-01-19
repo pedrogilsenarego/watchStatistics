@@ -184,16 +184,16 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 
 	const colorWatchParts = (watchParts) => {
 		let newArray = watchParts;
-		let color = newArray[0];
-		if (color === "0") return "#ffffff66";
-		if (color === "1") return "#ffffff";
-		if (color === "2") return "lightGreen";
-		if (color === "3") return "darkGreen";
-		if (color === "4") return "lightBlue";
-		if (color === "5") return "darkBlue";
-		if (color === "6") return "purple";
-		if (color === "7") return "orange";
-		if (color === "8") return "red";
+		let fusionPrice = newArray[0];
+		if (fusionPrice === "0") return "#ffffff66";
+		if (fusionPrice === "1") return "#ffffff";
+		if (fusionPrice === "2") return "lightGreen";
+		if (fusionPrice === "3") return "darkGreen";
+		if (fusionPrice === "4") return "lightBlue";
+		if (fusionPrice === "5") return "darkBlue";
+		if (fusionPrice === "6") return "purple";
+		if (fusionPrice === "7") return "orange";
+		if (fusionPrice === "8") return "red";
 	};
 
 	const randomWeightedNumber = () => {
@@ -208,16 +208,28 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 
 	const priceWatchParts = (watchParts) => {
 		let newArray = watchParts;
-		let color = newArray[0];
-		if (color === "0") return "0-200€";
-		if (color === "1") return "200-500€";
-		if (color === "2") return "500-1000€";
-		if (color === "3") return "1000-5000€";
-		if (color === "4") return "5000-10.000€";
-		if (color === "5") return "10.000-30.000€";
-		if (color === "6") return "30.000-50.000€";
-		if (color === "7") return "50.000-100.000€";
-		if (color === "8") return "100.000€+";
+		let fusionPrice = newArray[0];
+		if (fusionPrice === "0") return "0-200€";
+		if (fusionPrice === "1") return "200-500€";
+		if (fusionPrice === "2") return "500-1000€";
+		if (fusionPrice === "3") return "1000-5000€";
+		if (fusionPrice === "4") return "5000-10.000€";
+		if (fusionPrice === "5") return "10.000-30.000€";
+		if (fusionPrice === "6") return "30.000-50.000€";
+		if (fusionPrice === "7") return "50.000-100.000€";
+		if (fusionPrice === "8") return "100.000€+";
+	};
+
+	const boosterValue = () => {
+		if (fusionPrice === "0-200€") return cartBoosters.a;
+		if (fusionPrice === "200-500€") return cartBoosters.b;
+		if (fusionPrice === "500-1000€") return cartBoosters.c;
+		if (fusionPrice === "1000-5000€") return cartBoosters.d;
+		if (fusionPrice === "5000-10.000€") return cartBoosters.e;
+		if (fusionPrice === "10.000-30.000€") return cartBoosters.f;
+		if (fusionPrice === "30.000-50.000€") return cartBoosters.g;
+		if (fusionPrice === "50.000-100.000€") return cartBoosters.h;
+		if (fusionPrice === "100.000€+") return cartBoosters.i;
 	};
 
 	const handleFusionNewWatch = () => {
@@ -231,7 +243,6 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 				fusionPrice
 			};
 			dispatch(fetchRandomProduct(configData));
-			setOpenPopupNewWatch(true);
 		}
 		if (boostStatus === "fail") {
 			const randomValue = randomWeightedNumber();
@@ -246,9 +257,9 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 				fusionPrice
 			};
 			dispatch(fetchRandomProduct(configData));
-			setOpenPopupNewWatch(true);
 		}
 		if (boostStatus === "true") {
+			const baby = boosterValue();
 			const configData = {
 				...currentUser,
 				userID: currentUser.id,
@@ -256,12 +267,12 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 				boosters: currentUser.boosters
 					? currentUser.boosters - numberBoosters
 					: 0,
-				productID: "teste",
-				flag: "boost"
+				fusionPrice,
+				randomValue: baby.avgTotal
 			};
 			dispatch(fetchRandomProduct(configData));
-			setOpenPopupNewWatch(true);
 		}
+		setOpenPopupNewWatch(true);
 	};
 
 	const boostStatusFalse = () => {
@@ -337,7 +348,7 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 												justifyContent: "center"
 											}}
 										>
-											<Typography style={{ color: "#3C3939" }}>
+											<Typography style={{ fusionPrice: "#3C3939" }}>
 												{item.toString().slice(1)}
 											</Typography>
 										</Box>
@@ -354,28 +365,38 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 							</Typography>
 
 							{list[1].items.length > 5 && (
-								<Typography style={{ color: "orange" }}>
+								<Typography style={{ fusionPrice: "orange" }}>
 									You have to many parts on the fusion machine
 								</Typography>
 							)}
 							{!fusionMatchParts && (
-								<Typography style={{ color: "orange" }}>
+								<Typography style={{ fusionPrice: "orange" }}>
 									You have Parts that are incompatible (different colors)
 								</Typography>
 							)}
-							<Typography style={{ color: fusionCrown ? "white" : "grey" }}>
+							<Typography
+								style={{ fusionPrice: fusionCrown ? "white" : "grey" }}
+							>
 								Crown
 							</Typography>
-							<Typography style={{ color: fusionMovement ? "white" : "grey" }}>
+							<Typography
+								style={{ fusionPrice: fusionMovement ? "white" : "grey" }}
+							>
 								Movement
 							</Typography>
-							<Typography style={{ color: fusionCase ? "white" : "grey" }}>
+							<Typography
+								style={{ fusionPrice: fusionCase ? "white" : "grey" }}
+							>
 								Case
 							</Typography>
-							<Typography style={{ color: fusionGlass ? "white" : "grey" }}>
+							<Typography
+								style={{ fusionPrice: fusionGlass ? "white" : "grey" }}
+							>
 								Glass
 							</Typography>
-							<Typography style={{ color: fusionBracelet ? "white" : "grey" }}>
+							<Typography
+								style={{ fusionPrice: fusionBracelet ? "white" : "grey" }}
+							>
 								Bracelet
 							</Typography>
 
@@ -412,7 +433,7 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 						</Grid>
 						<Grid item xs={12} md={6}>
 							{list[2].items.length > 0 && (
-								<Typography style={{ color: "orange" }}>
+								<Typography style={{ fusionPrice: "orange" }}>
 									Shredded Parts are gone!
 								</Typography>
 							)}
@@ -437,7 +458,7 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 										setOpenConfirmDelete(true);
 									}}
 								>
-									<TiDelete color="red" fontSize="3.5em" />
+									<TiDelete fusionPrice="red" fontSize="3.5em" />
 									Shred Parts
 								</Button>
 							)}
@@ -453,7 +474,7 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 										);
 									}}
 								>
-									<TiDelete color="red" fontSize="3.5em" />
+									<TiDelete fusionPrice="red" fontSize="3.5em" />
 									I, Confirm
 								</Button>
 							)}
@@ -471,7 +492,11 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 							image={randomProduct.productThumbnail[0]}
 						></CardMedia>
 						<Typography
-							style={{ color: "black", fontSize: "12px", marginTop: "10px" }}
+							style={{
+								fusionPrice: "black",
+								fontSize: "12px",
+								marginTop: "10px"
+							}}
 						>
 							Congratulations you added to your collection a:{" "}
 							{randomProduct.productBrand} {randomProduct.productName} Ref:{" "}

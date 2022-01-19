@@ -343,49 +343,35 @@ export const handleUserUpdateDetails = (product) => {
 export const handleFetchRandomProduct = ({
 	fusionPrice,
 	randomValue,
-	productID,
+	boostWatch,
 	flag
 }) => {
 	return new Promise((resolve, reject) => {
 		let ref = firestore.collection("products");
 
-		if (flag === "boost") {
-			ref = ref.doc("zQ8WRRbJGPN4sqJIkMNj");
-			ref
-				.get()
-				.then((snapshot) => {
-					if (snapshot.exists) {
-						const data = [...snapshot.data()];
-						resolve(data);
-					}
-				})
-				.catch((err) => {
-					reject(err);
-				});
-		} else {
-			const rValue = randomValue.toString();
-			ref = ref.orderBy("avgTotal").limit(1);
-			ref = ref.where("productPriceBrackets", "==", fusionPrice);
-			ref = ref.where("avgTotal", ">=", rValue);
-			ref
-				.get()
-				.then((snapshot) => {
-					const data = [
-						...snapshot.docs.map((doc) => {
-							return {
-								...doc.data(),
-								documentID: doc.id
-							};
-						})
-					];
+		const rValue = randomValue.toString();
+		ref = ref.orderBy("avgTotal").limit(1);
+		ref = ref.where("productPriceBrackets", "==", fusionPrice);
+		ref = ref.where("avgTotal", ">=", rValue);
 
-					resolve({
-						data
-					});
-				})
-				.catch((err) => {
-					reject(err);
+		ref
+			.get()
+			.then((snapshot) => {
+				const data = [
+					...snapshot.docs.map((doc) => {
+						return {
+							...doc.data(),
+							documentID: doc.id
+						};
+					})
+				];
+
+				resolve({
+					data
 				});
-		}
+			})
+			.catch((err) => {
+				reject(err);
+			});
 	});
 };
