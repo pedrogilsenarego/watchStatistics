@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 	menu: {
 		marginTop: "70px",
 		"& .MuiPaper-root": {
-			backgroundColor: "#04040680",
+			backgroundColor: "#040406BF",
 			color: "#ffffff",
 			disableScrollLock: true,
 
@@ -84,6 +84,7 @@ const Header = (props) => {
 		useState(false);
 
 	const [watchstatistics, setWatchstatistics] = useState(true);
+
 	//media
 
 	const dispatch = useDispatch();
@@ -440,6 +441,13 @@ const Header = (props) => {
 				onClose={handleCloseLoginMenu}
 				anchorEl={anchorLogin}
 				open={Boolean(anchorLogin)}
+				anchorReference="none"
+				PaperProps={{
+					style: {
+						left: "50%",
+						transform: "translateX(-50%) translateY(35%)"
+					}
+				}}
 			>
 				<MenuItem disableRipple>
 					<SignIn {...configMenuLogin} />

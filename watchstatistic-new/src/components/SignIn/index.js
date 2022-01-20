@@ -4,14 +4,48 @@ import {
 	emailSignInStart,
 	googleSignInStart
 } from "../../redux/User/user.actions";
-
+import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, Typography } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import TextField from "../forms/InputMUI";
 import ButtonMUI from "../forms/ButtonMUI";
+import Container from "@mui/material/Container";
 
+import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core";
 import { FcGoogle } from "react-icons/fc";
+
+const useStyles = makeStyles((theme) => ({
+	textField: {
+		"& .MuiOutlinedInput-input": { color: "white" },
+		"& . MuiInputLabel-root": {
+			color: "#ffffffB3"
+		},
+		"& .MuiInputLabel-root": { color: "grey" },
+		"& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffff",
+			borderWidth: "2px"
+		},
+		"&:hover .MuiOutlinedInput-input": {
+			color: "black"
+		},
+		"&:hover .MuiInputLabel-root": { color: "grey" },
+		"&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffffB3"
+		},
+		"&  .MuiOutlinedInput-input": {
+			color: "black"
+		},
+		"& .MuiOutlinedInput-root.Mui-focused": {
+			color: "#ffffffB3"
+		},
+		"& .MuiInputLabel-root.Mui-focused": { color: "#ffffffB3" },
+		"& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffffB3"
+		}
+	}
+}));
 
 const INITIAL_FORM_STATE = {
 	email: "",
@@ -25,6 +59,9 @@ const FORM_VALIDATION = Yup.object().shape({
 
 const SignIn = ({ handleCloseLoginMenu }) => {
 	const dispatch = useDispatch();
+	const classes = useStyles();
+	const theme = useTheme();
+	const history = useHistory();
 
 	const handleFormSubmit = (event) => {
 		const { email, password } = event;
@@ -56,25 +93,53 @@ const SignIn = ({ handleCloseLoginMenu }) => {
 					}}
 				>
 					<Form>
-						<Grid container>
+						<Grid container spacing={1}>
 							<Grid item xs={12}>
-								<TextField name="email" label="email"></TextField>
+								<Container
+									style={{
+										backgroundColor: theme.palette.textField.background,
+										height: "40px",
+										padding: "0px",
+										marginTop: "10px",
+										borderRadius: "4px"
+									}}
+								>
+									<TextField
+										className={classes.textField}
+										name="email"
+										size="small"
+										placeholder="Email"
+									></TextField>
+								</Container>
 							</Grid>
+
 							<Grid item xs={12}>
-								<TextField
-									type="password"
-									name="password"
-									label="password"
-								></TextField>
+								<Container
+									style={{
+										backgroundColor: theme.palette.textField.background,
+										height: "40px",
+										padding: "0px",
+
+										borderRadius: "4px"
+									}}
+								>
+									<TextField
+										className={classes.textField}
+										type="password"
+										name="password"
+										size="small"
+										placeholder="Password"
+									></TextField>
+								</Container>
 							</Grid>
-							<Grid item xs={12} style={{ paddingTop: "20px" }}>
+							<Grid item xs={12} style={{ paddingTop: "10px" }}>
 								<ButtonMUI>Login</ButtonMUI>
 							</Grid>
 						</Grid>
 					</Form>
 				</Formik>
 			</Grid>
-			<Grid item xs={12} style={{ paddingTop: "10px" }}>
+			<Grid item xs={12} style={{ paddingTop: "30px" }}>
 				<Button
 					onClick={handleGoogleSigniIn}
 					variant={"contained"}
@@ -84,10 +149,21 @@ const SignIn = ({ handleCloseLoginMenu }) => {
 					<FcGoogle size={"2em"} /> &nbsp;Login With Google
 				</Button>
 			</Grid>
-
-			<div className="links" style={{ paddingTop: "10px" }}>
-				<Button href="/recovery">Reset Password</Button>
-			</div>
+			<Grid item xs={12} justify="flex-end" style={{ display: "flex" }}>
+				<Typography
+					style={{
+						fontSize: "12px",
+						color: "#ffffff80",
+						paddingTop: "10px",
+						marginBottom: "0px !important"
+					}}
+					onClick={() => {
+						history.push("/recovery");
+					}}
+				>
+					Reset Password
+				</Typography>
+			</Grid>
 		</div>
 	);
 };
