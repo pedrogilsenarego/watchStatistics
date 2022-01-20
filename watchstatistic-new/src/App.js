@@ -11,7 +11,7 @@ import WithAdminAuth from "./hoc/withAdminAuth";
 //pages
 import Search from "./pages/Search";
 import Registration from "./pages/Registration";
-import Recovery from "./pages/Recovery";
+
 import Dashboard from "./pages/Dashboard";
 import MyCollection from "./pages/MyCollection";
 import Admin from "./pages/Admin";
@@ -164,14 +164,6 @@ const App = (props) => {
 						)}
 					/>
 
-					<Route
-						path="/recovery"
-						render={() => (
-							<MainLayout>
-								<Recovery />
-							</MainLayout>
-						)}
-					/>
 					<Route
 						path="/dashboard"
 						render={() => (
