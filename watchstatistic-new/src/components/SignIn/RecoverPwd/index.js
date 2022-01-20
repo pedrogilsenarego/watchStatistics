@@ -1,12 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import FormInput from "../../forms/FormInput";
-import Button from "../../forms/Button";
+import Button from "@mui/material/Button";
+import { TextField, useTheme } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@mui/material/Container";
 import {
 	resetPasswordStart,
 	resetUserState
 } from "./../../../redux/User/user.actions";
-
+const useStyles = makeStyles((theme) => ({
+	textField: {
+		"& .MuiOutlinedInput-input": { color: "white" },
+		"& . MuiInputLabel-root": {
+			color: "#ffffffB3"
+		},
+		"& .MuiInputLabel-root": { color: "grey" },
+		"& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffff",
+			borderWidth: "2px"
+		},
+		"&:hover .MuiOutlinedInput-input": {
+			color: "black"
+		},
+		"&:hover .MuiInputLabel-root": { color: "grey" },
+		"&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffffB3"
+		},
+		"&  .MuiOutlinedInput-input": {
+			color: "black"
+		},
+		"& .MuiOutlinedInput-root.Mui-focused": {
+			color: "#ffffffB3"
+		},
+		"& .MuiInputLabel-root.Mui-focused": { color: "#ffffffB3" },
+		"& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffffB3"
+		}
+	}
+}));
 const mapState = ({ user }) => ({
 	resetPasswordSuccess: user.resetPasswordSuccess,
 	userErr: user.userErr
@@ -15,8 +46,10 @@ const mapState = ({ user }) => ({
 const RecoverPwd = ({ handleCloseLoginMenu }) => {
 	const { resetPasswordSuccess, userErr } = useSelector(mapState);
 	const dispatch = useDispatch();
+	const classes = useStyles();
 	const [email, setEmail] = useState("");
 	const [errors, setErrors] = useState([]);
+	const theme = useTheme();
 
 	useEffect(
 		() => {
@@ -50,14 +83,33 @@ const RecoverPwd = ({ handleCloseLoginMenu }) => {
 				</ul>
 			)}
 			<form onSubmit={handleSubmit}>
-				<FormInput
-					type="email"
-					name="email"
-					value={email}
-					placeholder="Email"
-					handleChange={(e) => setEmail(e.target.value)}
-				/>
-				<Button type="submit">Email Password</Button>
+				<Container
+					style={{
+						backgroundColor: theme.palette.textField.background,
+						height: "40px",
+						padding: "0px",
+						marginTop: "10px",
+						borderRadius: "4px"
+					}}
+				>
+					<TextField
+						className={classes.textField}
+						size="small"
+						name="email"
+						value={email}
+						placeholder="Email"
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</Container>
+				<Button
+					style={{ marginTop: "15px" }}
+					variant="contained"
+					color="primary"
+					size="small"
+					type="submit"
+				>
+					Recover Password
+				</Button>
 			</form>
 		</div>
 	);
