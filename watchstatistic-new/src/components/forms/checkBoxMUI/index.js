@@ -1,11 +1,11 @@
 import React from "react";
 import {
-	Checkbox,
 	FormControl,
 	FormControlLabel,
 	FormGroup,
 	FormLabel
 } from "@material-ui/core";
+import Checkbox from "@mui/material/Checkbox";
 import { useField, useFormikContext } from "formik";
 
 const CheckboxWrapper = ({ name, label, legend, ...otherProps }) => {
@@ -32,7 +32,17 @@ const CheckboxWrapper = ({ name, label, legend, ...otherProps }) => {
 			<FormLabel component="legend">{legend}</FormLabel>
 			<FormGroup>
 				<FormControlLabel
-					control={<Checkbox {...configCheckbox} />}
+					control={
+						<Checkbox
+							sx={{
+								color: "#ffffffB3",
+								"&.Mui-checked": {
+									color: "white"
+								}
+							}}
+							{...configCheckbox}
+						/>
+					}
 					label={label}
 				/>
 			</FormGroup>

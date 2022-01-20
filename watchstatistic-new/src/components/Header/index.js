@@ -446,7 +446,7 @@ const Header = (props) => {
 				PaperProps={{
 					style: {
 						left: "50%",
-						transform: "translateX(-50%) translateY(35%)"
+						transform: "translateX(-50%) translateY(15%)"
 					}
 				}}
 			>

@@ -8,6 +8,7 @@ import { useTheme } from "@material-ui/core";
 
 import Main from "./Main";
 import RecoverPwd from "./RecoverPwd";
+import Signup from "./Signup";
 
 const SignIn = ({ handleCloseLoginMenu }) => {
 	const theme = useTheme();
@@ -21,6 +22,7 @@ const SignIn = ({ handleCloseLoginMenu }) => {
 		<div>
 			{whichMenu === "main" && <Main {...configMain} />}
 			{whichMenu === "recover" && <RecoverPwd {...configMain} />}
+			{whichMenu === "register" && <Signup {...configMain} />}
 			<Divider
 				style={{
 					width: "100%",
@@ -28,11 +30,16 @@ const SignIn = ({ handleCloseLoginMenu }) => {
 					marginTop: "20px"
 				}}
 			/>
-			<Grid item xs={12} justify="flex-end" style={{ display: "flex" }}>
+			<Grid
+				item
+				xs={12}
+				justify="space-between"
+				style={{ display: "flex", marginLeft: "50px", marginRight: "50px" }}
+			>
 				<Typography
 					style={{
 						fontSize: "13px",
-						color: "#ffffff80",
+						color: whichMenu === "main" ? "white" : "#ffffff80",
 						paddingTop: "5px"
 					}}
 					onClick={() => {
@@ -44,9 +51,12 @@ const SignIn = ({ handleCloseLoginMenu }) => {
 				<Typography
 					style={{
 						fontSize: "13px",
-						color: "#ffffff80",
+						color: whichMenu === "register" ? "white" : "#ffffff80",
 						paddingTop: "5px",
 						paddingLeft: "15px"
+					}}
+					onClick={() => {
+						setWhichMenu("register");
 					}}
 				>
 					Register
@@ -54,7 +64,7 @@ const SignIn = ({ handleCloseLoginMenu }) => {
 				<Typography
 					style={{
 						fontSize: "13px",
-						color: "#ffffff80",
+						color: whichMenu === "recover" ? "white" : "#ffffff80",
 						paddingTop: "5px",
 
 						paddingLeft: "15px"
