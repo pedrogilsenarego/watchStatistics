@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import Boxes from "./Boxes";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
+import Divider from "@mui/material/Divider";
+import Paper from "@mui/material/Paper";
 
 import {
 	AiFillCaretUp,
 	AiFillCaretLeft,
 	AiFillCaretRight
 } from "react-icons/ai";
+import Typography from "@mui/material/Typography";
 
 const WatchLab2 = () => {
 	const [bottomMenu, setBottomMenu] = useState(false);
@@ -19,7 +23,7 @@ const WatchLab2 = () => {
 				style={{
 					position: "absolute",
 
-					zIndex: "1",
+					zIndex: "2",
 					paddingLeft: "48.5%",
 					paddingTop: "90vh"
 				}}
@@ -45,7 +49,7 @@ const WatchLab2 = () => {
 			<Box
 				style={{
 					position: "absolute",
-					zIndex: "1",
+					zIndex: "2",
 					paddingLeft: "63.5%",
 					paddingTop: "40vh"
 				}}
@@ -71,7 +75,7 @@ const WatchLab2 = () => {
 			<Box
 				style={{
 					position: "absolute",
-					zIndex: "1",
+					zIndex: "2",
 					paddingLeft: "33.5%",
 					paddingTop: "40vh"
 				}}
@@ -94,7 +98,30 @@ const WatchLab2 = () => {
 					/>
 				</Avatar>
 			</Box>
+			<Container
+				style={{
+					position: "absolute",
 
+					zIndex: "1",
+					paddingLeft: "8%",
+					paddingTop: "25vh"
+				}}
+			>
+				<Paper
+					style={{ background: "#0000001C", width: "200px", padding: "20px" }}
+				>
+					<Typography variant="h5" style={{ color: "#ffffffE6" }}>
+						White box
+					</Typography>
+					<Divider
+						style={{
+							width: "100%",
+							marginTop: "3px",
+							background: "#ffffff66"
+						}}
+					/>
+				</Paper>
+			</Container>
 			<Box style={{ height: "100vh" }}>
 				<Boxes />
 			</Box>
