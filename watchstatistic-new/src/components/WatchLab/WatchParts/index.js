@@ -232,6 +232,12 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 		if (fusionPrice === "100.000€+") return cartBoosters.i;
 	};
 
+	const whatImage = (item) => {
+		if (item === "Case") return Case;
+		if (item === "Glass") return Case;
+		else return null;
+	};
+
 	const handleFusionNewWatch = () => {
 		if (boostStatus === "false") {
 			const randomValue = randomWeightedNumber();
@@ -323,7 +329,7 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 								<Grid xs={12}>
 									<Typography>{grp.title}</Typography>
 								</Grid>
-								<Grid xs={12}>
+								<Grid xs={12} style={{ display: "flex" }}>
 									{grp.items.map((item, itemI) => (
 										<Box
 											onDragStart={(e) => {
@@ -337,17 +343,32 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 											draggable={true}
 											key={item.id}
 											style={{
+												maxWidth: "80px",
+												maxHeight: "80px",
 												cursor: "pointer",
 												backgroundColor: dragging
 													? getStyles({ grpI, itemI, item })
-													: colorWatchParts(item),
+													: "black",
 												margin: "5px",
+												border: "solid 2px",
+												borderColor: colorWatchParts(item),
 												padding: "5px",
 												borderRadius: "3px",
 												display: "flex",
-												justifyContent: "center"
+												justifyContent: "center",
+												filter: "opacity(1) drop-shadow(2px 2px 5px red)"
 											}}
 										>
+											<img
+												src={whatImage(item.toString().slice(1))}
+												style={{
+													maxWidth: "100%",
+													maxHeight: "100%",
+													padding: "5px",
+													filter: "opacity(1) drop-shadow(2px 2px 5px red)"
+												}}
+												alt=""
+											/>
 											<Typography style={{ color: "#3C3939" }}>
 												{item.toString().slice(1)}
 											</Typography>
@@ -521,3 +542,4 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 	}
 };
 export default WatchParts;
+//colorWatchParts(item)
