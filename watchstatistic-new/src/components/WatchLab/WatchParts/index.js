@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import Case from "../../../assets/Case.svg";
 import Bracelet from "../../../assets/Bracelet.svg";
 import Movement from "../../../assets/Movement.svg";
+import Crown from "../../../assets/Crown.svg";
+import Glass from "../../../assets/Glass.svg";
 import { useSelector } from "react-redux";
 import {
 	Grid,
@@ -236,9 +238,10 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 
 	const whatImage = (item) => {
 		if (item === "Case") return Case;
-		if (item === "Glass") return Case;
+		if (item === "Glass") return Glass;
 		if (item === "Bracelet") return Bracelet;
 		if (item === "Movement") return Movement;
+		if (item === "Crown") return Crown;
 		else return null;
 	};
 
