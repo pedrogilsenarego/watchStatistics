@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import Boxes from "./Boxes";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import Container from "@mui/material/Container";
+
 import {
 	AiFillCaretUp,
 	AiFillCaretLeft,
 	AiFillCaretRight
 } from "react-icons/ai";
-import { Typography } from "@material-ui/core";
 
 const WatchLab2 = () => {
 	const [bottomMenu, setBottomMenu] = useState(false);
@@ -21,7 +20,7 @@ const WatchLab2 = () => {
 					position: "absolute",
 
 					zIndex: "1",
-					paddingLeft: "50%",
+					paddingLeft: "48.5%",
 					paddingTop: "90vh"
 				}}
 			>
@@ -37,14 +36,17 @@ const WatchLab2 = () => {
 						backgroundColor: bottomMenu ? "#00000066" : "#00000026"
 					}}
 				>
-					<AiFillCaretUp style={{ color: "#ffffffCC" }} size="4vh" />
+					<AiFillCaretUp
+						style={{ color: "#ffffffCC", paddingBottom: "2px" }}
+						size="4vh"
+					/>
 				</Avatar>
 			</Box>
 			<Box
 				style={{
 					position: "absolute",
 					zIndex: "1",
-					paddingLeft: "65%",
+					paddingLeft: "63.5%",
 					paddingTop: "40vh"
 				}}
 			>
@@ -60,14 +62,17 @@ const WatchLab2 = () => {
 						backgroundColor: rightMenu ? "#00000066" : "#00000026"
 					}}
 				>
-					<AiFillCaretRight style={{ color: "#ffffffCC" }} size="4vh" />
+					<AiFillCaretRight
+						style={{ color: "#ffffffCC", paddingLeft: "2px" }}
+						size="4vh"
+					/>
 				</Avatar>
 			</Box>
 			<Box
 				style={{
 					position: "absolute",
 					zIndex: "1",
-					paddingLeft: "35%",
+					paddingLeft: "33.5%",
 					paddingTop: "40vh"
 				}}
 			>
@@ -83,7 +88,10 @@ const WatchLab2 = () => {
 						backgroundColor: leftMenu ? "#00000066" : "#00000026"
 					}}
 				>
-					<AiFillCaretLeft style={{ color: "#ffffffCC" }} size="4vh" />
+					<AiFillCaretLeft
+						style={{ color: "#ffffffCC", paddingRight: "2px" }}
+						size="4vh"
+					/>
 				</Avatar>
 			</Box>
 
