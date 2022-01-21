@@ -36,6 +36,8 @@ import { darkTheme, lightTheme } from "./styles/MUITheme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { useSelector } from "react-redux";
 
+import Prodsmart from "./prodsmart";
+
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
@@ -193,6 +195,7 @@ const App = (props) => {
 							</WithAdminAuth>
 						)}
 					/>
+					<Route path="/prodsmart" render={() => <Prodsmart />} />
 				</Switch>
 			</div>
 		</ThemeProvider>
