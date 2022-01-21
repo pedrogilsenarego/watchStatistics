@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import Case from "../../../assets/Case.svg";
+import Bracelet from "../../../assets/Bracelet.svg";
+import Movement from "../../../assets/Movement.svg";
 import { useSelector } from "react-redux";
 import {
 	Grid,
@@ -235,6 +237,8 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 	const whatImage = (item) => {
 		if (item === "Case") return Case;
 		if (item === "Glass") return Case;
+		if (item === "Bracelet") return Bracelet;
+		if (item === "Movement") return Movement;
 		else return null;
 	};
 
@@ -343,17 +347,17 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 											draggable={true}
 											key={item.id}
 											style={{
-												maxWidth: "80px",
-												maxHeight: "80px",
+												width: "80px",
+												height: "80px",
 												cursor: "pointer",
 												backgroundColor: dragging
 													? getStyles({ grpI, itemI, item })
-													: "black",
+													: colorWatchParts(item),
 												margin: "5px",
 												border: "solid 2px",
 												borderColor: colorWatchParts(item),
 												padding: "5px",
-												borderRadius: "3px",
+												borderRadius: "8px",
 												display: "flex",
 												justifyContent: "center",
 												filter: "opacity(1) drop-shadow(2px 2px 5px red)"
@@ -369,9 +373,6 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 												}}
 												alt=""
 											/>
-											<Typography style={{ color: "#3C3939" }}>
-												{item.toString().slice(1)}
-											</Typography>
 										</Box>
 									))}
 								</Grid>
@@ -514,29 +515,6 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 						</Typography>
 					</Popup>
 				)}
-				<Box
-					draggable="true"
-					style={{
-						width: "80px",
-						height: "80px",
-						backgroundColor: "#000000E6",
-						border: "solid 2px",
-						borderColor: "red",
-						borderRadius: "10px",
-						filter: "opacity(1) drop-shadow(2px 2px 5px red)"
-					}}
-				>
-					<img
-						src={Case}
-						style={{
-							maxWidth: "100%",
-							maxHeight: "100%",
-							padding: "5px",
-							filter: "opacity(1) drop-shadow(2px 2px 5px red)"
-						}}
-						alt=""
-					/>
-				</Box>
 			</div>
 		);
 	}
