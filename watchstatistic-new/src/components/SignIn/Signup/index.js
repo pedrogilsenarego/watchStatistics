@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signUpUserStart } from "./../../../redux/User/user.actions";
@@ -80,6 +80,7 @@ const Signup = (props) => {
 	const history = useHistory();
 	const classes = useStyles();
 	const theme = useTheme();
+	const [terms, setTerms] = useState(false);
 	const { currentUser } = useSelector(mapState);
 
 	useEffect(
@@ -194,9 +195,26 @@ const Signup = (props) => {
 								</Container>
 							</Grid>
 							<Grid item xs={12} style={{ paddingTop: "20px" }}>
-								<Typography style={{ color: "#ffffffCC" }}>
+								<Typography
+									onClick={() => {
+										setTerms(!terms);
+									}}
+									style={{ color: "#ffffffCC" }}
+								>
 									Terms of service
 								</Typography>
+								{terms && (
+									<Typography
+										style={{
+											fontSize: "12px",
+											color: "#ffffffCC",
+											wordWrap: "break-word"
+										}}
+									>
+										This is an app
+									</Typography>
+								)}
+
 								<CheckBox
 									style={{ color: "white" }}
 									name="termsOfService"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch } from "react-redux";
-
+import Case from "../../../assets/Case.svg";
 import { useSelector } from "react-redux";
 import {
 	Grid,
@@ -348,7 +348,7 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 												justifyContent: "center"
 											}}
 										>
-											<Typography style={{ fusionPrice: "#3C3939" }}>
+											<Typography style={{ color: "#3C3939" }}>
 												{item.toString().slice(1)}
 											</Typography>
 										</Box>
@@ -364,38 +364,28 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 							</Typography>
 
 							{list[1].items.length > 5 && (
-								<Typography style={{ fusionPrice: "orange" }}>
+								<Typography style={{ color: "orange" }}>
 									You have to many parts on the fusion machine
 								</Typography>
 							)}
 							{!fusionMatchParts && (
-								<Typography style={{ fusionPrice: "orange" }}>
+								<Typography style={{ color: "orange" }}>
 									You have Parts that are incompatible (different colors)
 								</Typography>
 							)}
-							<Typography
-								style={{ fusionPrice: fusionCrown ? "white" : "grey" }}
-							>
+							<Typography style={{ color: fusionCrown ? "white" : "grey" }}>
 								Crown
 							</Typography>
-							<Typography
-								style={{ fusionPrice: fusionMovement ? "white" : "grey" }}
-							>
+							<Typography style={{ color: fusionMovement ? "white" : "grey" }}>
 								Movement
 							</Typography>
-							<Typography
-								style={{ fusionPrice: fusionCase ? "white" : "grey" }}
-							>
+							<Typography style={{ color: fusionCase ? "white" : "grey" }}>
 								Case
 							</Typography>
-							<Typography
-								style={{ fusionPrice: fusionGlass ? "white" : "grey" }}
-							>
+							<Typography style={{ color: fusionGlass ? "white" : "grey" }}>
 								Glass
 							</Typography>
-							<Typography
-								style={{ fusionPrice: fusionBracelet ? "white" : "grey" }}
-							>
+							<Typography style={{ color: fusionBracelet ? "white" : "grey" }}>
 								Bracelet
 							</Typography>
 
@@ -492,7 +482,7 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 						></CardMedia>
 						<Typography
 							style={{
-								fusionPrice: "black",
+								color: "black",
 								fontSize: "12px",
 								marginTop: "10px"
 							}}
@@ -503,6 +493,29 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 						</Typography>
 					</Popup>
 				)}
+				<Box
+					draggable="true"
+					style={{
+						width: "80px",
+						height: "80px",
+						backgroundColor: "#000000E6",
+						border: "solid 2px",
+						borderColor: "red",
+						borderRadius: "10px",
+						filter: "opacity(1) drop-shadow(2px 2px 5px red)"
+					}}
+				>
+					<img
+						src={Case}
+						style={{
+							maxWidth: "100%",
+							maxHeight: "100%",
+							padding: "5px",
+							filter: "opacity(1) drop-shadow(2px 2px 5px red)"
+						}}
+						alt=""
+					/>
+				</Box>
 			</div>
 		);
 	}
