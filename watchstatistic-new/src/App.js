@@ -10,7 +10,6 @@ import WithAdminAuth from "./hoc/withAdminAuth";
 
 //pages
 import Search from "./pages/Search";
-import Registration from "./pages/Registration";
 
 import Dashboard from "./pages/Dashboard";
 import MyCollection from "./pages/MyCollection";
@@ -150,16 +149,6 @@ const App = (props) => {
 						render={() => (
 							<MainLayout>
 								<WatchBoxes />
-							</MainLayout>
-						)}
-					/>
-
-					<Route
-						exact
-						path="/registration"
-						render={() => (
-							<MainLayout>
-								<Registration />
 							</MainLayout>
 						)}
 					/>

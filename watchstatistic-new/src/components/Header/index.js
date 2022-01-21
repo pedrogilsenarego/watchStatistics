@@ -19,7 +19,6 @@ import { BsGraphUp } from "react-icons/bs";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { VscHome } from "react-icons/vsc";
 
-import Signup from "../Signup";
 import SignIn from "../SignIn";
 
 import RightIconsNoUser from "./RightIconsNoUser";
@@ -78,7 +77,6 @@ const Header = (props) => {
 	const [anchorSupport, setAnchorSupport] = useState(null);
 	const [anchorMyAccount, setAnchorMyAccount] = useState(null);
 	const [anchorLogin, setAnchorLogin] = useState(null);
-	const [anchorSignup, setAnchorSignup] = useState(null);
 	const [anchorMediaMenu, setAnchorMediaMenu] = useState(null);
 	const [anchorWatchStatistics, setAnchorWatchstatistics] = useState(null);
 	const [mediaWatchstatisticsBtns, setMediaWatchstatisticsBtns] =
@@ -98,15 +96,12 @@ const Header = (props) => {
 	};
 
 	//RightIconsNoUser
-	const handleSignupOpen = (e) => {
-		setAnchorSignup(e.currentTarget);
-	};
+
 	const handleLoginOpen = (e) => {
 		setAnchorLogin(e.currentTarget);
 	};
 
 	const configRightIconsNoUser = {
-		handleSignupOpen,
 		handleLoginOpen
 	};
 
@@ -150,10 +145,6 @@ const Header = (props) => {
 
 	const configMenuLogin = {
 		handleCloseLoginMenu
-	};
-
-	const handleCloseSignupMenu = () => {
-		setAnchorSignup(null);
 	};
 
 	const handleCloseWatchstatisticsMenu = () => {
@@ -452,19 +443,6 @@ const Header = (props) => {
 			>
 				<MenuItem disableRipple>
 					<SignIn {...configMenuLogin} />
-				</MenuItem>
-			</Menu>
-			<Menu
-				disableRipple
-				disableScrollLock
-				className={classes.menu}
-				id="signup"
-				onClose={handleCloseSignupMenu}
-				anchorEl={anchorSignup}
-				open={Boolean(anchorSignup)}
-			>
-				<MenuItem disableRipple>
-					<Signup />
 				</MenuItem>
 			</Menu>
 		</div>

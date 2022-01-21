@@ -41,6 +41,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
 				userVotes: ["1"],
 				numberVotes: 0,
 				experience: 0,
+				points: 0,
 				...additionalData
 			});
 		} catch (err) {

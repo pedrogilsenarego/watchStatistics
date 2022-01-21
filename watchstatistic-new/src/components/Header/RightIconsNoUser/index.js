@@ -19,16 +19,7 @@ const RightIconsNoUser = ({ handleSignupOpen, handleLoginOpen }) => {
 	const classes = useStyles();
 	const activeStyle = { color: "#FFA500" };
 
-	return [
-		<Button
-			aria-controls="signup"
-			disableRipple
-			className={classes.textBtn}
-			activeStyle={activeStyle}
-			onClick={(e) => handleSignupOpen(e)}
-		>
-			Signup
-		</Button>,
+	return (
 		<Button
 			aria-controls="login"
 			disableRipple
@@ -38,7 +29,7 @@ const RightIconsNoUser = ({ handleSignupOpen, handleLoginOpen }) => {
 		>
 			Login
 		</Button>
-	];
+	);
 };
 
 export default RightIconsNoUser;
