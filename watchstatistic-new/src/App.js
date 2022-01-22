@@ -22,6 +22,7 @@ import AddWatch from "./pages/Watchstatistics/AddWatch";
 import WatchBoxes from "./pages/WatchBoxes";
 import CompareWatches from "./pages/CompareWatches";
 import WatchLaboratory from "./pages/WatchLaboratory";
+import WatchLaboratory2 from "./components/WatchLab2";
 
 import Order from "./pages/Order";
 
@@ -35,8 +36,6 @@ import { ThemeProvider } from "@material-ui/styles";
 import { darkTheme, lightTheme } from "./styles/MUITheme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { useSelector } from "react-redux";
-
-import Prodsmart from "./prodsmart";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
@@ -88,6 +87,17 @@ const App = (props) => {
 							<WithAuth>
 								<MainLayout>
 									<WatchLaboratory />
+								</MainLayout>
+							</WithAuth>
+						)}
+					/>
+					<Route
+						exact
+						path="/watchstatistics/watchlaboratory2"
+						render={() => (
+							<WithAuth>
+								<MainLayout>
+									<WatchLaboratory2 />
 								</MainLayout>
 							</WithAuth>
 						)}
@@ -195,7 +205,6 @@ const App = (props) => {
 							</WithAdminAuth>
 						)}
 					/>
-					<Route path="/prodsmart" render={() => <Prodsmart />} />
 				</Switch>
 			</div>
 		</ThemeProvider>

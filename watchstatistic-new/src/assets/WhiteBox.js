@@ -11,8 +11,8 @@ export default function Model({ ...props }) {
 	return (
 		<group ref={group} {...props} dispose={null}>
 			<mesh
-				geometry={nodes["Part_Studio_1_-_Part_1_(7)"].geometry}
-				material={nodes["Part_Studio_1_-_Part_1_(7)"].material}
+				geometry={nodes["Part_Studio_1_-_Part_1_(8)"].geometry}
+				material={nodes["Part_Studio_1_-_Part_1_(8)"].material}
 			/>
 		</group>
 	);
