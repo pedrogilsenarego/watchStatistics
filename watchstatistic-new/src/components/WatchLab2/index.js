@@ -13,6 +13,8 @@ import {
 } from "react-icons/ai";
 import Typography from "@mui/material/Typography";
 
+var checkmark = "\u00BB";
+
 const WatchLab2 = () => {
 	const [bottomMenu, setBottomMenu] = useState(false);
 	const [leftMenu, setLeftMenu] = useState(false);
@@ -110,9 +112,21 @@ const WatchLab2 = () => {
 				<Paper
 					style={{ background: "#0000001C", width: "350px", padding: "20px" }}
 				>
-					<Typography variant="h5" style={{ color: "#ffffffE6" }}>
-						White box
-					</Typography>
+					<div style={{ display: "flex", alignItems: "center" }}>
+						<Typography variant="h5" style={{ color: "#ffffffE6" }}>
+							White box {checkmark}
+						</Typography>
+						<Typography
+							variant="subtitle 2"
+							style={{
+								color: "#ffffffE6",
+								marginLeft: "120px",
+								marginTop: "4px"
+							}}
+						>
+							4 points
+						</Typography>
+					</div>
 					<Divider
 						style={{
 							width: "100%",
