@@ -168,7 +168,7 @@ const BoxInfo = () => {
 			style={{
 				position: "absolute",
 
-				zIndex: "3",
+				zIndex: "2",
 				paddingLeft: "2%",
 				paddingTop: "20vh"
 			}}
@@ -223,7 +223,11 @@ const BoxInfo = () => {
 						disabled={whiteboxDisabled()}
 						size="small"
 						onClick={() => handleGetWhiteBox()}
-						style={{ color: "#ffffffBF" }}
+						style={{
+							color: "#ffffffBF",
+							borderColor: "#ffffff40",
+							border: "solid 1.5px"
+						}}
 					>
 						Get
 					</Button>
@@ -231,7 +235,11 @@ const BoxInfo = () => {
 						disabled={whiteboxDisabled2()}
 						size="small"
 						onClick={() => handleOpenWhiteBox()}
-						style={{ color: whiteboxDisabled2() ? "grey" : "#ffffffBF" }}
+						style={{
+							color: whiteboxDisabled2() ? "grey" : "#ffffffBF",
+							borderColor: "#ffffff40",
+							border: "solid 1.5px"
+						}}
 					>
 						Open
 					</Button>

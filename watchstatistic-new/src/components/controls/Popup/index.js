@@ -16,6 +16,7 @@ const Popup = (props) => {
 				onClick={() => {
 					setOpenPopup(false);
 				}}
+				style={{ color: "black" }}
 			>
 				<DialogTitle>
 					<div style={{ textAlign: "center" }}>

@@ -17,6 +17,7 @@ const WatchLab2 = () => {
 	const [rightMenu, setRightMenu] = useState(false);
 	return (
 		<div style={{ backgroundColor: "#C84E15" }}>
+			<BoxInfo />
 			<Box
 				style={{
 					position: "absolute",
@@ -96,11 +97,8 @@ const WatchLab2 = () => {
 					/>
 				</Avatar>
 			</Box>
-			<Box>
-				<BoxInfo />
-			</Box>
 
-			<Box>
+			<Box style={{ height: "100vh" }}>
 				<Boxes />
 			</Box>
 		</div>
