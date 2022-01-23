@@ -18,7 +18,7 @@ const WatchLab2 = () => {
 	const [leftMenu, setLeftMenu] = useState(false);
 	const [rightMenu, setRightMenu] = useState(false);
 	return (
-		<div>
+		<div style={{ backgroundColor: "#f15946" }}>
 			<Box
 				style={{
 					position: "absolute",
