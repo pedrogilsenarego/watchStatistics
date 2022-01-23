@@ -1,40 +1,27 @@
 import { Canvas, extend, useFrame } from "react-three-fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { Physics, useBox } from "@react-three/cannon";
+import { Physics } from "@react-three/cannon";
 import WhiteBox from "../../../assets/WhiteBox";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
 extend({ OrbitControls });
 
-function Cube(props) {
-	const [ref, api] = useBox(() => ({
-		mass: 1,
-		position: [0, 5, 0],
-		rotation: [0.4, 0.2, 0.5],
-		...props
-	}));
-	const [colorCube, setColorCube] = useState("green");
+const MyMesh = () => {
+	const mesh = useRef();
+
+	useFrame(() => {
+		// rotates the object
+		mesh.current.rotation.y = mesh.current.rotation.y += 0.005;
+	});
 	return (
-		<mesh
-			onClick={() => {
-				api.velocity.set(0, 5, 0);
-				setColorCube("red");
-			}}
-			receiveShadow
-			castShadow
-			ref={ref}
-		>
-			<boxBufferGeometry attach="geometry" />
-			<meshLambertMaterial attach="material" color={colorCube} />
+		<mesh ref={mesh} receiveShadow castShadow position={[0, -1, 0]}>
+			<WhiteBox />
 		</mesh>
 	);
-}
+};
 
-export default function WatchBoxesMain() {
-	const ref = useRef();
-	//useFrame(() => (ref.current.rotation.y += 0.01));
-
+const Boxes = () => {
 	return (
 		<Canvas
 			shadowMap
@@ -58,11 +45,12 @@ export default function WatchBoxesMain() {
 				castShadow
 			/>
 			<Physics>
-				<Cube />
-				<mesh ref={ref} position={[0, -0.8, 0]}>
-					<WhiteBox />
-				</mesh>
+				<MyMesh />
 			</Physics>
 		</Canvas>
 	);
-}
+};
+export default Boxes;
+/* <mesh ref={ref} position={[0, -0.8, 0]}>
+	<WhiteBox />
+</mesh>; */

@@ -122,7 +122,7 @@ const WatchLab2 = () => {
 					/>
 				</Paper>
 			</Container>
-			<Box style={{ height: "100vh" }}>
+			<Box style={{ height: "100vh", zIndex: "3" }}>
 				<Boxes />
 			</Box>
 		</div>
