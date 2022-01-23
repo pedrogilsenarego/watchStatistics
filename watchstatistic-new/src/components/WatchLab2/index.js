@@ -103,12 +103,12 @@ const WatchLab2 = () => {
 					position: "absolute",
 
 					zIndex: "1",
-					paddingLeft: "8%",
-					paddingTop: "25vh"
+					paddingLeft: "2%",
+					paddingTop: "20vh"
 				}}
 			>
 				<Paper
-					style={{ background: "#0000001C", width: "200px", padding: "20px" }}
+					style={{ background: "#0000001C", width: "350px", padding: "20px" }}
 				>
 					<Typography variant="h5" style={{ color: "#ffffffE6" }}>
 						White box
@@ -120,6 +120,21 @@ const WatchLab2 = () => {
 							background: "#ffffff66"
 						}}
 					/>
+					<Typography style={{ color: "#ffffffBF" }}>
+						Grey Watch Part
+					</Typography>
+					<Typography style={{ color: "#ffffffBF" }}>
+						20% Chance of a White Watch Part
+					</Typography>
+					<Typography style={{ color: "#ffffffBF" }}>
+						1% Chance of a Light Green Part
+					</Typography>
+					<Typography style={{ color: "#ffffffBF" }}>
+						1-3 Fragments of Blue Box
+					</Typography>
+					<Typography style={{ color: "#ffffffBF" }}>
+						5% Chance of Fragment of Purple Box
+					</Typography>
 				</Paper>
 			</Container>
 			<Box style={{ height: "100vh", zIndex: "3" }}>
