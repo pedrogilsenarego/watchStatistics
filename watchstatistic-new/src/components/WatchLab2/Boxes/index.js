@@ -38,7 +38,7 @@ const Boxes = () => {
 				castShadow
 			/>
 			<spotLight
-				position={[1000, 0, 0]}
+				position={[10, 0, 0]}
 				angle={0.3}
 				penumbra={1}
 				intensity={2}

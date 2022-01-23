@@ -1,26 +1,22 @@
 import React, { useState } from "react";
 import Boxes from "./Boxes";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Divider from "@mui/material/Divider";
-import Paper from "@mui/material/Paper";
 
+import Avatar from "@mui/material/Avatar";
+
+import BoxInfo from "./BoxInfo";
 import {
 	AiFillCaretUp,
 	AiFillCaretLeft,
 	AiFillCaretRight
 } from "react-icons/ai";
-import Typography from "@mui/material/Typography";
-
-var checkmark = "\u00BB";
 
 const WatchLab2 = () => {
 	const [bottomMenu, setBottomMenu] = useState(false);
 	const [leftMenu, setLeftMenu] = useState(false);
 	const [rightMenu, setRightMenu] = useState(false);
 	return (
-		<div style={{ backgroundColor: "#f15946" }}>
+		<div style={{ backgroundColor: "#C84E15" }}>
 			<Box
 				style={{
 					position: "absolute",
@@ -100,58 +96,11 @@ const WatchLab2 = () => {
 					/>
 				</Avatar>
 			</Box>
-			<Container
-				style={{
-					position: "absolute",
+			<Box>
+				<BoxInfo />
+			</Box>
 
-					zIndex: "1",
-					paddingLeft: "2%",
-					paddingTop: "20vh"
-				}}
-			>
-				<Paper
-					style={{ background: "#0000001C", width: "350px", padding: "20px" }}
-				>
-					<div style={{ display: "flex", alignItems: "center" }}>
-						<Typography variant="h5" style={{ color: "#ffffffE6" }}>
-							White box {checkmark}
-						</Typography>
-						<Typography
-							variant="subtitle 2"
-							style={{
-								color: "#ffffffE6",
-								marginLeft: "120px",
-								marginTop: "4px"
-							}}
-						>
-							4 points
-						</Typography>
-					</div>
-					<Divider
-						style={{
-							width: "100%",
-							marginTop: "3px",
-							background: "#ffffff66"
-						}}
-					/>
-					<Typography style={{ color: "#ffffffBF" }}>
-						Grey Watch Part
-					</Typography>
-					<Typography style={{ color: "#ffffffBF" }}>
-						20% Chance of a White Watch Part
-					</Typography>
-					<Typography style={{ color: "#ffffffBF" }}>
-						1% Chance of a Light Green Part
-					</Typography>
-					<Typography style={{ color: "#ffffffBF" }}>
-						1-3 Fragments of Blue Box
-					</Typography>
-					<Typography style={{ color: "#ffffffBF" }}>
-						5% Chance of Fragment of Purple Box
-					</Typography>
-				</Paper>
-			</Container>
-			<Box style={{ height: "100vh", zIndex: "3" }}>
+			<Box>
 				<Boxes />
 			</Box>
 		</div>
