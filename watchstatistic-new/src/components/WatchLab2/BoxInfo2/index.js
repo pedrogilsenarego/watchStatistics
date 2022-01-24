@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import { updateBoxStatus } from "../../../redux/User/user.actions";
 import Popup from "../../controls/Popup";
 import { useSelector, useDispatch } from "react-redux";
-import { FaCoins } from "react-icons/fa";
+import { FaPuzzlePiece } from "react-icons/fa";
 import { getRandomInt, getRandomPart, percentageLoot } from "../helpers.js";
 
 const mapState = (state) => ({
@@ -38,41 +38,41 @@ const BoxInfo = () => {
 		else return currentUser.watchParts;
 	};
 
-	const whiteboxDisabled = () => {
-		if (!currentUser.points || currentUser.points < 4) {
+	const blueboxDisabled = () => {
+		if (!currentUser.blueBoxFragments || currentUser.blueBoxFragments < 10) {
 			return true;
 		} else return false;
 	};
 
-	const whiteboxDisabled2 = () => {
+	const blueboxDisabled2 = () => {
 		if (
-			!currentUser.whiteBox ||
-			currentUser.whiteBox < 1 ||
+			!currentUser.blueBox ||
+			currentUser.blueBox < 1 ||
 			(currentUser.watchParts && currentUser.watchParts.length >= bagSize())
 		) {
 			return true;
 		} else return false;
 	};
 
-	const whiteBoxes = () => {
-		if (!currentUser.whiteBox) return 0;
-		else return currentUser.whiteBox;
+	const BlueBoxes = () => {
+		if (!currentUser.blueBox) return 0;
+		else return currentUser.blueBox;
 	};
 
-	const handleGetWhiteBox = () => {
+	const handleGetBlueBox = () => {
 		const configData = {
 			...currentUser,
-			flag: "getWhitebox",
-			points: currentUser.points - 4,
-			whiteBox: whiteBoxes() + 1,
+			flag: "getBluebox",
+			blueBoxFragments: currentUser.blueBoxFragments - 10,
+			blueBox: BlueBoxes() + 1,
 			userID: currentUser.id
 		};
 		dispatch(updateBoxStatus(configData));
 	};
 
-	const blueBoxFragments = () => {
-		if (!currentUser.blueBoxFragments) return 0;
-		else return currentUser.blueBoxFragments;
+	const orangeBoxFragments = () => {
+		if (!currentUser.orangeBoxFragments) return 0;
+		else return currentUser.orangeBoxFragments;
 	};
 
 	const purpleBoxFragments = () => {
@@ -80,14 +80,13 @@ const BoxInfo = () => {
 		else return currentUser.purpleBoxFragments;
 	};
 
-	const handleOpenWhiteBox = () => {
-		const a = [getRandomPart("grey")];
-
+	const handleOpenBlueBox = () => {
+		const a = [getRandomPart("white")];
 		if (percentageLoot(20) === 1) {
-			a.push(getRandomPart("white"));
+			a.push(getRandomPart("lightGreen"));
 		}
 		if (percentageLoot(1) === 1) {
-			a.push(getRandomPart("lightGreen"));
+			a.push(getRandomPart("darkGreen"));
 		}
 		let b = [...a];
 		var c = b.map((s) => s.slice(1));
@@ -97,21 +96,21 @@ const BoxInfo = () => {
 		}
 		const configData = {
 			...currentUser,
-			flag: "openWhitebox",
-			whiteBox: whiteBoxes() - 1,
-			blueBoxFragments: blueBoxFragments() + getRandomInt(1, 3),
-			purpleBoxFragments: purpleBoxFragments() + percentageLoot(5),
+			flag: "openBluebox",
+			blueBox: BlueBoxes() - 1,
+			purpleBoxFragments: purpleBoxFragments() + getRandomInt(1, 3),
+			orangeBoxFragments: orangeBoxFragments() + percentageLoot(5),
 			watchParts: a,
 			userID: currentUser.id
 		};
 		dispatch(updateBoxStatus(configData));
 		setOpenBoxPopUp(true);
 		setPopUpInfo(
-			"You received: " +
-				Number(configData.blueBoxFragments - blueBoxFragments()) +
-				" Blue Box Fragments, " +
+			"You just received: " +
 				Number(configData.purpleBoxFragments - purpleBoxFragments()) +
 				" Purple Box Fragments, " +
+				Number(configData.orangeBoxFragments - orangeBoxFragments()) +
+				" Orange Box Fragments, " +
 				c
 		);
 	};
@@ -128,7 +127,7 @@ const BoxInfo = () => {
 			>
 				<div style={{ display: "flex", alignItems: "center" }}>
 					<Typography variant="h5" style={{ color: "#ffffffE6" }}>
-						White box {checkmark}
+						Blue box {checkmark}
 					</Typography>
 					<Typography
 						variant="subtitle 2"
@@ -138,7 +137,7 @@ const BoxInfo = () => {
 							marginTop: "4px"
 						}}
 					>
-						4 <FaCoins size="3vh" color="orange" />
+						10 <FaPuzzlePiece size="3vh" color="lightBlue" />
 					</Typography>
 				</div>
 				<Divider
@@ -148,18 +147,18 @@ const BoxInfo = () => {
 						background: "#ffffff66"
 					}}
 				/>
-				<Typography style={{ color: "#ffffffBF" }}>Grey Watch Part</Typography>
+				<Typography style={{ color: "#ffffffBF" }}>White Watch Part</Typography>
 				<Typography style={{ color: "#ffffffBF" }}>
-					20% Chance of a White Watch Part
+					20% Chance of a Light Green Part
 				</Typography>
 				<Typography style={{ color: "#ffffffBF" }}>
-					1% Chance of a Light Green Part
+					1% Chance of a Dark Green Watch Part
 				</Typography>
 				<Typography style={{ color: "#ffffffBF" }}>
-					1-3 Fragments of Blue Box
+					1-3 Fragments of Purple Box
 				</Typography>
 				<Typography style={{ color: "#ffffffBF" }}>
-					5% Chance of Fragment of Purple Box
+					2% Chance of Fragment of Orange Box
 				</Typography>
 				<Divider
 					style={{
@@ -170,9 +169,9 @@ const BoxInfo = () => {
 				/>
 				<ButtonGroup style={{ marginTop: "10px" }}>
 					<Button
-						disabled={whiteboxDisabled()}
+						disabled={blueboxDisabled()}
 						size="small"
-						onClick={() => handleGetWhiteBox()}
+						onClick={() => handleGetBlueBox()}
 						style={{
 							color: "#ffffffBF",
 							borderColor: "#ffffff40",
@@ -182,11 +181,11 @@ const BoxInfo = () => {
 						Get
 					</Button>
 					<Button
-						disabled={whiteboxDisabled2()}
+						disabled={blueboxDisabled2()}
 						size="small"
-						onClick={() => handleOpenWhiteBox()}
+						onClick={() => handleOpenBlueBox()}
 						style={{
-							color: whiteboxDisabled2() ? "grey" : "#ffffffBF",
+							color: blueboxDisabled2() ? "grey" : "#ffffffBF",
 							borderColor: "#ffffff40",
 							border: "solid 1.5px"
 						}}
