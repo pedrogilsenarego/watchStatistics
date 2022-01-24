@@ -173,7 +173,7 @@ const BoxInfo = () => {
 						size="small"
 						onClick={() => handleGetBlueBox()}
 						style={{
-							color: "#ffffffBF",
+							color: blueboxDisabled() ? "grey" : "#ffffffBF",
 							borderColor: "#ffffff40",
 							border: "solid 1.5px"
 						}}

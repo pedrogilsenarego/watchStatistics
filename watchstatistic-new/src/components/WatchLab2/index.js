@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import CentralButtons from "./CentralButtons";
 import BoxInfo from "./BoxInfo";
 import BoxInfo2 from "./BoxInfo2";
+import Currencies from "./Currencies";
 
 const WatchLab2 = () => {
 	const [boxInfoMenu, setBoxInfoMenu] = useState("whiteBox");
@@ -29,6 +30,7 @@ const WatchLab2 = () => {
 					<Grid item xs={4} justify="center">
 						{boxInfoMenu === "whiteBox" && <BoxInfo />}
 						{boxInfoMenu === "blueBox" && <BoxInfo2 />}
+						<Currencies />
 					</Grid>
 					<Grid item xs={4}>
 						<CentralButtons {...configCentralButtons} />

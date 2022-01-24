@@ -174,7 +174,7 @@ const BoxInfo = () => {
 						size="small"
 						onClick={() => handleGetWhiteBox()}
 						style={{
-							color: "#ffffffBF",
+							color: whiteboxDisabled() ? "grey" : "#ffffffBF",
 							borderColor: "#ffffff40",
 							border: "solid 1.5px"
 						}}
