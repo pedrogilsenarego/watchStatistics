@@ -6,7 +6,7 @@ import {
 	AiFillCaretRight
 } from "react-icons/ai";
 import Box from "@mui/material/Box";
-const CentralButtons = ({ boxInfoMenu, setBoxInfoMenu }) => {
+const CentralButtons = ({ boxInfoMenu, setBoxInfoMenu, setX, x }) => {
 	const [bottomMenu, setBottomMenu] = useState(false);
 	const [leftMenu, setLeftMenu] = useState(false);
 	const [rightMenu, setRightMenu] = useState(false);
@@ -20,6 +20,24 @@ const CentralButtons = ({ boxInfoMenu, setBoxInfoMenu }) => {
 			if (boxInfoMenu === "whiteBox") return "whiteBox";
 		}
 	}
+
+	function doIGo(button, boxInfoMenu) {
+		if (button === "rightButton") {
+			if (boxInfoMenu === "whiteBox") return goRight();
+			if (boxInfoMenu === "blueBox") return null;
+		}
+		if (button === "leftButton") {
+			if (boxInfoMenu === "blueBox") return goLeft();
+			if (boxInfoMenu === "whiteBox") return null;
+		}
+	}
+
+	const goLeft = () => {
+		setX(x + 100);
+	};
+	const goRight = () => {
+		setX(x - 100);
+	};
 
 	return (
 		<div>
@@ -38,9 +56,10 @@ const CentralButtons = ({ boxInfoMenu, setBoxInfoMenu }) => {
 					onMouseLeave={() => {
 						setLeftMenu(false);
 					}}
-					onClick={() =>
-						setBoxInfoMenu(whichInfoMenu("leftButton", boxInfoMenu))
-					}
+					onClick={() => {
+						setBoxInfoMenu(whichInfoMenu("leftButton", boxInfoMenu));
+						doIGo("leftButton", boxInfoMenu);
+					}}
 					style={{
 						cursor: "pointer",
 						backgroundColor:
@@ -59,9 +78,10 @@ const CentralButtons = ({ boxInfoMenu, setBoxInfoMenu }) => {
 					onMouseLeave={() => {
 						setRightMenu(false);
 					}}
-					onClick={() =>
-						setBoxInfoMenu(whichInfoMenu("rightButton", boxInfoMenu))
-					}
+					onClick={() => {
+						setBoxInfoMenu(whichInfoMenu("rightButton", boxInfoMenu));
+						doIGo("rightButton", boxInfoMenu);
+					}}
 					style={{
 						cursor: "pointer",
 						backgroundColor:

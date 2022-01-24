@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Boxes from "./Boxes";
+import Slider from "./Slider";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
@@ -9,10 +9,17 @@ import BoxInfo2 from "./BoxInfo2";
 
 const WatchLab2 = () => {
 	const [boxInfoMenu, setBoxInfoMenu] = useState("whiteBox");
+	const [x, setX] = useState(0);
 
 	const configCentralButtons = {
 		boxInfoMenu,
-		setBoxInfoMenu
+		setBoxInfoMenu,
+		setX,
+		x
+	};
+
+	const configSlider = {
+		x
 	};
 
 	return (
@@ -28,7 +35,7 @@ const WatchLab2 = () => {
 					</Grid>
 					<Grid item xs={4}></Grid>
 				</Grid>
-				<Boxes />
+				<Slider {...configSlider} />
 			</Box>
 		</div>
 	);

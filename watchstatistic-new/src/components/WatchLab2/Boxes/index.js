@@ -7,27 +7,29 @@ import React, { useRef } from "react";
 
 extend({ OrbitControls });
 
-const MyMesh = () => {
+const MyMesh = ({ x }) => {
 	const mesh = useRef();
 
 	useFrame(() => {
 		// rotates the object
 		mesh.current.rotation.y = mesh.current.rotation.y += 0.005;
 	});
+
 	return (
 		<mesh ref={mesh} receiveShadow castShadow position={[0, -1, 0]}>
-			<WhiteBox />
+			{(x === -100 || x === 0) && <WhiteBox />}
 		</mesh>
 	);
 };
 
-const Boxes = () => {
+const Boxes = ({ x }) => {
+	const configMesh = { x };
 	return (
 		<Canvas
 			shadowMap
 			sRGB
 			colorManagement
-			camera={{ position: [30, 50, 200], fov: 1.5 }} //position: [100, 100, 200], fov: 2
+			camera={{ position: [30, 50, 200], fov: 1.5 }}
 		>
 			<ambientLight intensity={0.3} />
 			<directionalLight
@@ -45,7 +47,7 @@ const Boxes = () => {
 				castShadow
 			/>
 			<Physics>
-				<MyMesh />
+				<MyMesh {...configMesh} />
 			</Physics>
 		</Canvas>
 	);
