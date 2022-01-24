@@ -24,7 +24,7 @@ const WatchLab2 = () => {
 	};
 
 	return (
-		<div style={{ backgroundColor: "#C84E15" }}>
+		<div style={{ backgroundColor: "#8686af" }}>
 			<Box style={{ height: "100vh" }}>
 				<Grid container style={{ position: "fixed", zIndex: "2" }}>
 					<Grid item xs={4} justify="center">
@@ -44,3 +44,4 @@ const WatchLab2 = () => {
 };
 
 export default WatchLab2;
+// #C84E15
