@@ -165,11 +165,8 @@ const BoxInfo = () => {
 
 	return (
 		<Container
+			justify="center"
 			style={{
-				position: "absolute",
-
-				zIndex: "2",
-				paddingLeft: "2%",
 				paddingTop: "20vh"
 			}}
 		>
