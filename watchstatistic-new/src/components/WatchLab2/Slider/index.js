@@ -7,12 +7,7 @@ const Slider = ({ x }) => {
 		x
 	};
 
-	let sliderArr = [
-		<Boxes {...configBoxes} />,
-		<Boxes {...configBoxes} />,
-		3,
-		4
-	];
+	let sliderArr = [<Boxes {...configBoxes} />, 2, 3, 4];
 
 	return (
 		<div style={{ height: "100vh", width: "100%", display: "flex" }}>
