@@ -13,7 +13,6 @@ const ButtonWrapper = ({ children, ...otherProps }) => {
 		...otherProps,
 		size: "small",
 		variant: "contained",
-		color: "primary",
 
 		onClick: handleSubmit
 	};

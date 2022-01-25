@@ -40,6 +40,21 @@ const useStyles = makeStyles((theme) => ({
 		"& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
 			borderColor: "#ffffffB3"
 		}
+	},
+	textBtn: {
+		color: "#FFFFFF",
+		fontSize: "13px",
+		backgroundColor: "#00000066",
+		border: "solid 2px",
+		borderColor: "orange",
+		borderRadius: "14px",
+		"&:hover": {
+			color: "#FFA500",
+			backgroundColor: "#ffffff00"
+		},
+		"&:active": {
+			color: "#FFFFFF"
+		}
 	}
 }));
 const mapState = ({ user }) => ({
@@ -222,7 +237,7 @@ const Signup = (props) => {
 								/>
 							</Grid>
 							<Grid item xs={12} style={{ paddingTop: "15px" }}>
-								<ButtonMUI>Submit</ButtonMUI>
+								<ButtonMUI className={classes.textBtn}>Submit</ButtonMUI>
 							</Grid>
 						</Grid>
 					</Form>

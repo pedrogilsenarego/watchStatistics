@@ -26,8 +26,13 @@ const RightIconsNoUser = ({ handleSignupOpen, handleLoginOpen }) => {
 			className={classes.textBtn}
 			activeStyle={activeStyle}
 			onClick={(e) => handleLoginOpen(e)}
+			style={{
+				border: "solid 2px",
+				borderColor: "orange",
+				borderRadius: "14px"
+			}}
 		>
-			Login
+			Enter
 		</Button>
 	);
 };

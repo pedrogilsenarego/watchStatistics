@@ -36,6 +36,21 @@ const useStyles = makeStyles((theme) => ({
 		"& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
 			borderColor: "#ffffffB3"
 		}
+	},
+	textBtn: {
+		color: "#FFFFFF",
+		fontSize: "13px",
+		backgroundColor: "!important #00000066",
+		border: "solid 2px",
+		borderColor: "orange",
+		borderRadius: "14px",
+		"&:hover": {
+			color: "#FFA500",
+			backgroundColor: "#ffffff00"
+		},
+		"&:active": {
+			color: "#FFFFFF"
+		}
 	}
 }));
 const mapState = ({ user }) => ({
@@ -102,9 +117,9 @@ const RecoverPwd = ({ handleCloseLoginMenu }) => {
 					/>
 				</Container>
 				<Button
+					className={classes.textBtn}
 					style={{ marginTop: "15px" }}
 					variant="contained"
-					color="primary"
 					size="small"
 					type="submit"
 				>

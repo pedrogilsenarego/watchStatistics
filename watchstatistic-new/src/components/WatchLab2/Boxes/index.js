@@ -6,11 +6,11 @@ import Loading from "../Loading/";
 import WhiteBox from "./WhiteBox";
 //import test from "../../../assets/teste.jpg";
 
-import React, { useRef, Suspense } from "react";
+import React, { useRef, Suspense, useState, useEffect } from "react";
 
 extend({ OrbitControls });
 
-const MyMesh = ({ x }) => {
+const MyMesh = ({ render }) => {
 	const mesh = useRef();
 
 	useFrame(() => {
@@ -20,13 +20,25 @@ const MyMesh = ({ x }) => {
 
 	return (
 		<mesh ref={mesh} receiveShadow castShadow position={[0, -1, 0]}>
-			{(x === -100 || x === 0) && <WhiteBox />}
+			{render && <WhiteBox />}
 		</mesh>
 	);
 };
 
 const Boxes = ({ x }) => {
-	const configMesh = { x };
+	const [render, setRender] = useState(true);
+	const configMesh = { render };
+
+	useEffect(() => {
+		if (x === -100) {
+			setTimeout(() => {
+				setRender(false);
+			}, 1000);
+		}
+		if (x === 0) {
+			setRender(true);
+		}
+	}, [x]);
 
 	return (
 		<Canvas

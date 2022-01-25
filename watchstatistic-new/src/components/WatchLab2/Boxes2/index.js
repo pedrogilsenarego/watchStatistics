@@ -6,11 +6,11 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import BlueBox from "./BlueBox";
 //import test from "../../../assets/teste.jpg";
 
-import React, { useRef, Suspense } from "react";
+import React, { useRef, Suspense, useState, useEffect } from "react";
 
 extend({ OrbitControls });
 
-const MyMesh = ({ x }) => {
+const MyMesh = ({ render }) => {
 	const mesh = useRef();
 
 	useFrame(() => {
@@ -20,13 +20,25 @@ const MyMesh = ({ x }) => {
 
 	return (
 		<mesh ref={mesh} receiveShadow castShadow position={[0, -1, 0]}>
-			{(x === -100 || x === 0 || x === -200) && <BlueBox />}
+			{render && <BlueBox />}
 		</mesh>
 	);
 };
 
 const Boxes = ({ x }) => {
-	const configMesh = { x };
+	const [render, setRender] = useState(false);
+	const configMesh = { render };
+
+	useEffect(() => {
+		if (x === 0) {
+			setTimeout(() => {
+				setRender(false);
+			}, 1000);
+		}
+		if (x === -100) {
+			setRender(true);
+		}
+	}, [x]);
 
 	return (
 		<Canvas

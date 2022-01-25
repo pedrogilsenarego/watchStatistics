@@ -42,6 +42,22 @@ const useStyles = makeStyles((theme) => ({
 		"& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
 			borderColor: "#ffffffB3"
 		}
+	},
+
+	textBtn: {
+		color: "#FFFFFF",
+		fontSize: "13px",
+		backgroundColor: "#00000066",
+		border: "solid 2px",
+		borderColor: "orange",
+		borderRadius: "14px",
+		"&:hover": {
+			color: "#FFA500",
+			backgroundColor: "#ffffff00"
+		},
+		"&:active": {
+			color: "#FFFFFF"
+		}
 	}
 }));
 
@@ -130,7 +146,7 @@ const Main = ({ handleCloseLoginMenu }) => {
 								</Container>
 							</Grid>
 							<Grid item xs={12} style={{ paddingTop: "10px" }}>
-								<ButtonMUI>Login</ButtonMUI>
+								<ButtonMUI className={classes.textBtn}>Login</ButtonMUI>
 							</Grid>
 						</Grid>
 					</Form>
