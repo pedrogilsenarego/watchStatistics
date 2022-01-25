@@ -296,6 +296,8 @@ export const handleUserUpdateDetails = (product) => {
 	} = product;
 	var incrementExp = 0;
 	var incrementWatches = 0;
+	var incrementWhiteBox = 0;
+	var incrementBlueBox = 0;
 	if (!productDesc) {
 		if (waterResistance) {
 			incrementExp = incrementExp + 0.5;
@@ -319,6 +321,8 @@ export const handleUserUpdateDetails = (product) => {
 	if (productDesc) {
 		incrementExp = incrementExp + 4;
 		incrementWatches = incrementWatches + 1;
+		incrementWhiteBox = incrementWhiteBox + 1;
+		incrementBlueBox = incrementBlueBox + 1;
 	}
 
 	return new Promise((resolve, reject) => {
@@ -329,7 +333,9 @@ export const handleUserUpdateDetails = (product) => {
 				experience: firebase.firestore.FieldValue.increment(incrementExp),
 				points: firebase.firestore.FieldValue.increment(incrementExp),
 				watchesSubmited:
-					firebase.firestore.FieldValue.increment(incrementWatches)
+					firebase.firestore.FieldValue.increment(incrementWatches),
+				whiteBox: firebase.firestore.FieldValue.increment(incrementWhiteBox),
+				blueBox: firebase.firestore.FieldValue.increment(incrementBlueBox)
 			})
 			.then(() => {
 				resolve();
