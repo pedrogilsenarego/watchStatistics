@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import {
-	AiFillCaretUp,
-	AiFillCaretLeft,
-	AiFillCaretRight
-} from "react-icons/ai";
+import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import Box from "@mui/material/Box";
 const CentralButtons = ({ boxInfoMenu, setBoxInfoMenu, setX, x }) => {
-	const [bottomMenu, setBottomMenu] = useState(false);
 	const [leftMenu, setLeftMenu] = useState(false);
 	const [rightMenu, setRightMenu] = useState(false);
 	function whichInfoMenu(button, boxInfoMenu) {
@@ -90,32 +85,6 @@ const CentralButtons = ({ boxInfoMenu, setBoxInfoMenu, setX, x }) => {
 				>
 					<AiFillCaretRight
 						style={{ color: "#ffffffCC", paddingLeft: "2px" }}
-						size="4vh"
-					/>
-				</Avatar>
-			</Box>
-			<Box
-				style={{
-					paddingTop: "35vh",
-					display: "flex",
-
-					justifyContent: "center"
-				}}
-			>
-				<Avatar
-					onMouseEnter={() => {
-						setBottomMenu(true);
-					}}
-					onMouseLeave={() => {
-						setBottomMenu(false);
-					}}
-					style={{
-						cursor: "pointer",
-						backgroundColor: bottomMenu ? "#00000066" : "#00000026"
-					}}
-				>
-					<AiFillCaretUp
-						style={{ color: "#ffffffCC", paddingBottom: "2px" }}
 						size="4vh"
 					/>
 				</Avatar>

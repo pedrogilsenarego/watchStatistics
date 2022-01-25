@@ -114,10 +114,10 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 										if (!experience) return;
 										if (experience < 20) return "Noob";
 										if (experience < 100) return "Begginer";
-										if (experience < 200) return "Watch Enthusiast";
-										if (experience < 500) return "Mature Watch Enthusiast";
-										if (experience < 1500) return "Watch Connoisseour";
-										if (experience < 5000) return "Watch Geek Legend";
+										if (experience < 200) return "Enthusiast";
+										if (experience < 500) return "Mature";
+										if (experience < 1500) return "Connoisseour";
+										if (experience < 5000) return "Geek Legend";
 										else return "Watch God";
 									};
 									const progress = () => {
@@ -141,11 +141,11 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 									const colorRank = () => {
 										if (rank() === "Noob") return "#ffffff66";
 										if (rank() === "Begginer") return "white";
-										if (rank() === "Watch Enthusiast") return "green";
-										if (rank() === "Mature Watch Enthusiast") return "blue";
-										if (rank() === "Watch Connoisseour") return "purple";
-										if (rank() === "Watch Geek Legend") return "orange";
-										if (rank() === "Watch God") return "red";
+										if (rank() === "Enthusiast") return "green";
+										if (rank() === "Mature") return "blue";
+										if (rank() === "Connoisseour") return "purple";
+										if (rank() === "Geek Legend") return "orange";
+										if (rank() === "God") return "red";
 									};
 
 									return (

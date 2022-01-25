@@ -63,10 +63,11 @@ const Currencies = () => {
 		<Container
 			justify="center"
 			style={{
-				paddingTop: "3vh"
+				paddingTop: "4vh",
+				position: "fixed"
 			}}
 		>
-			<Paper style={{ background: "#0000001C", width: "70%", padding: "20px" }}>
+			<Paper style={{ background: "#0000001C", width: "25%", padding: "20px" }}>
 				<Typography style={{ color: "#ffffffBF", marginTop: "10px" }}>
 					<BsFillInboxFill size="3vh" color="white" />{" "}
 					{currentUser.collection ? currentUser.collection.length : 0}/

@@ -120,7 +120,7 @@ const BoxInfo = () => {
 		<Container
 			justify="center"
 			style={{
-				paddingTop: "20vh"
+				paddingTop: "25vh"
 			}}
 		>
 			<Paper

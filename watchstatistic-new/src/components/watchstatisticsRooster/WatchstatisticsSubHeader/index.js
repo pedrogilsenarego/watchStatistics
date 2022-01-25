@@ -72,25 +72,23 @@ const WatchstatisticsSubHeader = ({}) => {
 		if (!experience) return;
 		if (experience < 20) return "Noob";
 		if (experience < 100) return "Begginer";
-		if (experience < 200) return "Watch Enthusiast";
-		if (experience < 500) return "Mature Watch Enthusiast";
-		if (experience < 1500) return "Watch Connoisseour";
-		if (experience < 5000) return "Watch Geek Legend";
-		else return "Watch God";
+		if (experience < 200) return "Enthusiast";
+		if (experience < 500) return "Mature";
+		if (experience < 1500) return "Connoisseour";
+		if (experience < 5000) return "Geek Legend";
+		else return "God";
 	};
 
 	useEffect(() => {
 		if (rank() === "Noob") setProgress((experience / 20) * 100);
 		if (rank() === "Begginer") setProgress(((experience - 20) / 80) * 100);
-		if (rank() === "Watch enthusiast")
-			setProgress(((experience - 100) / 100) * 100);
-		if (rank() === "Mature watch enthusiast")
-			setProgress(((experience - 200) / 300) * 100);
-		if (rank() === "Watch connoisseour")
+		if (rank() === "Enthusiast") setProgress(((experience - 100) / 100) * 100);
+		if (rank() === "Mature") setProgress(((experience - 200) / 300) * 100);
+		if (rank() === "Connoisseour")
 			setProgress(((experience - 500) / 1000) * 100);
-		if (rank() === "Watch geek legend")
+		if (rank() === "Geek legend")
 			setProgress(((experience - 1500) / 3500) * 100);
-		if (rank() === "Watch god") setProgress(100);
+		if (rank() === "God") setProgress(100);
 		// eslint-disable-next-line
 	}, []);
 

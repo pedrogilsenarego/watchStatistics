@@ -21,6 +21,7 @@ const Slider = ({ x }) => {
 					<Container
 						style={{
 							minWidth: "100%",
+							zIndex: "1",
 							transition: "0.5s",
 							transform: `translateX(${x}%)`
 						}}
