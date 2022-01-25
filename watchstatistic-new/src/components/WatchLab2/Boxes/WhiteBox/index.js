@@ -21,11 +21,11 @@ export default function WhiteBox({ ...props }) {
 			>
 				<meshPhysicalMaterial
 					//map={colorMap}
-					color="purple"
+					color="#E5E4E1"
 					clearcoat="1.0"
-					metalness="0.9"
-					clearcoatRoughness="0.1"
-					roughness="0.5"
+					metalness="0.5"
+					clearcoatRoughness="0.9"
+					roughness="0.1"
 					envMaps="reflection"
 				/>
 			</mesh>

@@ -82,7 +82,8 @@ export const handleUpdateBoxStatus = (product) => {
 		blueBoxFragments,
 		purpleBoxFragments,
 		watchParts,
-		orangeBoxFragments
+		orangeBoxFragments,
+		boosters
 	} = product;
 
 	return new Promise((resolve, reject) => {
@@ -98,6 +99,11 @@ export const handleUpdateBoxStatus = (product) => {
 				blueBox: firebase.firestore.FieldValue.increment(1),
 				blueBoxFragments: firebase.firestore.FieldValue.increment(-10)
 			});
+		if (product.flag === "getPurplebox")
+			ref.update({
+				purpleBox: firebase.firestore.FieldValue.increment(1),
+				purpleBoxFragments: firebase.firestore.FieldValue.increment(-10)
+			});
 
 		if (product.flag === "openWhitebox")
 			ref.update({
@@ -111,6 +117,13 @@ export const handleUpdateBoxStatus = (product) => {
 				blueBox: firebase.firestore.FieldValue.increment(-1),
 				purpleBoxFragments: purpleBoxFragments,
 				orangeBoxFragments: orangeBoxFragments,
+				watchParts: watchParts
+			});
+		if (product.flag === "openPurplebox")
+			ref.update({
+				purpleBox: firebase.firestore.FieldValue.increment(-1),
+				orangeBoxFragments: orangeBoxFragments,
+				boosters: boosters,
 				watchParts: watchParts
 			});
 		if (product.flag === "deleteWatchPart")

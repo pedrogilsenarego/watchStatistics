@@ -52,7 +52,7 @@ const Boxes = ({ x }) => {
 			<Suspense fallback={<Loading />}>
 				<ambientLight intensity={0.3} />
 				<directionalLight
-					position={[10, 15, 10]}
+					position={[0, 30, 20]}
 					angle={0.3}
 					penumbra={1}
 					intensity={2}

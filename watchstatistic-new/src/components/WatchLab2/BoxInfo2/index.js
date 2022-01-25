@@ -158,7 +158,7 @@ const BoxInfo = () => {
 					1-3 Fragments of Purple Box
 				</Typography>
 				<Typography style={{ color: "#ffffffBF" }}>
-					2% Chance of Fragment of Orange Box
+					5% Chance of Fragment of Orange Box
 				</Typography>
 				<Divider
 					style={{

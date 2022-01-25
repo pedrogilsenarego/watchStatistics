@@ -45,6 +45,11 @@ const Currencies = () => {
 		else return currentUser.blueBox;
 	};
 
+	const PurpleBoxes = () => {
+		if (!currentUser.purpleBox) return 0;
+		else return currentUser.purpleBox;
+	};
+
 	const blueBoxFragments = () => {
 		if (!currentUser.blueBoxFragments) return 0;
 		else return currentUser.blueBoxFragments;
@@ -103,7 +108,8 @@ const Currencies = () => {
 					{"  "}
 					<AiOutlineCodeSandbox size="3vh" color="lightBlue" /> {BlueBoxes()}
 					{"  "}
-					<AiOutlineCodeSandbox size="3vh" color="purple" /> 0{"  "}
+					<AiOutlineCodeSandbox size="3vh" color="purple" /> {PurpleBoxes()}
+					{"  "}
 					<AiOutlineCodeSandbox size="3vh" color="red" /> 0
 				</Typography>
 			</Paper>

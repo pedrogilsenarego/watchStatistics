@@ -8,9 +8,11 @@ const CentralButtons = ({ boxInfoMenu, setBoxInfoMenu, setX, x }) => {
 	function whichInfoMenu(button, boxInfoMenu) {
 		if (button === "rightButton") {
 			if (boxInfoMenu === "whiteBox") return "blueBox";
-			if (boxInfoMenu === "blueBox") return "blueBox";
+			if (boxInfoMenu === "blueBox") return "purpleBox";
+			if (boxInfoMenu === "purpleBox") return "purpleBox";
 		}
 		if (button === "leftButton") {
+			if (boxInfoMenu === "purpleBox") return "blueBox";
 			if (boxInfoMenu === "blueBox") return "whiteBox";
 			if (boxInfoMenu === "whiteBox") return "whiteBox";
 		}
@@ -19,9 +21,11 @@ const CentralButtons = ({ boxInfoMenu, setBoxInfoMenu, setX, x }) => {
 	function doIGo(button, boxInfoMenu) {
 		if (button === "rightButton") {
 			if (boxInfoMenu === "whiteBox") return goRight();
-			if (boxInfoMenu === "blueBox") return null;
+			if (boxInfoMenu === "blueBox") return goRight();
+			if (boxInfoMenu === "purpleBox") return null;
 		}
 		if (button === "leftButton") {
+			if (boxInfoMenu === "purpleBox") return goLeft();
 			if (boxInfoMenu === "blueBox") return goLeft();
 			if (boxInfoMenu === "whiteBox") return null;
 		}
@@ -80,7 +84,9 @@ const CentralButtons = ({ boxInfoMenu, setBoxInfoMenu, setX, x }) => {
 					style={{
 						cursor: "pointer",
 						backgroundColor:
-							rightMenu && boxInfoMenu !== "blueBox" ? "#00000066" : "#00000026"
+							rightMenu && boxInfoMenu !== "purpleBox"
+								? "#00000066"
+								: "#00000026"
 					}}
 				>
 					<AiFillCaretRight

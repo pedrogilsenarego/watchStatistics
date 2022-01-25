@@ -30,7 +30,7 @@ const Boxes = ({ x }) => {
 	const configMesh = { render };
 
 	useEffect(() => {
-		if (x === 0) {
+		if (x === 0 || x === -200) {
 			setTimeout(() => {
 				setRender(false);
 			}, 1000);
@@ -52,7 +52,7 @@ const Boxes = ({ x }) => {
 			<Suspense fallback={<Loading />}>
 				<ambientLight intensity={0.3} />
 				<directionalLight
-					position={[10, 15, 10]}
+					position={[0, 30, 20]}
 					angle={0.3}
 					penumbra={1}
 					intensity={2}
