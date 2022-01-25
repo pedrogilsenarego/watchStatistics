@@ -86,7 +86,7 @@ const WatchLab2 = () => {
 
 	return (
 		<div>
-			<Box style={{ height: "100vh", backgroundColor: "#8686af" }}>
+			<Box style={{ height: "100vh", backgroundColor: "black" }}>
 				<Grid container style={{ position: "absolute", zIndex: "2" }}>
 					<Grid item xs={4} justify="center">
 						{boxInfoMenu === "whiteBox" && <BoxInfo />}
@@ -102,7 +102,7 @@ const WatchLab2 = () => {
 				<Slider {...configSlider} />
 			</Box>
 
-			<Box style={{ height: "100vh", backgroundColor: "black" }}>
+			<Box style={{ height: "100vh", backgroundColor: "#C84E15" }}>
 				<Grid container>
 					<Grid item xs={6}></Grid>
 					<Grid item xs={6}>
@@ -116,3 +116,4 @@ const WatchLab2 = () => {
 
 export default WatchLab2;
 // #C84E15
+// #8686af
