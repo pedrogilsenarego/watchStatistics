@@ -3,7 +3,7 @@ import { Canvas, extend, useFrame } from "react-three-fiber";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-import WhiteBox from "./WhiteBox";
+import BlueBox from "./BlueBox";
 //import test from "../../../assets/teste.jpg";
 
 import React, { useRef, Suspense } from "react";
@@ -20,7 +20,7 @@ const MyMesh = ({ x }) => {
 
 	return (
 		<mesh ref={mesh} receiveShadow castShadow position={[0, -1, 0]}>
-			{(x === -100 || x === 0) && <WhiteBox />}
+			{(x === -100 || x === 0 || x === -200) && <BlueBox />}
 		</mesh>
 	);
 };
