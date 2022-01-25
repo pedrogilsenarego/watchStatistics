@@ -2,7 +2,7 @@ import { Canvas, extend, useFrame } from "react-three-fiber";
 //import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-
+import Loading from "../Loading/";
 import WhiteBox from "./WhiteBox";
 //import test from "../../../assets/teste.jpg";
 
@@ -37,7 +37,7 @@ const Boxes = ({ x }) => {
 			colorManagement
 			camera={{ position: [30, 50, 200], fov: 1.5 }}
 		>
-			<Suspense callBack={null}>
+			<Suspense fallback={<Loading />}>
 				<ambientLight intensity={0.3} />
 				<directionalLight
 					position={[10, 15, 10]}

@@ -38,8 +38,7 @@ const WatchstatisticsSubHeader = ({}) => {
 	const { currentUser } = useSelector(mapState);
 
 	const [progress, setProgress] = useState(0);
-	const { userVotes, displayName, experience, watchesSubmited, points } =
-		currentUser;
+	const { userVotes, displayName, experience, watchesSubmited } = currentUser;
 
 	const useStyles = makeStyles((theme) => ({
 		root: {
@@ -95,11 +94,11 @@ const WatchstatisticsSubHeader = ({}) => {
 	const colorRank = () => {
 		if (rank() === "Noob") return "#ffffff66";
 		if (rank() === "Begginer") return "white";
-		if (rank() === "Watch Enthusiast") return "green";
-		if (rank() === "Mature Watch Enthusiast") return "blue";
-		if (rank() === "Watch Connoisseour") return "purple";
-		if (rank() === "Watch Geek Legend") return "orange";
-		if (rank() === "Watch God") return "red";
+		if (rank() === "Enthusiast") return "green";
+		if (rank() === "Mature") return "blue";
+		if (rank() === "Connoisseour") return "purple";
+		if (rank() === "Geek Legend") return "orange";
+		if (rank() === "God") return "red";
 	};
 
 	return (
@@ -174,7 +173,7 @@ const WatchstatisticsSubHeader = ({}) => {
 									className={classes.text}
 									style={{ color: colorRank() }}
 								>
-									Rank: {rank()} / Points: {points}
+									Rank: {rank()}
 								</Typography>
 								<Box
 									sx={{
