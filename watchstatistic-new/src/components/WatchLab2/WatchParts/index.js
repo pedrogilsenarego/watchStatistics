@@ -346,7 +346,11 @@ const WatchParts = ({ data, collectionFull, setBagFull, setWatchCase }) => {
 	};
 
 	const configWatch = {
-		caseColor: fusionCase
+		caseColor: fusionCase,
+		glassColor: fusionGlass,
+		movementColor: fusionMovement,
+		crownColor: fusionCrown,
+		braceletColor: fusionBracelet
 	};
 
 	if (list) {

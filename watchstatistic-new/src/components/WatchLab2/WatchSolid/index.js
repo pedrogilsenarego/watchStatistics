@@ -30,8 +30,17 @@ function CameraControls() {
 }
 
 const MyMesh = (configWatch) => {
+	const ref = useRef();
+	useFrame((state) => {
+		const t = state.clock.getElapsedTime();
+
+		ref.current.rotation.x = -Math.PI / 1.75 + Math.cos(t / 4) / 8;
+		ref.current.rotation.y = Math.sin(t / 4) / 8;
+		ref.current.rotation.z = (1 + Math.sin(t / 1.5)) / 20;
+		ref.current.position.y = (1 + Math.sin(t / 1.5)) / 10;
+	});
 	return (
-		<mesh receiveShadow castShadow position={[0, -0.2, 0]}>
+		<mesh ref={ref} receiveShadow castShadow position={[0, -0.2, 0]}>
 			<Watch {...configWatch} />
 		</mesh>
 	);
@@ -39,28 +48,15 @@ const MyMesh = (configWatch) => {
 
 const Boxes = (configWatch) => {
 	return (
-		<Canvas
-			shadows
-			dpr={[1, 2]}
-			shadowMap
-			sRGB
-			colorManagement
-			camera={{ position: [30, 50, 200], fov: 1 }}
-		>
+		<Canvas shadows dpr={[1, 2]} camera={{ position: [30, 50, 200], fov: 1 }}>
 			<Suspense fallback={<Loading />}>
 				<ambientLight intensity={0.3} />
-				<directionalLight
-					position={[0, 30, 20]}
-					angle={0.3}
-					penumbra={1}
-					intensity={2}
-					castShadow
-				/>
+
 				<spotLight
-					position={[10, 0, 0]}
-					angle={0.3}
+					position={[10, 10, 10]}
+					angle={0.15}
 					penumbra={1}
-					intensity={2}
+					shadow-mapSize={[512, 512]}
 					castShadow
 				/>
 
