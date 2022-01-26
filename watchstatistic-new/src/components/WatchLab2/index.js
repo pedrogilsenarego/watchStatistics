@@ -102,7 +102,7 @@ const WatchLab2 = () => {
 				<Slider {...configSlider} />
 			</Box>
 
-			<Box style={{ height: "100vh", backgroundColor: "#C84E15" }}>
+			<Box style={{ height: "100vh", backgroundColor: "#2d4967" }}>
 				<WatchParts {...configWatchParts} />
 			</Box>
 		</div>

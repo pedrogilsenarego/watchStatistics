@@ -361,7 +361,13 @@ const WatchParts = ({ data, collectionFull, setBagFull, setWatchCase }) => {
 						<Watch {...configWatch} />
 					</Grid>
 					<Grid item xs={6}>
-						<Paper style={{ padding: "3px", backgroundColor: "#3C3939" }}>
+						<Paper
+							style={{
+								marginTop: "20px",
+								padding: "3px",
+								backgroundColor: "#3C393900"
+							}}
+						>
 							<Typography>Put here your parts to Build your watch</Typography>
 
 							{list.map((grp, grpI) => (
