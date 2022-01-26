@@ -503,7 +503,11 @@ const WatchParts = ({ data, handleDeleteWatchParts, collectionFull }) => {
 					>
 						<CardMedia
 							style={{ height: "30vh" }}
-							image={randomProduct.productThumbnail[0]}
+							image={
+								randomProduct.productThumbnail
+									? randomProduct.productThumbnail[0]
+									: null
+							}
 						></CardMedia>
 						<Typography
 							style={{

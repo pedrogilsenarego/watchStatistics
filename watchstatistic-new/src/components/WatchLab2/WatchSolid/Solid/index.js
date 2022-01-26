@@ -7,11 +7,10 @@ import { useGLTF } from "@react-three/drei";
 
 export default function Model({ ...props }) {
 	const group = useRef();
-	const { nodes, materials } = useGLTF("/watch.glb");
+	const { nodes } = useGLTF("/watch.glb");
 	return (
 		<group ref={group} {...props} dispose={null}>
 			<mesh geometry={nodes["website_-_Bezel"].geometry}>
-				{" "}
 				<meshPhysicalMaterial
 					//map={colorMap}
 					color="lightGrey"
@@ -26,17 +25,18 @@ export default function Model({ ...props }) {
 				geometry={nodes["website_-_Case"].geometry}
 				material={nodes["website_-_Case"].material}
 			/>
-			<mesh geometry={nodes["website_-_Crown"].geometry}>
-				<meshPhysicalMaterial
-					//map={colorMap}
-					color="lightBlue"
-					clearcoat="1.0"
-					metalness="0"
-					clearcoatRoughness="0.1"
-					roughness="0.5"
-					envMaps="reflection"
-				/>{" "}
-			</mesh>
+			<mesh
+				geometry={nodes["website_-_CaseBack"].geometry}
+				material={nodes["website_-_CaseBack"].material}
+			/>
+			<mesh
+				geometry={nodes["website_-_Crown"].geometry}
+				material={nodes["website_-_Crown"].material}
+			/>
+			<mesh
+				geometry={nodes["website_-_Dial"].geometry}
+				material={nodes["website_-_Dial"].material}
+			/>
 			<mesh geometry={nodes["website_-_Glass"].geometry}>
 				<meshPhysicalMaterial
 					//map={colorMap}
@@ -61,8 +61,8 @@ export default function Model({ ...props }) {
 				material={nodes["website_-_Minutes"].material}
 			/>
 			<mesh
-				geometry={nodes["website_-_Part_8"].geometry}
-				material={nodes["website_-_Part_8"].material}
+				geometry={nodes["website_-_Part_9"].geometry}
+				material={nodes["website_-_Part_9"].material}
 			/>
 		</group>
 	);
