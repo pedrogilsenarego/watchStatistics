@@ -42,7 +42,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				...INITIAL_STATE
 			};
-		//new implementation
+
 		case cartTypes.ADD_BOOSTER_TO_CART:
 			return {
 				...state,

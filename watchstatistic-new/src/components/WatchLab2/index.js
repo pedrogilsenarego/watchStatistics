@@ -9,7 +9,6 @@ import BoxInfo2 from "./BoxInfo2";
 import BoxInfo3 from "./BoxInfo3";
 import Currencies from "./Currencies";
 import WatchParts from "./WatchParts";
-import Watch from "./WatchSolid";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
@@ -104,14 +103,7 @@ const WatchLab2 = () => {
 			</Box>
 
 			<Box style={{ height: "100vh", backgroundColor: "#C84E15" }}>
-				<Grid container>
-					<Grid item xs={6}>
-						<Watch />
-					</Grid>
-					<Grid item xs={6}>
-						<WatchParts {...configWatchParts} />
-					</Grid>
-				</Grid>
+				<WatchParts {...configWatchParts} />
 			</Box>
 		</div>
 	);

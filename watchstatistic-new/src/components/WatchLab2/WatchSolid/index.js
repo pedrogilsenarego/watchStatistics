@@ -29,15 +29,15 @@ function CameraControls() {
 	);
 }
 
-const MyMesh = () => {
+const MyMesh = (configWatch) => {
 	return (
 		<mesh receiveShadow castShadow position={[0, -0.2, 0]}>
-			<Watch />
+			<Watch {...configWatch} />
 		</mesh>
 	);
 };
 
-const Boxes = () => {
+const Boxes = (configWatch) => {
 	return (
 		<Canvas
 			shadows
@@ -64,7 +64,7 @@ const Boxes = () => {
 					castShadow
 				/>
 
-				<MyMesh />
+				<MyMesh {...configWatch} />
 				<CameraControls />
 			</Suspense>
 		</Canvas>
