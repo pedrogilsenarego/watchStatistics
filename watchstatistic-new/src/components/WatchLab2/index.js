@@ -86,13 +86,13 @@ const WatchLab2 = () => {
 
 	return (
 		<div>
+			<Currencies />
 			<Box style={{ height: "100vh", backgroundColor: "black" }}>
 				<Grid container style={{ position: "absolute", zIndex: "2" }}>
 					<Grid item xs={4} justify="center">
 						{boxInfoMenu === "whiteBox" && <BoxInfo />}
 						{boxInfoMenu === "blueBox" && <BoxInfo2 />}
 						{boxInfoMenu === "purpleBox" && <BoxInfo3 />}
-						<Currencies />
 					</Grid>
 					<Grid item xs={4}>
 						<CentralButtons {...configCentralButtons} />

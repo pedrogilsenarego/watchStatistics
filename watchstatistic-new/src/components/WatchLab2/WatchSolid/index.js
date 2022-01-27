@@ -2,9 +2,9 @@ import { Canvas, extend, useFrame, useThree } from "react-three-fiber";
 //import { TextureLoader } from "three/src/loaders/TextureLoader";
 import Loading from "../Loading/";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { Environment, ContactShadows } from "@react-three/drei";
 
 import Watch from "./Solid";
-//import test from "../../../assets/teste.jpg";
 
 import React, { useRef, Suspense } from "react";
 
@@ -40,7 +40,7 @@ const MyMesh = (configWatch) => {
 		ref.current.position.y = (1 + Math.sin(t / 1.5)) / 10;
 	});
 	return (
-		<mesh ref={ref} receiveShadow castShadow position={[0, -0.2, 0]}>
+		<mesh ref={ref} receiveShadow castShadow position={[0, -3, 0]}>
 			<Watch {...configWatch} />
 		</mesh>
 	);
@@ -48,7 +48,7 @@ const MyMesh = (configWatch) => {
 
 const Boxes = (configWatch) => {
 	return (
-		<Canvas shadows dpr={[1, 2]} camera={{ position: [30, 50, 200], fov: 1 }}>
+		<Canvas shadows dpr={[1, 2]} camera={{ position: [30, 80, 300], fov: 0.5 }}>
 			<Suspense fallback={<Loading />}>
 				<ambientLight intensity={0.3} />
 
@@ -62,6 +62,16 @@ const Boxes = (configWatch) => {
 
 				<MyMesh {...configWatch} />
 				<CameraControls />
+				<ContactShadows
+					rotation-x={Math.PI / 2}
+					position={[0, -0.8, 0]}
+					opacity={0.75}
+					width={10}
+					height={10}
+					blur={2.6}
+					far={2}
+				/>
+				<Environment preset="city" />
 			</Suspense>
 		</Canvas>
 	);

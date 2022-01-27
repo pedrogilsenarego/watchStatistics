@@ -21,65 +21,63 @@ export default function Model({
 				<meshPhysicalMaterial
 					//map={colorMap}
 					color={caseColor ? "lightGrey" : "black"}
-					clearcoat="1.0"
-					metalness="0.9"
+					clearcoat={caseColor ? "1.0" : "0"}
+					metalness={caseColor ? "0.9" : "0"}
 					clearcoatRoughness="0.1"
-					roughness="0.5"
-					envMaps="reflection"
+					roughness={caseColor ? "0.2" : "1"}
 				/>{" "}
 			</mesh>
 			<mesh geometry={nodes["website_-_Case"].geometry}>
 				<meshPhysicalMaterial
 					//map={colorMap}
 					color={caseColor ? "lightGrey" : "black"}
-					clearcoat="1.0"
-					metalness="0.9"
+					clearcoat={caseColor ? "1.0" : "0"}
+					metalness={caseColor ? "0.9" : "0"}
 					clearcoatRoughness="0.1"
-					roughness="0.5"
+					roughness={caseColor ? "0.2" : "1"}
 				/>{" "}
 			</mesh>
+
 			<mesh geometry={nodes["website_-_CaseBack"].geometry}>
 				<meshPhysicalMaterial
 					//map={colorMap}
 					color={caseColor ? "lightGrey" : "black"}
-					clearcoat="1.0"
+					clearcoat={caseColor ? "1.0" : "0"}
 					metalness={caseColor ? "0.9" : "0"}
 					clearcoatRoughness="0.1"
-					roughness="0.5"
+					roughness={caseColor ? "0.2" : "1"}
 				/>{" "}
 			</mesh>
 			<mesh geometry={nodes["website_-_Crown"].geometry}>
 				<meshPhysicalMaterial
 					//map={colorMap}
-					color={crownColor ? "grey" : "black"}
-					clearcoat="1.0"
+					color={crownColor ? "lightGrey" : "black"}
+					clearcoat={crownColor ? "1.0" : "0"}
 					metalness={crownColor ? "0.9" : "0"}
 					clearcoatRoughness="0.1"
-					roughness="0.5"
-					envMaps="reflection"
+					roughness={crownColor ? "0.2" : "1"}
 				/>{" "}
 			</mesh>
 			<mesh geometry={nodes["website_-_Dial"].geometry}>
 				<meshPhysicalMaterial
 					//map={colorMap}
-					color={braceletColor ? "grey" : "black"}
-					clearcoat="1.0"
+					color={braceletColor ? "lightGrey" : "black"}
+					clearcoat={braceletColor ? "1.0" : "0"}
 					metalness={braceletColor ? "0.9" : "0"}
 					clearcoatRoughness="0.1"
-					roughness="0.5"
-					envMaps="reflection"
+					roughness={braceletColor ? "0.2" : "1"}
 				/>{" "}
 			</mesh>
 			<mesh geometry={nodes["website_-_Glass"].geometry}>
 				<meshPhysicalMaterial
 					//map={colorMap}
 					color={glassColor ? "lightBlue" : "black"}
-					clearcoat="1.0"
+					clearcoat={glassColor ? "1.0" : "0"}
 					opacity={glassColor ? "0.6" : "1"}
 					metalness="0"
 					transmission={glassColor ? "1.0" : "0"}
 					clearcoatRoughness="0.1"
-					roughness="0.2"
+					roughness={glassColor ? "0.2" : "1"}
 					ior="1"
 					reflectivity="0.5"
 					envMaps="reflection"
@@ -91,34 +89,31 @@ export default function Model({
 			>
 				<meshPhysicalMaterial
 					//map={colorMap}
-					color={braceletColor ? "grey" : "black"}
-					clearcoat="1.0"
+					color={braceletColor ? "lightGrey" : "black"}
+					clearcoat={braceletColor ? "1.0" : "0"}
 					metalness={braceletColor ? "0.9" : "0"}
 					clearcoatRoughness="0.1"
-					roughness="0.5"
-					envMaps="reflection"
+					roughness={braceletColor ? "0.2" : "1"}
 				/>{" "}
 			</mesh>
 			<mesh geometry={nodes["website_-_Minutes"].geometry}>
 				<meshPhysicalMaterial
 					//map={colorMap}
-					color={braceletColor ? "grey" : "black"}
-					clearcoat="1.0"
+					color={braceletColor ? "lightGrey" : "black"}
+					clearcoat={braceletColor ? "1.0" : "0"}
 					metalness={braceletColor ? "0.9" : "0"}
 					clearcoatRoughness="0.1"
-					roughness="0.5"
-					envMaps="reflection"
+					roughness={braceletColor ? "0.2" : "1"}
 				/>{" "}
 			</mesh>
 			<mesh geometry={nodes["website_-_Part_9"].geometry}>
 				<meshPhysicalMaterial
 					//map={colorMap}
-					color={movementColor ? "grey" : "black"}
-					clearcoat="1.0"
+					color={movementColor ? "lightGrey" : "black"}
+					clearcoat={movementColor ? "1.0" : "0"}
 					metalness={movementColor ? "0.9" : "0"}
 					clearcoatRoughness="0.1"
-					roughness="0.5"
-					envMaps="reflection"
+					roughness={movementColor ? "0.2" : "1"}
 				/>{" "}
 			</mesh>
 		</group>

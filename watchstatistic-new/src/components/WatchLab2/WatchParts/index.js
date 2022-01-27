@@ -357,19 +357,18 @@ const WatchParts = ({ data, collectionFull, setBagFull, setWatchCase }) => {
 		return (
 			<div>
 				<Grid container>
-					<Grid item xs={6}>
+					<Grid item xs={5}>
 						<Watch {...configWatch} />
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item xs={7}>
 						<Paper
 							style={{
-								marginTop: "20px",
+								marginTop: "80px",
+								marginRight: "10px",
 								padding: "3px",
 								backgroundColor: "#3C393900"
 							}}
 						>
-							<Typography>Put here your parts to Build your watch</Typography>
-
 							{list.map((grp, grpI) => (
 								<Box
 									style={{
@@ -405,8 +404,8 @@ const WatchParts = ({ data, collectionFull, setBagFull, setWatchCase }) => {
 													draggable={true}
 													key={item.id}
 													style={{
-														width: "80px",
-														height: "80px",
+														width: "50px",
+														height: "50px",
 														cursor: "pointer",
 														backgroundColor: dragging
 															? getStyles({ grpI, itemI, item })

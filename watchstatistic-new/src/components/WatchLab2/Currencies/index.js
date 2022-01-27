@@ -1,8 +1,7 @@
 import React from "react";
 
-import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
-import Container from "@mui/material/Container";
+
 import Typography from "@mui/material/Typography";
 
 import { useSelector } from "react-redux";
@@ -65,55 +64,45 @@ const Currencies = () => {
 		else return currentUser.orangeBoxFragments;
 	};
 	return (
-		<Container
-			justify="center"
+		<Paper
 			style={{
-				paddingTop: "4vh",
-				position: "fixed"
+				background: "#0000001C",
+				position: "fixed",
+
+				marginTop: "91vh",
+				padding: "5px",
+				display: "flex"
 			}}
 		>
-			<Paper style={{ background: "#0000001C", width: "25%", padding: "20px" }}>
-				<Typography style={{ color: "#ffffffBF", marginTop: "10px" }}>
-					<BsFillInboxFill size="3vh" color="white" />{" "}
-					{currentUser.collection ? currentUser.collection.length : 0}/
-					{bagSize()} <GiGears size="3vh" color="white" /> {itemsBag().length}/
-					{bagSize()} <GoRocket size="3vh" color="white" />{" "}
-					{currentUser.boosters ? currentUser.boosters : 0}
-				</Typography>
+			<Typography style={{ color: "#ffffffBF", marginTop: "10px" }}>
+				<BsFillInboxFill size="3vh" color="white" />{" "}
+				{currentUser.collection ? currentUser.collection.length : 0}/{bagSize()}{" "}
+				<GiGears size="3vh" color="white" /> {itemsBag().length}/{bagSize()}{" "}
+				<GoRocket size="3vh" color="white" />{" "}
+				{currentUser.boosters ? currentUser.boosters : 0}
+			</Typography>
 
-				<Divider
-					style={{
-						marginTop: "8px",
-						background: "#ffffff66"
-					}}
-				/>
-				<Typography style={{ color: "#ffffffBF", marginTop: "10px" }}>
-					<FaCoins size="3vh" color="orange" />{" "}
-					{currentUser.points ? currentUser.points : 0}
-					{"  "}
-					<FaPuzzlePiece size="3vh" color="lightBlue" /> {blueBoxFragments()}
-					{"  "}
-					<FaPuzzlePiece size="3vh" color="purple" /> {purpleBoxFragments()}
-					{"  "}
-					<FaPuzzlePiece size="3vh" color="red" /> {orangeBoxFragments()}
-				</Typography>
-				<Divider
-					style={{
-						marginTop: "8px",
-						background: "#ffffff66"
-					}}
-				/>
-				<Typography style={{ color: "#ffffffBF", marginTop: "10px" }}>
-					<AiOutlineCodeSandbox size="3vh" color="white" /> {whiteBoxes()}
-					{"  "}
-					<AiOutlineCodeSandbox size="3vh" color="lightBlue" /> {BlueBoxes()}
-					{"  "}
-					<AiOutlineCodeSandbox size="3vh" color="purple" /> {PurpleBoxes()}
-					{"  "}
-					<AiOutlineCodeSandbox size="3vh" color="red" /> 0
-				</Typography>
-			</Paper>
-		</Container>
+			<Typography style={{ color: "#ffffffBF", marginTop: "10px" }}>
+				<FaCoins size="3vh" color="orange" />{" "}
+				{currentUser.points ? currentUser.points : 0}
+				{"  "}
+				<FaPuzzlePiece size="3vh" color="lightBlue" /> {blueBoxFragments()}
+				{"  "}
+				<FaPuzzlePiece size="3vh" color="purple" /> {purpleBoxFragments()}
+				{"  "}
+				<FaPuzzlePiece size="3vh" color="red" /> {orangeBoxFragments()}
+			</Typography>
+
+			<Typography style={{ color: "#ffffffBF", marginTop: "10px" }}>
+				<AiOutlineCodeSandbox size="3vh" color="white" /> {whiteBoxes()}
+				{"  "}
+				<AiOutlineCodeSandbox size="3vh" color="lightBlue" /> {BlueBoxes()}
+				{"  "}
+				<AiOutlineCodeSandbox size="3vh" color="purple" /> {PurpleBoxes()}
+				{"  "}
+				<AiOutlineCodeSandbox size="3vh" color="red" /> 0
+			</Typography>
+		</Paper>
 	);
 };
 
