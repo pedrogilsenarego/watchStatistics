@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
 		background: "#145875",
 		display: "flex",
 		flexDirection: "column",
-		justifyContent: "center"
+		justifyContent: "center",
+		marginTop: "20vh"
 	}
 }));
 
