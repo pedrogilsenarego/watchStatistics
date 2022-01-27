@@ -94,7 +94,23 @@ const BoosterSelection = ({
 		// eslint-disable-next-line
 	}, [numberBoosters]);
 
-	if (boosterValue())
+	if (!cartBoosters)
+		return (
+			<div>
+				<Typography>
+					You have no assigned any prefered watch for this price brackets click
+					here to choose it if you want
+				</Typography>
+				<Button
+					onClick={() => {
+						history.push(`/search`);
+					}}
+				>
+					Here
+				</Button>
+			</div>
+		);
+	else
 		return (
 			<Box sx={{ display: "flex", alignContent: "center" }}>
 				<Grid container>
@@ -159,22 +175,6 @@ const BoosterSelection = ({
 						]}
 				</Grid>
 			</Box>
-		);
-	else
-		return (
-			<div>
-				<Typography>
-					You have no assigned any prefered watch for this price brackets click
-					here to choose it if you want
-				</Typography>
-				<Button
-					onClick={() => {
-						history.push(`/search`);
-					}}
-				>
-					Here
-				</Button>
-			</div>
 		);
 };
 

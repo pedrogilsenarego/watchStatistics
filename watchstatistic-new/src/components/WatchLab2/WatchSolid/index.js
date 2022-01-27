@@ -52,7 +52,7 @@ const Boxes = (configWatch) => {
 			shadows
 			dpr={[1, 2]}
 			camera={{ position: [30, 80, 300], fov: 0.5 }}
-			style={{ cursor: "pointer" }}
+			style={{ cursor: "pointer", height: "70vh" }}
 		>
 			<Suspense fallback={<Loading />}>
 				<ambientLight intensity={0.3} />

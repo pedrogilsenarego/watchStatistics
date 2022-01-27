@@ -86,7 +86,7 @@ const App = (props) => {
 						render={() => (
 							<WithAuth>
 								<MainLayout>
-									<WatchLaboratory />
+									<WatchLaboratory2 />
 								</MainLayout>
 							</WithAuth>
 						)}
@@ -97,7 +97,7 @@ const App = (props) => {
 						render={() => (
 							<WithAuth>
 								<MainLayout>
-									<WatchLaboratory2 />
+									<WatchLaboratory />
 								</MainLayout>
 							</WithAuth>
 						)}
