@@ -48,7 +48,12 @@ const MyMesh = (configWatch) => {
 
 const Boxes = (configWatch) => {
 	return (
-		<Canvas shadows dpr={[1, 2]} camera={{ position: [30, 80, 300], fov: 0.5 }}>
+		<Canvas
+			shadows
+			dpr={[1, 2]}
+			camera={{ position: [30, 80, 300], fov: 0.5 }}
+			style={{ cursor: "pointer" }}
+		>
 			<Suspense fallback={<Loading />}>
 				<ambientLight intensity={0.3} />
 

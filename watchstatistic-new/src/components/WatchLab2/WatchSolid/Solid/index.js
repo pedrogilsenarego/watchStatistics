@@ -22,9 +22,9 @@ export default function Model({
 					//map={colorMap}
 					color={caseColor ? "lightGrey" : "black"}
 					clearcoat={caseColor ? "1.0" : "0"}
-					metalness={caseColor ? "0.9" : "0"}
+					metalness={caseColor ? "1" : "0"}
 					clearcoatRoughness="0.1"
-					roughness={caseColor ? "0.2" : "1"}
+					roughness={caseColor ? "0" : "1"}
 				/>{" "}
 			</mesh>
 			<mesh geometry={nodes["website_-_Case"].geometry}>
@@ -32,7 +32,7 @@ export default function Model({
 					//map={colorMap}
 					color={caseColor ? "lightGrey" : "black"}
 					clearcoat={caseColor ? "1.0" : "0"}
-					metalness={caseColor ? "0.9" : "0"}
+					metalness={caseColor ? "1" : "0"}
 					clearcoatRoughness="0.1"
 					roughness={caseColor ? "0.2" : "1"}
 				/>{" "}

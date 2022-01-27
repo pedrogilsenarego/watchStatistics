@@ -356,14 +356,14 @@ const WatchParts = ({ data, collectionFull, setBagFull, setWatchCase }) => {
 	if (list) {
 		return (
 			<div>
-				<Grid container>
+				<Grid container style={{ paddingTop: "80px" }}>
 					<Grid item xs={5}>
 						<Watch {...configWatch} />
 					</Grid>
 					<Grid item xs={7}>
 						<Paper
 							style={{
-								marginTop: "80px",
+								marginTop: "20px",
 								marginRight: "10px",
 								padding: "3px",
 								backgroundColor: "#3C393900"
@@ -404,8 +404,8 @@ const WatchParts = ({ data, collectionFull, setBagFull, setWatchCase }) => {
 													draggable={true}
 													key={item.id}
 													style={{
-														width: "50px",
-														height: "50px",
+														width: "45px",
+														height: "45px",
 														cursor: "pointer",
 														backgroundColor: dragging
 															? getStyles({ grpI, itemI, item })
@@ -452,25 +452,6 @@ const WatchParts = ({ data, collectionFull, setBagFull, setWatchCase }) => {
 											You have Parts that are incompatible (different colors)
 										</Typography>
 									)}
-									<Typography style={{ color: fusionCrown ? "white" : "grey" }}>
-										Crown
-									</Typography>
-									<Typography
-										style={{ color: fusionMovement ? "white" : "grey" }}
-									>
-										Movement
-									</Typography>
-									<Typography style={{ color: fusionCase ? "white" : "grey" }}>
-										Case
-									</Typography>
-									<Typography style={{ color: fusionGlass ? "white" : "grey" }}>
-										Glass
-									</Typography>
-									<Typography
-										style={{ color: fusionBracelet ? "white" : "grey" }}
-									>
-										Bracelet
-									</Typography>
 
 									{!ready &&
 										fusionBracelet &&
