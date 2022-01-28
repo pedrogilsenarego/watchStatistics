@@ -29,7 +29,7 @@ const RightIconsUser = ({
 		<Button
 			aria-controls="messages"
 			className={classes.textBtn}
-			activeStyle={activeStyle}
+			activestyle={activeStyle}
 			disableRipple
 			onClick={(e) => handleMessagesOpen(e)}
 		>
@@ -38,7 +38,7 @@ const RightIconsUser = ({
 		</Button>,
 		<Button
 			className={classes.textBtn}
-			activeStyle={activeStyle}
+			activestyle={activeStyle}
 			aria-controls="myAccount"
 			disableRipple
 			onClick={(e) => handleMyAccountOpen(e)}

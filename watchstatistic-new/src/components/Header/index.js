@@ -194,7 +194,7 @@ const Header = (props) => {
 									aria-controls="mediaMenu"
 									disableRipple
 									className={classes.textBtn}
-									activeStyle={activeStyle}
+									activestyle={activeStyle}
 									onClick={(e) => {
 										setAnchorMediaMenu(e.currentTarget);
 									}}
@@ -354,7 +354,7 @@ const Header = (props) => {
 			>
 				<MenuItem
 					className={classes.textBtn}
-					activeStyle={activeStyle}
+					activestyle={activeStyle}
 					component={NavLink}
 					disableRipple
 					to="/"
@@ -416,7 +416,7 @@ const Header = (props) => {
 					aria-controls="support"
 					disableRipple
 					className={classes.textBtn}
-					activeStyle={activeStyle}
+					activestyle={activeStyle}
 					onClick={(e) => {
 						setAnchorSupport(e.currentTarget);
 					}}

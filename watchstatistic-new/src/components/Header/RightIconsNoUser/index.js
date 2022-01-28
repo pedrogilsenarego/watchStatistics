@@ -24,7 +24,7 @@ const RightIconsNoUser = ({ handleSignupOpen, handleLoginOpen }) => {
 			aria-controls="login"
 			disableRipple
 			className={classes.textBtn}
-			activeStyle={activeStyle}
+			activestyle={activeStyle}
 			onClick={(e) => handleLoginOpen(e)}
 			style={{
 				border: "solid 2px",

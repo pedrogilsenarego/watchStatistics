@@ -22,13 +22,11 @@ const useStyles = makeStyles((theme) => ({
 
 const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 	const classes = useStyles();
-	const activeStyle = { color: "#FFA500" };
 
 	return (
 		<div>
 			<Button
 				className={classes.textBtn}
-				activeStyle={activeStyle}
 				component={NavLink}
 				disableRipple
 				to="/"
@@ -41,7 +39,6 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 			<Button
 				aria-controls="watchstatistics"
 				className={classes.textBtn}
-				activeStyle={activeStyle}
 				disableRipple
 				onClick={(e) => handleWatchstatisticsOpen(e)}
 			>
@@ -54,7 +51,6 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 				aria-controls="support"
 				disableRipple
 				className={classes.textBtn}
-				activeStyle={activeStyle}
 				onClick={(e) => handleSupportOpen(e)}
 			>
 				<AiOutlineInfoCircle fontSize="1.5em" />
