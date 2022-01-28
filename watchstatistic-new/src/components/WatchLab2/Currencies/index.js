@@ -3,7 +3,7 @@ import React from "react";
 import Paper from "@mui/material/Paper";
 
 import Typography from "@mui/material/Typography";
-
+import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
 import { BsFillInboxFill } from "react-icons/bs";
 import { FaCoins } from "react-icons/fa";
@@ -64,45 +64,81 @@ const Currencies = () => {
 		else return currentUser.orangeBoxFragments;
 	};
 	return (
-		<Paper
-			style={{
-				background: "#0000001C",
-				position: "fixed",
+		<Grid container direction="column" alignItems="center">
+			<Paper
+				style={{
+					background: "#0000001C",
+					position: "fixed",
 
-				marginTop: "91vh",
-				padding: "5px",
-				display: "flex"
-			}}
-		>
-			<Typography style={{ color: "#ffffffBF", marginTop: "10px" }}>
-				<BsFillInboxFill size="3vh" color="white" />{" "}
-				{currentUser.collection ? currentUser.collection.length : 0}/{bagSize()}{" "}
-				<GiGears size="3vh" color="white" /> {itemsBag().length}/{bagSize()}{" "}
-				<GoRocket size="3vh" color="white" />{" "}
-				{currentUser.boosters ? currentUser.boosters : 0}
-			</Typography>
+					marginTop: "91vh",
+					padding: "10px",
+					paddingRight: "10px",
+					display: "flex",
+					alignItems: "center"
+				}}
+			>
+				<Typography style={{ color: "#ffffffBF" }}>
+					<BsFillInboxFill size="3vh" color="white" />{" "}
+					{currentUser.collection ? currentUser.collection.length : 0}/
+					{bagSize()}{" "}
+					<GiGears style={{ marginLeft: "5px" }} size="3vh" color="white" />{" "}
+					{itemsBag().length}/{bagSize()} {"     "}{" "}
+					<GoRocket style={{ marginLeft: "5px" }} size="3vh" color="white" />{" "}
+					{currentUser.boosters ? currentUser.boosters : 0}
+				</Typography>
 
-			<Typography style={{ color: "#ffffffBF", marginTop: "10px" }}>
-				<FaCoins size="3vh" color="orange" />{" "}
-				{currentUser.points ? currentUser.points : 0}
-				{"  "}
-				<FaPuzzlePiece size="3vh" color="lightBlue" /> {blueBoxFragments()}
-				{"  "}
-				<FaPuzzlePiece size="3vh" color="purple" /> {purpleBoxFragments()}
-				{"  "}
-				<FaPuzzlePiece size="3vh" color="red" /> {orangeBoxFragments()}
-			</Typography>
+				<Typography style={{ color: "#ffffffBF", paddingLeft: "30px" }}>
+					<FaCoins size="3vh" color="orange" />{" "}
+					{currentUser.points ? currentUser.points : 0}
+					{"  "}
+					<FaPuzzlePiece
+						style={{ marginLeft: "5px" }}
+						size="3vh"
+						color="lightBlue"
+					/>{" "}
+					{blueBoxFragments()}
+					{"  "}
+					<FaPuzzlePiece
+						style={{ marginLeft: "5px" }}
+						size="3vh"
+						color="purple"
+					/>{" "}
+					{purpleBoxFragments()}
+					{"  "}
+					<FaPuzzlePiece
+						style={{ marginLeft: "5px" }}
+						size="3vh"
+						color="red"
+					/>{" "}
+					{orangeBoxFragments()}
+				</Typography>
 
-			<Typography style={{ color: "#ffffffBF", marginTop: "10px" }}>
-				<AiOutlineCodeSandbox size="3vh" color="white" /> {whiteBoxes()}
-				{"  "}
-				<AiOutlineCodeSandbox size="3vh" color="lightBlue" /> {BlueBoxes()}
-				{"  "}
-				<AiOutlineCodeSandbox size="3vh" color="purple" /> {PurpleBoxes()}
-				{"  "}
-				<AiOutlineCodeSandbox size="3vh" color="red" /> 0
-			</Typography>
-		</Paper>
+				<Typography style={{ color: "#ffffffBF", paddingLeft: "30px" }}>
+					<AiOutlineCodeSandbox size="3vh" color="white" /> {whiteBoxes()}
+					{"  "}
+					<AiOutlineCodeSandbox
+						style={{ marginLeft: "5px" }}
+						size="3vh"
+						color="lightBlue"
+					/>{" "}
+					{BlueBoxes()}
+					{"  "}
+					<AiOutlineCodeSandbox
+						style={{ marginLeft: "5px" }}
+						size="3vh"
+						color="purple"
+					/>{" "}
+					{PurpleBoxes()}
+					{"  "}
+					<AiOutlineCodeSandbox
+						style={{ marginLeft: "5px" }}
+						size="3vh"
+						color="red"
+					/>{" "}
+					0
+				</Typography>
+			</Paper>
+		</Grid>
 	);
 };
 
