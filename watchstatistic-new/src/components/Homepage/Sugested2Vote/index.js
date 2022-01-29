@@ -17,6 +17,16 @@ const Sugested2Vote = () => {
 	const { products, currentUser } = useSelector(mapState);
 	const { data } = products;
 
+	function filterData() {
+		const newData = [...data];
+		for (let i = 0; i < data.length; i++) {
+			if (currentUser.userVotes.includes(data[i].documentID)) {
+				newData.splice(i, 1);
+			}
+		}
+		return newData;
+	}
+
 	useEffect(
 		() => {
 			dispatch(fetchLatestProductsStart({ pageSize }));
@@ -38,11 +48,12 @@ const Sugested2Vote = () => {
 	return (
 		<div>
 			<Typography variant={"h6"}>Sugested for you to vote</Typography>
-			<Grid container spacing={2} style={{ paddingTop: "15px" }}>
-				{data.map((item, pos) => {
+			<Grid container spacing={2} style={{ paddingTop: "10px" }}>
+				{filterData().map((item, pos) => {
+					const configItem = { currentUser };
 					return (
 						<Grid item>
-							<Item item={item} key={pos} />
+							<Item item={item} key={pos} {...configItem} />
 						</Grid>
 					);
 				})}
