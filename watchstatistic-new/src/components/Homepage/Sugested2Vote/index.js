@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Avatar from "@mui/material/Avatar";
+import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLatestProductsStart } from "../../../redux/Products/products.actions";
@@ -50,6 +52,29 @@ const Sugested2Vote = () => {
 		<div>
 			<Typography variant={"h6"}>Sugested for you to vote</Typography>
 			<Grid container spacing={2} style={{ paddingTop: "10px" }}>
+				<Avatar
+					style={{
+						backgroundColor: "#ffffff66",
+						position: "absolute",
+						zIndex: "2",
+						cursor: "pointer",
+						marginTop: "50px"
+					}}
+				>
+					<AiFillCaretLeft fontSize="1em" />
+				</Avatar>
+				<Avatar
+					style={{
+						backgroundColor: "#ffffff66",
+						position: "absolute",
+						zIndex: "2",
+						cursor: "pointer",
+						marginTop: "50px",
+						marginLeft: "88.5vw"
+					}}
+				>
+					<AiFillCaretRight fontSize="1em" />
+				</Avatar>
 				{filterData().map((item, pos) => {
 					const configItem = { currentUser };
 					if (pos < 4) {

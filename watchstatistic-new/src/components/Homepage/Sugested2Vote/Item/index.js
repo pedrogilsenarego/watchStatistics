@@ -9,7 +9,7 @@ const Item = ({ item, key, currentUser }) => {
 	return (
 		<>
 			<CardMedia
-				style={{ width: "20vw", cursor: "pointer" }}
+				style={{ cursor: "pointer" }}
 				component="img"
 				height="90vh"
 				image={item.productThumbnail[0]}
