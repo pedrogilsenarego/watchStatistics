@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Item from "./Item";
@@ -54,7 +54,7 @@ const Sugested2Vote = () => {
 					const configItem = { currentUser };
 					if (pos < 4) {
 						return (
-							<Grid item>
+							<Grid item xs={6} sm={4} lg={3}>
 								<Item item={item} key={pos} {...configItem} />
 							</Grid>
 						);
