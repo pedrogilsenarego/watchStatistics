@@ -23,6 +23,7 @@ import WatchBoxes from "./pages/WatchBoxes";
 import CompareWatches from "./pages/CompareWatches";
 import WatchLaboratory from "./pages/WatchLaboratory";
 import WatchLaboratory2 from "./components/WatchLab2";
+import Auction from "./pages/Auction";
 
 import Order from "./pages/Order";
 
@@ -36,6 +37,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import { darkTheme, lightTheme } from "./styles/MUITheme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { useSelector } from "react-redux";
+import HomePage from "./pages/Homepage";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
@@ -65,10 +67,25 @@ const App = (props) => {
 					<Route
 						exact
 						path="/"
+						render={() =>
+							currentUser ? (
+								<HomepageLayout>
+									<HomePage />
+								</HomepageLayout>
+							) : (
+								<MainLayout>
+									<Watchstatistics />
+								</MainLayout>
+							)
+						}
+					/>
+					<Route
+						exact
+						path="/auction"
 						render={() => (
-							<HomepageLayout>
-								<Watchstatistics />
-							</HomepageLayout>
+							<MainLayout>
+								<Auction />
+							</MainLayout>
 						)}
 					/>
 					<Route

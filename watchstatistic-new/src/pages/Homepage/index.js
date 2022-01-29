@@ -1,17 +1,22 @@
 import React from "react";
-import Welcoming from "../../components/Welcoming";
+import WatchstatisticsSubHeader from "../../components/watchstatisticsRooster/WatchstatisticsSubHeader";
+import TableMain from "../../components/watchstatisticsRooster/TableMain";
+import { useSelector } from "react-redux";
+import HomePageComponent from "../../components/Homepage";
 
-import Directory from "./../../components/Directory";
+const mapState = (state) => ({
+	currentUser: state.user.currentUser
+});
 
-const Homepage = (props) => {
+const HomePage = () => {
+	const { currentUser } = useSelector(mapState);
 	return (
-		<section>
-			<Welcoming />
-			<Directory />
-		</section>
+		<div>
+			<WatchstatisticsSubHeader {...currentUser} />
+			<HomePageComponent />
+			<TableMain />
+		</div>
 	);
 };
 
-export default Homepage;
-
-//
+export default HomePage;

@@ -53,7 +53,7 @@ const Intro = () => {
 						marginRight: "4vw"
 					}}
 				>
-					<Grid item xs={10} sm={8} md={6} lg={5}>
+					<Grid item xs={10} sm={8} md={6} lg={5} xl={3.3}>
 						{" "}
 						<Typography
 							style={{
@@ -94,7 +94,7 @@ const Intro = () => {
 					</Grid>
 				</Grid>
 				<img
-					style={{ filter: "grayscale(100%) brightness(0.4)" }}
+					style={{ filter: "grayscale(100%) brightness(0.4)", float: "right" }}
 					src={img1}
 					alt=""
 				/>
