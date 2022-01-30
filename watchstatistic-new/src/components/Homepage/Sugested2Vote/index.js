@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
-import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,10 +48,10 @@ const Sugested2Vote = () => {
 	);
 
 	const goLeft = () => {
-		setX(x + 100);
+		setX(x + 98.5);
 	};
 	const goRight = () => {
-		setX(x - 100);
+		setX(x - 98.5);
 	};
 
 	const handleGoRight = () => {
@@ -59,17 +59,17 @@ const Sugested2Vote = () => {
 		if (x === 0) {
 			setButtonLeft(true);
 		}
-		if (x === -100) {
+		if (x === -98.5) {
 			setButtonRight(false);
 		}
 	};
 
 	const handleGoLeft = () => {
 		goLeft();
-		if (x === -100) {
+		if (x === -98.5) {
 			setButtonLeft(false);
 		}
-		if (x === -200) {
+		if (x === -197) {
 			setButtonRight(true);
 		}
 	};
@@ -85,57 +85,66 @@ const Sugested2Vote = () => {
 	}
 
 	return (
-		<div style={{ marginTop: "80px", marginLeft: "10px", marginRight: "10px" }}>
-			<Typography variant={"h6"}>Sugested for you to vote</Typography>
-			<Container>
-				{buttonLeft && (
-					<Avatar
-						style={{
-							backgroundColor: "#ffffff66",
-							position: "absolute",
-							zIndex: "2",
-							cursor: "pointer",
-							marginTop: "50px"
-						}}
-						onClick={() => {
-							handleGoLeft();
-						}}
-					>
-						<IoIosArrowBack fontSize="1em" />
-					</Avatar>
-				)}
-				{buttonRight && (
-					<Avatar
-						style={{
-							backgroundColor: "#ffffff66",
-							position: "absolute",
-							zIndex: "2",
+		<div>
+			<Box
+				sx={{
+					alignItems: "center",
+					justifyContent: "center"
+				}}
+				style={{
+					display: "flex",
+					minWidth: "100%",
+					marginTop: "80px",
+					position: "absolute",
+					zIndex: "2"
+				}}
+			>
+				<Avatar
+					style={{
+						backgroundColor: "#ffffff66",
+						marginRight: "85vw",
+						cursor: "pointer"
+					}}
+					onClick={() => {
+						handleGoLeft();
+					}}
+				>
+					<IoIosArrowBack fontSize="1em" />
+				</Avatar>
 
-							cursor: "pointer",
-							marginTop: "50px",
-							marginLeft: "85vw"
-						}}
-						onClick={() => {
-							handleGoRight();
-						}}
-					>
-						<IoIosArrowForward fontSize="1em" />
-					</Avatar>
-				)}
-			</Container>
+				<Avatar
+					style={{
+						backgroundColor: "#ffffff66",
 
-			<div style={{ display: "flex", marginTop: "10px" }}>
-				{filterData().map((item, pos) => (
-					<Container
-						disableGutters
-						style={{ paddingTop: "10px", minWidth: "100%" }}
-						key={pos}
-					>
+						cursor: "pointer"
+					}}
+					onClick={() => {
+						handleGoRight();
+					}}
+				>
+					<IoIosArrowForward fontSize="1em" />
+				</Avatar>
+			</Box>
+			<div
+				style={{ marginTop: "80px", marginLeft: "5.5vw", marginRight: "4vw" }}
+			>
+				<Typography variant={"h6"}>Sugested for you to vote</Typography>
+
+				<Grid
+					container
+					wrap="nowrap"
+					spacing={"10.5vw"}
+					style={{ display: "flex", marginTop: "5px" }}
+				>
+					{filterData().map((item, pos) => (
 						<Grid
 							container
-							spacing={1.5}
+							item
+							spacing={"1.5vw"}
 							style={{
 								display: "flex",
+								paddingTop: "10px",
+								minWidth: "100%",
 
 								transition: "0.5s",
 								transform: `translateX(${x}%)`
@@ -145,14 +154,14 @@ const Sugested2Vote = () => {
 								const configItem = { currentUser };
 
 								return (
-									<Grid item xs={6} sm={4} lg={3}>
+									<Grid item xs={6} lg={3}>
 										<Item item={item} key={pos} {...configItem} />
 									</Grid>
 								);
 							})}
 						</Grid>
-					</Container>
-				))}
+					))}
+				</Grid>
 			</div>
 		</div>
 	);
