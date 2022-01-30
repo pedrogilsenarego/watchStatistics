@@ -104,7 +104,7 @@ const Sugested2Vote = () => {
 					minWidth: "100%",
 					marginTop: isMatch ? "-2vh" : "72px",
 					position: "absolute",
-					marginLeft: isMatch ? "38vw" : "0vw",
+					paddingLeft: isMatch ? "38vw" : "0vw",
 					zIndex: "2"
 				}}
 			>
