@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Container from "@mui/material/Container";
-import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLatestProductsStart } from "../../../redux/Products/products.actions";
@@ -85,42 +85,44 @@ const Sugested2Vote = () => {
 	}
 
 	return (
-		<div>
+		<div style={{ marginTop: "80px" }}>
 			<Typography variant={"h6"}>Sugested for you to vote</Typography>
-			{buttonLeft && (
-				<Avatar
-					style={{
-						backgroundColor: "#ffffff66",
-						position: "absolute",
-						zIndex: "2",
-						cursor: "pointer",
-						marginTop: "50px"
-					}}
-					onClick={() => {
-						handleGoLeft();
-					}}
-				>
-					<AiFillCaretLeft fontSize="1em" />
-				</Avatar>
-			)}
-			{buttonRight && (
-				<Avatar
-					style={{
-						backgroundColor: "#ffffff66",
-						position: "absolute",
-						zIndex: "2",
+			<Container>
+				{buttonLeft && (
+					<Avatar
+						style={{
+							backgroundColor: "#ffffff66",
+							position: "absolute",
+							zIndex: "2",
+							cursor: "pointer",
+							marginTop: "50px"
+						}}
+						onClick={() => {
+							handleGoLeft();
+						}}
+					>
+						<IoIosArrowBack fontSize="1em" />
+					</Avatar>
+				)}
+				{buttonRight && (
+					<Avatar
+						style={{
+							backgroundColor: "#ffffff66",
+							position: "absolute",
+							zIndex: "2",
 
-						cursor: "pointer",
-						marginTop: "50px",
-						marginLeft: "85vw"
-					}}
-					onClick={() => {
-						handleGoRight();
-					}}
-				>
-					<AiFillCaretRight fontSize="1em" />
-				</Avatar>
-			)}
+							cursor: "pointer",
+							marginTop: "50px",
+							marginLeft: "85vw"
+						}}
+						onClick={() => {
+							handleGoRight();
+						}}
+					>
+						<IoIosArrowForward fontSize="1em" />
+					</Avatar>
+				)}
+			</Container>
 
 			<div style={{ display: "flex", marginTop: "10px" }}>
 				{filterData().map((item, pos) => (
@@ -129,7 +131,6 @@ const Sugested2Vote = () => {
 							container
 							spacing={2}
 							style={{
-								width: "100%",
 								display: "flex",
 								transition: "0.5s",
 								transform: `translateX(${x}%)`
