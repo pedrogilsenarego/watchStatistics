@@ -55,22 +55,27 @@ const Sugested2Vote = () => {
 	};
 
 	const handleGoRight = () => {
-		goRight();
-		if (x === 0) {
-			setButtonLeft(true);
-		}
-		if (x === -98.5) {
-			setButtonRight(false);
+		if (x !== -197) {
+			if (x === 0) {
+				goRight();
+				setButtonLeft(true);
+			}
+			if (x === -98.5) {
+				goRight();
+				setButtonRight(false);
+			}
 		}
 	};
 
 	const handleGoLeft = () => {
-		goLeft();
-		if (x === -98.5) {
-			setButtonLeft(false);
-		}
-		if (x === -197) {
-			setButtonRight(true);
+		if (x !== 0) {
+			goLeft();
+			if (x === -98.5) {
+				setButtonLeft(false);
+			}
+			if (x === -197) {
+				setButtonRight(true);
+			}
 		}
 	};
 
@@ -94,35 +99,41 @@ const Sugested2Vote = () => {
 				style={{
 					display: "flex",
 					minWidth: "100%",
-					marginTop: "80px",
+					marginTop: "72px",
 					position: "absolute",
 					zIndex: "2"
 				}}
 			>
 				<Avatar
 					style={{
-						backgroundColor: "#ffffff66",
-						marginRight: "85vw",
-						cursor: "pointer"
+						backgroundColor: "#ffffff00",
+						marginRight: "90vw",
+						cursor: buttonLeft ? "pointer" : "default"
 					}}
 					onClick={() => {
 						handleGoLeft();
 					}}
 				>
-					<IoIosArrowBack fontSize="1em" />
+					<IoIosArrowBack
+						fontSize="1em"
+						color={buttonLeft ? "white" : "#ffffff00"}
+					/>
 				</Avatar>
 
 				<Avatar
 					style={{
-						backgroundColor: "#ffffff66",
+						backgroundColor: "#ffffff00",
 
-						cursor: "pointer"
+						cursor: buttonRight ? "pointer" : "default"
 					}}
 					onClick={() => {
 						handleGoRight();
 					}}
 				>
-					<IoIosArrowForward fontSize="1em" />
+					<IoIosArrowForward
+						fontSize="1em"
+						color={buttonRight ? "white" : "#ffffff00"}
+					/>
 				</Avatar>
 			</Box>
 			<div
