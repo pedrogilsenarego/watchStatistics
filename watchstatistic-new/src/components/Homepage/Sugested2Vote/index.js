@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
+import Container from "@mui/material/Container";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,11 +13,14 @@ const mapState = (state) => ({
 	products: state.productsData.latestProducts
 });
 
-const pageSize = 10;
+const pageSize = 12;
 
 const Sugested2Vote = () => {
 	const dispatch = useDispatch();
 	const { products, currentUser } = useSelector(mapState);
+	const [buttonLeft, setButtonLeft] = useState(false);
+	const [buttonRight, setButtonRight] = useState(true);
+	const [x, setX] = useState(0);
 
 	const { data } = products;
 
@@ -27,7 +31,12 @@ const Sugested2Vote = () => {
 				newData.push(data[i]);
 			}
 		}
-		return newData;
+		const newData1 = newData.slice(0, 4);
+		const newData2 = newData.slice(5, 8);
+		const newData3 = newData.slice(9, 12);
+
+		const finalArray = [newData1, newData2, newData3];
+		return finalArray;
 	};
 
 	useEffect(
@@ -37,6 +46,33 @@ const Sugested2Vote = () => {
 		// eslint-disable-next-line
 		[]
 	);
+
+	const goLeft = () => {
+		setX(x + 104.2);
+	};
+	const goRight = () => {
+		setX(x - 104.2);
+	};
+
+	const handleGoRight = () => {
+		goRight();
+		if (x === 0) {
+			setButtonLeft(true);
+		}
+		if (x === -104.2) {
+			setButtonRight(false);
+		}
+	};
+
+	const handleGoLeft = () => {
+		goLeft();
+		if (x === -104.2) {
+			setButtonLeft(false);
+		}
+		if (x === -208.4) {
+			setButtonRight(true);
+		}
+	};
 
 	if (!Array.isArray(data)) return null;
 
@@ -51,7 +87,7 @@ const Sugested2Vote = () => {
 	return (
 		<div>
 			<Typography variant={"h6"}>Sugested for you to vote</Typography>
-			<Grid container spacing={2} style={{ paddingTop: "10px" }}>
+			{buttonLeft && (
 				<Avatar
 					style={{
 						backgroundColor: "#ffffff66",
@@ -60,32 +96,58 @@ const Sugested2Vote = () => {
 						cursor: "pointer",
 						marginTop: "50px"
 					}}
+					onClick={() => {
+						handleGoLeft();
+					}}
 				>
 					<AiFillCaretLeft fontSize="1em" />
 				</Avatar>
+			)}
+			{buttonRight && (
 				<Avatar
 					style={{
 						backgroundColor: "#ffffff66",
 						position: "absolute",
 						zIndex: "2",
+
 						cursor: "pointer",
 						marginTop: "50px",
-						marginLeft: "88.5vw"
+						marginLeft: "85vw"
+					}}
+					onClick={() => {
+						handleGoRight();
 					}}
 				>
 					<AiFillCaretRight fontSize="1em" />
 				</Avatar>
-				{filterData().map((item, pos) => {
-					const configItem = { currentUser };
-					if (pos < 4) {
-						return (
-							<Grid item xs={6} sm={4} lg={3}>
-								<Item item={item} key={pos} {...configItem} />
-							</Grid>
-						);
-					} else return null;
-				})}
-			</Grid>
+			)}
+
+			<div style={{ display: "flex", marginTop: "10px" }}>
+				{filterData().map((item, pos) => (
+					<Container style={{ paddingTop: "10px", minWidth: "100%" }} key={pos}>
+						<Grid
+							container
+							spacing={2}
+							style={{
+								width: "100%",
+								display: "flex",
+								transition: "0.5s",
+								transform: `translateX(${x}%)`
+							}}
+						>
+							{item.map((item, pos) => {
+								const configItem = { currentUser };
+
+								return (
+									<Grid item xs={6} sm={4} lg={3}>
+										<Item item={item} key={pos} {...configItem} />
+									</Grid>
+								);
+							})}
+						</Grid>
+					</Container>
+				))}
+			</div>
 		</div>
 	);
 };
