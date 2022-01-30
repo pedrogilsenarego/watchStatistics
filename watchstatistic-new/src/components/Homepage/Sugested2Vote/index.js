@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import { useMediaQuery, useTheme } from "@material-ui/core";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +20,8 @@ const Sugested2Vote = () => {
 	const dispatch = useDispatch();
 	const { products, currentUser } = useSelector(mapState);
 	const [buttonLeft, setButtonLeft] = useState(false);
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 	const [buttonRight, setButtonRight] = useState(true);
 	const [x, setX] = useState(0);
 
@@ -99,15 +102,16 @@ const Sugested2Vote = () => {
 				style={{
 					display: "flex",
 					minWidth: "100%",
-					marginTop: "72px",
+					marginTop: isMatch ? "-2vh" : "72px",
 					position: "absolute",
+					marginLeft: isMatch ? "38vw" : "0vw",
 					zIndex: "2"
 				}}
 			>
 				<Avatar
 					style={{
 						backgroundColor: "#ffffff00",
-						marginRight: "90vw",
+						marginRight: isMatch ? "2vw" : "90vw",
 						cursor: buttonLeft ? "pointer" : "default"
 					}}
 					onClick={() => {
@@ -115,7 +119,7 @@ const Sugested2Vote = () => {
 					}}
 				>
 					<IoIosArrowBack
-						fontSize="1em"
+						fontSize={isMatch ? "1.5em" : "1em"}
 						color={buttonLeft ? "white" : "#ffffff00"}
 					/>
 				</Avatar>
@@ -131,7 +135,7 @@ const Sugested2Vote = () => {
 					}}
 				>
 					<IoIosArrowForward
-						fontSize="1em"
+						fontSize={isMatch ? "1.5em" : "1em"}
 						color={buttonRight ? "white" : "#ffffff00"}
 					/>
 				</Avatar>
@@ -165,7 +169,7 @@ const Sugested2Vote = () => {
 								const configItem = { currentUser };
 
 								return (
-									<Grid item xs={6} lg={3}>
+									<Grid item xs={6} md={3}>
 										<Item item={item} key={pos} {...configItem} />
 									</Grid>
 								);
