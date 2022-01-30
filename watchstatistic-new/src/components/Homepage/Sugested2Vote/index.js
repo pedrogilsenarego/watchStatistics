@@ -48,10 +48,10 @@ const Sugested2Vote = () => {
 	);
 
 	const goLeft = () => {
-		setX(x + 104.2);
+		setX(x + 100);
 	};
 	const goRight = () => {
-		setX(x - 104.2);
+		setX(x - 100);
 	};
 
 	const handleGoRight = () => {
@@ -59,17 +59,17 @@ const Sugested2Vote = () => {
 		if (x === 0) {
 			setButtonLeft(true);
 		}
-		if (x === -104.2) {
+		if (x === -100) {
 			setButtonRight(false);
 		}
 	};
 
 	const handleGoLeft = () => {
 		goLeft();
-		if (x === -104.2) {
+		if (x === -100) {
 			setButtonLeft(false);
 		}
-		if (x === -208.4) {
+		if (x === -200) {
 			setButtonRight(true);
 		}
 	};
@@ -85,7 +85,7 @@ const Sugested2Vote = () => {
 	}
 
 	return (
-		<div style={{ marginTop: "80px" }}>
+		<div style={{ marginTop: "80px", marginLeft: "10px", marginRight: "10px" }}>
 			<Typography variant={"h6"}>Sugested for you to vote</Typography>
 			<Container>
 				{buttonLeft && (
@@ -126,12 +126,17 @@ const Sugested2Vote = () => {
 
 			<div style={{ display: "flex", marginTop: "10px" }}>
 				{filterData().map((item, pos) => (
-					<Container style={{ paddingTop: "10px", minWidth: "100%" }} key={pos}>
+					<Container
+						disableGutters
+						style={{ paddingTop: "10px", minWidth: "100%" }}
+						key={pos}
+					>
 						<Grid
 							container
-							spacing={2}
+							spacing={1.5}
 							style={{
 								display: "flex",
+
 								transition: "0.5s",
 								transform: `translateX(${x}%)`
 							}}
