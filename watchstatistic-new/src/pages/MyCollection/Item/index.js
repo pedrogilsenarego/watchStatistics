@@ -25,7 +25,11 @@ const Item = ({ item, pos, relativePos }) => {
 	const { collection, boosters } = currentUser;
 
 	const handleWatch4BoosterPopup = (pos, item) => {
-		setWatch(item);
+		setWatch(
+			products.data[relativePos[pos]].productBrand +
+				" " +
+				products.data[relativePos[pos]].productName
+		);
 		setPosWatch(pos);
 		setOpenDeleteWatchPopup(true);
 	};
@@ -50,7 +54,6 @@ const Item = ({ item, pos, relativePos }) => {
 		setPosWatch(pos);
 		setOpenSellWatchPopup(true);
 	};
-	//const relativePos = [0, 1, 2, 0];
 
 	return (
 		<div>
@@ -63,14 +66,26 @@ const Item = ({ item, pos, relativePos }) => {
 				key={item}
 			>
 				<ButtonGroup>
-					<Button
-						onClick={() => {
-							history.push(`/product/${item}`);
-						}}
-					>
-						{products.data[relativePos[pos]].productBrand}{" "}
-						{products.data[relativePos[pos]].productName}
-					</Button>
+					{products.data[relativePos[pos]] && (
+						<Button
+							onClick={() => {
+								history.push(`/product/${item}`);
+							}}
+						>
+							{products.data[relativePos[pos]].productBrand}{" "}
+							{products.data[relativePos[pos]].productName}
+						</Button>
+					)}
+					{!products.data[relativePos[pos]] && (
+						<Button
+							onClick={() => {
+								history.push(`/product/${item}`);
+							}}
+						>
+							Error
+						</Button>
+					)}
+
 					<Button
 						onClick={() => {
 							handleWatch4BoosterPopup(pos, item);

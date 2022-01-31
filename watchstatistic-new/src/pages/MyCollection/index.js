@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { useDispatch } from "react-redux";
@@ -13,8 +13,8 @@ const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
 
-const MyCollection = (props) => {
-	const { products, currentUser } = useSelector(mapState);
+const MyCollection = () => {
+	const { currentUser } = useSelector(mapState);
 	const dispatch = useDispatch();
 
 	const myCollection = currentUser.collection;
@@ -30,16 +30,18 @@ const MyCollection = (props) => {
 	const relativePosFunct = () => {
 		let newArray = [0, 1, 2, 0];
 		let simetricArray = [];
-		/* for (let i = 0; i <= currentUser.collection.length; i++) {
+		for (let i = 0; i <= currentUser.collection.length; i++) {
 			for (let j = 0; i <= simetricArray.length; j++) {
-				if (!currentUser.collection[i].includes(simetricArray[j]))
+				/* if (simetricArray[j] === currentUser.collection[i]) {
+					newArray.push(j);
+					break;
+				} */
+				/* if (j === simetricArray.length) {
 					newArray.push(i);
-				else newArray.push(j);
-				simetricArray.push(currentUser.collection[i]);
+					simetricArray.push(currentUser.collection[i]);
+				} */
 			}
-		} */
-		console.log(newArray);
-		console.log(simetricArray);
+		}
 		return newArray;
 	};
 
