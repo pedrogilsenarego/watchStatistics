@@ -9,12 +9,12 @@ import { fetchMyCollectionStart } from "../../redux/Products/products.actions";
 import Item from "./Item";
 
 const mapState = (state) => ({
-	products: state.productsData.myCollection,
-	currentUser: state.user.currentUser
+	currentUser: state.user.currentUser,
+	products: state.productsData.myCollection.data
 });
 
 const MyCollection = () => {
-	const { currentUser } = useSelector(mapState);
+	const { currentUser, products } = useSelector(mapState);
 	const dispatch = useDispatch();
 
 	const myCollection = currentUser.collection;
@@ -27,25 +27,20 @@ const MyCollection = () => {
 		[]
 	);
 
-	const relativePosFunct = () => {
-		let newArray = [0, 1, 2, 0];
-		let simetricArray = [];
-		for (let i = 0; i <= currentUser.collection.length; i++) {
-			for (let j = 0; i <= simetricArray.length; j++) {
-				/* if (simetricArray[j] === currentUser.collection[i]) {
+	const relativePosFunct2 = () => {
+		let newArray = [];
+		for (let i = 0; i < currentUser.collection.length; i++) {
+			for (let j = 0; j < products.length; j++) {
+				if (products[j].documentID === currentUser.collection[i]) {
 					newArray.push(j);
 					break;
-				} */
-				/* if (j === simetricArray.length) {
-					newArray.push(i);
-					simetricArray.push(currentUser.collection[i]);
-				} */
+				}
 			}
 		}
 		return newArray;
 	};
 
-	const relativePos = relativePosFunct();
+	const relativePos = currentUser.collection ? relativePosFunct2() : [];
 
 	return (
 		<div>
@@ -60,13 +55,18 @@ const MyCollection = () => {
 						<Button style={{ color: "white" }}>All Watches</Button>
 					</Container>
 				</Grid>
-				{myCollection.map((item, pos) => {
-					const configItem = { item, pos, relativePos };
-					return <Item item={item} key={pos} {...configItem} />;
-				})}
+				<Grid item xs={12}>
+					{currentUser.collection &&
+						myCollection.map((item, pos) => {
+							const configItem = { item, pos, relativePos };
+							return <Item item={item} key={pos} {...configItem} />;
+						})}
+				</Grid>
 			</Grid>
 		</div>
 	);
 };
 
 export default MyCollection;
+
+/*  */

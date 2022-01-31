@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import Popup from "../../../components/controls/Popup";
 import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
-import Grid from "@mui/material/Grid";
 import { updateCollectionStatus } from "../../../redux/User/user.actions";
 
 const mapState = (state) => ({
@@ -57,51 +56,43 @@ const Item = ({ item, pos, relativePos }) => {
 
 	return (
 		<div>
-			<Grid
-				container
-				spacing={0}
-				direction="row"
-				alignItems="center"
-				justifyContent="center"
-				key={item}
-			>
-				<ButtonGroup>
-					{products.data[relativePos[pos]] && (
-						<Button
-							onClick={() => {
-								history.push(`/product/${item}`);
-							}}
-						>
-							{products.data[relativePos[pos]].productBrand}{" "}
-							{products.data[relativePos[pos]].productName}
-						</Button>
-					)}
-					{!products.data[relativePos[pos]] && (
-						<Button
-							onClick={() => {
-								history.push(`/product/${item}`);
-							}}
-						>
-							Error
-						</Button>
-					)}
+			<ButtonGroup>
+				{products.data[relativePos[pos]] && (
+					<Button
+						onClick={() => {
+							history.push(`/product/${item}`);
+						}}
+					>
+						{products.data[relativePos[pos]].productBrand}{" "}
+						{products.data[relativePos[pos]].productName}
+					</Button>
+				)}
+				{!products.data[relativePos[pos]] && (
+					<Button
+						onClick={() => {
+							history.push(`/product/${item}`);
+						}}
+					>
+						{item}
+					</Button>
+				)}
 
-					<Button
-						onClick={() => {
-							handleWatch4BoosterPopup(pos, item);
-						}}
-					>
-						Trade this Watch for Boosters
-					</Button>
-					<Button
-						onClick={() => {
-							handleWatch4SellPopup(pos, item);
-						}}
-					>
-						Sell this item
-					</Button>
-				</ButtonGroup>
-			</Grid>
+				<Button
+					onClick={() => {
+						handleWatch4BoosterPopup(pos, item);
+					}}
+				>
+					Trade this Watch for Boosters
+				</Button>
+				<Button
+					onClick={() => {
+						handleWatch4SellPopup(pos, item);
+					}}
+				>
+					Sell this item
+				</Button>
+			</ButtonGroup>
+
 			<Popup
 				title={"Sell this watch"}
 				openPopup={openSellWatchPopup}
