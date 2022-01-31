@@ -45,6 +45,7 @@ const Sugested2Vote = () => {
 	useEffect(
 		() => {
 			dispatch(fetchLatestProductsStart({ pageSize }));
+			if (filterData()[1].length === 0) setButtonRight(false);
 		},
 		// eslint-disable-next-line
 		[]
@@ -62,6 +63,7 @@ const Sugested2Vote = () => {
 			if (x === 0) {
 				goRight();
 				setButtonLeft(true);
+				if (filterData()[2].length === 0) setButtonRight(false);
 			}
 			if (x === -98.5) {
 				goRight();
@@ -75,6 +77,7 @@ const Sugested2Vote = () => {
 			goLeft();
 			if (x === -98.5) {
 				setButtonLeft(false);
+				setButtonRight(true);
 			}
 			if (x === -197) {
 				setButtonRight(true);
@@ -102,9 +105,9 @@ const Sugested2Vote = () => {
 				style={{
 					display: "flex",
 					minWidth: "100%",
-					marginTop: isMatch ? "-2vh" : "72px",
+					marginTop: isMatch ? "-1.7vh" : "72px",
 					position: "absolute",
-					paddingLeft: isMatch ? "38vw" : "0vw",
+					paddingLeft: isMatch ? "70vw" : "0vw",
 					zIndex: "2"
 				}}
 			>
