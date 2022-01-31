@@ -10,12 +10,13 @@ import Grid from "@mui/material/Grid";
 import { updateCollectionStatus } from "../../../redux/User/user.actions";
 
 const mapState = (state) => ({
-	currentUser: state.user.currentUser
+	currentUser: state.user.currentUser,
+	products: state.productsData.myCollection
 });
 
-const Item = ({ item, pos }) => {
+const Item = ({ item, pos, relativePos }) => {
 	const history = useHistory();
-	const { currentUser } = useSelector(mapState);
+	const { currentUser, products } = useSelector(mapState);
 	const dispatch = useDispatch();
 	const [watch, setWatch] = useState();
 	const [posWatch, setPosWatch] = useState();
@@ -40,6 +41,7 @@ const Item = ({ item, pos }) => {
 			collection: oldArray
 		};
 		dispatch(updateCollectionStatus(configData));
+
 		setOpenDeleteWatchPopup(false);
 	};
 
@@ -48,6 +50,8 @@ const Item = ({ item, pos }) => {
 		setPosWatch(pos);
 		setOpenSellWatchPopup(true);
 	};
+	//const relativePos = [0, 1, 2, 0];
+
 	return (
 		<div>
 			<Grid
@@ -64,7 +68,8 @@ const Item = ({ item, pos }) => {
 							history.push(`/product/${item}`);
 						}}
 					>
-						{item.productBrand} {item.productName}
+						{products.data[relativePos[pos]].productBrand}{" "}
+						{products.data[relativePos[pos]].productName}
 					</Button>
 					<Button
 						onClick={() => {
@@ -108,7 +113,7 @@ const Item = ({ item, pos }) => {
 				setOpenPopup={setOpenDeleteWatchPopup}
 			>
 				<Typography style={{ color: "black" }}>
-					You are Deleting: {watch}, this is not reversible.
+					You are Trading a: {watch}, this is not reversible.
 				</Typography>
 				<Typography style={{ color: "black" }}>
 					You will receive 1 Booster

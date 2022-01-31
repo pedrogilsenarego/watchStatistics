@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { useDispatch } from "react-redux";
@@ -16,7 +16,7 @@ const mapState = (state) => ({
 const MyCollection = (props) => {
 	const { products, currentUser } = useSelector(mapState);
 	const dispatch = useDispatch();
-	const { data } = !products ? [] : products;
+
 	const myCollection = currentUser.collection;
 
 	useEffect(
@@ -26,6 +26,24 @@ const MyCollection = (props) => {
 		// eslint-disable-next-line
 		[]
 	);
+
+	const relativePosFunct = () => {
+		let newArray = [0, 1, 2, 0];
+		let simetricArray = [];
+		/* for (let i = 0; i <= currentUser.collection.length; i++) {
+			for (let j = 0; i <= simetricArray.length; j++) {
+				if (!currentUser.collection[i].includes(simetricArray[j]))
+					newArray.push(i);
+				else newArray.push(j);
+				simetricArray.push(currentUser.collection[i]);
+			}
+		} */
+		console.log(newArray);
+		console.log(simetricArray);
+		return newArray;
+	};
+
+	const relativePos = relativePosFunct();
 
 	return (
 		<div>
@@ -40,12 +58,10 @@ const MyCollection = (props) => {
 						<Button style={{ color: "white" }}>All Watches</Button>
 					</Container>
 				</Grid>
-
-				{data &&
-					data.map((item, pos) => {
-						const configItem = { item, pos };
-						return <Item item={item} key={pos} {...configItem} />;
-					})}
+				{myCollection.map((item, pos) => {
+					const configItem = { item, pos, relativePos };
+					return <Item item={item} key={pos} {...configItem} />;
+				})}
 			</Grid>
 		</div>
 	);
