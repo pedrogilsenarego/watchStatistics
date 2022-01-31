@@ -5,7 +5,6 @@ import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import Popup from "../../../components/controls/Popup";
 import { useSelector } from "react-redux";
-
 import { Typography } from "@material-ui/core";
 import Grid from "@mui/material/Grid";
 import { updateCollectionStatus } from "../../../redux/User/user.actions";
@@ -54,7 +53,7 @@ const Item = ({ item, pos }) => {
 			<Grid
 				container
 				spacing={0}
-				direction="column"
+				direction="row"
 				alignItems="center"
 				justifyContent="center"
 				key={item}
@@ -65,7 +64,7 @@ const Item = ({ item, pos }) => {
 							history.push(`/product/${item}`);
 						}}
 					>
-						{item}
+						{item.productBrand} {item.productName}
 					</Button>
 					<Button
 						onClick={() => {

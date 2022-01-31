@@ -58,13 +58,24 @@ export const updateProductDetailsStart = (productDetails) => ({
 	type: productsTypes.UPDATE_PRODUCT_DETAILS_START,
 	payload: productDetails
 });
-//new implementations
+
 export const fetchRandomProduct = (randomDetails) => ({
 	type: productsTypes.FETCH_RANDOM_PRODUCT,
 	payload: randomDetails
 });
-//retirar
+
 export const setRandomProduct = (product) => ({
 	type: productsTypes.SET_RANDOM_PRODUCT,
 	payload: product
+});
+
+//
+export const fetchMyCollectionStart = (myCollection) => ({
+	type: productsTypes.FETCH_MY_COLLECTION_START,
+	payload: myCollection
+});
+
+export const setMyCollection = (myCollection) => ({
+	type: productsTypes.SET_MY_COLLECTION,
+	payload: myCollection
 });

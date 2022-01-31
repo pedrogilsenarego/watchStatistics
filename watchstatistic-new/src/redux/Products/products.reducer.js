@@ -7,7 +7,8 @@ const INITIAL_STATE = {
 	validationProducts: [],
 	product: {},
 	randomNewProduct: {},
-	sidePanel: "graph"
+	sidePanel: "graph",
+	myCollection: []
 };
 
 const productsReducer = (state = INITIAL_STATE, action) => {
@@ -37,6 +38,11 @@ const productsReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				randomNewProduct: action.payload.data[0]
+			};
+		case productTypes.SET_MY_COLLECTION:
+			return {
+				...state,
+				myCollection: action.payload
 			};
 		default:
 			return state;

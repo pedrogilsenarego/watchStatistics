@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import { useHistory } from "react-router";
 import CardMedia from "@mui/material/CardMedia";
 
-const Item = ({ item, key, currentUser }) => {
+const Item = ({ item }) => {
 	const history = useHistory();
 
 	return (

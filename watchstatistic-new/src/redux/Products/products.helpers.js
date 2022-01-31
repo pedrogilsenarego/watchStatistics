@@ -345,7 +345,6 @@ export const handleUserUpdateDetails = (product) => {
 			});
 	});
 };
-//new implementations
 export const handleFetchRandomProduct = ({
 	fusionPrice,
 	randomValue,
@@ -374,6 +373,44 @@ export const handleFetchRandomProduct = ({
 
 				resolve({
 					data
+				});
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
+//
+export const handleFetchMyCollection = ({
+	myCollection,
+
+	persistProducts = []
+}) => {
+	return new Promise((resolve, reject) => {
+		let ref = firestore
+			.collection("products")
+
+			.where("__name__", "in", myCollection);
+
+		ref
+			.get()
+			.then((snapshot) => {
+				const totalCount = snapshot.size;
+
+				const data = [
+					...persistProducts,
+					...snapshot.docs.map((doc) => {
+						return {
+							...doc.data(),
+							documentID: doc.id
+						};
+					})
+				];
+
+				resolve({
+					data,
+					queryDoc: snapshot.docs[totalCount - 1],
+					isLastPage: totalCount < 1
 				});
 			})
 			.catch((err) => {

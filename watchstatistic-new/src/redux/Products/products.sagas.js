@@ -7,7 +7,8 @@ import {
 	setProduct,
 	setRandomProduct,
 	fetchValidationProductsStart,
-	fetchProductStart
+	fetchProductStart,
+	setMyCollection
 } from "./products.actions";
 import {
 	handleAddProduct,
@@ -20,7 +21,8 @@ import {
 	handleUpdateDetails,
 	handleUserVote,
 	handleUserUpdateDetails,
-	handleFetchRandomProduct
+	handleFetchRandomProduct,
+	handleFetchMyCollection
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
@@ -177,6 +179,20 @@ export function* onFetchRandomProductStart() {
 	yield takeLatest(productsTypes.FETCH_RANDOM_PRODUCT, fetchRandomProduct);
 }
 
+//
+export function* fetchMyCollection({ payload }) {
+	try {
+		const myCollection = yield handleFetchMyCollection(payload);
+		yield put(setMyCollection(myCollection));
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* onFetchMyCollectionStart() {
+	yield takeLatest(productsTypes.FETCH_MY_COLLECTION_START, fetchMyCollection);
+}
+
 export default function* productsSagas() {
 	yield all([
 		call(onAddProductStart),
@@ -187,7 +203,7 @@ export default function* productsSagas() {
 		call(onUpdateProductDetailsStart),
 		call(onFetchLatestProductsStart),
 		call(onFetchValidationProductsStart),
-		//new implementation
-		call(onFetchRandomProductStart)
+		call(onFetchRandomProductStart),
+		call(onFetchMyCollectionStart)
 	]);
 }
