@@ -95,6 +95,7 @@ const Sugested2Vote = () => {
 			</div>
 		);
 	}
+	if (filterData()[0].length === 0) return null;
 
 	return (
 		<div>
