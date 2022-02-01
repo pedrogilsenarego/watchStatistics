@@ -156,10 +156,14 @@ const AddWatchForm = () => {
 	const [productAdditionalDataPreview, setProductAdditionalDataPreview] =
 		useState("");
 	const [helperDescription, setHelperDescription] = useState(false);
+	const [helperDescriptionImages, setHelperDescriptionImages] = useState(false);
 
 	const { currentUser } = useSelector(mapState);
 	const { userRoles, displayName } = currentUser;
 	const admin = userRoles.includes("admin") ? true : false;
+
+	const IMAGE_ADRESS =
+		"https://www.lifewire.com/thmb/O35ttQdgXOmbxzFuiPHwgR0xYg8=/1373x972/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2020-04-20at10.06.28AM-69855f4797cb4be4bbed72f51dff1ab5.jpg";
 
 	const handleFormSubmit = (e) => {
 		const {
@@ -393,11 +397,51 @@ const AddWatchForm = () => {
 										></TextField>
 									</Grid>
 									<Typography
-										variant="h6"
-										style={{ paddingLeft: "8px", paddingTop: "40px" }}
+										variant="subheader1"
+										style={{ paddingLeft: "8px" }}
 									>
-										Images
+										* fields have to be filled
 									</Typography>
+									<Grid
+										item
+										xs={12}
+										style={{
+											display: "flex",
+											paddingLeft: "8px",
+											paddingTop: "60px"
+										}}
+									>
+										<Typography variant="h6">Images</Typography>
+										<Button>
+											<AiOutlineQuestionCircle
+												onClick={() =>
+													setHelperDescriptionImages(!helperDescriptionImages)
+												}
+												fontSize="1.5em"
+											/>
+										</Button>
+									</Grid>
+									{helperDescriptionImages && (
+										<Grid item xs={12}>
+											<img
+												style={{ width: "40vw" }}
+												src={IMAGE_ADRESS}
+												alt=""
+											/>
+											<Typography
+												style={{ fontSize: "12px", marginTop: "5px" }}
+											>
+												1. Select the images you want to insert from the Web and
+												right click on it. <br /> 2. Copy the image
+												adress(Image) <br />
+												3. paste the path of the desired image to the insert
+												field. <br />
+												Dont forget to choose a good quality image, you can
+												preview the final outcome to confirm.
+											</Typography>
+										</Grid>
+									)}
+
 									<Grid item xs={12} style={{ paddingTop: "20px" }}>
 										<TextField
 											className={classes.textField}
@@ -434,6 +478,7 @@ const AddWatchForm = () => {
 										{!additionalProductThumbnail4 && (
 											<Button
 												className={classes.textBtn}
+												style={{ marginTop: "10px" }}
 												onClick={() => {
 													if (!additionalProductThumbnail2)
 														setAdditionalProductThumbnail2(true);
@@ -484,9 +529,7 @@ const AddWatchForm = () => {
 									</Grid>
 									{helperDescription && (
 										<Grid item xs={12}>
-											<Typography
-												style={{ paddingLeft: "15px", fontSize: "12px" }}
-											>
+											<Typography style={{ fontSize: "12px" }}>
 												To set up the description text use the following
 												procedure: <br />
 												1. When using the text from a source put the text
