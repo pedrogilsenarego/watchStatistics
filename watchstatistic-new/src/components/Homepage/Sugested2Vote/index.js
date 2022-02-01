@@ -45,6 +45,7 @@ const Sugested2Vote = () => {
 	useEffect(
 		() => {
 			dispatch(fetchLatestProductsStart({ pageSize }));
+			if (filterData()[1].length === 0) setButtonRight(false);
 		},
 		// eslint-disable-next-line
 		[]
@@ -58,6 +59,7 @@ const Sugested2Vote = () => {
 	};
 
 	const handleGoRight = () => {
+		if (filterData()[1].length === 0) return;
 		if (x !== -197) {
 			if (x === 0) {
 				goRight();

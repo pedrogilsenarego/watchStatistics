@@ -10,12 +10,60 @@ import watchTypes from "./../../assets/data/watchTypes2.json";
 import watchBrands from "./../../assets/data/watchBrands2.json";
 import pricesBracket from "./../../assets/data/pricesBracket2.json";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { makeStyles } from "@material-ui/core/styles";
 
 import TextField from "../forms/InputMUI";
 import ButtonMUI from "../forms/ButtonMUI";
 import Multiline from "../forms/MultiLineMUI";
 import Select from "../forms/SelectMUIFormik";
 import ProductDetailsPreview from "../../pages/ProductDetailsPreview";
+
+const useStyles = makeStyles((theme) => ({
+	textField: {
+		"& .MuiOutlinedInput-input": { color: "white" },
+		"& . MuiInputLabel-root": {
+			color: "#ffffffB3"
+		},
+		"& .MuiInputLabel-root": { color: "grey" },
+		"& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffff",
+			borderWidth: "2px"
+		},
+		"&:hover .MuiOutlinedInput-input": {
+			color: "black"
+		},
+		"&:hover .MuiInputLabel-root": { color: "grey" },
+		"&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffffB3"
+		},
+		"&  .MuiOutlinedInput-input": {
+			color: "black"
+		},
+		"& .MuiOutlinedInput-root.Mui-focused": {
+			color: "#ffffffB3"
+		},
+		"& .MuiInputLabel-root.Mui-focused": { color: "#ffffffB3" },
+		"& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffffB3"
+		}
+	},
+
+	textBtn: {
+		color: "#FFFFFF",
+		fontSize: "13px",
+		backgroundColor: "#00000066",
+		border: "solid 2px",
+		borderColor: "orange",
+		borderRadius: "14px",
+		"&:hover": {
+			color: "#FFA500",
+			backgroundColor: "#ffffff00"
+		},
+		"&:active": {
+			color: "#FFFFFF"
+		}
+	}
+}));
 
 const INITIAL_FORM_STATE = {
 	productCategory: "",
@@ -92,6 +140,8 @@ const mapState = (state) => ({
 const AddWatchForm = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
+	const classes = useStyles();
+
 	const [additionalProductThumbnail2, setAdditionalProductThumbnail2] =
 		useState(false);
 	const [additionalProductThumbnail3, setAdditionalProductThumbnail3] =
@@ -224,7 +274,7 @@ const AddWatchForm = () => {
 	return (
 		<div>
 			<Grid container justify="center">
-				<Paper style={{ width: "90vw", background: "#196B91" }}>
+				<Paper style={{ width: "60vw", background: "black" }}>
 					<Box style={{ margin: "10px" }}>
 						<Formik
 							initialValues={{
@@ -243,6 +293,7 @@ const AddWatchForm = () => {
 								<Grid container spacing={2} style={{ paddingTop: "20px" }}>
 									<Grid item xs={12} md={6}>
 										<Select
+											className={classes.textField}
 											name="productCategory"
 											label="Categories*"
 											options={watchTypes}
@@ -250,6 +301,7 @@ const AddWatchForm = () => {
 									</Grid>
 									<Grid item xs={12} md={6}>
 										<Select
+											className={classes.textField}
 											name="productBrand"
 											label="Brands*"
 											options={watchBrands}
@@ -257,6 +309,7 @@ const AddWatchForm = () => {
 									</Grid>
 									<Grid item xs={12} md={6}>
 										<Select
+											className={classes.textField}
 											name="productPriceBrackets"
 											label="Price Brackets*"
 											options={pricesBracket}
@@ -264,6 +317,7 @@ const AddWatchForm = () => {
 									</Grid>
 									<Grid item xs={12} md={6}>
 										<Select
+											className={classes.textField}
 											name="movement"
 											label="Type of movement"
 											options={{
@@ -276,6 +330,7 @@ const AddWatchForm = () => {
 									</Grid>
 									<Grid item xs={12} md={6}>
 										<Select
+											className={classes.textField}
 											name="caseMaterial"
 											label="Watch material"
 											options={{
@@ -289,6 +344,7 @@ const AddWatchForm = () => {
 									</Grid>
 									<Grid item xs={12} md={6}>
 										<Select
+											className={classes.textField}
 											name="waterResistance"
 											label="Water Resistance"
 											options={{
@@ -302,25 +358,39 @@ const AddWatchForm = () => {
 									</Grid>
 									<Grid item xs={3}>
 										<TextField
+											className={classes.textField}
 											name="yearProductionStart"
 											label="Start year"
 										></TextField>
 									</Grid>
 									<Grid item xs={3}>
 										<TextField
+											className={classes.textField}
 											name="yearProductionEnd"
 											label="Finish year"
 										></TextField>
 									</Grid>
 									<Grid item xs={3}>
-										<TextField name="caseSize" label="Case size"></TextField>
+										<TextField
+											className={classes.textField}
+											name="caseSize"
+											label="Case size"
+										></TextField>
 									</Grid>
 
 									<Grid item xs={6}>
-										<TextField name="productName" label="Model*"></TextField>
+										<TextField
+											className={classes.textField}
+											name="productName"
+											label="Model*"
+										></TextField>
 									</Grid>
 									<Grid item xs={6}>
-										<TextField name="reference" label="Reference*"></TextField>
+										<TextField
+											className={classes.textField}
+											name="reference"
+											label="Reference*"
+										></TextField>
 									</Grid>
 									<Typography
 										variant="h6"
@@ -330,12 +400,14 @@ const AddWatchForm = () => {
 									</Typography>
 									<Grid item xs={12} style={{ paddingTop: "20px" }}>
 										<TextField
+											className={classes.textField}
 											name="productThumbnail"
 											label="Main Image*"
 										></TextField>
 										{additionalProductThumbnail2 && (
 											<Grid item xs={12} style={{ paddingTop: "10px" }}>
 												<TextField
+													className={classes.textField}
 													name="productThumbnail2"
 													label="Additional Image"
 												></TextField>
@@ -344,6 +416,7 @@ const AddWatchForm = () => {
 										{additionalProductThumbnail3 && (
 											<Grid item xs={12} style={{ paddingTop: "10px" }}>
 												<TextField
+													className={classes.textField}
 													name="productThumbnail3"
 													label="Additional Image 2"
 												></TextField>
@@ -352,6 +425,7 @@ const AddWatchForm = () => {
 										{additionalProductThumbnail4 && (
 											<Grid item xs={12} style={{ paddingTop: "10px" }}>
 												<TextField
+													className={classes.textField}
 													name="productThumbnail4"
 													label="Additional Image 3"
 												></TextField>
@@ -359,6 +433,7 @@ const AddWatchForm = () => {
 										)}
 										{!additionalProductThumbnail4 && (
 											<Button
+												className={classes.textBtn}
 												onClick={() => {
 													if (!additionalProductThumbnail2)
 														setAdditionalProductThumbnail2(true);
@@ -375,6 +450,7 @@ const AddWatchForm = () => {
 
 									<Grid item xs={12}>
 										<TextField
+											className={classes.textField}
 											name="productBackground"
 											label="Background Image*"
 										></TextField>
@@ -394,6 +470,7 @@ const AddWatchForm = () => {
 										}}
 									>
 										<Multiline
+											className={classes.textField}
 											style={{ width: "80%" }}
 											name="productDesc"
 											label="Description from Watch*"
@@ -426,12 +503,14 @@ const AddWatchForm = () => {
 									</Grid>
 									<Grid item xs={12}>
 										<TextField
+											className={classes.textField}
 											name="additionalDataTitle"
 											label="Title*"
 										></TextField>
 									</Grid>
 									<Grid item xs={12}>
 										<TextField
+											className={classes.textField}
 											name="additionalDataLink"
 											label="Link*"
 										></TextField>
@@ -442,12 +521,18 @@ const AddWatchForm = () => {
 									</Grid>
 									<Grid item xs={12} style={{ paddingTop: "20px" }}>
 										{preview && (
-											<Button onClick={() => setPreview(!preview)}>
+											<Button
+												className={classes.textBtn}
+												onClick={() => setPreview(!preview)}
+											>
 												I am ready to Submit
 											</Button>
 										)}
 										{!preview && (
-											<Button onClick={() => setPreview(!preview)}>
+											<Button
+												className={classes.textBtn}
+												onClick={() => setPreview(!preview)}
+											>
 												Take me back
 											</Button>
 										)}
