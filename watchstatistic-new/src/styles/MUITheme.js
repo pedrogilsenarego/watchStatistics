@@ -27,7 +27,7 @@ const darkTheme = createTheme({
 			primary: "#154A6799"
 		},
 		home: {
-			primary: "#196B91"
+			primary: "#154A6799"
 		},
 		type: "dark"
 	}

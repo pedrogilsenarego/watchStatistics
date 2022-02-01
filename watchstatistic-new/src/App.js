@@ -24,7 +24,6 @@ import CompareWatches from "./pages/CompareWatches";
 import WatchLaboratory from "./pages/WatchLaboratory";
 import WatchLaboratory2 from "./components/WatchLab2";
 import Market from "./pages/Market";
-import Auction from "./pages/Auction";
 
 import Order from "./pages/Order";
 
@@ -80,15 +79,7 @@ const App = (props) => {
 							)
 						}
 					/>
-					<Route
-						exact
-						path="/auction"
-						render={() => (
-							<MainLayout>
-								<Auction />
-							</MainLayout>
-						)}
-					/>
+
 					<Route
 						exact
 						path="/watchstatistics/comparewatches"

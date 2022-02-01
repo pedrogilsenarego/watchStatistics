@@ -14,6 +14,7 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
 import { GiTrophyCup } from "react-icons/gi";
+import Container from "@mui/material/Container";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
@@ -103,13 +104,13 @@ const WatchstatisticsSubHeader = ({}) => {
 
 	return (
 		<div>
-			<Box className={classes.root}>
+			<Container className={classes.root}>
 				<Grid
 					container
 					className={classes.container}
 					style={{ marginTop: isMatch ? "15px" : "0px" }}
 				>
-					<Grid item xs={12} md={6} className={classes.item}>
+					<Grid item xs={12} sm={6} className={classes.item}>
 						<Typography className={classes.text} variant="h5">
 							Welcome, {displayName}
 						</Typography>
@@ -124,7 +125,7 @@ const WatchstatisticsSubHeader = ({}) => {
 					<Grid
 						item
 						xs={12}
-						md={6}
+						sm={6}
 						className={classes.item}
 						style={{ marginTop: isMatch ? "20px" : "0px" }}
 					>
@@ -192,7 +193,7 @@ const WatchstatisticsSubHeader = ({}) => {
 						</Grid>
 					</Grid>
 				</Grid>
-			</Box>
+			</Container>
 		</div>
 	);
 };
