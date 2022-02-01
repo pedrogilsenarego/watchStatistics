@@ -284,6 +284,14 @@ const Header = (props) => {
 				>
 					Compare Watches
 				</MenuItem>
+				<MenuItem
+					onClick={() => {
+						handleCloseWatchstatisticsMenu();
+						history.push("/watchstatistics/market");
+					}}
+				>
+					Market
+				</MenuItem>
 			</Menu>
 			<Menu
 				disableScrollLock
@@ -409,6 +417,14 @@ const Header = (props) => {
 						}}
 					>
 						Compare Watches
+					</MenuItem>,
+					<MenuItem
+						onClick={() => {
+							handleCloseWatchstatisticsMenu();
+							history.push("/watchstatistics/market");
+						}}
+					>
+						Market
 					</MenuItem>
 				]}
 

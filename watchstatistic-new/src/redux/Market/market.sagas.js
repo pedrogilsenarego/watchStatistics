@@ -1,11 +1,20 @@
-import { takeLatest, put, all, call } from "redux-saga/effects";
-import { setToAuction } from "./market.actions";
+import { takeLatest, all, put, call } from "redux-saga/effects";
+import { auth } from "./../../firebase/utils";
 import marketTypes from "./market.types";
-import { handleAddToAuction } from "./market.helpers.js";
+import {
+	handleAddToAuction,
+	handleFetchMarketProducts
+} from "./market.helpers.js";
+import { setMarketProducts } from "./market.actions";
 
 export function* addToAuction({ payload }) {
 	try {
-		yield handleAddToAuction({});
+		const timestamps = new Date();
+		yield handleAddToAuction({
+			...payload,
+			UserUID: auth.currentUser.uid,
+			orderCreatedDate: timestamps
+		});
 	} catch (err) {}
 }
 
@@ -13,6 +22,22 @@ export function* onAddToAuctionStart() {
 	yield takeLatest(marketTypes.ADD_TO_AUCTION, addToAuction);
 }
 
+export function* fetchMarketProducts({ payload }) {
+	try {
+		const products = yield handleFetchMarketProducts(payload);
+		yield put(setMarketProducts(products));
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* onFetchMarketProductsStart() {
+	yield takeLatest(
+		marketTypes.FETCH_MARKET_PRODUCTS_START,
+		fetchMarketProducts
+	);
+}
+
 export default function* marketSagas() {
-	yield all([call(onAddToAuctionStart)]);
+	yield all([call(onAddToAuctionStart), call(onFetchMarketProductsStart)]);
 }

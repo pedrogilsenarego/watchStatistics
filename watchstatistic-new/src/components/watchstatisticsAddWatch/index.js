@@ -538,6 +538,16 @@ const AddWatchForm = () => {
 												2. To make any part of text bold wrap in the tag
 												&lt;b&gt;&lt;/b&gt;, to use a line break use the tag
 												&lt;br&gt;
+												<br />
+												<br />
+												Ex: "In attempting something of a predictive AMA, here
+												is a synthesis of the many curious DMs, emails, and
+												voicemail questions I’ve received over the past year.
+												But, as I’m sure to miss a query or two, please check
+												out my original A Week On The Wrist with the SPB143, and
+												drop any remaining questions into the comments. I will
+												endeavor to fill in as many blanks as possible …"
+												Hodinkee
 											</Typography>
 										</Grid>
 									)}
@@ -548,14 +558,14 @@ const AddWatchForm = () => {
 										<TextField
 											className={classes.textField}
 											name="additionalDataTitle"
-											label="Title*"
+											label="Title*  ex:Hodinkee"
 										></TextField>
 									</Grid>
 									<Grid item xs={12}>
 										<TextField
 											className={classes.textField}
 											name="additionalDataLink"
-											label="Link*"
+											label="Link*  ex:https://www.hodinkee.com/articles/..."
 										></TextField>
 									</Grid>
 									<Grid item xs={12} style={{ paddingTop: "60px" }}>
