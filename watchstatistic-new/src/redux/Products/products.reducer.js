@@ -42,7 +42,7 @@ const productsReducer = (state = INITIAL_STATE, action) => {
 		case productTypes.SET_MY_COLLECTION:
 			return {
 				...state,
-				myCollection: action.payload
+				myCollection: action.payload.data
 			};
 		default:
 			return state;

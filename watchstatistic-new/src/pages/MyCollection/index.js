@@ -27,11 +27,21 @@ const MyCollection = () => {
 		[]
 	);
 
+	if (!Array.isArray(products)) return null;
+
+	if (products.length < 1) {
+		return (
+			<div>
+				<p>No search Results</p>
+			</div>
+		);
+	}
+
 	const relativePosFunct2 = () => {
 		let newArray = [];
 		for (let i = 0; i < currentUser.collection.length; i++) {
-			for (let j = 0; j < products.data.length; j++) {
-				if (products.data[j].documentID === currentUser.collection[i]) {
+			for (let j = 0; j < products.length; j++) {
+				if (products[j].documentID === currentUser.collection[i]) {
 					newArray.push(j);
 					break;
 				}
@@ -58,7 +68,7 @@ const MyCollection = () => {
 				<Grid item xs={12}>
 					{currentUser.collection &&
 						myCollection.map((item, pos) => {
-							const configItem = { item, pos, relativePos };
+							const configItem = { item, pos, relativePos, products };
 							return <Item item={item} key={pos} {...configItem} />;
 						})}
 				</Grid>

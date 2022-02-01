@@ -9,13 +9,12 @@ import { Typography } from "@material-ui/core";
 import { updateCollectionStatus } from "../../../redux/User/user.actions";
 
 const mapState = (state) => ({
-	currentUser: state.user.currentUser,
-	products: state.productsData.myCollection
+	currentUser: state.user.currentUser
 });
 
-const Item = ({ item, pos, relativePos }) => {
+const Item = ({ item, pos, relativePos, products }) => {
 	const history = useHistory();
-	const { currentUser, products } = useSelector(mapState);
+	const { currentUser } = useSelector(mapState);
 	const dispatch = useDispatch();
 	const [watch, setWatch] = useState();
 	const [posWatch, setPosWatch] = useState();
@@ -25,9 +24,9 @@ const Item = ({ item, pos, relativePos }) => {
 
 	const handleWatch4BoosterPopup = (pos, item) => {
 		setWatch(
-			products.data[relativePos[pos]].productBrand +
+			products[relativePos[pos]].productBrand +
 				" " +
-				products.data[relativePos[pos]].productName
+				products[relativePos[pos]].productName
 		);
 		setPosWatch(pos);
 		setOpenDeleteWatchPopup(true);
@@ -57,17 +56,17 @@ const Item = ({ item, pos, relativePos }) => {
 	return (
 		<div>
 			<ButtonGroup>
-				{products.data[relativePos[pos]] && (
+				{products[relativePos[pos]] && (
 					<Button
 						onClick={() => {
 							history.push(`/product/${item}`);
 						}}
 					>
-						{products.data[relativePos[pos]].productBrand}{" "}
-						{products.data[relativePos[pos]].productName}
+						{products[relativePos[pos]].productBrand}{" "}
+						{products[relativePos[pos]].productName}
 					</Button>
 				)}
-				{!products.data[relativePos[pos]] && (
+				{!products[relativePos[pos]] && (
 					<Button
 						onClick={() => {
 							history.push(`/product/${item}`);
