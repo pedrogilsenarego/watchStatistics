@@ -45,7 +45,6 @@ const Sugested2Vote = () => {
 	useEffect(
 		() => {
 			dispatch(fetchLatestProductsStart({ pageSize }));
-			if (filterData()[1].length === 0) setButtonRight(false);
 		},
 		// eslint-disable-next-line
 		[]
@@ -107,15 +106,15 @@ const Sugested2Vote = () => {
 					minWidth: "100%",
 					marginTop: isMatch ? "-1.7vh" : "72px",
 					position: "absolute",
-					paddingLeft: isMatch ? "70vw" : "0vw",
-					zIndex: "2"
+					paddingLeft: isMatch ? "70vw" : "0vw"
 				}}
 			>
 				<Avatar
 					style={{
 						backgroundColor: "#ffffff00",
 						marginRight: isMatch ? "2vw" : "90vw",
-						cursor: buttonLeft ? "pointer" : "default"
+						cursor: buttonLeft ? "pointer" : "default",
+						zIndex: "2"
 					}}
 					onClick={() => {
 						handleGoLeft();
@@ -130,7 +129,7 @@ const Sugested2Vote = () => {
 				<Avatar
 					style={{
 						backgroundColor: "#ffffff00",
-
+						zIndex: "2",
 						cursor: buttonRight ? "pointer" : "default"
 					}}
 					onClick={() => {

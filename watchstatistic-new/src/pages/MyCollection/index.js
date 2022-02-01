@@ -10,7 +10,7 @@ import Item from "./Item";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
-	products: state.productsData.myCollection.data
+	products: state.productsData.myCollection
 });
 
 const MyCollection = () => {
@@ -30,8 +30,8 @@ const MyCollection = () => {
 	const relativePosFunct2 = () => {
 		let newArray = [];
 		for (let i = 0; i < currentUser.collection.length; i++) {
-			for (let j = 0; j < products.length; j++) {
-				if (products[j].documentID === currentUser.collection[i]) {
+			for (let j = 0; j < products.data.length; j++) {
+				if (products.data[j].documentID === currentUser.collection[i]) {
 					newArray.push(j);
 					break;
 				}
@@ -40,7 +40,7 @@ const MyCollection = () => {
 		return newArray;
 	};
 
-	const relativePos = currentUser.collection ? relativePosFunct2() : [];
+	const relativePos = products ? relativePosFunct2() : [];
 
 	return (
 		<div>
