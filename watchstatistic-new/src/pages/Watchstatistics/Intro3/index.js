@@ -20,6 +20,7 @@ const Intro3 = () => {
 			maxWidth={isMatch ? "xs" : "sm"}
 			style={{
 				marginBottom: "200px",
+				marginTop: isMatch ? "10vh" : "20vh",
 				border: "solid 1.5px",
 				borderColor: isMatch ? "black" : "hotPink",
 				borderRadius: "10px",

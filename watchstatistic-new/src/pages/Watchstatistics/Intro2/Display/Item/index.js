@@ -4,10 +4,13 @@ import Grid from "@mui/material/Grid";
 import { useHistory } from "react-router-dom";
 import CardMedia from "@mui/material/CardMedia";
 import { Typography } from "@material-ui/core";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@material-ui/core";
 
 const Item = ({ item, pos, filterType }) => {
 	const history = useHistory();
-
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
 		<Grid item xs={6}>
 			<Paper
@@ -21,7 +24,7 @@ const Item = ({ item, pos, filterType }) => {
 					cursor: "pointer"
 				}}
 			>
-				<Grid item container>
+				<Grid item container spacing={0.5}>
 					<Grid item xs={8}>
 						<Typography style={{ color: "hotPink" }}>
 							{filterType} #{pos + 1}
@@ -36,7 +39,7 @@ const Item = ({ item, pos, filterType }) => {
 					<Grid item xs={4}>
 						<CardMedia
 							component="img"
-							height="80"
+							height={isMatch ? "50" : "80"}
 							image={item.productThumbnail[0]}
 							alt={item.productName}
 							style={{ borderRadius: "8px" }}
