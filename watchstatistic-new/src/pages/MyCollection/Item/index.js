@@ -8,8 +8,7 @@ import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
 import { updateCollectionStatus } from "../../../redux/User/user.actions";
 import { setToAuction } from "../../../redux/Market/market.actions";
-import { TextField } from "@mui/material";
-import { Dialog, DialogContent, DialogTitle } from "@material-ui/core";
+import SellPopup from "./SellPopup";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
@@ -23,7 +22,7 @@ const Item = ({ item, pos, relativePos, products }) => {
 	const [posWatch, setPosWatch] = useState();
 	const [openDeleteWatchPopup, setOpenDeleteWatchPopup] = useState();
 	const [openSellWatchPopup, setOpenSellWatchPopup] = useState();
-	const [price, setPrice] = useState(0);
+
 	const { collection, boosters } = currentUser;
 
 	const handleWatch4BoosterPopup = (pos, item) => {
@@ -35,9 +34,10 @@ const Item = ({ item, pos, relativePos, products }) => {
 		setPosWatch(pos);
 		setOpenDeleteWatchPopup(true);
 	};
-	const handleWatch4SellConfirm = (watchPos) => {
+	const handleWatch4SellConfirm = (values) => {
+		const { price } = values;
 		const oldArray = collection;
-		oldArray.splice(watchPos, 1);
+		oldArray.splice(posWatch, 1);
 		const configData = {
 			...currentUser,
 			flag: "sell",
@@ -49,11 +49,10 @@ const Item = ({ item, pos, relativePos, products }) => {
 			productBrand: products[relativePos[pos]].productBrand,
 			productName: products[relativePos[pos]].productName,
 			reference: products[relativePos[pos]].reference,
-			price: parseInt(price)
+			price: price
 		};
 		dispatch(setToAuction(configOrder));
-
-		setOpenDeleteWatchPopup(false);
+		setOpenSellWatchPopup(false);
 	};
 
 	const handleWatch4BoosterConfirm = (watchPos) => {
@@ -80,6 +79,13 @@ const Item = ({ item, pos, relativePos, products }) => {
 		);
 		setPosWatch(pos);
 		setOpenSellWatchPopup(true);
+	};
+
+	const configSellPopup = {
+		openSellWatchPopup,
+		watch,
+		handleWatch4SellConfirm,
+		setOpenSellWatchPopup
 	};
 
 	return (
@@ -120,43 +126,7 @@ const Item = ({ item, pos, relativePos, products }) => {
 					Sell this item
 				</Button>
 			</ButtonGroup>
-			<Dialog open={openSellWatchPopup} style={{ color: "black" }}>
-				<DialogTitle>
-					<div style={{ textAlign: "center" }}>
-						<Typography variant="h6" component="div" style={{ color: "black" }}>
-							"Sell this watch"
-						</Typography>
-					</div>
-				</DialogTitle>
-				<DialogContent dividers>
-					<Typography style={{ color: "black" }}>
-						You are puting: {watch} to market, this is not reversible.
-					</Typography>
-					<TextField
-						value={price}
-						label={price}
-						onChange={(e) => {
-							setPrice(e.target.value);
-						}}
-					></TextField>
-					<ButtonGroup>
-						<Button
-							onClick={() => {
-								handleWatch4SellConfirm(posWatch);
-							}}
-						>
-							Accept
-						</Button>
-						<Button
-							onClick={() => {
-								setOpenSellWatchPopup(false);
-							}}
-						>
-							Cancel
-						</Button>
-					</ButtonGroup>
-				</DialogContent>
-			</Dialog>
+			<SellPopup {...configSellPopup} />
 
 			<Popup
 				title={"Danger!!"}
