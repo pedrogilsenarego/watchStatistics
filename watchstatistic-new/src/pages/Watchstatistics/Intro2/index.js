@@ -16,46 +16,73 @@ const Intro2 = () => {
 	return (
 		<Container maxWidth={"md"}>
 			<Grid container spacing={isMatch ? 0 : 5}>
-				<Grid item xs={12} md={8} style={{ paddingTop: "15vh" }}>
-					<Display />
-				</Grid>
+				{isMatch && (
+					<Grid
+						item
+						xs={12}
+						style={{ paddingTop: "8vh", marginBottom: "10px" }}
+					>
+						<Typography
+							variant={"h5"}
+							color={"hotPink"}
+							style={{ fontWeight: "600" }}
+						>
+							The hottest watches
+						</Typography>
+						<Typography
+							variant={"h3"}
+							style={{ fontWeight: "600", marginTop: "4px" }}
+						>
+							Top most voted
+						</Typography>
+						<Typography variant={"h6"} style={{ marginTop: "8px" }}>
+							What are the top watches for different categories, price brackets,
+							brands and so much more
+						</Typography>
+					</Grid>
+				)}
 				<Grid
 					item
 					xs={12}
-					md={4}
-					style={{ paddingTop: isMatch ? "0vh" : "12vh" }}
+					md={8}
+					style={{ paddingTop: isMatch ? "2vh" : "20vh" }}
 				>
-					<Typography
-						variant={"h5"}
-						color={"hotPink"}
-						style={{ fontWeight: "600" }}
-					>
-						Find the hottest watches
-					</Typography>
-					<Typography variant={"h3"} style={{ fontWeight: "600" }}>
-						Top most voted
-					</Typography>
-					<Typography variant={"subheader1"} style={{}}>
-						What are the top watches for different categories, price brackets,
-						brands and so much more
-					</Typography>
-					<Box
-						style={{ display: "flex", marginTop: "20px", cursor: "pointer" }}
-					>
-						<Typography
-							onClick={() => history.push(`/search/`)}
-							variant={"h6"}
-							style={{}}
-						>
-							Check here{" "}
-						</Typography>
-						<AiOutlineDoubleRight
-							color={"hotPink"}
-							fontSize={"2em"}
-							style={{ marginLeft: "10px" }}
-						/>
-					</Box>
+					<Display />
 				</Grid>
+				{!isMatch && (
+					<Grid item xs={12} md={4} style={{ paddingTop: "17vh" }}>
+						<Typography
+							variant={"h5"}
+							color={"hotPink"}
+							style={{ fontWeight: "600" }}
+						>
+							The hottest watches
+						</Typography>
+						<Typography variant={"h3"} style={{ fontWeight: "600" }}>
+							Top most voted
+						</Typography>
+						<Typography variant={"subheader1"} style={{}}>
+							What are the top watches for different categories, price brackets,
+							brands and so much more
+						</Typography>
+						<Box
+							style={{ display: "flex", marginTop: "20px", cursor: "pointer" }}
+						>
+							<Typography
+								onClick={() => history.push(`/search/`)}
+								variant={"h6"}
+								style={{}}
+							>
+								Check here{" "}
+							</Typography>
+							<AiOutlineDoubleRight
+								color={"hotPink"}
+								fontSize={"2em"}
+								style={{ marginLeft: "10px" }}
+							/>
+						</Box>
+					</Grid>
+				)}
 			</Grid>
 		</Container>
 	);

@@ -49,8 +49,7 @@ const Intro = () => {
 						position: "absolute",
 						zIndex: "2",
 						marginTop: "20vh",
-						marginLeft: "4vw",
-						marginRight: "4vw"
+						paddingLeft: "4vw"
 					}}
 				>
 					<Grid item xs={10} sm={8} md={6} lg={5} xl={3.3}>

@@ -21,10 +21,9 @@ const Intro3 = () => {
 			style={{
 				marginBottom: "200px",
 				border: "solid 1.5px",
-				borderColor: "hotPink",
+				borderColor: isMatch ? "black" : "hotPink",
 				borderRadius: "10px",
-				padding: "20px",
-				marginTop: isMatch ? "20vh" : "0vh"
+				padding: "20px"
 			}}
 		>
 			<Grid container spacing={4} style={{ padding: "20px" }}>
