@@ -6,16 +6,25 @@ import Box from "@mui/material/Box";
 import Display from "./Display";
 import { useHistory } from "react-router-dom";
 import { AiOutlineDoubleRight } from "react-icons/ai";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@material-ui/core";
 
 const Intro2 = () => {
 	const history = useHistory();
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
-		<Container maxWidth={"md"} style={{ paddingTop: "15vh" }}>
-			<Grid container spacing={5}>
-				<Grid item xs={12} md={8}>
+		<Container maxWidth={"md"}>
+			<Grid container spacing={isMatch ? 0 : 5}>
+				<Grid item xs={12} md={8} style={{ paddingTop: "15vh" }}>
 					<Display />
 				</Grid>
-				<Grid item xs={12} md={4}>
+				<Grid
+					item
+					xs={12}
+					md={4}
+					style={{ paddingTop: isMatch ? "0vh" : "12vh" }}
+				>
 					<Typography
 						variant={"h5"}
 						color={"hotPink"}

@@ -48,13 +48,7 @@ const SellPopup = ({
 							</Typography>
 							<TextField type="number" name="price" placeholder="0"></TextField>
 							<ButtonGroup>
-								<ButtonMUI
-									onClick={() => {
-										setOpenSellWatchPopup(false);
-									}}
-								>
-									Accept
-								</ButtonMUI>
+								<ButtonMUI>Accept</ButtonMUI>
 								<Button
 									onClick={() => {
 										setOpenSellWatchPopup(false);
