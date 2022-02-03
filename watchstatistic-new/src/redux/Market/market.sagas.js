@@ -6,7 +6,7 @@ import {
 	handleFetchMarketProducts,
 	handleDeleteProduct
 } from "./market.helpers.js";
-import { setMarketProducts } from "./market.actions";
+import { setMarketProducts, removeMarketItem } from "./market.actions";
 
 export function* addToAuction({ payload }) {
 	try {
@@ -41,8 +41,10 @@ export function* onFetchMarketProductsStart() {
 
 export function* buyProduct({ payload }) {
 	const { documentID } = payload;
+
 	try {
 		yield handleDeleteProduct(documentID);
+		yield put(removeMarketItem(documentID));
 	} catch (err) {
 		// console.log(err);
 	}

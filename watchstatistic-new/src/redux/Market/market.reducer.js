@@ -21,7 +21,7 @@ const marketReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				marketProducts: handleRemoveMarketItem({
-					prevMarketItems: state.marketItems,
+					prevMarketProducts: state.marketProducts,
 					marketItemToRemove: action.payload
 				})
 			};

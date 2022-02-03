@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import {
-	buyMarketProduct,
-	removeMarketItem
-} from "../../../redux/Market/market.actions";
+import { buyMarketProduct } from "../../../redux/Market/market.actions";
 import { updateCollectionStatus } from "../../../redux/User/user.actions";
 
 const Item = ({ item, pos, marketData, currentUser }) => {
@@ -33,9 +30,6 @@ const Item = ({ item, pos, marketData, currentUser }) => {
 				documentID: item.documentID
 			};
 			dispatch(buyMarketProduct(configBuyItem));
-			const configRemoveMarketItem = {
-				reference: item.reference
-			};
 		}
 	};
 

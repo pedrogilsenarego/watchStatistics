@@ -1,8 +1,8 @@
 export const handleRemoveMarketItem = ({
-	prevMarketItems,
+	prevMarketProducts,
 	marketItemToRemove
 }) => {
-	return prevMarketItems.filter(
-		(item) => item.reference !== marketItemToRemove.reference
+	return prevMarketProducts.filter(
+		(item) => item.documentID !== marketItemToRemove
 	);
 };
