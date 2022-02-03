@@ -1,4 +1,5 @@
 import marketTypes from "./market.types";
+import { handleRemoveMarketItem } from "./market.utils";
 
 const INITIAL_STATE = {
 	marketProducts: []
@@ -16,7 +17,14 @@ const marketReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				marketProducts: action.payload.data
 			};
-
+		case marketTypes.REMOVE_MARKET_ITEM:
+			return {
+				...state,
+				marketProducts: handleRemoveMarketItem({
+					prevMarketItems: state.marketItems,
+					marketItemToRemove: action.payload
+				})
+			};
 		default:
 			return state;
 	}

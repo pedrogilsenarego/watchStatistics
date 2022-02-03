@@ -1,18 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { buyMarketProduct } from "../../../redux/Market/market.actions";
+import {
+	buyMarketProduct,
+	removeMarketItem
+} from "../../../redux/Market/market.actions";
+import { updateCollectionStatus } from "../../../redux/User/user.actions";
 
 const Item = ({ item, pos, marketData, currentUser }) => {
 	const dispatch = useDispatch();
+	const [funds, setFunds] = useState(false);
+
+	useEffect(() => {
+		if (currentUser.points >= item.price) setFunds(true);
+	}, [currentUser.points, item.price]);
 
 	const handleBuyItem = () => {
-		const newCollection = currentUser.collection;
-		newCollection.push();
+		if (currentUser.points >= item.price) {
+			const newCollection = currentUser.collection;
+			newCollection.push(item.productID);
+			const configUpdateCollection = {
+				...currentUser,
+				flag: "buy",
+				userID: currentUser.id,
+				collection: newCollection,
+				points: currentUser.points - item.price
+			};
 
-		const configBuyItem = { ...marketData, documentID: item.documentID };
-		dispatch(buyMarketProduct(configBuyItem));
+			dispatch(updateCollectionStatus(configUpdateCollection));
+			const configBuyItem = {
+				documentID: item.documentID
+			};
+			dispatch(buyMarketProduct(configBuyItem));
+			const configRemoveMarketItem = {
+				reference: item.reference
+			};
+		}
 	};
 
 	return (
@@ -20,7 +44,9 @@ const Item = ({ item, pos, marketData, currentUser }) => {
 			<Typography>
 				{item.productBrand} {item.productName} {item.reference} {item.price}
 			</Typography>
-			<Button onClick={() => handleBuyItem()}>Buy</Button>
+			<Button disabled={!funds} onClick={() => handleBuyItem()}>
+				Buy
+			</Button>
 		</div>
 	);
 };

@@ -19,3 +19,8 @@ export const buyMarketProduct = (productID) => ({
 	type: marketTypes.BUY_MARKET_PRODUCT_START,
 	payload: productID
 });
+
+export const removeMarketItem = (marketItem) => ({
+	type: marketTypes.REMOVE_Market_ITEM,
+	payload: marketItem
+});

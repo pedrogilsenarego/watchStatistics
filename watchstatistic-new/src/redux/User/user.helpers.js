@@ -142,7 +142,7 @@ export const handleUpdateBoxStatus = (product) => {
 };
 //new implementations
 export const handleUpdateCollectionStatus = (product) => {
-	const { collection, userID, boosters, flag } = product;
+	const { collection, userID, boosters, points, flag } = product;
 	return new Promise((resolve, reject) => {
 		let ref = firestore.collection("users").doc(userID);
 		ref.update({
@@ -150,6 +150,10 @@ export const handleUpdateCollectionStatus = (product) => {
 		});
 		if (flag === "boosters") {
 			ref.update({ boosters: boosters });
+		}
+
+		if (flag === "buy") {
+			ref.update({ points: points });
 		}
 
 		ref

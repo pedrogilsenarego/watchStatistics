@@ -40,10 +40,9 @@ export function* onFetchMarketProductsStart() {
 }
 
 export function* buyProduct({ payload }) {
-	const { marketData, documentID } = payload;
+	const { documentID } = payload;
 	try {
 		yield handleDeleteProduct(documentID);
-		yield put(setMarketProducts(marketData));
 	} catch (err) {
 		// console.log(err);
 	}
