@@ -5,13 +5,15 @@ import { useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
 import { fetchMarketProductsStart } from "../../redux/Market/market.actions";
+import Item from "./Item";
 
 const mapState = (state) => ({
-	marketData: state.marketData.marketProducts
+	marketData: state.marketData.marketProducts,
+	currentUser: state.user.currentUser
 });
 
 const Market = () => {
-	const { marketData } = useSelector(mapState);
+	const { marketData, currentUser } = useSelector(mapState);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -35,12 +37,8 @@ const Market = () => {
 				<Grid item xs={12}>
 					<Container style={{}}>
 						{marketData.map((item, pos) => {
-							return (
-								<p>
-									{item.productBrand} {item.productName} {item.reference}{" "}
-									{item.price}
-								</p>
-							);
+							const configItem = { item, pos, marketData, currentUser };
+							return <Item key={pos} {...configItem} />;
 						})}
 					</Container>
 				</Grid>

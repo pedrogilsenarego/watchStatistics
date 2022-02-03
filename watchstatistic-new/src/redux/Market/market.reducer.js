@@ -16,6 +16,7 @@ const marketReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				marketProducts: action.payload.data
 			};
+
 		default:
 			return state;
 	}

@@ -3,7 +3,8 @@ import { auth } from "./../../firebase/utils";
 import marketTypes from "./market.types";
 import {
 	handleAddToAuction,
-	handleFetchMarketProducts
+	handleFetchMarketProducts,
+	handleDeleteProduct
 } from "./market.helpers.js";
 import { setMarketProducts } from "./market.actions";
 
@@ -38,6 +39,24 @@ export function* onFetchMarketProductsStart() {
 	);
 }
 
+export function* buyProduct({ payload }) {
+	const { marketData, documentID } = payload;
+	try {
+		yield handleDeleteProduct(documentID);
+		yield put(setMarketProducts(marketData));
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* onBuyProductStart() {
+	yield takeLatest(marketTypes.BUY_MARKET_PRODUCT_START, buyProduct);
+}
+
 export default function* marketSagas() {
-	yield all([call(onAddToAuctionStart), call(onFetchMarketProductsStart)]);
+	yield all([
+		call(onAddToAuctionStart),
+		call(onFetchMarketProductsStart),
+		call(onBuyProductStart)
+	]);
 }

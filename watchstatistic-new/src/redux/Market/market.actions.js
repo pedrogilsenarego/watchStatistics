@@ -14,3 +14,8 @@ export const setMarketProducts = (products) => ({
 	type: marketTypes.SET_MARKET_PRODUCTS,
 	payload: products
 });
+
+export const buyMarketProduct = (productID) => ({
+	type: marketTypes.BUY_MARKET_PRODUCT_START,
+	payload: productID
+});

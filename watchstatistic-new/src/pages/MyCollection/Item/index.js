@@ -48,6 +48,7 @@ const Item = ({ item, pos, relativePos, products }) => {
 		const configOrder = {
 			productBrand: products[relativePos[pos]].productBrand,
 			productName: products[relativePos[pos]].productName,
+			productID: item,
 			reference: products[relativePos[pos]].reference,
 			price: price
 		};

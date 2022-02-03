@@ -54,3 +54,19 @@ export const handleFetchMarketProducts = ({
 			});
 	});
 };
+
+export const handleDeleteProduct = (documentID) => {
+	return new Promise((resolve, reject) => {
+		firestore
+			.collection("market")
+			.doc(documentID)
+			.delete()
+			.then(() => {
+				//console.log(documentID, 2);
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};

@@ -18,7 +18,7 @@ const Item = ({ item, pos, filterType }) => {
 					history.push(`/product/${item.documentID}`);
 				}}
 				style={{
-					height: "120px",
+					height: "110px",
 					backgroundColor: "#18161E",
 					padding: "10px",
 					cursor: "pointer"
