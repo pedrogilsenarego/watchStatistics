@@ -37,18 +37,16 @@ const Item = ({ item, pos, marketData, currentUser }) => {
 			};
 			dispatch(buyMarketProduct(configBuyItem));
 
-			const messages = currentUser.messages ? currentUser.messages : [];
 			const newMessage = {
 				from: "watchstatistics",
 				message: `Congratulation you sold your ${item.productBrand} ${item.productName} ${item.reference}, you added ${item.price} points to your currency`,
 				date: new Date()
 			};
-			messages.push(newMessage);
 
 			const configSellerUpdate = {
 				userID: item.UserUID,
 				points: item.price,
-				messages: messages
+				messages: newMessage
 			};
 			dispatch(updateSellerStatus(configSellerUpdate));
 		}

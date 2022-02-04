@@ -28,10 +28,11 @@ const Messages = () => {
 				</Grid>
 				<Grid item xs={12}>
 					<Container style={{}}>
-						{messages.map((item, pos) => {
-							const configItem = { item, pos };
-							return <Item {...configItem} />;
-						})}
+						{currentUser.messages &&
+							messages.map((item, pos) => {
+								const configItem = { item, pos };
+								return <Item {...configItem} />;
+							})}
 					</Container>
 				</Grid>
 			</Grid>

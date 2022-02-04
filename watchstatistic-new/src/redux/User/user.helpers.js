@@ -175,7 +175,7 @@ export const handleUpdateSellerStatus = (product) => {
 
 		ref.update({
 			points: firebase.firestore.FieldValue.increment(points),
-			messages: messages
+			messages: firebase.firestore.FieldValue.arrayUnion(messages)
 		});
 
 		ref
