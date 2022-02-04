@@ -54,7 +54,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
 		case userTypes.CLEAR_MESSAGES:
 			return {
 				...state,
-				currentUser: { messages: [] }
+				currentUser: action.payload
 			};
 		default:
 			return state;

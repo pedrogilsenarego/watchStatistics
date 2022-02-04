@@ -189,12 +189,12 @@ export const handleUpdateSellerStatus = (product) => {
 };
 
 export const handleClearMessages = (payload) => {
-	const { userID } = payload;
+	const { userID, messages } = payload;
 	return new Promise((resolve, reject) => {
 		let ref = firestore.collection("users").doc(userID);
 
 		ref.update({
-			messages: firebase.firestore.FieldValue.delete()
+			messages: messages
 		});
 
 		ref

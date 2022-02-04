@@ -16,7 +16,11 @@ const Messages = () => {
 	const { messages } = currentUser;
 
 	const handleClearMessages = () => {
-		const configClearMessages = { ...currentUser, userID: currentUser.id };
+		const configClearMessages = {
+			...currentUser,
+			userID: currentUser.id,
+			messages: []
+		};
 		dispatch(clearMessages(configClearMessages));
 	};
 
