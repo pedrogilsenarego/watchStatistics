@@ -1,6 +1,11 @@
 import React from "react";
 
-const Item = ({ item, pos }) => {
+interface Props {
+	item: { from: string; message: string };
+	pos: number;
+}
+
+const Item = ({ item, pos }: Props) => {
 	return (
 		<div>
 			<p>
