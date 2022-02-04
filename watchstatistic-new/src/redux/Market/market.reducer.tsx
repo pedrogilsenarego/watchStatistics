@@ -5,9 +5,9 @@ const INITIAL_STATE = {
 	marketProducts: []
 };
 
-/* interface SetMarketProducts {
+interface SetMarketProducts {
 	type: "SET_MARKET_PRODUCTS";
-	payload: Array<object>;
+	payload: any;
 }
 
 interface RemoveMarketItem {
@@ -15,9 +15,9 @@ interface RemoveMarketItem {
 	payload: Array<object>;
 }
 
-type Action = SetMarketProducts | RemoveMarketItem; */
+type Action = SetMarketProducts | RemoveMarketItem;
 
-const marketReducer = (state = INITIAL_STATE, action) => {
+const marketReducer = (state = INITIAL_STATE, action: Action) => {
 	switch (action.type) {
 		case marketTypes.SET_MARKET_PRODUCTS:
 			return {

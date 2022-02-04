@@ -3,6 +3,7 @@ import React from "react";
 import Intro from "./Intro";
 import Intro2 from "./Intro2";
 import Intro3 from "./Intro3";
+import Intro4 from "./Intro4";
 
 const Watchstatistics = () => {
 	return (
@@ -10,6 +11,7 @@ const Watchstatistics = () => {
 			<Intro />
 			<Intro2 />
 			<Intro3 />
+			<Intro4 />
 		</div>
 	);
 };
