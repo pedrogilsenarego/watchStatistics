@@ -24,6 +24,7 @@ import CompareWatches from "./pages/CompareWatches";
 import WatchLaboratory from "./pages/WatchLaboratory";
 import WatchLaboratory2 from "./components/WatchLab2";
 import Market from "./pages/Market";
+import Messages from "./pages/Messages";
 
 import Order from "./pages/Order";
 
@@ -96,6 +97,17 @@ const App = (props) => {
 							<WithAuth>
 								<MainLayout>
 									<WatchLaboratory2 />
+								</MainLayout>
+							</WithAuth>
+						)}
+					/>
+					<Route
+						exact
+						path="/messages"
+						render={() => (
+							<WithAuth>
+								<MainLayout>
+									<Messages />
 								</MainLayout>
 							</WithAuth>
 						)}

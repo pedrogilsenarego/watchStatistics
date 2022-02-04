@@ -3,6 +3,7 @@ import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AiOutlineMessage } from "react-icons/ai";
 import { VscAccount } from "react-icons/vsc";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	textBtn: {
@@ -17,13 +18,10 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const RightIconsUser = ({
-	handleMessagesOpen,
-	handleMyAccountOpen,
-	messageStatus
-}) => {
+const RightIconsUser = ({ handleMyAccountOpen, messageStatus }) => {
 	const classes = useStyles();
 	const activeStyle = { color: "#FFA500" };
+	const history = useHistory();
 
 	return [
 		<Button
@@ -31,7 +29,9 @@ const RightIconsUser = ({
 			className={classes.textBtn}
 			activestyle={activeStyle}
 			disableRipple
-			onClick={(e) => handleMessagesOpen(e)}
+			onClick={() => {
+				history.push(`/messages`);
+			}}
 		>
 			<AiOutlineMessage fontSize="1.5em" />
 			&nbsp;({messageStatus})

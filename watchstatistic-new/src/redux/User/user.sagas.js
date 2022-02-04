@@ -19,7 +19,8 @@ import {
 	handleFetchUsers,
 	handleUpdateUserPreferences,
 	handleUpdateBoxStatus,
-	handleUpdateCollectionStatus
+	handleUpdateCollectionStatus,
+	handleUpdateSellerStatus
 } from "./user.helpers";
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
@@ -200,6 +201,19 @@ export function* onUpdateCollectionStatus() {
 	yield takeLatest(userTypes.UPDATE_COLLECTION_STATE, updateCollectionState);
 }
 
+export function* updateSellerState({ payload }) {
+	try {
+		yield handleUpdateSellerStatus({
+			...payload
+		});
+	} catch (err) {
+		// console.log(err);
+	}
+}
+export function* onUpdateSellerStatus() {
+	yield takeLatest(userTypes.UPDATE_SELLER_STATE, updateSellerState);
+}
+
 export default function* userSagas() {
 	yield all([
 		call(onEmailSignInStart),
@@ -211,6 +225,7 @@ export default function* userSagas() {
 		call(onFetchUsersStart),
 		call(onUpdateUserPreferencesStart),
 		call(onUpdateBoxStatus),
-		call(onUpdateCollectionStatus)
+		call(onUpdateCollectionStatus),
+		call(onUpdateSellerStatus)
 	]);
 }

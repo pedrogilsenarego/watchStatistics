@@ -145,9 +145,11 @@ export const handleUpdateCollectionStatus = (product) => {
 	const { collection, userID, boosters, points, flag } = product;
 	return new Promise((resolve, reject) => {
 		let ref = firestore.collection("users").doc(userID);
+
 		ref.update({
 			collection: collection
 		});
+
 		if (flag === "boosters") {
 			ref.update({ boosters: boosters });
 		}
@@ -155,6 +157,26 @@ export const handleUpdateCollectionStatus = (product) => {
 		if (flag === "buy") {
 			ref.update({ points: points });
 		}
+
+		ref
+			.then(() => {
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
+
+export const handleUpdateSellerStatus = (product) => {
+	const { userID, points, messages } = product;
+	return new Promise((resolve, reject) => {
+		let ref = firestore.collection("users").doc(userID);
+
+		ref.update({
+			points: firebase.firestore.FieldValue.increment(points),
+			messages: messages
+		});
 
 		ref
 			.then(() => {

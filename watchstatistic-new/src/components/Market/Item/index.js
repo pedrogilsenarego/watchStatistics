@@ -3,7 +3,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { buyMarketProduct } from "../../../redux/Market/market.actions";
-import { updateCollectionStatus } from "../../../redux/User/user.actions";
+import {
+	updateCollectionStatus,
+	updateSellerStatus
+} from "../../../redux/User/user.actions";
 
 const Item = ({ item, pos, marketData, currentUser }) => {
 	const dispatch = useDispatch();
@@ -15,7 +18,9 @@ const Item = ({ item, pos, marketData, currentUser }) => {
 
 	const handleBuyItem = () => {
 		if (currentUser.points >= item.price) {
-			const newCollection = currentUser.collection;
+			const newCollection = currentUser.collection
+				? currentUser.collection
+				: [];
 			newCollection.push(item.productID);
 			const configUpdateCollection = {
 				...currentUser,
@@ -26,10 +31,26 @@ const Item = ({ item, pos, marketData, currentUser }) => {
 			};
 
 			dispatch(updateCollectionStatus(configUpdateCollection));
+
 			const configBuyItem = {
 				documentID: item.documentID
 			};
 			dispatch(buyMarketProduct(configBuyItem));
+
+			const messages = currentUser.messages ? currentUser.messages : [];
+			const newMessage = {
+				from: "watchstatistics",
+				message: `Congratulation you sold your ${item.productBrand} ${item.productName} ${item.reference}, you added ${item.price} points to your currency`,
+				date: new Date()
+			};
+			messages.push(newMessage);
+
+			const configSellerUpdate = {
+				userID: item.UserUID,
+				points: item.price,
+				messages: messages
+			};
+			dispatch(updateSellerStatus(configSellerUpdate));
 		}
 	};
 

@@ -88,7 +88,6 @@ const Header = (props) => {
 
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
-	const { userRoles } = currentUser ? currentUser : 2;
 
 	const signOut = () => {
 		dispatch(signOutUserStart());
@@ -106,14 +105,11 @@ const Header = (props) => {
 	};
 
 	//RightIconsUser
-	const handleMessagesOpen = (e) => {
-		setAnchorMessages(e.currentTarget);
-	};
+
 	const handleMyAccountOpen = (e) => {
 		setAnchorMyAccount(e.currentTarget);
 	};
 	const configRightIconsUser = {
-		handleMessagesOpen,
 		handleMyAccountOpen,
 		messageStatus
 	};
@@ -161,18 +157,11 @@ const Header = (props) => {
 
 	useEffect(
 		() => {
-			if (currentUser && userRoles.includes("non-verified")) {
-				setMessageStatus(1);
-			}
-		},
-		// eslint-disable-next-line
-		[currentUser]
-	);
-
-	useEffect(
-		() => {
-			if (currentUser && userRoles.includes("verified")) {
+			if (currentUser) {
 				setWatchstatistics(false);
+				if (currentUser.messages) {
+					setMessageStatus(currentUser.messages.length);
+				}
 			}
 		},
 		// eslint-disable-next-line

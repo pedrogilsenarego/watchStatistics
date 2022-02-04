@@ -5,10 +5,17 @@ const INITIAL_STATE = {
 	marketProducts: []
 };
 
-/* type Action = {
-	type: string;
-	payload?: object;
-}; */
+/* interface SetMarketProducts {
+	type: "SET_MARKET_PRODUCTS";
+	payload: Array<object>;
+}
+
+interface RemoveMarketItem {
+	type: "REMOVE_MARKET_ITEM";
+	payload: Array<object>;
+}
+
+type Action = SetMarketProducts | RemoveMarketItem; */
 
 const marketReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {

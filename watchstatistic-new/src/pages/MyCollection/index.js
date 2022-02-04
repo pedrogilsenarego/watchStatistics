@@ -17,7 +17,7 @@ const MyCollection = () => {
 	const { currentUser, products } = useSelector(mapState);
 	const dispatch = useDispatch();
 
-	const myCollection = currentUser.collection;
+	const myCollection = currentUser.collection ? currentUser.collection : [];
 
 	useEffect(
 		() => {
@@ -39,9 +39,9 @@ const MyCollection = () => {
 
 	const relativePosFunct2 = () => {
 		let newArray = [];
-		for (let i = 0; i < currentUser.collection.length; i++) {
+		for (let i = 0; i < myCollection.length; i++) {
 			for (let j = 0; j < products.length; j++) {
-				if (products[j].documentID === currentUser.collection[i]) {
+				if (products[j].documentID === myCollection[i]) {
 					newArray.push(j);
 					break;
 				}

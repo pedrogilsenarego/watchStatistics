@@ -72,3 +72,8 @@ export const updateCollectionStatus = (newWatch) => ({
 	type: userTypes.UPDATE_COLLECTION_STATE,
 	payload: newWatch
 });
+
+export const updateSellerStatus = (newWatch) => ({
+	type: userTypes.UPDATE_SELLER_STATE,
+	payload: newWatch
+});
