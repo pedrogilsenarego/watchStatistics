@@ -10,8 +10,8 @@ const Watchstatistics = () => {
 		<div>
 			<Intro />
 			<Intro2 />
-			<Intro3 />
 			<Intro4 />
+			<Intro3 />
 		</div>
 	);
 };

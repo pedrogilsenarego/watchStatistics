@@ -1,9 +1,9 @@
 import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { motion } from "framer-motion";
-
-import { useHistory } from "react-router-dom";
+import Typist from "react-typist";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@material-ui/core";
@@ -29,32 +29,46 @@ const pathVariants = {
 };
 
 const Intro4 = () => {
-	const history = useHistory();
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
 		<Container
 			maxWidth={isMatch ? "xs" : "sm"}
 			style={{
-				marginBottom: "200px",
 				marginTop: isMatch ? "10vh" : "20vh",
 
 				padding: "20px"
 			}}
 		>
-			<motion.svg
-				variants={svgVariants}
-				initial="hidden"
-				animate="visible"
-				fill="hotPink"
-				viewBox="0 0 7.52189 7.52189"
+			<Grid
+				alignItems="center"
+				justifyContent="center"
+				container
+				style={{ color: "hotPink" }}
 			>
-				<motion.path
-					variants={pathVariants}
-					class="fil0 str0"
-					d="m0.02098 3.76c0-2.0689 1.6752-3.7391 3.7409-3.7391s3.7391 1.6745 3.7391 3.7391-1.6711 3.7409-3.7391 3.7409-3.7409-1.672-3.7409-3.7409zm0.43697 0c0 1.8284 1.4754 3.3039 3.3039 3.3039 1.8284 0 3.3021-1.4769 3.3021-3.3039s-1.4752-3.3021-3.3021-3.3021c-1.827 0-3.3039 1.4737-3.3039 3.3021zm2.9469 0.0017833c0 0.19213 0.16377 0.35525 0.35525   "
-				/>
-			</motion.svg>
+				<Grid item style={{ position: "absolute", marginLeft: "20vw" }}>
+					<Typist
+						cursor={{ show: false, hideWhenDone: true, hideWhenDoneDelay: 0 }}
+					>
+						<Typography style={{}}>
+							Discover a new ecosystem for watch lovers
+						</Typography>
+					</Typist>
+				</Grid>
+				<motion.svg
+					variants={svgVariants}
+					initial="hidden"
+					animate="visible"
+					fill="hotPink"
+					viewBox="0 0 100 101"
+				>
+					<motion.path
+						variants={pathVariants}
+						class="fil0 str0"
+						d="M84.2163432,86.4589839 C75.2720219,94.8564365 63.2366828,100 50,100 C22.3857625,100 0,77.6142375 0,50 C0,22.3857625 22.3857625,1.13686838e-13 50,1.13686838e-13 C63.1983248,1.13686838e-13 75.2022585,5.11379605 84.1385074,13.4680944 L76.3546493,21.2519525 C69.4138659,14.8856019 60.1606984,11 50,11 C28.4608948,11 11,28.4608948 11,50 C11,71.5391052 28.4608948,89 50,89 C60.1990671,89 69.4837363,85.0849972 76.4331793,78.67582 L84.2163432,86.4589839 L84.2163432,86.4589839 Z"
+					/>
+				</motion.svg>
+			</Grid>
 		</Container>
 	);
 };
