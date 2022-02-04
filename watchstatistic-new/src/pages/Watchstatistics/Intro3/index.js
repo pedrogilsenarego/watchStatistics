@@ -45,19 +45,19 @@ const Intro3 = () => {
 				<Grid item xs={6} style={{ textAlign: "center" }}>
 					<BiAddToQueue fontSize={"4em"} color="hotPink" />
 					<Typography style={{ color: "hotPink" }}>
-						Submit your favorite Watches
+						Submit new watches
 					</Typography>
 				</Grid>
 				<Grid item xs={6} style={{ textAlign: "center" }}>
 					<BsInboxesFill fontSize={"4em"} color="hotPink" />
 					<Typography style={{ color: "hotPink" }}>
-						Build and trade virtual watches
+						Build and trade your virtual collection
 					</Typography>
 				</Grid>
 				<Grid item xs={6} style={{ textAlign: "center" }}>
 					<BiTrophy fontSize={"4em"} color="hotPink" />
 					<Typography style={{ color: "hotPink" }}>
-						Play games with your collection
+						Use your collection to play games
 					</Typography>
 				</Grid>
 			</Grid>
