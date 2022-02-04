@@ -29,10 +29,11 @@ const Display = () => {
 	return (
 		<div style={{}}>
 			<Grid container spacing={1} style={{ display: "flex" }}>
-				{data.map((item, pos) => {
-					const configItem = { item, pos, filter, filterType };
-					return <Item {...configItem} />;
-				})}
+				{data &&
+					data.map((item, pos) => {
+						const configItem = { item, pos, filter, filterType };
+						return <Item {...configItem} />;
+					})}
 			</Grid>
 		</div>
 	);

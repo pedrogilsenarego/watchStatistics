@@ -35,6 +35,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				users: action.payload
 			};
+
 		case userTypes.SET_PREFERENCES:
 			return {
 				...state,
@@ -43,12 +44,17 @@ const userReducer = (state = INITIAL_STATE, action) => {
 		case userTypes.UPDATE_BOX_STATE:
 			return {
 				...state,
-				currentUser: action.payload
+				currentUser: action.payloa
 			};
 		case userTypes.UPDATE_COLLECTION_STATE:
 			return {
 				...state,
 				currentUser: action.payload
+			};
+		case userTypes.CLEAR_MESSAGES:
+			return {
+				...state,
+				currentUser: { messages: [] }
 			};
 		default:
 			return state;

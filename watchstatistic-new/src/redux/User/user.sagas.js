@@ -20,7 +20,8 @@ import {
 	handleUpdateUserPreferences,
 	handleUpdateBoxStatus,
 	handleUpdateCollectionStatus,
-	handleUpdateSellerStatus
+	handleUpdateSellerStatus,
+	handleClearMessages
 } from "./user.helpers";
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
@@ -214,6 +215,17 @@ export function* onUpdateSellerStatus() {
 	yield takeLatest(userTypes.UPDATE_SELLER_STATE, updateSellerState);
 }
 
+export function* clearMessagesSaga({ payload }) {
+	try {
+		yield handleClearMessages({ ...payload });
+	} catch (err) {
+		// console.log(err);
+	}
+}
+export function* onClearMessages() {
+	yield takeLatest(userTypes.CLEAR_MESSAGES, clearMessagesSaga);
+}
+
 export default function* userSagas() {
 	yield all([
 		call(onEmailSignInStart),
@@ -226,6 +238,7 @@ export default function* userSagas() {
 		call(onUpdateUserPreferencesStart),
 		call(onUpdateBoxStatus),
 		call(onUpdateCollectionStatus),
-		call(onUpdateSellerStatus)
+		call(onUpdateSellerStatus),
+		call(onClearMessages)
 	]);
 }

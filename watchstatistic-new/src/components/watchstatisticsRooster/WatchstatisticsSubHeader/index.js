@@ -66,7 +66,7 @@ const WatchstatisticsSubHeader = ({}) => {
 
 	const classes = useStyles();
 
-	const numberVotes = userVotes.length - 1;
+	const numberVotes = userVotes ? userVotes.length - 1 : 0;
 
 	const rank = () => {
 		if (!experience) return;

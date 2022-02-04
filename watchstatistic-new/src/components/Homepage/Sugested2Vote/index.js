@@ -28,18 +28,21 @@ const Sugested2Vote = () => {
 	const { data } = products;
 
 	const filterData = () => {
-		const newData = [];
-		for (let i = 0; i < data.length; i++) {
-			if (!currentUser.userVotes.includes(data[i].documentID)) {
-				newData.push(data[i]);
+		if (!currentUser.userVotes) return [[], [], []];
+		else {
+			const newData = [];
+			for (let i = 0; i < data.length; i++) {
+				if (!currentUser.userVotes.includes(data[i].documentID)) {
+					newData.push(data[i]);
+				}
 			}
-		}
-		const newData1 = newData.slice(0, 4);
-		const newData2 = newData.slice(5, 8);
-		const newData3 = newData.slice(9, 12);
+			const newData1 = newData.slice(0, 4);
+			const newData2 = newData.slice(5, 8);
+			const newData3 = newData.slice(9, 12);
 
-		const finalArray = [newData1, newData2, newData3];
-		return finalArray;
+			const finalArray = [newData1, newData2, newData3];
+			return finalArray;
+		}
 	};
 
 	useEffect(

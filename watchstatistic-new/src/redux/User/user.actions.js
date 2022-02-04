@@ -67,7 +67,6 @@ export const updateBoxStatus = (boxStatus) => ({
 	type: userTypes.UPDATE_BOX_STATE,
 	payload: boxStatus
 });
-//new implementation
 export const updateCollectionStatus = (newWatch) => ({
 	type: userTypes.UPDATE_COLLECTION_STATE,
 	payload: newWatch
@@ -76,4 +75,8 @@ export const updateCollectionStatus = (newWatch) => ({
 export const updateSellerStatus = (newWatch) => ({
 	type: userTypes.UPDATE_SELLER_STATE,
 	payload: newWatch
+});
+export const clearMessages = (userID) => ({
+	type: userTypes.CLEAR_MESSAGES,
+	payload: userID
 });

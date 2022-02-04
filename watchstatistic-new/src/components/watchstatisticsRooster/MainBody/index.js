@@ -72,6 +72,13 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 		);
 	}
 
+	if (!currentUser.userVotes)
+		return (
+			<div>
+				<p>No search Results</p>
+			</div>
+		);
+
 	return (
 		<div>
 			<Grid container spacing={1} style={{ padding: "20px" }}>
@@ -165,7 +172,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 											<TableCell align="center" style={{ color: color }}>
 												{numberVotesNotOwn + numberVotesOwn}
 											</TableCell>
-											{currentUser && userVotes.includes(documentID) && (
+											{currentUser.userVotes && userVotes.includes(documentID) && (
 												<TableCell
 													align="center"
 													style={{ color: color, fontSize: "15px" }}

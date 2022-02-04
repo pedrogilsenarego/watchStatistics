@@ -187,3 +187,22 @@ export const handleUpdateSellerStatus = (product) => {
 			});
 	});
 };
+
+export const handleClearMessages = (payload) => {
+	const { userID } = payload;
+	return new Promise((resolve, reject) => {
+		let ref = firestore.collection("users").doc(userID);
+
+		ref.update({
+			messages: firebase.firestore.FieldValue.delete()
+		});
+
+		ref
+			.then(() => {
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};

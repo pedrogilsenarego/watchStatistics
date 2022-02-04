@@ -22,7 +22,7 @@ const pathVariants = {
 		opacity: 1,
 		pathLength: 1,
 		transition: {
-			duration: 2,
+			duration: 3,
 			ease: "easeInOut"
 		}
 	}
@@ -31,15 +31,8 @@ const pathVariants = {
 const Intro4 = () => {
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
-	//const [render, setRender] = useState(true);
+
 	const [scrollY, setScrollY] = useState(0);
-
-	/* const handleScroll = (event) => {
-		let scrollTop = window.scrollY;
-
-		if (scrollTop > 200) setRender(true);
-		else setRender(false);
-	}; */
 
 	function logit() {
 		setScrollY(window.pageYOffset);
@@ -76,7 +69,7 @@ const Intro4 = () => {
 							cursor={{ show: false, hideWhenDone: true, hideWhenDoneDelay: 0 }}
 						>
 							<Typography style={{}}>
-								Discover a new ecosystem for watch lovers
+								Contribute to a new ecosystem for watch lovers
 							</Typography>
 						</Typist>
 					</Grid>
