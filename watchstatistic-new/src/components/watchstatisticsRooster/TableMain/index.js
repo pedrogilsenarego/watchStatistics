@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // eslint-disable-next-line
-const TableMain = ({ currentUser }) => {
+const TableMain = () => {
 	const classes = useStyles();
 	const [table, setTable] = useState("main");
 	const [loadedLatest, setLoadedLatest] = useState(false);

@@ -32,7 +32,7 @@ const Display = () => {
 				{data &&
 					data.map((item, pos) => {
 						const configItem = { item, pos, filter, filterType };
-						return <Item {...configItem} />;
+						return <Item key={pos} {...configItem} />;
 					})}
 			</Grid>
 		</div>

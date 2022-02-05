@@ -12,7 +12,7 @@ interface SetMarketProducts {
 
 interface RemoveMarketItem {
 	type: "REMOVE_MARKET_ITEM";
-	payload: Array<object>;
+	payload: Object[];
 }
 
 type Action = SetMarketProducts | RemoveMarketItem;

@@ -52,7 +52,7 @@ const Intro = () => {
 						paddingLeft: "4vw"
 					}}
 				>
-					<Grid item xs={10} sm={8} md={6} lg={5} xl={3.3}>
+					<Grid container item xs={10} sm={8} md={6} lg={5} xl={3.3}>
 						{" "}
 						<Typography
 							style={{

@@ -113,7 +113,7 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 									const rank = () => {
 										if (!experience) return;
 										if (experience < 20) return "Noob";
-										if (experience < 100) return "Begginer";
+										if (experience < 100) return "Beginner";
 										if (experience < 200) return "Enthusiast";
 										if (experience < 500) return "Mature";
 										if (experience < 1500) return "Connoisseour";
@@ -140,7 +140,7 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 
 									const colorRank = () => {
 										if (rank() === "Noob") return "#ffffff66";
-										if (rank() === "Begginer") return "white";
+										if (rank() === "Beginner") return "white";
 										if (rank() === "Enthusiast") return "green";
 										if (rank() === "Mature") return "blue";
 										if (rank() === "Connoisseour") return "purple";

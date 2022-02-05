@@ -1,6 +1,6 @@
 import React from "react";
 import WatchstatisticsSubHeader from "../../components/watchstatisticsRooster/WatchstatisticsSubHeader";
-import TableMain from "../../components/watchstatisticsRooster/TableMain";
+
 import { useSelector } from "react-redux";
 import HomePageComponent from "../../components/Homepage";
 
@@ -14,7 +14,6 @@ const HomePage = () => {
 		<div>
 			<WatchstatisticsSubHeader {...currentUser} />
 			<HomePageComponent />
-			<TableMain />
 		</div>
 	);
 };

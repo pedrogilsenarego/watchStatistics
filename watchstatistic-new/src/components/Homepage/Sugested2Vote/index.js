@@ -28,7 +28,7 @@ const Sugested2Vote = () => {
 	const { data } = products;
 
 	const filterData = () => {
-		if (!currentUser.userVotes) return [[], [], []];
+		if (!currentUser.userVotes || !data) return [[], [], []];
 		else {
 			const newData = [];
 			for (let i = 0; i < data.length; i++) {
@@ -53,6 +53,8 @@ const Sugested2Vote = () => {
 		// eslint-disable-next-line
 		[]
 	);
+
+	if (!Array.isArray(data)) return null;
 
 	const goLeft = () => {
 		setX(x + 98.5);
@@ -88,8 +90,6 @@ const Sugested2Vote = () => {
 			}
 		}
 	};
-
-	if (!Array.isArray(data)) return null;
 
 	if (data.length < 1) {
 		return (

@@ -282,6 +282,15 @@ const Header = (props) => {
 				>
 					Market
 				</MenuItem>
+				<MenuItem
+					disabled={watchstatistics}
+					onClick={() => {
+						handleCloseWatchstatisticsMenu();
+						history.push("/watchstatistics/stats");
+					}}
+				>
+					Stats
+				</MenuItem>
 			</Menu>
 			<Menu
 				disableScrollLock
@@ -416,6 +425,15 @@ const Header = (props) => {
 						}}
 					>
 						Market
+					</MenuItem>,
+					<MenuItem
+						disabled={watchstatistics}
+						onClick={() => {
+							handleCloseWatchstatisticsMenu();
+							history.push("/watchstatistics/stats");
+						}}
+					>
+						Stats
 					</MenuItem>
 				]}
 

@@ -16,18 +16,6 @@ import { styled } from "@mui/material/styles";
 import { GiTrophyCup } from "react-icons/gi";
 import Container from "@mui/material/Container";
 
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-	height: 4,
-	borderRadius: 5,
-	[`&.${linearProgressClasses.colorPrimary}`]: {
-		backgroundColor: "#1877a3"
-	},
-	[`& .${linearProgressClasses.bar}`]: {
-		borderRadius: 5,
-		backgroundColor: "#154A67"
-	}
-}));
-
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
@@ -43,8 +31,9 @@ const WatchstatisticsSubHeader = ({}) => {
 
 	const useStyles = makeStyles((theme) => ({
 		root: {
-			height: isMatch ? "35vh" : "20vh",
 			marginTop: "80px",
+			paddingTop: "15px",
+			paddingBottom: "15px",
 			background: theme.palette.home.primary,
 			display: "flex",
 			flexDirection: "column",
@@ -71,7 +60,7 @@ const WatchstatisticsSubHeader = ({}) => {
 	const rank = () => {
 		if (!experience) return;
 		if (experience < 20) return "Noob";
-		if (experience < 100) return "Begginer";
+		if (experience < 100) return "Beginner";
 		if (experience < 200) return "Enthusiast";
 		if (experience < 500) return "Mature";
 		if (experience < 1500) return "Connoisseour";
@@ -81,7 +70,7 @@ const WatchstatisticsSubHeader = ({}) => {
 
 	useEffect(() => {
 		if (rank() === "Noob") setProgress((experience / 20) * 100);
-		if (rank() === "Begginer") setProgress(((experience - 20) / 80) * 100);
+		if (rank() === "Beginner") setProgress(((experience - 20) / 80) * 100);
 		if (rank() === "Enthusiast") setProgress(((experience - 100) / 100) * 100);
 		if (rank() === "Mature") setProgress(((experience - 200) / 300) * 100);
 		if (rank() === "Connoisseour")
@@ -94,7 +83,7 @@ const WatchstatisticsSubHeader = ({}) => {
 
 	const colorRank = () => {
 		if (rank() === "Noob") return "#ffffff66";
-		if (rank() === "Begginer") return "white";
+		if (rank() === "Beginner") return "white";
 		if (rank() === "Enthusiast") return "green";
 		if (rank() === "Mature") return "blue";
 		if (rank() === "Connoisseour") return "purple";
@@ -102,14 +91,22 @@ const WatchstatisticsSubHeader = ({}) => {
 		if (rank() === "God") return "red";
 	};
 
+	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+		height: 4,
+		borderRadius: 5,
+		[`&.${linearProgressClasses.colorPrimary}`]: {
+			backgroundColor: "black"
+		},
+		[`& .${linearProgressClasses.bar}`]: {
+			borderRadius: 5,
+			backgroundColor: colorRank()
+		}
+	}));
+
 	return (
 		<div>
 			<Container className={classes.root}>
-				<Grid
-					container
-					className={classes.container}
-					style={{ marginTop: isMatch ? "15px" : "0px" }}
-				>
+				<Grid container className={classes.container}>
 					<Grid item xs={12} sm={6} className={classes.item}>
 						<Typography className={classes.text} variant="h5">
 							Welcome, {displayName}
@@ -127,7 +124,7 @@ const WatchstatisticsSubHeader = ({}) => {
 						xs={12}
 						sm={6}
 						className={classes.item}
-						style={{ marginTop: isMatch ? "20px" : "0px" }}
+						style={{ marginTop: isMatch ? "15px" : "0px" }}
 					>
 						<Grid
 							container
