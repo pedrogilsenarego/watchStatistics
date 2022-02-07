@@ -206,3 +206,22 @@ export const handleClearMessages = (payload) => {
 			});
 	});
 };
+
+export const handleRemoveMessage = (payload) => {
+	const { userID, messages } = payload;
+	return new Promise((resolve, reject) => {
+		let ref = firestore.collection("users").doc(userID);
+
+		ref.update({
+			messages: messages
+		});
+
+		ref
+			.then(() => {
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};

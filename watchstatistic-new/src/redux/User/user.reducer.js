@@ -56,6 +56,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				currentUser: action.payload
 			};
+		case userTypes.REMOVE_MESSAGE:
+			return {
+				...state,
+				currentUser: action.payload
+			};
 		default:
 			return state;
 	}

@@ -46,12 +46,9 @@ const Footer = () => {
 					<Box
 						style={{
 							cursor: "pointer",
-							width: "150px",
-							border: "solid 2px",
+
 							padding: "5px",
-							color: "#ffffffB3",
-							borderColor: "#ffffff66",
-							borderRadius: "2px",
+							color: "orange",
 
 							display: "flex",
 							justifyContent: "center",
@@ -60,7 +57,7 @@ const Footer = () => {
 					>
 						<Typograpy
 							style={{
-								fontSize: "15px"
+								fontSize: "20px"
 							}}
 						>
 							Send Feedback

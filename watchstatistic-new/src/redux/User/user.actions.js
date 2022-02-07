@@ -80,3 +80,8 @@ export const clearMessages = (userID) => ({
 	type: userTypes.CLEAR_MESSAGES,
 	payload: userID
 });
+
+export const removeMessage = (message) => ({
+	type: userTypes.REMOVE_MESSAGE,
+	payload: message
+});

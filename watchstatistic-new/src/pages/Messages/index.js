@@ -3,7 +3,7 @@ import MessagesComp from "../../components/Messages";
 
 const Messages = () => {
 	return (
-		<div>
+		<div style={{ minHeight: "40vh" }}>
 			<MessagesComp />
 		</div>
 	);

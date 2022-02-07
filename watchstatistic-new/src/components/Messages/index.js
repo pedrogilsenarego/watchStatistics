@@ -13,12 +13,12 @@ const mapState = (state) => ({
 const Messages = () => {
 	const { currentUser } = useSelector(mapState);
 	const dispatch = useDispatch();
-	const { messages } = currentUser;
+	const { messages, id } = currentUser;
 
 	const handleClearMessages = () => {
 		const configClearMessages = {
 			...currentUser,
-			userID: currentUser.id,
+			userID: id,
 			messages: []
 		};
 		dispatch(clearMessages(configClearMessages));
@@ -49,7 +49,7 @@ const Messages = () => {
 					<Container style={{}}>
 						{currentUser.messages &&
 							messages.map((item, pos) => {
-								const configItem = { item, pos };
+								const configItem = { item, pos, messages, id };
 								return <Item {...configItem} />;
 							})}
 					</Container>

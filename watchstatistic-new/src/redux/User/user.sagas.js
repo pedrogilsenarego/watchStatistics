@@ -21,7 +21,8 @@ import {
 	handleUpdateBoxStatus,
 	handleUpdateCollectionStatus,
 	handleUpdateSellerStatus,
-	handleClearMessages
+	handleClearMessages,
+	handleRemoveMessage
 } from "./user.helpers";
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
@@ -226,6 +227,17 @@ export function* onClearMessages() {
 	yield takeLatest(userTypes.CLEAR_MESSAGES, clearMessagesSaga);
 }
 
+export function* removeMessagesSaga({ payload }) {
+	try {
+		yield handleRemoveMessage({ ...payload });
+	} catch (err) {
+		// console.log(err);
+	}
+}
+export function* onRemoveMessage() {
+	yield takeLatest(userTypes.REMOVE_MESSAGE, removeMessagesSaga);
+}
+
 export default function* userSagas() {
 	yield all([
 		call(onEmailSignInStart),
@@ -239,6 +251,7 @@ export default function* userSagas() {
 		call(onUpdateBoxStatus),
 		call(onUpdateCollectionStatus),
 		call(onUpdateSellerStatus),
-		call(onClearMessages)
+		call(onClearMessages),
+		call(onRemoveMessage)
 	]);
 }

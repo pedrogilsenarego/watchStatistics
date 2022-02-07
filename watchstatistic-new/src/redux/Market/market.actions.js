@@ -24,3 +24,8 @@ export const removeMarketItem = (marketItem) => ({
 	type: marketTypes.REMOVE_MARKET_ITEM,
 	payload: marketItem
 });
+
+export const removeOneMarketItem = (marketItem) => ({
+	type: marketTypes.REMOVE_ONE_MARKET_ITEM,
+	payload: marketItem
+});
