@@ -191,7 +191,7 @@ const App = (props) => {
 						)}
 					/>
 					<Route
-						path="/about/FAQ"
+						path="/FAQ"
 						render={() => (
 							<MainLayout>
 								<FAQ />

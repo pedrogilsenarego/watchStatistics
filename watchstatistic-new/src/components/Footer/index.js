@@ -2,12 +2,14 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typograpy from "@mui/material/Typography";
 import { BsFillDiamondFill } from "react-icons/bs";
+import { useHistory } from "react-router-dom";
 
 import { useMediaQuery, useTheme } from "@material-ui/core";
 
 const Footer = () => {
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+	const history = useHistory();
 	return (
 		<div>
 			{!isMatch && (
@@ -50,6 +52,7 @@ const Footer = () => {
 							color: "#ffffffB3",
 							borderColor: "#ffffff66",
 							borderRadius: "2px",
+
 							display: "flex",
 							justifyContent: "center",
 							alignItems: "center"
@@ -108,6 +111,9 @@ const Footer = () => {
 						display: "flex",
 						justifyContent: "center",
 						alignItems: "center"
+					}}
+					onClick={() => {
+						history.push(`/FAQ`);
 					}}
 				>
 					&nbsp; FAQ &nbsp;

@@ -247,15 +247,7 @@ const Header = (props) => {
 				>
 					Browse
 				</MenuItem>
-				<MenuItem
-					disabled={watchstatistics}
-					onClick={() => {
-						handleCloseWatchstatisticsMenu();
-						history.push("/watchstatistics/watchlaboratory");
-					}}
-				>
-					Watch Laboratory
-				</MenuItem>
+
 				<MenuItem
 					disabled={watchstatistics}
 					onClick={() => {
@@ -273,17 +265,8 @@ const Header = (props) => {
 				>
 					Compare Watches
 				</MenuItem>
+
 				<MenuItem
-					disabled={watchstatistics}
-					onClick={() => {
-						handleCloseWatchstatisticsMenu();
-						history.push("/watchstatistics/market");
-					}}
-				>
-					Market
-				</MenuItem>
-				<MenuItem
-					disabled={watchstatistics}
 					onClick={() => {
 						handleCloseWatchstatisticsMenu();
 						history.push("/watchstatistics/stats");
@@ -300,22 +283,23 @@ const Header = (props) => {
 				anchorEl={anchorSupport}
 				open={Boolean(anchorSupport)}
 			>
-				<MenuItem disabled onClick={handleCloseSupportMenu}>
-					Contact Us
-				</MenuItem>
-				<MenuItem disabled onClick={handleCloseSupportMenu}>
-					Privacy Policy
-				</MenuItem>
 				<MenuItem
+					disabled={watchstatistics}
 					onClick={() => {
-						handleCloseSupportMenu();
-						history.push("/about/FAQ");
+						handleCloseWatchstatisticsMenu();
+						history.push("/watchstatistics/watchlaboratory");
 					}}
 				>
-					FAQ
+					Watch Laboratory
 				</MenuItem>
-				<MenuItem disabled onClick={handleCloseSupportMenu}>
-					Terms and Conditions
+				<MenuItem
+					disabled={watchstatistics}
+					onClick={() => {
+						handleCloseWatchstatisticsMenu();
+						history.push("/watchstatistics/market");
+					}}
+				>
+					Market
 				</MenuItem>
 			</Menu>
 			<Menu
@@ -393,14 +377,7 @@ const Header = (props) => {
 					>
 						Browse
 					</MenuItem>,
-					<MenuItem
-						disabled={watchstatistics}
-						onClick={() => {
-							history.push("/watchstatistics/watchlaboratory");
-						}}
-					>
-						Watch Laboratory
-					</MenuItem>,
+
 					<MenuItem
 						disabled={watchstatistics}
 						onClick={() => {
@@ -417,15 +394,7 @@ const Header = (props) => {
 					>
 						Compare Watches
 					</MenuItem>,
-					<MenuItem
-						disabled={watchstatistics}
-						onClick={() => {
-							handleCloseWatchstatisticsMenu();
-							history.push("/watchstatistics/market");
-						}}
-					>
-						Market
-					</MenuItem>,
+
 					<MenuItem
 						disabled={watchstatistics}
 						onClick={() => {
@@ -447,7 +416,7 @@ const Header = (props) => {
 					}}
 				>
 					<AiOutlineInfoCircle fontSize="1.5em" />
-					&nbsp; About
+					&nbsp; Ecosystem
 				</MenuItem>
 			</Menu>
 

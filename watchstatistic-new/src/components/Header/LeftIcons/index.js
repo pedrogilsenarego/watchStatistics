@@ -54,7 +54,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 				onClick={(e) => handleSupportOpen(e)}
 			>
 				<AiOutlineInfoCircle fontSize="1.5em" />
-				&nbsp; About
+				&nbsp; Ecosystem
 			</Button>
 		</div>
 	);
