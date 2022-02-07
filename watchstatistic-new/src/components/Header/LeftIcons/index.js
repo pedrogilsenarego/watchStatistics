@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, Typography } from "@material-ui/core";
+import { Button, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
@@ -7,6 +7,7 @@ import { BsGraphUp } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import { VscHome } from "react-icons/vsc";
 import TextField from "@mui/material/TextField";
+import watchData from "../../../assets/data/watchesCorr.json";
 
 const useStyles = makeStyles((theme) => ({
 	textBtn: {
@@ -57,14 +58,9 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 	const [search, setSearch] = useState("");
 	const wrapperRef = useRef(null);
 
-	const Data = [
-		{ name: "rolexDatejust", id: "7LyNi2wYMfl3FtGvo03F" },
-		{ name: "omegaseams", id: "3232kkk" }
-	];
-
 	useEffect(
 		() => {
-			setOptions(Data);
+			setOptions(watchData);
 		},
 		// eslint-disable-next-line
 		[]
@@ -84,6 +80,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 	const handleSearch = (search) => {
 		history.push(`/product/${search}`);
 		setDisplay(false);
+		setSearch("");
 	};
 
 	return (
@@ -121,6 +118,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 			</Button>
 			<TextField
 				className={classes.textField}
+				style={{ marginLeft: "20px", marginTop: "-2px" }}
 				name="search"
 				size="small"
 				placeholder="Search"
@@ -130,22 +128,37 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 					setSearch(event.target.value);
 				}}
 			></TextField>
-			{display &&
-				options
-					.filter(({ name }) => name.indexOf(search.toLowerCase()) > -1)
-					.map((item, pos) => {
-						return (
-							<Typography
-								ref={wrapperRef}
-								onClick={() => {
-									handleSearch(item.id);
-								}}
-								key={pos}
-							>
-								{item.name}
-							</Typography>
-						);
-					})}
+			{display && search.length > 2 && (
+				<Box
+					style={{
+						backgroundColor: "#ffffff66",
+						position: "absolute",
+						borderRadius: "8px",
+						padding: "20px",
+						marginLeft: "10vw",
+						minWidth: "200px",
+						minHeight: "50px",
+						marginTop: "30px"
+					}}
+				>
+					{options
+						.filter(({ name }) => name.indexOf(search.toLowerCase()) > -1)
+						.map((item, pos) => {
+							return (
+								<Typography
+									ref={wrapperRef}
+									style={{ cursor: "pointer" }}
+									onClick={() => {
+										handleSearch(item.id);
+									}}
+									key={pos}
+								>
+									{item.name}
+								</Typography>
+							);
+						})}
+				</Box>
+			)}
 		</div>
 	);
 };
