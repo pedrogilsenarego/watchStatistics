@@ -1,23 +1,19 @@
 const functions = require("firebase-functions");
-
-exports.helloworld = functions.https.onRequest((request, response) => {
-	response.send("hello.world");
-});
-
-/* const express = require("express");
+const express = require("express");
 const cors = require("cors");
+const admin = require("firebase-admin");
+admin.initializeApp();
 
 const app = express();
 
-app.use(
-	cors({
-		origin: true
-	})
-);
-app.use(express.json());
+app.get("/", (req, res) => {});
 
-app.get("*", (req, res) => {
-	res.status(404).send("404, Not Found");
+app.post("/", async (req, res) => {
+	const user = req.body;
+
+	await admin.firestore().collection("users").add(user);
+
+	res.status(201).send();
 });
 
-exports.api = functions.https.onRequest(app); */
+exports.user = functions.https.onRequest(app);

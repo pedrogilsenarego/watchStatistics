@@ -9,6 +9,10 @@ import { VscHome } from "react-icons/vsc";
 import TextField from "@mui/material/TextField";
 import watchData from "../../../assets/data/watchesCorr.json";
 
+import axios from "axios";
+const watchesCorr =
+	"https://watchstatisticsapinodejs.herokuapp.com/watchCorrelations";
+
 const useStyles = makeStyles((theme) => ({
 	textBtn: {
 		color: "#FFFFFF",
@@ -56,10 +60,23 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 	const [display, setDisplay] = useState(false);
 	const [options, setOptions] = useState([]);
 	const [search, setSearch] = useState("");
+	const [dataApi, setDataApi] = useState([]);
 	const wrapperRef = useRef(null);
+
+	const getDataFromApi = async () => {
+		try {
+			const response = await axios.get(watchesCorr);
+			const data = Object.keys(response.data.message);
+			console.log(data);
+			setDataApi(data);
+		} catch (error) {
+			console.error();
+		}
+	};
 
 	useEffect(
 		() => {
+			getDataFromApi();
 			setOptions(watchData);
 		},
 		// eslint-disable-next-line
