@@ -138,6 +138,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 				style={{ marginLeft: "20px", marginTop: "-2px" }}
 				name="search"
 				size="small"
+				autoComplete="off"
 				placeholder="Search"
 				value={search}
 				onChange={(event) => {
@@ -151,7 +152,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 						backgroundColor: "#ffffff66",
 						position: "absolute",
 						borderRadius: "8px",
-						padding: "20px",
+						padding: "30px",
 						marginLeft: "49vw",
 						minWidth: "200px",
 						minHeight: "50px",
@@ -159,7 +160,11 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 					}}
 				>
 					{options
-						.filter(({ name }) => name.indexOf(search.toLowerCase()) > -1)
+
+						.filter(
+							({ name }) =>
+								name.toLowerCase().indexOf(search.toLowerCase()) > -1
+						)
 						.map((item, pos) => {
 							return (
 								<Typography
