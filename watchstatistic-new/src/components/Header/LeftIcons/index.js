@@ -10,7 +10,7 @@ import TextField from "@mui/material/TextField";
 import watchData from "../../../assets/data/watchesCorr.json";
 
 import axios from "axios";
-const watchesCorr =
+const WATCHES_INFO =
 	"https://watchstatisticsapinodejs.herokuapp.com/watchCorrelations";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,24 +60,24 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 	const [display, setDisplay] = useState(false);
 	const [options, setOptions] = useState([]);
 	const [search, setSearch] = useState("");
-	const [dataApi, setDataApi] = useState([]);
+
 	const wrapperRef = useRef(null);
 
 	const getDataFromApi = async () => {
 		try {
-			const response = await axios.get(watchesCorr);
-			const data = Object.keys(response.data.message);
-			console.log(data);
-			setDataApi(data);
+			const response = await axios.get(WATCHES_INFO);
+			const data = response.data;
+
+			setOptions(data);
 		} catch (error) {
 			console.error();
 		}
 	};
-
+	console.log(options);
 	useEffect(
 		() => {
 			getDataFromApi();
-			setOptions(watchData);
+			//setOptions(watchData);
 		},
 		// eslint-disable-next-line
 		[]
