@@ -7,11 +7,11 @@ import { BsGraphUp } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import { VscHome } from "react-icons/vsc";
 import TextField from "@mui/material/TextField";
-import watchData from "../../../assets/data/watchesCorr.json";
 
 import axios from "axios";
+
 const WATCHES_INFO =
-	"https://watchstatisticsapinodejs.herokuapp.com/watchCorrelations";
+	"https://us-central1-fir-auth0-9b4cb.cloudfunctions.net/app/watchcorrelations";
 
 const useStyles = makeStyles((theme) => ({
 	textBtn: {
@@ -73,11 +73,10 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 			console.error();
 		}
 	};
-	console.log(options);
+
 	useEffect(
 		() => {
 			getDataFromApi();
-			//setOptions(watchData);
 		},
 		// eslint-disable-next-line
 		[]
@@ -88,6 +87,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 			window.removeEventListener("mousedown", handleClickOutside);
 		};
 	});
+
 	const handleClickOutside = (event) => {
 		const { current: wrap } = wrapperRef;
 		if (wrap && !wrap.contains(event.target)) {
@@ -152,10 +152,10 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 						position: "absolute",
 						borderRadius: "8px",
 						padding: "20px",
-						marginLeft: "10vw",
+						marginLeft: "49vw",
 						minWidth: "200px",
 						minHeight: "50px",
-						marginTop: "30px"
+						marginTop: "50px"
 					}}
 				>
 					{options

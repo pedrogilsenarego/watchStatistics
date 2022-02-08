@@ -1,19 +1,20 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
-const admin = require("firebase-admin");
-admin.initializeApp();
-
 const app = express();
+const importData = require("./watchesCorr.json");
+const admin = require("firebase-admin");
 
-app.get("/", (req, res) => {});
+admin.initializeApp(functions.config().firebase);
 
-app.post("/", async (req, res) => {
-	const user = req.body;
+app.use(cors());
 
-	await admin.firestore().collection("users").add(user);
-
-	res.status(201).send();
+app.get("/", (req, res) => {
+	res.status(200).send({ data: "wordly hellos" });
 });
 
-exports.user = functions.https.onRequest(app);
+app.get(`/watchcorrelations`, (req, res) => {
+	res.send(importData);
+});
+
+exports.app = functions.https.onRequest(app);
