@@ -21,7 +21,7 @@ import Watchstatistics from "./pages/Watchstatistics";
 import AddWatch from "./pages/Watchstatistics/AddWatch";
 import WatchBoxes from "./pages/WatchBoxes";
 import CompareWatches from "./pages/CompareWatches";
-import WatchLaboratory from "./pages/WatchLaboratory";
+
 import WatchLaboratory2 from "./components/WatchLab2";
 import Market from "./pages/Market";
 import Messages from "./pages/Messages";
@@ -34,6 +34,7 @@ import HomepageLayout from "./layouts/HomepageLayout";
 import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import DashBoardLayout from "./layouts/DashboardLayout";
+import WatchLab from "./layouts/WatchLab";
 
 import { ThemeProvider } from "@material-ui/styles";
 import { darkTheme, lightTheme } from "./styles/MUITheme";
@@ -105,9 +106,9 @@ const App = (props) => {
 						path="/watchstatistics/watchlaboratory"
 						render={() => (
 							<WithAuth>
-								<MainLayout>
+								<WatchLab>
 									<WatchLaboratory2 />
-								</MainLayout>
+								</WatchLab>
 							</WithAuth>
 						)}
 					/>
@@ -122,17 +123,7 @@ const App = (props) => {
 							</WithAuth>
 						)}
 					/>
-					<Route
-						exact
-						path="/watchstatistics/watchlaboratory2"
-						render={() => (
-							<WithAuth>
-								<MainLayout>
-									<WatchLaboratory />
-								</MainLayout>
-							</WithAuth>
-						)}
-					/>
+
 					<Route
 						exact
 						path="/watchstatistics/addwatch"

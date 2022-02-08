@@ -22,45 +22,56 @@ const WatchLab2 = () => {
 	const { currentUser } = useSelector(mapState);
 
 	const bagSize = () => {
-		if (currentUser.experience < 20) return 10;
-		if (currentUser.experience < 100) return 12;
-		if (currentUser.experience < 200) return 14;
-		if (currentUser.experience < 500) return 16;
-		if (currentUser.experience < 1500) return 18;
-		if (currentUser.experience < 5000) return 20;
+		if (getExperience() < 20) return 10;
+		if (getExperience() < 100) return 12;
+		if (getExperience() < 200) return 14;
+		if (getExperience() < 500) return 16;
+		if (getExperience() < 1500) return 18;
+		if (getExperience() < 5000) return 20;
 		else return 15;
 	};
 
+	function watchParts() {
+		if (currentUser)
+			return currentUser.watchParts ? currentUser.watchParts : [];
+		else return [];
+	}
+
+	function collection() {
+		if (currentUser)
+			return currentUser.collection ? currentUser.collection : [];
+		else return [];
+	}
+
+	function getExperience() {
+		if (currentUser) return currentUser.experience ? currentUser.experience : 0;
+		else return 0;
+	}
+
 	useEffect(
 		() => {
-			if (
-				currentUser.watchParts &&
-				currentUser.watchParts.length >= bagSize()
-			) {
+			if (watchParts() >= bagSize()) {
 				setBagFull(true);
 			} else setBagFull(false);
 		},
 		// eslint-disable-next-line
-		[currentUser.watchParts]
+		[watchParts()]
 	);
 
 	useEffect(
 		() => {
-			if (
-				currentUser.collection &&
-				currentUser.collection.length >= bagSize()
-			) {
+			if (collection() && collection() >= bagSize()) {
 				setCollectionFull(true);
 			} else setCollectionFull(false);
 		},
 		// eslint-disable-next-line
-		[currentUser.collection]
+		[collection()]
 	);
 
 	const data = [
 		{
 			title: "Available Parts",
-			items: currentUser.watchParts ? currentUser.watchParts : []
+			items: watchParts()
 		},
 		{ title: "Fusion Machine", items: [] },
 		{ title: "Parts Shreder", items: [] }

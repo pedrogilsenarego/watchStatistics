@@ -20,48 +20,77 @@ const Currencies = () => {
 	const { currentUser } = useSelector(mapState);
 
 	const bagSize = () => {
-		if (currentUser.experience < 20) return 10;
-		if (currentUser.experience < 100) return 12;
-		if (currentUser.experience < 200) return 14;
-		if (currentUser.experience < 500) return 16;
-		if (currentUser.experience < 1500) return 18;
-		if (currentUser.experience < 5000) return 20;
+		if (Experience() < 20) return 10;
+		if (Experience() < 100) return 12;
+		if (Experience() < 200) return 14;
+		if (Experience() < 500) return 16;
+		if (Experience() < 1500) return 18;
+		if (Experience() < 5000) return 20;
 		else return 15;
 	};
 
-	const itemsBag = () => {
-		if (!currentUser.watchParts) return "";
-		else return currentUser.watchParts;
-	};
+	function collection() {
+		if (currentUser)
+			return currentUser.collection ? currentUser.collection.length : 0;
+		else return 0;
+	}
+
+	function Experience() {
+		if (currentUser) return currentUser.experience ? currentUser.experience : 0;
+		else return 0;
+	}
+
+	function Points() {
+		if (currentUser) return currentUser.points ? currentUser.points : 0;
+		else return 0;
+	}
+
+	function watchParts() {
+		if (currentUser)
+			return currentUser.watchParts ? currentUser.watchParts : [];
+		else return [];
+	}
+
+	function Boosters() {
+		if (currentUser) return currentUser.boosters ? currentUser.boosters : 0;
+		else return 0;
+	}
 
 	const whiteBoxes = () => {
-		if (!currentUser.whiteBox) return 0;
-		else return currentUser.whiteBox;
+		if (currentUser) return currentUser.whiteBox ? currentUser.whiteBox : 0;
+		else return 0;
 	};
 
 	const BlueBoxes = () => {
-		if (!currentUser.blueBox) return 0;
-		else return currentUser.blueBox;
+		if (currentUser) return currentUser.blueBox ? currentUser.blueBox : 0;
+		else return 0;
 	};
 
 	const PurpleBoxes = () => {
-		if (!currentUser.purpleBox) return 0;
-		else return currentUser.purpleBox;
+		if (currentUser) return currentUser.purpleBox ? currentUser.purpleBox : 0;
+		else return 0;
 	};
 
 	const blueBoxFragments = () => {
-		if (!currentUser.blueBoxFragments) return 0;
-		else return currentUser.blueBoxFragments;
+		if (currentUser)
+			return currentUser.blueBoxFragments ? currentUser.blueBoxFragments : 0;
+		else return 0;
 	};
 
 	const purpleBoxFragments = () => {
-		if (!currentUser.purpleBoxFragments) return 0;
-		else return currentUser.purpleBoxFragments;
+		if (currentUser)
+			return currentUser.purpleBoxFragments
+				? currentUser.purpleBoxFragments
+				: 0;
+		else return 0;
 	};
 
 	const orangeBoxFragments = () => {
-		if (!currentUser.orangeBoxFragments) return 0;
-		else return currentUser.orangeBoxFragments;
+		if (currentUser)
+			return currentUser.orangeBoxFragments
+				? currentUser.orangeBoxFragments
+				: 0;
+		else return 0;
 	};
 	return (
 		<Grid container direction="column" alignItems="center">
@@ -78,18 +107,16 @@ const Currencies = () => {
 				}}
 			>
 				<Typography style={{ color: "#ffffffBF" }}>
-					<BsFillInboxFill size="3vh" color="white" />{" "}
-					{currentUser.collection ? currentUser.collection.length : 0}/
+					<BsFillInboxFill size="3vh" color="white" /> {collection()}/
 					{bagSize()}{" "}
 					<GiGears style={{ marginLeft: "5px" }} size="3vh" color="white" />{" "}
-					{itemsBag().length}/{bagSize()} {"     "}{" "}
+					{watchParts().length}/{bagSize()} {"     "}{" "}
 					<GoRocket style={{ marginLeft: "5px" }} size="3vh" color="white" />{" "}
-					{currentUser.boosters ? currentUser.boosters : 0}
+					{Boosters()}
 				</Typography>
 
 				<Typography style={{ color: "#ffffffBF", paddingLeft: "30px" }}>
-					<FaCoins size="3vh" color="orange" />{" "}
-					{currentUser.points ? currentUser.points : 0}
+					<FaCoins size="3vh" color="orange" /> {Points()}
 					{"  "}
 					<FaPuzzlePiece
 						style={{ marginLeft: "5px" }}

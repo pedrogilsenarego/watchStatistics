@@ -44,7 +44,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
 		case userTypes.UPDATE_BOX_STATE:
 			return {
 				...state,
-				currentUser: action.payloa
+				currentUser: action.payload
 			};
 		case userTypes.UPDATE_COLLECTION_STATE:
 			return {

@@ -38,16 +38,25 @@ const BoxInfo = () => {
 		else return currentUser.watchParts;
 	};
 
+	function points() {
+		if (currentUser) return currentUser.points ? currentUser.points : 0;
+		else return 0;
+	}
+
+	function whiteBox() {
+		if (currentUser) return currentUser.whiteBox ? currentUser.whiteBox : 0;
+		else return 0;
+	}
+
 	const whiteboxDisabled = () => {
-		if (!currentUser.points || currentUser.points < 4) {
+		if (points() < 4) {
 			return true;
 		} else return false;
 	};
 
 	const whiteboxDisabled2 = () => {
 		if (
-			!currentUser.whiteBox ||
-			currentUser.whiteBox < 1 ||
+			whiteBox() < 1 ||
 			(currentUser.watchParts && currentUser.watchParts.length >= bagSize())
 		) {
 			return true;

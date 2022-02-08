@@ -149,14 +149,16 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 			{display && search.length > 2 && (
 				<Box
 					style={{
-						backgroundColor: "#ffffff66",
+						backgroundColor: "#000000E6",
 						position: "absolute",
 						borderRadius: "8px",
 						padding: "30px",
-						marginLeft: "49vw",
+						marginLeft: "30.2vw",
 						minWidth: "200px",
 						minHeight: "50px",
-						marginTop: "50px"
+						marginTop: "10px",
+						border: "solid 2px",
+						borderColor: "#ffffff66"
 					}}
 				>
 					{options
