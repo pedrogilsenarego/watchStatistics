@@ -1,17 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Button, Typography, Box } from "@material-ui/core";
+import React from "react";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import { useHistory } from "react-router-dom";
+
 import { BsGraphUp } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import { VscHome } from "react-icons/vsc";
-import TextField from "@mui/material/TextField";
 
-import axios from "axios";
-
-const WATCHES_INFO =
-	"https://us-central1-fir-auth0-9b4cb.cloudfunctions.net/app/watchcorrelations";
+import Search from "../Search";
 
 const useStyles = makeStyles((theme) => ({
 	textBtn: {
@@ -56,49 +52,6 @@ const useStyles = makeStyles((theme) => ({
 
 const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 	const classes = useStyles();
-	const history = useHistory();
-	const [display, setDisplay] = useState(false);
-	const [options, setOptions] = useState([]);
-	const [search, setSearch] = useState("");
-
-	const wrapperRef = useRef(null);
-
-	const getDataFromApi = async () => {
-		try {
-			const response = await axios.get(WATCHES_INFO);
-			const data = response.data;
-
-			setOptions(data);
-		} catch (error) {
-			console.error();
-		}
-	};
-
-	useEffect(
-		() => {
-			getDataFromApi();
-		},
-		// eslint-disable-next-line
-		[]
-	);
-	useEffect(() => {
-		window.addEventListener("mousedown", handleClickOutside);
-		return () => {
-			window.removeEventListener("mousedown", handleClickOutside);
-		};
-	});
-
-	const handleClickOutside = (event) => {
-		const { current: wrap } = wrapperRef;
-		if (wrap && !wrap.contains(event.target)) {
-			setDisplay(false);
-		}
-	};
-	const handleSearch = (search) => {
-		history.push(`/product/${search}`);
-		setDisplay(false);
-		setSearch("");
-	};
 
 	return (
 		<div>
@@ -133,56 +86,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 				<AiOutlineInfoCircle fontSize="1.5em" />
 				&nbsp; Ecosystem
 			</Button>
-			<TextField
-				className={classes.textField}
-				style={{ marginLeft: "20px", marginTop: "-2px" }}
-				name="search"
-				size="small"
-				autoComplete="off"
-				placeholder="Search"
-				value={search}
-				onChange={(event) => {
-					setDisplay(true);
-					setSearch(event.target.value);
-				}}
-			></TextField>
-			{display && search.length > 2 && (
-				<Box
-					style={{
-						backgroundColor: "#000000E6",
-						position: "absolute",
-						borderRadius: "8px",
-						padding: "30px",
-						marginLeft: "30.2vw",
-						minWidth: "200px",
-						minHeight: "50px",
-						marginTop: "10px",
-						border: "solid 2px",
-						borderColor: "#ffffff66"
-					}}
-				>
-					{options
-
-						.filter(
-							({ name }) =>
-								name.toLowerCase().indexOf(search.toLowerCase()) > -1
-						)
-						.map((item, pos) => {
-							return (
-								<Typography
-									ref={wrapperRef}
-									style={{ cursor: "pointer" }}
-									onClick={() => {
-										handleSearch(item.id);
-									}}
-									key={pos}
-								>
-									{item.name}
-								</Typography>
-							);
-						})}
-				</Box>
-			)}
+			<Search />
 		</div>
 	);
 };

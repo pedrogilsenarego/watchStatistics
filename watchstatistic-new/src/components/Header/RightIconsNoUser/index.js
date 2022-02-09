@@ -27,6 +27,7 @@ const RightIconsNoUser = ({ handleSignupOpen, handleLoginOpen }) => {
 			activestyle={activeStyle}
 			onClick={(e) => handleLoginOpen(e)}
 			style={{
+				marginTop: "2px",
 				border: "solid 2px",
 				borderColor: "orange",
 				borderRadius: "14px"

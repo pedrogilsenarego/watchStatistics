@@ -1,0 +1,146 @@
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { Typography, Box, TextField } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+
+const WATCHES_INFO =
+	"https://us-central1-fir-auth0-9b4cb.cloudfunctions.net/app/watchcorrelations";
+
+const useStyles = makeStyles((theme) => ({
+	textField: {
+		"& .MuiOutlinedInput-input": { color: "white" },
+		"& . MuiInputLabel-root": {
+			color: "#ffffffB3"
+		},
+		"& .MuiInputLabel-root": { color: "grey" },
+		"& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffff",
+			borderWidth: "2px"
+		},
+		"&:hover .MuiOutlinedInput-input": {
+			color: "white"
+		},
+		"&:hover .MuiInputLabel-root": { color: "grey" },
+		"&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffffB3"
+		},
+		"&  .MuiOutlinedInput-input": {
+			color: "white"
+		},
+		"& .MuiOutlinedInput-root.Mui-focused": {
+			color: "#ffffffB3"
+		},
+		"& .MuiInputLabel-root.Mui-focused": { color: "#ffffffB3" },
+		"& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+			borderColor: "#ffffffB3"
+		}
+	}
+}));
+
+const Search = ({ isMatch }) => {
+	const history = useHistory();
+	const [display, setDisplay] = useState(false);
+	const [options, setOptions] = useState([]);
+	const [search, setSearch] = useState("");
+	const wrapperRef = useRef(null);
+	const classes = useStyles();
+
+	const getDataFromApi = async () => {
+		try {
+			const response = await axios.get(WATCHES_INFO);
+			const data = response.data;
+
+			setOptions(data);
+		} catch (error) {
+			console.error();
+		}
+	};
+
+	useEffect(
+		() => {
+			getDataFromApi();
+		},
+		// eslint-disable-next-line
+		[]
+	);
+	useEffect(() => {
+		window.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			window.removeEventListener("mousedown", handleClickOutside);
+		};
+	});
+
+	const handleClickOutside = (event) => {
+		const { current: wrap } = wrapperRef;
+		if (wrap && !wrap.contains(event.target)) {
+			setDisplay(false);
+		}
+	};
+	const handleSearch = (search) => {
+		history.push(`/product/${search}`);
+		setDisplay(false);
+		setSearch("");
+	};
+
+	return (
+		<>
+			<TextField
+				variant="outlined"
+				className={classes.textField}
+				style={{
+					marginLeft: isMatch ? "0px" : "20px",
+					marginTop: isMatch ? "5px" : "-2px"
+				}}
+				name="search"
+				size="small"
+				autoComplete="off"
+				placeholder="Search"
+				value={search}
+				onChange={(event) => {
+					setDisplay(true);
+					setSearch(event.target.value);
+				}}
+			></TextField>{" "}
+			{display && search.length > 2 && (
+				<Box
+					style={{
+						backgroundColor: "#000000E6",
+						position: "absolute",
+						borderRadius: "8px",
+						padding: "30px",
+						marginLeft: "30.2vw",
+						minWidth: "200px",
+						minHeight: "50px",
+						marginTop: "10px",
+						border: "solid 2px",
+						borderColor: "#ffffff66"
+					}}
+				>
+					{options
+
+						.filter(
+							({ name }) =>
+								name.toLowerCase().indexOf(search.toLowerCase()) > -1
+						)
+						.map((item, pos) => {
+							return (
+								<Typography
+									ref={wrapperRef}
+									style={{ cursor: "pointer" }}
+									onClick={() => {
+										handleSearch(item.id);
+									}}
+									key={pos}
+								>
+									{item.name}
+								</Typography>
+							);
+						})}
+				</Box>
+			)}
+		</>
+	);
+};
+
+export default Search;

@@ -10,8 +10,11 @@ import {
 	Grid,
 	Paper,
 	Button,
+	Typography,
 	ButtonGroup
 } from "@material-ui/core";
+
+import { fetchAllProductsStart } from "../../redux/Products/products.actions";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -23,7 +26,8 @@ import {
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
-	products: state.productsData.validationProducts
+	products: state.productsData.validationProducts,
+	watchProducts: state.productsData.products.data
 });
 
 // eslint-disable-next-line
@@ -32,9 +36,13 @@ const Admin = ({}) => {
 	const history = useHistory();
 	const pageSize = 5;
 
-	const { products } = useSelector(mapState);
+	const { products, watchProducts } = useSelector(mapState);
 
 	const { data } = products;
+
+	const handleGetWatches = () => {
+		dispatch(fetchAllProductsStart());
+	};
 
 	useEffect(
 		() => {
@@ -50,6 +58,15 @@ const Admin = ({}) => {
 		return (
 			<div>
 				<p>No search Results</p>
+				<Button onClick={() => handleGetWatches()}>Get Watches</Button>
+				{watchProducts.map((item, pos) => {
+					return (
+						<Typography style={{ color: "white" }} key={pos}>
+							&#123;"name":"{item.productBrand} {item.productName}{" "}
+							{item.reference}", "id": "{item.documentID}"&#125;,
+						</Typography>
+					);
+				})}
 			</div>
 		);
 	}
@@ -142,6 +159,7 @@ const Admin = ({}) => {
 					</TableContainer>
 				</Grid>
 			</Grid>
+			<Button>Get Watches collection</Button>
 		</div>
 	);
 };

@@ -79,3 +79,7 @@ export const setMyCollection = (myCollection) => ({
 	type: productsTypes.SET_MY_COLLECTION,
 	payload: myCollection
 });
+
+export const fetchAllProductsStart = () => ({
+	type: productsTypes.FETCH_ALL_PRODUCTS_START
+});

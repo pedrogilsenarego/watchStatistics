@@ -17,6 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { CgMenuGridO } from "react-icons/cg";
 import { BsGraphUp } from "react-icons/bs";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { FiSearch } from "react-icons/fi";
 import { VscHome } from "react-icons/vsc";
 
 import SignIn from "../SignIn";
@@ -178,24 +179,46 @@ const Header = (props) => {
 				<Toolbar>
 					{isMatch ? (
 						<>
-							<Grid item xs={12} md={6} className={classes.grid} align="left">
-								<Button
-									aria-controls="mediaMenu"
-									disableRipple
-									className={classes.textBtn}
-									activestyle={activeStyle}
-									onClick={(e) => {
-										setAnchorMediaMenu(e.currentTarget);
-									}}
+							<Grid container>
+								<Grid
+									item
+									xs={6}
+									md={6}
+									style={{ display: "flex" }}
+									align="left"
 								>
-									<CgMenuGridO fontSize="2.5em" />
-								</Button>
-							</Grid>
-							<Grid item xs={12} md={6} align="right">
-								{currentUser && <RightIconsUser {...configRightIconsUser} />}
-								{!currentUser && (
-									<RightIconsNoUser {...configRightIconsNoUser} />
-								)}
+									<Button
+										aria-controls="mediaMenu"
+										disableRipple
+										className={classes.textBtn}
+										activestyle={activeStyle}
+										onClick={(e) => {
+											setAnchorMediaMenu(e.currentTarget);
+										}}
+									>
+										<CgMenuGridO fontSize="2.5em" />
+									</Button>
+									<Button
+										aria-controls="search"
+										disableRipple
+										className={classes.textBtn}
+										activestyle={activeStyle}
+									>
+										<FiSearch fontSize="2.5em" />
+									</Button>
+								</Grid>
+								<Grid
+									item
+									xs={6}
+									md={6}
+									align="right"
+									style={{ marginTop: "3px" }}
+								>
+									{currentUser && <RightIconsUser {...configRightIconsUser} />}
+									{!currentUser && (
+										<RightIconsNoUser {...configRightIconsNoUser} />
+									)}
+								</Grid>
 							</Grid>
 						</>
 					) : (

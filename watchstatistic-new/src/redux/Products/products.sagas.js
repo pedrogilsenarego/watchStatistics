@@ -22,7 +22,8 @@ import {
 	handleUserVote,
 	handleUserUpdateDetails,
 	handleFetchRandomProduct,
-	handleFetchMyCollection
+	handleFetchMyCollection,
+	handleFetchAllProducts
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
@@ -193,6 +194,19 @@ export function* onFetchMyCollectionStart() {
 	yield takeLatest(productsTypes.FETCH_MY_COLLECTION_START, fetchMyCollection);
 }
 
+export function* fetchAllProducts({ payload }) {
+	try {
+		const products = yield handleFetchAllProducts(payload);
+		yield put(setProducts(products));
+	} catch (err) {
+		// console.log(err);
+	}
+}
+
+export function* onFetchAllProductsStart() {
+	yield takeLatest(productsTypes.FETCH_ALL_PRODUCTS_START, fetchAllProducts);
+}
+
 export default function* productsSagas() {
 	yield all([
 		call(onAddProductStart),
@@ -204,6 +218,7 @@ export default function* productsSagas() {
 		call(onFetchLatestProductsStart),
 		call(onFetchValidationProductsStart),
 		call(onFetchRandomProductStart),
-		call(onFetchMyCollectionStart)
+		call(onFetchMyCollectionStart),
+		call(onFetchAllProductsStart)
 	]);
 }

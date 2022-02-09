@@ -418,3 +418,29 @@ export const handleFetchMyCollection = ({
 			});
 	});
 };
+
+export const handleFetchAllProducts = () => {
+	return new Promise((resolve, reject) => {
+		let ref = firestore.collection("products");
+
+		ref
+			.get()
+			.then((snapshot) => {
+				const data = [
+					...snapshot.docs.map((doc) => {
+						return {
+							...doc.data(),
+							documentID: doc.id
+						};
+					})
+				];
+
+				resolve({
+					data
+				});
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};

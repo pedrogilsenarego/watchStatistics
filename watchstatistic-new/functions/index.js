@@ -18,3 +18,8 @@ app.get(`/watchcorrelations`, (req, res) => {
 });
 
 exports.app = functions.https.onRequest(app);
+
+/* exports.addWatches = function.firestore.document("/products/{documentID}").onCreate((snapshot, context)=>{
+	console.log(snapshot.data())
+	return Promise.resolve()
+}) */
