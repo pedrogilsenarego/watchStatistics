@@ -18,35 +18,40 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const RightIconsUser = ({ handleMyAccountOpen, messageStatus }) => {
+const RightIconsUser = ({ handleMyAccountOpen, messageStatus, search }) => {
 	const classes = useStyles();
 	const activeStyle = { color: "#FFA500" };
 	const history = useHistory();
 
-	return [
-		<Button
-			aria-controls="messages"
-			className={classes.textBtn}
-			activestyle={activeStyle}
-			disableRipple
-			onClick={() => {
-				history.push(`/messages`);
-			}}
-		>
-			<AiOutlineMessage fontSize="1.5em" />
-			&nbsp;({messageStatus})
-		</Button>,
-		<Button
-			className={classes.textBtn}
-			activestyle={activeStyle}
-			aria-controls="myAccount"
-			disableRipple
-			onClick={(e) => handleMyAccountOpen(e)}
-		>
-			<VscAccount fontSize="1.5em" />
-			&nbsp;
-		</Button>
-	];
+	return (
+		<>
+			{!search && [
+				<Button
+					aria-controls="messages"
+					className={classes.textBtn}
+					activestyle={activeStyle}
+					disableRipple
+					onClick={() => {
+						history.push(`/messages`);
+					}}
+				>
+					<AiOutlineMessage fontSize="1.5em" />
+					&nbsp;({messageStatus})
+				</Button>,
+
+				<Button
+					className={classes.textBtn}
+					activestyle={activeStyle}
+					aria-controls="myAccount"
+					disableRipple
+					onClick={(e) => handleMyAccountOpen(e)}
+				>
+					<VscAccount fontSize="1.5em" />
+					&nbsp;
+				</Button>
+			]}
+		</>
+	);
 };
 
 export default RightIconsUser;

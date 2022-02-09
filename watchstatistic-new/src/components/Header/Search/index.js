@@ -11,15 +11,17 @@ const WATCHES_INFO =
 const useStyles = makeStyles((theme) => ({
 	textField: {
 		[`& fieldset`]: {
-			borderRadius: 12
+			borderRadius: 12,
+			background: "#ffffff1A"
 		},
+
 		"& .MuiOutlinedInput-input": { color: "white" },
 		"& . MuiInputLabel-root": {
 			color: "#ffffffB3"
 		},
 		"& .MuiInputLabel-root": { color: "grey" },
 		"& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-			borderColor: "#ffffff",
+			borderColor: "#ffffff00",
 			borderWidth: "1.5px"
 		},
 		"&:hover .MuiOutlinedInput-input": {
@@ -93,13 +95,14 @@ const Search = ({ isMatch }) => {
 				variant="outlined"
 				className={classes.textField}
 				style={{
-					marginLeft: isMatch ? "0px" : "20px",
-					marginTop: isMatch ? "5px" : "-2px"
+					marginLeft: isMatch ? "20px" : "20px",
+					marginTop: isMatch ? "5px" : "-2px",
+					minWidth: isMatch ? "230px" : "0px"
 				}}
 				name="search"
 				size="small"
 				autoComplete="off"
-				placeholder={isMatch ? null : "Search"}
+				placeholder="Search"
 				value={search}
 				InputProps={{
 					endAdornment: isMatch ? null : <FiSearch />

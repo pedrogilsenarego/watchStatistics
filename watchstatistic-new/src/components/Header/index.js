@@ -104,7 +104,8 @@ const Header = (props) => {
 	};
 
 	const configRightIconsNoUser = {
-		handleLoginOpen
+		handleLoginOpen,
+		search
 	};
 
 	//RightIconsUser
@@ -114,7 +115,8 @@ const Header = (props) => {
 	};
 	const configRightIconsUser = {
 		handleMyAccountOpen,
-		messageStatus
+		messageStatus,
+		search
 	};
 
 	//leftIconst
@@ -186,22 +188,23 @@ const Header = (props) => {
 							<Grid container>
 								<Grid
 									item
-									xs={8}
-									md={6}
+									xs={search ? 12 : 6}
 									style={{ display: "flex" }}
 									align="left"
 								>
-									<Button
-										aria-controls="mediaMenu"
-										disableRipple
-										className={classes.textBtn}
-										activestyle={activeStyle}
-										onClick={(e) => {
-											setAnchorMediaMenu(e.currentTarget);
-										}}
-									>
-										<CgMenuGridO fontSize="2.5em" />
-									</Button>
+									{!search && (
+										<Button
+											aria-controls="mediaMenu"
+											disableRipple
+											className={classes.textBtn}
+											activestyle={activeStyle}
+											onClick={(e) => {
+												setAnchorMediaMenu(e.currentTarget);
+											}}
+										>
+											<CgMenuGridO fontSize="2.5em" />
+										</Button>
+									)}
 
 									<Button
 										aria-controls="search"
@@ -216,8 +219,7 @@ const Header = (props) => {
 								</Grid>
 								<Grid
 									item
-									xs={4}
-									md={6}
+									xs={search ? 0 : 6}
 									align="right"
 									style={{ marginTop: "3px" }}
 								>

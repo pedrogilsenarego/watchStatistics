@@ -15,26 +15,30 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const RightIconsNoUser = ({ handleSignupOpen, handleLoginOpen }) => {
+const RightIconsNoUser = ({ handleSignupOpen, handleLoginOpen, search }) => {
 	const classes = useStyles();
 	const activeStyle = { color: "#FFA500" };
 
 	return (
-		<Button
-			aria-controls="login"
-			disableRipple
-			className={classes.textBtn}
-			activestyle={activeStyle}
-			onClick={(e) => handleLoginOpen(e)}
-			style={{
-				marginTop: "2px",
-				border: "solid 2px",
-				borderColor: "orange",
-				borderRadius: "14px"
-			}}
-		>
-			Enter
-		</Button>
+		<>
+			{!search && (
+				<Button
+					aria-controls="login"
+					disableRipple
+					className={classes.textBtn}
+					activestyle={activeStyle}
+					onClick={(e) => handleLoginOpen(e)}
+					style={{
+						marginTop: "2px",
+						border: "solid 2px",
+						borderColor: "orange",
+						borderRadius: "14px"
+					}}
+				>
+					Enter
+				</Button>
+			)}
+		</>
 	);
 };
 
