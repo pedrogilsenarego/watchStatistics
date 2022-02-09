@@ -13,6 +13,7 @@ import {
 	useTheme
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Search from "./Search";
 
 import { CgMenuGridO } from "react-icons/cg";
 import { BsGraphUp } from "react-icons/bs";
@@ -82,6 +83,7 @@ const Header = (props) => {
 	const [anchorWatchStatistics, setAnchorWatchstatistics] = useState(null);
 	const [mediaWatchstatisticsBtns, setMediaWatchstatisticsBtns] =
 		useState(false);
+	const [search, setSearch] = useState(false);
 
 	const [watchstatistics, setWatchstatistics] = useState(true);
 
@@ -173,6 +175,8 @@ const Header = (props) => {
 
 	const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
+	const configSearch = { isMatch };
+
 	return (
 		<div>
 			<AppBar position="fixed" elevation={0} className={classes.appbar}>
@@ -182,7 +186,7 @@ const Header = (props) => {
 							<Grid container>
 								<Grid
 									item
-									xs={6}
+									xs={8}
 									md={6}
 									style={{ display: "flex" }}
 									align="left"
@@ -198,18 +202,21 @@ const Header = (props) => {
 									>
 										<CgMenuGridO fontSize="2.5em" />
 									</Button>
+
 									<Button
 										aria-controls="search"
 										disableRipple
 										className={classes.textBtn}
 										activestyle={activeStyle}
+										onClick={() => setSearch(!search)}
 									>
 										<FiSearch fontSize="2.5em" />
 									</Button>
+									{search && <Search {...configSearch} />}
 								</Grid>
 								<Grid
 									item
-									xs={6}
+									xs={4}
 									md={6}
 									align="right"
 									style={{ marginTop: "3px" }}

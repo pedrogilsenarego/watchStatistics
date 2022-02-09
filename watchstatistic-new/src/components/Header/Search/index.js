@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 		"& .MuiInputLabel-root": { color: "grey" },
 		"& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
 			borderColor: "#ffffff",
-			borderWidth: "2px"
+			borderWidth: "1.5px"
 		},
 		"&:hover .MuiOutlinedInput-input": {
 			color: "white"
@@ -99,10 +99,10 @@ const Search = ({ isMatch }) => {
 				name="search"
 				size="small"
 				autoComplete="off"
-				placeholder="Search"
+				placeholder={isMatch ? null : "Search"}
 				value={search}
 				InputProps={{
-					endAdornment: <FiSearch />
+					endAdornment: isMatch ? null : <FiSearch />
 				}}
 				onChange={(event) => {
 					setDisplay(true);
