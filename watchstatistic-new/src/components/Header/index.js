@@ -223,10 +223,10 @@ const Header = (props) => {
 						</>
 					) : (
 						<>
-							<Grid item xs={12} md={6} className={classes.grid} align="left">
+							<Grid item xs={12} md={7} className={classes.grid} align="left">
 								<LeftIcons {...configLeftIcons} />
 							</Grid>
-							<Grid item xs={12} md={6} align="right">
+							<Grid item xs={12} md={5} align="right">
 								{currentUser && <RightIconsBigUser {...configRightIconsUser} />}
 								{!currentUser && (
 									<RightIconsNoUser {...configRightIconsNoUser} />

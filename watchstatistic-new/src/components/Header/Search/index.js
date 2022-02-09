@@ -3,12 +3,16 @@ import axios from "axios";
 import { Typography, Box, TextField } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { FiSearch } from "react-icons/fi";
 
 const WATCHES_INFO =
 	"https://us-central1-fir-auth0-9b4cb.cloudfunctions.net/app/watchcorrelations";
 
 const useStyles = makeStyles((theme) => ({
 	textField: {
+		[`& fieldset`]: {
+			borderRadius: 12
+		},
 		"& .MuiOutlinedInput-input": { color: "white" },
 		"& . MuiInputLabel-root": {
 			color: "#ffffffB3"
@@ -97,11 +101,14 @@ const Search = ({ isMatch }) => {
 				autoComplete="off"
 				placeholder="Search"
 				value={search}
+				InputProps={{
+					endAdornment: <FiSearch />
+				}}
 				onChange={(event) => {
 					setDisplay(true);
 					setSearch(event.target.value);
 				}}
-			></TextField>{" "}
+			/>
 			{display && search.length > 2 && (
 				<Box
 					style={{
