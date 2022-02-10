@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { addProductStart } from "../../redux/Products/products.actions";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import Container from "@mui/material/Container";
+
 import { useHistory } from "react-router";
 import { Grid, Typography, Box, Paper, Button } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes2.json";
@@ -21,6 +21,9 @@ import ProductDetailsPreview from "../../pages/ProductDetailsPreview";
 
 const useStyles = makeStyles((theme) => ({
 	textField: {
+		[`& fieldset`]: {
+			background: "white"
+		},
 		"& .MuiOutlinedInput-input": { color: "white" },
 		"& . MuiInputLabel-root": {
 			color: "#ffffffB3"
@@ -43,18 +46,12 @@ const useStyles = makeStyles((theme) => ({
 		"& .MuiOutlinedInput-root.Mui-focused": {
 			color: "#ffffffB3"
 		},
-		"& .MuiInputLabel-root.Mui-focused": { color: "#ffffffB3" },
+		"& .MuiInputLabel-root.Mui-focused": { color: "#ffffff00" },
 		"& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
 			borderColor: "#ffffffB3"
 		}
 	},
-	container: {
-		backgroundColor: theme.palette.textField.background,
-		height: "40px",
-		padding: "0px",
 
-		borderRadius: "4px"
-	},
 	textBtn: {
 		color: "#FFFFFF",
 		fontSize: "13px",
@@ -285,7 +282,9 @@ const AddWatchForm = () => {
 	return (
 		<div>
 			<Grid container justify="center">
-				<Paper style={{ width: "60vw", background: "black" }}>
+				<Paper
+					style={{ width: "45vw", background: "black", paddingTop: "10vh" }}
+				>
 					<Box style={{ margin: "10px" }}>
 						<Formik
 							initialValues={{
@@ -303,138 +302,116 @@ const AddWatchForm = () => {
 								<Typography variant="h6">Details from the Watch</Typography>
 								<Grid container spacing={2} style={{ paddingTop: "20px" }}>
 									<Grid item xs={12} md={6}>
-										<Container className={classes.container}>
-											<Select
-												size="small"
-												className={classes.textField}
-												name="productCategory"
-												label="Categories*"
-												options={watchTypes}
-											/>
-										</Container>
+										<Select
+											size="small"
+											className={classes.textField}
+											name="productCategory"
+											label="Categories*"
+											options={watchTypes}
+										/>
 									</Grid>
 									<Grid item xs={12} md={6}>
-										<Container className={classes.container}>
-											<Select
-												className={classes.textField}
-												size="small"
-												name="productBrand"
-												label="Brands*"
-												options={watchBrands}
-											/>
-										</Container>
+										<Select
+											className={classes.textField}
+											size="small"
+											name="productBrand"
+											label="Brands*"
+											options={watchBrands}
+										/>
 									</Grid>
 									<Grid item xs={12} md={6}>
-										<Container className={classes.container}>
-											<Select
-												size="small"
-												className={classes.textField}
-												name="productPriceBrackets"
-												label="Price Brackets*"
-												options={pricesBracket}
-											/>
-										</Container>
+										<Select
+											size="small"
+											className={classes.textField}
+											name="productPriceBrackets"
+											label="Price Brackets*"
+											options={pricesBracket}
+										/>
 									</Grid>
 									<Grid item xs={12} md={6}>
-										<Container className={classes.container}>
-											<Select
-												size="small"
-												className={classes.textField}
-												name="movement"
-												label="Type of movement"
-												options={{
-													Automatic: "Automatic",
-													Quartz: "Quartz",
-													MechaQuartz: "MechaQuartz",
-													Manual: "Manual"
-												}}
-											/>
-										</Container>
+										<Select
+											size="small"
+											className={classes.textField}
+											name="movement"
+											label="Type of movement"
+											options={{
+												Automatic: "Automatic",
+												Quartz: "Quartz",
+												MechaQuartz: "MechaQuartz",
+												Manual: "Manual"
+											}}
+										/>
 									</Grid>
 									<Grid item xs={12} md={6}>
-										<Container className={classes.container}>
-											<Select
-												size="small"
-												className={classes.textField}
-												name="caseMaterial"
-												label="Watch material"
-												options={{
-													Gold: "Gold",
-													Plastic: "Plastic",
-													"Stainless Steel": "Stainless Steel",
-													Titanium: "Titanium",
-													"White Gold": "White Gold"
-												}}
-											/>
-										</Container>
+										<Select
+											size="small"
+											className={classes.textField}
+											name="caseMaterial"
+											label="Watch material"
+											options={{
+												Gold: "Gold",
+												Plastic: "Plastic",
+												"Stainless Steel": "Stainless Steel",
+												Titanium: "Titanium",
+												"White Gold": "White Gold"
+											}}
+										/>
 									</Grid>
 									<Grid item xs={12} md={6}>
-										<Container className={classes.container}>
-											<Select
-												size="small"
-												className={classes.textField}
-												name="waterResistance"
-												label="Water Resistance"
-												options={{
-													"30meters": "30 meters",
-													"50meters": "50 meters",
-													"100meters": "100 meters",
-													"200meters": "200 meters",
-													"300meters": "300 meters"
-												}}
-											/>
-										</Container>
+										<Select
+											size="small"
+											className={classes.textField}
+											name="waterResistance"
+											label="Water Resistance"
+											options={{
+												"30meters": "30 meters",
+												"50meters": "50 meters",
+												"100meters": "100 meters",
+												"200meters": "200 meters",
+												"300meters": "300 meters"
+											}}
+										/>
 									</Grid>
 									<Grid item xs={3}>
-										<Container className={classes.container}>
-											<TextField
-												size="small"
-												className={classes.textField}
-												name="yearProductionStart"
-												label="Start year"
-											></TextField>
-										</Container>
+										<TextField
+											size="small"
+											className={classes.textField}
+											name="yearProductionStart"
+											label="Start year"
+										></TextField>
 									</Grid>
 									<Grid item xs={3}>
-										<Container className={classes.container}>
-											<TextField
-												size="small"
-												className={classes.textField}
-												name="yearProductionEnd"
-												label="Finish year"
-											></TextField>
-										</Container>
+										<TextField
+											size="small"
+											className={classes.textField}
+											name="yearProductionEnd"
+											label="Finish year"
+										></TextField>
 									</Grid>
-									<Grid item xs={3}>
-										<Container className={classes.container}>
-											<TextField
-												size="small"
-												className={classes.textField}
-												name="caseSize"
-												label="Case size"
-											></TextField>
-										</Container>
+									<Grid item xs={6}>
+										<TextField
+											size="small"
+											className={classes.textField}
+											name="caseSize"
+											label="Case size"
+										></TextField>
 									</Grid>
 
 									<Grid item xs={6}>
-										<Container className={classes.container}>
-											<TextField
-												size="small"
-												className={classes.textField}
-												name="productName"
-												label="Model*"
-											></TextField>
-										</Container>
+										<TextField
+											size="small"
+											className={classes.textField}
+											name="productName"
+											label="Model*"
+										></TextField>
 									</Grid>
 									<Grid item xs={6}>
-										<Container className={classes.container}>
-											<TextField
-												size="small"
-												className={classes.textField}
-												name="reference"
-												label="Reference*"
-											></TextField>
-										</Container>
+										<TextField
+											size="small"
+											className={classes.textField}
+											name="reference"
+											label="Reference*"
+										></TextField>
 									</Grid>
 									<Typography
 										variant="subheader1"
@@ -448,7 +425,7 @@ const AddWatchForm = () => {
 										style={{
 											display: "flex",
 											paddingLeft: "8px",
-											paddingTop: "60px"
+											paddingTop: "20vh"
 										}}
 									>
 										<Typography variant="h6">Images</Typography>
@@ -482,50 +459,42 @@ const AddWatchForm = () => {
 										</Grid>
 									)}
 
-									<Grid item xs={12} style={{ paddingTop: "20px" }}>
-										<Container className={classes.container}>
-											<TextField
-												size="small"
-												className={classes.textField}
-												name="productThumbnail"
-												label="Main Image*"
-											></TextField>
-										</Container>
+									<Grid item xs={6} style={{}}>
+										<TextField
+											size="small"
+											className={classes.textField}
+											name="productThumbnail"
+											label="Main Image*"
+										></TextField>
 
 										{additionalProductThumbnail2 && (
 											<Grid item xs={12} style={{ paddingTop: "10px" }}>
-												<Container className={classes.container}>
-													<TextField
-														size="small"
-														className={classes.textField}
-														name="productThumbnail2"
-														label="Additional Image"
-													></TextField>
-												</Container>
+												<TextField
+													size="small"
+													className={classes.textField}
+													name="productThumbnail2"
+													label="Additional Image"
+												></TextField>
 											</Grid>
 										)}
 										{additionalProductThumbnail3 && (
 											<Grid item xs={12} style={{ paddingTop: "10px" }}>
-												<Container className={classes.container}>
-													<TextField
-														size="small"
-														className={classes.textField}
-														name="productThumbnail3"
-														label="Additional Image 2"
-													></TextField>
-												</Container>
+												<TextField
+													size="small"
+													className={classes.textField}
+													name="productThumbnail3"
+													label="Additional Image 2"
+												></TextField>
 											</Grid>
 										)}
 										{additionalProductThumbnail4 && (
 											<Grid item xs={12} style={{ paddingTop: "10px" }}>
-												<Container className={classes.container}>
-													<TextField
-														size="small"
-														className={classes.textField}
-														name="productThumbnail4"
-														label="Additional Image 3"
-													></TextField>
-												</Container>
+												<TextField
+													size="small"
+													className={classes.textField}
+													name="productThumbnail4"
+													label="Additional Image 3"
+												></TextField>
 											</Grid>
 										)}
 										{!additionalProductThumbnail4 && (
@@ -546,15 +515,13 @@ const AddWatchForm = () => {
 										)}
 									</Grid>
 
-									<Grid item xs={12}>
-										<Container className={classes.container}>
-											<TextField
-												size="small"
-												className={classes.textField}
-												name="productBackground"
-												label="Background Image*"
-											></TextField>
-										</Container>
+									<Grid item xs={6}>
+										<TextField
+											size="small"
+											className={classes.textField}
+											name="productBackground"
+											label="Background Image*"
+										></TextField>
 									</Grid>
 									<Typography
 										variant="h6"
@@ -570,14 +537,13 @@ const AddWatchForm = () => {
 											display: "flex"
 										}}
 									>
-										<Container className={classes.container}>
-											<Multiline
-												className={classes.textField}
-												style={{ width: "80%" }}
-												name="productDesc"
-												label="Description from Watch*"
-											></Multiline>
-										</Container>
+										<Multiline
+											className={classes.textField}
+											style={{ width: "80%" }}
+											name="productDesc"
+											label="Description from Watch*"
+										></Multiline>
+
 										<Button size="small">
 											<AiOutlineQuestionCircle
 												onClick={() => setHelperDescription(!helperDescription)}
@@ -612,25 +578,21 @@ const AddWatchForm = () => {
 									<Grid item xs={12}>
 										<Typography>References</Typography>
 									</Grid>
-									<Grid item xs={12}>
-										<Container className={classes.container}>
-											<TextField
-												size="small"
-												className={classes.textField}
-												name="additionalDataTitle"
-												label="Title*  ex:Hodinkee"
-											></TextField>
-										</Container>
+									<Grid item xs={6}>
+										<TextField
+											size="small"
+											className={classes.textField}
+											name="additionalDataTitle"
+											label="Title*  ex:Hodinkee"
+										></TextField>
 									</Grid>
-									<Grid item xs={12}>
-										<Container className={classes.container}>
-											<TextField
-												size="small"
-												className={classes.textField}
-												name="additionalDataLink"
-												label="Link*  ex:https://www.hodinkee.com/articles/..."
-											></TextField>
-										</Container>
+									<Grid item xs={6}>
+										<TextField
+											size="small"
+											className={classes.textField}
+											name="additionalDataLink"
+											label="Link*  ex:https://www.hodinkee.com/articles/..."
+										></TextField>
 									</Grid>
 									<Grid item xs={12} style={{ paddingTop: "60px" }}>
 										{preview && <ButtonMUI>Refresh Preview</ButtonMUI>}

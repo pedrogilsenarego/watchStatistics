@@ -63,7 +63,7 @@ const Next = () => {
 
 	const submitNewWatch = () => {
 		const newWatch = {
-			title: "Submit Watch",
+			title: "Submit New Watch",
 			link: "watchstatistics/addwatch"
 		};
 		if (getWatchesSubmited() < 10) return newWatch;
@@ -95,7 +95,7 @@ const Next = () => {
 	return (
 		<div>
 			<Container>
-				<Grid container spacing={2} style={{ marginTop: "1px" }}>
+				<Grid container spacing={2} style={{ marginTop: "-2px" }}>
 					{nextItems().map((item, pos) => {
 						return (
 							<Grid item key={pos}>
@@ -105,7 +105,7 @@ const Next = () => {
 									className={classes.textBtn}
 									style={{
 										backgroundColor: "#18161E",
-
+										textTransform: "none",
 										borderRadius: "14px"
 									}}
 								>
