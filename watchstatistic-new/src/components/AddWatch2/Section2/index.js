@@ -201,9 +201,16 @@ const Section2 = ({ isMatch }) => {
 					</Container>
 				</Grid>
 
+				<Divider
+					style={{
+						width: "100%",
+						background: theme.palette.text.faded3,
+						marginTop: "60px"
+					}}
+				/>
 				<Typography
 					variant="subheader1"
-					style={{ paddingLeft: "8px", marginTop: "20px" }}
+					style={{ paddingLeft: "8px", marginTop: "10px" }}
 				>
 					* fields have to be filled
 				</Typography>

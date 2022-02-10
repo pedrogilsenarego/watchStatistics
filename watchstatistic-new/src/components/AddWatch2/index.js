@@ -217,7 +217,8 @@ const AddWatch2 = () => {
 		productThumbnail: productThumbnailPreview,
 		productBackground: productBackGroundPreview,
 		productDesc: productDescPreview,
-		additionalData: productAdditionalDataPreview
+		additionalData: productAdditionalDataPreview,
+		isMatch
 	};
 
 	return (
@@ -235,15 +236,14 @@ const AddWatch2 = () => {
 				}}
 			>
 				<Form>
+					<Section3 {...configSection3} />
+
 					<Grid className="section" container justify="center">
 						<Section1 />
 					</Grid>
 
 					<Grid className="section" container justify="center">
 						<Section2 {...configSection2} />
-					</Grid>
-					<Grid className="section" container justify="center">
-						<Section3 {...configSection3} />
 					</Grid>
 				</Form>
 			</Formik>
