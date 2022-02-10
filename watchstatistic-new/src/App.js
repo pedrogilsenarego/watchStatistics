@@ -129,9 +129,9 @@ const App = (props) => {
 						path="/watchstatistics/addwatch"
 						render={() => (
 							<WithAuth>
-								<MainLayout>
+								<WatchLab>
 									<AddWatch />
-								</MainLayout>
+								</WatchLab>
 							</WithAuth>
 						)}
 					/>

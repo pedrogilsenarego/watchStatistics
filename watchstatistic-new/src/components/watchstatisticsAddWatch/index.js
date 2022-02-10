@@ -6,7 +6,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
 import { useHistory } from "react-router";
-import { Grid, Typography, Box, Paper, Button } from "@material-ui/core";
+import { Grid, Typography, Paper, Button } from "@material-ui/core";
 import watchTypes from "./../../assets/data/watchTypes2.json";
 import watchBrands from "./../../assets/data/watchBrands2.json";
 import pricesBracket from "./../../assets/data/pricesBracket2.json";
@@ -281,11 +281,14 @@ const AddWatchForm = () => {
 
 	return (
 		<div>
-			<Grid container justify="center">
-				<Paper
-					style={{ width: "45vw", background: "black", paddingTop: "10vh" }}
-				>
-					<Box style={{ margin: "10px" }}>
+			<container>
+				<Grid container justify="center">
+					<Paper
+						style={{
+							width: "45vw",
+							background: "black"
+						}}
+					>
 						<Formik
 							initialValues={{
 								...INITIAL_FORM_STATE
@@ -299,8 +302,20 @@ const AddWatchForm = () => {
 							}}
 						>
 							<Form>
-								<Typography variant="h6">Details from the Watch</Typography>
-								<Grid container spacing={2} style={{ paddingTop: "20px" }}>
+								<Grid
+									container
+									item
+									spacing={2}
+									style={{
+										height: "100vh",
+										paddingTop: "20vh",
+										scrollSnapAlign: "start",
+										overflowY: "scroll"
+									}}
+								>
+									<Grid item xs={12}>
+										<Typography variant="h6">Details from the Watch</Typography>
+									</Grid>
 									<Grid item xs={12} md={6}>
 										<Select
 											size="small"
@@ -396,7 +411,6 @@ const AddWatchForm = () => {
 											label="Case size"
 										></TextField>
 									</Grid>
-
 									<Grid item xs={6}>
 										<TextField
 											size="small"
@@ -419,6 +433,17 @@ const AddWatchForm = () => {
 									>
 										* fields have to be filled
 									</Typography>
+								</Grid>
+								<Grid
+									container
+									spacing={2}
+									style={{
+										paddingTop: "20px",
+										height: "100vh",
+										scrollSnapAlign: "start",
+										overflowY: "scroll"
+									}}
+								>
 									<Grid
 										item
 										xs={12}
@@ -619,16 +644,17 @@ const AddWatchForm = () => {
 								</Grid>
 							</Form>
 						</Formik>
-					</Box>
-				</Paper>
-			</Grid>
-			<Typography
-				style={{ paddingTop: "40px", paddingLeft: "60px" }}
-				variant={"h5"}
-			>
-				Preview your watch
-			</Typography>
-			<ProductDetailsPreview {...configPreview} />
+					</Paper>
+				</Grid>
+
+				<Typography
+					style={{ paddingTop: "40px", paddingLeft: "60px" }}
+					variant={"h5"}
+				>
+					Preview your watch
+				</Typography>
+				<ProductDetailsPreview {...configPreview} />
+			</container>
 		</div>
 	);
 };
