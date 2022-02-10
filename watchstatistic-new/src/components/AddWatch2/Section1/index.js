@@ -72,7 +72,7 @@ const Section1 = () => {
 						}}
 					/>
 				</Grid>
-				<Grid item xs={12} md={6} style={{ marginTop: "10px" }}>
+				<Grid item xs={6} style={{ marginTop: "10px" }}>
 					<Container
 						style={{
 							backgroundColor: theme.palette.textField.background,
@@ -91,7 +91,7 @@ const Section1 = () => {
 						/>
 					</Container>
 				</Grid>
-				<Grid item xs={12} md={6} style={{ marginTop: "10px" }}>
+				<Grid item xs={6} style={{ marginTop: "10px" }}>
 					<Container
 						style={{
 							backgroundColor: theme.palette.textField.background,
@@ -110,7 +110,7 @@ const Section1 = () => {
 						/>
 					</Container>
 				</Grid>
-				<Grid item xs={12} md={6} style={{ marginTop: "10px" }}>
+				<Grid item xs={6} style={{ marginTop: "10px" }}>
 					<Container
 						style={{
 							backgroundColor: theme.palette.textField.background,
@@ -129,7 +129,7 @@ const Section1 = () => {
 						/>
 					</Container>
 				</Grid>
-				<Grid item xs={12} md={6} style={{ marginTop: "10px" }}>
+				<Grid item xs={6} style={{ marginTop: "10px" }}>
 					<Container
 						style={{
 							backgroundColor: theme.palette.textField.background,
@@ -153,7 +153,7 @@ const Section1 = () => {
 						/>
 					</Container>
 				</Grid>
-				<Grid item xs={12} md={6} style={{ marginTop: "10px" }}>
+				<Grid item xs={6} style={{ marginTop: "10px" }}>
 					<Container
 						style={{
 							backgroundColor: theme.palette.textField.background,
@@ -178,7 +178,7 @@ const Section1 = () => {
 						/>
 					</Container>
 				</Grid>
-				<Grid item xs={12} md={6} style={{ marginTop: "10px" }}>
+				<Grid item xs={6} style={{ marginTop: "10px" }}>
 					<Container
 						style={{
 							backgroundColor: theme.palette.textField.background,

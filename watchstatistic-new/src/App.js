@@ -150,25 +150,25 @@ const App = (props) => {
 						exact
 						path="/search"
 						render={() => (
-							<MainLayout>
+							<WatchLab>
 								<Search />
-							</MainLayout>
+							</WatchLab>
 						)}
 					/>
 					<Route
 						path="/search/:filterType"
 						render={() => (
-							<MainLayout>
+							<WatchLab>
 								<Search />
-							</MainLayout>
+							</WatchLab>
 						)}
 					/>
 					<Route
 						path="/product/:productID"
 						render={() => (
-							<MainLayout>
+							<WatchLab>
 								<ProductDetails />
-							</MainLayout>
+							</WatchLab>
 						)}
 					/>
 					<Route

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SideGraphPanel from "../../components/ProductDetails/ProductSideGraph";
+
 import SideDescriptionPreview from "../../components/ProductDetails/ProductSideDescriptionPreview";
 import { makeStyles } from "@material-ui/core/styles";
 import { BsXDiamond } from "react-icons/bs";
@@ -103,7 +103,7 @@ const ProductDetails = (configPreview) => {
 							paddingRight: "10px"
 						}}
 					>
-						<Grid item xs={12} md={8}>
+						<Grid item xs={12}>
 							<Box alt={productName}>
 								{!mainImage && (
 									<CardMedia
@@ -144,25 +144,15 @@ const ProductDetails = (configPreview) => {
 								)}
 							</Box>
 						</Grid>
-						<Grid item xs={12} md={4}>
-							<Card
-								className={classes.side}
-								style={{ backgroundColor: "#04040699" }}
-							>
-								<CardContent style={{ padding: "5px" }}>
-									<SideGraphPanel />
-								</CardContent>
-							</Card>
-						</Grid>
 
-						<Grid item xs={12} sm={8}>
+						<Grid item xs={12}>
 							<Card style={{ backgroundColor: "#04040699" }}>
 								<CardContent style={{ padding: "5px" }}>
 									<SideDescriptionPreview {...configSideDesc} />
 								</CardContent>
 							</Card>
 						</Grid>
-						<Grid item xs={12} sm={4}>
+						<Grid item xs={12}>
 							<Card
 								style={{ backgroundColor: "#04040699", marginBottom: "10px" }}
 							>

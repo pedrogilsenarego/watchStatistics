@@ -4,11 +4,9 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Multiline from "../../forms/MultiLineMUI";
-import Select from "../../forms/SelectMUIFormik";
+
 import TextField from "../../forms/InputMUI";
-import watchTypes from "./../../../assets/data/watchTypes2.json";
-import watchBrands from "./../../../assets/data/watchBrands2.json";
-import pricesBracket from "./../../../assets/data/pricesBracket2.json";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import Divider from "@mui/material/Divider";
@@ -59,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const Section2 = () => {
+const Section2 = ({ isMatch }) => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const [helperDescriptionImages, setHelperDescriptionImages] = useState(false);
@@ -123,7 +121,11 @@ const Section2 = () => {
 						></TextField>
 					</Container>
 				</Grid>
-				<Grid item xs={12} style={{ marginTop: "40px", display: "flex" }}>
+				<Grid
+					item
+					xs={12}
+					style={{ marginTop: isMatch ? "20px" : "40px", display: "flex" }}
+				>
 					<Typography>Additional Information</Typography>
 					<Button disableRipple>
 						<AiOutlineQuestionCircle

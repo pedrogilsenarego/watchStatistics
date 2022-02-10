@@ -9,7 +9,7 @@ import Section3 from "./Section3";
 import Grid from "@mui/material/Grid";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-
+import { useMediaQuery, useTheme } from "@material-ui/core";
 import { addProductStart } from "../../redux/Products/products.actions";
 
 const INITIAL_FORM_STATE = {
@@ -86,6 +86,7 @@ const mapState = (state) => ({
 const AddWatch2 = () => {
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
+	const theme = useTheme();
 	const history = useHistory();
 	const [preview, setPreview] = useState(true);
 	const [additionalProductThumbnail2, setAdditionalProductThumbnail2] =
@@ -99,9 +100,10 @@ const AddWatch2 = () => {
 	const [productDescPreview, setProductDescPreview] = useState("");
 	const [productAdditionalDataPreview, setProductAdditionalDataPreview] =
 		useState("");
-
+	const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
 	const { userRoles, displayName } = currentUser;
 	const admin = userRoles.includes("admin") ? true : false;
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
 	const handlePreview = (e) => {
 		const {
@@ -206,7 +208,17 @@ const AddWatch2 = () => {
 		history.push("/");
 	};
 
-	const configSection3 = { preview };
+	const configSection2 = { isMatch };
+	const configSection3 = {
+		preview,
+		setPreview,
+		openBoxPopUp,
+		setOpenBoxPopUp,
+		productThumbnail: productThumbnailPreview,
+		productBackground: productBackGroundPreview,
+		productDesc: productDescPreview,
+		additionalData: productAdditionalDataPreview
+	};
 
 	return (
 		<div className="container">
@@ -216,8 +228,10 @@ const AddWatch2 = () => {
 				}}
 				validationSchema={!preview ? FORM_VALIDATION : FORM_VALIDATION_NULL}
 				onSubmit={(values) => {
-					if (preview) handlePreview(values);
-					else handleFormSubmit(values);
+					if (preview) {
+						handlePreview(values);
+						setOpenBoxPopUp(true);
+					} else handleFormSubmit(values);
 				}}
 			>
 				<Form>
@@ -226,7 +240,7 @@ const AddWatch2 = () => {
 					</Grid>
 
 					<Grid className="section" container justify="center">
-						<Section2 />
+						<Section2 {...configSection2} />
 					</Grid>
 					<Grid className="section" container justify="center">
 						<Section3 {...configSection3} />

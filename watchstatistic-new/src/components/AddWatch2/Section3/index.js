@@ -1,18 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
+
 import ButtonMUI from "../../forms/ButtonMUI";
-import Multiline from "../../forms/MultiLineMUI";
-import Select from "../../forms/SelectMUIFormik";
-import TextField from "../../forms/InputMUI";
-import watchTypes from "./../../../assets/data/watchTypes2.json";
-import watchBrands from "./../../../assets/data/watchBrands2.json";
-import pricesBracket from "./../../../assets/data/pricesBracket2.json";
+import Button from "@mui/material/Button";
+import ProductDetailsPreview from "../../../pages/ProductDetailsPreview";
+import Popup from "../../controls/Popup";
+
 import { makeStyles } from "@material-ui/core/styles";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
-import Divider from "@mui/material/Divider";
-import { useTheme } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	"& .MuiOutlinedInput-input": { color: "white" },
@@ -59,9 +54,24 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const Section3 = ({ preview }) => {
+const Section3 = ({
+	preview,
+	setPreview,
+	productThumbnail,
+	productBackground,
+	productDesc,
+	additionalData,
+	openBoxPopUp,
+	setOpenBoxPopUp
+}) => {
 	const classes = useStyles();
-	const theme = useTheme();
+
+	const configPreview = {
+		productThumbnail,
+		productBackground,
+		productDesc,
+		additionalData
+	};
 
 	return (
 		<Container maxWidth={"sm"}>
@@ -70,7 +80,33 @@ const Section3 = ({ preview }) => {
 					{preview && <ButtonMUI>Refresh Preview</ButtonMUI>}
 					{!preview && <ButtonMUI>Submit</ButtonMUI>}
 				</Grid>
+				<Grid item xs={12} style={{ paddingTop: "20px" }}>
+					{preview && (
+						<Button
+							className={classes.textBtn}
+							onClick={() => setPreview(!preview)}
+						>
+							I am ready to Submit
+						</Button>
+					)}
+					{!preview && (
+						<Button
+							className={classes.textBtn}
+							onClick={() => setPreview(!preview)}
+						>
+							Take me back
+						</Button>
+					)}
+				</Grid>
 			</Grid>
+
+			<Popup
+				title="Preview your watch"
+				openPopup={openBoxPopUp}
+				setOpenPopup={setOpenBoxPopUp}
+			>
+				<ProductDetailsPreview {...configPreview} />
+			</Popup>
 		</Container>
 	);
 };
