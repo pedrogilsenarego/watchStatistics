@@ -308,9 +308,7 @@ const AddWatchForm = () => {
 									spacing={2}
 									style={{
 										height: "100vh",
-										paddingTop: "20vh",
-										scrollSnapAlign: "start",
-										overflowY: "scroll"
+										paddingTop: "20vh"
 									}}
 								>
 									<Grid item xs={12}>

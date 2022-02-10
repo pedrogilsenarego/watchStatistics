@@ -4,9 +4,12 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Section1 from "./Section1";
+import Section2 from "./Section2";
+import Section3 from "./Section3";
 import Grid from "@mui/material/Grid";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+
 import { addProductStart } from "../../redux/Products/products.actions";
 
 const INITIAL_FORM_STATE = {
@@ -203,6 +206,8 @@ const AddWatch2 = () => {
 		history.push("/");
 	};
 
+	const configSection3 = { preview };
+
 	return (
 		<div className="container">
 			<Formik
@@ -219,11 +224,12 @@ const AddWatch2 = () => {
 					<Grid className="section" container justify="center">
 						<Section1 />
 					</Grid>
+
 					<Grid className="section" container justify="center">
-						<Section1 />
+						<Section2 />
 					</Grid>
 					<Grid className="section" container justify="center">
-						<Section1 />
+						<Section3 {...configSection3} />
 					</Grid>
 				</Form>
 			</Formik>
