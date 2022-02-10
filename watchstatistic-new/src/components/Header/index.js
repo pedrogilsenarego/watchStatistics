@@ -356,6 +356,18 @@ const Header = (props) => {
 				>
 					DashBoard
 				</MenuItem>
+				{isMatch && (
+					<MenuItem
+						onClick={() => {
+							handleCloseMyAccountMenu();
+
+							history.push("/messages");
+						}}
+					>
+						messages ({messageStatus})
+					</MenuItem>
+				)}
+
 				<MenuItem
 					onClick={() => {
 						signOut();
