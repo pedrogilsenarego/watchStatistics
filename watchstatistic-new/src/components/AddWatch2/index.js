@@ -208,7 +208,15 @@ const AddWatch2 = () => {
 		history.push("/");
 	};
 
-	const configSection2 = { isMatch };
+	const configSection2 = {
+		isMatch,
+		additionalProductThumbnail2,
+		setAdditionalProductThumbnail2,
+		additionalProductThumbnail3,
+		setAdditionalProductThumbnail3,
+		additionalProductThumbnail4,
+		setAdditionalProductThumbnail4
+	};
 	const configSection3 = {
 		preview,
 		setPreview,
