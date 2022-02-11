@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Section1 from "./Section1";
 import Section2 from "./Section2";
 import Section3 from "./Section3";
+import Section4 from "./Section4";
 import Grid from "@mui/material/Grid";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -217,6 +218,16 @@ const AddWatch2 = () => {
 		additionalProductThumbnail4,
 		setAdditionalProductThumbnail4
 	};
+
+	const configSection4 = {
+		isMatch,
+		additionalProductThumbnail2,
+		setAdditionalProductThumbnail2,
+		additionalProductThumbnail3,
+		setAdditionalProductThumbnail3,
+		additionalProductThumbnail4,
+		setAdditionalProductThumbnail4
+	};
 	const configSection3 = {
 		preview,
 		setPreview,
@@ -252,6 +263,9 @@ const AddWatch2 = () => {
 
 					<Grid className="section" container justify="center">
 						<Section2 {...configSection2} />
+					</Grid>
+					<Grid className="section" container justify="center">
+						<Section4 {...configSection4} />
 					</Grid>
 				</Form>
 			</Formik>
