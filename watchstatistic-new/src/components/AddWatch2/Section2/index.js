@@ -127,7 +127,7 @@ const Section2 = ({
 								size="small"
 								className={classes.textField}
 								name="productThumbnail2"
-								placeholder="Image1"
+								placeholder="Image2"
 							></TextField>
 						</Container>
 					</Grid>
@@ -147,7 +147,7 @@ const Section2 = ({
 								size="small"
 								className={classes.textField}
 								name="productThumbnail3"
-								label="Image 2"
+								label="Image 3"
 							></TextField>
 						</Container>
 					</Grid>
@@ -167,7 +167,7 @@ const Section2 = ({
 								size="small"
 								className={classes.textField}
 								name="productThumbnail4"
-								label="Image 3"
+								label="Image 4"
 							></TextField>
 						</Container>
 					</Grid>

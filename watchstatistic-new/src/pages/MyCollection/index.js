@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { fetchMyCollectionStart } from "../../redux/Products/products.actions";
 
 import Item from "./Item";
+import { Typography } from "@material-ui/core";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
@@ -37,6 +38,27 @@ const MyCollection = () => {
 		);
 	}
 
+	const bagSize = () => {
+		if (getExperience() < 20) return 10;
+		if (getExperience() < 100) return 12;
+		if (getExperience() < 200) return 14;
+		if (getExperience() < 500) return 16;
+		if (getExperience() < 1500) return 18;
+		if (getExperience() < 5000) return 20;
+		else return 15;
+	};
+
+	const getExperience = () => {
+		if (currentUser) return currentUser.experience ? currentUser.experience : 0;
+		else return 0;
+	};
+
+	const getCollection = () => {
+		if (currentUser)
+			return currentUser.collection ? currentUser.collection.length : 0;
+		else return 0;
+	};
+
 	const relativePosFunct2 = () => {
 		let newArray = [];
 		for (let i = 0; i < myCollection.length; i++) {
@@ -63,6 +85,9 @@ const MyCollection = () => {
 				<Grid item xs={12}>
 					<Container style={{ backgroundColor: "#154A6799" }}>
 						<Button style={{ color: "white" }}>All Watches</Button>
+						<Button style={{ float: "right" }}>
+							{getCollection()}/{bagSize()}
+						</Button>
 					</Container>
 				</Grid>
 				<Grid item xs={12}>
