@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { fetchMyCollectionStart } from "../../redux/Products/products.actions";
 
 import Item from "./Item";
-import { Typography } from "@material-ui/core";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
@@ -85,18 +84,27 @@ const MyCollection = () => {
 				<Grid item xs={12}>
 					<Container style={{ backgroundColor: "#154A6799" }}>
 						<Button style={{ color: "white" }}>All Watches</Button>
+
 						<Button style={{ float: "right" }}>
 							{getCollection()}/{bagSize()}
 						</Button>
 					</Container>
 				</Grid>
-				<Grid item xs={12}>
-					{currentUser.collection &&
-						myCollection.map((item, pos) => {
-							const configItem = { item, pos, relativePos, products };
-							return <Item item={item} key={pos} {...configItem} />;
-						})}
-				</Grid>
+				<Container>
+					<Grid
+						item
+						container
+						spacing={1}
+						xs={12}
+						style={{ marginTop: "20px" }}
+					>
+						{currentUser.collection &&
+							myCollection.map((item, pos) => {
+								const configItem = { item, pos, relativePos, products };
+								return <Item item={item} key={pos} {...configItem} />;
+							})}
+					</Grid>
+				</Container>
 			</Grid>
 		</div>
 	);

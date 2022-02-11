@@ -12,6 +12,7 @@ import pricesBracket from "./../../assets/data/pricesBracket.json";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@mui/material/TextField";
 import { FiSearch } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -317,7 +318,7 @@ const ProductResults = ({}) => {
 	}
 
 	return (
-		<div>
+		<motion.div layout>
 			<div>
 				{["left"].map((anchor) => (
 					<div key={anchor}>
@@ -377,14 +378,16 @@ const ProductResults = ({}) => {
 
 					return (
 						<Grid item xs="12" sm="6" md="3">
-							<Product {...configProduct} />
+							<motion.div layout>
+								<Product {...configProduct} />
+							</motion.div>
 						</Grid>
 					);
 				})}
 			</Grid>
 
 			{!isLastPage && <LoadMore {...configLoadMore} />}
-		</div>
+		</motion.div>
 	);
 };
 

@@ -3,6 +3,11 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
 import Popup from "../../../components/controls/Popup";
 import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
@@ -90,45 +95,55 @@ const Item = ({ item, pos, relativePos, products }) => {
 	};
 
 	return (
-		<div>
-			<ButtonGroup>
-				{products[relativePos[pos]] && (
-					<Button
-						onClick={() => {
-							history.push(`/product/${item}`);
-						}}
-					>
+		<Grid item xs={3}>
+			<Card>
+				<CardMedia
+					component="img"
+					height="120"
+					onClick={() => {
+						history.push(`/product/${item}`);
+					}}
+					image={products[relativePos[pos]].productThumbnail[0]}
+					alt="Paella dish"
+					style={{ cursor: "pointer" }}
+				/>
+				<CardContent>
+					<Typography style={{ fontSize: "12px" }}>
 						{products[relativePos[pos]].productBrand}{" "}
-						{products[relativePos[pos]].productName}
-					</Button>
-				)}
-				{!products[relativePos[pos]] && (
-					<Button
-						onClick={() => {
-							history.push(`/product/${item}`);
-						}}
-					>
-						{item}
-					</Button>
-				)}
+						{products[relativePos[pos]].productName}{" "}
+						{products[relativePos[pos]].reference}
+					</Typography>
+				</CardContent>
+				<CardActions disableSpacing>
+					<ButtonGroup>
+						{!products[relativePos[pos]] && (
+							<Button
+								onClick={() => {
+									history.push(`/product/${item}`);
+								}}
+							>
+								{item}
+							</Button>
+						)}
 
-				<Button
-					onClick={() => {
-						handleWatch4BoosterPopup(pos, item);
-					}}
-				>
-					Trade this Watch for Boosters
-				</Button>
-				<Button
-					onClick={() => {
-						handleWatch4SellPopup(pos, item);
-					}}
-				>
-					Sell this item
-				</Button>
-			</ButtonGroup>
-			<SellPopup {...configSellPopup} />
-
+						<Button
+							onClick={() => {
+								handleWatch4BoosterPopup(pos, item);
+							}}
+						>
+							Trade for Boosters
+						</Button>
+						<Button
+							onClick={() => {
+								handleWatch4SellPopup(pos, item);
+							}}
+						>
+							Sell
+						</Button>
+					</ButtonGroup>
+				</CardActions>
+				<SellPopup {...configSellPopup} />
+			</Card>
 			<Popup
 				title={"Danger!!"}
 				openPopup={openDeleteWatchPopup}
@@ -157,7 +172,7 @@ const Item = ({ item, pos, relativePos, products }) => {
 					</Button>
 				</ButtonGroup>
 			</Popup>
-		</div>
+		</Grid>
 	);
 };
 
