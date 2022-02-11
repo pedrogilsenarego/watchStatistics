@@ -6,11 +6,14 @@ import Button from "@mui/material/Button";
 import Multiline from "../../forms/MultiLineMUI";
 
 import TextField from "../../forms/InputMUI";
-
+import Popup from "../../controls/Popup";
 import { makeStyles } from "@material-ui/core/styles";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import Divider from "@mui/material/Divider";
 import { useTheme } from "@material-ui/core";
+
+const IMAGE_ADRESS =
+	"https://www.lifewire.com/thmb/O35ttQdgXOmbxzFuiPHwgR0xYg8=/1373x972/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2020-04-20at10.06.28AM-69855f4797cb4be4bbed72f51dff1ab5.jpg";
 
 const useStyles = makeStyles((theme) => ({
 	"& .MuiOutlinedInput-input": { color: "white" },
@@ -68,8 +71,8 @@ const Section2 = ({
 }) => {
 	const classes = useStyles();
 	const theme = useTheme();
-
-	const [helperDescriptionImages, setHelperDescriptionImages] = useState(false);
+	const [openDeleteWatchPopup, setOpenDeleteWatchPopup] = useState(false);
+	const [openTextWatchPopup, setOpenTextWatchPopup] = useState(false);
 
 	return (
 		<Container maxWidth={"sm"}>
@@ -78,9 +81,7 @@ const Section2 = ({
 					<Typography>Choose the Images</Typography>
 					<Button disableRipple>
 						<AiOutlineQuestionCircle
-							onClick={() =>
-								setHelperDescriptionImages(!helperDescriptionImages)
-							}
+							onClick={() => setOpenDeleteWatchPopup(!openDeleteWatchPopup)}
 							fontSize="1.5em"
 							color="white"
 							style={{ marginTop: "-3px" }}
@@ -217,10 +218,8 @@ const Section2 = ({
 					<Typography>Additional Information</Typography>
 					<Button disableRipple>
 						<AiOutlineQuestionCircle
-							onClick={() =>
-								setHelperDescriptionImages(!helperDescriptionImages)
-							}
 							fontSize="1.5em"
+							onClick={() => setOpenTextWatchPopup(!openTextWatchPopup)}
 							color="white"
 							style={{ marginTop: "-3px" }}
 						/>
@@ -303,6 +302,49 @@ const Section2 = ({
 					* fields have to be filled
 				</Typography>
 			</Grid>
+			<Popup
+				title={"How to add images"}
+				openPopup={openDeleteWatchPopup}
+				setOpenPopup={setOpenDeleteWatchPopup}
+			>
+				<Grid item xs={12}>
+					<img style={{ width: "40vw" }} src={IMAGE_ADRESS} alt="" />
+					<Typography
+						style={{ color: "black", fontSize: "12px", marginTop: "5px" }}
+					>
+						1. Select the images you want to insert from the Web and right click
+						on it. <br /> 2. Copy the image adress(Image) <br />
+						3. paste the path of the desired image to the insert field. <br />
+						Dont forget to choose a good quality image, you can preview the
+						final outcome to confirm.
+					</Typography>
+				</Grid>
+			</Popup>
+
+			<Popup
+				title={"How to add text"}
+				openPopup={openTextWatchPopup}
+				setOpenPopup={setOpenTextWatchPopup}
+			>
+				<Grid item xs={12}>
+					<Typography style={{ color: "black", fontSize: "12px" }}>
+						To set up the description text use the following procedure: <br />
+						1. When using the text from a source put the text between "" and the
+						name of the Source after
+						<br />
+						2. To make any part of text bold wrap in the tag
+						&lt;b&gt;&lt;/b&gt;, to use a line break use the tag &lt;br&gt;
+						<br />
+						<br />
+						Ex: "In attempting something of a predictive AMA, here is a
+						synthesis of the many curious DMs, emails, and voicemail questions
+						I’ve received over the past year. But, as I’m sure to miss a query
+						or two, please check out my original A Week On The Wrist with the
+						SPB143, and drop any remaining questions into the comments. I will
+						endeavor to fill in as many blanks as possible …" Hodinkee
+					</Typography>
+				</Grid>
+			</Popup>
 		</Container>
 	);
 };
