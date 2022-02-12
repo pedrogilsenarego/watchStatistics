@@ -10,7 +10,7 @@ import watchTypes from "./../../assets/data/watchTypes.json";
 import watchBrands from "./../../assets/data/watchBrands.json";
 import pricesBracket from "./../../assets/data/pricesBracket.json";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@mui/material/TextField";
+
 import { FiSearch } from "react-icons/fi";
 import { motion } from "framer-motion";
 
@@ -27,7 +27,7 @@ const ProductResults = ({}) => {
 	const history = useHistory();
 	const { filterType } = useParams();
 	const [filter, setFilter] = useState("productCategory");
-	const [productNameSearch, setProductNameSearch] = useState(false);
+
 	const [stateButtonSearch, setStateButtonSearch] = useState(true);
 	const [state, setState] = React.useState({
 		left: false
@@ -44,10 +44,6 @@ const ProductResults = ({}) => {
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
 	const pageSize = isMatch ? 3 : 12;
-
-	function capitalize(string) {
-		return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-	}
 
 	function logit() {
 		setScrollY(window.pageYOffset);
@@ -181,43 +177,6 @@ const ProductResults = ({}) => {
 							{...configFilterPriceBrackets}
 						/>
 					</Grid>
-					<Grid item xs={9}>
-						<TextField
-							fullWidth
-							className={classes.textField}
-							size="small"
-							id="outlined-basic"
-							label="Model"
-							variant="outlined"
-							onChange={(e) => {
-								setProductNameSearch(capitalize(e.target.value));
-							}}
-							InputProps={{
-								endAdornment: (
-									<Button
-										onClick={(e) => {
-											if (!startedSearch) {
-												setFilter("productName");
-												setStartedSearch(true);
-												history.push(`/search/${productNameSearch}`);
-											} else {
-												setProductNameSearch(capitalize(e.target.value));
-											}
-										}}
-										size="small"
-									>
-										<FiSearch fontSize="1.5em" />
-									</Button>
-								)
-							}}
-						/>
-						<Button onClick={() => setStartedSearch(false)}>
-							Reset Search
-						</Button>
-						{isMatch && (
-							<Button onClick={toggleDrawer(anchor, false)}>Close</Button>
-						)}
-					</Grid>
 				</Grid>
 			</Grid>
 		</Box>
@@ -232,39 +191,27 @@ const ProductResults = ({}) => {
 	);
 
 	const handleFilter = (e) => {
-		if (!startedSearch) {
-			const nextFilter = e.target.value;
-			setFilter("productCategory");
-			setStartedSearch(true);
-			setProductCategoryFilter(e.target.value);
-			history.push(`/search/${nextFilter}`);
-		} else {
-			setProductCategoryFilter(e.target.value);
-		}
+		const nextFilter = e.target.value;
+		setFilter("productCategory");
+
+		setProductCategoryFilter(e.target.value);
+		history.push(`/search/${nextFilter}`);
 	};
 
 	const handleFilterBrand = (e) => {
-		if (!startedSearch) {
-			const nextFilter = e.target.value;
-			setFilter("productBrand");
-			setStartedSearch(true);
-			setProductBrandFilter(e.target.value);
-			history.push(`/search/${nextFilter}`);
-		} else {
-			setProductBrandFilter(e.target.value);
-		}
+		const nextFilter = e.target.value;
+		setFilter("productBrand");
+
+		setProductBrandFilter(e.target.value);
+		history.push(`/search/${nextFilter}`);
 	};
 
 	const handleFilterPriceBracket = (e) => {
-		if (!startedSearch) {
-			const nextFilter = e.target.value;
-			setStartedSearch(true);
-			setFilter("productPriceBrackets");
-			setProductPriceFilter(e.target.value);
-			history.push(`/search/${nextFilter}`);
-		} else {
-			setProductPriceFilter(e.target.value);
-		}
+		const nextFilter = e.target.value;
+
+		setFilter("productPriceBrackets");
+		setProductPriceFilter(e.target.value);
+		history.push(`/search/${nextFilter}`);
 	};
 
 	if (!Array.isArray(data)) return null;
@@ -397,8 +344,7 @@ const ProductResults = ({}) => {
 							productCategoryFilter !== productCategory) ||
 							(productBrandFilter && productBrandFilter !== productBrand) ||
 							(productPriceFilter &&
-								productPriceFilter !== productPriceBrackets) ||
-							(productNameSearch && productNameSearch !== productName))
+								productPriceFilter !== productPriceBrackets))
 					)
 						return null;
 					const configProduct = {
