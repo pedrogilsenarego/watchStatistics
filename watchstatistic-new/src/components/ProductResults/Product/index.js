@@ -50,12 +50,11 @@ const Product = (product) => {
 	const classes = useStyles();
 
 	return (
-		<Box className={classes.root} alt={productName}>
+		<Box className={classes.root} alt={productName} key={reference}>
 			{onMouse && (
 				<CardMedia
 					className={classes.media}
 					image={productThumbnail[0]}
-					key={1}
 					onClick={() => setOnMouse(false)}
 					onMouseEnter={() => setOnMouse(false)}
 				/>
@@ -65,7 +64,6 @@ const Product = (product) => {
 					<CardMedia
 						className={classes.media2}
 						image={productThumbnail[0]}
-						key={1}
 						style={{
 							position: "relative",
 							cursor: "pointer"
@@ -94,7 +92,6 @@ const Product = (product) => {
 										cursor: "pointer",
 										paddingTop: "90px"
 									}}
-									key={2}
 									className={classes.text}
 									onMouseEnter={() => setOnMouse(false)}
 									onClick={() => history.push(`/product/${documentID}`)}
@@ -110,7 +107,6 @@ const Product = (product) => {
 										cursor: "pointer",
 										paddingTop: "10px"
 									}}
-									key={3}
 									className={classes.text}
 									onMouseEnter={() => setOnMouse(false)}
 									onClick={() => history.push(`/product/${documentID}`)}
@@ -121,7 +117,6 @@ const Product = (product) => {
 									style={{
 										cursor: "pointer"
 									}}
-									key={3}
 									className={classes.text}
 									onMouseEnter={() => setOnMouse(false)}
 									onClick={() => history.push(`/product/${documentID}`)}
@@ -132,7 +127,6 @@ const Product = (product) => {
 									style={{
 										cursor: "pointer"
 									}}
-									key={4}
 									className={classes.text}
 									onMouseEnter={() => setOnMouse(false)}
 									onClick={() => history.push(`/product/${documentID}`)}

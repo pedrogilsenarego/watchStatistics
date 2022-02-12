@@ -37,12 +37,42 @@ const ProductResults = ({}) => {
 	const [productBrandFilter, setProductBrandFilter] = useState(false);
 	const [productCategoryFilter, setProductCategoryFilter] = useState(false);
 	const [productPriceFilter, setProductPriceFilter] = useState(false);
+	const [scrollY, setScrollY] = useState(0);
+	const [scrollGap, setScrollGap] = useState(0);
 
-	const pageSize = 8;
+	const theme = useTheme();
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
+	const pageSize = isMatch ? 3 : 12;
 
 	function capitalize(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 	}
+
+	function logit() {
+		setScrollY(window.pageYOffset);
+	}
+
+	useEffect(() => {
+		function watchScroll() {
+			window.addEventListener("scroll", logit);
+		}
+		watchScroll();
+		return () => {
+			window.removeEventListener("scroll", logit);
+		};
+	});
+
+	useEffect(
+		() => {
+			if (scrollY - scrollGap >= 50) {
+				setScrollGap(scrollGap + 50);
+				handleLoadMore();
+			}
+		},
+		// eslint-disable-next-line
+		[scrollY]
+	);
 
 	const useStyles = makeStyles((theme) => ({
 		main: {
@@ -201,9 +231,6 @@ const ProductResults = ({}) => {
 		[filterType]
 	);
 
-	const theme = useTheme();
-	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
-
 	const handleFilter = (e) => {
 		if (!startedSearch) {
 			const nextFilter = e.target.value;
@@ -264,14 +291,16 @@ const ProductResults = ({}) => {
 	};
 
 	const handleLoadMore = () => {
-		dispatch(
-			fetchProductsStart({
-				filterType,
-				startAfterDoc: queryDoc,
-				persistProducts: data,
-				pageSize
-			})
-		);
+		if (!isLastPage) {
+			dispatch(
+				fetchProductsStart({
+					filterType,
+					startAfterDoc: queryDoc,
+					persistProducts: data,
+					pageSize: isMatch ? 2 : 4
+				})
+			);
+		}
 	};
 
 	const configLoadMore = {

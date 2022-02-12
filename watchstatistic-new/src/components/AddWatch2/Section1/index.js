@@ -253,6 +253,7 @@ const Section1 = () => {
 							size="small"
 							className={classes.textField}
 							name="caseSize"
+							InputLabelProps={{ shrink: false }}
 							label="Case size"
 						></TextField>
 					</Container>
