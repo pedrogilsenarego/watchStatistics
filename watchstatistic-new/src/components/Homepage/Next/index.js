@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
@@ -111,7 +112,14 @@ const Next = () => {
 										borderRadius: "14px"
 									}}
 								>
-									{item.title}
+									<Typography
+										style={{
+											color: "#ffffff66",
+											fontFamily: "Open Sans Condensed,sans-serif"
+										}}
+									>
+										{item.title}
+									</Typography>
 								</Button>
 							</Grid>
 						);
