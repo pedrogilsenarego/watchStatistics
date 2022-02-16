@@ -136,7 +136,7 @@ const WatchstatisticsSubHeader = ({}) => {
 							container
 							xs={12}
 							md={4}
-							justifyContent="center"
+							justifyContent={isMatch ? "center" : "flex-end"}
 							style={{}}
 						>
 							<Avatar

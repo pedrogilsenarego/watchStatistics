@@ -92,17 +92,19 @@ const Section4 = ({ isMatch }) => {
 					<Container
 						style={{
 							backgroundColor: theme.palette.textField.background,
-							height: "60px",
+							height: "170px",
 							padding: "0px",
 
 							borderRadius: "4px"
 						}}
 					>
-						<Multiline
-							className={classes.textField}
+						<TextField
 							name="productDesc"
+							className={classes.textField}
+							multiline
+							rows={6}
 							label="Description from Watch*"
-						></Multiline>
+						></TextField>
 					</Container>
 				</Grid>
 
