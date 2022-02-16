@@ -59,6 +59,28 @@ const useStyles = makeStyles((theme) => ({
 const Section1 = () => {
 	const classes = useStyles();
 	const theme = useTheme();
+
+	const Input = ({ name, placeholder }) => {
+		return (
+			<Container
+				style={{
+					backgroundColor: theme.palette.textField.background,
+					height: "40px",
+					padding: "0px",
+
+					borderRadius: "4px"
+				}}
+			>
+				<TextField
+					size="small"
+					className={classes.textField}
+					name={name}
+					placeholder={placeholder}
+				></TextField>
+			</Container>
+		);
+	};
+
 	return (
 		<Container maxWidth={"sm"}>
 			<Grid container item spacing={1}>
@@ -204,95 +226,19 @@ const Section1 = () => {
 					</Container>
 				</Grid>
 				<Grid item xs={3} style={{ marginTop: "10px" }}>
-					<Container
-						style={{
-							backgroundColor: theme.palette.textField.background,
-							height: "40px",
-							padding: "0px",
-
-							borderRadius: "4px"
-						}}
-					>
-						<TextField
-							size="small"
-							className={classes.textField}
-							name="yearProductionStart"
-							placeholder="Start year"
-						></TextField>
-					</Container>
+					<Input name="yearProductionStart" placeholder="Start year" />
 				</Grid>
 				<Grid item xs={3} style={{ marginTop: "10px" }}>
-					<Container
-						style={{
-							backgroundColor: theme.palette.textField.background,
-							height: "40px",
-							padding: "0px",
-
-							borderRadius: "4px"
-						}}
-					>
-						<TextField
-							size="small"
-							className={classes.textField}
-							name="yearProductionEnd"
-							placeholder="Finish year"
-						></TextField>
-					</Container>
+					<Input name="yearProductionEnd" placeholder="End year" />
 				</Grid>
 				<Grid item xs={6} style={{ marginTop: "10px" }}>
-					<Container
-						style={{
-							backgroundColor: theme.palette.textField.background,
-							height: "40px",
-							padding: "0px",
-
-							borderRadius: "4px"
-						}}
-					>
-						<TextField
-							size="small"
-							className={classes.textField}
-							name="caseSize"
-							InputLabelProps={{ shrink: false }}
-							label="Case size"
-						></TextField>
-					</Container>
+					<Input name="caseSize" placeholder="Case size" />
 				</Grid>
 				<Grid item xs={6} style={{ marginTop: "10px" }}>
-					<Container
-						style={{
-							backgroundColor: theme.palette.textField.background,
-							height: "40px",
-							padding: "0px",
-
-							borderRadius: "4px"
-						}}
-					>
-						<TextField
-							size="small"
-							className={classes.textField}
-							name="productName"
-							placeholder="Model*"
-						></TextField>
-					</Container>
+					<Input name="productName" placeholder="Model*" />
 				</Grid>
 				<Grid item xs={6} style={{ marginTop: "10px" }}>
-					<Container
-						style={{
-							backgroundColor: theme.palette.textField.background,
-							height: "40px",
-							padding: "0px",
-
-							borderRadius: "4px"
-						}}
-					>
-						<TextField
-							size="small"
-							className={classes.textField}
-							name="reference"
-							placeholder="Reference*"
-						></TextField>
-					</Container>
+					<Input name="reference" placeholder="Reference*" />
 				</Grid>
 				<Divider
 					style={{

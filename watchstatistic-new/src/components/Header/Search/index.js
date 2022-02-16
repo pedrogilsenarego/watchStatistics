@@ -105,7 +105,7 @@ const Search = ({ isMatch }) => {
 				placeholder="Search"
 				value={search}
 				InputProps={{
-					endAdornment: isMatch ? null : <FiSearch />
+					endAdornment: isMatch ? null : <FiSearch color="#ffffff66" />
 				}}
 				onChange={(event) => {
 					setDisplay(true);
