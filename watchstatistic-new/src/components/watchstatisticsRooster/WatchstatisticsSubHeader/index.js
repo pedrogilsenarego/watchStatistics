@@ -3,7 +3,6 @@ import {
 	Box,
 	Grid,
 	Typography,
-	Button,
 	useMediaQuery,
 	useTheme
 } from "@material-ui/core";
@@ -13,10 +12,11 @@ import LinearProgress, {
 	linearProgressClasses
 } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
-import { GiTrophyCup } from "react-icons/gi";
+
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import { useHistory } from "react-router-dom";
+import Divider from "@mui/material/Divider";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
@@ -167,86 +167,90 @@ const WatchstatisticsSubHeader = ({}) => {
 							md={8}
 							style={{ marginTop: isMatch ? "10px" : "0px" }}
 						>
-							<Typography className={classes.text} variant="h5">
+							<Typography
+								className={classes.text}
+								variant="h4"
+								style={{
+									fontFamily: "Open Sans Condensed,sans-serif"
+								}}
+							>
 								Welcome, {displayName}
 							</Typography>
 							<Typography
 								className={classes.text}
 								variant="h6"
-								style={{ color: "#ffffffB3" }}
+								style={{
+									color: "#ffffffB3",
+									fontFamily: "Open Sans Condensed,sans-serif"
+								}}
 							>
 								have you voted today?
 							</Typography>
 						</Grid>
 					</Grid>
+					{isMatch && (
+						<Divider
+							style={{
+								width: "100%",
+								background: theme.palette.text.faded3,
+								marginTop: "10px"
+							}}
+						/>
+					)}
+
 					<Grid
-						item
+						container
 						xs={12}
 						sm={6}
+						alignItems="center"
+						justify="center"
 						className={classes.item}
-						style={{ marginTop: isMatch ? "15px" : "0px" }}
+						style={{ marginTop: isMatch ? "10px" : "0px" }}
 					>
-						<Grid
-							container
-							spacing={0}
-							justify="center"
-							style={{ paddingRight: "40px" }}
-						>
-							<Grid item xs={6} md={3} className={classes.item}>
-								<Button
-									style={{
-										marginLeft: "30px",
-										marginRight: "30px"
-									}}
-								>
-									<Grid
-										container
-										style={{
-											paddingTop: "5px",
-											display: "flex",
-											flexDirection: "column",
-											justify: "center"
-										}}
-									>
-										<Grid item>
-											<GiTrophyCup size="2.5em" />
-										</Grid>
-										<Grid>
-											<Typography style={{ fontSize: "14px" }}>
-												Badges
-											</Typography>
-										</Grid>
-									</Grid>
-								</Button>
-							</Grid>
-							<Grid item xs={6} md={5}>
-								<Typography variant="h6" className={classes.text}>
-									Watches Voted: {numberVotes}
-								</Typography>
-								<Typography variant="h6" className={classes.text}>
-									Watches Submited: {watchesSubmited}
-								</Typography>
-								<Typography
-									variant="h6"
-									className={classes.text}
-									style={{ color: colorRank() }}
-								>
-									Rank: {rank()}
-								</Typography>
-								<Box
-									sx={{
-										display: "flex",
-										justifyContent: "center",
-										paddingTop: "5px"
-									}}
-								>
-									<BorderLinearProgress
-										style={{ width: "50%" }}
-										variant="determinate"
-										value={progress}
-									/>
-								</Box>
-							</Grid>
+						<Grid item xs={12} md={12}>
+							<Typography
+								variant="h6"
+								className={classes.text}
+								style={{
+									color: "#ffffffB3",
+									fontFamily: "Open Sans Condensed,sans-serif"
+								}}
+							>
+								Watches Voted: {numberVotes}
+							</Typography>
+							<Typography
+								variant="h6"
+								className={classes.text}
+								style={{
+									color: "#ffffffB3",
+									fontFamily: "Open Sans Condensed,sans-serif"
+								}}
+							>
+								Watches Submited: {watchesSubmited}
+							</Typography>
+							<Typography
+								variant="h6"
+								className={classes.text}
+								style={{
+									color: colorRank(),
+									fontFamily: "Open Sans Condensed,sans-serif"
+								}}
+							>
+								Rank: {rank()}
+							</Typography>
+							<Box
+								sx={{
+									display: "flex",
+									justifyContent: "center",
+									paddingTop: "5px"
+								}}
+							>
+								<BorderLinearProgress
+									style={{ width: "50%" }}
+									variant="determinate"
+									value={progress}
+								/>
+							</Box>
 						</Grid>
 					</Grid>
 				</Grid>

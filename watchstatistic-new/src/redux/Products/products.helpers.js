@@ -36,7 +36,7 @@ export const handleFetchProducts = ({
 			.limit(pageSize);
 
 		if (filterType) ref = ref.where(where, "==", filterType);
-		ref = ref.where("productPriceBrackets", "==", "500-1000€");
+
 		if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 
 		ref
