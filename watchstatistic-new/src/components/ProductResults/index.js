@@ -32,7 +32,6 @@ const ProductResults = ({}) => {
 	const [state, setState] = React.useState({
 		left: false
 	});
-	const [startedSearch, setStartedSearch] = useState(false);
 
 	const [productBrandFilter, setProductBrandFilter] = useState(false);
 	const [productCategoryFilter, setProductCategoryFilter] = useState(false);
@@ -339,12 +338,10 @@ const ProductResults = ({}) => {
 					} = product;
 					if (!productThumbnail || !productName) return null;
 					if (
-						startedSearch &&
-						((productCategoryFilter &&
+						(productCategoryFilter &&
 							productCategoryFilter !== productCategory) ||
-							(productBrandFilter && productBrandFilter !== productBrand) ||
-							(productPriceFilter &&
-								productPriceFilter !== productPriceBrackets))
+						(productBrandFilter && productBrandFilter !== productBrand) ||
+						(productPriceFilter && productPriceFilter !== productPriceBrackets)
 					)
 						return null;
 					const configProduct = {

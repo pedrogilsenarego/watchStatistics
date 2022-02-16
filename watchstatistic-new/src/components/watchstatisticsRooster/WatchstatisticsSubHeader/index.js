@@ -15,6 +15,8 @@ import LinearProgress, {
 import { styled } from "@mui/material/styles";
 import { GiTrophyCup } from "react-icons/gi";
 import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import { useHistory } from "react-router-dom";
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser
@@ -23,6 +25,7 @@ const mapState = (state) => ({
 // eslint-disable-next-line
 const WatchstatisticsSubHeader = ({}) => {
 	const theme = useTheme();
+	const history = useHistory();
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 	const { currentUser } = useSelector(mapState);
 
@@ -91,6 +94,14 @@ const WatchstatisticsSubHeader = ({}) => {
 		if (rank() === "God") return "red";
 	};
 
+	const avatarLetter = () => {
+		if (displayName) {
+			let str = displayName;
+			let firstLetter = str.charAt(0);
+			return firstLetter;
+		} else return null;
+	};
+
 	const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 		height: 4,
 		borderRadius: 5,
@@ -107,17 +118,66 @@ const WatchstatisticsSubHeader = ({}) => {
 		<div>
 			<Container className={classes.root}>
 				<Grid container className={classes.container}>
-					<Grid item xs={12} sm={6} className={classes.item}>
-						<Typography className={classes.text} variant="h5">
-							Welcome, {displayName}
-						</Typography>
-						<Typography
-							className={classes.text}
-							variant="h6"
-							style={{ color: "#ffffffB3" }}
+					<Grid
+						item
+						container
+						xs={12}
+						sm={6}
+						alignItems="center"
+						className={classes.item}
+						style={{
+							display: "flex",
+							flexDirection: "row",
+							justify: "center"
+						}}
+					>
+						<Grid
+							item
+							container
+							xs={12}
+							md={4}
+							justifyContent="center"
+							style={{}}
 						>
-							have you voted today?
-						</Typography>
+							<Avatar
+								onClick={() => {
+									history.push(`/dashboard`);
+								}}
+								sx={{
+									bgcolor: "#A91D07",
+									width: isMatch ? 90 : 74,
+									height: isMatch ? 90 : 74,
+									border: "solid 1.5px",
+									borderColor: "#ffffff66"
+								}}
+								style={{
+									float: isMatch ? null : "right",
+
+									cursor: "pointer"
+								}}
+							>
+								<Typography style={{ fontSize: "40px" }}>
+									{avatarLetter()}
+								</Typography>
+							</Avatar>
+						</Grid>
+						<Grid
+							item
+							xs={12}
+							md={8}
+							style={{ marginTop: isMatch ? "10px" : "0px" }}
+						>
+							<Typography className={classes.text} variant="h5">
+								Welcome, {displayName}
+							</Typography>
+							<Typography
+								className={classes.text}
+								variant="h6"
+								style={{ color: "#ffffffB3" }}
+							>
+								have you voted today?
+							</Typography>
+						</Grid>
 					</Grid>
 					<Grid
 						item
