@@ -54,7 +54,7 @@ const Next = () => {
 
 	const userPoints = () => {
 		const userPoints = {
-			title: "Spend Points",
+			title: `Spend Points: ${currentUser.points}`,
 			link: "watchstatistics/watchlaboratory"
 		};
 		if (currentUser.points > 4) return userPoints;
@@ -72,7 +72,9 @@ const Next = () => {
 
 	const openBoxes = () => {
 		const openBoxes = {
-			title: "Open Boxes",
+			title: `Open Boxes: ${
+				getWhiteBoxes() + getBlueBoxes() + getPurpleBoxes() + getOrangeBoxes()
+			}`,
 			link: "watchstatistics/watchlaboratory"
 		};
 		if (
