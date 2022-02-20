@@ -2,6 +2,7 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 import { useHistory } from "react-router-dom";
 import { BiAddToQueue, BiTrophy } from "react-icons/bi";
@@ -21,44 +22,79 @@ const Intro3 = () => {
 			style={{
 				marginBottom: "200px",
 				marginTop: isMatch ? "10vh" : "20vh",
-				border: "solid 1.5px",
-				borderColor: isMatch ? "black" : "hotPink",
-				borderRadius: "10px",
-				padding: "20px"
+				perspective: "50rem"
 			}}
 		>
-			<Grid container spacing={4} style={{ padding: "20px" }}>
+			<Grid container spacing={1} style={{ transform: "rotateY(-40deg)" }}>
 				<Grid
 					item
 					xs={6}
-					style={{
-						textAlign: "center",
-						cursor: "pointer"
-					}}
 					onClick={() => history.push(`/watchstatistics/comparewatches`)}
 				>
-					<GoMirror fontSize={"4em"} color="hotPink" />
-					<Typography style={{ color: "hotPink" }}>
-						Compare your favorite Watches
-					</Typography>
+					<Box
+						style={{
+							textAlign: "center",
+							cursor: "pointer",
+							border: "solid 1.5px",
+							borderRadius: "10px",
+							borderColor: "hotpink",
+							padding: "10px"
+						}}
+					>
+						<GoMirror fontSize={"4em"} color="hotPink" />
+						<Typography style={{ color: "hotPink" }}>
+							Compare Watches
+						</Typography>
+					</Box>
 				</Grid>
-				<Grid item xs={6} style={{ textAlign: "center" }}>
-					<BiAddToQueue fontSize={"4em"} color="hotPink" />
-					<Typography style={{ color: "hotPink" }}>
-						Submit new watches
-					</Typography>
+				<Grid item xs={6}>
+					<Box
+						style={{
+							textAlign: "center",
+							cursor: "pointer",
+							border: "solid 1.5px",
+							borderRadius: "10px",
+							borderColor: "hotpink",
+							padding: "10px"
+						}}
+					>
+						<BiAddToQueue fontSize={"4em"} color="hotPink" />
+						<Typography style={{ color: "hotPink" }}>
+							Submit new watches
+						</Typography>
+					</Box>
 				</Grid>
-				<Grid item xs={6} style={{ textAlign: "center" }}>
-					<BsInboxesFill fontSize={"4em"} color="hotPink" />
-					<Typography style={{ color: "hotPink" }}>
-						Build and trade your virtual collection
-					</Typography>
+				<Grid item xs={6}>
+					<Box
+						style={{
+							textAlign: "center",
+							cursor: "pointer",
+							border: "solid 1.5px",
+							borderRadius: "10px",
+							borderColor: "hotpink",
+							padding: "10px"
+						}}
+					>
+						<BsInboxesFill fontSize={"4em"} color="hotPink" />
+						<Typography style={{ color: "hotPink" }}>
+							Build and trade
+						</Typography>
+					</Box>
 				</Grid>
-				<Grid item xs={6} style={{ textAlign: "center" }}>
-					<BiTrophy fontSize={"4em"} color="hotPink" />
-					<Typography style={{ color: "hotPink" }}>
-						Use your collection to play games
-					</Typography>
+				<Grid item xs={6}>
+					<Box
+						style={{
+							textAlign: "center",
+							cursor: "pointer",
+							border: "solid 1.5px",
+							borderRadius: "10px",
+							borderColor: "hotpink",
+							padding: "10px"
+						}}
+					>
+						<BiTrophy fontSize={"4em"} color="hotPink" />
+						<Typography style={{ color: "hotPink" }}>Play games</Typography>
+					</Box>
 				</Grid>
 			</Grid>
 		</Container>

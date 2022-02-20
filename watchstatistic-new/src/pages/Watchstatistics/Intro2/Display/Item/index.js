@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useHistory } from "react-router-dom";
@@ -8,20 +8,28 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@material-ui/core";
 
 const Item = ({ item, pos, filterType }) => {
+	const [hover, setHover] = useState(false);
 	const history = useHistory();
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
-		<Grid item xs={6}>
+		<Grid item xs={6} style={{ transition: "transform 350ms ease-in" }}>
 			<Paper
 				onClick={() => {
 					history.push(`/product/${item.documentID}`);
+				}}
+				onMouseEnter={() => {
+					setHover(true);
+				}}
+				onMouseLeave={() => {
+					setHover(false);
 				}}
 				style={{
 					height: "110px",
 					backgroundColor: "#18161E",
 					padding: "10px",
-					cursor: "pointer"
+					cursor: "pointer",
+					transform: hover ? "scale(1.05)" : "scale(1)"
 				}}
 			>
 				<Grid item container spacing={0.5}>
