@@ -15,6 +15,7 @@ import { useTheme } from "@material-ui/core";
 const Intro3 = () => {
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
 	return (
 		<Container
 			maxWidth={isMatch ? "xs" : "md"}
@@ -58,18 +59,72 @@ const Intro3 = () => {
 					spacing={1}
 					style={{ transform: "rotateY(-40deg)" }}
 				>
+					<svg width="0" height="0">
+						<linearGradient
+							id="orange-blue-gradient"
+							x1="100%"
+							y1="100%"
+							x2="0%"
+							y2="0%"
+						>
+							<stop stopColor="darkBlue" offset="0%" />
+							<stop stopColor="hotPink" offset="100%" />
+						</linearGradient>
+					</svg>
 					<Item
 						title="Compare Watches"
+						color="purple"
 						path="/watchstatistics/comparewatches"
-						icon={<GoMirror fontSize={"4em"} color="hotPink" />}
+						icon={
+							<GoMirror
+								fontSize={"4em"}
+								style={{ fill: "url(#orange-blue-gradient)" }}
+							/>
+						}
 					/>
+					<svg width="0" height="0">
+						<linearGradient
+							id="orange-gradient"
+							x1="100%"
+							y1="100%"
+							x2="0%"
+							y2="0%"
+						>
+							<stop stopColor="#ffffff" offset="0%" />
+							<stop stopColor="#D97116" offset="100%" />
+						</linearGradient>
+					</svg>
 					<Item
 						title="Submit new watches"
-						icon={<BiAddToQueue fontSize={"4em"} color="hotPink" />}
+						color="orange"
+						icon={
+							<BiAddToQueue
+								fontSize={"4em"}
+								style={{ fill: "url(#orange-gradient)" }}
+							/>
+						}
 					/>
+					<svg width="0" height="0">
+						<linearGradient
+							id="blue-gradient"
+							x1="100%"
+							y1="100%"
+							x2="0%"
+							y2="0%"
+						>
+							<stop stopColor="#7a6ded" offset="0%" />
+							<stop stopColor="#591885" offset="100%" />
+						</linearGradient>
+					</svg>
 					<Item
 						title="Build and trade"
-						icon={<BsInboxesFill fontSize={"4em"} color="hotPink" />}
+						color="#591885"
+						icon={
+							<BsInboxesFill
+								fontSize={"4em"}
+								style={{ fill: "url(#blue-gradient)" }}
+							/>
+						}
 					/>
 					<Item
 						title="Play games"
