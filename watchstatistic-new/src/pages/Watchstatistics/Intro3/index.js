@@ -1,10 +1,10 @@
 import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import Item from "./Item";
 
-import { useHistory } from "react-router-dom";
 import { BiAddToQueue, BiTrophy } from "react-icons/bi";
 import { GoMirror } from "react-icons/go";
 import { BsInboxesFill } from "react-icons/bs";
@@ -13,88 +13,68 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@material-ui/core";
 
 const Intro3 = () => {
-	const history = useHistory();
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
 		<Container
-			maxWidth={isMatch ? "xs" : "sm"}
+			maxWidth={isMatch ? "xs" : "md"}
 			style={{
 				marginBottom: "200px",
-				marginTop: isMatch ? "10vh" : "20vh",
-				perspective: "50rem"
+				marginTop: isMatch ? "10vh" : "20vh"
 			}}
 		>
-			<Grid container spacing={1} style={{ transform: "rotateY(-40deg)" }}>
+			<Grid container style={{ perspective: "50rem" }}>
+				<Grid item xs={6} style={{ textTransform: "uppercase" }}>
+					<Typography variant={"h4"} fontWeight={600}>
+						Explore different features, a{" "}
+					</Typography>
+					<Typography
+						fontWeight={600}
+						variant={"h4"}
+						style={{ color: "hotpink" }}
+					>
+						community
+					</Typography>
+					<Typography fontWeight={600} variant={"h4"}>
+						{" "}
+						project dynamic
+					</Typography>
+					<Typography>Share your ideas and help us to growth</Typography>
+					<Button
+						variant="contained"
+						style={{
+							backgroundImage:
+								"linear-gradient(90deg, rgba(214,121,41,1) 50%, rgba(193,74,27,1) 100%)",
+							marginTop: "5px"
+						}}
+					>
+						Here
+					</Button>
+				</Grid>
 				<Grid
+					container
 					item
 					xs={6}
-					onClick={() => history.push(`/watchstatistics/comparewatches`)}
+					spacing={1}
+					style={{ transform: "rotateY(-40deg)" }}
 				>
-					<Box
-						style={{
-							textAlign: "center",
-							cursor: "pointer",
-							border: "solid 1.5px",
-							borderRadius: "10px",
-							borderColor: "hotpink",
-							padding: "10px"
-						}}
-					>
-						<GoMirror fontSize={"4em"} color="hotPink" />
-						<Typography style={{ color: "hotPink" }}>
-							Compare Watches
-						</Typography>
-					</Box>
-				</Grid>
-				<Grid item xs={6}>
-					<Box
-						style={{
-							textAlign: "center",
-							cursor: "pointer",
-							border: "solid 1.5px",
-							borderRadius: "10px",
-							borderColor: "hotpink",
-							padding: "10px"
-						}}
-					>
-						<BiAddToQueue fontSize={"4em"} color="hotPink" />
-						<Typography style={{ color: "hotPink" }}>
-							Submit new watches
-						</Typography>
-					</Box>
-				</Grid>
-				<Grid item xs={6}>
-					<Box
-						style={{
-							textAlign: "center",
-							cursor: "pointer",
-							border: "solid 1.5px",
-							borderRadius: "10px",
-							borderColor: "hotpink",
-							padding: "10px"
-						}}
-					>
-						<BsInboxesFill fontSize={"4em"} color="hotPink" />
-						<Typography style={{ color: "hotPink" }}>
-							Build and trade
-						</Typography>
-					</Box>
-				</Grid>
-				<Grid item xs={6}>
-					<Box
-						style={{
-							textAlign: "center",
-							cursor: "pointer",
-							border: "solid 1.5px",
-							borderRadius: "10px",
-							borderColor: "hotpink",
-							padding: "10px"
-						}}
-					>
-						<BiTrophy fontSize={"4em"} color="hotPink" />
-						<Typography style={{ color: "hotPink" }}>Play games</Typography>
-					</Box>
+					<Item
+						title="Compare Watches"
+						path="/watchstatistics/comparewatches"
+						icon={<GoMirror fontSize={"4em"} color="hotPink" />}
+					/>
+					<Item
+						title="Submit new watches"
+						icon={<BiAddToQueue fontSize={"4em"} color="hotPink" />}
+					/>
+					<Item
+						title="Build and trade"
+						icon={<BsInboxesFill fontSize={"4em"} color="hotPink" />}
+					/>
+					<Item
+						title="Play games"
+						icon={<BiTrophy fontSize={"4em"} color="hotPink" />}
+					/>
 				</Grid>
 			</Grid>
 		</Container>
