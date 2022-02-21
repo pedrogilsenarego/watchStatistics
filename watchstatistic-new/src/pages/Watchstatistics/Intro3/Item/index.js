@@ -16,7 +16,8 @@ const Item = ({ title, path, icon }) => {
 					border: "solid 1.5px",
 					borderRadius: "10px",
 					borderColor: "hotpink",
-					padding: "10px"
+					padding: "10px",
+					backgroundColor: "#0D0D0F"
 				}}
 			>
 				{icon}
