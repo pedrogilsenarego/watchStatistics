@@ -31,14 +31,14 @@ const Intro3 = () => {
 					</Typography>
 					<Typography
 						fontWeight={600}
-						variant={"h4"}
+						variant={"h3"}
 						style={{ color: "hotpink" }}
 					>
 						community
 					</Typography>
 					<Typography fontWeight={600} variant={"h4"}>
 						{" "}
-						project dynamic
+						dynamic project
 					</Typography>
 					<Typography>Share your ideas and help us to growth</Typography>
 					<Button

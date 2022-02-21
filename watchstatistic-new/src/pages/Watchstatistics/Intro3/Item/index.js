@@ -30,7 +30,8 @@ const Item = ({ title, path, icon, color }) => {
 					borderColor: "hotpink",
 					padding: "10px",
 					backgroundColor: "#0D0D0F",
-					transform: hover ? "scale(1.05)" : "scale(1)"
+					transform: hover ? "scale(1.05)" : "scale(1)",
+					boxShadow: hover ? "0 0 1.5rem hsl(0 0% 100%)" : null
 				}}
 			>
 				{icon}
