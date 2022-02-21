@@ -18,29 +18,29 @@ const Intro3 = () => {
 
 	return (
 		<Container
-			maxWidth={isMatch ? "xs" : "md"}
+			maxWidth={"md"}
 			style={{
 				marginBottom: "200px",
 				marginTop: isMatch ? "10vh" : "20vh"
 			}}
 		>
 			<Grid container style={{ perspective: "50rem" }}>
-				<Grid item xs={6} style={{ textTransform: "uppercase" }}>
-					<Typography variant={"h4"} fontWeight={600}>
+				<Grid item xs={4} md={6} style={{ textTransform: "uppercase" }}>
+					<Typography variant={isMatch ? "h7" : "h4"} fontWeight={600}>
 						Explore different features, a{" "}
 					</Typography>
 					<Typography
 						fontWeight={600}
-						variant={"h3"}
+						variant={isMatch ? "h6" : "h3"}
 						style={{ color: "hotpink" }}
 					>
 						community
 					</Typography>
-					<Typography fontWeight={600} variant={"h4"}>
+					<Typography fontWeight={600} variant={isMatch ? "h7" : "h4"}>
 						{" "}
 						dynamic project
 					</Typography>
-					<Typography>Share your ideas and help us to growth</Typography>
+					<Typography>Share your ideas and help us growth</Typography>
 					<Button
 						variant="contained"
 						style={{
@@ -55,7 +55,8 @@ const Intro3 = () => {
 				<Grid
 					container
 					item
-					xs={6}
+					xs={8}
+					md={6}
 					spacing={1}
 					style={{ transform: "rotateY(-40deg)" }}
 				>
@@ -95,7 +96,7 @@ const Intro3 = () => {
 						</linearGradient>
 					</svg>
 					<Item
-						title="Submit new watches"
+						title="Submit Watches"
 						color="orange"
 						icon={
 							<BiAddToQueue
