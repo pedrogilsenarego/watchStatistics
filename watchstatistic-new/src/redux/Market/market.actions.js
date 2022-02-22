@@ -12,7 +12,7 @@ export const fetchMarketProductsStart = (filters = {}) => ({
 
 export const setMarketProducts = (products) => ({
 	type: marketTypes.SET_MARKET_PRODUCTS,
-	payload: products
+	payload: products.data
 });
 
 export const buyMarketProduct = (productID) => ({

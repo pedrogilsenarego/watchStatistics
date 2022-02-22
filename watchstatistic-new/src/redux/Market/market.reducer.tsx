@@ -7,12 +7,12 @@ const INITIAL_STATE = {
 
 interface SetMarketProducts {
 	type: "SET_MARKET_PRODUCTS";
-	payload: any;
+	payload: {};
 }
 
 interface RemoveMarketItem {
 	type: "REMOVE_MARKET_ITEM";
-	payload: Object[];
+	payload: {};
 }
 
 type Action = SetMarketProducts | RemoveMarketItem;
@@ -22,7 +22,7 @@ const marketReducer = (state = INITIAL_STATE, action: Action) => {
 		case marketTypes.SET_MARKET_PRODUCTS:
 			return {
 				...state,
-				marketProducts: action.payload.data
+				marketProducts: action.payload
 			};
 		case marketTypes.REMOVE_MARKET_ITEM:
 			return {

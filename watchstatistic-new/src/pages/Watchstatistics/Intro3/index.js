@@ -25,7 +25,16 @@ const Intro3 = () => {
 			}}
 		>
 			<Grid container style={{ perspective: "50rem" }}>
-				<Grid item xs={4} md={6} style={{ textTransform: "uppercase" }}>
+				<Grid
+					item
+					xs={4}
+					md={6}
+					style={{
+						textTransform: "uppercase",
+						marginTop: "25px",
+						transform: isMatch ? "translateX(20px)" : null
+					}}
+				>
 					<Typography variant={isMatch ? "h7" : "h4"} fontWeight={600}>
 						Explore different features, a{" "}
 					</Typography>
@@ -73,7 +82,7 @@ const Intro3 = () => {
 						</linearGradient>
 					</svg>
 					<Item
-						title="Compare Watches"
+						title="Compare"
 						color="purple"
 						path="/watchstatistics/comparewatches"
 						icon={
@@ -96,7 +105,7 @@ const Intro3 = () => {
 						</linearGradient>
 					</svg>
 					<Item
-						title="Submit Watches"
+						title="Submit"
 						color="orange"
 						icon={
 							<BiAddToQueue

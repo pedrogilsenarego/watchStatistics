@@ -10,7 +10,7 @@ admin.initializeApp(functions.config().firebase);
 app.use(cors());
 
 app.get("/", (req, res) => {
-	res.status(200).send({ data: "wordly hellos" });
+	res.status(200).send({ data: "welcome to watch statistics endpoint" });
 });
 
 app.get(`/watchcorrelations`, (req, res) => {
