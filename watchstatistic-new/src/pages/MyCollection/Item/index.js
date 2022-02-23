@@ -27,7 +27,6 @@ const Item = ({ item, pos, relativePos, products }) => {
 	const [posWatch, setPosWatch] = useState();
 	const [openDeleteWatchPopup, setOpenDeleteWatchPopup] = useState();
 	const [openSellWatchPopup, setOpenSellWatchPopup] = useState();
-
 	const { collection, boosters } = currentUser;
 
 	const handleWatch4BoosterPopup = (pos, item) => {
@@ -93,6 +92,8 @@ const Item = ({ item, pos, relativePos, products }) => {
 		handleWatch4SellConfirm,
 		setOpenSellWatchPopup
 	};
+
+	if (!Array.isArray(products)) return;
 
 	return (
 		<Grid item xs={3}>

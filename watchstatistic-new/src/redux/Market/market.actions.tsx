@@ -1,6 +1,6 @@
 import marketTypes from "./market.types";
 
-export const setToAuction = (order) => ({
+export const setToAuction = (order: Object) => ({
 	type: marketTypes.ADD_TO_AUCTION,
 	payload: order
 });
@@ -10,22 +10,17 @@ export const fetchMarketProductsStart = (filters = {}) => ({
 	payload: filters
 });
 
-export const setMarketProducts = (products) => ({
+export const setMarketProducts = (products: Object) => ({
 	type: marketTypes.SET_MARKET_PRODUCTS,
-	payload: products.data
+	payload: products
 });
 
-export const buyMarketProduct = (productID) => ({
+export const buyMarketProduct = (productID: string) => ({
 	type: marketTypes.BUY_MARKET_PRODUCT_START,
 	payload: productID
 });
 
-export const removeMarketItem = (marketItem) => ({
+export const removeMarketItem = (productID: string) => ({
 	type: marketTypes.REMOVE_MARKET_ITEM,
-	payload: marketItem
-});
-
-export const removeOneMarketItem = (marketItem) => ({
-	type: marketTypes.REMOVE_ONE_MARKET_ITEM,
-	payload: marketItem
+	payload: productID
 });

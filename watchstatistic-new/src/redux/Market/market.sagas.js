@@ -26,7 +26,7 @@ export function* onAddToAuctionStart() {
 export function* fetchMarketProducts({ payload }) {
 	try {
 		const products = yield handleFetchMarketProducts(payload);
-		yield put(setMarketProducts(products));
+		yield put(setMarketProducts(products.data));
 	} catch (err) {
 		// console.log(err);
 	}
