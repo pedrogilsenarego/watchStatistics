@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import FacebookShare from "../../forms/socialShare/Facebook";
 import WhatsappShareButton from "../../forms/socialShare/Whatsapp";
 import { GoMirror } from "react-icons/go";
 import { AiFillFire } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
-import { Grid, Box, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { addProduct, addBooster } from "./../../../redux/Cart/cart.actions";
 
 const AvatarsControllers = ({
 	product,
-	isMatch,
+
 	cartItems,
 	productID,
 	productBrand,
@@ -21,6 +25,7 @@ const AvatarsControllers = ({
 }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const [openGallery, setOpenGallery] = useState(false);
 
 	const handleAddToBoost = (product) => {
 		if (!product) return;
@@ -56,68 +61,54 @@ const AvatarsControllers = ({
 	return (
 		<div>
 			{" "}
-			<Grid
-				item
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "space-between",
-					marginTop: "50vh",
-					marginLeft: "-15px",
-					position: "fixed",
-					zIndex: "3"
-				}}
-			>
+			{!openGallery && (
 				<Box
-					onClick={() => {
-						handleAddToBoost(product);
+					sx={{ alignSelf: "flex-end" }}
+					style={{
+						marginTop: "69vh",
+						height: "50px",
+						width: "50px",
+						borderRadius: "10px",
+						backgroundColor: "#ffffff66",
+						position: "fixed",
+						zIndex: "3"
 					}}
-					size="small"
-					sx={{
-						marginLeft: isMatch ? "15px" : "25px",
-						width: "7vh",
-						height: "7vh",
-						borderRadius: 25,
-						cursor: "pointer",
-						backgroundColor: "#1D5B7B",
-						marginBottom: "6px"
+					onClick={() => setOpenGallery(true)}
+				>
+					<IoIosArrowForward />
+				</Box>
+			)}
+			{openGallery && (
+				<Stack
+					direction="row"
+					spacing={2}
+					style={{
+						display: "flex",
+						flexDirection: "row",
+						alignItems: "center",
+						marginTop: "69vh",
+						borderRadius: "10px",
+						padding: "5px",
+						backgroundColor: "#ffffff66",
+						position: "fixed",
+						zIndex: "3"
 					}}
 				>
-					<Grid
-						container
-						direction="column"
-						alignItems="center"
-						justifyContent="center"
-						spacing={0}
-						style={{ paddingTop: "1.2vh" }}
+					<Avatar
+						sx={{ bgcolor: "orangeRed", width: "7vh", height: "7vh" }}
+						onClick={() => {
+							handleAddToBoost(product);
+						}}
 					>
 						<AiFillFire size="4vh" color="white" />
-					</Grid>
-				</Box>
-				<Box
-					onClick={() => {
-						handleAddToCart(product, cartItems, productID);
-					}}
-					size="small"
-					sx={{
-						marginLeft: isMatch ? "15px" : "25px",
-						width: "7vh",
-						height: "7vh",
-						borderRadius: 25,
-						cursor: "pointer",
-						backgroundColor: "#960617",
-						marginBottom: "3px"
-					}}
-				>
-					<Grid
-						container
-						direction="column"
-						alignItems="center"
-						justifyContent="center"
-						spacing={0}
-						style={{ paddingTop: "1.2vh" }}
+					</Avatar>
+					<Avatar
+						sx={{ bgcolor: "olive", width: "7vh", height: "7vh" }}
+						onClick={() => {
+							handleAddToCart(product, cartItems, productID);
+						}}
+						size="small"
 					>
-						{" "}
 						{compareWatches && (
 							<Typography
 								style={{
@@ -128,11 +119,17 @@ const AvatarsControllers = ({
 							</Typography>
 						)}
 						{!compareWatches && <GoMirror size="4vh" color="white" />}
-					</Grid>
-				</Box>
-				<FacebookShare {...configShareButtons} />
-				<WhatsappShareButton {...configShareButtons} />
-			</Grid>
+					</Avatar>
+					<FacebookShare {...configShareButtons} />
+					<WhatsappShareButton {...configShareButtons} />
+					<IoIosArrowBack
+						style={{ cursor: "pointer" }}
+						onClick={() => {
+							setOpenGallery(false);
+						}}
+					/>
+				</Stack>
+			)}
 		</div>
 	);
 };
