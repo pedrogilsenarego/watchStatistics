@@ -6,12 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { BsXDiamond } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { Parallax } from "react-parallax";
-import FacebookShare from "../../components/forms/socialShare/Facebook";
-import WhatsappShareButton from "../../components/forms/socialShare/Whatsapp";
-import { GoMirror } from "react-icons/go";
-import { AiFillFire } from "react-icons/ai";
-import { useHistory, useParams } from "react-router";
-import { addProduct, addBooster } from "./../../redux/Cart/cart.actions";
+import AvatarsControllers from "../../components/ProductDetails/AvatarsControllers";
+import { useParams } from "react-router";
 import { Helmet } from "react-helmet";
 
 import {
@@ -21,7 +17,6 @@ import {
 	CardContent,
 	IconButton,
 	Box,
-	Typography,
 	useMediaQuery,
 	useTheme
 } from "@material-ui/core";
@@ -43,17 +38,14 @@ const mapState = (state) => ({
 const ProductDetails = ({}) => {
 	const dispatch = useDispatch();
 	const { productID } = useParams();
-	const history = useHistory();
+
 	const { product, currentUser, cartItems } = useSelector(mapState);
 	const [mainImage, setMainImage] = useState(null);
 	const [compareWatches, setCompareWatches] = useState(false);
-
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("xs"));
 
 	const useStyles = makeStyles((theme) => ({
-		root: {},
-
 		filter: {},
 
 		media: {
@@ -106,19 +98,6 @@ const ProductDetails = ({}) => {
 		avgTotal
 	} = product;
 
-	const configShareButtons = {
-		quote:
-			"Vote here on your personal opinion for the " +
-			productBrand +
-			" " +
-			productName +
-			" " +
-			reference +
-			" with a score of " +
-			avgTotal,
-		url: "https://fir-auth0-9b4cb.web.app/product/" + productID
-	};
-
 	const bgImage = () => {
 		if (!currentUser) return productBackground;
 
@@ -129,22 +108,16 @@ const ProductDetails = ({}) => {
 
 	if (!productThumbnail || !productName) return null;
 
-	const handleAddToCart = (product, cartItems, productID) => {
-		if (!product) return;
-		if (cartItems.length < 4) {
-			product.productID = productID;
-			dispatch(addProduct(product));
-			history.push("/watchstatistics/comparewatches");
-		} else {
-			history.push("/watchstatistics/comparewatches");
-		}
-	};
-
-	const handleAddToBoost = (product) => {
-		if (!product) return;
-
-		dispatch(addBooster(product));
-		history.push("/watchstatistics/watchlaboratory");
+	const configAvatarBtns = {
+		product,
+		isMatch,
+		cartItems,
+		productID,
+		productBrand,
+		productName,
+		reference,
+		avgTotal,
+		compareWatches
 	};
 
 	return (
@@ -153,7 +126,7 @@ const ProductDetails = ({}) => {
 				<meta property="og:image" content={productThumbnail} />
 			</Helmet>
 			<Box>
-				<Parallax style={{}} bgImage={bgImage()} strength={300}>
+				<Parallax bgImage={bgImage()} strength={300}>
 					<Box
 						sx={{ borderRadius: "10px" }}
 						className={classes.filter}
@@ -171,87 +144,9 @@ const ProductDetails = ({}) => {
 								paddingRight: "10px"
 							}}
 						>
+							<AvatarsControllers {...configAvatarBtns} />
 							<Grid item xs={12} md={8}>
 								<Box alt={productName}>
-									<Grid
-										item
-										style={{
-											display: "flex",
-											flexDirection: "column",
-											justifyContent: "space-between",
-											marginTop: "50vh",
-											marginLeft: "-15px",
-											position: "fixed",
-											zIndex: "3"
-										}}
-									>
-										<Box
-											onClick={() => {
-												handleAddToBoost(product);
-											}}
-											size="small"
-											sx={{
-												marginLeft: isMatch ? "15px" : "25px",
-												width: "7vh",
-												height: "7vh",
-												borderRadius: 25,
-												cursor: "pointer",
-												backgroundColor: "#1D5B7B",
-												marginBottom: "6px"
-											}}
-										>
-											<Grid
-												container
-												direction="column"
-												alignItems="center"
-												justifyContent="center"
-												spacing={0}
-												style={{ paddingTop: "1.2vh" }}
-											>
-												<AiFillFire size="4vh" color="white" />
-											</Grid>
-										</Box>
-										<Box
-											onClick={() => {
-												handleAddToCart(product, cartItems, productID);
-											}}
-											size="small"
-											sx={{
-												marginLeft: isMatch ? "15px" : "25px",
-												width: "7vh",
-												height: "7vh",
-												borderRadius: 25,
-												cursor: "pointer",
-												backgroundColor: "#960617",
-												marginBottom: "3px"
-											}}
-										>
-											<Grid
-												container
-												direction="column"
-												alignItems="center"
-												justifyContent="center"
-												spacing={0}
-												style={{ paddingTop: "1.2vh" }}
-											>
-												{" "}
-												{compareWatches && (
-													<Typography
-														style={{
-															color: "white"
-														}}
-													>
-														X
-													</Typography>
-												)}
-												{!compareWatches && (
-													<GoMirror size="4vh" color="white" />
-												)}
-											</Grid>
-										</Box>
-										<FacebookShare {...configShareButtons} />
-										<WhatsappShareButton {...configShareButtons} />
-									</Grid>
 									{!mainImage && (
 										<CardMedia
 											style={{ borderRadius: "4px" }}

@@ -17,9 +17,29 @@ app.get(`/watchcorrelations`, (req, res) => {
 	res.send(importData);
 });
 
+/* app.get(`/teste`, (req, res) => {
+	res.send(handleFetchAllProducts());
+});
+
 exports.app = functions.https.onRequest(app);
 
-/* exports.addWatches = function.firestore.document("/products/{documentID}").onCreate((snapshot, context)=>{
-	console.log(snapshot.data())
-	return Promise.resolve()
-}) */
+const handleFetchAllProducts = () => {
+	const db = admin.firestore();
+	db.collection("products")
+		.get()
+		.then((snapshot) => {
+			const data = [
+				...snapshot.docs.map((doc) => {
+					return {
+						...doc.data(),
+						documentID: doc.id
+					};
+				})
+			];
+
+			resolve({ teste: teste, data });
+		})
+		.catch((err) => {
+			reject(err);
+		});
+}; */
