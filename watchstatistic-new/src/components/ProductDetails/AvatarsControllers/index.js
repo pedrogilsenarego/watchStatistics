@@ -7,14 +7,13 @@ import { useHistory } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { addProduct, addBooster } from "./../../../redux/Cart/cart.actions";
 
 const AvatarsControllers = ({
 	product,
-
+	isMatch,
 	cartItems,
 	productID,
 	productBrand,
@@ -59,77 +58,84 @@ const AvatarsControllers = ({
 	};
 
 	return (
-		<div>
+		<div style={{}}>
 			{" "}
-			{!openGallery && (
-				<Box
-					sx={{ alignSelf: "flex-end" }}
-					style={{
-						marginTop: "69vh",
-						height: "50px",
-						width: "50px",
-						borderRadius: "10px",
-						backgroundColor: "#ffffff66",
-						position: "fixed",
-						zIndex: "3"
-					}}
-					onClick={() => setOpenGallery(true)}
-				>
-					<IoIosArrowForward />
-				</Box>
-			)}
-			{openGallery && (
-				<Stack
-					direction="row"
-					spacing={2}
-					style={{
-						display: "flex",
-						flexDirection: "row",
-						alignItems: "center",
-						marginTop: "69vh",
-						borderRadius: "10px",
-						padding: "5px",
-						backgroundColor: "#ffffff66",
-						position: "fixed",
-						zIndex: "3"
-					}}
-				>
-					<Avatar
-						sx={{ bgcolor: "orangeRed", width: "7vh", height: "7vh" }}
-						onClick={() => {
-							handleAddToBoost(product);
-						}}
-					>
-						<AiFillFire size="4vh" color="white" />
-					</Avatar>
-					<Avatar
-						sx={{ bgcolor: "olive", width: "7vh", height: "7vh" }}
-						onClick={() => {
-							handleAddToCart(product, cartItems, productID);
-						}}
-						size="small"
-					>
-						{compareWatches && (
-							<Typography
-								style={{
-									color: "white"
-								}}
-							>
-								X
-							</Typography>
-						)}
-						{!compareWatches && <GoMirror size="4vh" color="white" />}
-					</Avatar>
-					<FacebookShare {...configShareButtons} />
-					<WhatsappShareButton {...configShareButtons} />
-					<IoIosArrowBack
+			<Stack
+				direction="row"
+				spacing={2}
+				style={{
+					display: "flex",
+					flexDirection: "row",
+					alignItems: "center",
+					marginTop: "72vh",
+					borderRadius: "10px",
+					padding: "5px",
+					backgroundColor: "#ffffff66",
+					position: "fixed",
+					zIndex: "3",
+					transition: "all 500ms ease-in-out",
+					width: openGallery ? "280px" : "50px"
+				}}
+			>
+				{!openGallery && (
+					<IoIosArrowForward
 						style={{ cursor: "pointer" }}
+						size="7vh"
 						onClick={() => {
-							setOpenGallery(false);
+							setOpenGallery(true);
 						}}
 					/>
-				</Stack>
-			)}
+				)}
+				{openGallery && (
+					<>
+						<Avatar
+							sx={{
+								bgcolor: "orangeRed",
+								width: "7vh",
+								height: "7vh",
+								cursor: "pointer"
+							}}
+							onClick={() => {
+								handleAddToBoost(product);
+							}}
+						>
+							<AiFillFire size="4vh" color="white" />
+						</Avatar>
+						<Avatar
+							sx={{
+								bgcolor: "olive",
+								width: "7vh",
+								height: "7vh",
+								cursor: "pointer"
+							}}
+							onClick={() => {
+								handleAddToCart(product, cartItems, productID);
+							}}
+							size="small"
+						>
+							{compareWatches && (
+								<Typography
+									style={{
+										color: "white"
+									}}
+								>
+									X
+								</Typography>
+							)}
+							{!compareWatches && <GoMirror size="4vh" color="white" />}
+						</Avatar>
+						<FacebookShare {...configShareButtons} />
+						<WhatsappShareButton {...configShareButtons} />
+						<IoIosArrowBack
+							size="7vh"
+							style={{ cursor: "pointer" }}
+							onClick={() => {
+								setOpenGallery(false);
+							}}
+						/>
+					</>
+				)}
+			</Stack>
 		</div>
 	);
 };
