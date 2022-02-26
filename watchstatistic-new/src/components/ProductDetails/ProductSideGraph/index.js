@@ -15,6 +15,7 @@ import ProductVote from "../ProductVote";
 import Draggable from "react-draggable";
 import { RiDragDropLine } from "react-icons/ri";
 import { useParams } from "react-router";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 import CategoriesLegend from "../CategoriesLegend";
 
@@ -37,7 +38,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 	textBtn: {
 		color: "#FFFFFF",
+		border: "solid 2px",
+		borderColor: "#ffffff66",
 		fontSize: "13px",
+		borderRadius: "20px",
 		"&:hover": {
 			color: "#FFA500"
 		},
@@ -257,7 +261,20 @@ const ProductSidePanel = ({}) => {
 
 	return (
 		<Grid container>
-			<Grid item xs={12}>
+			<Grid item style={{ textAlign: "center" }} xs={12}>
+				<AiOutlineQuestionCircle
+					style={{
+						cursor: "pointer",
+						poistion: "absolute",
+						float: "right",
+						color: "#ffffffCC"
+					}}
+					size="2em"
+					aria-controls="legendVote"
+					onClick={(e) => {
+						setAnchorLegendVote(e.currentTarget);
+					}}
+				/>
 				<Box
 					color={"text.secondary"}
 					borderRadius="10px"
@@ -292,53 +309,41 @@ const ProductSidePanel = ({}) => {
 						>
 							Only Seen Digital: {avgVotationsNotOwn} Votes: {numberVotesNotOwn}
 						</Typography>
-						<Grid item style={{}}>
-							{currentUser && !currentUser.userVotes.includes(productID) && (
-								<Button
-									className={classes.textBtn}
-									style={{ width: "50%" }}
-									aria-controls="vote"
-									onClick={(e) => {
-										setAnchorVote(e.currentTarget);
-									}}
-									disableRipple
-								>
-									Vote
-								</Button>
-							)}
-							{currentUser && currentUser.userVotes.includes(productID) && (
-								<Button
-									className={classes.textBtn}
-									style={{ width: "50%" }}
-									disableRipple
-								>
-									Already Voted
-								</Button>
-							)}
-							{!currentUser && (
-								<Button
-									className={classes.textBtn}
-									style={{ width: "50%" }}
-									aria-controls="vote"
-									disableRipple
-								>
-									Login to Vote
-								</Button>
-							)}
-							<Button
-								className={classes.textBtn}
-								style={{ width: "50%" }}
-								aria-controls="legendVote"
-								onClick={(e) => {
-									setAnchorLegendVote(e.currentTarget);
-								}}
-								disableRipple
-							>
-								Categories
-							</Button>
-						</Grid>
 					</Box>
 				</Box>
+				{currentUser && !currentUser.userVotes.includes(productID) && (
+					<Button
+						size="small"
+						className={classes.textBtn}
+						style={{ width: "50%" }}
+						aria-controls="vote"
+						onClick={(e) => {
+							setAnchorVote(e.currentTarget);
+						}}
+						disableRipple
+					>
+						Vote
+					</Button>
+				)}
+				{currentUser && currentUser.userVotes.includes(productID) && (
+					<Button
+						className={classes.textBtn}
+						style={{ width: "50%" }}
+						disableRipple
+					>
+						Already Voted
+					</Button>
+				)}
+				{!currentUser && (
+					<Button
+						className={classes.textBtn}
+						style={{ width: "50%" }}
+						aria-controls="vote"
+						disableRipple
+					>
+						Login to Vote
+					</Button>
+				)}
 				<Draggable handle="#imHandle">
 					<Menu
 						disableScrollLock
