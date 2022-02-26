@@ -97,7 +97,7 @@ const Item = ({ item, pos, relativePos, products }) => {
 
 	return (
 		<Grid item xs={3}>
-			<Card>
+			<Card style={{ backgroundColor: "#18161E" }}>
 				<CardMedia
 					component="img"
 					height="120"
@@ -108,8 +108,8 @@ const Item = ({ item, pos, relativePos, products }) => {
 					alt="Paella dish"
 					style={{ cursor: "pointer" }}
 				/>
-				<CardContent>
-					<Typography style={{ fontSize: "12px" }}>
+				<CardContent style={{ minHeight: "15vh" }}>
+					<Typography style={{ fontSize: "12px", color: "white" }}>
 						{products[relativePos[pos]].productBrand}{" "}
 						{products[relativePos[pos]].productName}{" "}
 						{products[relativePos[pos]].reference}
@@ -119,6 +119,10 @@ const Item = ({ item, pos, relativePos, products }) => {
 					<ButtonGroup>
 						{!products[relativePos[pos]] && (
 							<Button
+								style={{
+									color: "white"
+								}}
+								size="small"
 								onClick={() => {
 									history.push(`/product/${item}`);
 								}}
@@ -128,6 +132,10 @@ const Item = ({ item, pos, relativePos, products }) => {
 						)}
 
 						<Button
+							style={{
+								color: "white"
+							}}
+							size="small"
 							onClick={() => {
 								handleWatch4BoosterPopup(pos, item);
 							}}
@@ -135,6 +143,9 @@ const Item = ({ item, pos, relativePos, products }) => {
 							Trade for Boosters
 						</Button>
 						<Button
+							style={{
+								color: "white"
+							}}
 							onClick={() => {
 								handleWatch4SellPopup(pos, item);
 							}}
