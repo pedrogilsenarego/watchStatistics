@@ -4,7 +4,7 @@ import Item from "./Item";
 // eslint-disable-next-line
 const CategoriesLegend = () => {
 	return (
-		<div>
+		<div style={{}}>
 			<Item
 				title="S aesthetics"
 				message="Relates to the general aspect of the watch, a very personal choice"

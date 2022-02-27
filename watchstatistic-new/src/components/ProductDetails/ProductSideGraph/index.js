@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
 		}
 	},
 	menu2: {
+		transform: "translateX(-5%)",
+		minWidth: "500px",
 		"& .MuiPaper-root": {
 			backgroundColor: "#04040699",
 			color: "#ffffff",
@@ -366,26 +368,17 @@ const ProductSidePanel = ({}) => {
 						</MenuItem>
 					</Menu>
 				</Draggable>
-				<Draggable handle="#imHandle">
-					<Menu
-						disableScrollLock
-						className={classes.menu2}
-						id="legendVote"
-						onClose={handleCloseLegendVote}
-						anchorEl={anchorLegendVote}
-						open={Boolean(anchorLegendVote)}
-					>
-						<CategoriesLegend />
-						<ButtonGroup
-							style={{ paddingLeft: "25%", marginTop: "5px" }}
-							aria-label="outlined primary button group"
-						>
-							<Button id="imHandle">
-								<RiDragDropLine fontSize="1.5em" />
-							</Button>
-						</ButtonGroup>
-					</Menu>
-				</Draggable>
+
+				<Menu
+					disableScrollLock
+					className={classes.menu2}
+					id="legendVote"
+					onClose={handleCloseLegendVote}
+					anchorEl={anchorLegendVote}
+					open={Boolean(anchorLegendVote)}
+				>
+					<CategoriesLegend />
+				</Menu>
 			</Grid>
 		</Grid>
 	);
