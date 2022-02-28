@@ -35,7 +35,9 @@ const Item = ({ message, title }: Iprops) => {
 				<Typography className={classes.legend}>{title}</Typography>
 			</MenuItem>
 			{message && open && (
-				<Typography className={classes.text}>{message}</Typography>
+				<MenuItem style={{ whiteSpace: "normal" }}>
+					<Typography className={classes.text}>{message}</Typography>
+				</MenuItem>
 			)}
 		</div>
 	);

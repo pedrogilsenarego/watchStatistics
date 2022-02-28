@@ -5,53 +5,16 @@ import {
 	Typography,
 	Button,
 	Menu,
-	MenuItem,
-	ButtonGroup
+	MenuItem
 } from "@material-ui/core";
 import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
-import Draggable from "react-draggable";
-import { RiDragDropLine } from "react-icons/ri";
 import { useParams } from "react-router";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-
+import { useMediaQuery, useTheme } from "@material-ui/core";
 import CategoriesLegend from "../CategoriesLegend";
-
-const useStyles = makeStyles((theme) => ({
-	menu: {
-		"& .MuiPaper-root": {
-			backgroundColor: "#04040699",
-			color: "#ffffff",
-			disableScrollLock: true,
-			maxWidth: "350px"
-		}
-	},
-	menu2: {
-		transform: "translateX(-5%)",
-		minWidth: "500px",
-		"& .MuiPaper-root": {
-			backgroundColor: "#04040699",
-			color: "#ffffff",
-			disableScrollLock: true,
-			maxWidth: "200px"
-		}
-	},
-	textBtn: {
-		color: "#FFFFFF",
-		border: "solid 2px",
-		borderColor: "#ffffff66",
-		fontSize: "13px",
-		borderRadius: "20px",
-		"&:hover": {
-			color: "#FFA500"
-		},
-		"&:active": {
-			color: "#FFFFFF"
-		}
-	}
-}));
 
 const initialTargetVoteState = {
 	quality: "",
@@ -69,6 +32,9 @@ const ProductSidePanel = ({}) => {
 		currentUser: state.user.currentUser,
 		product: state.productsData.product
 	});
+
+	const theme = useTheme();
+
 	const { product, currentUser } = useSelector(mapState);
 	const [anchorVote, setAnchorVote] = useState(null);
 	const [anchorLegendVote, setAnchorLegendVote] = useState(null);
@@ -78,6 +44,41 @@ const ProductSidePanel = ({}) => {
 	const [targetVote, setTargetVote] = useState(false);
 	const [update, setUpdate] = useState(true);
 	const { productID } = useParams();
+	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
+	const useStyles = makeStyles((theme) => ({
+		menu: {
+			transform: isMatch ? "translateX(-10%)" : "translateX(-35%)",
+			"& .MuiPaper-root": {
+				backgroundColor: "#ffffff66",
+				color: "#ffffff",
+				disableScrollLock: true,
+				maxWidth: "350px"
+			}
+		},
+		menu2: {
+			transform: "translateX(-5%)",
+			"& .MuiPaper-root": {
+				backgroundColor: "#ffffff66",
+				color: "#ffffff",
+				disableScrollLock: true,
+				minWidth: "400px"
+			}
+		},
+		textBtn: {
+			color: "#FFFFFF",
+			border: "solid 2px",
+			borderColor: "#ffffff66",
+			fontSize: "13px",
+			borderRadius: "20px",
+			"&:hover": {
+				color: "#FFA500"
+			},
+			"&:active": {
+				color: "#FFFFFF"
+			}
+		}
+	}));
 
 	const handleCloseVote = () => {
 		setAnchorVote(null);
@@ -346,28 +347,19 @@ const ProductSidePanel = ({}) => {
 						Login to Vote
 					</Button>
 				)}
-				<Draggable handle="#imHandle">
-					<Menu
-						disableScrollLock
-						className={classes.menu}
-						id="vote"
-						onClose={handleCloseVote}
-						anchorEl={anchorVote}
-						open={Boolean(anchorVote)}
-					>
-						<ButtonGroup
-							style={{ paddingLeft: "5px", marginBottom: "5px" }}
-							aria-label="outlined primary button group"
-						>
-							<Button id="imHandle">
-								<RiDragDropLine fontSize="1.5em" />
-							</Button>
-						</ButtonGroup>
-						<MenuItem disableRipple>
-							<ProductVote {...configTargetVote} />
-						</MenuItem>
-					</Menu>
-				</Draggable>
+
+				<Menu
+					disableScrollLock
+					className={classes.menu}
+					id="vote"
+					onClose={handleCloseVote}
+					anchorEl={anchorVote}
+					open={Boolean(anchorVote)}
+				>
+					<MenuItem disableRipple>
+						<ProductVote {...configTargetVote} />
+					</MenuItem>
+				</Menu>
 
 				<Menu
 					disableScrollLock
