@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -97,7 +97,7 @@ const Next = () => {
 	};
 	return (
 		<div>
-			<Container>
+			<Box style={{ marginLeft: "5.5vw" }}>
 				<Grid container spacing={2} style={{ marginTop: "-2px" }}>
 					{nextItems().map((item, pos) => {
 						return (
@@ -125,7 +125,7 @@ const Next = () => {
 						);
 					})}
 				</Grid>
-			</Container>
+			</Box>
 		</div>
 	);
 };

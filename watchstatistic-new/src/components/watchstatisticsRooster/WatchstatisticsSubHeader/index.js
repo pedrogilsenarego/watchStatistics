@@ -35,12 +35,14 @@ const WatchstatisticsSubHeader = ({}) => {
 	const useStyles = makeStyles((theme) => ({
 		root: {
 			marginTop: "80px",
+			
 			paddingTop: "15px",
 			paddingBottom: "15px",
 			background: theme.palette.home.primary,
 			display: "flex",
 			flexDirection: "column",
-			justifyContent: "center"
+			justifyContent: "center",
+			
 		},
 		container: {
 			textAlign: "center",
@@ -116,7 +118,7 @@ const WatchstatisticsSubHeader = ({}) => {
 
 	return (
 		<div>
-			<Container className={classes.root}>
+			<Container maxWidth={false} className={classes.root}>
 				<Grid container className={classes.container}>
 					<Grid
 						item
