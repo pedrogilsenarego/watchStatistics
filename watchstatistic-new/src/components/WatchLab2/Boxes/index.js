@@ -1,4 +1,4 @@
-import { Canvas, extend, useFrame } from "react-three-fiber";
+import { Canvas, extend, useFrame } from "@react-three/fiber";
 //import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";

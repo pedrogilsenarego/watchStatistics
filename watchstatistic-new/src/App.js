@@ -19,7 +19,6 @@ import ProductDetailsPreview from "./pages/ProductDetailsPreview";
 import FAQ from "./pages/FAQ";
 import Watchstatistics from "./pages/Watchstatistics";
 import AddWatch from "./pages/Watchstatistics/AddWatch";
-import WatchBoxes from "./pages/WatchBoxes";
 import CompareWatches from "./pages/CompareWatches";
 
 import WatchLaboratory2 from "./components/WatchLab2";
@@ -46,7 +45,7 @@ const mapState = (state) => ({
 	currentUser: state.user.currentUser
 });
 
-const App = (props) => {
+const App = () => {
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector(mapState);
 
@@ -189,14 +188,7 @@ const App = (props) => {
 							</MainLayout>
 						)}
 					/>
-					<Route
-						path="/watchboxes"
-						render={() => (
-							<MainLayout>
-								<WatchBoxes />
-							</MainLayout>
-						)}
-					/>
+				
 
 					<Route
 						path="/dashboard"
