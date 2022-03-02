@@ -284,17 +284,10 @@ const ProductSidePanel = ({}) => {
 				
 				<Grid container style={{marginTop: "10px"}}>
 					<Grid item xs={8}>
-				<Box
-					
-					
-					style={{
-						padding: "10px",
-						
-					}}
-				>
-					
-					
-				
+				<Box	
+							
+					style={{textAlign: "left"}}
+				>				
 						<Typography
 							fontWeight={600}
 							
@@ -305,13 +298,13 @@ const ProductSidePanel = ({}) => {
 
 						<Typography
 							
-							style={{  color: "#ffffffBF" }}
+							style={{  color: "#ffffffBF", fontSize: "13px" }}
 						>
 							Own/Experimented: {avgVotationsOwn} Votes: {numberVotesOwn}
 						</Typography>
 						<Typography
 							
-							style={{  color: "#ffffffBF" }}
+							style={{  color: "#ffffffBF", fontSize: "13px" }}
 						>
 							Only Seen Digital: {avgVotationsNotOwn} Votes: {numberVotesNotOwn}
 						</Typography>
