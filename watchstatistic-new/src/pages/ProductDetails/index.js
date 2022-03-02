@@ -20,6 +20,7 @@ import {
 	useMediaQuery,
 	useTheme
 } from "@material-ui/core";
+import Container from "@mui/material/Container"
 
 import {
 	fetchProductStart,
@@ -49,9 +50,9 @@ const ProductDetails = ({}) => {
 		filter: {},
 
 		media: {
-			height: "94vh",
+			
 			textAlign: "right",
-			paddingTop: "86vh",
+			paddingTop: "55vh",
 			paddingRight: "5px",
 			borderRadius: "4px"
 		},
@@ -101,7 +102,7 @@ const ProductDetails = ({}) => {
 	const bgImage = () => {
 		if (!currentUser) return productBackground;
 
-		if (!currentUser.backgroundImageOff) {
+		if (currentUser.backgroundImageOff) {
 			if (productBackground) return productBackground;
 		} else return;
 	};
@@ -125,7 +126,7 @@ const ProductDetails = ({}) => {
 			<Helmet>
 				<meta property="og:image" content={productThumbnail} />
 			</Helmet>
-			<Box>
+			<Container style={{marginTop: "40px"}}>
 				<Parallax bgImage={bgImage()} strength={300}>
 					<Box
 						sx={{ borderRadius: "10px" }}
@@ -145,11 +146,12 @@ const ProductDetails = ({}) => {
 							}}
 						>
 							<AvatarsControllers {...configAvatarBtns} />
-							<Grid item xs={12} md={8}>
-								<Box alt={productName}>
+							<Grid item xs={12} md={7}>
+								<Card alt={productName}>
 									{!mainImage && (
 										<CardMedia
-											style={{ borderRadius: "4px" }}
+											
+											style={{ borderRadius: "4px"  }}
 											className={classes.media}
 											image={productThumbnail[0]}
 										>
@@ -169,11 +171,12 @@ const ProductDetails = ({}) => {
 										</CardMedia>
 									)}
 									{mainImage && (
-										<CardMedia className={classes.media} image={mainImage}>
+										<CardMedia  className={classes.media} image={mainImage}>
 											{productThumbnail &&
 												productThumbnail.map((productThumbnail, pos) => {
 													return (
 														<IconButton
+														key={pos}
 															className={classes.textBtn}
 															onClick={(e) => {
 																setMainImage(productThumbnail);
@@ -185,9 +188,9 @@ const ProductDetails = ({}) => {
 												})}
 										</CardMedia>
 									)}
-								</Box>
+								</Card>
 							</Grid>
-							<Grid item xs={12} md={4}>
+							<Grid item xs={12} md={5}>
 								<Card
 									className={classes.side}
 									style={{ backgroundColor: "#04040699" }}
@@ -217,7 +220,7 @@ const ProductDetails = ({}) => {
 						</Grid>
 					</Box>
 				</Parallax>
-			</Box>
+			</Container>
 		</div>
 	);
 };

@@ -113,16 +113,16 @@ const VisualPref = (props) => {
 					onClick={() => {
 						handleSetImageBackGround();
 					}}
-					checked={!currentUser.backgroundImageOff}
+					checked={currentUser.backgroundImageOff}
 					{...label}
 					color="primary"
 				/>
-				{!currentUser.backgroundImageOff && (
+				{currentUser.backgroundImageOff && (
 					<Typography style={{ marginLeft: "10px" }}>
 						Background Image is currently On
 					</Typography>
 				)}
-				{currentUser.backgroundImageOff && (
+				{!currentUser.backgroundImageOff && (
 					<Typography style={{ marginLeft: "10px" }}>
 						Background Image is currently Off
 					</Typography>
