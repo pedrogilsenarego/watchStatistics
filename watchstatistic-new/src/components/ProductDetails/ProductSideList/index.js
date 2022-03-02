@@ -45,6 +45,19 @@ const useStyles = makeStyles((theme) => ({
 			paddingBottom: "3px",
 			paddingTop: "3px"
 		}
+	},
+	textBtn: {
+		color: "#FFFFFF",
+		border: "solid 2px",
+		borderColor: "#ffffff66",
+		fontSize: "13px",
+		borderRadius: "20px",
+		"&:hover": {
+			color: "#FFA500"
+		},
+		"&:active": {
+			color: "#FFFFFF"
+		}
 	}
 }));
 
@@ -123,14 +136,14 @@ const ProductSideList = ({}) => {
 				<Form>
 					<Box
 						color={"text.secondary"}
-						sx={{ display: "flex", justifyContent: "space-evenly" }}
+						sx={{ display: "flex", justifyContent: "space-between" }}
 						borderRadius="10px"
 						container
 					>
 						{!submitDetails && (
 							<Typography
 								variant={"h6"}
-								style={{ paddingLeft: "10px", color: "#ffffffBF" }}
+								style={{ paddingLeft: "10px", color: "#ffffff" }}
 							>
 								{submitedDetails ? "Details submited for approval" : "Details"}
 							</Typography>
@@ -143,8 +156,8 @@ const ProductSideList = ({}) => {
 								!movement ||
 								!productionYears) &&
 							!submitedDetails && (
-								<Button size="small" onClick={() => setSubmitDetails(true)}>
-									Add details
+								<Button size="small" className={classes.textBtn} onClick={() => setSubmitDetails(true)}>
+									Add +
 								</Button>
 							)}
 
