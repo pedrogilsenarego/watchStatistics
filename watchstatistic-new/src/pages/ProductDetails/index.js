@@ -138,10 +138,11 @@ const ProductDetails = ({}) => {
 						>
 							<AvatarsControllers {...configAvatarBtns} />
 							<Grid item xs={12} md={7}>
-							<ImageMain {...configImageMain}/><Card style={{ backgroundColor: "#18161E" }}>
-									<CardContent style={{ padding: "5px" }}>
+							<ImageMain {...configImageMain}/>
+							<Card style={{ backgroundColor: "#18161E", marginTop: "5px" }}>
+									
 										<SideDescription />
-									</CardContent>
+								
 								</Card></Grid>
 							<Grid item xs={12} md={5}>
 								<Card
@@ -153,7 +154,7 @@ const ProductDetails = ({}) => {
 									</CardContent>
 								</Card>
 								<Card
-									style={{ backgroundColor: "#18161E"}}
+									style={{ backgroundColor: "#18161E", marginTop: "5px"}}
 								>
 									<CardContent style={{ padding: "5px" }}>
 										<ProductSideList />

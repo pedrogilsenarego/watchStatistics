@@ -33,10 +33,11 @@ const ProductSideDescription = ({}) => {
 	};
 
 	return (
-		<div>
+		<div >
 			<Box
+			style={{marginTop: "10px"}}
 				color={"text.secondary"}
-				borderRadius="10px"
+				
 				
 			>
 				<Typography
@@ -53,7 +54,7 @@ const ProductSideDescription = ({}) => {
 						dangerouslySetInnerHTML={{ __html: productDesc }}
 						align="justify"
 						style={{
-							
+							marginTop: "5px",
 							paddingLeft: "10px",
 							paddingRight: "10px",
 							paddingBottom: "10px",
@@ -76,7 +77,7 @@ const ProductSideDescription = ({}) => {
 					{additionalData &&
 						additionalData.map((additionalData, pos) => {
 							return (
-								<Grid item xs={6} md={3}>
+								<Grid item xs={6} md={3} key={pos}>
 									<Button
 										className={classes.textBtn}
 										align="justify"

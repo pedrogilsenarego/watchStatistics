@@ -27,6 +27,7 @@ const RightIconsBigUser = ({ messageStatus, handleMyAccountOpen }) => {
 		[
 			<Button
 				aria-controls="messages"
+				key="messages"
 				className={classes.textBtn}
 				activestyle={activeStyle}
 				disableRipple
@@ -38,6 +39,7 @@ const RightIconsBigUser = ({ messageStatus, handleMyAccountOpen }) => {
 				&nbsp;Messages ({messageStatus})
 			</Button>,
 			<Button
+			key="myAccount"
 				className={classes.textBtn}
 				activestyle={activeStyle}
 				aria-controls="myAccount"
