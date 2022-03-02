@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import { addProduct, addBooster } from "./../../../redux/Cart/cart.actions";
+import { addProduct, addBooster } from "../../../redux/Cart/cart.actions";
 
 const AvatarsControllers = ({
 	product,
@@ -67,7 +67,8 @@ const AvatarsControllers = ({
 					display: "flex",
 					flexDirection: "row",
 					alignItems: "center",
-					marginTop: "72vh",
+					marginLeft: "10px",
+					marginTop: "60vh",
 					borderRadius: "10px",
 					padding: "5px",
 					backgroundColor: "#ffffff66",

@@ -116,6 +116,7 @@ const ProductDetails = ({}) => {
 			<Helmet>
 				<meta property="og:image" content={productThumbnail} />
 			</Helmet>
+			<AvatarsControllers {...configAvatarBtns} />
 			<Container  style={{marginTop: "40px"}}>
 				<Typography style={{marginTop: "90px", color: "#ffffff66", marginLeft:"10px" }} variant="h6">{productBrand} {productName} - {reference}</Typography>
 				<Parallax bgImage={bgImage()} strength={300}>
@@ -136,7 +137,7 @@ const ProductDetails = ({}) => {
 								paddingRight: "10px"
 							}}
 						>
-							<AvatarsControllers {...configAvatarBtns} />
+							
 							<Grid item xs={12} md={7}>
 							<ImageMain {...configImageMain}/>
 							<Card style={{ backgroundColor: "#18161E", marginTop: "5px" }}>
