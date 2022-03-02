@@ -3,19 +3,20 @@ import SideGraphPanel from "../../components/ProductDetails/ProductSideGraph";
 import SideDescription from "../../components/ProductDetails/ProductSideDescription";
 import ProductSideList from "../../components/ProductDetails/ProductSideList";
 import { makeStyles } from "@material-ui/core/styles";
-import { BsXDiamond } from "react-icons/bs";
+
 import { useSelector } from "react-redux";
 import { Parallax } from "react-parallax";
 import AvatarsControllers from "../../components/ProductDetails/AvatarsControllers";
 import { useParams } from "react-router";
 import { Helmet } from "react-helmet";
+import ImageMain from "../../components/ProductDetails/ImageMain"
 
 import {
 	Grid,
 	Card,
-	CardMedia,
+	
 	CardContent,
-	IconButton,
+	
 	Box,
 	useMediaQuery,
 	useTheme
@@ -41,7 +42,7 @@ const ProductDetails = ({}) => {
 	const { productID } = useParams();
 
 	const { product, currentUser, cartItems } = useSelector(mapState);
-	const [mainImage, setMainImage] = useState(null);
+	
 	const [compareWatches, setCompareWatches] = useState(false);
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("xs"));
@@ -49,27 +50,11 @@ const ProductDetails = ({}) => {
 	const useStyles = makeStyles((theme) => ({
 		filter: {},
 
-		media: {
-			
-			textAlign: "right",
-			paddingTop: "55vh",
-			paddingRight: "5px",
-			borderRadius: "4px"
-		},
+	
 		side: {
 			height: isMatch ? null : "94vh"
-		},
-		textBtn: {
-			color: "#FFFFFF",
-			fontSize: "13px",
-
-			"&:hover": {
-				color: "#FFA500"
-			},
-			"&:active": {
-				color: "#FFFFFF"
-			}
 		}
+		
 	}));
 
 	const classes = useStyles();
@@ -121,6 +106,11 @@ const ProductDetails = ({}) => {
 		compareWatches
 	};
 
+	const configImageMain = {
+		isMatch,
+		productThumbnail
+	}
+
 	return (
 		<div>
 			<Helmet>
@@ -146,50 +136,7 @@ const ProductDetails = ({}) => {
 							}}
 						>
 							<AvatarsControllers {...configAvatarBtns} />
-							<Grid item xs={12} md={7}>
-								<Card alt={productName}>
-									{!mainImage && (
-										<CardMedia
-											
-											style={{ borderRadius: "4px"  }}
-											className={classes.media}
-											image={productThumbnail[0]}
-										>
-											{productThumbnail &&
-												productThumbnail.map((productThumbnail, pos) => {
-													return (
-														<IconButton
-															className={classes.textBtn}
-															onClick={(e) => {
-																setMainImage(productThumbnail);
-															}}
-														>
-															<BsXDiamond fontSize="1.5em" />
-														</IconButton>
-													);
-												})}
-										</CardMedia>
-									)}
-									{mainImage && (
-										<CardMedia  className={classes.media} image={mainImage}>
-											{productThumbnail &&
-												productThumbnail.map((productThumbnail, pos) => {
-													return (
-														<IconButton
-														key={pos}
-															className={classes.textBtn}
-															onClick={(e) => {
-																setMainImage(productThumbnail);
-															}}
-														>
-															<BsXDiamond fontSize="1.5em" />
-														</IconButton>
-													);
-												})}
-										</CardMedia>
-									)}
-								</Card>
-							</Grid>
+							<ImageMain {...configImageMain}/>
 							<Grid item xs={12} md={5}>
 								<Card
 									className={classes.side}
