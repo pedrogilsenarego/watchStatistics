@@ -61,7 +61,14 @@ const ImageMain = ({isMatch, productThumbnail}) => {
 																setMainImage(productThumbnail);
 															}}
 														>
-															<BsXDiamond fontSize="1.5em" />
+															<CardMedia
+				style={{ cursor: "pointer" }}
+				component="img"
+				height="50px"
+				image={productThumbnail}
+				alt=""
+				
+			/>
 														</IconButton>
 													);
 												})}

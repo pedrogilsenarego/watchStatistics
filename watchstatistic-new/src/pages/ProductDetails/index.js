@@ -52,7 +52,7 @@ const ProductDetails = ({}) => {
 
 	
 		side: {
-			height: isMatch ? null : "94vh"
+			
 		}
 		
 	}));
@@ -148,16 +148,16 @@ const ProductDetails = ({}) => {
 								</Card>
 							</Grid>
 
-							<Grid item xs={12} sm={8}>
+							<Grid item xs={12} md={7}>
 								<Card style={{ backgroundColor: "#04040699" }}>
 									<CardContent style={{ padding: "5px" }}>
 										<SideDescription />
 									</CardContent>
 								</Card>
 							</Grid>
-							<Grid item xs={12} sm={4}>
+							<Grid item xs={12} md={5}>
 								<Card
-									style={{ backgroundColor: "#04040699", marginBottom: "10px" }}
+									style={{ backgroundColor: "#04040699"}}
 								>
 									<CardContent style={{ padding: "5px" }}>
 										<ProductSideList />

@@ -263,6 +263,7 @@ const ProductSidePanel = ({}) => {
 	);
 
 	return (
+		
 		<Grid container>
 			<Grid item style={{ textAlign: "center" }} xs={12}>
 				<AiOutlineQuestionCircle

@@ -37,7 +37,7 @@ const ProductSideDescription = ({}) => {
 			<Box
 				color={"text.secondary"}
 				borderRadius="10px"
-				sx={{ minHeight: "70.4vh" }}
+				
 			>
 				<Typography
 					variant={"h6"}
@@ -46,26 +46,19 @@ const ProductSideDescription = ({}) => {
 					Description
 				</Typography>
 				<Box
-					overflow="hidden"
-					sx={{
-						minHeight: "60vh",
-
-						height: "100%",
-						position: "relative",
-						paddingTop: "10px"
-					}}
+					
+				
 				>
 					<Typography
 						dangerouslySetInnerHTML={{ __html: productDesc }}
 						align="justify"
 						style={{
-							width: "100%",
+							
 							paddingLeft: "10px",
 							paddingRight: "10px",
 							paddingBottom: "10px",
-							maxHeight: "60vh",
-							position: "absolute",
-							overflow: "scroll",
+							
+							
 							color: "#ffffffBF"
 						}}
 					/>
