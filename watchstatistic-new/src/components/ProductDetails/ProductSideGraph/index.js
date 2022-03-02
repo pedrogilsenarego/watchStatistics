@@ -5,6 +5,7 @@ import {
 	Typography,
 	Button,
 	Menu,
+
 	MenuItem
 } from "@material-ui/core";
 import RadarChart from "../../RadarChart";
@@ -279,42 +280,43 @@ const ProductSidePanel = ({}) => {
 						setAnchorLegendVote(e.currentTarget);
 					}}
 				/>
+				{memoRadarChart}
+				
+				<Grid container style={{marginTop: "10px"}}>
+					<Grid item xs={8}>
 				<Box
-					color={"text.secondary"}
-					borderRadius="10px"
+					
+					
 					style={{
 						padding: "10px",
-						paddingRight: "5px"
+						
 					}}
 				>
-					{memoRadarChart}
-					<Box
-						style={{
-							marginTop: "10px"
-						}}
-					>
+					
+					
+				
 						<Typography
 							fontWeight={600}
-							align="center"
-							style={{ width: "100%", color: "#ffffff" }}
+							
+							style={{ color: "#ffffff" }}
 						>
 							Score: {avgTotal}
 						</Typography>
 
 						<Typography
-							align="center"
-							style={{ width: "100%", color: "#ffffffBF" }}
+							
+							style={{  color: "#ffffffBF" }}
 						>
 							Own/Experimented: {avgVotationsOwn} Votes: {numberVotesOwn}
 						</Typography>
 						<Typography
-							align="center"
-							style={{ width: "100%", color: "#ffffffBF" }}
+							
+							style={{  color: "#ffffffBF" }}
 						>
 							Only Seen Digital: {avgVotationsNotOwn} Votes: {numberVotesNotOwn}
 						</Typography>
 					</Box>
-				</Box>
+				</Grid><Grid item xs={4}>
 				{currentUser && !currentUser.userVotes.includes(productID) && (
 					<Button
 						size="small"
@@ -347,7 +349,8 @@ const ProductSidePanel = ({}) => {
 					>
 						Login to Vote
 					</Button>
-				)}
+				)}</Grid>
+				</Grid>
 
 				<Menu
 					disableScrollLock
