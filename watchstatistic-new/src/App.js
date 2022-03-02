@@ -64,7 +64,7 @@ const App = () => {
 			}
 		>
 			<CssBaseline />
-			<div className="App">
+			<div className="App" >
 				<Switch>
 					<Route
 						exact

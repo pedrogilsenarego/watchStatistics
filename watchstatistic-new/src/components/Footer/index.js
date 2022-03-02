@@ -11,7 +11,7 @@ const Footer = () => {
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 	const history = useHistory();
 	return (
-		<div>
+		<div >
 			{!isMatch && (
 				<Box
 					style={{

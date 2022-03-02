@@ -4,7 +4,7 @@ import Next from "./Next";
 
 const HomePage = () => {
 	return (
-		<div>
+		<div >
 			<Next />
 			<Sugested2Vote />
 		</div>
