@@ -16,7 +16,7 @@ import {
 	Card,
 	
 	CardContent,
-	
+	Typography,
 	Box,
 	useMediaQuery,
 	useTheme
@@ -116,7 +116,8 @@ const ProductDetails = ({}) => {
 			<Helmet>
 				<meta property="og:image" content={productThumbnail} />
 			</Helmet>
-			<Container style={{marginTop: "40px"}}>
+			<Container  style={{marginTop: "40px"}}>
+				<Typography style={{marginTop: "90px", color: "#ffffff66", marginLeft:"10px" }} variant="h6">{productBrand} {productName} - {reference}</Typography>
 				<Parallax bgImage={bgImage()} strength={300}>
 					<Box
 						sx={{ borderRadius: "10px" }}
@@ -130,40 +131,37 @@ const ProductDetails = ({}) => {
 							container
 							spacing={1}
 							style={{
-								paddingTop: "90px",
+								
 								paddingLeft: "10px",
 								paddingRight: "10px"
 							}}
 						>
 							<AvatarsControllers {...configAvatarBtns} />
-							<ImageMain {...configImageMain}/>
+							<Grid item xs={12} md={7}>
+							<ImageMain {...configImageMain}/><Card style={{ backgroundColor: "#18161E" }}>
+									<CardContent style={{ padding: "5px" }}>
+										<SideDescription />
+									</CardContent>
+								</Card></Grid>
 							<Grid item xs={12} md={5}>
 								<Card
 									className={classes.side}
-									style={{ backgroundColor: "#04040699" }}
+									style={{ backgroundColor: "#18161E" }}
 								>
 									<CardContent style={{ padding: "5px" }}>
 										<SideGraphPanel />
 									</CardContent>
 								</Card>
-							</Grid>
-
-							<Grid item xs={12} md={7}>
-								<Card style={{ backgroundColor: "#04040699" }}>
-									<CardContent style={{ padding: "5px" }}>
-										<SideDescription />
-									</CardContent>
-								</Card>
-							</Grid>
-							<Grid item xs={12} md={5}>
 								<Card
-									style={{ backgroundColor: "#04040699"}}
+									style={{ backgroundColor: "#18161E"}}
 								>
 									<CardContent style={{ padding: "5px" }}>
 										<ProductSideList />
 									</CardContent>
 								</Card>
 							</Grid>
+
+							
 						</Grid>
 					</Box>
 				</Parallax>

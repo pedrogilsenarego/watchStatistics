@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import {
-	Grid,
+	
 	Card,
 	CardMedia,
 	
@@ -8,7 +8,7 @@ import {
 	
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { BsXDiamond } from "react-icons/bs";
+
 
 
 
@@ -44,9 +44,9 @@ const ImageMain = ({isMatch, productThumbnail}) => {
    
 
     return (
-        <Grid item xs={12} md={7}>
+        <>
 								{productThumbnail && (
-									<Card style={{ backgroundColor: "#04040699" }}>
+									<Card style={{ backgroundColor: "#18161E" }}>
 										<CardMedia  className={classes.media} image={mainImage ? mainImage : productThumbnail[0]}/>
 											
 										
@@ -73,7 +73,7 @@ const ImageMain = ({isMatch, productThumbnail}) => {
 													);
 												})}
 								</Card>)}
-							</Grid>
+							</>
     )
 }
 
