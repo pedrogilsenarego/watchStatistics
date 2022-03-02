@@ -100,7 +100,7 @@ const WatchLab2 = () => {
 			<Currencies />
 			<Box style={{ height: "100vh", background: "black" }}>
 				<Grid container style={{ position: "absolute", zIndex: "2" }}>
-					<Grid item xs={4} justify="center">
+					<Grid item xs={4} justifyContent="center">
 						{boxInfoMenu === "whiteBox" && <BoxInfo />}
 						{boxInfoMenu === "blueBox" && <BoxInfo2 />}
 						{boxInfoMenu === "purpleBox" && <BoxInfo3 />}

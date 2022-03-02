@@ -32,8 +32,9 @@ const SignIn = ({ handleCloseLoginMenu }) => {
 			/>
 			<Grid
 				item
+				container
 				xs={12}
-				justify="space-between"
+				justifyContent="space-between"
 				style={{ display: "flex", marginLeft: "50px", marginRight: "50px" }}
 			>
 				<Typography

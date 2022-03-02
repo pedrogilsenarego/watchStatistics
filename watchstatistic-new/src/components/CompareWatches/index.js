@@ -197,7 +197,7 @@ const CompareWatches = () => {
 		<Grid
 			container
 			spacing={2}
-			justify="center"
+			justifyContent="center"
 			style={{
 				paddingTop: "160px",
 				paddingLeft: isMatch ? "5px" : "100px",

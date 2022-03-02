@@ -177,8 +177,8 @@ const Sugested2Vote = () => {
 								const configItem = { currentUser };
 
 								return (
-									<Grid item xs={6} md={3}>
-										<Item item={item} key={pos} {...configItem} />
+									<Grid item key={pos} xs={6} md={3}>
+										<Item item={item}  {...configItem} />
 									</Grid>
 								);
 							})}

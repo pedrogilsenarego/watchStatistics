@@ -130,7 +130,7 @@ const WatchstatisticsSubHeader = ({}) => {
 						style={{
 							display: "flex",
 							flexDirection: "row",
-							justify: "center"
+							justifyContent: "center"
 						}}
 					>
 						<Grid
@@ -202,10 +202,11 @@ const WatchstatisticsSubHeader = ({}) => {
 
 					<Grid
 						container
+						item
 						xs={12}
 						sm={6}
 						alignItems="center"
-						justify="center"
+						justifyContent="center"
 						className={classes.item}
 						style={{ marginTop: isMatch ? "10px" : "0px" }}
 					>

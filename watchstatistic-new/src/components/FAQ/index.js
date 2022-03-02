@@ -13,8 +13,8 @@ const FAQ = () => {
 	const theme = useTheme();
 	const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
-		<div>
-			<Grid container justify="center" style={{ marginTop: "120px" }}>
+		<div style={{minHeight: "50vh"}}>
+			<Grid container justifyContent="center" style={{ marginTop: "120px" }}>
 				<Paper
 					style={{ width: isMatch ? "95vw" : "75vw", background: "#196B91" }}
 				>
