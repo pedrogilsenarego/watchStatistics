@@ -165,9 +165,9 @@ const App = () => {
 					<Route
 						path="/product/:productID"
 						render={() => (
-							<WatchLab>
+							<MainLayout>
 								<ProductDetails />
-							</WatchLab>
+							</MainLayout>
 						)}
 					/>
 					<Route

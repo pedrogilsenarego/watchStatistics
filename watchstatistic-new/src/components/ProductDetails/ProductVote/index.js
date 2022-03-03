@@ -18,7 +18,7 @@ const muiTheme = createTheme({
 	overrides: {
 		MuiSlider: {
 			thumb: {
-				color: "#36454f"
+				color: "orange"
 			},
 			track: {
 				color: "white"
@@ -27,9 +27,24 @@ const muiTheme = createTheme({
 				color: "white"
 			}
 		}
-	}
+	},
+	
 });
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+	textBtn: {
+		color: "#FFFFFF",
+		border: "solid 2px",
+		borderColor: "#ffffff66",
+		fontSize: "13px",
+		borderRadius: "20px",
+		"&:hover": {
+			color: "#FFA500"
+		},
+		"&:active": {
+			color: "#FFFFFF"
+		}
+	}
+}));
 
 const mapState = (state) => ({
 	currentUser: state.user.currentUser,
@@ -327,8 +342,10 @@ const ProductVote = ({
 					</Typography>
 				)}
 
-				<Button onClick={handleApplyVote}>Apply Vote</Button>
+				<Button className={classes.textBtn} style={{borderColor: "orange"}} onClick={handleApplyVote}>Apply Vote</Button>
 				<Button
+					className={classes.textBtn}
+					style={{marginLeft: "10px"}}
 					onClick={() => {
 						handleVisualTargetVote(true);
 						handleUpdate();

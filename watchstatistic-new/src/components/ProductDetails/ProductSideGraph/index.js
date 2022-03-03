@@ -51,19 +51,24 @@ const ProductSidePanel = ({}) => {
 		menu: {
 			transform: isMatch ? "translateX(-10%)" : "translateX(-35%)",
 			"& .MuiPaper-root": {
-				backgroundColor: "#ffffff66",
+				backgroundColor: "#18161E",
 				color: "#ffffff",
 				disableScrollLock: true,
-				maxWidth: "350px"
+				marginTop: "0vh",
+				maxWidth: "350px",
+				boxShadow: "0 0 0.5rem hsl(0 0% 100%)"
 			}
 		},
 		menu2: {
-			transform: "translateX(-5%)",
+			transform: isMatch ? "translateX(-10%)" : "translateX(-35%)",
 			"& .MuiPaper-root": {
-				backgroundColor: "#ffffff66",
+				backgroundColor: "#18161E",
 				color: "#ffffff",
 				disableScrollLock: true,
-				minWidth: "400px"
+				marginTop: "0vh",
+				minWidth: "300px",
+				maxWidth: "350px",
+				boxShadow: "0 0 0.5rem hsl(0 0% 100%)"
 			}
 		},
 		textBtn: {
@@ -314,7 +319,7 @@ const ProductSidePanel = ({}) => {
 					<Button
 						
 						className={classes.textBtn}
-						style={{ width: "80%" }}
+						style={{ width: "80%", borderColor: "orange" }}
 						aria-controls="vote"
 						onClick={(e) => {
 							setAnchorVote(e.currentTarget);

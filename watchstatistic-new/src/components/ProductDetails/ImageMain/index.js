@@ -21,7 +21,7 @@ const ImageMain = ({isMatch, productThumbnail}) => {
         media: {
             
             textAlign: "right",
-            paddingTop: "55vh",
+            paddingTop: "70vh",
             paddingRight: "5px",
             borderRadius: "4px"
         },

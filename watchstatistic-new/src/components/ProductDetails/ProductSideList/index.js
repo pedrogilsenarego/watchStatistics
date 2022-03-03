@@ -144,7 +144,7 @@ const ProductSideList = ({}) => {
 						{!submitDetails && (
 							<Typography
 								variant={"h6"}
-								style={{ paddingLeft: "10px", color: "#ffffff" }}
+								style={{ paddingLeft: "15px", color: "#ffffff" }}
 							>
 								{submitedDetails ? "Details submited for approval" : "Details"}
 							</Typography>
@@ -163,8 +163,8 @@ const ProductSideList = ({}) => {
 							)}
 
 						{submitDetails && [
-							<ButtonMUI size="small">Submit </ButtonMUI>,
-							<Button onClick={() => setSubmitDetails(false)}>GoBack</Button>
+							<ButtonMUI style={{marginLeft: "15px"}} className={classes.textBtn} >Submit </ButtonMUI>,
+							<Button className={classes.textBtn} onClick={() => setSubmitDetails(false)}>GoBack</Button>
 						]}
 					</Box>
 					<TableContainer className={classes.table} component={Paper}>
@@ -248,6 +248,7 @@ const ProductSideList = ({}) => {
 											submitDetails && [
 												<InputBase
 													size="small"
+													key="yearsStart"
 													style={{
 														width: "60px",
 														border: "1.4px solid #ffffffB3",
@@ -264,10 +265,12 @@ const ProductSideList = ({}) => {
 												></InputBase>,
 												<InputBase
 													size="small"
+													key="yearsEnd"
 													style={{
 														width: "60px",
 														border: "1.4px solid #ffffffB3",
-														borderRadius: "4px"
+														borderRadius: "4px",
+														marginLeft: "5px"
 													}}
 													name="productionYearsEnd"
 													inputProps={{
