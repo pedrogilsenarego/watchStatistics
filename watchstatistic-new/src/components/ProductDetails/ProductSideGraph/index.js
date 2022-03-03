@@ -283,10 +283,10 @@ const ProductSidePanel = ({}) => {
 				{memoRadarChart}
 				
 				<Grid container style={{marginTop: "10px"}}>
-					<Grid item xs={8}>
+					<Grid item xs={6} >
 				<Box	
 							
-					style={{textAlign: "left"}}
+					style={{textAlign: "left", padding: "10px"}}
 				>				
 						<Typography
 							fontWeight={600}
@@ -309,12 +309,12 @@ const ProductSidePanel = ({}) => {
 							Only Seen Digital: {avgVotationsNotOwn} Votes: {numberVotesNotOwn}
 						</Typography>
 					</Box>
-				</Grid><Grid item xs={4}>
+				</Grid><Grid item xs={6} alignItems="center" justifyContent="center" container>
 				{currentUser && !currentUser.userVotes.includes(productID) && (
 					<Button
-						size="small"
+						
 						className={classes.textBtn}
-						style={{ width: "50%" }}
+						style={{ width: "80%" }}
 						aria-controls="vote"
 						onClick={(e) => {
 							setAnchorVote(e.currentTarget);
@@ -327,7 +327,7 @@ const ProductSidePanel = ({}) => {
 				{currentUser && currentUser.userVotes.includes(productID) && (
 					<Button
 						className={classes.textBtn}
-						style={{ width: "50%" }}
+						style={{ width: "80%" }}
 						disableRipple
 					>
 						Already Voted
@@ -336,7 +336,7 @@ const ProductSidePanel = ({}) => {
 				{!currentUser && (
 					<Button
 						className={classes.textBtn}
-						style={{ width: "50%" }}
+						style={{ width: "80%" }}
 						aria-controls="vote"
 						disableRipple
 					>

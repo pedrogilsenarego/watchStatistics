@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 		color: "#FFFFFF",
 		border: "solid 2px",
 		borderColor: "#ffffff66",
+		marginRight: "15px",
 		fontSize: "13px",
 		borderRadius: "20px",
 		"&:hover": {
@@ -124,7 +125,7 @@ const ProductSideList = ({}) => {
 	};
 
 	return (
-		<Box sx={{ minHeight: "76vh" }}>
+		<Box >
 			<Formik
 				initialValues={{
 					...INITIAL_FORM_STATE

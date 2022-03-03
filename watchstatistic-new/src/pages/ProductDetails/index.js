@@ -140,7 +140,7 @@ const ProductDetails = ({}) => {
 							
 							<Grid item xs={12} md={7}>
 							<ImageMain {...configImageMain}/>
-							<Card style={{ backgroundColor: "#18161E", marginTop: "5px" }}>
+							<Card style={{ backgroundColor: "#18161E", marginTop: "8px" }}>
 									
 										<SideDescription />
 								
@@ -155,7 +155,7 @@ const ProductDetails = ({}) => {
 									</CardContent>
 								</Card>
 								<Card
-									style={{ backgroundColor: "#18161E", marginTop: "5px"}}
+									style={{ backgroundColor: "#18161E", marginTop: "8px", padding: "5px"}}
 								>
 									<CardContent style={{ padding: "5px" }}>
 										<ProductSideList />
