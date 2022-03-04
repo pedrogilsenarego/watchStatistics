@@ -17,7 +17,7 @@ const ImageMain = ({
   avgTotal,
   compareWatches,
 }) => {
-  const [mainImage, setMainImage] = useState(null);
+  const [mainImage, setMainImage] = useState(productThumbnail[0]);
   const theme = useTheme();
   const useStyles = makeStyles((theme) => ({
     filter: {},
@@ -67,20 +67,27 @@ const ImageMain = ({
 
           <Grid container alignItems="center" justifyContent="center">
             <Grid xs={12} sm={8} item>
-              {productThumbnail.map((productThumbnail, pos) => {
+              {productThumbnail.map((item, pos) => {
                 return (
                   <IconButton
                     key={pos}
                     className={classes.textBtn}
                     onClick={(e) => {
-                      setMainImage(productThumbnail);
+                      setMainImage(item);
                     }}
                   >
                     <CardMedia
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        cursor: "pointer",
+                        border:
+                          mainImage === item ? "solid 1.5px" : "solid 0px",
+                        borderRadius: "2px",
+                        borderColor:
+                          mainImage === item ? "#E9361766" : "ffffff00",
+                      }}
                       component="img"
                       height="50px"
-                      image={productThumbnail}
+                      image={item}
                       alt=""
                     />
                   </IconButton>
