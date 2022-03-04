@@ -44,7 +44,7 @@ const AddToBoost = ({ product }) => {
         anchor={anchor}
         setAnchor={setAnchor}
         message={[
-          " Select this watch to the boost,",
+          " Select this watch for boosting,",
           <br />,
           "check FAQ for more information",
         ]}
