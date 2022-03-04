@@ -1,11 +1,12 @@
 import React from "react";
 import FacebookShare from "../../forms/socialShare/Facebook";
 import WhatsappShareButton from "../../forms/socialShare/Whatsapp";
-import { GoMirror } from "react-icons/go";
+import { BsFillGrid1X2Fill } from "react-icons/bs";
 import { AiFillFire } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import Avatar from "@mui/material/Avatar";
+
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
 
@@ -24,6 +25,7 @@ const AvatarsControllers = ({
 }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	
 	
 
 	const handleAddToBoost = (product) => {
@@ -68,8 +70,10 @@ const AvatarsControllers = ({
 					display: "flex",
 					flexDirection: "row",
 					alignItems: "center",
-					justifyContent: "flex-end",
-					paddingRight: "10px"				
+					justifyContent: isMatch ? "center" : "flex-end",
+					paddingTop: isMatch ? "10px": "0px",
+					paddingRight: "10px",
+					marginBottom: isMatch ? "10px" : "0px"				
 				}}
 			>
 				
@@ -113,8 +117,10 @@ const AvatarsControllers = ({
 									X
 								</Typography>
 							)}
-							{!compareWatches && <GoMirror size="3vh" color="#ffffff66" />}
+							{!compareWatches && <BsFillGrid1X2Fill size="3vh" color="#ffffff66" />}
 						</Avatar>
+						
+						
 						<FacebookShare {...configShareButtons} />
 						<WhatsappShareButton {...configShareButtons} />
 						

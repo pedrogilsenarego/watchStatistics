@@ -7,6 +7,8 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AvatarsControllers from "../AvatarsControllers2";
+import Divider from "@mui/material/Divider"
+import { useTheme } from "@material-ui/core";
 
 
 
@@ -14,7 +16,7 @@ import AvatarsControllers from "../AvatarsControllers2";
 const ImageMain = ({isMatch, productThumbnail, product, cartItems, productID, productBrand, productName,
 reference, avgTotal, compareWatches}) => {
     const [mainImage, setMainImage] = useState(null);
-
+	const theme = useTheme();
     const useStyles = makeStyles((theme) => ({
         filter: {},
     
@@ -84,7 +86,15 @@ reference, avgTotal, compareWatches}) => {
 			/>
 														</IconButton>
 													);
-												})}</Grid><Grid xs={12} sm={4}item>
+												})}</Grid>
+												{isMatch && (<Divider
+					style={{
+						width: "60%",
+						background: theme.palette.text.faded3,
+						marginTop: "5px"
+					}}
+				/>)}
+												<Grid xs={12} sm={4}item>
 												<AvatarsControllers {...configAvatarControllers}/></Grid></Grid>
 								</Card>)}
 							</>
