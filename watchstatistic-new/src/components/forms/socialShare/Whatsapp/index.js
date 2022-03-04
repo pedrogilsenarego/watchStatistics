@@ -11,7 +11,7 @@ const FacebookShare = ({ ...otherProps }) => {
 			url={url}
 			style={{ transform: "translateY(2px)" }}
 		>
-			<WhatsappIcon iconFillColor="white" size="7vh" round={true} />
+			<WhatsappIcon iconFillColor="white" size="6vh" round={true} />
 		</WhatsappShareButton>
 	);
 };

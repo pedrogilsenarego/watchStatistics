@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { useSelector } from "react-redux";
 import { Parallax } from "react-parallax";
-import AvatarsControllers from "../../components/ProductDetails/AvatarsControllers";
 import { useParams } from "react-router";
 import { Helmet } from "react-helmet";
 import ImageMain from "../../components/ProductDetails/ImageMain"
@@ -85,7 +84,7 @@ const ProductDetails = ({}) => {
 	} = product;
 
 	const bgImage = () => {
-		if (!currentUser) return productBackground;
+		if (!currentUser) return;
 
 		if (currentUser.backgroundImageOff) {
 			if (productBackground) return productBackground;
@@ -94,9 +93,12 @@ const ProductDetails = ({}) => {
 
 	if (!productThumbnail || !productName) return null;
 
-	const configAvatarBtns = {
-		product,
+	
+
+	const configImageMain = {
 		isMatch,
+		productThumbnail,
+		product,
 		cartItems,
 		productID,
 		productBrand,
@@ -104,11 +106,6 @@ const ProductDetails = ({}) => {
 		reference,
 		avgTotal,
 		compareWatches
-	};
-
-	const configImageMain = {
-		isMatch,
-		productThumbnail
 	}
 
 	return (
@@ -116,7 +113,7 @@ const ProductDetails = ({}) => {
 			<Helmet>
 				<meta property="og:image" content={productThumbnail} />
 			</Helmet>
-			<AvatarsControllers {...configAvatarBtns} />
+			
 			<Container  style={{marginTop: "40px"}}>
 				<Typography style={{marginTop: "90px", color: "#ffffff66", marginLeft:"10px" }} variant="h6">{productBrand} {productName} - {reference}</Typography>
 				<Parallax bgImage={bgImage()} strength={300}>

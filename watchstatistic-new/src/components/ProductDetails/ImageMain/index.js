@@ -1,18 +1,18 @@
 import React, {useState} from "react"
 import {
-	
 	Card,
 	CardMedia,
-	
 	IconButton,
-	
+	Grid
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import AvatarsControllers from "../AvatarsControllers2";
 
 
 
 
-const ImageMain = ({isMatch, productThumbnail}) => {
+const ImageMain = ({isMatch, productThumbnail, product, cartItems, productID, productBrand, productName,
+reference, avgTotal, compareWatches}) => {
     const [mainImage, setMainImage] = useState(null);
 
     const useStyles = makeStyles((theme) => ({
@@ -41,6 +41,18 @@ const ImageMain = ({isMatch, productThumbnail}) => {
     
     const classes = useStyles();
 
+	const configAvatarControllers = {
+		product,
+	isMatch,
+	cartItems,
+	productID,
+	productBrand,
+	productName,
+	reference,
+	avgTotal,
+	compareWatches
+	}
+
    
 
     return (
@@ -50,7 +62,8 @@ const ImageMain = ({isMatch, productThumbnail}) => {
 										<CardMedia  className={classes.media} image={mainImage ? mainImage : productThumbnail[0]}/>
 											
 										
-								
+									<Grid container alignItems= "center" justifyContent="center">
+										<Grid xs={12} sm={8} item>
 									{
 												productThumbnail.map((productThumbnail, pos) => {
 													return (
@@ -71,7 +84,8 @@ const ImageMain = ({isMatch, productThumbnail}) => {
 			/>
 														</IconButton>
 													);
-												})}
+												})}</Grid><Grid xs={12} sm={4}item>
+												<AvatarsControllers {...configAvatarControllers}/></Grid></Grid>
 								</Card>)}
 							</>
     )
