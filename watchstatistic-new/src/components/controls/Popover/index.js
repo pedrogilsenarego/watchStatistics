@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiPaper-root": {
       backgroundColor: "#18161E",
       color: "#ffffffCC",
+      boxShadow: "0 0 0.2rem hsl(0 0% 100%)",
     },
     marginTop: "10px",
   },

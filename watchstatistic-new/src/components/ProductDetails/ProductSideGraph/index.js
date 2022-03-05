@@ -39,7 +39,7 @@ const ProductSidePanel = ({}) => {
 
   const { product, currentUser } = useSelector(mapState);
   const [anchorVote, setAnchorVote] = useState(null);
-  const [anchorLegendVote, setAnchorLegendVote] = useState(null);
+
   const [targetVoteCategories, setTargetVoteCategories] = useState({
     ...initialTargetVoteState,
   });
@@ -62,18 +62,7 @@ const ProductSidePanel = ({}) => {
         boxShadow: "0 0 0.5rem hsl(0 0% 100%)",
       },
     },
-    menu2: {
-      transform: isMatch ? "translateX(-10%)" : "translateX(-35%)",
-      "& .MuiPaper-root": {
-        backgroundColor: "#18161E",
-        color: "#ffffff",
-        disableScrollLock: true,
-        marginTop: "0vh",
-        minWidth: "300px",
-        maxWidth: "350px",
-        boxShadow: "0 0 0.5rem hsl(0 0% 100%)",
-      },
-    },
+
     textBtn: {
       color: "#FFFFFF",
       border: "solid 2px",
@@ -93,9 +82,6 @@ const ProductSidePanel = ({}) => {
     setAnchorVote(null);
     setTargetVote(false);
     setTargetVoteCategories({ ...initialTargetVoteState });
-  };
-  const handleCloseLegendVote = () => {
-    setAnchorLegendVote(null);
   };
 
   const handleTargetVote = (value, name) => {
@@ -282,7 +268,6 @@ const ProductSidePanel = ({}) => {
         style={{
           backgroundColor: "#18161E",
           padding: "5px",
-          minHeight: "400px",
         }}
       >
         <Grid container>
@@ -405,17 +390,6 @@ const ProductSidePanel = ({}) => {
                 <MenuItem disableRipple>
                   <ProductVote {...configTargetVote} />
                 </MenuItem>
-              </Menu>
-
-              <Menu
-                disableScrollLock
-                className={classes.menu2}
-                id="legendVote"
-                onClose={handleCloseLegendVote}
-                anchorEl={anchorLegendVote}
-                open={Boolean(anchorLegendVote)}
-              >
-                <CategoriesLegend />
               </Menu>
             </Grid>
           )}
