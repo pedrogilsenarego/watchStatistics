@@ -82,8 +82,7 @@ const ImageMain = ({
                         border:
                           mainImage === item ? "solid 1.5px" : "solid 0px",
                         borderRadius: "2px",
-                        borderColor:
-                          mainImage === item ? "#E9361766" : "ffffff00",
+                        borderColor: mainImage === item ? "orange" : "ffffff00",
                       }}
                       component="img"
                       height="50px"
