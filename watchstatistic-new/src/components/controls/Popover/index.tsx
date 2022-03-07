@@ -14,7 +14,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PopoverM = ({ anchor, setAnchor, message }) => {
+interface Iprops {
+  anchor: Element;
+  setAnchor: React.Dispatch<React.SetStateAction<Boolean>>;
+  message: string;
+}
+
+const PopoverM = ({ anchor, setAnchor, message }: Iprops) => {
   const classes = useStyles();
 
   return (
@@ -24,7 +30,7 @@ const PopoverM = ({ anchor, setAnchor, message }) => {
       open={Boolean(anchor)}
       anchorEl={anchor}
       onClose={() => {
-        setAnchor(null);
+        setAnchor(false);
       }}
       anchorOrigin={{
         vertical: "bottom",
