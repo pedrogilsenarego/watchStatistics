@@ -6,8 +6,6 @@ import {
   Button,
   Card,
   CardContent,
-  Menu,
-  MenuItem,
 } from "@material-ui/core";
 import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
@@ -15,7 +13,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
 import { useParams } from "react-router";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { useMediaQuery, useTheme } from "@material-ui/core";
 import CategoriesLegend from "../CategoriesLegend";
 import { motion } from "framer-motion";
 
@@ -36,10 +33,7 @@ const ProductSidePanel = ({}) => {
     product: state.productsData.product,
   });
 
-  const theme = useTheme();
-
   const { product, currentUser } = useSelector(mapState);
-  const [anchorVote, setAnchorVote] = useState(null);
 
   const [targetVoteCategories, setTargetVoteCategories] = useState({
     ...initialTargetVoteState,
@@ -50,7 +44,6 @@ const ProductSidePanel = ({}) => {
   const [easterEggMotion, setEasterEggMotion] = useState(false);
   const [showVote, setShowVote] = useState(false);
   const { productID } = useParams();
-  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
   const useStyles = makeStyles((theme) => ({
     menu: {
@@ -80,12 +73,6 @@ const ProductSidePanel = ({}) => {
     },
   }));
 
-  const handleCloseVote = () => {
-    setAnchorVote(null);
-    setTargetVote(false);
-    setTargetVoteCategories({ ...initialTargetVoteState });
-  };
-
   const handleTargetVote = (value, name) => {
     setTargetVoteCategories({ ...targetVoteCategories, [name]: value });
   };
@@ -103,7 +90,7 @@ const ProductSidePanel = ({}) => {
     setTargetVote,
     handleVisualTargetVote,
     targetVote,
-    handleCloseVote,
+
     handleUpdate,
     setShowVote,
   };
@@ -354,11 +341,7 @@ const ProductSidePanel = ({}) => {
                         style={{ width: "80%", borderColor: "orange" }}
                         aria-controls="vote"
                         onClick={(e) => {
-                          if (isMatch) {
-                            setShowVote(!showVote);
-                          } else {
-                            setAnchorVote(e.currentTarget);
-                          }
+                          setShowVote(!showVote);
                         }}
                         disableRipple
                       >
@@ -386,19 +369,6 @@ const ProductSidePanel = ({}) => {
                     )}
                   </Grid>
                 </Grid>
-
-                <Menu
-                  disableScrollLock
-                  className={classes.menu}
-                  id="vote"
-                  onClose={handleCloseVote}
-                  anchorEl={anchorVote}
-                  open={Boolean(anchorVote)}
-                >
-                  <MenuItem disableRipple>
-                    <ProductVote {...configTargetVote} />
-                  </MenuItem>
-                </Menu>
               </Grid>
             )}
           </Grid>
@@ -409,7 +379,7 @@ const ProductSidePanel = ({}) => {
           style={{
             backgroundColor: "#18161E",
             marginTop: "8px",
-            padding: "5px",
+            padding: "10px",
           }}
         >
           <CardContent style={{ padding: "5px" }}>

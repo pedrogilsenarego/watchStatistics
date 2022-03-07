@@ -66,7 +66,6 @@ const ProductVote = ({
   setTargetVote,
   handleVisualTargetVote,
   targetVote,
-  handleCloseVote,
   handleUpdate,
   setShowVote,
 }) => {
@@ -179,7 +178,6 @@ const ProductVote = ({
     }
     setErrors(false);
     setTargetVote(false);
-    handleCloseVote();
     setShowVote(false);
   };
 
