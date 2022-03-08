@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import {
   Grid,
   Box,
@@ -43,6 +43,9 @@ const ProductSidePanel = ({}) => {
   const [motionAction, setMotionAction] = useState(false);
   const [easterEggMotion, setEasterEggMotion] = useState(false);
   const [showVote, setShowVote] = useState(false);
+  const voteRef = useRef();
+  const noVoteRef = useRef();
+
   const { productID } = useParams();
 
   const useStyles = makeStyles((theme) => ({
@@ -247,6 +250,16 @@ const ProductSidePanel = ({}) => {
     [update]
   );
 
+  const scrollToRef = (ref) => {
+    window.scrollTo({ top: ref.current.offsetTop, behavior: "smooth" });
+  };
+
+  const handleVote = () => {
+    setShowVote(!showVote);
+    const passRef = !showVote ? voteRef : noVoteRef;
+    scrollToRef(passRef);
+  };
+
   return (
     <>
       <motion.div
@@ -260,6 +273,7 @@ const ProductSidePanel = ({}) => {
             backgroundColor: "#18161E",
             padding: "5px",
           }}
+          ref={noVoteRef}
         >
           <Grid container>
             {motionAction && (
@@ -287,6 +301,7 @@ const ProductSidePanel = ({}) => {
             {!motionAction && (
               <Grid item style={{ textAlign: "center" }} xs={12}>
                 <AiOutlineQuestionCircle
+                  ref={noVoteRef}
                   style={{
                     cursor: "pointer",
                     poistion: "absolute",
@@ -341,7 +356,7 @@ const ProductSidePanel = ({}) => {
                         style={{ width: "80%", borderColor: "orange" }}
                         aria-controls="vote"
                         onClick={(e) => {
-                          setShowVote(!showVote);
+                          handleVote();
                         }}
                         disableRipple
                       >
@@ -387,6 +402,7 @@ const ProductSidePanel = ({}) => {
           </CardContent>
         </Card>
       )}
+      <div ref={voteRef}>teste</div>
     </>
   );
 };
