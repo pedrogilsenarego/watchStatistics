@@ -44,7 +44,7 @@ const ProductSidePanel = ({}) => {
   const [easterEggMotion, setEasterEggMotion] = useState(false);
   const [showVote, setShowVote] = useState(false);
   const voteRef = useRef();
-  const noVoteRef = useRef();
+  const graphRef = useRef();
 
   const { productID } = useParams();
 
@@ -86,16 +86,6 @@ const ProductSidePanel = ({}) => {
 
   const handleUpdate = () => {
     setUpdate(!update);
-  };
-
-  const configTargetVote = {
-    handleTargetVote,
-    setTargetVote,
-    handleVisualTargetVote,
-    targetVote,
-
-    handleUpdate,
-    setShowVote,
   };
 
   const classes = useStyles();
@@ -256,8 +246,19 @@ const ProductSidePanel = ({}) => {
 
   const handleVote = () => {
     setShowVote(!showVote);
-    const passRef = !showVote ? voteRef : noVoteRef;
-    scrollToRef(passRef);
+    if (!showVote) scrollToRef(voteRef);
+  };
+
+  const configTargetVote = {
+    scrollToRef,
+    graphRef,
+    handleTargetVote,
+    setTargetVote,
+    handleVisualTargetVote,
+    targetVote,
+
+    handleUpdate,
+    setShowVote,
   };
 
   return (
@@ -269,11 +270,11 @@ const ProductSidePanel = ({}) => {
         }}
       >
         <Card
+          ref={graphRef}
           style={{
             backgroundColor: "#18161E",
             padding: "5px",
           }}
-          ref={noVoteRef}
         >
           <Grid container>
             {motionAction && (
@@ -301,7 +302,6 @@ const ProductSidePanel = ({}) => {
             {!motionAction && (
               <Grid item style={{ textAlign: "center" }} xs={12}>
                 <AiOutlineQuestionCircle
-                  ref={noVoteRef}
                   style={{
                     cursor: "pointer",
                     poistion: "absolute",
@@ -389,20 +389,21 @@ const ProductSidePanel = ({}) => {
           </Grid>
         </Card>
       </motion.div>
-      {showVote && (
-        <Card
-          style={{
-            backgroundColor: "#18161E",
-            marginTop: "8px",
-            padding: "10px",
-          }}
-        >
-          <CardContent style={{ padding: "5px" }}>
-            <ProductVote {...configTargetVote} />
-          </CardContent>
-        </Card>
-      )}
-      <div ref={voteRef}>teste</div>
+      <div ref={voteRef}>
+        {showVote && (
+          <Card
+            style={{
+              backgroundColor: "#18161E",
+              marginTop: "8px",
+              padding: "10px",
+            }}
+          >
+            <CardContent style={{ padding: "5px" }}>
+              <ProductVote {...configTargetVote} />
+            </CardContent>
+          </Card>
+        )}
+      </div>
     </>
   );
 };

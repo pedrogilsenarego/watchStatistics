@@ -68,6 +68,8 @@ const ProductVote = ({
   targetVote,
   handleUpdate,
   setShowVote,
+  scrollToRef,
+  graphRef,
 }) => {
   const classes = useStyles();
 
@@ -179,6 +181,7 @@ const ProductVote = ({
     setErrors(false);
     setTargetVote(false);
     setShowVote(false);
+    scrollToRef(graphRef);
   };
 
   const newAvgVotationsOwn = (
@@ -354,6 +357,7 @@ const ProductVote = ({
           onClick={() => {
             handleVisualTargetVote(true);
             handleUpdate();
+            scrollToRef(graphRef);
           }}
         >
           Preview Vote
