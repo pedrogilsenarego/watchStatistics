@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Slider, Typography, Card, CardContent } from "@material-ui/core";
+import { Typography, Card, CardContent } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -10,26 +10,11 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { updateProductVoteStart } from "../../../redux/Products/products.actions";
 import { makeStyles } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
-import { createTheme } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { RiCheckboxBlankLine, RiCheckboxFill } from "react-icons/ri";
 
-const muiTheme = createTheme({
-  overrides: {
-    MuiSlider: {
-      thumb: {
-        color: "orange",
-      },
-      track: {
-        color: "white",
-      },
-      rail: {
-        color: "white",
-      },
-    },
-  },
-});
+import SliderComponent from "./SliderComponent";
+
 const useStyles = makeStyles((theme) => ({
   textBtn: {
     color: "#FFFFFF",
@@ -197,6 +182,12 @@ const ProductVote = ({
     }) / 7
   ).toFixed(2);
 
+  const configSliderComponent = {
+    setCategories,
+    categories,
+    handleTargetVote,
+  };
+
   return (
     <Card
       style={{
@@ -238,124 +229,58 @@ const ProductVote = ({
                 />
               </RadioGroup>
             </Grid>
-            <Grid item xs={12} style={{ marginBottom: "10px" }}>
-              <ThemeProvider theme={muiTheme}>
-                <Typography id="discrete-slider" gutterBottom>
-                  Aesthetics
-                </Typography>
-                <Slider
-                  className={classes.slider}
-                  defaultValue={0}
-                  aria-labelledby="discrete-slider"
-                  valueLabelDisplay="auto"
-                  step={1}
-                  marks
-                  min={0}
-                  max={10}
-                  name="quality"
-                  onChange={(event, newValue) => {
-                    setCategories({ ...categories, quality: newValue });
-                    handleTargetVote(newValue, "quality");
-                  }}
-                />
-                <Typography id="discrete-slider" gutterBottom>
-                  Price over Quality
-                </Typography>
-                <Slider
-                  defaultValue={0}
-                  aria-labelledby="discrete-slider"
-                  valueLabelDisplay="auto"
-                  step={1}
-                  marks
-                  min={0}
-                  max={10}
-                  name="price"
-                  onChange={(event, newValue) => {
-                    setCategories({ ...categories, price: newValue });
-                    handleTargetVote(newValue, "price");
-                  }}
-                />
-                <Typography id="discrete-slider" gutterBottom>
-                  Brand
-                </Typography>
-                <Slider
-                  defaultValue={0}
-                  aria-labelledby="discrete-slider"
-                  valueLabelDisplay="auto"
-                  step={1}
-                  marks
-                  min={0}
-                  max={10}
-                  onChange={(event, newValue) => {
-                    setCategories({ ...categories, brand: newValue });
-                    handleTargetVote(newValue, "brand");
-                  }}
-                />
-                <Typography id="discrete-slider" gutterBottom>
-                  Refinement
-                </Typography>
-                <Slider
-                  defaultValue={0}
-                  aria-labelledby="discrete-slider"
-                  valueLabelDisplay="auto"
-                  step={1}
-                  marks
-                  min={0}
-                  max={10}
-                  onChange={(event, newValue) => {
-                    setCategories({ ...categories, refinement: newValue });
-                    handleTargetVote(newValue, "refinement");
-                  }}
-                />
-                <Typography id="discrete-slider" gutterBottom>
-                  History
-                </Typography>
-                <Slider
-                  defaultValue={0}
-                  aria-labelledby="discrete-slider"
-                  valueLabelDisplay="auto"
-                  step={1}
-                  marks
-                  min={0}
-                  max={10}
-                  onChange={(event, newValue) => {
-                    setCategories({ ...categories, history: newValue });
-                    handleTargetVote(newValue, "history");
-                  }}
-                />
-                <Typography id="discrete-slider" gutterBottom>
-                  Engineering
-                </Typography>
-                <Slider
-                  defaultValue={0}
-                  aria-labelledby="discrete-slider"
-                  valueLabelDisplay="auto"
-                  step={1}
-                  marks
-                  min={0}
-                  max={10}
-                  onChange={(event, newValue) => {
-                    setCategories({ ...categories, engineering: newValue });
-                    handleTargetVote(newValue, "engineering");
-                  }}
-                />
-                <Typography id="discrete-slider" gutterBottom>
-                  X-Factor
-                </Typography>
-                <Slider
-                  defaultValue={0}
-                  aria-labelledby="discrete-slider"
-                  valueLabelDisplay="auto"
-                  step={1}
-                  marks
-                  min={0}
-                  max={10}
-                  onChange={(event, newValue) => {
-                    setCategories({ ...categories, xFactor: newValue });
-                    handleTargetVote(newValue, "xFactor");
-                  }}
-                />
-              </ThemeProvider>
+
+            <Grid
+              item
+              container
+              justifyContent="center"
+              alignItems="center"
+              xs={12}
+              style={{ marginBottom: "10px", marginTop: "10px" }}
+            >
+              <SliderComponent
+                {...configSliderComponent}
+                icon="S"
+                name="quality"
+                message="Aesthetics from the Watch"
+              />
+              <SliderComponent
+                {...configSliderComponent}
+                icon="M"
+                name="price"
+                message="Price over Quality"
+              />
+              <SliderComponent
+                {...configSliderComponent}
+                icon="L"
+                name="brand"
+                message="The strength from the brand"
+              />
+              <SliderComponent
+                {...configSliderComponent}
+                icon="K"
+                name="refinement"
+                message="Refinement from the watch"
+              />
+              <SliderComponent
+                {...configSliderComponent}
+                icon="R"
+                name="history"
+                message="History from the watch and brand"
+              />
+              <SliderComponent
+                {...configSliderComponent}
+                icon="Q"
+                name="engineering"
+                message="What does the engineering from the watch presents"
+              />
+              <SliderComponent
+                {...configSliderComponent}
+                icon="O"
+                name="xFactor"
+                message="Something hard to explain but special about it"
+              />
+
               {errors && Object.values(categories).includes("") && (
                 <Typography style={{ color: "red", fontSize: "15px" }}>
                   You must choose all fields

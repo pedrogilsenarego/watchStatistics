@@ -310,7 +310,7 @@ const ProductSidePanel = ({}) => {
                 {memoRadarChart}
 
                 <Grid container style={{ marginTop: "10px" }}>
-                  <Grid item xs={6}>
+                  <Grid item xs={8} md={6}>
                     <Box style={{ textAlign: "left", padding: "10px" }}>
                       <Typography
                         fontWeight={600}
@@ -338,7 +338,8 @@ const ProductSidePanel = ({}) => {
                   </Grid>
                   <Grid
                     item
-                    xs={6}
+                    xs={4}
+                    md={6}
                     alignItems="center"
                     justifyContent="center"
                     container
