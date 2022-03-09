@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
 import { useParams } from "react-router";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
-import CategoriesLegend from "../CategoriesLegend";
 import { motion } from "framer-motion";
 
 const initialTargetVoteState = {
@@ -33,7 +31,6 @@ const ProductSidePanel = ({}) => {
   });
   const [targetVote, setTargetVote] = useState(false);
   const [update, setUpdate] = useState(true);
-  const [motionAction, setMotionAction] = useState(false);
   const [easterEggMotion, setEasterEggMotion] = useState(false);
   const [showVote, setShowVote] = useState(false);
   const voteRef = useRef();
@@ -258,7 +255,6 @@ const ProductSidePanel = ({}) => {
     <>
       <motion.div
         animate={{
-          rotateY: motionAction ? 180 : 0,
           rotate: easterEggMotion ? 90 : 0,
         }}
       >
@@ -270,116 +266,79 @@ const ProductSidePanel = ({}) => {
           }}
         >
           <Grid container>
-            {motionAction && (
-              <Grid
-                item
-                style={{ textAlign: "center", transform: "rotateY(180deg)" }}
-                xs={12}
-              >
-                <AiOutlineQuestionCircle
-                  style={{
-                    cursor: "pointer",
-                    poistion: "absolute",
-                    float: "right",
-                    color: "#ffffffCC",
-                  }}
-                  size="2em"
-                  aria-controls="legendVote"
-                  onClick={(e) => {
-                    setMotionAction(!motionAction);
-                  }}
-                />
-                <CategoriesLegend />
-              </Grid>
-            )}
-            {!motionAction && (
-              <Grid item style={{ textAlign: "center" }} xs={12}>
-                <AiOutlineQuestionCircle
-                  style={{
-                    cursor: "pointer",
-                    poistion: "absolute",
-                    float: "right",
-                    color: "#ffffffCC",
-                  }}
-                  size="2em"
-                  aria-controls="legendVote"
-                  onClick={(e) => {
-                    setMotionAction(!motionAction);
-                  }}
-                />
-                {memoRadarChart}
+            <Grid item style={{ textAlign: "center" }} xs={12}>
+              {memoRadarChart}
 
-                <Grid container style={{ marginTop: "10px" }}>
-                  <Grid item xs={8} md={6}>
-                    <Box style={{ textAlign: "left", padding: "10px" }}>
-                      <Typography
-                        fontWeight={600}
-                        style={{ color: "#ffffff" }}
-                        onClick={() => {
-                          setEasterEggMotion(!easterEggMotion);
-                        }}
-                      >
-                        Score: {avgTotal}
-                      </Typography>
+              <Grid container style={{ marginTop: "10px" }}>
+                <Grid item xs={8} md={6}>
+                  <Box style={{ textAlign: "left", padding: "10px" }}>
+                    <Typography
+                      fontWeight={600}
+                      style={{ color: "#ffffff" }}
+                      onClick={() => {
+                        setEasterEggMotion(!easterEggMotion);
+                      }}
+                    >
+                      Score: {avgTotal}
+                    </Typography>
 
-                      <Typography
-                        style={{ color: "#ffffffBF", fontSize: "13px" }}
-                      >
-                        Own/Experimented: {avgVotationsOwn} Votes:{" "}
-                        {numberVotesOwn}
-                      </Typography>
-                      <Typography
-                        style={{ color: "#ffffffBF", fontSize: "13px" }}
-                      >
-                        Only Seen Digital: {avgVotationsNotOwn} Votes:{" "}
-                        {numberVotesNotOwn}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={4}
-                    md={6}
-                    alignItems="center"
-                    justifyContent="center"
-                    container
-                  >
-                    {currentUser && !currentUser.userVotes.includes(productID) && (
-                      <Button
-                        className={classes.textBtn}
-                        style={{ width: "80%", borderColor: "orange" }}
-                        aria-controls="vote"
-                        onClick={(e) => {
-                          handleVote();
-                        }}
-                        disableRipple
-                      >
-                        Vote
-                      </Button>
-                    )}
-                    {currentUser && currentUser.userVotes.includes(productID) && (
-                      <Button
-                        className={classes.textBtn}
-                        style={{ width: "80%" }}
-                        disableRipple
-                      >
-                        Already Voted
-                      </Button>
-                    )}
-                    {!currentUser && (
-                      <Button
-                        className={classes.textBtn}
-                        style={{ width: "80%" }}
-                        aria-controls="vote"
-                        disableRipple
-                      >
-                        Login to Vote
-                      </Button>
-                    )}
-                  </Grid>
+                    <Typography
+                      style={{ color: "#ffffffBF", fontSize: "13px" }}
+                    >
+                      Own/Experimented: {avgVotationsOwn} Votes:{" "}
+                      {numberVotesOwn}
+                    </Typography>
+                    <Typography
+                      style={{ color: "#ffffffBF", fontSize: "13px" }}
+                    >
+                      Only Seen Digital: {avgVotationsNotOwn} Votes:{" "}
+                      {numberVotesNotOwn}
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid
+                  item
+                  xs={4}
+                  md={6}
+                  alignItems="center"
+                  justifyContent="center"
+                  container
+                >
+                  {currentUser && !currentUser.userVotes.includes(productID) && (
+                    <Button
+                      className={classes.textBtn}
+                      style={{ width: "80%", borderColor: "orange" }}
+                      aria-controls="vote"
+                      onClick={(e) => {
+                        handleVote();
+                      }}
+                      disableRipple
+                    >
+                      Vote
+                    </Button>
+                  )}
+                  {currentUser && currentUser.userVotes.includes(productID) && (
+                    <Button
+                      className={classes.textBtn}
+                      style={{ width: "80%" }}
+                      disableRipple
+                    >
+                      Already Voted
+                    </Button>
+                  )}
+                  {!currentUser && (
+                    <Button
+                      className={classes.textBtn}
+                      style={{ width: "80%" }}
+                      aria-controls="vote"
+                      disableRipple
+                    >
+                      Login to Vote
+                    </Button>
+                  )}
                 </Grid>
               </Grid>
-            )}
+            </Grid>
           </Grid>
         </Card>
       </motion.div>
