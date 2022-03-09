@@ -1,12 +1,5 @@
 import React, { useState, useMemo, useRef } from "react";
-import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-} from "@material-ui/core";
+import { Grid, Box, Typography, Button, Card } from "@material-ui/core";
 import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -390,19 +383,7 @@ const ProductSidePanel = ({}) => {
         </Card>
       </motion.div>
       <div ref={voteRef}>
-        {showVote && (
-          <Card
-            style={{
-              backgroundColor: "#18161E",
-              marginTop: "8px",
-              padding: "10px",
-            }}
-          >
-            <CardContent style={{ padding: "5px" }}>
-              <ProductVote {...configTargetVote} />
-            </CardContent>
-          </Card>
-        )}
+        {showVote && <ProductVote {...configTargetVote} />}
       </div>
     </>
   );

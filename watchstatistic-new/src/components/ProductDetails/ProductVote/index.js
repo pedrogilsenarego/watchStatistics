@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Slider, Typography } from "@material-ui/core";
+import { Slider, Typography, Card, CardContent } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { createTheme } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
+import { RiCheckboxBlankLine, RiCheckboxFill } from "react-icons/ri";
 
 const muiTheme = createTheme({
   overrides: {
@@ -197,173 +198,193 @@ const ProductVote = ({
   ).toFixed(2);
 
   return (
-    <FormControl component="fieldset">
-      <Grid container>
-        <Grid item xs={12}>
-          <RadioGroup
-            aria-label="gender"
-            value={ownership}
-            onChange={(event) => {
-              setOwnership(event.target.value);
-            }}
-          >
-            <FormControlLabel
-              value="Own"
-              control={<Radio style={{ color: "#ffffff66" }} />}
-              label="I own/experimented the watch"
-            />
-            <FormControlLabel
-              value="Not Own"
-              control={<Radio style={{ color: "#ffffff66" }} />}
-              label="I do not own/experimented the watch"
-            />
-          </RadioGroup>
-        </Grid>
-        <Grid item xs={12} style={{ marginBottom: "10px" }}>
-          <ThemeProvider theme={muiTheme}>
-            <Typography id="discrete-slider" gutterBottom>
-              Aesthetics
-            </Typography>
-            <Slider
-              className={classes.slider}
-              defaultValue={0}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              step={1}
-              marks
-              min={0}
-              max={10}
-              name="quality"
-              onChange={(event, newValue) => {
-                setCategories({ ...categories, quality: newValue });
-                handleTargetVote(newValue, "quality");
-              }}
-            />
-            <Typography id="discrete-slider" gutterBottom>
-              Price over Quality
-            </Typography>
-            <Slider
-              defaultValue={0}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              step={1}
-              marks
-              min={0}
-              max={10}
-              name="price"
-              onChange={(event, newValue) => {
-                setCategories({ ...categories, price: newValue });
-                handleTargetVote(newValue, "price");
-              }}
-            />
-            <Typography id="discrete-slider" gutterBottom>
-              Brand
-            </Typography>
-            <Slider
-              defaultValue={0}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              step={1}
-              marks
-              min={0}
-              max={10}
-              onChange={(event, newValue) => {
-                setCategories({ ...categories, brand: newValue });
-                handleTargetVote(newValue, "brand");
-              }}
-            />
-            <Typography id="discrete-slider" gutterBottom>
-              Refinement
-            </Typography>
-            <Slider
-              defaultValue={0}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              step={1}
-              marks
-              min={0}
-              max={10}
-              onChange={(event, newValue) => {
-                setCategories({ ...categories, refinement: newValue });
-                handleTargetVote(newValue, "refinement");
-              }}
-            />
-            <Typography id="discrete-slider" gutterBottom>
-              History
-            </Typography>
-            <Slider
-              defaultValue={0}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              step={1}
-              marks
-              min={0}
-              max={10}
-              onChange={(event, newValue) => {
-                setCategories({ ...categories, history: newValue });
-                handleTargetVote(newValue, "history");
-              }}
-            />
-            <Typography id="discrete-slider" gutterBottom>
-              Engineering
-            </Typography>
-            <Slider
-              defaultValue={0}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              step={1}
-              marks
-              min={0}
-              max={10}
-              onChange={(event, newValue) => {
-                setCategories({ ...categories, engineering: newValue });
-                handleTargetVote(newValue, "engineering");
-              }}
-            />
-            <Typography id="discrete-slider" gutterBottom>
-              X-Factor
-            </Typography>
-            <Slider
-              defaultValue={0}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              step={1}
-              marks
-              min={0}
-              max={10}
-              onChange={(event, newValue) => {
-                setCategories({ ...categories, xFactor: newValue });
-                handleTargetVote(newValue, "xFactor");
-              }}
-            />
-          </ThemeProvider>
-          {errors && Object.values(categories).includes("") && (
-            <Typography style={{ color: "red", fontSize: "15px" }}>
-              You must choose all fields
-            </Typography>
-          )}
-        </Grid>
+    <Card
+      style={{
+        backgroundColor: "#18161E",
+        marginTop: "8px",
+        padding: "10px",
+      }}
+    >
+      <CardContent style={{ padding: "20px" }}>
+        <FormControl component="fieldset">
+          <Grid container>
+            <Grid item xs={12}>
+              <RadioGroup
+                aria-label="gender"
+                value={ownership}
+                onChange={(event) => {
+                  setOwnership(event.target.value);
+                }}
+              >
+                <FormControlLabel
+                  value="Own"
+                  control={
+                    <Radio
+                      checkedIcon={<RiCheckboxFill color="orange" />}
+                      icon={<RiCheckboxBlankLine color="#ffffff66" />}
+                    />
+                  }
+                  label="I own/experimented the watch"
+                />
+                <FormControlLabel
+                  value="Not Own"
+                  control={
+                    <Radio
+                      checkedIcon={<RiCheckboxFill color="orange" />}
+                      icon={<RiCheckboxBlankLine color="#ffffff66" />}
+                    />
+                  }
+                  label="I do not own/experimented the watch"
+                />
+              </RadioGroup>
+            </Grid>
+            <Grid item xs={12} style={{ marginBottom: "10px" }}>
+              <ThemeProvider theme={muiTheme}>
+                <Typography id="discrete-slider" gutterBottom>
+                  Aesthetics
+                </Typography>
+                <Slider
+                  className={classes.slider}
+                  defaultValue={0}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={0}
+                  max={10}
+                  name="quality"
+                  onChange={(event, newValue) => {
+                    setCategories({ ...categories, quality: newValue });
+                    handleTargetVote(newValue, "quality");
+                  }}
+                />
+                <Typography id="discrete-slider" gutterBottom>
+                  Price over Quality
+                </Typography>
+                <Slider
+                  defaultValue={0}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={0}
+                  max={10}
+                  name="price"
+                  onChange={(event, newValue) => {
+                    setCategories({ ...categories, price: newValue });
+                    handleTargetVote(newValue, "price");
+                  }}
+                />
+                <Typography id="discrete-slider" gutterBottom>
+                  Brand
+                </Typography>
+                <Slider
+                  defaultValue={0}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={0}
+                  max={10}
+                  onChange={(event, newValue) => {
+                    setCategories({ ...categories, brand: newValue });
+                    handleTargetVote(newValue, "brand");
+                  }}
+                />
+                <Typography id="discrete-slider" gutterBottom>
+                  Refinement
+                </Typography>
+                <Slider
+                  defaultValue={0}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={0}
+                  max={10}
+                  onChange={(event, newValue) => {
+                    setCategories({ ...categories, refinement: newValue });
+                    handleTargetVote(newValue, "refinement");
+                  }}
+                />
+                <Typography id="discrete-slider" gutterBottom>
+                  History
+                </Typography>
+                <Slider
+                  defaultValue={0}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={0}
+                  max={10}
+                  onChange={(event, newValue) => {
+                    setCategories({ ...categories, history: newValue });
+                    handleTargetVote(newValue, "history");
+                  }}
+                />
+                <Typography id="discrete-slider" gutterBottom>
+                  Engineering
+                </Typography>
+                <Slider
+                  defaultValue={0}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={0}
+                  max={10}
+                  onChange={(event, newValue) => {
+                    setCategories({ ...categories, engineering: newValue });
+                    handleTargetVote(newValue, "engineering");
+                  }}
+                />
+                <Typography id="discrete-slider" gutterBottom>
+                  X-Factor
+                </Typography>
+                <Slider
+                  defaultValue={0}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={0}
+                  max={10}
+                  onChange={(event, newValue) => {
+                    setCategories({ ...categories, xFactor: newValue });
+                    handleTargetVote(newValue, "xFactor");
+                  }}
+                />
+              </ThemeProvider>
+              {errors && Object.values(categories).includes("") && (
+                <Typography style={{ color: "red", fontSize: "15px" }}>
+                  You must choose all fields
+                </Typography>
+              )}
+            </Grid>
 
-        <Button
-          className={classes.textBtn}
-          style={{ borderColor: "orange" }}
-          onClick={handleApplyVote}
-        >
-          Apply Vote
-        </Button>
-        <Button
-          className={classes.textBtn}
-          style={{ marginLeft: "10px" }}
-          onClick={() => {
-            handleVisualTargetVote(true);
-            handleUpdate();
-            scrollToRef(graphRef);
-          }}
-        >
-          Preview Vote
-        </Button>
-      </Grid>
-    </FormControl>
+            <Button
+              className={classes.textBtn}
+              style={{ borderColor: "orange" }}
+              onClick={handleApplyVote}
+            >
+              Apply Vote
+            </Button>
+            <Button
+              className={classes.textBtn}
+              style={{ marginLeft: "10px" }}
+              onClick={() => {
+                handleVisualTargetVote(true);
+                handleUpdate();
+                scrollToRef(graphRef);
+              }}
+            >
+              Preview Vote
+            </Button>
+          </Grid>
+        </FormControl>
+      </CardContent>
+    </Card>
   );
 };
 export default ProductVote;
