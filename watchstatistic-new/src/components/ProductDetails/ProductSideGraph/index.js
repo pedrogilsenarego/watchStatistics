@@ -240,23 +240,19 @@ const ProductSidePanel = ({ isMatch }) => {
         getElementAtEvent={(element, event) => {
           const clickX = event.nativeEvent.offsetX;
           const clickY = event.nativeEvent.offsetY;
-          const scale = radarRef.scales;
-          console.log(clickX, clickY);
+          const scale = radarRef.current.scales.r;
 
-          //const pointLabelItems = scale._pointLabelItems;
-          /*pointLabelItems.forEach((pointLabelItem, index) => {
+          const pointLabelItems = scale._pointLabelItems;
+          pointLabelItems.forEach((pointLabelItem, index) => {
             if (
               clickX >= pointLabelItem.left &&
               clickX <= pointLabelItem.right &&
               clickY >= pointLabelItem.top &&
               clickY <= pointLabelItem.bottom
             ) {
-              console.log("teste");
-
-              // labels and data have been changed, update the graph
-              radarRef.update();
+              console.log(pointLabelItem);
             }
-          });*/
+          });
         }}
       />
     ),
