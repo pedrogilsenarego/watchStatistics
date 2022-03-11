@@ -1,11 +1,20 @@
 import React, { useState, useMemo, useRef } from "react";
-import { Grid, Box, Typography, Button, Card } from "@material-ui/core";
+import {
+  Grid,
+  Box,
+  Typography,
+  Button,
+  Card,
+  Menu,
+  MenuItem,
+} from "@material-ui/core";
 import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
 import { useParams } from "react-router";
 import { motion } from "framer-motion";
+import SignIn from "../../../components/SignIn";
 
 const initialTargetVoteState = {
   quality: "",
@@ -33,6 +42,7 @@ const ProductSidePanel = ({}) => {
   const [update, setUpdate] = useState(true);
   const [easterEggMotion, setEasterEggMotion] = useState(false);
   const [showVote, setShowVote] = useState(false);
+  const [anchorLogin, setAnchorLogin] = useState(null);
   const voteRef = useRef();
   const graphRef = useRef();
 
@@ -48,6 +58,20 @@ const ProductSidePanel = ({}) => {
 
         maxWidth: "350px",
         boxShadow: "0 0 0.5rem hsl(0 0% 100%)",
+      },
+    },
+
+    menu2: {
+      marginTop: "70px",
+      "& .MuiPaper-root": {
+        backgroundColor: "#040406BF",
+        color: "#ffffff",
+        disableScrollLock: true,
+        minWidth: "300px",
+
+        [theme.breakpoints.up(750)]: {
+          maxWidth: "350px",
+        },
       },
     },
 
@@ -76,6 +100,16 @@ const ProductSidePanel = ({}) => {
 
   const handleUpdate = () => {
     setUpdate(!update);
+  };
+
+  const handleCloseLoginMenu = () => {
+    setAnchorLogin(null);
+  };
+  const handleLoginOpen = (e) => {
+    setAnchorLogin(e.currentTarget);
+  };
+  const configMenuLogin = {
+    handleCloseLoginMenu,
   };
 
   const classes = useStyles();
@@ -332,6 +366,7 @@ const ProductSidePanel = ({}) => {
                       style={{ width: "80%" }}
                       aria-controls="vote"
                       disableRipple
+                      onClick={(e) => handleLoginOpen(e)}
                     >
                       Login to Vote
                     </Button>
@@ -345,6 +380,25 @@ const ProductSidePanel = ({}) => {
       <div ref={voteRef}>
         {showVote && <ProductVote {...configTargetVote} />}
       </div>
+      <Menu
+        disableScrollLock
+        className={classes.menu2}
+        id="login"
+        onClose={handleCloseLoginMenu}
+        anchorEl={anchorLogin}
+        open={Boolean(anchorLogin)}
+        anchorReference="none"
+        PaperProps={{
+          style: {
+            left: "50%",
+            transform: "translateX(-50%) translateY(15%)",
+          },
+        }}
+      >
+        <MenuItem disableRipple>
+          <SignIn {...configMenuLogin} />
+        </MenuItem>
+      </Menu>
     </>
   );
 };
