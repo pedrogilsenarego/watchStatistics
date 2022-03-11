@@ -8,13 +8,13 @@ import {
   Menu,
   MenuItem,
 } from "@material-ui/core";
-import RadarChart from "../../RadarChart";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
 import { useParams } from "react-router";
 import { motion } from "framer-motion";
 import SignIn from "../../../components/SignIn";
+import { Radar } from "react-chartjs-2";
 
 const initialTargetVoteState = {
   quality: "",
@@ -45,6 +45,7 @@ const ProductSidePanel = ({ isMatch }) => {
   const [anchorLogin, setAnchorLogin] = useState(null);
   const voteRef = useRef();
   const graphRef = useRef();
+  const radarRef = useRef();
 
   const { productID } = useParams();
 
@@ -180,32 +181,6 @@ const ProductSidePanel = ({ isMatch }) => {
           bodyAlign: "center",
           titleColor: "#ffffff",
           bodyColor: "#ffffffDB",
-          callbacks: {
-            title: function (item, everything) {
-              if (item[0].label === "Q") {
-                return "Engineering";
-              }
-              if (item[0].label === "S") {
-                return "Aesthetics";
-              }
-              if (item[0].label === "M") {
-                return "Price over Quality";
-              }
-              if (item[0].label === "L") {
-                return "Brand";
-              }
-              if (item[0].label === "K") {
-                return "Refinement";
-              }
-              if (item[0].label === "R") {
-                return "History";
-              }
-              if (item[0].label === "O") {
-                return "X-Factor";
-              }
-              return;
-            },
-          },
         },
         legend: {
           position: "bottom",
@@ -227,10 +202,9 @@ const ProductSidePanel = ({ isMatch }) => {
           },
           pointLabels: {
             color: "#dcdae0",
-
             font: {
               family: "MyFont",
-              size: 15,
+              size: 20,
             },
           },
           angleLines: { color: "#dcdae066" },
@@ -259,7 +233,33 @@ const ProductSidePanel = ({ isMatch }) => {
   if (!targetVote) configRadarChart.data.datasets.pop();
 
   const memoRadarChart = useMemo(
-    () => <RadarChart {...configRadarChart} />,
+    () => (
+      <Radar
+        ref={radarRef}
+        {...configRadarChart}
+        getElementAtEvent={(element, event) => {
+          const clickX = event.nativeEvent.offsetX;
+          const clickY = event.nativeEvent.offsetY;
+          const scale = radarRef.scales;
+          console.log(clickX, clickY);
+
+          //const pointLabelItems = scale._pointLabelItems;
+          /*pointLabelItems.forEach((pointLabelItem, index) => {
+            if (
+              clickX >= pointLabelItem.left &&
+              clickX <= pointLabelItem.right &&
+              clickY >= pointLabelItem.top &&
+              clickY <= pointLabelItem.bottom
+            ) {
+              console.log("teste");
+
+              // labels and data have been changed, update the graph
+              radarRef.update();
+            }
+          });*/
+        }}
+      />
+    ),
     // eslint-disable-next-line
     [update]
   );
