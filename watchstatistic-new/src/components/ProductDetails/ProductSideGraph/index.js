@@ -43,6 +43,7 @@ const ProductSidePanel = ({ isMatch }) => {
   const [easterEggMotion, setEasterEggMotion] = useState(false);
   const [showVote, setShowVote] = useState(false);
   const [anchorLogin, setAnchorLogin] = useState(null);
+  const [popOverInfo, setPopOverInfo] = useState("");
   const voteRef = useRef();
   const graphRef = useRef();
   const radarRef = useRef();
@@ -232,6 +233,17 @@ const ProductSidePanel = ({ isMatch }) => {
 
   if (!targetVote) configRadarChart.data.datasets.pop();
 
+  const returnLabel = (index) => {
+    if (index === 0) return "Aesthetics from the Watch";
+    if (index === 1) return "Price over Quality";
+    if (index === 2) return "The strength from the brand";
+    if (index === 3) return "Refinement from the watch";
+    if (index === 4) return "History from the watch and brand";
+    if (index === 5) return "What does the engineering from the watch presents";
+    if (index === 6) return "History from the watch and brand";
+    else return;
+  };
+
   const memoRadarChart = useMemo(
     () => (
       <Radar
@@ -250,7 +262,7 @@ const ProductSidePanel = ({ isMatch }) => {
               clickY >= pointLabelItem.top &&
               clickY <= pointLabelItem.bottom
             ) {
-              console.log(pointLabelItem);
+              setPopOverInfo(returnLabel(index));
             }
           });
         }}
@@ -295,6 +307,7 @@ const ProductSidePanel = ({ isMatch }) => {
             padding: "5px",
           }}
         >
+          <div>{popOverInfo}</div>
           <Grid container>
             <Grid item style={{ textAlign: "center" }} xs={12}>
               {memoRadarChart}
