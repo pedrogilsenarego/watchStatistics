@@ -27,7 +27,7 @@ const initialTargetVoteState = {
 };
 
 // eslint-disable-next-line
-const ProductSidePanel = ({}) => {
+const ProductSidePanel = ({ isMatch }) => {
   const mapState = (state) => ({
     currentUser: state.user.currentUser,
     product: state.productsData.product,
@@ -304,8 +304,13 @@ const ProductSidePanel = ({}) => {
               {memoRadarChart}
 
               <Grid container style={{ marginTop: "10px" }}>
-                <Grid item xs={8} md={6}>
-                  <Box style={{ textAlign: "left", padding: "10px" }}>
+                <Grid item xs={12} md={6}>
+                  <Box
+                    style={{
+                      textAlign: isMatch ? "center" : "left",
+                      padding: "10px",
+                    }}
+                  >
                     <Typography
                       fontWeight={600}
                       style={{ color: "#ffffff" }}
@@ -332,7 +337,7 @@ const ProductSidePanel = ({}) => {
                 </Grid>
                 <Grid
                   item
-                  xs={4}
+                  xs={12}
                   md={6}
                   alignItems="center"
                   justifyContent="center"

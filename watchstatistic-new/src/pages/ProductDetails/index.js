@@ -138,7 +138,7 @@ const ProductDetails = ({}) => {
                 </Card>
               </Grid>
               <Grid item xs={12} md={5}>
-                <SideGraphPanel />
+                <SideGraphPanel isMatch={isMatch} />
 
                 <Card
                   style={{
