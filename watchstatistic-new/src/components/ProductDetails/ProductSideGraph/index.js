@@ -255,7 +255,8 @@ const ProductSidePanel = ({ isMatch }) => {
         style={{ cursor: "Pointer" }}
         ref={radarRef}
         {...configRadarChart}
-        getElementAtEvent={(element, event) => {
+        onMouseLeave={() => setAnchorPopover(null)}
+        onClick={(event) => {
           const clickX = event.nativeEvent.offsetX;
           const clickY = event.nativeEvent.offsetY;
           const scale = radarRef.current.scales.r;
@@ -268,16 +269,12 @@ const ProductSidePanel = ({ isMatch }) => {
               clickY >= pointLabelItem.top &&
               clickY <= pointLabelItem.bottom
             ) {
-              setAnchorPopover(null);
               setPopOverInfo(returnLabel(index));
               setCoordinatesPopoverX(clickX);
               setCoordinatesPopoverY(clickY + 10);
               setAnchorPopover(popoverRef.current);
             }
           });
-        }}
-        onMouseLeave={() => {
-          setAnchorPopover(null);
         }}
       />
     ),
