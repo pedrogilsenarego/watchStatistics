@@ -46,6 +46,7 @@ const ProductSidePanel = ({ isMatch }) => {
   const [anchorLogin, setAnchorLogin] = useState(null);
   const [anchorPopover, setAnchorPopover] = useState(null);
   const [popOverInfo, setPopOverInfo] = useState("");
+  const [coordinatesPopover, setCoordinatesPopover] = useState(null);
   const voteRef = useRef();
   const graphRef = useRef();
   const radarRef = useRef();
@@ -265,6 +266,7 @@ const ProductSidePanel = ({ isMatch }) => {
               clickY <= pointLabelItem.bottom
             ) {
               setPopOverInfo(returnLabel(index));
+              setCoordinatesPopover(clickX);
             }
           });
         }}
@@ -309,7 +311,10 @@ const ProductSidePanel = ({ isMatch }) => {
             padding: "5px",
           }}
         >
-          <div>{popOverInfo}</div>
+          <div>
+            {popOverInfo}
+            {coordinatesPopover}
+          </div>
           <Grid container>
             <Grid item style={{ textAlign: "center" }} xs={12}>
               {memoRadarChart}
@@ -416,8 +421,8 @@ const ProductSidePanel = ({ isMatch }) => {
         </MenuItem>
       </Menu>
       <Button
-        onClick={(e) => {
-          setAnchorPopover(e.currentTarget);
+        onClick={(radarRef) => {
+          setAnchorPopover(radarRef.current);
         }}
       >
         Teste
