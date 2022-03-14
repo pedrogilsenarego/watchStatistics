@@ -46,10 +46,12 @@ const ProductSidePanel = ({ isMatch }) => {
   const [anchorLogin, setAnchorLogin] = useState(null);
   const [anchorPopover, setAnchorPopover] = useState(null);
   const [popOverInfo, setPopOverInfo] = useState("");
-  const [coordinatesPopover, setCoordinatesPopover] = useState(null);
+  const [coordinatesPopoverX, setCoordinatesPopoverX] = useState(null);
+  const [coordinatesPopoverY, setCoordinatesPopoverY] = useState(null);
   const voteRef = useRef();
   const graphRef = useRef();
   const radarRef = useRef();
+  const popoverRef = useRef();
 
   const { productID } = useParams();
 
@@ -265,8 +267,11 @@ const ProductSidePanel = ({ isMatch }) => {
               clickY >= pointLabelItem.top &&
               clickY <= pointLabelItem.bottom
             ) {
+              setAnchorPopover(null);
               setPopOverInfo(returnLabel(index));
-              setCoordinatesPopover(clickX);
+              setCoordinatesPopoverX(clickX);
+              setCoordinatesPopoverY(clickY);
+              setAnchorPopover(popoverRef.current);
             }
           });
         }}
@@ -311,10 +316,14 @@ const ProductSidePanel = ({ isMatch }) => {
             padding: "5px",
           }}
         >
-          <div>
-            {popOverInfo}
-            {coordinatesPopover}
-          </div>
+          <div
+            ref={popoverRef}
+            style={{
+              position: "absolute",
+              marginTop: `${coordinatesPopoverY}px`,
+              marginLeft: `${coordinatesPopoverX}px`,
+            }}
+          ></div>
           <Grid container>
             <Grid item style={{ textAlign: "center" }} xs={12}>
               {memoRadarChart}
@@ -420,13 +429,7 @@ const ProductSidePanel = ({ isMatch }) => {
           <SignIn {...configMenuLogin} />
         </MenuItem>
       </Menu>
-      <Button
-        onClick={(radarRef) => {
-          setAnchorPopover(radarRef.current);
-        }}
-      >
-        Teste
-      </Button>
+
       <Popover
         anchor={anchorPopover}
         setAnchor={setAnchorPopover}
