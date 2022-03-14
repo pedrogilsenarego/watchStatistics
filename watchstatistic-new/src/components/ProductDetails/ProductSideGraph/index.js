@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import {
   Grid,
   Box,
@@ -46,6 +46,7 @@ const ProductSidePanel = ({ isMatch }) => {
   const [anchorLogin, setAnchorLogin] = useState(null);
   const [anchorPopover, setAnchorPopover] = useState(null);
   const [popOverInfo, setPopOverInfo] = useState("");
+  const [coordinates, setCoordinates] = useState([1, 1]);
   const [coordinatesPopoverX, setCoordinatesPopoverX] = useState(null);
   const [coordinatesPopoverY, setCoordinatesPopoverY] = useState(null);
   const voteRef = useRef();
@@ -249,10 +250,28 @@ const ProductSidePanel = ({ isMatch }) => {
     else return;
   };
 
+  const getPositionFromIcons = () => {
+    const scale = radarRef.current.scales.r;
+    const pointLabelItems = scale._pointLabelItems;
+    const newArray = [];
+    pointLabelItems.forEach((pointLabelItem, index) => {
+      const xpoint = pointLabelItem.left;
+      const ypoint = pointLabelItem.top;
+      const point = { x: xpoint, y: ypoint };
+
+      newArray.push(point);
+    });
+    setCoordinates(newArray);
+    console.log(newArray);
+  };
+
+  useEffect(() => {
+    getPositionFromIcons();
+  }, []);
+
   const memoRadarChart = useMemo(
     () => (
       <Radar
-        style={{ cursor: "Pointer" }}
         ref={radarRef}
         {...configRadarChart}
         onMouseLeave={() => setAnchorPopover(null)}
@@ -317,6 +336,22 @@ const ProductSidePanel = ({ isMatch }) => {
             padding: "5px",
           }}
         >
+          {coordinates.map((item, pos) => {
+            return (
+              <Box
+                key={pos}
+                style={{
+                  minHeight: "30px",
+                  minWidth: "30px",
+                  cursor: "pointer",
+                  backgroundColor: "#ffffff66",
+                  position: "absolute",
+                  marginTop: `${item.y}px`,
+                  marginLeft: `${item.x}px`,
+                }}
+              />
+            );
+          })}
           <div
             ref={popoverRef}
             style={{
