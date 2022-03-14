@@ -18,10 +18,10 @@ const Icons = ({ item, pos, returnLabel }) => {
         }}
         key={pos}
         style={{
-          minHeight: "30px",
-          minWidth: "30px",
+          minHeight: "35px",
+          minWidth: "35px",
           cursor: "pointer",
-          backgroundColor: "#ffffff66",
+          backgroundColor: "#ffffff00",
           position: "absolute",
           marginTop: `${item.y}px`,
           marginLeft: `${item.x}px`,

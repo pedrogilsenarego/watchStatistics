@@ -253,7 +253,7 @@ const ProductSidePanel = ({ isMatch }) => {
     pointLabelItems.forEach((pointLabelItem, index) => {
       const xpoint = pointLabelItem.left;
       const ypoint = pointLabelItem.top;
-      const point = { x: xpoint, y: ypoint };
+      const point = { x: xpoint - 5, y: ypoint - 5 };
 
       newArray.push(point);
     });
@@ -261,9 +261,17 @@ const ProductSidePanel = ({ isMatch }) => {
     console.log(newArray);
   };
 
+  window.onorientationchange = () => {
+    getPositionFromIcons();
+  };
+
+  window.onresize = () => {
+    getPositionFromIcons();
+  };
+
   useEffect(() => {
     getPositionFromIcons();
-  }, []);
+  }, [isMatch]);
 
   const memoRadarChart = useMemo(
     () => <Radar ref={radarRef} {...configRadarChart} />,
