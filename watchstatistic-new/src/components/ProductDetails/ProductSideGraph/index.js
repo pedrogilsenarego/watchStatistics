@@ -15,7 +15,7 @@ import { useParams } from "react-router";
 import { motion } from "framer-motion";
 import SignIn from "../../../components/SignIn";
 import { Radar } from "react-chartjs-2";
-import Popover from "../../controls/Popover";
+import Icons from "./Icons";
 
 const initialTargetVoteState = {
   quality: "",
@@ -44,15 +44,11 @@ const ProductSidePanel = ({ isMatch }) => {
   const [easterEggMotion, setEasterEggMotion] = useState(false);
   const [showVote, setShowVote] = useState(false);
   const [anchorLogin, setAnchorLogin] = useState(null);
-  const [anchorPopover, setAnchorPopover] = useState(null);
-  const [popOverInfo, setPopOverInfo] = useState("");
   const [coordinates, setCoordinates] = useState([1, 1]);
-  const [coordinatesPopoverX, setCoordinatesPopoverX] = useState(null);
-  const [coordinatesPopoverY, setCoordinatesPopoverY] = useState(null);
+
   const voteRef = useRef();
   const graphRef = useRef();
   const radarRef = useRef();
-  const popoverRef = useRef();
 
   const { productID } = useParams();
 
@@ -270,33 +266,7 @@ const ProductSidePanel = ({ isMatch }) => {
   }, []);
 
   const memoRadarChart = useMemo(
-    () => (
-      <Radar
-        ref={radarRef}
-        {...configRadarChart}
-        onMouseLeave={() => setAnchorPopover(null)}
-        onClick={(event) => {
-          const clickX = event.nativeEvent.offsetX;
-          const clickY = event.nativeEvent.offsetY;
-          const scale = radarRef.current.scales.r;
-
-          const pointLabelItems = scale._pointLabelItems;
-          pointLabelItems.forEach((pointLabelItem, index) => {
-            if (
-              clickX >= pointLabelItem.left &&
-              clickX <= pointLabelItem.right &&
-              clickY >= pointLabelItem.top &&
-              clickY <= pointLabelItem.bottom
-            ) {
-              setPopOverInfo(returnLabel(index));
-              setCoordinatesPopoverX(clickX);
-              setCoordinatesPopoverY(clickY + 10);
-              setAnchorPopover(popoverRef.current);
-            }
-          });
-        }}
-      />
-    ),
+    () => <Radar ref={radarRef} {...configRadarChart} />,
     // eslint-disable-next-line
     [update]
   );
@@ -337,29 +307,14 @@ const ProductSidePanel = ({ isMatch }) => {
           }}
         >
           {coordinates.map((item, pos) => {
-            return (
-              <Box
-                key={pos}
-                style={{
-                  minHeight: "30px",
-                  minWidth: "30px",
-                  cursor: "pointer",
-                  backgroundColor: "#ffffff66",
-                  position: "absolute",
-                  marginTop: `${item.y}px`,
-                  marginLeft: `${item.x}px`,
-                }}
-              />
-            );
+            const configIcons = {
+              item,
+              pos,
+              returnLabel,
+            };
+            return <Icons {...configIcons} />;
           })}
-          <div
-            ref={popoverRef}
-            style={{
-              position: "absolute",
-              marginTop: `${coordinatesPopoverY}px`,
-              marginLeft: `${coordinatesPopoverX}px`,
-            }}
-          ></div>
+
           <Grid container>
             <Grid item style={{ textAlign: "center" }} xs={12}>
               {memoRadarChart}
@@ -465,12 +420,6 @@ const ProductSidePanel = ({ isMatch }) => {
           <SignIn {...configMenuLogin} />
         </MenuItem>
       </Menu>
-
-      <Popover
-        anchor={anchorPopover}
-        setAnchor={setAnchorPopover}
-        message={popOverInfo}
-      />
     </>
   );
 };
