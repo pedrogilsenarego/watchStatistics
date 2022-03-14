@@ -252,6 +252,7 @@ const ProductSidePanel = ({ isMatch }) => {
   const memoRadarChart = useMemo(
     () => (
       <Radar
+        style={{ cursor: "Pointer" }}
         ref={radarRef}
         {...configRadarChart}
         getElementAtEvent={(element, event) => {
@@ -270,10 +271,13 @@ const ProductSidePanel = ({ isMatch }) => {
               setAnchorPopover(null);
               setPopOverInfo(returnLabel(index));
               setCoordinatesPopoverX(clickX);
-              setCoordinatesPopoverY(clickY);
+              setCoordinatesPopoverY(clickY + 10);
               setAnchorPopover(popoverRef.current);
             }
           });
+        }}
+        onMouseLeave={() => {
+          setAnchorPopover(null);
         }}
       />
     ),
