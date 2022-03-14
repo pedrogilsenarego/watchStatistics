@@ -15,6 +15,7 @@ import { useParams } from "react-router";
 import { motion } from "framer-motion";
 import SignIn from "../../../components/SignIn";
 import { Radar } from "react-chartjs-2";
+import Popover from "../../controls/Popover";
 
 const initialTargetVoteState = {
   quality: "",
@@ -43,6 +44,7 @@ const ProductSidePanel = ({ isMatch }) => {
   const [easterEggMotion, setEasterEggMotion] = useState(false);
   const [showVote, setShowVote] = useState(false);
   const [anchorLogin, setAnchorLogin] = useState(null);
+  const [anchorPopover, setAnchorPopover] = useState(null);
   const [popOverInfo, setPopOverInfo] = useState("");
   const voteRef = useRef();
   const graphRef = useRef();
@@ -413,6 +415,18 @@ const ProductSidePanel = ({ isMatch }) => {
           <SignIn {...configMenuLogin} />
         </MenuItem>
       </Menu>
+      <Button
+        onClick={(e) => {
+          setAnchorPopover(e.currentTarget);
+        }}
+      >
+        Teste
+      </Button>
+      <Popover
+        anchor={anchorPopover}
+        setAnchor={setAnchorPopover}
+        message={popOverInfo}
+      />
     </>
   );
 };
