@@ -107,7 +107,10 @@ const ProductDetails = ({}) => {
         <meta property="og:image" content={productThumbnail} />
       </Helmet>
 
-      <Container style={{ marginTop: "40px" }}>
+      <Container
+        disableGutters={isMatch ? true : false}
+        style={{ marginTop: "40px" }}
+      >
         <Typography
           style={{ marginTop: "90px", color: "#ffffff66", marginLeft: "10px" }}
           variant="h6"
