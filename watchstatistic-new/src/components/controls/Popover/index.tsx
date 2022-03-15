@@ -6,9 +6,8 @@ import { Typography } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiPaper-root": {
-      backgroundColor: "#18161E",
+      backgroundColor: "#000000CE",
       color: "#ffffffCC",
-      boxShadow: "0 0 0.2rem hsl(0 0% 100%)",
     },
     marginTop: "10px",
   },

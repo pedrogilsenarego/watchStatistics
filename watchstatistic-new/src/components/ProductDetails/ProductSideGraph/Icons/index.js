@@ -16,7 +16,6 @@ const Icons = ({ item, pos, returnLabel }) => {
         onMouseOut={() => {
           setAnchor(null);
         }}
-        key={pos}
         style={{
           minHeight: "35px",
           minWidth: "35px",

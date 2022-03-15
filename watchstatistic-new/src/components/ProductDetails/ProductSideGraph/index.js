@@ -179,11 +179,10 @@ const ProductSidePanel = ({ isMatch }) => {
     options: {
       plugins: {
         tooltip: {
-          displayColors: false,
-          titleAlign: "center",
-          bodyAlign: "center",
-          titleColor: "#ffffff",
-          bodyColor: "#ffffffDB",
+          enabled: true,
+          callbacks: {
+            title: function () {},
+          },
         },
         legend: {
           position: "bottom",
@@ -194,6 +193,13 @@ const ProductSidePanel = ({ isMatch }) => {
             padding: 20,
             font: {
               size: 12,
+            },
+          },
+        },
+        datalabels: {
+          labels: {
+            title: {
+              color: "pink",
             },
           },
         },
@@ -220,7 +226,9 @@ const ProductSidePanel = ({ isMatch }) => {
           },
         },
       },
-
+      layout: {
+        padding: -8,
+      },
       animations: {
         tension: {
           duration: 700,
@@ -258,7 +266,6 @@ const ProductSidePanel = ({ isMatch }) => {
       newArray.push(point);
     });
     setCoordinates(newArray);
-    console.log(newArray);
   };
 
   window.onorientationchange = () => {
@@ -320,87 +327,88 @@ const ProductSidePanel = ({ isMatch }) => {
               pos,
               returnLabel,
             };
-            return <Icons {...configIcons} />;
+            return <Icons key={pos} {...configIcons} />;
           })}
 
           <Grid container>
-            <Grid item style={{ textAlign: "center" }} xs={12}>
+            <Grid item xs={12}>
               {memoRadarChart}
-
-              <Grid container style={{ marginTop: "10px" }}>
-                <Grid item xs={12} md={6}>
-                  <Box
-                    style={{
-                      textAlign: isMatch ? "center" : "left",
-                      padding: "10px",
+            </Grid>
+            <Grid
+              container
+              item
+              style={{
+                marginTop: "10px",
+                marginBottom: isMatch ? "10px" : "0px",
+              }}
+            >
+              <Grid item xs={12} md={6}>
+                <Box
+                  style={{
+                    textAlign: isMatch ? "center" : "left",
+                    padding: "10px",
+                  }}
+                >
+                  <Typography
+                    fontWeight={600}
+                    style={{ color: "#ffffff" }}
+                    onClick={() => {
+                      setEasterEggMotion(!easterEggMotion);
                     }}
                   >
-                    <Typography
-                      fontWeight={600}
-                      style={{ color: "#ffffff" }}
-                      onClick={() => {
-                        setEasterEggMotion(!easterEggMotion);
-                      }}
-                    >
-                      Score: {avgTotal}
-                    </Typography>
+                    Score: {avgTotal}
+                  </Typography>
 
-                    <Typography
-                      style={{ color: "#ffffffBF", fontSize: "13px" }}
-                    >
-                      Own/Experimented: {avgVotationsOwn} Votes:{" "}
-                      {numberVotesOwn}
-                    </Typography>
-                    <Typography
-                      style={{ color: "#ffffffBF", fontSize: "13px" }}
-                    >
-                      Only Seen Digital: {avgVotationsNotOwn} Votes:{" "}
-                      {numberVotesNotOwn}
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  md={6}
-                  alignItems="center"
-                  justifyContent="center"
-                  container
-                >
-                  {currentUser && !currentUser.userVotes.includes(productID) && (
-                    <Button
-                      className={classes.textBtn}
-                      style={{ width: "80%", borderColor: "orange" }}
-                      aria-controls="vote"
-                      onClick={(e) => {
-                        handleVote();
-                      }}
-                      disableRipple
-                    >
-                      Vote
-                    </Button>
-                  )}
-                  {currentUser && currentUser.userVotes.includes(productID) && (
-                    <Button
-                      className={classes.textBtn}
-                      style={{ width: "80%" }}
-                      disableRipple
-                    >
-                      Already Voted
-                    </Button>
-                  )}
-                  {!currentUser && (
-                    <Button
-                      className={classes.textBtn}
-                      style={{ width: "80%" }}
-                      aria-controls="vote"
-                      disableRipple
-                      onClick={(e) => handleLoginOpen(e)}
-                    >
-                      Login to Vote
-                    </Button>
-                  )}
-                </Grid>
+                  <Typography style={{ color: "#ffffffBF", fontSize: "13px" }}>
+                    Own/Experimented: {avgVotationsOwn} Votes: {numberVotesOwn}
+                  </Typography>
+                  <Typography style={{ color: "#ffffffBF", fontSize: "13px" }}>
+                    Only Seen Digital: {avgVotationsNotOwn} Votes:{" "}
+                    {numberVotesNotOwn}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                md={6}
+                alignItems="center"
+                justifyContent="center"
+                container
+              >
+                {currentUser && !currentUser.userVotes.includes(productID) && (
+                  <Button
+                    className={classes.textBtn}
+                    style={{ width: "80%", borderColor: "orange" }}
+                    aria-controls="vote"
+                    onClick={(e) => {
+                      handleVote();
+                    }}
+                    disableRipple
+                  >
+                    Vote
+                  </Button>
+                )}
+                {currentUser && currentUser.userVotes.includes(productID) && (
+                  <Button
+                    className={classes.textBtn}
+                    style={{ width: "80%" }}
+                    disableRipple
+                  >
+                    Already Voted
+                  </Button>
+                )}
+                {!currentUser && (
+                  <Button
+                    className={classes.textBtn}
+                    style={{ width: "80%" }}
+                    aria-controls="vote"
+                    disableRipple
+                    onClick={(e) => handleLoginOpen(e)}
+                  >
+                    Login to Vote
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </Grid>
