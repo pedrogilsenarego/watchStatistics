@@ -103,8 +103,9 @@ const Section4 = ({ isMatch }) => {
               name="productDesc"
               className={classes.textField}
               multiline
+              InputLabelProps={{ shrink: false }}
               rows={6}
-              label="Description from Watch*"
+              placeholder="Description from Watch*"
             ></TextField>
           </Container>
         </Grid>
