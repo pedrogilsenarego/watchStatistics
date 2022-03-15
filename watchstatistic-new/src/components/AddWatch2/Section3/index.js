@@ -1,117 +1,106 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import ButtonGroup from "@mui/material/ButtonGroup";
 import ButtonMUI from "../../forms/ButtonMUI";
-import Button from "@mui/material/Button";
+import { Button } from "@material-ui/core";
 import ProductDetailsPreview from "../../../pages/ProductDetailsPreview";
 import Popup from "../../controls/Popup";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  textBtn: {
+    color: "#FFFFFF",
+    fontSize: "13px",
+    backgroundColor: "#00000000",
+    border: "solid 2px",
+    borderColor: "orange",
+    borderRadius: "14px",
+    "&:hover": {
+      color: "#FFA500",
+      backgroundColor: "#ffffff00",
+    },
+    "&:active": {
+      color: "#FFFFFF",
+    },
+  },
+}));
 
 const Section3 = ({
-	preview,
-	setPreview,
-	productThumbnail,
-	productBackground,
-	productDesc,
-	additionalData,
-	openBoxPopUp,
-	setOpenBoxPopUp,
-	isMatch
+  preview,
+  setPreview,
+  productThumbnail,
+  productBackground,
+  productDesc,
+  additionalData,
+  openBoxPopUp,
+  setOpenBoxPopUp,
+  isMatch,
 }) => {
-	const configPreview = {
-		productThumbnail,
-		productBackground,
-		productDesc,
-		additionalData
-	};
+  const classes = useStyles();
+  const configPreview = {
+    productThumbnail,
+    productBackground,
+    productDesc,
+    additionalData,
+  };
 
-	return (
-		<>
-			<Grid
-				container
-				item
-				spacing={1}
-				direction="column"
-				alignItems={isMatch ? "center" : null}
-				justifyContent="center"
-				style={{
-					position: "absolute",
-					marginTop: "84vh",
-					marginLeft: isMatch ? "0px" : "58vw",
-					padding: "10px",
+  return (
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Grid
+        container
+        item
+        spacing={1}
+        direction="column"
+        alignItems={isMatch ? "center" : "flex-end"}
+        justifyContent="center"
+        style={{
+          position: "absolute",
+          marginTop: "70vh",
+          maxWidth: "35vw",
+          padding: "10px",
+        }}
+      >
+        <Grid item xs={12}>
+          {preview && (
+            <ButtonMUI
+              style={{ borderColor: "#00000000", backgroundColor: "#00000000" }}
+              className={classes.textBtn}
+            >
+              Preview
+            </ButtonMUI>
+          )}
+          {!preview && (
+            <Button
+              style={{ borderColor: "#00000000", backgroundColor: "#00000000" }}
+              className={classes.textBtn}
+              onClick={() => setPreview(!preview)}
+            >
+              Back
+            </Button>
+          )}
+          {!preview && (
+            <ButtonMUI className={classes.textBtn}>Submit</ButtonMUI>
+          )}
 
-					borderRadius: "40px"
-				}}
-			>
-				<Grid item xs={12}>
-					<ButtonGroup>
-						{preview && (
-							<ButtonMUI
-								style={{
-									textTransform: "none",
-									backgroundColor: "black",
-									color: "orange",
-									border: "solid 1.5px",
-									borderColor: "orange"
-								}}
-							>
-								Preview
-							</ButtonMUI>
-						)}
-						{!preview && (
-							<ButtonMUI
-								style={{
-									textTransform: "none",
-									backgroundColor: "black",
-									color: "orange",
-									border: "solid 1.5px",
-									borderColor: "orange"
-								}}
-							>
-								Submit
-							</ButtonMUI>
-						)}
+          {preview && (
+            <Button
+              className={classes.textBtn}
+              onClick={() => setPreview(!preview)}
+            >
+              Submit
+            </Button>
+          )}
+        </Grid>
+      </Grid>
 
-						{preview && (
-							<Button
-								style={{
-									textTransform: "none",
-									backgroundColor: "black",
-									color: "orange",
-									border: "solid 1.5px",
-									borderColor: "orange"
-								}}
-								onClick={() => setPreview(!preview)}
-							>
-								Submit
-							</Button>
-						)}
-						{!preview && (
-							<Button
-								style={{
-									textTransform: "none",
-									backgroundColor: "black",
-									color: "orange",
-									border: "solid 1.5px",
-									borderColor: "orange"
-								}}
-								onClick={() => setPreview(!preview)}
-							>
-								Back
-							</Button>
-						)}
-					</ButtonGroup>
-				</Grid>
-			</Grid>
-
-			<Popup
-				title="Preview your watch"
-				openPopup={openBoxPopUp}
-				setOpenPopup={setOpenBoxPopUp}
-			>
-				<ProductDetailsPreview {...configPreview} />
-			</Popup>
-		</>
-	);
+      <Popup
+        title="Preview your watch"
+        openPopup={openBoxPopUp}
+        setOpenPopup={setOpenBoxPopUp}
+      >
+        <ProductDetailsPreview {...configPreview} />
+      </Popup>
+    </div>
+  );
 };
 
 export default Section3;
