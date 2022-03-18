@@ -62,9 +62,6 @@ const mapState = ({ user }) => ({
 });
 
 const INITIAL_FORM_STATE = {
-  // budget: "",
-  // dailyLimit: "",
-
   displayName: "",
   email: "",
   password: "",
@@ -73,12 +70,6 @@ const INITIAL_FORM_STATE = {
 };
 
 const FORM_VALIDATION = Yup.object().shape({
-  // budget: Yup.number(),
-  // dailyLimit: Yup.number().lessThan(
-  //   Yup.ref("budget"),
-  //   "budget must B less than budget"
-  // ),
-
   displayName: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
