@@ -197,7 +197,11 @@ const CompareWatches = () => {
       disableGutters={isMatch ? true : false}
       style={{ marginTop: "100px" }}
     >
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={2}
+        style={{ paddingLeft: "10px", paddingRight: "10px" }}
+      >
         <Grid item xs={12} md={7}>
           <Paper style={{ background: theme.palette.card.main }}>
             {cartItems && cartItems.length > 0 && (
