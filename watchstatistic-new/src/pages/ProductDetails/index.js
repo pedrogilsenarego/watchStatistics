@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import SideGraphPanel from "../../components/ProductDetails/ProductSideGraph";
-import SideDescription from "../../components/ProductDetails/ProductSideDescription";
-import ProductSideList from "../../components/ProductDetails/ProductSideList";
+import SideGraphPanel from "../../containers/ProductDetails/ProductSideGraph";
+import SideDescription from "../../containers/ProductDetails/ProductSideDescription";
+import ProductSideList from "../../containers/ProductDetails/ProductSideList";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useSelector } from "react-redux";
 import { Parallax } from "react-parallax";
 import { useParams } from "react-router";
 import { Helmet } from "react-helmet";
-import ImageMain from "../../components/ProductDetails/ImageMain";
+import ImageMain from "../../containers/ProductDetails/ImageMain";
 
 import {
   Grid,

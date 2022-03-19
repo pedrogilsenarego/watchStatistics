@@ -1,12 +1,12 @@
 import React from "react";
-import MarketComp from "../../components/Market";
+import MarketComp from "../../containers/Market";
 // eslint-disable-next-line
 const Market = ({}) => {
-	return (
-		<div>
-			<MarketComp />
-		</div>
-	);
+  return (
+    <div>
+      <MarketComp />
+    </div>
+  );
 };
 
 export default Market;

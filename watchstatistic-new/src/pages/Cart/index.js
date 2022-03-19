@@ -1,13 +1,13 @@
 import React from "react";
-import Checkout from "../../components/Checkout";
+import Checkout from "../../containers/Checkout";
 
 // eslint-disable-next-line
 const Cart = ({}) => {
-	return (
-		<div>
-			<Checkout />
-		</div>
-	);
+  return (
+    <div>
+      <Checkout />
+    </div>
+  );
 };
 
 export default Cart;

@@ -21,7 +21,7 @@ import Watchstatistics from "./pages/Watchstatistics";
 import AddWatch from "./pages/Watchstatistics/AddWatch";
 import CompareWatches from "./pages/CompareWatches";
 
-import WatchLaboratory2 from "./components/WatchLab2";
+import WatchLaboratory2 from "./containers/WatchLab2";
 import Market from "./pages/Market";
 import Messages from "./pages/Messages";
 import Stats from "./pages/Stats";
@@ -40,200 +40,210 @@ import { darkTheme, lightTheme } from "./styles/MUITheme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { useSelector } from "react-redux";
 import HomePage from "./pages/Homepage";
+import SubmitFeedback from "./pages/SubmitFeedback";
 
 const mapState = (state) => ({
-	currentUser: state.user.currentUser
+  currentUser: state.user.currentUser,
 });
 
 const App = () => {
-	const dispatch = useDispatch();
-	const { currentUser } = useSelector(mapState);
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector(mapState);
 
-	useEffect(
-		() => {
-			dispatch(checkUserSession());
-		},
-		// eslint-disable-next-line
-		[]
-	);
+  useEffect(
+    () => {
+      dispatch(checkUserSession());
+    },
+    // eslint-disable-next-line
+    []
+  );
 
-	return (
-		<ThemeProvider
-			theme={
-				currentUser ? (!currentUser.theme ? darkTheme : lightTheme) : darkTheme
-			}
-		>
-			<CssBaseline />
-			<div className="App" >
-				<Switch>
-					<Route
-						exact
-						path="/"
-						render={() =>
-							currentUser ? (
-								<HomepageLayout>
-									<HomePage />
-								</HomepageLayout>
-							) : (
-								<MainLayout>
-									<Watchstatistics />
-								</MainLayout>
-							)
-						}
-					/>
+  return (
+    <ThemeProvider
+      theme={
+        currentUser ? (!currentUser.theme ? darkTheme : lightTheme) : darkTheme
+      }
+    >
+      <CssBaseline />
+      <div className="App">
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() =>
+              currentUser ? (
+                <HomepageLayout>
+                  <HomePage />
+                </HomepageLayout>
+              ) : (
+                <MainLayout>
+                  <Watchstatistics />
+                </MainLayout>
+              )
+            }
+          />
 
-					<Route
-						exact
-						path="/watchstatistics/comparewatches"
-						render={() => (
-							<MainLayout>
-								<CompareWatches />
-							</MainLayout>
-						)}
-					/>
-					<Route
-						exact
-						path="/watchstatistics/stats"
-						render={() => (
-							<MainLayout>
-								<Stats />
-							</MainLayout>
-						)}
-					/>
-					<Route
-						exact
-						path="/watchstatistics/watchlaboratory"
-						render={() => (
-							<WithAuth>
-								<WatchLab>
-									<WatchLaboratory2 />
-								</WatchLab>
-							</WithAuth>
-						)}
-					/>
-					<Route
-						exact
-						path="/messages"
-						render={() => (
-							<WithAuth>
-								<MainLayout>
-									<Messages />
-								</MainLayout>
-							</WithAuth>
-						)}
-					/>
+          <Route
+            exact
+            path="/watchstatistics/comparewatches"
+            render={() => (
+              <MainLayout>
+                <CompareWatches />
+              </MainLayout>
+            )}
+          />
+          <Route
+            exact
+            path="/watchstatistics/stats"
+            render={() => (
+              <MainLayout>
+                <Stats />
+              </MainLayout>
+            )}
+          />
+          <Route
+            exact
+            path="/watchstatistics/watchlaboratory"
+            render={() => (
+              <WithAuth>
+                <WatchLab>
+                  <WatchLaboratory2 />
+                </WatchLab>
+              </WithAuth>
+            )}
+          />
+          <Route
+            exact
+            path="/messages"
+            render={() => (
+              <WithAuth>
+                <MainLayout>
+                  <Messages />
+                </MainLayout>
+              </WithAuth>
+            )}
+          />
 
-					<Route
-						exact
-						path="/watchstatistics/addwatch"
-						render={() => (
-							<WithAuth>
-								<WatchLab>
-									<AddWatch />
-								</WatchLab>
-							</WithAuth>
-						)}
-					/>
-					<Route
-						exact
-						path="/watchstatistics/market"
-						render={() => (
-							<WithAuth>
-								<MainLayout>
-									<Market />
-								</MainLayout>
-							</WithAuth>
-						)}
-					/>
-					<Route
-						exact
-						path="/search"
-						render={() => (
-							<WatchLab>
-								<Search />
-							</WatchLab>
-						)}
-					/>
-					<Route
-						path="/search/:filterType"
-						render={() => (
-							<WatchLab>
-								<Search />
-							</WatchLab>
-						)}
-					/>
-					<Route
-						path="/product/:productID"
-						render={() => (
-							<MainLayout>
-								<ProductDetails />
-							</MainLayout>
-						)}
-					/>
-					<Route
-						path="/product/preview"
-						render={() => (
-							<WithAuth>
-								<MainLayout>
-									<ProductDetailsPreview />
-								</MainLayout>
-							</WithAuth>
-						)}
-					/>
-					<Route
-						path="/FAQ"
-						render={() => (
-							<MainLayout>
-								<FAQ />
-							</MainLayout>
-						)}
-					/>
-				
+          <Route
+            exact
+            path="/watchstatistics/addwatch"
+            render={() => (
+              <WithAuth>
+                <WatchLab>
+                  <AddWatch />
+                </WatchLab>
+              </WithAuth>
+            )}
+          />
+          <Route
+            exact
+            path="/watchstatistics/market"
+            render={() => (
+              <WithAuth>
+                <MainLayout>
+                  <Market />
+                </MainLayout>
+              </WithAuth>
+            )}
+          />
+          <Route
+            exact
+            path="/search"
+            render={() => (
+              <WatchLab>
+                <Search />
+              </WatchLab>
+            )}
+          />
+          <Route
+            path="/search/:filterType"
+            render={() => (
+              <WatchLab>
+                <Search />
+              </WatchLab>
+            )}
+          />
+          <Route
+            path="/product/:productID"
+            render={() => (
+              <MainLayout>
+                <ProductDetails />
+              </MainLayout>
+            )}
+          />
+          <Route
+            path="/product/preview"
+            render={() => (
+              <WithAuth>
+                <MainLayout>
+                  <ProductDetailsPreview />
+                </MainLayout>
+              </WithAuth>
+            )}
+          />
+          <Route
+            path="/FAQ"
+            render={() => (
+              <MainLayout>
+                <FAQ />
+              </MainLayout>
+            )}
+          />
 
-					<Route
-						path="/dashboard"
-						render={() => (
-							<WithAuth>
-								<MainLayout>
-									<Dashboard />
-								</MainLayout>
-							</WithAuth>
-						)}
-					/>
-					<Route
-						path="/mycollection"
-						render={() => (
-							<WithAuth>
-								<MainLayout>
-									<MyCollection />
-								</MainLayout>
-							</WithAuth>
-						)}
-					/>
-					<Route
-						path="/order/:orderID"
-						render={() => (
-							<WithAuth>
-								<DashBoardLayout>
-									<Order />
-								</DashBoardLayout>
-							</WithAuth>
-						)}
-					/>
-					<Route
-						path="/admin"
-						render={() => (
-							<WithAdminAuth>
-								<AdminLayout>
-									<Admin />
-								</AdminLayout>
-							</WithAdminAuth>
-						)}
-					/>
-				</Switch>
-			</div>
-		</ThemeProvider>
-	);
+          <Route
+            path="/dashboard"
+            render={() => (
+              <WithAuth>
+                <MainLayout>
+                  <Dashboard />
+                </MainLayout>
+              </WithAuth>
+            )}
+          />
+          <Route
+            path="/mycollection"
+            render={() => (
+              <WithAuth>
+                <MainLayout>
+                  <MyCollection />
+                </MainLayout>
+              </WithAuth>
+            )}
+          />
+          <Route
+            path="/order/:orderID"
+            render={() => (
+              <WithAuth>
+                <DashBoardLayout>
+                  <Order />
+                </DashBoardLayout>
+              </WithAuth>
+            )}
+          />
+          <Route
+            path="/admin"
+            render={() => (
+              <WithAdminAuth>
+                <AdminLayout>
+                  <Admin />
+                </AdminLayout>
+              </WithAdminAuth>
+            )}
+          />
+          <Route
+            path="/submitfeedback"
+            render={() => (
+              <WithAuth>
+                <MainLayout>
+                  <SubmitFeedback />
+                </MainLayout>
+              </WithAuth>
+            )}
+          />
+        </Switch>
+      </div>
+    </ThemeProvider>
+  );
 };
 
 export default App;
