@@ -4,18 +4,23 @@ const cors = require("cors");
 const app = express();
 const importData = require("./watchesCorr.json");
 const admin = require("firebase-admin");
+const { sendEmail } = require("./email");
 
 admin.initializeApp(functions.config().firebase);
 
 app.use(cors());
 
 app.get("/", (req, res) => {
-	res.status(200).send({ data: "welcome to watch statistics endpoint" });
+  res.status(200).send({ data: "welcome to watch statistics endpoint" });
 });
 
 app.get(`/watchcorrelations`, (req, res) => {
-	res.send(importData);
+  res.status(200).send(importData);
 });
+
+sendEmail();
+
+exports.api = functions.https.onRequest(app);
 
 /* app.get(`/teste`, (req, res) => {
 	res.send(handleFetchAllProducts());
