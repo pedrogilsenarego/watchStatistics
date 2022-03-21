@@ -3,8 +3,14 @@ import { Container, Grid, Typography, Divider, TextField } from "@mui/material";
 import { useTheme } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import ButtonMUI from "../forms/ButtonMUI";
+import { apiInstance } from "./../../Utils";
+
+const mapState = (state) => ({
+  currentUser: state.user.currentUser,
+});
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -38,10 +44,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SubmitFeedback = () => {
+  const { currentUser } = useSelector(mapState);
   const theme = useTheme();
   const classes = useStyles();
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (event) => {
+    const { message } = event;
+    apiInstance
+      .post("/submitfeedback", {
+        userEmail: currentUser.email,
+        userName: currentUser.displayName,
+        message: message,
+      })
+      .then(({ data: clientSecret }) => {});
+  };
 
   return (
     <Grid
@@ -66,23 +82,24 @@ const SubmitFeedback = () => {
               marginTop: "20px",
             }}
           />
-          <Typography
-            style={{ color: theme.palette.text.faded, marginTop: "60px" }}
-          >
-            Message
-          </Typography>
+
           <Formik
             initialValues={{
               message: "",
             }}
             validationSchema={Yup.object().shape({
-              username: Yup.string().required("Required"),
+              message: Yup.string().required("Required"),
             })}
             onSubmit={(values) => {
               handleSubmit(values);
             }}
           >
             <Form>
+              <Typography
+                style={{ color: theme.palette.text.faded, marginTop: "60px" }}
+              >
+                Message
+              </Typography>
               <Container
                 style={{
                   backgroundColor: theme.palette.textField.background,
@@ -97,7 +114,7 @@ const SubmitFeedback = () => {
                   multiline
                   rows={6}
                   InputLabelProps={{ shrink: false }}
-                  name="username"
+                  name="message"
                   placeholder="Put your message here*"
                 ></TextField>
               </Container>
