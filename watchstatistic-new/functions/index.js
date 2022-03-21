@@ -18,19 +18,20 @@ app.get(`/watchcorrelations`, (req, res) => {
   res.status(200).send(importData);
 });
 
-app.get("/submitfeedback", async (req, res) => {
-  try {
-    const { userEmail, userName, message } = req.body;
-    const submitFeedback = await sendEmail(userEmail, userName, message);
-  } catch (err) {
-    res.status(500).json({
-      statusCode: 500,
-      message: err.message,
-    });
-  }
-});
+// app.get("/submitfeedback", async (req, res) => {
+//   try {
+//     const { userEmail, userName, message } = req.body;
+//     const submitFeedback = await sendEmail(userEmail, userName, message);
+//     res.status(200).send(submitFeedback.client_secret);
+//   } catch (err) {
+//     res.status(500).json({
+//       statusCode: 500,
+//       message: err.message,
+//     });
+//   }
+// });
 
-sendEmail("teste", "teste2", "teste3");
+sendEmail();
 
 exports.api = functions.https.onRequest(app);
 
