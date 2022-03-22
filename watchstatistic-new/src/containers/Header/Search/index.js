@@ -60,7 +60,7 @@ const Search = ({ isMatch }) => {
       setOptions(data);
     } catch (error) {
       console.error();
-    }
+    } 
   };
 
   useEffect(

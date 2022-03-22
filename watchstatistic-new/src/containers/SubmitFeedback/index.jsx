@@ -4,8 +4,7 @@ import {
   Grid,
   Typography,
   Divider,
-  TextField,
-  Button,
+  
 } from "@mui/material";
 import { useTheme } from "@material-ui/core";
 import { Form, Formik } from "formik";
@@ -13,7 +12,9 @@ import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import ButtonMUI from "../forms/ButtonMUI";
+import TextField from "../forms/InputMUI";
 import { apiInstance } from "./../../Utils";
+import {useHistory} from "react-router"
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -54,30 +55,17 @@ const SubmitFeedback = () => {
   const { currentUser } = useSelector(mapState);
   const theme = useTheme();
   const classes = useStyles();
+  const history=useHistory()
 
   const handleSubmit = async (event) => {
     const body = {
-      message: "pizza",
+      message: event.message,
       userName: currentUser.displayName,
       userEmail: currentUser.email,
     };
     try {
-      const response = apiInstance.post("/submitfeedback", body);
-      console.log(response);
-    } catch {
-      console.log("fail");
-    }
-  };
-
-  const handleTest = async (event) => {
-    const body = {
-      message: "pizza",
-      userName: currentUser.displayName,
-      userEmail: currentUser.email,
-    };
-    try {
-      const response = await apiInstance.post("/submitfeedback", body);
-      console.log(response);
+      apiInstance.post("/submitfeedback", body);
+      history.push(`/`)
     } catch {
       console.log("fail");
     }
@@ -145,13 +133,7 @@ const SubmitFeedback = () => {
               <ButtonMUI style={{ marginTop: "20px" }}>Submit</ButtonMUI>
             </Form>
           </Formik>
-          <Button
-            onClick={() => {
-              handleTest();
-            }}
-          >
-            Teste
-          </Button>
+          
         </Container>
       </Grid>
     </Grid>
