@@ -18,7 +18,7 @@ app.get(`/watchcorrelations`, (req, res) => {
   res.status(200).send(importData);
 });
 
-app.get("/submitfeedback", async (req, res) => {
+app.post("/submitfeedback", async (req, res) => {
   try {
     const { message, userName, userEmail } = req.body;
     const teste2 = {

@@ -76,7 +76,7 @@ const SubmitFeedback = () => {
       userEmail: currentUser.email,
     };
     try {
-      const response = apiInstance.post("/submitfeedback", body);
+      const response = await apiInstance.post("/submitfeedback", body);
       console.log(response);
     } catch {
       console.log("fail");
