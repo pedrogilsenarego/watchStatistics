@@ -22,9 +22,9 @@ app.post("/submitfeedback", async (req, res) => {
   try {
     const { message, userName, userEmail } = req.body;
     const teste2 = {
-      message: "mano",
-      userName: "2",
-      userEmail: "3",
+      message: message,
+      userName: userName,
+      userEmail: userEmail,
     };
     const submitFeedback = await sendEmail(teste2);
     res.status(200).send(submitFeedback);

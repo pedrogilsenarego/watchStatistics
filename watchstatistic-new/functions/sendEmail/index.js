@@ -14,7 +14,7 @@ const sendEmail = (teste) => {
     from: "pedrogilsenarego@gmail.com",
     to: "pedrogilsenarego@gmail.com",
     subject: `Feedback from: ${userName} - ${userEmail}`,
-    text: message,
+    text: `Message: ${message}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
