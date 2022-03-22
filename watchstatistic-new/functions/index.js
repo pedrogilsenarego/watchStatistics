@@ -20,7 +20,7 @@ app.get(`/watchcorrelations`, (req, res) => {
 
 app.get("/submitfeedback", async (req, res) => {
   try {
-    const { message } = req.body;
+    const { message, userName, userEmail } = req.body;
     const teste2 = {
       message: "mano",
       userName: "2",

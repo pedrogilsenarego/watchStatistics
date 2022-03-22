@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, Grid, Typography, Divider, TextField } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Typography,
+  Divider,
+  TextField,
+  Button,
+} from "@mui/material";
 import { useTheme } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -49,9 +56,31 @@ const SubmitFeedback = () => {
   const classes = useStyles();
 
   const handleSubmit = async (event) => {
-    const body = { message: "pizza" };
-    const response = await apiInstance.post("/submitfeedback", body);
-    console.log(response);
+    const body = {
+      message: "pizza",
+      userName: currentUser.displayName,
+      userEmail: currentUser.email,
+    };
+    try {
+      const response = apiInstance.post("/submitfeedback", body);
+      console.log(response);
+    } catch {
+      console.log("fail");
+    }
+  };
+
+  const handleTest = async (event) => {
+    const body = {
+      message: "pizza",
+      userName: currentUser.displayName,
+      userEmail: currentUser.email,
+    };
+    try {
+      const response = apiInstance.post("/submitfeedback", body);
+      console.log(response);
+    } catch {
+      console.log("fail");
+    }
   };
 
   return (
@@ -116,6 +145,13 @@ const SubmitFeedback = () => {
               <ButtonMUI style={{ marginTop: "20px" }}>Submit</ButtonMUI>
             </Form>
           </Formik>
+          <Button
+            onClick={() => {
+              handleTest();
+            }}
+          >
+            Teste
+          </Button>
         </Container>
       </Grid>
     </Grid>
