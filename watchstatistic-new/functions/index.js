@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 const importData = require("./watchesCorr.json");
 const admin = require("firebase-admin");
-const { sendEmail } = require("./email");
+const { sendEmail } = require("./sendEmail");
 
 admin.initializeApp(functions.config().firebase);
 
@@ -18,20 +18,23 @@ app.get(`/watchcorrelations`, (req, res) => {
   res.status(200).send(importData);
 });
 
-// app.get("/submitfeedback", async (req, res) => {
-//   try {
-//     const { userEmail, userName, message } = req.body;
-//     const submitFeedback = await sendEmail(userEmail, userName, message);
-//     res.status(200).send(submitFeedback.client_secret);
-//   } catch (err) {
-//     res.status(500).json({
-//       statusCode: 500,
-//       message: err.message,
-//     });
-//   }
-// });
-
-sendEmail();
+app.get("/submitfeedback", async (req, res) => {
+  try {
+    const { message } = req.body;
+    const teste2 = {
+      message: "mano",
+      userName: "2",
+      userEmail: "3",
+    };
+    const submitFeedback = await sendEmail(teste2);
+    res.status(200).send(submitFeedback);
+  } catch (err) {
+    res.status(500).json({
+      statusCode: 500,
+      message: err.message,
+    });
+  }
+});
 
 exports.api = functions.https.onRequest(app);
 

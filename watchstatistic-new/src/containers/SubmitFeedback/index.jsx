@@ -49,14 +49,9 @@ const SubmitFeedback = () => {
   const classes = useStyles();
 
   const handleSubmit = async (event) => {
-    const { message } = event;
-    apiInstance
-      .post("/submitfeedback", {
-        userEmail: currentUser.email,
-        userName: currentUser.displayName,
-        message: message,
-      })
-      .then(({ data: clientSecret }) => {});
+    const body = { message: "pizza" };
+    const response = await apiInstance.post("/submitfeedback", body);
+    console.log(response);
   };
 
   return (
