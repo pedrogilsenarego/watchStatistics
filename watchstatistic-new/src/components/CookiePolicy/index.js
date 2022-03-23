@@ -5,23 +5,24 @@ import {
   DialogTitle,
   Typography,
   Button,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { acceptCookiePolicy } from "../../redux/User/user.actions";
 
 const mapState = ({ user }) => ({
-  currentUser: user,
+  user: user,
 });
 
 const CookiePolicy = () => {
   const [open, setOpen] = useState(null);
+  const [privacyPolicy, setPrivacyPolicy] = useState(false);
   const dispatch = useDispatch();
-  const { currentUser } = useSelector(mapState);
+  const { user } = useSelector(mapState);
 
   useEffect(
     () => {
-      if (currentUser.cookiePolicy === false) setOpen(true);
-      else setOpen(false);
+      if (user.cookiePolicy === true) setOpen(false);
+      else setOpen(true);
     },
     // eslint-disable-next-line
     []
@@ -40,19 +41,37 @@ const CookiePolicy = () => {
         <DialogContent dividers>
           <Typography style={{ color: "black" }}>
             The use of cookies on this website has only the finality of
-            improving user experience.
+            improving the user experience.
           </Typography>
           <Typography style={{ color: "black", marginTop: "20px" }}>
-            to accept, visit Privacy policy to know more
+            If you want to know more read our{" "}
+            <b
+              onClick={() => setPrivacyPolicy(!privacyPolicy)}
+              style={{ cursor: "pointer" }}
+            >
+              Privacy policy
+            </b>
           </Typography>
+          {privacyPolicy && (
+            <Typography style={{ color: "black", marginTop: "20px" }}>
+              Lorem Ipsus
+            </Typography>
+          )}
+
           <Button
             onClick={() => {
               dispatch(acceptCookiePolicy(true));
               setOpen(false);
             }}
-            style={{ color: "black", backgroundColor: "blue" }}
+            style={{
+              float: "right",
+              fontSize: "20px",
+              color: "darkBlue",
+              fontWeight: "500",
+              marginTop: "40px",
+            }}
           >
-            Click Here
+            Accept Terms
           </Button>
         </DialogContent>
       </Dialog>
