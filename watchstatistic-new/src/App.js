@@ -10,7 +10,6 @@ import WithAdminAuth from "./hoc/withAdminAuth";
 
 //pages
 import Search from "./pages/Search";
-
 import Dashboard from "./pages/Dashboard";
 import MyCollection from "./pages/MyCollection";
 import Admin from "./pages/Admin";
@@ -20,12 +19,10 @@ import FAQ from "./pages/FAQ";
 import Watchstatistics from "./pages/Watchstatistics";
 import AddWatch from "./pages/Watchstatistics/AddWatch";
 import CompareWatches from "./pages/CompareWatches";
-
 import WatchLaboratory2 from "./containers/WatchLab2";
 import Market from "./pages/Market";
 import Messages from "./pages/Messages";
 import Stats from "./pages/Stats";
-
 import Order from "./pages/Order";
 
 // layouts
@@ -34,6 +31,9 @@ import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import DashBoardLayout from "./layouts/DashboardLayout";
 import WatchLab from "./layouts/WatchLab";
+
+//components
+import CookiePolicy from "./components/CookiePolicy";
 
 import { ThemeProvider } from "@material-ui/styles";
 import { darkTheme, lightTheme } from "./styles/MUITheme";
@@ -65,6 +65,7 @@ const App = () => {
       }
     >
       <CssBaseline />
+      <CookiePolicy />
       <div className="App">
         <Switch>
           <Route
