@@ -53,8 +53,25 @@ const CookiePolicy = () => {
             </b>
           </Typography>
           {privacyPolicy && (
-            <Typography style={{ color: "black", marginTop: "20px" }}>
-              Lorem Ipsus
+            <Typography
+              style={{ color: "black", marginTop: "20px", fontSize: "13px" }}
+            >
+              This website stores some user preferences that are stored on the
+              cache from the browser, the goal is strictly for better user
+              experience.
+              <br />
+              <br />
+              When registering the website, additional information is also
+              stored, the information is not shared with any other entities and
+              is safely secured with encryptation. The goal of that information
+              is strictly for user experience.
+              <br />
+              <br />
+              All passwords are never saved on the Database and instead are
+              runed through a authentication process from google firebase.
+              <br />
+              <br />
+              For more information please visit the <b>Submit Feedback</b> tab.
             </Typography>
           )}
 
@@ -65,7 +82,7 @@ const CookiePolicy = () => {
             }}
             style={{
               float: "right",
-              fontSize: "20px",
+              fontSize: "17px",
               color: "darkBlue",
               fontWeight: "500",
               marginTop: "40px",
