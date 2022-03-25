@@ -40,7 +40,9 @@ const PopoverM = ({ anchor, setAnchor, message }: Iprops) => {
         horizontal: "center",
       }}
     >
-      <Typography style={{ margin: "5px" }}>{message}</Typography>
+      <Typography style={{ margin: "5px", fontSize: "14px" }}>
+        {message}
+      </Typography>
     </Popover>
   );
 };

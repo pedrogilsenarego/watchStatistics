@@ -60,7 +60,7 @@ const Search = ({ isMatch }) => {
       setOptions(data);
     } catch (error) {
       console.error();
-    } 
+    }
   };
 
   useEffect(
@@ -119,14 +119,12 @@ const Search = ({ isMatch }) => {
             backgroundColor: "#000000E6",
             position: "absolute",
             borderRadius: "8px",
-            padding: "20px",
-            marginLeft: isMatch ? "10px" : "30.2vw",
+            padding: "10px",
+            marginLeft: isMatch ? "10px" : "23.2vw",
 
             minWidth: "200px",
             minHeight: "50px",
             marginTop: isMatch ? "10vh" : "10px",
-            border: "solid 2px",
-            borderColor: "#ffffff66",
           }}
         >
           {options
