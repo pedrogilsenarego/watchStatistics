@@ -66,10 +66,8 @@ const SubmitFeedback = () => {
     }
   };
 
-  const payloadMessage = () => {
-    if (location.state !== undefined) return location.state.message;
-    else return "";
-  };
+  const payloadMessage = () =>
+    location.state !== undefined ? location.state.message : "";
 
   return (
     <Grid

@@ -40,7 +40,7 @@ const BottomComponents = ({
             history.push({
               pathname: "/submitfeedback",
               state: {
-                message: `I found there is something incorrect with the ${productBrand} ${productName} ${reference}, the following:`,
+                message: `I found there is something incorrect with the ${productBrand} ${productName} ${reference}, the following should be fixed:`,
               },
             });
           }}
