@@ -50,7 +50,7 @@ const BottomComponents = ({
             cursor: "pointer",
           }}
         >
-          Review
+          Report
         </Typography>
       </Grid>
       <Popover
