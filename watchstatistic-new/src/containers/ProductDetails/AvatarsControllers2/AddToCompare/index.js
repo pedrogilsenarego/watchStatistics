@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { BsFillGrid1X2Fill } from "react-icons/bs";
-import Popover from "../../../controls/Popover";
+import Popover from "../../../../components/Popover";
 
 const AddToCompare = ({ product, cartItems, productID, compareWatches }) => {
   const dispatch = useDispatch();

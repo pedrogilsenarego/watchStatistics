@@ -4,7 +4,7 @@ import { addBooster } from "../../../../redux/Cart/cart.actions";
 import { useHistory } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { AiFillFire } from "react-icons/ai";
-import Popover from "../../../controls/Popover";
+import Popover from "../../../../components/Popover";
 
 const AddToBoost = ({ product }) => {
   const dispatch = useDispatch();

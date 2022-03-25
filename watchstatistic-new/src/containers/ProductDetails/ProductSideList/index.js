@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Box, Grid } from "@material-ui/core";
+import { Typography, Box} from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router";
@@ -9,7 +9,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import InputBase from "../../forms/InputMUI";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+
 
 import ButtonMUI from "../../forms/ButtonMUI";
 import { Button } from "@material-ui/core";
@@ -19,6 +19,8 @@ import Select from "../../forms/SelectMUIFormik";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { addProductStart } from "../../../redux/Products/products.actions";
+// components
+import BottomComponents from './BottomComponents'
 
 const INITIAL_FORM_STATE = {
   movement: "",
@@ -72,7 +74,6 @@ const mapState = (state) => ({
 const ProductSideList = ({}) => {
   const { product } = useSelector(mapState);
   const dispatch = useDispatch();
-  const history = useHistory();
   const { productID } = useParams();
   const [submitDetails, setSubmitDetails] = useState(false);
   const [submitedDetails, setSubmitedDetails] = useState(false);
@@ -125,6 +126,10 @@ const ProductSideList = ({}) => {
     setSubmitDetails(false);
     setSubmitedDetails(true);
   };
+
+  const configBottomComponents = {
+    userID
+  }
 
   return (
     <Box>
@@ -382,29 +387,7 @@ const ProductSideList = ({}) => {
           </TableContainer>
         </Form>
       </Formik>
-      <Grid container justifyContent="space-between">
-        <Grid item>
-          {userID && (
-            <Typography style={{ paddingLeft: "10px", color: "#ffffff66" }}>
-              Submited by {userID}
-            </Typography>
-          )}
-        </Grid>
-        <Grid item>
-          <Typography
-            onClick={() => {
-              history.push("/submitfeedback");
-            }}
-            style={{
-              paddingLeft: "10px",
-              color: "#ffffff66",
-              cursor: "pointer",
-            }}
-          >
-            Review
-          </Typography>
-        </Grid>
-      </Grid>
+      <BottomComponents{...configBottomComponents}/>
     </Box>
   );
 };

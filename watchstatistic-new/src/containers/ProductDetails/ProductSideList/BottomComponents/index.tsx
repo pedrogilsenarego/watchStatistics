@@ -1,0 +1,52 @@
+import React, { useState } from "react";
+import { Grid, Typography } from "@mui/material";
+import { useHistory } from "react-router-dom";
+// components
+import Popover from "../../../../components/Popover";
+
+interface IProps {
+  userID: string;
+}
+
+const BottomComponents = ({ userID }: IProps) => {
+  const [openHelper, setOpenHelper] = useState<any>(null);
+  const history = useHistory();
+  return (
+    <Grid container justifyContent="space-between">
+      <Grid item>
+        {userID && (
+          <Typography style={{ paddingLeft: "10px", color: "#ffffff66" }}>
+            Submited by {userID}
+          </Typography>
+        )}
+      </Grid>
+      <Grid item>
+        <Typography
+          onMouseOver={(e) => {
+            setOpenHelper(e.currentTarget);
+          }}
+          onMouseOut={() => {
+            setOpenHelper(null);
+          }}
+          onClick={() => {
+            history.push("/submitfeedback");
+          }}
+          style={{
+            paddingLeft: "10px",
+            color: "#ffffff66",
+            cursor: "pointer",
+          }}
+        >
+          Review
+        </Typography>
+      </Grid>
+      <Popover
+        message="If something is not correct, please let us know!"
+        anchor={openHelper}
+        setAnchor={setOpenHelper}
+      />
+    </Grid>
+  );
+};
+
+export default BottomComponents;

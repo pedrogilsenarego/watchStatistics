@@ -3,7 +3,7 @@ import { Slider, Typography, Grid } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import { createTheme } from "@material-ui/core/styles";
 
-import Popover from "../../../controls/Popover";
+import Popover from "../../../../components/Popover";
 
 const muiTheme = createTheme({
   overrides: {

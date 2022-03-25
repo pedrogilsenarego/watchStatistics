@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
-import Popover from "../../../controls/Popover";
+import Popover from "../../../../components/Popover";
 
 const Icons = ({ item, pos, returnLabel }) => {
   const [anchor, setAnchor] = useState(null);

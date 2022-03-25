@@ -5,7 +5,7 @@ import {
 	DialogTitle,
 	Typography
 } from "@material-ui/core";
-
+ 
 const Popup = (props) => {
 	const { title, children, openPopup, setOpenPopup } = props;
 
