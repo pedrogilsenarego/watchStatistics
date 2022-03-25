@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Grid,
-  Typography,
-  Divider,
-  
-} from "@mui/material";
+import { Container, Grid, Typography, Divider } from "@mui/material";
 import { useTheme } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -14,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ButtonMUI from "../forms/ButtonMUI";
 import TextField from "../forms/InputMUI";
 import { apiInstance } from "./../../Utils";
-import {useHistory} from "react-router"
+import { useHistory, useLocation } from "react-router";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -53,9 +47,10 @@ const useStyles = makeStyles((theme) => ({
 
 const SubmitFeedback = () => {
   const { currentUser } = useSelector(mapState);
+  const location = useLocation();
   const theme = useTheme();
   const classes = useStyles();
-  const history=useHistory()
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
     const body = {
@@ -65,10 +60,15 @@ const SubmitFeedback = () => {
     };
     try {
       apiInstance.post("/submitfeedback", body);
-      history.push(`/`)
+      history.push(`/`);
     } catch {
       console.log("fail");
     }
+  };
+
+  const payloadMessage = () => {
+    if (location.state !== undefined) return location.state.message;
+    else return "";
   };
 
   return (
@@ -97,7 +97,7 @@ const SubmitFeedback = () => {
 
           <Formik
             initialValues={{
-              message: "",
+              message: payloadMessage(),
             }}
             validationSchema={Yup.object().shape({
               message: Yup.string().required("Required"),
@@ -133,7 +133,6 @@ const SubmitFeedback = () => {
               <ButtonMUI style={{ marginTop: "20px" }}>Submit</ButtonMUI>
             </Form>
           </Formik>
-          
         </Container>
       </Grid>
     </Grid>

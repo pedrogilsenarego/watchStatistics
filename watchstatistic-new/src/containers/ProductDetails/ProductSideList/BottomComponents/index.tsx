@@ -6,9 +6,17 @@ import Popover from "../../../../components/Popover";
 
 interface IProps {
   userID: string;
+  productName: string;
+  productBrand: string;
+  reference: string;
 }
 
-const BottomComponents = ({ userID }: IProps) => {
+const BottomComponents = ({
+  userID,
+  productName,
+  productBrand,
+  reference,
+}: IProps) => {
   const [openHelper, setOpenHelper] = useState<any>(null);
   const history = useHistory();
   return (
@@ -29,7 +37,12 @@ const BottomComponents = ({ userID }: IProps) => {
             setOpenHelper(null);
           }}
           onClick={() => {
-            history.push("/submitfeedback");
+            history.push({
+              pathname: "/submitfeedback",
+              state: {
+                message: `I found there is something incorrect with the ${productBrand} ${productName} ${reference}, the following:`,
+              },
+            });
           }}
           style={{
             paddingLeft: "10px",

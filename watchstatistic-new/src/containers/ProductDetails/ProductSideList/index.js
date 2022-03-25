@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Box} from "@material-ui/core";
+import { Typography, Box } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router";
@@ -10,7 +10,6 @@ import TableContainer from "@mui/material/TableContainer";
 import InputBase from "../../forms/InputMUI";
 import { useDispatch } from "react-redux";
 
-
 import ButtonMUI from "../../forms/ButtonMUI";
 import { Button } from "@material-ui/core";
 import { Form, Formik } from "formik";
@@ -20,7 +19,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { addProductStart } from "../../../redux/Products/products.actions";
 // components
-import BottomComponents from './BottomComponents'
+import BottomComponents from "./BottomComponents";
 
 const INITIAL_FORM_STATE = {
   movement: "",
@@ -128,8 +127,11 @@ const ProductSideList = ({}) => {
   };
 
   const configBottomComponents = {
-    userID
-  }
+    userID,
+    productBrand,
+    productName,
+    reference,
+  };
 
   return (
     <Box>
@@ -387,7 +389,7 @@ const ProductSideList = ({}) => {
           </TableContainer>
         </Form>
       </Formik>
-      <BottomComponents{...configBottomComponents}/>
+      <BottomComponents {...configBottomComponents} />
     </Box>
   );
 };
