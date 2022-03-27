@@ -49,6 +49,7 @@ const Search = ({ isMatch }) => {
   const [display, setDisplay] = useState(false);
   const [options, setOptions] = useState([]);
   const [search, setSearch] = useState("");
+  const [searchHover, setSearchHover] = useState(false);
   const wrapperRef = useRef(null);
   const classes = useStyles();
 
@@ -102,7 +103,7 @@ const Search = ({ isMatch }) => {
         name="search"
         size="small"
         autoComplete="off"
-        placeholder="Search"
+        placeholder={searchHover ? `${options.length} watches` : "Search"}
         value={search}
         InputProps={{
           endAdornment: isMatch ? null : <FiSearch color="#ffffff66" />,
@@ -110,6 +111,12 @@ const Search = ({ isMatch }) => {
         onChange={(event) => {
           setDisplay(true);
           setSearch(event.target.value);
+        }}
+        onMouseEnter={() => {
+          setSearchHover(true);
+        }}
+        onMouseLeave={() => {
+          setSearchHover(false);
         }}
       />
       {display && search.length > 2 && (

@@ -464,3 +464,20 @@ export const handleFetchAllProducts = () => {
       });
   });
 };
+
+export const handleGetCounters = () => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("watch-statistics")
+      .doc("counters")
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists) {
+          resolve(snapshot.data());
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

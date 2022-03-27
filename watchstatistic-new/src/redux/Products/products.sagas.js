@@ -9,6 +9,7 @@ import {
   fetchValidationProductsStart,
   fetchProductStart,
   setMyCollection,
+  setCounters,
 } from "./products.actions";
 import {
   handleAddProduct,
@@ -25,6 +26,7 @@ import {
   handleFetchMyCollection,
   handleFetchAllProducts,
   handleIncrementProductsCounter,
+  handleGetCounters,
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
@@ -210,6 +212,19 @@ export function* onFetchAllProductsStart() {
   yield takeLatest(productsTypes.FETCH_ALL_PRODUCTS_START, fetchAllProducts);
 }
 
+export function* fetchCounters() {
+  try {
+    const counters = yield handleGetCounters();
+    yield put(setCounters(counters));
+  } catch (err) {
+    // console.log(err);
+  }
+}
+
+export function* onFetchCounters() {
+  yield takeLatest(productsTypes.FETCH_COUNTERS, fetchCounters);
+}
+
 export default function* productsSagas() {
   yield all([
     call(onAddProductStart),
@@ -223,5 +238,6 @@ export default function* productsSagas() {
     call(onFetchRandomProductStart),
     call(onFetchMyCollectionStart),
     call(onFetchAllProductsStart),
+    call(onFetchCounters),
   ]);
 }
