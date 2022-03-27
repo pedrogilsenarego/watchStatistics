@@ -84,6 +84,10 @@ export const fetchAllProductsStart = () => ({
   type: productsTypes.FETCH_ALL_PRODUCTS_START,
 });
 
+export const fetchCountersStart = () => ({
+  type: productsTypes.FETCH_COUNTERS_START,
+});
+
 export const setCounters = (counters) => ({
   type: productsTypes.SET_COUNTERS,
   payload: counters,

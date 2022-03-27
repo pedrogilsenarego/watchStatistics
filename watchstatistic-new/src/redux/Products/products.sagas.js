@@ -214,15 +214,15 @@ export function* onFetchAllProductsStart() {
 
 export function* fetchCounters() {
   try {
-    const counters = yield handleGetCounters();
-    yield put(setCounters(counters));
+    const product = yield handleGetCounters();
+    yield put(setCounters(product));
   } catch (err) {
     // console.log(err);
   }
 }
 
-export function* onFetchCounters() {
-  yield takeLatest(productsTypes.FETCH_COUNTERS, fetchCounters);
+export function* onFetchCountersStart() {
+  yield takeLatest(productsTypes.FETCH_COUNTERS_START, fetchCounters);
 }
 
 export default function* productsSagas() {
@@ -238,6 +238,6 @@ export default function* productsSagas() {
     call(onFetchRandomProductStart),
     call(onFetchMyCollectionStart),
     call(onFetchAllProductsStart),
-    call(onFetchCounters),
+    call(onFetchCountersStart),
   ]);
 }

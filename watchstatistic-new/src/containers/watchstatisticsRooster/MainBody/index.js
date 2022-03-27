@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import {
   Table,
@@ -18,23 +18,28 @@ import {
 import Pagination from "@mui/material/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductsStart } from "../../../redux/Products/products.actions";
+import {
+  fetchProductsStart,
+  fetchCountersStart,
+} from "../../../redux/Products/products.actions";
 import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
   products: state.productsData.products,
+  counters: state.productsData.counters,
 });
 
 // eslint-disable-next-line
 const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
   const history = useHistory();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const pageSize = 10;
 
-  const { products, currentUser } = useSelector(mapState);
+  const { products, currentUser, counters } = useSelector(mapState);
 
   const { data } = products;
 
@@ -57,12 +62,17 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
     () => {
       if (!loadedTopWatches) {
         dispatch(fetchProductsStart({ pageSize }));
+        dispatch(fetchCountersStart());
         handleLoadedTopWatches();
       }
     },
     // eslint-disable-next-line
     []
   );
+
+  const handlePaginationChange = (event, value) => {
+    setPage(value);
+  };
 
   if (!Array.isArray(data)) return null;
 
@@ -192,7 +202,12 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
             </Table>
           </TableContainer>
           <Box style={{ backgroundColor: "white" }}>
-            <Pagination count={10} shape="rounded" />
+            <Pagination
+              count={parseInt(counters.products / pageSize + 1)}
+              shape="rounded"
+              page={Number(page) || 1}
+              onChange={handlePaginationChange}
+            />
           </Box>
         </Grid>
         <Grid item xs={12} md={4}>
