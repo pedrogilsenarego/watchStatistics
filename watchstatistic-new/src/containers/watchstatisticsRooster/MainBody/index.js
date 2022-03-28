@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import {
   Table,
@@ -22,6 +22,7 @@ import {
   fetchProductsStart,
 } from "../../../redux/Products/products.actions";
 import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
+import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -32,7 +33,7 @@ const mapState = (state) => ({
 // eslint-disable-next-line
 const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
   const dispatch = useDispatch();
-  
+  const [score, setScore] = useState('desc')
   const history = useHistory();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
@@ -61,13 +62,13 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 
   useEffect(
     () => {
-      if (!loadedTopWatches) {
-        dispatch(fetchProductsStart({ pageSize }));
+      
+        dispatch(fetchProductsStart({ pageSize, sort: score }));
         handleLoadedTopWatches();
-      }
+      
     },
     // eslint-disable-next-line
-    []
+    [score]
   );
 
   const handleGoNext = () => {
@@ -75,7 +76,9 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
       dispatch(
         fetchProductsStart({
           startAfterDoc: queryDoc,
-          pageSize
+          pageSize,
+          sort: score,
+          persistProducts: data
         })
       );
     }
@@ -104,11 +107,11 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
                   <TableCell align="center" style={{ fontSize: "15px" }}>
                     Watch
                   </TableCell>
-                  <TableCell align="center" style={{ fontSize: "15px" }}>
+                  <TableCell align="center" style={{ fontSize: "15px" }}> 
                     Ref.
                   </TableCell>
                   <TableCell align="center" style={{ fontSize: "15px" }}>
-                    Score
+                    {score ==="desc" &&(<AiOutlineArrowDown style={{cursor:"pointer"}} onClick={()=>{setScore("asc")}}/>)}{score==="asc" && (<AiOutlineArrowUp style={{cursor:"pointer"}} onClick={()=>{setScore("desc")}}/>)} Score
                   </TableCell>
                   <TableCell align="center" style={{ fontSize: "15px" }}>
                     Category
@@ -208,8 +211,8 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
             </Table>
           </TableContainer>
           
-          <Button>Go Previous</Button>
-          {!isLastPage && (<Button onClick={()=>handleGoNext()}>Go next</Button>)}
+          
+          {!isLastPage && (<Button onClick={()=>handleGoNext()}>Get more</Button>)}
             
         
         </Grid>

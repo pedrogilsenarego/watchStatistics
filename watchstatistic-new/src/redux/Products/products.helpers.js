@@ -43,16 +43,17 @@ export const handleFetchProducts = ({
   filterType,
   filter,
   pageSize,
-  offset,
+  sort,
   startAfterDoc,
   persistProducts = [],
 }) => {
   return new Promise((resolve, reject) => {
     const where = filter;
+    const sorting = sort ? sort : "desc"
 
     let ref = firestore
       .collection("products")
-      .orderBy("avgTotal", "desc")
+      .orderBy("avgTotal", sorting)
       .limit(pageSize);
 
     if (filterType) ref = ref.where(where, "==", filterType);
