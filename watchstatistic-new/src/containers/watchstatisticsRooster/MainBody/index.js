@@ -23,7 +23,8 @@ import {
 } from "../../../redux/Products/products.actions";
 import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
-import watchTypes from "../../../assets/data/watchTypes.json";
+import watchTypes from "../../../assets/data/watchTypes.json"
+import pricesBracket from "../../../assets/data/pricesBracket.json";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -35,6 +36,7 @@ const mapState = (state) => ({
 const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
   const dispatch = useDispatch();
   const [productCategory, setProductCategory] = useState(null)
+  const [productPrices, setProductPrices] = useState(null)
   const [score, setScore] = useState('desc')
   const history = useHistory();
   const theme = useTheme();
@@ -65,11 +67,11 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
   useEffect(
     () => {
       
-        dispatch(fetchProductsStart({ pageSize, sort: score, productCategory }));
+        dispatch(fetchProductsStart({ pageSize, sort: score, productCategory, productPrices }));
         handleLoadedTopWatches();    
     },
     // eslint-disable-next-line
-    [score, productCategory]
+    [score, productCategory, productPrices]
   );
 
   const handleGoNext = () => {
@@ -78,6 +80,8 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
         fetchProductsStart({
           startAfterDoc: queryDoc,
           pageSize,
+          productCategory,
+          productPrices,
           sort: score,
           persistProducts: data
         })
@@ -89,6 +93,10 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
   const handleFilterCategory = (e) => {
     setProductCategory(e.target.value);
   }
+
+  const handleFilterPrices = (e) => {
+    setProductPrices(e.target.value);
+  }
     
 
   const configCategory = {
@@ -96,6 +104,13 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
     options: watchTypes.options,
     handleChange: handleFilterCategory,
     label: "Categories",
+  };
+
+  const configPricesBracket = {
+    defaultValue: productPrices,
+    options: pricesBracket.options,
+    handleChange: handleFilterPrices,
+    label: "Prices Bracket",
   };
 
   if (data.length < 1) {
@@ -130,6 +145,9 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
                   <Select className={classes.select2} {...configCategory} />
                   </TableCell>
                   <TableCell align="center" style={{ fontSize: "15px" }}>
+                  <Select className={classes.select2} {...configPricesBracket} />
+                  </TableCell>
+                  <TableCell align="center" style={{ fontSize: "15px" }}>
                     Votes
                   </TableCell>
                   {currentUser && (
@@ -149,6 +167,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
                     productCategory,
                     numberVotesOwn,
                     numberVotesNotOwn,
+                    productPriceBrackets,
                     documentID,
                     reference,
                   } = product;
@@ -195,6 +214,9 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
                       </TableCell>
                       <TableCell align="center" style={{ color: color }}>
                         {productCategory}
+                      </TableCell>
+                      <TableCell align="center" style={{ color: color }}>
+                        {productPriceBrackets}
                       </TableCell>
                       <TableCell align="center" style={{ color: color }}>
                         {numberVotesNotOwn + numberVotesOwn}

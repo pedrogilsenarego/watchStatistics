@@ -46,7 +46,8 @@ export const handleFetchProducts = ({
   sort,
   startAfterDoc,
   persistProducts = [],
-  productCategory
+  productCategory,
+  productPrices
 }) => {
   return new Promise((resolve, reject) => {
     const where = filter;
@@ -60,7 +61,7 @@ export const handleFetchProducts = ({
     if (filterType) ref = ref.where(where, "==", filterType);
     //new
     if (productCategory) ref = ref.where("productCategory", "==", productCategory)
-    ref = ref.where("productPriceBrackets", "==", "0-200€")
+    if (productPrices) ref=ref.where("productPriceBrackets", "==", productPrices)
     if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 
     ref
