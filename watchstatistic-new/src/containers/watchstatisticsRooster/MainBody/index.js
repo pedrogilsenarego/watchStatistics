@@ -119,7 +119,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
               </TableHead>
 
               <TableBody>
-                {data.map((product, i) => {
+                {data?.map((product, i) => {
                   const {
                     productName,
                     productBrand,
@@ -203,7 +203,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
           </TableContainer>
           <Box style={{ backgroundColor: "white" }}>
             <Pagination
-              count={parseInt(counters.products / pageSize + 1)}
+              count={parseInt(counters?.products / pageSize + 1) || 1}
               shape="rounded"
               page={Number(page) || 1}
               onChange={handlePaginationChange}
