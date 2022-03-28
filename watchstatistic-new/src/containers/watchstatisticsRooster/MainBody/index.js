@@ -15,7 +15,7 @@ import {
   useTheme,
   CardMedia,
 } from "@material-ui/core";
-
+import Select from "../../forms/SelectMUI";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -23,6 +23,7 @@ import {
 } from "../../../redux/Products/products.actions";
 import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import watchTypes from "../../../assets/data/watchTypes.json";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -33,6 +34,7 @@ const mapState = (state) => ({
 // eslint-disable-next-line
 const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
   const dispatch = useDispatch();
+  const [productCategory, setProductCategory] = useState(null)
   const [score, setScore] = useState('desc')
   const history = useHistory();
   const theme = useTheme();
@@ -63,12 +65,11 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
   useEffect(
     () => {
       
-        dispatch(fetchProductsStart({ pageSize, sort: score }));
-        handleLoadedTopWatches();
-      
+        dispatch(fetchProductsStart({ pageSize, sort: score, productCategory }));
+        handleLoadedTopWatches();    
     },
     // eslint-disable-next-line
-    [score]
+    [score, productCategory]
   );
 
   const handleGoNext = () => {
@@ -83,7 +84,19 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
       );
     }
   }
+  const handleScore = () => {score==="desc" ? setScore("asc"): setScore("desc")}
 
+  const handleFilterCategory = (e) => {
+    setProductCategory(e.target.value);
+  }
+    
+
+  const configCategory = {
+    defaultValue: productCategory,
+    options: watchTypes.options,
+    handleChange: handleFilterCategory,
+    label: "Categories",
+  };
 
   if (data.length < 1) {
     return (
@@ -110,11 +123,11 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
                   <TableCell align="center" style={{ fontSize: "15px" }}> 
                     Ref.
                   </TableCell>
-                  <TableCell align="center" style={{ fontSize: "15px" }}>
-                    {score ==="desc" &&(<AiOutlineArrowDown style={{cursor:"pointer"}} onClick={()=>{setScore("asc")}}/>)}{score==="asc" && (<AiOutlineArrowUp style={{cursor:"pointer"}} onClick={()=>{setScore("desc")}}/>)} Score
+                  <TableCell onClick={()=>{handleScore()}} align="center" style={{ fontSize: "15px", cursor:"pointer" }}>
+                    {score ==="desc" &&(<AiOutlineArrowDown />)}{score==="asc" && (<AiOutlineArrowUp />)} Score
                   </TableCell>
                   <TableCell align="center" style={{ fontSize: "15px" }}>
-                    Category
+                  <Select className={classes.select2} {...configCategory} />
                   </TableCell>
                   <TableCell align="center" style={{ fontSize: "15px" }}>
                     Votes
