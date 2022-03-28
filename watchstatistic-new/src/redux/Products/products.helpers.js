@@ -43,6 +43,7 @@ export const handleFetchProducts = ({
   filterType,
   filter,
   pageSize,
+  offset,
   startAfterDoc,
   persistProducts = [],
 }) => {

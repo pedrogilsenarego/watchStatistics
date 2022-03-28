@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import {
   Table,
@@ -11,16 +11,15 @@ import {
   Typography,
   Paper,
   useMediaQuery,
-  Box,
+  Button,
   useTheme,
   CardMedia,
 } from "@material-ui/core";
-import Pagination from "@mui/material/Pagination";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductsStart,
-  fetchCountersStart,
 } from "../../../redux/Products/products.actions";
 import { BiCheckboxChecked, BiCheckbox } from "react-icons/bi";
 
@@ -33,15 +32,17 @@ const mapState = (state) => ({
 // eslint-disable-next-line
 const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
+  
   const history = useHistory();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const pageSize = 10;
 
-  const { products, currentUser, counters } = useSelector(mapState);
 
-  const { data } = products;
+
+  const { products, currentUser } = useSelector(mapState);
+
+  const { data, isLastPage, queryDoc } = products;
 
   const useStyles = makeStyles((theme) => ({
     tableRow: {
@@ -62,7 +63,6 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
     () => {
       if (!loadedTopWatches) {
         dispatch(fetchProductsStart({ pageSize }));
-        dispatch(fetchCountersStart());
         handleLoadedTopWatches();
       }
     },
@@ -70,11 +70,17 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
     []
   );
 
-  const handlePaginationChange = (event, value) => {
-    setPage(value);
-  };
+  const handleGoNext = () => {
+    if (!isLastPage) {
+      dispatch(
+        fetchProductsStart({
+          startAfterDoc: queryDoc,
+          pageSize
+        })
+      );
+    }
+  }
 
-  if (!Array.isArray(data)) return null;
 
   if (data.length < 1) {
     return (
@@ -201,14 +207,11 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
               </TableBody>
             </Table>
           </TableContainer>
-          <Box style={{ backgroundColor: "white" }}>
-            <Pagination
-              count={parseInt(counters?.products / pageSize + 1) || 1}
-              shape="rounded"
-              page={Number(page) || 1}
-              onChange={handlePaginationChange}
-            />
-          </Box>
+          
+          <Button>Go Previous</Button>
+          {!isLastPage && (<Button onClick={()=>handleGoNext()}>Go next</Button>)}
+            
+        
         </Grid>
         <Grid item xs={12} md={4}>
           <Paper style={{ height: "100%", backgroundColor: "black" }}>
