@@ -133,7 +133,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
 
   return (
     <div>
-      <Grid container spacing={1} style={{ padding: "20px" }}>
+      <Grid container spacing={1} style={{ marginTop: "20px" }}>
         <Grid item xs={12} md={8}>
           <Table
             aria-label="simple table"
@@ -142,14 +142,23 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
           >
             <TableHead className={classes.tableHead}>
               <TableRow>
-                <TableCell align="center" style={{ fontSize: "15px" }}>
+                <TableCell
+                  align="center"
+                  style={{ fontSize: "15px", borderBottom: "none" }}
+                >
                   <Select className={classes.select2} {...configBrands} />
                 </TableCell>
 
-                <TableCell align="center" style={{ fontSize: "15px" }}>
+                <TableCell
+                  align="center"
+                  style={{ fontSize: "15px", borderBottom: "none" }}
+                >
                   <Select className={classes.select2} {...configCategory} />
                 </TableCell>
-                <TableCell align="center" style={{ fontSize: "15px" }}>
+                <TableCell
+                  align="center"
+                  style={{ fontSize: "15px", borderBottom: "none" }}
+                >
                   <Select
                     className={classes.select2}
                     {...configPricesBracket}
@@ -164,6 +173,7 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
                     fontSize: "15px",
                     color: "#ffffff66",
                     cursor: "pointer",
+                    borderBottom: "none",
                   }}
                 >
                   {score === "desc" && <AiOutlineArrowDown />}
@@ -171,12 +181,19 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
                 </TableCell>
                 <TableCell
                   align="center"
-                  style={{ fontSize: "15px", color: "#ffffff66" }}
+                  style={{
+                    fontSize: "15px",
+                    color: "#ffffff66",
+                    borderBottom: "none",
+                  }}
                 >
                   Votes
                 </TableCell>
                 {currentUser && (
-                  <TableCell align="center" style={{ fontSize: "15px" }}>
+                  <TableCell
+                    align="center"
+                    style={{ fontSize: "15px", borderBottom: "none" }}
+                  >
                     <BiCheckboxChecked color="#ffffff66" fontSize="1.5em" />
                   </TableCell>
                 )}
@@ -219,21 +236,33 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
                         align="center"
                         component="th"
                         scope="row"
-                        style={{ color: color }}
+                        style={{ color: color, borderBottom: "none" }}
                       >
                         {productBrand} {productName} - {reference}
                       </TableCell>
 
-                      <TableCell align="center" style={{ color: color }}>
+                      <TableCell
+                        align="center"
+                        style={{ color: color, borderBottom: "none" }}
+                      >
                         {productCategory}
                       </TableCell>
-                      <TableCell align="center" style={{ color: color }}>
+                      <TableCell
+                        align="center"
+                        style={{ color: color, borderBottom: "none" }}
+                      >
                         {productPriceBrackets}
                       </TableCell>
-                      <TableCell align="center" style={{ color: color }}>
+                      <TableCell
+                        align="center"
+                        style={{ color: color, borderBottom: "none" }}
+                      >
                         {avgTotal}
                       </TableCell>
-                      <TableCell align="center" style={{ color: color }}>
+                      <TableCell
+                        align="center"
+                        style={{ color: color, borderBottom: "none" }}
+                      >
                         {numberVotesNotOwn + numberVotesOwn}
                       </TableCell>
                       {currentUser &&
@@ -241,7 +270,11 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
                         userVotes.includes(documentID) && (
                           <TableCell
                             align="center"
-                            style={{ color: color, fontSize: "15px" }}
+                            style={{
+                              color: color,
+                              fontSize: "15px",
+                              borderBottom: "none",
+                            }}
                           >
                             <BiCheckboxChecked fontSize="1.5em" />
                           </TableCell>
