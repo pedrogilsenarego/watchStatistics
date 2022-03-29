@@ -149,7 +149,7 @@ const App = () => {
           />
           <Route
             exact
-            path="/search"
+            path="/browse/tiles"
             render={() => (
               <WatchLab>
                 <Search />

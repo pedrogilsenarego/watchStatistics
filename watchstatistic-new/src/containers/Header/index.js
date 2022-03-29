@@ -274,7 +274,7 @@ const Header = (props) => {
         <MenuItem
           onClick={() => {
             handleCloseWatchstatisticsMenu();
-            history.push("/search");
+            history.push("/watchstatistics/stats");
           }}
         >
           Browse
@@ -296,15 +296,6 @@ const Header = (props) => {
           }}
         >
           Compare Watches
-        </MenuItem>
-
-        <MenuItem
-          onClick={() => {
-            handleCloseWatchstatisticsMenu();
-            history.push("/watchstatistics/stats");
-          }}
-        >
-          Stats
         </MenuItem>
       </Menu>
       <Menu
@@ -416,7 +407,7 @@ const Header = (props) => {
         {mediaWatchstatisticsBtns && [
           <MenuItem
             onClick={() => {
-              history.push("/search");
+              history.push("/watchstatistics/stats");
             }}
           >
             Browse
@@ -437,16 +428,6 @@ const Header = (props) => {
             }}
           >
             Compare Watches
-          </MenuItem>,
-
-          <MenuItem
-            disabled={watchstatistics}
-            onClick={() => {
-              handleCloseWatchstatisticsMenu();
-              history.push("/watchstatistics/stats");
-            }}
-          >
-            Stats
           </MenuItem>,
         ]}
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import {
   Table,
-  TableContainer,
   TableHead,
   TableRow,
   TableCell,
@@ -14,7 +13,7 @@ import {
   Button,
   useTheme,
   CardMedia,
-} from "@material-ui/core";
+} from "@mui/material";
 import Select from "../../forms/SelectMUI";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,8 +52,9 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
         backgroundColor: "#858585 !important",
       },
     },
+    table: {},
     tableHead: {
-      backgroundColor: "#145875 !important",
+      backgroundColor: "#14587500 !important",
     },
   }));
 
@@ -135,131 +135,131 @@ const MainBody = ({ handleLoadedTopWatches, loadedTopWatches }) => {
     <div>
       <Grid container spacing={1} style={{ padding: "20px" }}>
         <Grid item xs={12} md={8}>
-          <TableContainer component={Paper}>
-            <Table aria-label="simple table" size="small">
-              <TableHead className={classes.tableHead}>
-                <TableRow>
-                  <TableCell align="center" style={{ fontSize: "15px" }}>
-                    #
-                  </TableCell>
-                  <TableCell align="center" style={{ fontSize: "15px" }}>
-                    <Select className={classes.select2} {...configBrands} />
-                  </TableCell>
+          <Table
+            aria-label="simple table"
+            size="small"
+            className={classes.table}
+          >
+            <TableHead className={classes.tableHead}>
+              <TableRow>
+                <TableCell align="center" style={{ fontSize: "15px" }}>
+                  <Select className={classes.select2} {...configBrands} />
+                </TableCell>
 
+                <TableCell align="center" style={{ fontSize: "15px" }}>
+                  <Select className={classes.select2} {...configCategory} />
+                </TableCell>
+                <TableCell align="center" style={{ fontSize: "15px" }}>
+                  <Select
+                    className={classes.select2}
+                    {...configPricesBracket}
+                  />
+                </TableCell>
+                <TableCell
+                  onClick={() => {
+                    handleScore();
+                  }}
+                  align="center"
+                  style={{
+                    fontSize: "15px",
+                    color: "#ffffff66",
+                    cursor: "pointer",
+                  }}
+                >
+                  {score === "desc" && <AiOutlineArrowDown />}
+                  {score === "asc" && <AiOutlineArrowUp />} Score
+                </TableCell>
+                <TableCell
+                  align="center"
+                  style={{ fontSize: "15px", color: "#ffffff66" }}
+                >
+                  Votes
+                </TableCell>
+                {currentUser && (
                   <TableCell align="center" style={{ fontSize: "15px" }}>
-                    <Select className={classes.select2} {...configCategory} />
+                    <BiCheckboxChecked color="#ffffff66" fontSize="1.5em" />
                   </TableCell>
-                  <TableCell align="center" style={{ fontSize: "15px" }}>
-                    <Select
-                      className={classes.select2}
-                      {...configPricesBracket}
-                    />
-                  </TableCell>
-                  <TableCell
-                    onClick={() => {
-                      handleScore();
-                    }}
-                    align="center"
-                    style={{ fontSize: "15px", cursor: "pointer" }}
-                  >
-                    {score === "desc" && <AiOutlineArrowDown />}
-                    {score === "asc" && <AiOutlineArrowUp />} Score
-                  </TableCell>
-                  <TableCell align="center" style={{ fontSize: "15px" }}>
-                    Votes
-                  </TableCell>
-                  {currentUser && (
-                    <TableCell align="center" style={{ fontSize: "15px" }}>
-                      <BiCheckboxChecked fontSize="1.5em" />
-                    </TableCell>
-                  )}
-                </TableRow>
-              </TableHead>
+                )}
+              </TableRow>
+            </TableHead>
 
-              <TableBody>
-                {data.length < 1 ? (
-                  <div>teste</div>
-                ) : (
-                  data?.map((product, i) => {
-                    const {
-                      productName,
-                      productBrand,
-                      avgTotal,
-                      productCategory,
-                      numberVotesOwn,
-                      numberVotesNotOwn,
-                      productPriceBrackets,
-                      documentID,
-                      reference,
-                    } = product;
-                    if (!productName) return null;
-                    const color = "#ffffffB3";
+            <TableBody>
+              {data.length < 1 ? (
+                <div>teste</div>
+              ) : (
+                data?.map((product, i) => {
+                  const {
+                    productName,
+                    productBrand,
+                    avgTotal,
+                    productCategory,
+                    numberVotesOwn,
+                    numberVotesNotOwn,
+                    productPriceBrackets,
+                    documentID,
+                    reference,
+                  } = product;
+                  if (!productName) return null;
+                  const color = "#ffffffB3";
 
-                    const colorRow = `linear-gradient(90deg, rgba(3, 10, 13, ${
-                      avgTotal / 10
-                    }) ${avgTotal * 10}%, rgb(25, 107, 145) 100%)`;
-                    return (
-                      <TableRow
-                        className={classes.tableRow}
-                        key={productName}
-                        style={{
-                          cursor: "pointer",
-                          background: colorRow,
-                        }}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                        onClick={() => history.push(`/product/${documentID}`)}
+                  const colorRow = `linear-gradient(90deg, rgba(3, 10, 13, ${
+                    avgTotal / 10
+                  }) ${avgTotal * 10}%, rgb(25, 107, 145) 100%)`;
+                  return (
+                    <TableRow
+                      className={classes.tableRow}
+                      key={productName}
+                      style={{
+                        cursor: "pointer",
+                        background: colorRow,
+                      }}
+                      onClick={() => history.push(`/product/${documentID}`)}
+                    >
+                      <TableCell
+                        align="center"
+                        component="th"
+                        scope="row"
+                        style={{ color: color }}
                       >
-                        <TableCell align="center" style={{ color: color }}>
-                          {i + 1}
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          component="th"
-                          scope="row"
-                          style={{ color: color }}
-                        >
-                          {productBrand} {productName} - {reference}
-                        </TableCell>
+                        {productBrand} {productName} - {reference}
+                      </TableCell>
 
-                        <TableCell align="center" style={{ color: color }}>
-                          {productCategory}
-                        </TableCell>
-                        <TableCell align="center" style={{ color: color }}>
-                          {productPriceBrackets}
-                        </TableCell>
-                        <TableCell align="center" style={{ color: color }}>
-                          {avgTotal}
-                        </TableCell>
-                        <TableCell align="center" style={{ color: color }}>
-                          {numberVotesNotOwn + numberVotesOwn}
-                        </TableCell>
-                        {currentUser &&
-                          currentUser.userVotes &&
-                          userVotes.includes(documentID) && (
-                            <TableCell
-                              align="center"
-                              style={{ color: color, fontSize: "15px" }}
-                            >
-                              <BiCheckboxChecked fontSize="1.5em" />
-                            </TableCell>
-                          )}
-                        {currentUser && !userVotes.includes(documentID) && (
+                      <TableCell align="center" style={{ color: color }}>
+                        {productCategory}
+                      </TableCell>
+                      <TableCell align="center" style={{ color: color }}>
+                        {productPriceBrackets}
+                      </TableCell>
+                      <TableCell align="center" style={{ color: color }}>
+                        {avgTotal}
+                      </TableCell>
+                      <TableCell align="center" style={{ color: color }}>
+                        {numberVotesNotOwn + numberVotesOwn}
+                      </TableCell>
+                      {currentUser &&
+                        currentUser.userVotes &&
+                        userVotes.includes(documentID) && (
                           <TableCell
                             align="center"
                             style={{ color: color, fontSize: "15px" }}
                           >
-                            <BiCheckbox fontSize="1.5em" />
+                            <BiCheckboxChecked fontSize="1.5em" />
                           </TableCell>
                         )}
-                      </TableRow>
-                    );
-                  })
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                      {currentUser && !userVotes.includes(documentID) && (
+                        <TableCell
+                          align="center"
+                          style={{ color: color, fontSize: "15px" }}
+                        >
+                          <BiCheckbox fontSize="1.5em" />
+                        </TableCell>
+                      )}
+                    </TableRow>
+                  );
+                })
+              )}
+            </TableBody>
+          </Table>
 
           {!isLastPage && (
             <Button onClick={() => handleGoNext()}>Get more</Button>
