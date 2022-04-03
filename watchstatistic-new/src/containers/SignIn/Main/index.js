@@ -11,7 +11,7 @@ import TextField from "../../forms/InputMUI";
 import ButtonMUI from "../../forms/ButtonMUI";
 import Container from "@mui/material/Container";
 import { makeStyles } from "@material-ui/core/styles";
-import { useTheme } from "@material-ui/core";
+
 import { FcGoogle } from "react-icons/fc";
 
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +74,6 @@ const FORM_VALIDATION = Yup.object().shape({
 const Main = ({ handleCloseLoginMenu }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const theme = useTheme();
 
   const handleFormSubmit = (event) => {
     const { email, password } = event;
@@ -110,7 +109,7 @@ const Main = ({ handleCloseLoginMenu }) => {
               <Grid item xs={12}>
                 <Container
                   style={{
-                    backgroundColor: theme.palette.textField.background,
+                    backgroundColor: "white",
                     height: "40px",
                     padding: "0px",
                     marginTop: "10px",
@@ -129,7 +128,7 @@ const Main = ({ handleCloseLoginMenu }) => {
               <Grid item xs={12}>
                 <Container
                   style={{
-                    backgroundColor: theme.palette.textField.background,
+                    backgroundColor: "white",
                     height: "40px",
                     padding: "0px",
 

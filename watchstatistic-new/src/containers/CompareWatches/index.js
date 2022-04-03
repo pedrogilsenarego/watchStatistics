@@ -203,7 +203,7 @@ const CompareWatches = () => {
         style={{ paddingLeft: "10px", paddingRight: "10px" }}
       >
         <Grid item xs={12} md={7}>
-          <Paper style={{ background: theme.palette.card.main }}>
+          <Paper style={{ background: "#18161E" }}>
             {cartItems && cartItems.length > 0 && (
               <TableContainer>
                 <Table size="small" border="0" aria-label="simple table">
@@ -271,7 +271,7 @@ const CompareWatches = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={5}>
-          <Paper style={{ background: theme.palette.card.main }}>
+          <Paper style={{ background: "#18161E" }}>
             <RadarChart {...configRadarChart} />
             <Typography>
               Weighted average from the votes of owners VS non-owners

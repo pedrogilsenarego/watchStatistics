@@ -112,7 +112,7 @@ const SubmitFeedback = () => {
               </Typography>
               <Container
                 style={{
-                  backgroundColor: theme.palette.textField.background,
+                  backgroundColor: "white",
                   height: "170px",
                   padding: "0px",
                   marginTop: "10px",

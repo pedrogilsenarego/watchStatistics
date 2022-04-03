@@ -28,7 +28,7 @@ const darkTheme = createTheme({
     switch: {
       primary: "#154A6799",
     },
-    home: {
+    box: {
       primary: "#154A6799",
     },
     type: "dark",
@@ -60,7 +60,7 @@ const lightTheme = createTheme({
     switch: {
       primary: "#154A6799",
     },
-    home: {
+    box: {
       primary: "#154A6799",
     },
     type: "light",

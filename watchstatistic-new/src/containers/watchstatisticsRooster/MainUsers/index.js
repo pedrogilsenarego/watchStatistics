@@ -2,15 +2,15 @@ import React, { useEffect } from "react";
 
 import {
 	Table,
-	TableContainer,
+	
 	TableHead,
 	TableRow,
 	TableCell,
 	TableBody,
 	Grid,
-	Paper,
+	
 	Box
-} from "@material-ui/core";
+} from "@mui/material";
 import LinearProgress, {
 	linearProgressClasses
 } from "@mui/material/LinearProgress";
@@ -21,7 +21,7 @@ import { styled } from "@mui/material/styles";
 
 const useStyles = makeStyles((theme) => ({
 	tableHead: {
-		backgroundColor: "#145875 !important"
+		backgroundColor: "#14587500 !important"
 	}
 }));
 
@@ -75,28 +75,28 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 
 	return (
 		<div>
-			<Grid container className={classes.container} style={{ padding: "20px" }}>
+			<Grid container  style={{ padding: "20px" }}>
 				<Grid item xs={12} md={8}>
-					<TableContainer component={Paper} style={{ marginTop: "10px" }}>
+					
 						<Table aria-label="simple table" size="small">
 							<TableHead className={classes.tableHead}>
 								<TableRow>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
+									<TableCell align="center" style={{ fontSize: "15px", borderBottom: "none", color:"white" }}>
 										#
 									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
+									<TableCell align="center" style={{ fontSize: "15px", borderBottom: "none", color:"white" }}>
 										Users
 									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
+									<TableCell align="center" style={{ fontSize: "15px", borderBottom: "none", color:"white" }}>
 										Rank
 									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
+									<TableCell align="center" style={{ fontSize: "15px", borderBottom: "none", color:"white" }}>
 										Progress
 									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
+									<TableCell align="center" style={{ fontSize: "15px", borderBottom: "none", color:"white" }}>
 										Number of Votes
 									</TableCell>
-									<TableCell align="center" style={{ fontSize: "15px" }}>
+									<TableCell align="center" style={{ fontSize: "15px", borderBottom: "none", color:"white" }}>
 										Watches Submited
 									</TableCell>
 								</TableRow>
@@ -157,14 +157,14 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 											key={displayName}
 											sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 										>
-											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+											<TableCell align="center" style={{ color: "#ffffffB3", borderBottom: "none" }}>
 												{i + 1}
 											</TableCell>
 											<TableCell
 												align="center"
 												component="th"
 												scope="row"
-												style={{ color: "#ffffffB3" }}
+												style={{ color: "#ffffffB3", borderBottom: "none" }}
 											>
 												{displayName}
 											</TableCell>
@@ -172,11 +172,11 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 												align="center"
 												component="th"
 												scope="row"
-												style={{ color: colorRank() }}
+												style={{ color: colorRank(), borderBottom: "none" }}
 											>
 												{rank()}
 											</TableCell>
-											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+											<TableCell align="center" style={{ color: "#ffffffB3", borderBottom: "none" }}>
 												<Box
 													sx={{
 														display: "flex",
@@ -191,10 +191,10 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 													/>
 												</Box>
 											</TableCell>
-											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+											<TableCell align="center" style={{ color: "#ffffffB3", borderBottom: "none" }}>
 												{userVotes.length - 1}
 											</TableCell>
-											<TableCell align="center" style={{ color: "#ffffffB3" }}>
+											<TableCell align="center" style={{ color: "#ffffffB3", borderBottom: "none" }}>
 												{watchesSubmited}
 											</TableCell>
 										</TableRow>
@@ -202,7 +202,7 @@ const MainUsers = ({ handleLoadedTopUsers, loadedTopUsers }) => {
 								})}
 							</TableBody>
 						</Table>
-					</TableContainer>
+					
 				</Grid>
 			</Grid>
 		</div>

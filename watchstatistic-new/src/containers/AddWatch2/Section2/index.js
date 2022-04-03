@@ -98,7 +98,7 @@ const Section2 = ({
         <Grid item xs={6} style={{ marginTop: "10px" }}>
           <Container
             style={{
-              backgroundColor: theme.palette.textField.background,
+              backgroundColor: "white",
               height: "40px",
               padding: "0px",
 
@@ -118,7 +118,7 @@ const Section2 = ({
           <Grid item xs={6} style={{ marginTop: "10px" }}>
             <Container
               style={{
-                backgroundColor: theme.palette.textField.background,
+                backgroundColor: "white",
                 height: "40px",
                 padding: "0px",
 
@@ -138,7 +138,7 @@ const Section2 = ({
           <Grid item xs={6} style={{ marginTop: "10px" }}>
             <Container
               style={{
-                backgroundColor: theme.palette.textField.background,
+                backgroundColor: "white",
                 height: "40px",
                 padding: "0px",
 
@@ -158,7 +158,7 @@ const Section2 = ({
           <Grid item xs={6} style={{ marginTop: "10px" }}>
             <Container
               style={{
-                backgroundColor: theme.palette.textField.background,
+                backgroundColor: "white",
                 height: "40px",
                 padding: "0px",
 
@@ -178,7 +178,7 @@ const Section2 = ({
         <Grid item xs={6} style={{ marginTop: "10px" }}>
           <Container
             style={{
-              backgroundColor: theme.palette.textField.background,
+              backgroundColor: "white",
               height: "40px",
               padding: "0px",
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 import {
   Button,
-  ButtonGroup,
   Grid,
   Box,
   Container,
@@ -19,11 +18,10 @@ import { fetchCountersStart } from "../../../redux/Products/products.actions";
 
 const useStyles = makeStyles((theme) => ({
   subHeaderBox2: {
-    height: "10vh",
     background: theme.palette.home.primary,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    
+    
+    
     marginTop: "20vh",
   },
 }));
@@ -70,19 +68,18 @@ const TableMain = () => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" >
       <Box className={classes.subHeaderBox2}>
         <Grid container style={{ paddingLeft: "20px", paddingRight: "20px" }}>
           <Grid
             item
             container
-            xs={12}
-            justifyContent="space-between"
+            xs={6}
+            
             alignItems="center"
           >
-            <ButtonGroup>
               <Button
-                style={{ color: table === "main" ? "white" : "#ffffffB3" }}
+                style={{ color: table === "main" ? "orange" : "white" }}
                 onClick={(e) => {
                   setTable("main");
                 }}
@@ -90,15 +87,27 @@ const TableMain = () => {
                 Watches
               </Button>
               <Button
-                style={{ color: table === "third" ? "white" : "#ffffffB3" }}
+                style={{ color: table === "third" ? "orange" : "white" }}
                 onClick={(e) => {
                   setTable("third");
                 }}
               >
                 Users
               </Button>
-            </ButtonGroup>
-            <Typography>Watches: {counters.products}</Typography>
+           
+           
+          </Grid>
+          <Grid
+            item
+            container
+            xs={6}
+            justifyContent="flex-end"
+            alignItems="center"
+            spacing={2}
+          >
+              
+           <Grid item>
+            <Typography>Watches: {counters.products}</Typography></Grid><Grid>
             <BiImages
               onClick={() => {
                 history.push("/browse/tiles");
@@ -106,7 +115,7 @@ const TableMain = () => {
               size="2em"
               style={{ cursor: "pointer" }}
             />
-          </Grid>
+          </Grid></Grid>
         </Grid>
       </Box>
       {table === "main" && <MainBody {...configLoadedTopWatches} />}
