@@ -10,16 +10,15 @@ const mapState = (state: any) => ({
   products: state.productsData.products,
 });
 
-const WatchesTable = () => {
+const WatchesCards = () => {
   const dispatch = useDispatch();
   const { products, currentUser } = useSelector(mapState);
   const { data, isLastPage, queryDoc } = products;
-  const { userVotes } = currentUser ? currentUser : "null";
   const [productCategory, setProductCategory] = useState(null);
   const [productPrices, setProductPrices] = useState(null);
   const [productBrands, setProductBrands] = useState(null);
   const [score, setScore] = useState("desc");
-  const pageSize = 10;
+  const pageSize = 5;
 
   useEffect(
     () => {
@@ -41,7 +40,9 @@ const WatchesTable = () => {
     <Styled.Grid container spacing={2}>
       <Grid item container spacing={2} xs={8}>
         {data?.map((watchData: any, index: number) => {
-          return <WatchCard key={index} data={watchData} />;
+          return (
+            <WatchCard key={index} data={watchData} currentUser={currentUser} />
+          );
         })}
       </Grid>
       <Grid item xs={4}>
@@ -51,4 +52,4 @@ const WatchesTable = () => {
   );
 };
 
-export default WatchesTable;
+export default WatchesCards;

@@ -1,14 +1,18 @@
 import * as Styled from "./styles";
 import { Grid, Button } from "@mui/material";
 import { BiImages } from "react-icons/bi";
+import { VscListUnordered } from "react-icons/vsc";
+import { AiOutlineTable } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
 
 type Props = {
   table: string;
   setTable: (table: string) => void;
+  typeTable: string;
+  setTypeTable: (typeTable: string) => void;
 };
 
-const MenuTables = ({ table, setTable }: Props) => {
+const MenuTables = ({ table, setTable, typeTable, setTypeTable }: Props) => {
   const history = useHistory();
 
   return (
@@ -42,13 +46,31 @@ const MenuTables = ({ table, setTable }: Props) => {
           alignItems="center"
           spacing={2}
         >
-          <Grid>
+          <Grid item>
+            <VscListUnordered
+              size="1em"
+              style={{
+                cursor: "pointer",
+                color: typeTable === "cards" ? "orange" : "white",
+              }}
+              onClick={(e) => {
+                setTypeTable("cards");
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <AiOutlineTable
+              size="1em"
+              style={{ cursor: "pointer", color: "lightgray" }}
+            />
+          </Grid>
+          <Grid item>
             <BiImages
               onClick={() => {
                 history.push("/browse/tiles");
               }}
               size="1em"
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", color: "lightgray" }}
             />
           </Grid>
         </Grid>
