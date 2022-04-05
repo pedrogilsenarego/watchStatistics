@@ -36,17 +36,22 @@ const WatchesCards = () => {
     [score, productCategory, productPrices, productBrands]
   );
 
+  const configWatchCard = {
+    currentUser,
+    setProductBrands,
+  };
+
   return (
-    <Styled.Grid container spacing={2}>
+    <Styled.Grid container spacing={1}>
       <Grid item container spacing={2} xs={8}>
         {data?.map((watchData: any, index: number) => {
           return (
-            <WatchCard key={index} data={watchData} currentUser={currentUser} />
+            <WatchCard key={index} data={watchData} {...configWatchCard} />
           );
         })}
       </Grid>
       <Grid item xs={4}>
-        <Paper>Teste</Paper>
+        <Styled.Paper>Teste</Styled.Paper>
       </Grid>
     </Styled.Grid>
   );

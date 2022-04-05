@@ -4,5 +4,5 @@ export const Paper = styled(MuiPaper)(() => ({
   alignItems: "center",
   backgroundColor: "#18161E !important",
   color: "white !important",
-  padding: "25px",
+  padding: "15px",
 }));
