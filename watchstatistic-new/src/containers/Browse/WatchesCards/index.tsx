@@ -40,6 +40,10 @@ const WatchesCards = () => {
   const configWatchCard = {
     currentUser,
     setProductBrands,
+    setProductCategory,
+    pCategory: productCategory,
+    productPrices,
+    setProductPrices,
   };
 
   const configMenu = {
@@ -49,6 +53,8 @@ const WatchesCards = () => {
     productCategory,
     productPrices,
     setProductPrices,
+    score, 
+    setScore
   }
 
   return (

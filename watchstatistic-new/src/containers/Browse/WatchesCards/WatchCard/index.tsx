@@ -3,7 +3,9 @@ import * as Styled from "./styles";
 import CircularProgress from "./CircularProgress";
 
 
-const WatchCard = ({ data, currentUser, setProductBrands }: any) => {
+const WatchCard = ({ data, currentUser, setProductBrands, setProductCategory,
+  
+  setProductPrices, }: any) => {
   const { userVotes } = currentUser ? currentUser : "null";
   const {
     productThumbnail,
@@ -65,22 +67,34 @@ const WatchCard = ({ data, currentUser, setProductBrands }: any) => {
             </Grid>
             <Grid item container xs={8}>
               <Grid item container alignItems="center" xs={12}>
-                <Grid item xs={6}>
+                <Grid item xs={8}>
                   <Typography>
                     {productName} {reference}
                   </Typography>
                   <Typography>
                     {numberVotesNotOwn+numberVotesOwn}
                   </Typography>
-                  <Typography>{productCategory}</Typography>
-                  <Typography>{productPriceBrackets}</Typography>
                   {currentUser &&
                     userVotes &&
                     userVotes.includes(documentID) && (
                       <Typography>AlreadyVoted</Typography>
                     )}
+                    {currentUser &&
+                    userVotes &&
+                    !userVotes.includes(documentID) && (
+                      <Typography>Not voted</Typography>
+                    )}
+                  <Grid item container spacing={1}>
+                    <Grid item>
+                      <Styled.Button onClick={()=>{setProductCategory(productCategory)}} style={{textTransform: "none", cursor:"pointer"}}>{productCategory}</Styled.Button>
+                    </Grid>
+                    <Grid item>
+                      <Styled.Button onClick={()=>{setProductPrices(productPriceBrackets)}} style={{textTransform: "none", cursor:"pointer"}}>{productPriceBrackets}</Styled.Button>
+                    </Grid>
+                  </Grid>
+                 
                 </Grid>
-                <Grid item container xs={6} justifyContent="flex-end">
+                <Grid item container xs={4} justifyContent="flex-end">
                   <CircularProgress avgTotal={avgTotal} />
                 </Grid>
               </Grid>
