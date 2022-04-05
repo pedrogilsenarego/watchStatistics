@@ -2,6 +2,7 @@ import { Grid, CardMedia, Typography, Divider } from "@mui/material";
 import * as Styled from "./styles";
 import CircularProgress from "./CircularProgress";
 
+
 const WatchCard = ({ data, currentUser, setProductBrands }: any) => {
   const { userVotes } = currentUser ? currentUser : "null";
   const {
@@ -13,6 +14,8 @@ const WatchCard = ({ data, currentUser, setProductBrands }: any) => {
     avgTotal,
     productCategory,
     productPriceBrackets,
+    numberVotesNotOwn,
+    numberVotesOwn
   } = data;
 
   return (
@@ -36,7 +39,7 @@ const WatchCard = ({ data, currentUser, setProductBrands }: any) => {
       >
         <Typography
           style={{
-            fontSize: "40px",
+            fontSize: "35px",
             fontWeight: 500,
             color: "#ffffff66",
             transform: "rotate(-90deg)",
@@ -45,7 +48,7 @@ const WatchCard = ({ data, currentUser, setProductBrands }: any) => {
           }}
           onClick={() => setProductBrands(productBrand)}
         >
-          {productBrand.slice(0, 7)}
+          {productBrand.slice(0, 9)}
         </Typography>
       </Grid>
       <Grid item xs={11.3}>
@@ -66,7 +69,9 @@ const WatchCard = ({ data, currentUser, setProductBrands }: any) => {
                   <Typography>
                     {productName} {reference}
                   </Typography>
-
+                  <Typography>
+                    {numberVotesNotOwn+numberVotesOwn}
+                  </Typography>
                   <Typography>{productCategory}</Typography>
                   <Typography>{productPriceBrackets}</Typography>
                   {currentUser &&

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductsStart } from "../../../redux/Products/products.actions";
-import { Grid, Paper } from "@mui/material";
+import { Grid} from "@mui/material";
 import WatchCard from "./WatchCard";
 import * as Styled from "./styles";
+import Menu from "./Menu";
 
 const mapState = (state: any) => ({
   currentUser: state.user.currentUser,
@@ -16,7 +17,7 @@ const WatchesCards = () => {
   const { data, isLastPage, queryDoc } = products;
   const [productCategory, setProductCategory] = useState(null);
   const [productPrices, setProductPrices] = useState(null);
-  const [productBrands, setProductBrands] = useState(null);
+  const [productBrands, setProductBrands] = useState<null | string>(null);
   const [score, setScore] = useState("desc");
   const pageSize = 5;
 
@@ -41,6 +42,15 @@ const WatchesCards = () => {
     setProductBrands,
   };
 
+  const configMenu = {
+    setProductBrands,
+    productBrands,
+    setProductCategory,
+    productCategory,
+    productPrices,
+    setProductPrices,
+  }
+
   return (
     <Styled.Grid container spacing={1}>
       <Grid item container spacing={2} xs={8}>
@@ -51,7 +61,7 @@ const WatchesCards = () => {
         })}
       </Grid>
       <Grid item xs={4}>
-        <Styled.Paper>Teste</Styled.Paper>
+        <Menu {...configMenu}/>
       </Grid>
     </Styled.Grid>
   );
