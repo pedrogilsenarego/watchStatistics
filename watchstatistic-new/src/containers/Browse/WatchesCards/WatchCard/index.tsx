@@ -1,11 +1,13 @@
 import { Grid, CardMedia, Typography, Divider } from "@mui/material";
 import * as Styled from "./styles";
 import CircularProgress from "./CircularProgress";
+import { useHistory } from "react-router-dom";
 
 
 const WatchCard = ({ data, currentUser, setProductBrands, setProductCategory,
   setProductPrices, pCategory, productPrices }: any) => {
   const { userVotes } = currentUser ? currentUser : "null";
+  const history = useHistory()
   const {
     productThumbnail,
     productName,
@@ -37,12 +39,12 @@ const WatchCard = ({ data, currentUser, setProductBrands, setProductCategory,
         justifyContent="center"
         alignItems="center"
         style={{
-          height: "200px",
+          height: "150px",
         }}
       >
         <Typography
           style={{
-            fontSize: "35px",
+            fontSize: "30px",
             fontWeight: 500,
             color: "#ffffff66",
             transform: "rotate(-90deg)",
@@ -51,7 +53,7 @@ const WatchCard = ({ data, currentUser, setProductBrands, setProductCategory,
           }}
           onClick={() => setProductBrands(productBrand)}
         >
-          {productBrand.slice(0, 9)}
+          {productBrand.slice(0, 8)}
         </Typography>
       </Grid>
       <Grid item xs={11.3}>
@@ -59,19 +61,20 @@ const WatchCard = ({ data, currentUser, setProductBrands, setProductCategory,
           <Grid container spacing={2}>
             <Grid xs={4} item>
               <CardMedia
-                style={{ borderRadius: "4px" }}
+                style={{ borderRadius: "4px", cursor: "pointer" }}
                 component="img"
-                height="150"
+                height="120"
                 image={productThumbnail[0]}
                 alt={reference}
+                onClick={()=>{history.push(`/product/${documentID}`)}}
               />
             </Grid>
             <Grid item container xs={8}>
               <Grid item container  xs={12}>
                 <Grid item container xs={8} spacing={1}>
                   <Grid container item spacing={1}>
-                  <Grid item ><Typography>
-                     {productName}:
+                  <Grid item ><Typography style={{color: "#ffffff66"}}>
+                     {productName}
                   </Typography></Grid><Grid item>
                   <Typography style={{color: "#ffffff66"}}>
                      {reference}
@@ -84,21 +87,21 @@ const WatchCard = ({ data, currentUser, setProductBrands, setProductCategory,
                     
                   <Grid item container spacing={1}>
                     {!pCategory && (<Grid item>
-                      <Styled.Button onClick={()=>{setProductCategory(productCategory)}} style={{textTransform: "none", cursor:"pointer"}}>{productCategory}</Styled.Button>
+                      <Styled.Button onClick={()=>{setProductCategory(productCategory)}} style={{textTransform: "none", cursor:"pointer", fontSize: "14px"}}>{productCategory}</Styled.Button>
                     </Grid>)}
                     {!productPrices && (<Grid item>
-                      <Styled.Button onClick={()=>{setProductPrices(productPriceBrackets)}} style={{textTransform: "none", cursor:"pointer"}}>{productPriceBrackets}</Styled.Button>
+                      <Styled.Button onClick={()=>{setProductPrices(productPriceBrackets)}} style={{textTransform: "none", cursor:"pointer", fontSize: "14px"}}>{productPriceBrackets}</Styled.Button>
                     </Grid>)}
                     
                     {currentUser &&
                     userVotes &&
                     userVotes.includes(documentID) && (<Grid item>
-                      <Styled.Button bColor="green" style={{textTransform: "none", cursor:"pointer"}}>AlreadyVoted</Styled.Button>
+                      <Styled.Button bColor="green" style={{textTransform: "none", cursor:"pointer", fontSize: "14px"}}>AlreadyVoted</Styled.Button>
                       </Grid>)}
                       {currentUser &&
                     userVotes &&
                     !userVotes.includes(documentID) && (
-                      <Grid item><Styled.Button bColor="red">Not voted</Styled.Button></Grid>
+                      <Grid item><Styled.Button bColor="red" style={{textTransform: "none", cursor:"pointer", fontSize: "14px"}}>Not voted</Styled.Button></Grid>
                     )}
                   </Grid>
                  

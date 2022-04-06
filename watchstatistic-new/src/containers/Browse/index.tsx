@@ -16,7 +16,7 @@ const Browse = () => {
     setTypeTable,
   };
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <MenuTables {...configMenuTables} />
       {table === "watches" && typeTable === "cards" && <WatchesCards />}
       {table === "watches" && typeTable === "table" && <WatchesTable />}

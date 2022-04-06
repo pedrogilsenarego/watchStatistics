@@ -60,14 +60,14 @@ const WatchesCards = () => {
 
   return (
     <Styled.Grid container spacing={1}>
-      <Grid item container spacing={1} xs={8}>
+      <Grid item container spacing={1} xs={9.5}>
         {data?.map((watchData: any, index: number) => {
           return (
             <WatchCard key={index} data={watchData} {...configWatchCard} />
           );
         })}
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={2.5}>
         <Menu {...configMenu}/>
       </Grid>
     </Styled.Grid>
