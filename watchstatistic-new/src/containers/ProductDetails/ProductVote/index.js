@@ -206,6 +206,7 @@ const ProductVote = ({
                 onChange={(event) => {
                   setOwnership(event.target.value);
                 }}
+                style={{ color: "#ffffffBF" }}
               >
                 <FormControlLabel
                   value="Own"
@@ -236,7 +237,11 @@ const ProductVote = ({
               justifyContent="center"
               alignItems="center"
               xs={12}
-              style={{ marginBottom: "10px", marginTop: "10px" }}
+              style={{
+                marginBottom: "10px",
+                marginTop: "10px",
+                color: "#ffffffBF",
+              }}
             >
               <SliderComponent
                 {...configSliderComponent}
