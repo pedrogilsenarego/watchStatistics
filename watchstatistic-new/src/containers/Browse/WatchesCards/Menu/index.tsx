@@ -1,11 +1,12 @@
 
 import * as Styled from "./styles"
-import { Box } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 import Select from "../../../forms/SelectMUI";
 import watchBrands from "../../../../assets/data/watchBrands.json";
 import watchTypes from "../../../../assets/data/watchTypes.json"
 import pricesBracket from "../../../../assets/data/pricesBracket.json"
-import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import { BsFileArrowUpFill,BsFileArrowDownFill } from "react-icons/bs";
+
 
 interface Props {
   productBrands: any,
@@ -60,10 +61,12 @@ const Menu = ({setProductBrands, productBrands, productCategory, setProductCateg
       };
 
     return (<Styled.Paper>
-      <Select  {...configBrands}/>
-      <Select  {...configCategory}/>
-      <Select  {...configPricesBracket}/>
-      <Box
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+      <Select  {...configBrands}/></Grid>
+      <Grid item xs={12}><Select  {...configCategory}/></Grid>
+      <Grid item xs={12}><Select  {...configPricesBracket}/></Grid>
+      <Grid item xs={12}><Box
                   onClick={() => {
                     handleScore();
                   }}
@@ -75,9 +78,9 @@ const Menu = ({setProductBrands, productBrands, productCategory, setProductCateg
                     borderBottom: "none",
                   }}
                 >
-                  {score === "desc" && <AiOutlineArrowDown />}
-                  {score === "asc" && <AiOutlineArrowUp />} Score
-                </Box>
+                  <BsFileArrowDownFill size="3em" color={score==="desc"? "orange" : "#ffffff66"}/>
+                   <BsFileArrowUpFill size="3em" color={score==="asc"? "orange" : "#ffffff66"}/>
+                </Box></Grid></Grid>
       </Styled.Paper>)
 }
 

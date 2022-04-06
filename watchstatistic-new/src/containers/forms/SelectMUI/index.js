@@ -65,6 +65,7 @@ const FormSelect = ({
 							}
 						}
 					}}
+					
 					className={classes.select}
 					labelId="demo-simple-select-label"
 					id="demo-simple-select"
