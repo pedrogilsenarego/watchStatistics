@@ -4,8 +4,7 @@ import CircularProgress from "./CircularProgress";
 
 
 const WatchCard = ({ data, currentUser, setProductBrands, setProductCategory,
-  
-  setProductPrices, }: any) => {
+  setProductPrices, pCategory, productPrices }: any) => {
   const { userVotes } = currentUser ? currentUser : "null";
   const {
     productThumbnail,
@@ -19,6 +18,8 @@ const WatchCard = ({ data, currentUser, setProductBrands, setProductCategory,
     numberVotesNotOwn,
     numberVotesOwn
   } = data;
+
+  
 
   return (
     <Grid
@@ -66,31 +67,39 @@ const WatchCard = ({ data, currentUser, setProductBrands, setProductCategory,
               />
             </Grid>
             <Grid item container xs={8}>
-              <Grid item container alignItems="center" xs={12}>
-                <Grid item xs={8}>
+              <Grid item container  xs={12}>
+                <Grid item container xs={8} spacing={1}>
+                  <Grid container item spacing={1}>
+                  <Grid item ><Typography>
+                     {productName}:
+                  </Typography></Grid><Grid item>
+                  <Typography style={{color: "#ffffff66"}}>
+                     {reference}
+                  </Typography></Grid></Grid><Grid item>
                   <Typography>
-                    {productName} {reference}
-                  </Typography>
-                  <Typography>
-                    {numberVotesNotOwn+numberVotesOwn}
-                  </Typography>
-                  {currentUser &&
-                    userVotes &&
-                    userVotes.includes(documentID) && (
-                      <Typography>AlreadyVoted</Typography>
-                    )}
+                    Votes: {numberVotesNotOwn+numberVotesOwn}
+                  </Typography></Grid>
+                  
+                  
+                    
+                  <Grid item container spacing={1}>
+                    {!pCategory && (<Grid item>
+                      <Styled.Button onClick={()=>{setProductCategory(productCategory)}} style={{textTransform: "none", cursor:"pointer"}}>{productCategory}</Styled.Button>
+                    </Grid>)}
+                    {!productPrices && (<Grid item>
+                      <Styled.Button onClick={()=>{setProductPrices(productPriceBrackets)}} style={{textTransform: "none", cursor:"pointer"}}>{productPriceBrackets}</Styled.Button>
+                    </Grid>)}
+                    
                     {currentUser &&
                     userVotes &&
+                    userVotes.includes(documentID) && (<Grid item>
+                      <Styled.Button bColor="green" style={{textTransform: "none", cursor:"pointer"}}>AlreadyVoted</Styled.Button>
+                      </Grid>)}
+                      {currentUser &&
+                    userVotes &&
                     !userVotes.includes(documentID) && (
-                      <Typography>Not voted</Typography>
+                      <Grid item><Styled.Button bColor="red">Not voted</Styled.Button></Grid>
                     )}
-                  <Grid item container spacing={1}>
-                    <Grid item>
-                      <Styled.Button onClick={()=>{setProductCategory(productCategory)}} style={{textTransform: "none", cursor:"pointer"}}>{productCategory}</Styled.Button>
-                    </Grid>
-                    <Grid item>
-                      <Styled.Button onClick={()=>{setProductPrices(productPriceBrackets)}} style={{textTransform: "none", cursor:"pointer"}}>{productPriceBrackets}</Styled.Button>
-                    </Grid>
                   </Grid>
                  
                 </Grid>
@@ -101,8 +110,8 @@ const WatchCard = ({ data, currentUser, setProductBrands, setProductCategory,
               <Grid item xs={12}>
                 <Divider
                   style={{
-                    width: "100%",
-                    background: "white",
+                    width: "75%",
+                    background: "#ffffff66",
                     marginTop: "5px",
                   }}
                 />

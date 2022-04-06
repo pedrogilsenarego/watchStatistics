@@ -6,12 +6,21 @@ import {
 
 const CircularProgress = ({ avgTotal }: any) => {
   return (
-    <Box component="div" sx={{ position: "relative", display: "inline-flex" }}>
+    <Box component="div" sx={{ position: "relative", display: "inline-flex", alignItems: "center",
+    justifyContent: "center",  }}>
       <MuiCircularProgress
         variant="determinate"
         value={avgTotal * 10}
+        
         size={80}
-        style={{ color: "orange" }}
+        style={{ color: "orange", position: "relative", zIndex: 2 }}
+      />
+      <MuiCircularProgress
+        variant="determinate"
+        value={100}
+        
+        size={80}
+        style={{ color: "black", position: "absolute", zIndex:1 }}
       />
       <Box
         component="div"
@@ -30,7 +39,7 @@ const CircularProgress = ({ avgTotal }: any) => {
           variant="caption"
           component="div"
           color="white"
-          style={{ fontSize: "20px" }}
+          style={{ fontSize: "16px" }}
         >
           {avgTotal}
         </Typography>

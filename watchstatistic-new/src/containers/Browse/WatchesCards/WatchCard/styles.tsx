@@ -7,8 +7,12 @@ export const Paper = styled(MuiPaper)(() => ({
   padding: "15px",
 }));
 
-export const Button = styled(MuiButton)(() => ({
-  backgroundColor: "#65656566 !important",
+interface buttonProps {
+  bColor?:string
+}
+
+export const Button = styled(MuiButton)(({bColor}:buttonProps) => ({
+  backgroundColor: bColor? bColor:"#65656566 !important",
 	textTransform: "none",
 	borderRadius: "16px !important",
   color: "white !important",
